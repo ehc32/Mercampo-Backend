@@ -8,6 +8,7 @@ import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import { useSearchStore } from "../store/search";
 import SearchResults from "./SearchResults";
+import Footer from "../components/Footer"; // Importa el footer
 
 const HomePage = () => {
 
@@ -68,10 +69,13 @@ const HomePage = () => {
                                 ) : null}
                             </div>
                         )}
+                    
                 </>
             ))}
         </>
+        
     );
+    <Footer />
 };
 
 export default HomePage;
