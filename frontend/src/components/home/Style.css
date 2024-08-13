@@ -1,0 +1,312 @@
+/* Modo claro */
+
+.card-name-light {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    padding-top: 2em;
+    color: #000;
+    text-align: center;
+}
+
+.card-subname-light {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #000;
+    text-align: center;
+}
+
+.carrousel {
+    cursor: grab;
+    width: 85%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.carrousel:active {
+    cursor: grabbing;
+}
+
+.card-products-light {
+    height: 350px;
+    width: 300px;
+    border-radius: 2px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-products-light img {
+    height: 70%;
+    width: 95%;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}
+
+.card-productsRandom-light h5,
+.card-products-light h5,
+.card-products-light h6 {
+    font-size: 1.2rem;
+    color: #000;
+    text-align: start;
+    width: 100%;
+}
+
+.productContainer {
+    width: 95%;
+    padding: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: start;
+}
+
+.cardFooter {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 1em;
+}
+
+.cardFooter h6 {
+    text-align: end !important;
+}
+
+.card-productsRandom-light {
+    border-radius: 2px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: .5px #999 solid;
+}
+
+.card-productsRandom-dark,
+.card-productsRandom-light {
+    width: 15%;
+    margin-bottom: 1em;
+    min-width: 250px;
+    height: 50%;
+    margin: 1em;
+    cursor: pointer;
+}
+
+.productContainer img {
+    width: 97%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.hero-text-light {
+    width: 40%;
+}
+
+.hero-text-light h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero-text-light p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.hero-text-light button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.hero-img {
+    width: 50%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Modo oscuro */
+
+.card-name-dark {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    text-align: center;
+}
+
+.card-subname-dark {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    text-align: center;
+}
+
+.card-products-dark {
+    height: 350px;
+    width: 300px;
+    border-radius: 2px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-products-dark img {
+    height: 70%;
+    width: 95%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}
+
+.card-productsRandom-dark h5,
+.card-products-dark h5,
+.card-products-dark h6 {
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: start;
+    width: 100%;
+}
+
+.card-productsRandom-dark {
+    border-radius: 2px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: .5px #999 solid;
+}
+
+.card-productsRandom-dark p,
+.card-productsRandom-dark span {
+    color: #fff;
+}
+.hero,
+.hero-dark {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 500px;
+    width: 80%;
+    margin: auto;
+}
+
+.hero-text-dark {
+    width: 50%;
+}
+
+.hero-text-dark h1 {
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.hero-text-dark p {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.hero-text-dark button {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.hero-button-dark {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.hero-button-light {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.banner {
+    height: 300px;
+    background-image: url("./../../../public/fondo.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* contacto product */
+/* 
+.contactForm {
+    width: 50%;
+    padding: 2em;
+    border: #fff solid 1px;
+    margin: auto;
+}
+
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label-dark {
+    color: #fff;
+}
+
+.label-light {
+    color: #000;
+}
+
+#mensaje, #correo, #nombreCompleto, #telefono {
+    padding: .8em;
+    width: 70%;
+    background-color: transparent;
+    border: none;
+    border-radius: 3px;
+    border: #000 solid 1px;
+    margin-bottom: .5em;
+    resize: none;
+    transition: .2s ease;
+}
+
+#mensaje:active, #correo:active, #nombreCompleto:active, #telefono:active {
+    outline: none;
+    border: #fff solid 1px; 
+}
+
+.btn-dark, .btn-light {
+    border: #fff 1px solid;
+    padding: 0.5em 1em;
+    border-radius: 1.5em;
+    width: 150px;
+    margin: 0 auto;
+} */

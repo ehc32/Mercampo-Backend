@@ -15,41 +15,41 @@ import SearchByCate from "./pages/SearchByCate"
 import CartPage from "./pages/CartPage"
 import UserProfile from "./pages/UserProfile"
 import SoloOrder from "./pages/SoloOrder"
-// import Tienda from "./pages/TiendaPage"
+import Tienda from "./pages/TiendaPage"
 
 
 function App() {
 
-  return (
-    <BrowserRouter>
-        <Routes>
-            {/* <Route index element={<Tienda />} /> */}
-            <Route path="/" element={<Layout />} >
-                <Route path="login" element={<LoginPage />} />
-                <Route path="register" element={<RegisterPage />} />
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />} >
+                    <Route index element={<Tienda />} />
+                    <Route path="login" element={<LoginPage />} />
+                    <Route path="register" element={<RegisterPage />} />
 
-                <Route index element={<HomePage />} />
-                <Route path="product/:slug" element={<SoloProduct />} />
+                    <Route index element={<HomePage />} />
+                    <Route path="product/:slug" element={<SoloProduct />} />
 
-                <Route path="cate" element={<CatePage />} />
-                <Route path="cate/:cate" element={<SearchByCate />} />
+                    <Route path="cate" element={<CatePage />} />
+                    <Route path="cate/:cate" element={<SearchByCate />} />
 
-                <Route element={<PrivateRoute />} >
-                    <Route path="cart" element={<CartPage />} />
-                    <Route path="profile" element={<UserProfile />} />
-                    <Route path="order/:id" element={<SoloOrder />} />
+                    <Route element={<PrivateRoute />} >
+                        <Route path="cart" element={<CartPage />} />
+                        <Route path="profile" element={<UserProfile />} />
+                        <Route path="order/:id" element={<SoloOrder />} />
+                    </Route>
+
+                    <Route path="admin" element={<AdminPrivateRoute />} >
+                        <Route index element={<AdminPage />} />
+                        <Route path="add" element={<AddProductPage />} />
+                        <Route path="edit/:id" element={<EditProductPage />} />
+                    </Route>
+
                 </Route>
-
-                <Route path="admin" element={<AdminPrivateRoute />} >
-                    <Route index element={<AdminPage />} />
-                    <Route path="add" element={<AddProductPage />} />
-                    <Route path="edit/:id" element={<EditProductPage />} />
-                </Route>
-
-            </Route>
-        </Routes>
-    </BrowserRouter>
-  )
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App

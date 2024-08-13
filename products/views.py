@@ -27,7 +27,6 @@ def get_prod_by_cate(request, category):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
-
 @api_view(['GET'])
 def search(request):
     query = request.query_params.get('query')
@@ -37,6 +36,32 @@ def search(request):
     serializer = ProductSerializer(product, many=True)
     return Response({'products': serializer.data})
 
+@api_view(['GET'])
+def get_products_by_locate(request):
+    locate = request.query_params.get('locate')
+    if locate is None:
+        return Response({'error': 'La ubicación es requerida'}, status=400)
+    products = Product.objects.filter(location__icontains=locate)
+    if not products:
+        return Response({'error': 'No se encontraron productos con esa ubicación'}, status=404)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_products_random(request):
+    products = Product.objects.order_by('?')[:20]
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_last_12_products(request):
+    order_by = request.query_params.get('order_by')
+    if order_by is None:
+        order_by = '-created'
+    products = Product.objects.all().order_by(order_by)[:12]
+    
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def get_products(request):

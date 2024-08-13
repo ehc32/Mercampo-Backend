@@ -3,9 +3,12 @@ from . import views
 
 urlpatterns = [
     path('search/', views.search),
-    path('', views.get_products),
-    path('get/<slug:slug>/', views.get_product),
+    path('', views.get_products),   
+    path('get/<str:locate>/', views.get_products_by_locate),
+    path('get/random_products/', views.get_products_random),
+    path('get/last_products/', views.get_last_12_products),
     path('get/admin/<int:id>/', views.get_product_admin),
+    path('get/<slug:slug>/', views.get_product),
     path('post/', views.create_product),
     path('edit/<int:pk>/', views.edit_product),
     path('delete/<int:pk>/', views.delete_product),
