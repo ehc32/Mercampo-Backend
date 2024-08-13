@@ -8,6 +8,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, blank=True)
     image = models.ImageField(default='placeholder.png')
     category = models.CharField(max_length=100, blank=True)
+    locate = models.CharField(max_length=100, blank=False, null=False) # this is the place where's product offer
     description = models.CharField(max_length=100, blank=True)
     rating = models.DecimalField(max_digits=10,
                                  decimal_places=2,
@@ -17,6 +18,7 @@ class Product(models.Model):
                                 decimal_places=2,
                                 null=True, blank=True)
     count_in_stock = models.IntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
 
