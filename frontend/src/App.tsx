@@ -15,6 +15,7 @@ import SearchByCate from "./pages/SearchByCate"
 import CartPage from "./pages/CartPage"
 import UserProfile from "./pages/UserProfile"
 import SoloOrder from "./pages/SoloOrder"
+// import Tienda from "./pages/TiendaPage"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
+            {/* <Route index element={<Tienda />} /> */}
             <Route path="/" element={<Layout />} >
                 <Route path="login" element={<LoginPage />} />
                 <Route path="register" element={<RegisterPage />} />

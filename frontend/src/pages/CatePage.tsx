@@ -41,6 +41,23 @@ const CatePage = () => {
                 </div>
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <Link to={`/cate/Zapatos y Sandalias`}>
+                        <img
+                            className="rounded-t-lg"
+                    src="/static/logo.png"
+                            alt=""
+                        />
+                    </Link>
+                    <div className="p-5 ">
+                        <Link to={`/cate/Zapatos y Sandalias`}>
+                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Comida
+                            </h5>
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <Link to={`/cate/Lang`}>
                         <img
                             className="rounded-t-lg"
