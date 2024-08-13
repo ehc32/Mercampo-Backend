@@ -40,12 +40,12 @@ const LoginPage = () => {
           <img className="w-8 h-8 mr-2" 
                     src="/logo.png"
           alt="logo"/>
-          <span>Zona de Compras</span>
+          <span>¡Bienvenidos!</span>
         </Link>
         <div className="w-full md:w-[400px] lg:w-[500px] bg-slate-300 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Inicio de sesión
+                Inicia sesión
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
 

@@ -15,7 +15,7 @@ export const AdminPrivateRoute = () => {
     const tokenDecoded: Token = jwt_decode(token)
     const isAdmin = (tokenDecoded.is_staff);  
     return (
-        isAdmin ? <Outlet /> : <Navigate to='/' />   
+        isAdmin ? <Outlet /> : <Navigate to='/AdminPages' />   
     );
 };
 

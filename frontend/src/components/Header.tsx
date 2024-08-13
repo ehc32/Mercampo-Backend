@@ -16,18 +16,18 @@ const Header = () => {
   const { toggleDarkMode, darkMode } = useDarkMode();
   const token: string = useAuthStore.getState().access;
   const { isAuth } = useAuthStore()
-    const cart = useCartStore(state => state.cart);
+  const cart = useCartStore(state => state.cart);
 
-    let is_admin: boolean;
-    let user_id: number;
-    let avatar: string;
+  let is_admin: boolean;
+  let user_id: number;
+  let avatar: string;
 
-  if(isAuth) {
+  if (isAuth) {
     const tokenDecoded: Token = jwt_decode(token)
     is_admin = tokenDecoded.is_staff;
     user_id = tokenDecoded.user_id;
     avatar = String(tokenDecoded.avatar)
-  } 
+  }
 
   const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
   const location = useLocation();  // Hook para obtener la ubicación actual
@@ -59,8 +59,8 @@ const Header = () => {
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
-                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                    )}
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -81,7 +81,7 @@ const Header = () => {
                       <>
                         <Link
                           to={'/'}
-                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white' 
+                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
                         >
                           Home
                         </Link>
@@ -95,22 +95,22 @@ const Header = () => {
                       </>
 
                     ) : (
-                        <>
-                          <Link
-                            to={'/login'}
-                            className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white' 
-                          >
-                            Iniciar sesión
-                          </Link>
+                      <>
+                        <Link
+                          to={'/login'}
+                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                        >
+                          Iniciar sesión
+                        </Link>
 
-                          <Link
-                            to={'/register'}
-                            className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                          >
-                            Registrar cuenta
-                          </Link>
-                        </>
-                      )}
+                        <Link
+                          to={'/register'}
+                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                        >
+                          Registrar cuenta
+                        </Link>
+                      </>
+                    )}
 
                     {is_admin && is_admin && (
                       <Link
@@ -128,7 +128,7 @@ const Header = () => {
               </div>
 
               {/* Mostrar el campo de búsqueda solo si no estamos en la página de login */}
-              {location.pathname !== "/login" && (
+              {location.pathname !== "/login" && location.pathname !== "/register" && (
                 <div className="relative hidden md:block">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg className="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -136,10 +136,10 @@ const Header = () => {
                     </svg>
                     <span className="sr-only">Buscar</span>
                   </div>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     onChange={handleInputChange}
-                    className="block w-full md:w-[200px] lg:w-[400px] xl:w-[600px] p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 dark:bg-gray-700 outline-none dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                    className="block w-full md:w-[200px] lg:w-[400px] xl:w-[600px] p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 dark:bg-gray-700 outline-none dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Buscar..."
                   />
                 </div>
@@ -150,20 +150,31 @@ const Header = () => {
                   onClick={toggleDarkMode}
                   type="button"
                 >
-                  {darkMode ? 
+                  {darkMode ?
 
-                    <BsFillMoonStarsFill size={20} className="text-slate-200 hover:text-white "/> 
+                    <BsFillMoonStarsFill size={20} className="text-slate-200 hover:text-white " />
 
-                    : 
+                    :
 
-                    <BsFillSunFill size={23} className="text-slate-900 hover:text-black"/>}
+                    <BsFillSunFill size={23} className="text-slate-900 hover:text-black" />}
 
                 </button>
+                <div className="absolute space-x-2 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <button onClick={toggleDarkMode} type="button">
+                    {/* ... */}
+                  </button>
 
-                <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white">
-                  <HiOutlineShoppingBag size={23}/>
-                </Link>
-                <span className="text-slate-900 dark:text-slate-200">{cart.length}</span>
+                  {location.pathname !== "/login" && location.pathname !== "/register" && (
+                    <>
+                      <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white">
+                        <HiOutlineShoppingBag size={23} />
+                      </Link>
+                      <span className="text-slate-900 dark:text-slate-200">{cart.length}</span>
+                    </>
+                  )}
+
+                  {/* ... */}
+                </div>
 
                 {isAuth && (
                   <Menu as="div" className="relative ml-2">
@@ -172,7 +183,7 @@ const Header = () => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                            src={`${import.meta.env.VITE_BACKEND_URL}${avatar}`}
+                          src={`${import.meta.env.VITE_BACKEND_URL}${avatar}`}
                           alt=""
                         />
                       </Menu.Button>

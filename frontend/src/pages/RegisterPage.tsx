@@ -53,7 +53,7 @@ const RegisterPage = () => {
           <img className="w-8 h-8 mr-2" 
                     src="/logo.png"
           alt="logo"/>
-          <span>Compras</span>
+          <span>¡Registrate!</span>
         </Link>
         <div className="w-full md:w-[400px] lg:w-[500px] bg-slate-300 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
