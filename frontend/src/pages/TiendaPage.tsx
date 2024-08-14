@@ -98,7 +98,7 @@ export default function Tienda() {
     return (
         <React.Fragment>
             <Hero darkMode={darkMode} />
-            <CarrouselLast12 productos={datos} darkMode={darkMode} />
+            {/* <CarrouselLast12 productos={datos} darkMode={darkMode} /> */}
             <RandomProducts productos={datos} darkMode={darkMode} />
             {/* <Banner /> */}
             {/* <Contacto darkMode={darkMode} /> */}

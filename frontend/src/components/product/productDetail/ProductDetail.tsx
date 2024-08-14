@@ -1,6 +1,8 @@
-import './bundle.js'
-import './scripts.js'
+
 import './dashlite.css'
+
+// import './bundle.js'
+// import './scripts.js'
 
 const ProductDetail = () => {
     return (
@@ -32,19 +34,19 @@ const ProductDetail = () => {
                                                     <div className="product-gallery mr-xl-1 mr-xxl-5">
                                                         <div className="slider-init" id="sliderhtmlFor" data-slick='{"arrows": false, "fade": true, "asNavhtmlFor":"#sliderNav", "slidesToShow": 1, "slidesToScroll": 1}'>
                                                             <div className="slider-item rounded">
-                                                                <img src="./images/product/lg-a.jpg" className="rounded w-100" alt=""/>
+                                                                <img src="https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg" className="rounded w-100" alt=""/>
                                                             </div>
                                                             <div className="slider-item rounded">
-                                                                <img src="./images/product/lg-g.jpg" className="rounded w-100" alt=""/>
+                                                                <img src="https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg" className="rounded w-100" alt=""/>
                                                             </div>
                                                             <div className="slider-item rounded">
-                                                                <img src="./images/product/lg-d.jpg" className="rounded w-100" alt=""/>
+                                                                <img src="https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg" className="rounded w-100" alt=""/>
                                                             </div>
                                                             <div className="slider-item rounded">
-                                                                <img src="./images/product/lg-h.jpg" className="rounded w-100" alt=""/>
+                                                                <img src="https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg" className="rounded w-100" alt=""/>
                                                             </div>
                                                             <div className="slider-item rounded">
-                                                                <img src="./images/product/lg-e.jpg" className="rounded w-100" alt=""/>
+                                                                <img src="https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg" className="rounded w-100" alt=""/>
                                                             </div>
                                                         </div>
                                                         <div className="slider-init slider-nav" id="sliderNav" data-slick='{"arrows": false, "slidesToShow": 5, "slidesToScroll": 1, "asNavhtmlFor":"#sliderhtmlFor", "centerMode":true, "focusOnSelect": true, 

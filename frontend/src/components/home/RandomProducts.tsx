@@ -23,7 +23,6 @@ const RandomProducts: React.FC<CarrouselLast12Props> = ({ productos, darkMode })
             <div className='productContainer'>
                 {productos.map((producto) => (
                     <Card producto={producto} darkMode={darkMode} />
-
                 ))}
 
             </div>

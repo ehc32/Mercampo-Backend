@@ -48,6 +48,11 @@ def get_products_by_locate(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+def get_all_locate(request):
+    locations = Product.objects.values_list('location', flat=True).distinct()
+    return Response(list(locations))
+
+@api_view(['GET'])
 def get_products_random(request):
     products = Product.objects.order_by('?')[:20]
     serializer = ProductSerializer(products, many=True)

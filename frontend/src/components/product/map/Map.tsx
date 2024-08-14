@@ -4,7 +4,7 @@ const Map = () => {
     
     const { isLoaded } = useJsApiLoader({
         id: 'google-maps-script',
-        googleMapsApiKey: 'YOUR_API_KEY'
+        googleMapsApiKey: 'AIzaSyDWmh4H4O1AqdP5-nzLJft-EdFo9m6TDk8' // tener en cuenta de que esto puede variar
     });
 
     if (!isLoaded) {

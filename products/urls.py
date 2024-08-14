@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.get_products),   
     path('get/<str:locate>/', views.get_products_by_locate),
     path('getRandom/random_products/', views.get_products_random),
+    path('get_all_locate/', views.get_all_locate),
     path('getLast12/last_products/', views.get_last_12_products),
     path('get/admin/<int:id>/', views.get_product_admin),
     path('getProductImg/<int:id>/', views.get_product_img),
