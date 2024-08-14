@@ -83,7 +83,7 @@ const Header = () => {
                           to={'/'}
                           className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
                         >
-                          Home
+                          Inicio
                         </Link>
 
                         <Link
@@ -121,14 +121,12 @@ const Header = () => {
                       </Link>
                     )}
 
-
                   </div>
-
                 </div>
               </div>
 
               {/* Mostrar el campo de búsqueda solo si no estamos en la página de login */}
-              {location.pathname !== "/login" && location.pathname !== "/register" && (
+              {/* {location.pathname !== "/login" && location.pathname !== "/register" && (
                 <div className="relative hidden md:block">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg className="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +141,7 @@ const Header = () => {
                     placeholder="Buscar..."
                   />
                 </div>
-              )}
+              )} */}
 
               <div className="absolute space-x-2 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button

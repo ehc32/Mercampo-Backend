@@ -4,7 +4,6 @@ from users.models import User
 
 class Product(models.Model):
     slug = models.SlugField(max_length=50, null=True, blank=True)
-    image = models.ImageField(default='placeholder.png')
     name = models.CharField(max_length=100, blank=True)
     category = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=100, blank=True, null=False)
@@ -22,7 +21,11 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) # user who's offer product
     created = models.DateTimeField(auto_now_add=True) # when was created
 
-
+class ProductImage(models.Model):
+    slug = models.SlugField(max_length=50, null=True, blank=True)
+    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(default='placeholder.png')
+    
 class Reviews(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)

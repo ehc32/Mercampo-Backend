@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
 
-from . models import Product
-from . serializers import ProductSerializer, ReviewSerializer
+from . models import Product, ProductImage
+from . serializers import ProductSerializer, ReviewSerializer, ProductImageSerializer
 from backend.pagination import CustomPagination
 
 
@@ -52,6 +52,14 @@ def get_products_random(request):
     products = Product.objects.order_by('?')[:20]
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def get_product_img(request, product_id):
+    product = Product.objects.get(id=product_id)
+    images = ProductImage.objects.filter(product=product)
+    serializer = ProductImageSerializer(images, many=True)
+    return Response(serializer.data)
+
 
 @api_view(['GET'])
 def get_last_12_products(request):

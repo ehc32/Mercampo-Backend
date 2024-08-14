@@ -1,0 +1,69 @@
+.asideCard {
+    width: 20%;
+    height: 90vh;
+    background-color: rgb(31, 41, 55);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: .8em;
+    left: .6em;
+    min-width: 220px;
+}
+
+.asideBox {
+    margin-bottom: 20px;
+}
+
+
+
+.asideBox input[type="range"] {
+    -webkit-appearance: none;
+    /* Oculta el estilo predeterminado */
+    appearance: none;
+    width: 100%;
+    height: 5px !important;
+    border-radius: 5px;
+    background-color: #ddd;
+    outline: none;
+    /* Elimina el borde azul al seleccionar */
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.asideBox input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Oculta el estilo predeterminado */
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #1511ff;
+    cursor: pointer;
+}
+
+.asideBox input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #666;
+    cursor: pointer;
+}
+
+.busquedaAside {
+    color: #000;
+    padding: .2em 1em;
+    border-radius: 2.5px;
+    width: 100%;
+}
+
+.title-dark {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.btnSearchDark:active {
+    outline: none;
+}

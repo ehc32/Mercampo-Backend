@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from . models import Product, Reviews
+from . models import Product, Reviews, ProductImage
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -25,3 +25,11 @@ class ProductSerializer(serializers.ModelSerializer):
         reviews = obj.reviews_set.all()
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
+
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    product_id = ProductSerializer(read_only=True)
+
+    class Meta:
+        model = ProductImage
+        fields = ['slug', 'product_id', 'image']

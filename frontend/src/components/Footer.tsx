@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaYoutube, FaLinkedin, FaWhatsapp } from 'react-
 
 const Footer = () => {
   return (
-    <footer id="footer" className="bg-gray-800 text-white py-8">
+    <footer id="footer" className="bg-gray-800 text-white py-8 mt-12 absolute botom-0 right-0 left-0">
       <div className="flex justify-center mb-4">
         {/* Logos footer - Aquí puedes agregar tus logos */}
       </div>
