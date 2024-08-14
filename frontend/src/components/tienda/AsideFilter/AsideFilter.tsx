@@ -1,6 +1,5 @@
 import './Aside.css';
-import { useSearchStore } from '../../Header';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface CarrouselLast12Props {
     darkMode: boolean;
@@ -72,7 +71,7 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
             <div className={darkMode ? 'asideBox' : 'asideBox'}>
                 <h4 className={darkMode ? 'title-dark' : 'title-dark'}>Rango de tiempo</h4>
                 <select onChange={handleLocationChange} className='busquedaAside'>
-                    <option value="prueba"selected>6 Horas</option>
+                    <option value="prueba" selected>6 Horas</option>
                     <option value="prueba">12 Horas</option>
                     <option value="prueba">24 Horas</option>
                     <option value="prueba">1 Dia</option>

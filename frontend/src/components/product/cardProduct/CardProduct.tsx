@@ -1,4 +1,5 @@
 import Map from "../map/Map";
+import ProductDetail from "../productDetail/ProductDetail";
 
 interface CarrouselLast12Props {
     darkMode: boolean;
@@ -7,6 +8,7 @@ interface CarrouselLast12Props {
 const CardProduct: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
     return (
         <div>
+            <ProductDetail />
             <Map />
         </div>
     )
