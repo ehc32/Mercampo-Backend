@@ -1,10 +1,9 @@
 import React from "react";
-import CarrouselLast12 from "../components/home/CarrouselLastProducts";
+import CarrouselLast12 from "../components/home/Carrousel/CarrouselLastProducts";
 import RandomProducts from "../components/home/RandomProducts";
 import { useDarkMode } from "../store/theme";
-import Banner from "../components/home/Banner";
 import Hero from "../components/home/Hero";
-import Contacto from "../components/home/Contacto";
+import Footer from "../components/Footer";
 
 export default function Tienda() {
 
@@ -103,6 +102,7 @@ export default function Tienda() {
             <RandomProducts productos={datos} darkMode={darkMode} />
             {/* <Banner /> */}
             {/* <Contacto darkMode={darkMode} /> */}
+            <Footer />
         </React.Fragment>
     )
 

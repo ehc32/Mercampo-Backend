@@ -12,7 +12,7 @@ body {
 .nft {
     user-select: none;
     text-align: start;
-    max-width: 300px;
+    max-width: 250px;
     margin: 1rem auto;
     border: 1px solid #ffffff22;
     background-color: #282c34;
@@ -49,6 +49,7 @@ body {
         }
 
         .description {
+            font-size: 12px !important;
             margin: .5rem 0;
             color: #a89ec9;
 
@@ -131,7 +132,7 @@ body {
 }
 
 .main h2 {
-    font-size: 22px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -145,4 +146,17 @@ body {
         font-size: 20rem;
         filter: opacity(0.5);
     }
+}
+.duration p,
+.duration ins,
+.creator p {
+    font-size: 12px;
+}
+
+.duration ins {
+    scale: 1.2;
+}
+
+.price p {
+    font-size: 14px;
 }
