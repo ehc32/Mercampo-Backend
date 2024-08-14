@@ -8,8 +8,8 @@ class Product(models.Model):
     name = models.CharField(max_length=100, blank=True)
     category = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=100, blank=True, null=False)
-    map_locate = models.CharField(max_length=100, blank=False, null=False) # location google maps
-    locate = models.CharField(max_length=100, blank=False, null=False) # this is the place where's product offer
+    map_locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # location google maps
+    locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # this is the place where's product offer
     count_in_stock = models.IntegerField(default=0) # how many units
     price = models.DecimalField(max_digits=10,
                                 decimal_places=2,
