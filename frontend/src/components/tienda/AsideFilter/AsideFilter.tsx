@@ -1,22 +1,28 @@
 import './Aside.css';
+import './../../../assets/dashlite.css'
 import { useState } from 'react';
-
+import DatePickers from '../date/date';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 interface CarrouselLast12Props {
     darkMode: boolean;
 }
 
 const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
-    const [searchTerm, setSearchTerm] = useState(''); // Constante para guardar el término de búsqueda
-    const [maxPrice, setMaxPrice] = useState(''); // Constante para guardar el precio máximo
-    const [location, setLocation] = useState(''); // Constante para guardar la localización
+    const [searchTerm, setSearchTerm] = useState('');
+    const [location, setLocation] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [timeRange, setTimeRange] = useState('');
+    const [maxPrice, setMaxPrice] = useState(0)
+    const [minPrice, setMinPrice] = useState(0)
+    const [fechaInicio, setFechaInicio] = useState(Date)
+    const [fechaFin, setFechaFin] = useState(Date)
 
     function buscarSimilitudes() {
         if (searchTerm.length > 0) {
             console.log("Buscar: " + searchTerm)
         }
     }
+
     const handleCategoryChange = (e) => {
         const { checked, value } = e.target;
         if (checked) {
@@ -27,6 +33,10 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
             );
         }
     };
+
+    const handleSetPricesValues = () => {
+
+    }
 
     const handleTimeRangeChange = (e) => {
         console.log(e.target.value)
@@ -46,9 +56,9 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
     const categorias = ["Frutas", "Verduras", "Grano", "Otros"]
 
     return (
-        <nav className={darkMode ? 'asideCard' : 'asideCard'}>
-            <div className={darkMode ? 'asideBox' : 'asideBox'}>
-                <h4 className={darkMode ? 'title-dark' : 'title-dark'}>Busqueda de productos</h4>
+        <nav className={darkMode ? 'asideCardDark' : 'asideCard'}>
+            <div className='asideBox'>
+                <h4 className='cardTitles'>Busqueda de productos</h4>
                 <form
                     action=""
                     onSubmit={(e) => {
@@ -64,11 +74,11 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
                     />
                 </form>
             </div>
-            <div className={darkMode ? 'asideBox' : 'asideBox'}>
-                <h4 className={darkMode ? 'title-dark' : 'title-dark'}>Categoría</h4>
+            <div className='asideBox'>
+                <h4 className='cardTitles'>Categoría</h4>
                 {
                     categorias.map((categoria, index) => (
-                        <div key={index} className={darkMode ? 'asideBox' : 'asideBox'}>
+                        <div key={index} className='asideBox input-text-check'>
                             <input
                                 type="checkbox"
                                 id={categoria}
@@ -83,33 +93,35 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
 
                 }
             </div>
-            <div className={darkMode ? 'asideBox' : 'asideBox'}>
-                <h4 className={darkMode ? 'title-dark' : 'title-dark'}>Precio máximo</h4>
-                <input
-                    type="range"
-                    name=""
-                    id=""
-                    onMouseUp={handlePriceChange}
-                />
-                <span>Precio máximo: {maxPrice}</span>
+            <div className='asideBox'>
+                <h4 className='cardTitles'>Precio máximo</h4>
+                <ul>
+                    <li><p>Menos de $ 100.000</p></li>
+                    <li><p>Entre $100.000 y $150.000</p></li>
+                    <li><p>Más de $150.000</p></li>
+                    <div className='box-inputs'>
+                        <input type="text" className='min-price' placeholder='Minimo' />
+                        <i className='bi bi-dash' onClick={handleSetPricesValues}></i>
+                        <input type="text" className='max-price' placeholder='Maximo' /> <i className="bi bi-arrow-right"></i>
+                    </div>
+                </ul>
             </div>
-            <div className={darkMode ? 'asideBox' : 'asideBox'}>
-                <h4 className={darkMode ? 'title-dark' : 'title-dark'}>Rango de tiempo</h4>
-                <select onChange={handleTimeRangeChange} className='busquedaAside' value={timeRange}>
-                    <option value="6 Horas">6 Horas</option>
-                    <option value="12 Horas">12 Horas</option>
-                    <option value="24 Horas">24 Horas</option>
-                    <option value="1 Dia">1 Dia</option>
-                    <option value="1 semana">1 semana</option>
-                    <option value="2 semanas">2 semanas</option>
-                    <option value="1 Mes">1 Mes</option>
-                </select>
+            <div className='asideBox'>
+                <h4 className='cardTitles'>Rango de tiempo</h4>
+                <ul>
+                    <li><p>Publicados hoy</p></li>
+                    <li><p>Esta semana</p></li>
+                    <li><p>Este mes</p></li>
+                    <div className='dateField'>
+                        <DatePickers darkMode={darkMode} label={"Fecha inicial"} value={fechaInicio} />
+                        <DatePickers darkMode={darkMode} label={"Fecha final"} value={fechaInicio} />
+                        <i className='bi bi-arrow-right' onClick={handleSetPricesValues}></i>
+                    </div>
+                </ul>
             </div>
-            <div className={darkMode ? 'asideBox' : 'asideBox'}>
-                <h4 className={darkMode ? 'title-dark' : 'title-dark'}>Localización</h4>
+            <div className='asideBox'>
+                <h4 className={darkMode ? 'title-dark cardTitles' : 'title-card cardTitles'}>Localización</h4>
                 <select onChange={handleLocationChange} className='busquedaAside' value={location}>
-                    <option value="prueba">prueba</option>
-                    <option value="prueba">prueba</option>
                     <option value="prueba">prueba</option>
                     <option value="prueba">prueba</option>
                     <option value="prueba">prueba</option>

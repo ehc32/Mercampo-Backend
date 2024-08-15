@@ -1,64 +1,86 @@
 .asideCard {
     width: 20%;
     height: 90vh;
-    background-color: rgb(31, 41, 55);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     position: relative;
     top: .8em;
     left: .6em;
     min-width: 220px;
 }
 
-.asideBox {
-    margin-bottom: 20px;
+.asideCard input[type="checkbox"] {
+    margin-right: 1em;
 }
 
+.input-text-check {
+    width: 40%;
+    margin-left: .8em;
+}
 
+i {
+    width: 30px !important;
+    height: 30px !important;
+}
 
-.asideBox input[type="range"] {
-    -webkit-appearance: none;
-    /* Oculta el estilo predeterminado */
-    appearance: none;
-    width: 100%;
-    height: 5px !important;
-    border-radius: 5px;
-    background-color: #ddd;
+ul {
+    margin-left: .8em !important;
+}
+
+.box-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #000;
+}
+
+.box-inputs input {
+    border: #000 solid .5px;
+    padding: .4em;
+    max-width: 40% !important;
     outline: none;
-    /* Elimina el borde azul al seleccionar */
-    padding: 0;
-    margin-bottom: 20px;
+    border-radius: 5px;
 }
 
-.asideBox input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    /* Oculta el estilo predeterminado */
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #1511ff;
+.asideCard:has(p, h4, input, label, span, li) {
+    color: #000;
+    font-size: 14px;
+    transition: .1s ease;
+}
+
+.asideCardDark:has(p, h4, input, label, span, li) {
+    color: #fff;
+    font-size: 14px;
+    transition: .1s ease;
+}
+
+h4 {
+    margin: .8em 0 !important;
+}
+
+.asideCard li p {
+    display: inline;
+}
+
+.asideCard li p:hover {
+    text-decoration: underline;
     cursor: pointer;
 }
 
-.asideBox input[type="range"]::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #666;
-    cursor: pointer;
-}
 
 .busquedaAside {
-    color: #000;
-    padding: .2em 1em;
+    padding: .5em 1em;
     border-radius: 2.5px;
     width: 100%;
+    outline: none;
+    border: 1px solid #000;
 }
 
-.title-dark {
-    color: #fff;
+.asideCardDark .busquedaAside {
+    border: 1px solid #fff;
+}
+
+.cardTitles {
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 10px;
@@ -66,4 +88,9 @@
 
 .btnSearchDark:active {
     outline: none;
+}
+
+.dateField {
+    display: flex;
+    flex-direction: row;
 }

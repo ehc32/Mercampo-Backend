@@ -126,7 +126,7 @@ export default class Example extends Component {
                 break;
         }
     };
-
+    
     render() {
         return (
             <div
