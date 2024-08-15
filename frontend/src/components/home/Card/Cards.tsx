@@ -1,4 +1,6 @@
 import './Card.css'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 interface Producto {
     nombre?: string;
@@ -6,39 +8,38 @@ interface Producto {
     precio?: number;
     description?: string;
     locate?: string;
-    id?: number;
-
+    categoria?: string;
+    fecha?: string;
 }
+
 
 interface CarrouselLast12Props {
     producto: Producto[];
     darkMode: boolean;
 }
 
-const Card:  React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
+const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
     return (
         <>
-            <div className="nft">
-                <div className='main'>
-                    <img className='tokenImage' src={producto.foto} alt="NFT" />
-                    <h2>{producto.nombre}</h2>
-                    <p className='description'>{producto.description.slice(0, 100)}</p>
-                    <div className='tokenInfo'>
-                        <div className="price">
-                            <ins>$</ins>
-                            <p>{producto.precio}</p>
-                        </div>
-                        <div className="duration">
-                            <ins>◷</ins>
-                            <p>Fecha</p>
-                        </div>
-                    </div>
+            <div className='cardBody'>
+                <div className='imgContent'>
+                    <img src={producto.foto} alt="Imagen del producto" />
+                </div>
+                <div className='minihead'>
                     <hr />
-                    <div className='creator'>
-                        <div className='wrapper'>
-                            <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80" alt="Creator" />
+                </div>
+                <div className='infoContent'>
+                    <div>
+                        <h4 className='headInfo'>{producto.nombre}</h4>
+                        <h4 className='headInfo'>{producto.categoria}</h4>
+                    </div>
+                    <p className='headInfo'>{producto.description.slice(0, 100)}</p>
+                    <div className='footerInfo'>
+                        <div>
+                            <h6>$ {producto.precio}</h6>
+                            <span>{producto.locate}, {producto.fecha}</span>
                         </div>
-                        <p><ins>Publicado por</ins> Kiberbash</p>
+                        <i className='bi bi-bag-plus'></i>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import { useDarkMode } from "../store/theme";
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { HiOutlineShoppingBag } from "react-icons/hi";
@@ -45,83 +45,82 @@ const Header = () => {
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
   }
+  const handleToggleMenu = () => {
+    setOpen(!open);
+  };
+  const [open, setOpen] = useState(false); // aside
 
   return (
     <Disclosure as="nav" className="bg-grey dark:bg-gray-800">
-      {({ open }) => (
+      {() => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="px-5">
             <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
 
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:text-gray-900 dark:text-slate-200 dark:hover:text-slate-50">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex flex-1 items-center justify-start sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
 
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="/public/logo.png"
-                    alt="Logo"
-                  />
-                </div>
-
-                <div className="hidden sm:ml-6 sm:block">
-
-                  <div className="flex space-x-4">
-
-                    {isAuth ? (
-                      <>
-                        <Link
-                          to={'/'}
-                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
-                        >
-                          Inicio
-                        </Link>
-
-                        <Link
-                          to={'/cate'}
-                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                        >
-                          Categorias
-                        </Link>
-                      </>
-
-                    ) : (
-                      <>
-                        <Link
-                          to={'/login'}
-                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
-                        >
-                          Iniciar sesión
-                        </Link>
-
-                        <Link
-                          to={'/register'}
-                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                        >
-                          Registrar cuenta
-                        </Link>
-                      </>
+                <div className="flex space-x-4">
+                  <button onClick={handleToggleMenu}>
+                    {location.pathname === "/cate" && (
+                      open ? (
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                      ) : (
+                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                      )
                     )}
+                  </button>
+                  <div className="flex flex-shrink-0 items-center">
 
-                    {is_admin && is_admin && (
+                    <img
+                      className=" h-8 w-auto lg:block"
+                      src="/public/logo.png"
+                      alt="Logo"
+                    />
+                  </div>
+                  {isAuth ? (
+                    <>
                       <Link
-                        to={'/admin'}
+                        to={'/'}
+                        className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                      >
+                        Inicio
+                      </Link>
+
+                      <Link
+                        to={'/cate'}
                         className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                       >
-                        Panel de administración
+                        Categorias
                       </Link>
-                    )}
+                    </>
 
-                  </div>
+                  ) : (
+                    <>
+                      <Link
+                        to={'/login'}
+                        className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                      >
+                        Iniciar sesión
+                      </Link>
+
+                      <Link
+                        to={'/register'}
+                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                      >
+                        Registrar cuenta
+                      </Link>
+                    </>
+                  )}
+
+                  {is_admin && is_admin && (
+                    <Link
+                      to={'/admin'}
+                      className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                    >
+                      Panel de administración
+                    </Link>
+                  )}
+
                 </div>
               </div>
 

@@ -1,7 +1,8 @@
 .swiper {
-    width: 50%;
-    height: 45vh;
-    border-radius: 15px;
+    width: 98%;
+    height: 30vh;
+    margin: 1em auto;
+    border-radius: 3.5px;
 }
 
 .swiper-slide {

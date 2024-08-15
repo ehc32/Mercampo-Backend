@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     textFieldDate: {
         marginLeft: '1rem',
         marginRight: '1rem',    
-        width: '80px',
+        width: '100%',
     },
 });
 

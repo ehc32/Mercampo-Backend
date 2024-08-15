@@ -1,12 +1,18 @@
 .asideCard {
-    width: 20%;
-    height: 90vh;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    position: relative;
-    top: .8em;
-    left: .6em;
-    min-width: 220px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.asideCard.hide {
+    left: -250px;
 }
 
 .asideCard input[type="checkbox"] {
@@ -15,12 +21,15 @@
 
 .input-text-check {
     width: 40%;
+    display: flex;
+    flex-direction: row;
     margin-left: .8em;
+    margin-bottom: 1em;
+    align-items: center;
 }
 
 i {
-    width: 30px !important;
-    height: 30px !important;
+    width: 30px;
 }
 
 ul {
@@ -31,15 +40,20 @@ ul {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     color: #000;
 }
 
 .box-inputs input {
-    border: #000 solid .5px;
-    padding: .4em;
+    border: #000 solid .2px;
+    padding:  .2em;
     max-width: 40% !important;
     outline: none;
-    border-radius: 5px;
+    border-radius: 2px;
+}
+
+.box-inputs i {
+    
 }
 
 .asideCard:has(p, h4, input, label, span, li) {
@@ -92,5 +106,12 @@ h4 {
 
 .dateField {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.asideCard li p {
+}
+
+.asideBox li {
+    margin-bottom: 1em;
 }
