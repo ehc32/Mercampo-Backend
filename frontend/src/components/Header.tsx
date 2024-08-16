@@ -1,6 +1,6 @@
 import { BsFillMoonStarsFill, BsFillSunFill, BsFillCartFill } from "react-icons/bs";
 
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from "react-router-dom";
@@ -20,8 +20,9 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
   const { toggleDarkMode, darkMode } = useDarkMode();
   const token: string = useAuthStore.getState().access;
-  const { isAuth } = useAuthStore()
   const cart = useCartStore(state => state.cart);
+  const { isAuth } = useAuthStore()
+  const [ imgMenu, setImgMenu ] = useState(false);
 
   let is_admin: boolean;
   let user_id: number;
@@ -64,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
                 <div className="flex space-x-4">
                   <button onClick={handleToggleMenu}>
-                    {location.pathname === "/cate" && (
+                    {imgMenu && (
                       estadoAside ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
@@ -78,7 +79,6 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                     alt="Logo"
                   />
 
-
                   <div className=" sm:ml-6 sm:block">
 
                     <div className="flex space-x-4">
@@ -88,6 +88,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                           <Link
                             to={'/'}
                             className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                            onClick={() => setImgMenu(false)}
                           >
                             Inicio
                           </Link>
@@ -95,6 +96,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                           <Link
                             to={'/cate'}
                             className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                            onClick={() => setImgMenu(true)}
                           >
                             Tienda
                           </Link>
