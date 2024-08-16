@@ -1,11 +1,13 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import './styles.css'
 
 interface locationStatus {
     lat: number;
     lng: number;
+    darkMode: boolean;
 }
 
-const Map: React.FC<locationStatus> = ({ lat, lng }) => {
+const Map: React.FC<locationStatus> = ({ lat, lng, darkMode }) => {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-maps-script',
@@ -17,11 +19,10 @@ const Map: React.FC<locationStatus> = ({ lat, lng }) => {
     }
 
     return (
-        <section>
+        <section className="sectionMap">
+            <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Lozalización</h2>
+            <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra lo que te gusta de manera eficiente</h4>
 
-            <h4>Localización</h4>
-            <h6>Encuentra al provedor a través de google maps</h6>
-        
             <GoogleMap
                 mapContainerStyle={{ width: '100%', height: '400px' }}
                 center={{ lat: lat, lng: lng }}
