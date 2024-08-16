@@ -1,25 +1,23 @@
-import { Outlet } from 'react-router-dom';
-import Header from './Header';
-import { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import { Outlet } from 'react-router-dom';
+import { useDarkMode } from "../hooks/theme";
+import Header from './Header';
 import AsideFilter from './tienda/AsideFilter/AsideFilter';
-import { useDarkMode } from "../store/theme";
 
 const Layout = () => {
 
-  const [estadoAside, setEstadoAside] = useState(true);
+  const [estadoAside, setEstadoAside] = useState(false);
   const { toggleDarkMode, darkMode } = useDarkMode();
 
   return (
-      <div>
-          <Toaster />
-          {/* <Header /> */}
-          <Header estadoAside={estadoAside} setEstadoAside={setEstadoAside} />
-        <div className="min-h-[1000px] bg-white dark:bg-gray-900">
-            <AsideFilter estadoAside={estadoAside} darkMode={darkMode} />
-            <Outlet />
-        </div>
+    <div>
+      <Toaster />
+      <Header estadoAside={estadoAside} setEstadoAside={setEstadoAside} />
+      <div className="min-h-[1000px] bg-white dark:bg-gray-900">
+        <Outlet />
       </div>
+    </div>
   )
 }
 

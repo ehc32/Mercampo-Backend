@@ -1,10 +1,10 @@
 import React from "react";
-import RandomProducts from "../components/home/RandomProducts";
-import { useDarkMode } from "../store/theme";
-import Hero from "../components/home/Hero";
-import Swiper from "../components/shared/Swiper/swiper";
 import Footer from "../components/Footer";
 import About from "../components/home/About/About";
+import Hero from "../components/home/Hero";
+import RandomProducts from "../components/home/RandomProducts";
+import Swiper from "../components/shared/Swiper/swiper";
+import { useDarkMode } from "../hooks/theme";
 
 export default function Tienda() {
 

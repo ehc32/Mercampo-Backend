@@ -1,8 +1,11 @@
-import ProductDetail from './../components/product/productDetail/productDetail'
+
+import ProductDetail from '../components/product/productDetail/ProductDetail';
+
+
 const DetallesProd = () => {
   return (
     <main>
-        <ProductDetail />
+      <ProductDetail />
     </main>
   );
 };

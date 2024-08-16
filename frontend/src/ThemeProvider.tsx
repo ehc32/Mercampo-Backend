@@ -1,5 +1,5 @@
 import React from "react";
-import { useDarkMode } from "./store/theme";
+import { useDarkMode } from "./hooks/theme";
 
 interface ThemeProviderProps {
   children: React.ReactNode;

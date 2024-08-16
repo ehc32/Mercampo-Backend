@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Card.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -21,7 +22,7 @@ interface CarrouselLast12Props {
 const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
     return (
         <>
-            <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight' }>
+            <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
                 <div className='imgContent'>
                     <img src={producto.foto} alt="Imagen del producto" />
                 </div>
@@ -39,7 +40,9 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                             <h6>$ {producto.precio}</h6>
                             <span>{producto.locate}, {producto.fecha}</span>
                         </div>
-                        <i className='bi bi-bag-plus'></i>
+                        <Link to="/product/prueba">
+                            <i className='bi bi-bag-plus'></i>
+                        </Link>
                     </div>
                 </div>
             </div>

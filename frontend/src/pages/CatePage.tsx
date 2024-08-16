@@ -1,9 +1,8 @@
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
-import Footer from "../components/Footer";
-import { useDarkMode } from "../store/theme";
-import Content from "../components/tienda/Content/Content";
 import React, { useState } from "react";
-import './style.css'
+import Footer from "../components/Footer";
+import Content from "../components/tienda/Content/Content";
+import { useDarkMode } from "../hooks/theme";
+import './style.css';
 
 interface CarrouselLast12Props {
     byCategory: [];
@@ -177,14 +176,14 @@ const CatePage: React.FC<CarrouselLast12Props> = () => {
     ];
 
     const [byCategory, setCategory] = useState(["all"])
-    
+
     return (
         <section>
             <main className="mainTienda">
                 {/* <AsideFilter darkMode={darkMode} /> */}
                 <Content byCategory={byCategory} darkMode={darkMode} productos={productos} />
             </main>
-            <Footer />
+            {/* <Footer /> */}
         </section>
     );
 };
