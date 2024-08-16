@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Footer from "../components/Footer";
 import Content from "../components/tienda/Content/Content";
 import { useDarkMode } from "../hooks/theme";
 import './style.css';
@@ -199,14 +198,11 @@ const CatePage: React.FC<CarrouselLast12Props> = () => {
 
     return (
         <section className="sectionCatePage">
-            <main className="mainTienda">
-                {/* <AsideFilter darkMode={darkMode} /> */}
-                <Content byCategory={byCategory} darkMode={darkMode} productos={productos} />
-            </main>
-            <div className="footerCatePage">
-                <Footer />
-            </div>
-        </section>
+        <main className="mainTienda">
+            {/* <AsideFilter darkMode={darkMode} /> */}
+            <Content byCategory={byCategory} darkMode={darkMode} productos={productos} />
+        </main>
+    </section>
     );
 };
 export default CatePage;

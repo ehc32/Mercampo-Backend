@@ -14,7 +14,7 @@ const Layout = () => {
     <div>
       <Toaster />
       <Header estadoAside={estadoAside} setEstadoAside={setEstadoAside} />
-      <div className="min-h-[1000px] bg-white dark:bg-gray-900">
+      <div className="min-h-[1000px] bg-white dark:bg-gray-900 content-layout">
         <Outlet />
       </div>
     </div>

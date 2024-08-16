@@ -3,6 +3,7 @@ import Card from "../../shared/Card/Cards";
 import Swiper from "../../shared/Swiper/swiper";
 
 import './Content.css';
+import Footer from "../../Footer";
 
 interface CarrouselLast12Props {
     darkMode: boolean;
@@ -71,6 +72,7 @@ const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, product
                         </div>
                     )
             }
+            <Footer />
         </section >
 
     )
