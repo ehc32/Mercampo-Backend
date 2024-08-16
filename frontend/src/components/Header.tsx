@@ -73,13 +73,13 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                     )}
                   </button>
                   <img
-                    className="h-8 w-auto lg:block"
-                    src="/public/logo.png"
+                    className="h-10 w-auto lg:block"
+                    src="/public/lo.ico"
                     alt="Logo"
                   />
 
 
-                  <div className="hidden sm:ml-6 sm:block">
+                  <div className=" sm:ml-6 sm:block">
 
                     <div className="flex space-x-4">
 
@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         <>
                           <Link
                             to={'/'}
-                            className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                            className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                           >
                             Inicio
                           </Link>

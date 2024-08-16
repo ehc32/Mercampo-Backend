@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Card.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useCartStore } from '../../../store/cart';
 
 interface Producto {
     nombre?: string;
@@ -18,6 +19,10 @@ interface CarrouselLast12Props {
 }
 
 const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
+
+
+    const addToCart = useCartStore(state => state.addToCart)
+
     return (
         <>
             <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
@@ -42,7 +47,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                         </div>
                         <i
                             className='bi bi-cart3'
-                            onClick={() => addToCart(product)}></i>
+                            onClick={() => addToCart(producto)}></i>
                     </div>
                 </div>
             </div>
