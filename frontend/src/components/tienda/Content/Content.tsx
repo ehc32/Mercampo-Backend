@@ -1,7 +1,9 @@
+import { useState } from "react";
 import Card from "../../shared/Card/Cards";
 import Swiper from "../../shared/Swiper/swiper";
 
 import './Content.css';
+import Footer from "../../Footer";
 
 interface CarrouselLast12Props {
     darkMode: boolean;
@@ -21,7 +23,8 @@ interface Producto {
 
 const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, productos }) => {
 
-    
+    const [isUpSwiper, setIsUpSwiper] = useState<boolean>()
+
 
     const carrouselData = [
         {
@@ -37,7 +40,7 @@ const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, product
 
     return (
         <section className="contenidoTienda">
-            <Swiper width="80%" height="300px" datos={carrouselData} />
+            <Swiper width="80%" height="300px" datos={carrouselData} isUpSwiper={true} />
             {/* aqui las cards de productos*/}
 
             {
@@ -69,6 +72,7 @@ const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, product
                         </div>
                     )
             }
+            <Footer />
         </section >
 
     )

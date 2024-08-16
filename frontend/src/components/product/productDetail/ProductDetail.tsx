@@ -5,7 +5,11 @@ import './../../../global/dashlite.css'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import './styles.css'
 
-const ProductDetail = () => {
+interface productProps {
+    darkMode: boolean;
+}
+
+const ProductDetail: React.FC<productProps> = ({ darkMode }) => {
 
     const carrouselData = [
         {
@@ -42,7 +46,7 @@ const ProductDetail = () => {
                                                     <div className="col-lg-6">
                                                         <div className="product-gallery mr-xl-1 mr-xxl-5 p-4">
                                                             <h4 className='titleProductoPreview'>Visualización del producto</h4>
-                                                            <MySwiper width={"100%"} height={"50vh"} datos={carrouselData} />
+                                                            <MySwiper width={"100%"} height={"40vh"} datos={carrouselData} isUpSwiper={false} />
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-6">
@@ -80,7 +84,7 @@ const ProductDetail = () => {
                                                                     <div className="fs-14px text-muted">Selecciona una cantidad</div>
                                                                     <div className="fs-16px fw-bold text-secondary total">$0</div>
                                                                 </div>
-                                                                <ul className="d-flex flex-wrap ailgn-center g-2 pt-1">
+                                                                <ul className="d-flex flex-wrap ailgn-center g-2 pt-1 pl-4">
                                                                     <li className="w-140px item-row">
                                                                         <div className="cantidadOrden">
                                                                             <button
@@ -91,8 +95,8 @@ const ProductDetail = () => {
                                                                                     const currentValue = parseInt(input.value);
                                                                                     const totalElement = document.querySelector('.total');
                                                                                     const productoPrecio = producto.precio; // Reemplaza con el precio real del producto
-                                                                                    input.value = currentValue - 1;
-                                                                                    totalElement.innerText = `$${(currentValue - 1) * productoPrecio}`;
+                                                                                    input.value = currentValue <= 0 ? 0 : currentValue - 1;
+                                                                                    totalElement.innerText = currentValue <= 0 ? '$0' : `$${(currentValue - 1) * productoPrecio}`;
                                                                                 }}
                                                                             >
                                                                                 <em className="icon bi bi-dash"></em>
@@ -112,7 +116,7 @@ const ProductDetail = () => {
                                                                                     const totalElement = document.querySelector('.total');
                                                                                     const productoPrecio = producto.precio; // Reemplaza con el precio real del producto
                                                                                     input.value = currentValue + 1;
-                                                                                    totalElement.innerText = `$${(currentValue + 1) * productoPrecio}`;
+                                                                                    totalElement.innerText = `$ ${(currentValue + 1) * productoPrecio}`;
                                                                                 }}
                                                                             >
                                                                                 <i className="icon bi bi-plus"></i>
@@ -144,7 +148,7 @@ const ProductDetail = () => {
                                         <div className="card card-bordered">
                                             <div className="card-inner">
                                                 <div className="row pb-5">
-                                                    <Map lat={37.7749} lng={-122.4194} />
+                                                    <Map lat={37.7749} lng={-122.4194} darkMode={darkMode} />
                                                 </div>
                                             </div>
                                         </div>

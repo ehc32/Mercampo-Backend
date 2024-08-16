@@ -10154,11 +10154,6 @@ button.bg-lighter:focus,
   padding-right: 2.75rem !important;
 }
 
-.pb-5,
-.py-5 {
-  padding-bottom: 2.75rem !important;
-}
-
 .pl-5,
 .px-5 {
   padding-left: 2.75rem !important;
@@ -30880,7 +30875,7 @@ body.nav-shown {
 .nk-wrap {
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  min-height: 60vh;
 }
 
 .nk-content {

@@ -73,30 +73,41 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       )
                     )}
                   </button>
-                  <img
-                    className="h-10 w-auto lg:block"
-                    src="/public/lo.ico"
-                    alt="Logo"
-                  />
+                  <Link
+                    to={'/'}>
+                    <img
+                      className="h-10 w-auto lg:block"
+                      src="/public/lo.ico"
+                      alt="Logo"
+                    />
+                  </Link>
 
                   <div className=" sm:ml-6 sm:block">
 
                     <div className="flex space-x-4">
 
-                      {!isAuth ? (
+                      {isAuth ? (
                         <>
                           <Link
                             to={'/'}
+<<<<<<< HEAD
                             className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                             onClick={() => setImgMenu(false)}
+=======
+                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+>>>>>>> 15e25c6fabda2a1a09ef0470932babe903cee710
                           >
                             Inicio
                           </Link>
 
                           <Link
                             to={'/cate'}
+<<<<<<< HEAD
                             className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                             onClick={() => setImgMenu(true)}
+=======
+                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+>>>>>>> 15e25c6fabda2a1a09ef0470932babe903cee710
                           >
                             Tienda
                           </Link>
@@ -106,14 +117,14 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         <>
                           <Link
                             to={'/login'}
-                            className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Iniciar sesión
                           </Link>
 
                           <Link
                             to={'/register'}
-                            className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Registrar cuenta
                           </Link>
@@ -123,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       {is_admin && is_admin && (
                         <Link
                           to={'/admin'}
-                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                          className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                         >
                           Panel de administración
                         </Link>
@@ -138,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
 
 
-              <div className="absolute space-x-2 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   onClick={toggleDarkMode}
                   type="button"
@@ -153,16 +164,16 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                 </button>
 
-                <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white">
+                <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white d-flex row align-center">
                   <BsFillCartFill size={23} />
+                  <span className="text-slate-900 dark:text-slate-200 mx-1">{cart.length}</span>
                 </Link>
-                <span className="text-slate-900 dark:text-slate-200">{cart.length}</span>
 
                 {isAuth && (
                   <Menu as="div" className="relative ml-2">
                     <div>
                       <Menu.Button className="flex rounded-full ml-8 text-sm focus:outline-none ">
-                        <span className="sr-only">Open user menu</span>
+                        <span className="sr-only">Menú de usuario</span>
                         <img
                           className="h-8 w-8 rounded-full"
                           src={`${import.meta.env.VITE_BACKEND_URL}${avatar}`}
@@ -237,7 +248,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                   <Link
                     to={'/cate'}
-                    className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                    className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                   >
                     Categorias
                   </Link>
@@ -254,7 +265,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                   <Link
                     to={'/register'}
-                    className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                    className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                   >
                     Sign up
                   </Link>
@@ -265,7 +276,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                 <div className="w-full">
                   <Link
                     to={'/'}
-                    className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                    className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                   >
                     Administrador
                   </Link>
@@ -275,8 +286,9 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
             </div>
           </Disclosure.Panel>
         </>
-      )}
-    </Disclosure>
+      )
+      }
+    </Disclosure >
   )
 }
 
