@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       alt="Logo"
                     />
                   </div>
-                  {!isAuth ? (
+                  {isAuth ? (
                     <>
                       <Link
                         to={'/'}
