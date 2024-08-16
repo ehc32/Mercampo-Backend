@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+
 * {
     font-family: "Nunito", sans-serif !important;
     font-optical-sizing: auto;
@@ -6,7 +9,7 @@
 
 .cardBody {
     height: 400px;
-    width: 300px;
+    width: 200px ;
     min-width: 300px;
     margin: 1em;
     padding: 1em 0;
@@ -107,11 +110,14 @@
 }
 
 .footerInfo span {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .infoContent p {
     height: 60px;
+    font-size: 14px;
+    text-align: justify;
+    font-weight: 400;
 }
 
 .footerInfo i {
@@ -141,4 +147,5 @@
 
 .headInfo:last-child {
     color: #39A900;
+    font-size: 16px;
 }

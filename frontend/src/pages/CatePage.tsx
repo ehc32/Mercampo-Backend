@@ -11,7 +11,6 @@ interface CarrouselLast12Props {
 
 const CatePage: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
 
-
     const productos = [
         {
             nombre: 'Mango2',
@@ -174,6 +173,7 @@ const CatePage: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
         },
     ];
 
+   
     const [byCategory, setCategory] = useState(["all"])
 
     return (

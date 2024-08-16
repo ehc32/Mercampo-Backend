@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="text-center">
           <div>
             <p className="text-lg font-semibold">Centro de la Empresa la Industria, la Empresa y los Servicios</p>
-            <p className="text-sm">Carrera 9 No 68-50, estaciones - PBX (60 8) 8757040 IP 83352</p>
+            <p className="text-sm">Carrera 9 No 68-50, SENA - PBX (60 8) 8757040 IP 83352</p>
           </div>
           <div className="flex justify-center mt-4 space-x-4">
             <a href="https://www.facebook.com/SENAHuila" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">

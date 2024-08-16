@@ -1,5 +1,6 @@
-import Card from "../../home/Card/Cards";
-import Swipper from "../Swiper/swiper"
+import Card from "../../shared/Card/Cards";
+import Swiper from "../../shared/Swiper/swiper";
+
 import './Content.css';
 
 interface CarrouselLast12Props {
@@ -20,12 +21,21 @@ interface Producto {
 
 const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, productos }) => {
 
+    const carrouselData = [
+        {
+            foto: 'https://c.wallhere.com/photos/d1/7d/1920x1080_px_Blurred_Clear_Sky_Depth_Of_Field_grass_Green_landscape_macro-789849.jpg!d'
+        },
+        {
+            foto: 'https://c.wallhere.com/photos/8b/29/nature_sunlight_grass_macro_trees_shadow_lens_flare-167088.jpg!d',
+        },
+    ];
+
+
     console.log(productos)
 
     return (
-
         <section className="contenidoTienda">
-            <Swipper />
+            <Swiper width="100%" height="300px" datos={carrouselData} />
             {/* aqui las cards de productos*/}
 
             {

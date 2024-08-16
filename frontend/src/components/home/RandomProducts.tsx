@@ -1,6 +1,6 @@
 import React from 'react';
+import Card from '../shared/Card/Cards';
 import './Style.css';
-import Card from './Card/Cards'
 
 interface Producto {
     nombre?: string;
