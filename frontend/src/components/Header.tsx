@@ -8,7 +8,7 @@ import { useAuthStore } from "../store/auth";
 import jwt_decode from "jwt-decode"
 import { useCartStore } from "../store/cart"
 import { Token } from "../Interfaces";
-import { useSearchStore } from "../store/search";
+// import { useSearchStore } from "../store/search";
 import { useDarkMode } from "../hooks/theme";
 
 interface HeaderProps {
@@ -34,11 +34,11 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
     avatar = String(tokenDecoded.avatar)
   }
 
-  const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
+  // const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value)
-  }
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchTerm(event.target.value)
+  // }
 
 
   function logOutFun() {
@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
 
   return (
-    <Disclosure as="nav" className="bg-grey dark:bg-gray-800">
+    <Disclosure as="nav" className={darkMode ? 'nav-dark' : 'nav-light'}>
       {() => (
         <>
           <div className="px-5">
