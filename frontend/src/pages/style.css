@@ -62,8 +62,17 @@
         width: 30%;
     }
 
-    .divisor div:last-child{
+    .divisor div:last-child {
         margin-left: 10px;
         width: 70%;
     }
+
+    .tablaCart {
+        width: 100% !important;
+    }
+    
+    .contenedorSobreTabla {
+        width: 90% !important;
+    }
+
 }

@@ -122,7 +122,7 @@ const CartPage = () => {
                             </form>
                         </div>
                         <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                            <div className="relative mt-5 overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+                            <div className="relative contenedorSobreTabla mt-5 overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                                 <div className="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                                     <div className="flex flex-col items-center w-full space-y-4">
                                         <h4 className="fs-22px font-bold text-white">Tu carrito de compras</h4>
@@ -141,7 +141,7 @@ const CartPage = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="overflow-x-auto">
+                                <div className="overflow-x-auto tablaCart">
                                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
@@ -226,7 +226,7 @@ const CartPage = () => {
                                                                 >
                                                                     <span className="sr-only">
                                                                         Quantity
-                                                                        button
+                                                                        button  
                                                                     </span>
                                                                     <svg
                                                                         className="w-4 h-4"
