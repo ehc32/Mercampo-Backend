@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import './style.css'
+import Footer from "../components/Footer";
 
 const CartPage = () => {
 
@@ -72,9 +73,9 @@ const CartPage = () => {
     return (
         <>
             <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-                <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
-                    <div className="divisor"> {/* Este div contiene ambas secciones */}
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div className="px-4 lg:px-12">
+                    <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
+                        <div className="bg-white dark:bg-gray-800 relative  shadow-md sm:rounded-lg overflow-hidden p-8">
                             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Dirección de compra
                             </h1>
@@ -121,10 +122,10 @@ const CartPage = () => {
 
                             </form>
                         </div>
-                        <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                        <div className="bg-white dark:bg-gray-800 relative  shadow-md sm:rounded-lg overflow-hidden">
                             <div className="relative contenedorSobreTabla mt-5 overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-                                <div className="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
-                                    <div className="flex flex-col items-center w-full space-y-4">
+                                <div className="flex flex-col px-4 box-titlesCart  lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
+                                    <div className="flex flex-col box-titlesCart items-center w-full space-y-4">
                                         <h4 className="fs-22px font-bold text-white">Tu carrito de compras</h4>
                                         <h6 className="fs-16px text-white">¿Terminaste? Haz tu pedido</h6>
                                         <div className="flex flex-row justify-between w-full">
@@ -226,7 +227,7 @@ const CartPage = () => {
                                                                 >
                                                                     <span className="sr-only">
                                                                         Quantity
-                                                                        button  
+                                                                        button
                                                                     </span>
                                                                     <svg
                                                                         className="w-4 h-4"
@@ -303,7 +304,7 @@ const CartPage = () => {
 
                 </div>
             </section>
-
+            <Footer />
         </>
     );
 };
