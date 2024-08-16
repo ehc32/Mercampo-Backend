@@ -10,7 +10,12 @@ import { useCartStore } from "../store/cart"
 import { Token } from "../Interfaces";
 import { useSearchStore } from "../store/search";
 
-const Header = () => {
+interface HeaderProps {
+  estadoAside: boolean;
+  setEstadoAside: (newState: boolean) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
   const { toggleDarkMode, darkMode } = useDarkMode();
   const token: string = useAuthStore.getState().access;
@@ -44,13 +49,13 @@ const Header = () => {
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
   }
+
   const handleToggleMenu = () => {
-    setOpen(!open);
+    setEstadoAside(!estadoAside);
   };
-  const [open, setOpen] = useState(false); // aside
 
   return (
-    <Disclosure as="nav" className="bg-grey dark:bg-gray-800">
+    <Disclosure as="nav" className="bg-grey dark:bg-gray-800 nav-header">
       {() => (
         <>
           <div className="px-5">
@@ -61,7 +66,7 @@ const Header = () => {
                 <div className="flex space-x-4">
                   <button onClick={handleToggleMenu}>
                     {location.pathname === "/cate" && (
-                      open ? (
+                      estadoAside ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
                         <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
@@ -76,7 +81,7 @@ const Header = () => {
                       alt="Logo"
                     />
                   </div>
-                  {isAuth ? (
+                  {!isAuth ? (
                     <>
                       <Link
                         to={'/'}
@@ -160,8 +165,8 @@ const Header = () => {
                   {location.pathname !== "/login" && location.pathname !== "/register" && (
                     <>
                       <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white">
-    <BsFillCartFill size={23} />
-</Link>
+					  <BsFillCartFill size={23} />
+						</Link>
                       <span className="text-slate-900 dark:text-slate-200">{cart.length}</span>
                     </>
                   )}
@@ -245,4 +250,3 @@ const Header = () => {
 }
 
 export default Header;
-

@@ -18,7 +18,6 @@ import UserProfile from "./pages/UserProfile"
 import SoloOrder from "./pages/SoloOrder"
 import Tienda from "./pages/TiendaPage"
 
-
 function App() {
 
     return (
@@ -31,7 +30,7 @@ function App() {
 
                     <Route index element={<HomePage />} />
                     <Route path="product/:slug" element={<SoloProduct />} />
-                    <Route path="product/prueba" element={<DetallesProd />} />
+					<Route path="product/prueba" element={<DetallesProd />} />
 
                     <Route path="cate" element={<CatePage />} />
                     <Route path="cate/:cate" element={<SearchByCate />} />
@@ -47,7 +46,6 @@ function App() {
                         <Route path="add" element={<AddProductPage />} />
                         <Route path="edit/:id" element={<EditProductPage />} />
                     </Route>
-
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -3,15 +3,57 @@
 @tailwind utilities;
 
 button {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
-  .on {
-    color: #ffc107;
-  }
-  .off {
-    color: #ccc;
-  }
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #ffc107;
+}
+.off {
+  color: #ccc;
+}
 
+.nav-header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1100;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+  background: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.mainTienda{
+  min-height: 1000px;
+  height: 100vh;
+}
+
+#footer{
+  /* position: fixed !important; */
+  bottom: 0;
+  /* z-index: 1; */
+  overflow-y: unset;
+}
+
+.productContainer{
+  --tw-bg-opacity: 1;
+  background: rgb(17 24 39 / var(--tw-bg-opacity));
+}

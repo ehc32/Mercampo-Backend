@@ -4,9 +4,10 @@ import DatePickers from '../date/date';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 interface CarrouselLast12Props {
     darkMode: boolean;
+    estadoAside: boolean;
 }
 
-const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
+const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode, estadoAside }) => {
     const [showNav, setShowNav] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [location, setLocation] = useState('');
@@ -59,7 +60,7 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
 
 
     return (
-        <>{showNav && (
+        <>{estadoAside && (
             <nav className={darkMode ? 'asideCardDark' : 'asideCard'}>
                 <div className='asideBox'>
                     <h4 className='cardTitles'>Busqueda de productos</h4>
