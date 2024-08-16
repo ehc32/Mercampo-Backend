@@ -19,3 +19,15 @@
     object-fit: cover;
 }
 
+.contenedorSwiper {
+    position: absolute;
+    left: 10%;
+    color: #fff;
+    background-color: rgba(0,0,0, .5);
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    border-radius: 2.5px;
+    height: 40%;
+    width: 20%;
+}

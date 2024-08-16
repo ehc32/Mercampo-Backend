@@ -32,6 +32,9 @@ const MySwiper: React.FC<SwiperPropsP> = ({ width, height, datos }) => {
       {datos.map((producto, index) => (
         <SwiperSlide key={index}>
           <img src={producto.foto} alt="alt" />
+          {/* <div className="contenedorSwiper">
+            Promociones o mensajes aqui junto a la imagen
+          </div> */}
         </SwiperSlide>
       ))}
     </SwiperReact>
