@@ -1,9 +1,8 @@
-import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+import { BsFillMoonStarsFill, BsFillSunFill, BsFillCartFill  } from "react-icons/bs";
 import { useDarkMode } from "../store/theme";
 import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/auth";
 import jwt_decode from "jwt-decode"
@@ -161,8 +160,8 @@ const Header = () => {
                   {location.pathname !== "/login" && location.pathname !== "/register" && (
                     <>
                       <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white">
-                        <HiOutlineShoppingBag size={23} />
-                      </Link>
+    <BsFillCartFill size={23} />
+</Link>
                       <span className="text-slate-900 dark:text-slate-200">{cart.length}</span>
                     </>
                   )}
