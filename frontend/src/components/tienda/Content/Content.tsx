@@ -44,9 +44,9 @@ const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, product
                 byCategory.includes("all") ?
                     (
                         <div>
-                            <h2 className="tituloSalaCompra">Una gran variedad de productos</h2>
-                            <h4 className="subtituloSalaCompra">Encuentra productos de alta calidad a los mejores precios</h4>
-                            <div className='productContainer'>
+                            <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Una gran variedad de productos</h2>
+                            <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra productos de alta calidad a los mejores precios</h4>
+                            <div className={darkMode ? 'product-container-dark' : 'product-container-light'}>
                                 {
                                     productos.map((producto) => (
                                         <Card producto={producto} darkMode={darkMode} />
@@ -57,9 +57,9 @@ const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, product
 
                     ) : (
                         <div>
-                            <h2 className="tituloSalaCompra">Gran variedad de productos en todas las categorias</h2>
-                            <h4 className="subtituloSalaCompra">Encuentra algo que te guste de manera eficiente</h4>
-                            <div className='productContainer'>
+                            <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Gran variedad de productos en todas las categorias</h2>
+                            <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra algo que te guste de manera eficiente</h4>
+                            <div className={darkMode ? 'product-container-dark' : 'product-container-light'}>
                                 {
                                     productos.map((producto) => (
                                         <Card producto={producto} darkMode={darkMode} />

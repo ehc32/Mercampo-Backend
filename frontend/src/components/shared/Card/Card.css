@@ -87,7 +87,7 @@
     align-items: center;
 }
 
-.productContainer {
+.product-container-light, .product-container-dark{
     width: 100%;
     padding: 20px;
     display: flex;
@@ -96,8 +96,7 @@
     justify-content: space-between;
 }
 
-
-.productContainer img {
+.product-container-light img, .product-container-dark img{
     width: 97%;
     height: 150px;
     object-fit: cover;

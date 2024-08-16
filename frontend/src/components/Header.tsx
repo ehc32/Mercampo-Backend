@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
   return (
     <Disclosure as="nav" className="bg-grey dark:bg-gray-800">
-      {({ open }) => (
+      {() => (
         <>
           <div className="px-5">
             <div className="relative flex h-16 items-center justify-between">
@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                     )}
                   </button>
                   <img
-                    className="hidden h-8 w-auto lg:block"
+                    className="h-8 w-auto lg:block"
                     src="/public/logo.png"
                     alt="Logo"
                   />
@@ -83,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                     <div className="flex space-x-4">
 
-                      {isAuth ? (
+                      {!isAuth ? (
                         <>
                           <Link
                             to={'/'}

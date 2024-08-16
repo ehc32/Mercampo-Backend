@@ -54,7 +54,7 @@
     width: 100%;
 }
 
-.productContainer {
+.product-container-light, .product-container-dark {
     width: 100%;
     padding: 20px;
     margin: 0;

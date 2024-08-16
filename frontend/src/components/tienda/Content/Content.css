@@ -8,11 +8,15 @@ main {
     /* background-color: rgb(237, 237, 237); */
 }
 
-.tituloSalaCompra {
+.titulo-sala-compra-dark, .titulo-sala-compra-light {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.subtituloSalaCompra {
+.sub-titulo-sala-compra-dark, .sub-titulo-sala-compra-light {
     font-size: 1rem;
+}
+
+.sub-titulo-sala-compra-dark, .titulo-sala-compra-dark {
+    color: #fff;
 }
