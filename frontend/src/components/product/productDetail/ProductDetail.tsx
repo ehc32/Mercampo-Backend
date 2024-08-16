@@ -3,6 +3,7 @@ import MySwiper from '../../shared/Swiper/swiper';
 import Map from '../map/Map';
 import './../../../global/dashlite.css'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
+import './styles.css'
 
 const ProductDetail = () => {
 
@@ -40,6 +41,7 @@ const ProductDetail = () => {
                                                 <div className="row pb-5">
                                                     <div className="col-lg-6">
                                                         <div className="product-gallery mr-xl-1 mr-xxl-5 p-4">
+                                                            <h4 className='titleProductoPreview'>Visualización del producto</h4>
                                                             <MySwiper width={"100%"} height={"50vh"} datos={carrouselData} />
                                                         </div>
                                                     </div>
@@ -67,42 +69,55 @@ const ProductDetail = () => {
                                                                         <div className="fs-16px fw-bold text-secondary">{producto.categoria}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Model Number</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">htmlForerunner 290XT</div>
+                                                                        <div className="fs-14px text-muted">Localización</div>
+                                                                        <div className="fs-16px fw-bold text-secondary">{producto.locate}</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>
 
                                                             <div className="product-meta">
+                                                                <div className='productCatn'>
+                                                                    <div className="fs-14px text-muted">Selecciona una cantidad</div>
+                                                                    <div className="fs-16px fw-bold text-secondary total">$0</div>
+                                                                </div>
                                                                 <ul className="d-flex flex-wrap ailgn-center g-2 pt-1">
-                                                                    <li className="w-140px">
-                                                                        <div className="htmlForm-control-wrap number-spinner-wrap">
+                                                                    <li className="w-140px item-row">
+                                                                        <div className="cantidadOrden">
                                                                             <button
                                                                                 className="btn btn-icon btn-outline-light number-spinner-btn number-minus"
                                                                                 data-number="minus"
                                                                                 onClick={() => {
-                                                                                    const input = document.querySelector('.number-spinner');
+                                                                                    const input = document.querySelector('.input-increment');
                                                                                     const currentValue = parseInt(input.value);
+                                                                                    const totalElement = document.querySelector('.total');
+                                                                                    const productoPrecio = producto.precio; // Reemplaza con el precio real del producto
                                                                                     input.value = currentValue - 1;
+                                                                                    totalElement.innerText = `$${(currentValue - 1) * productoPrecio}`;
                                                                                 }}
                                                                             >
-                                                                                <em className="icon bi bi-minus"></em>
+                                                                                <em className="icon bi bi-dash"></em>
                                                                             </button>
-                                                                            <input type="number" className="htmlForm-control number-spinner" value="0" />
+                                                                            <input
+                                                                                type="number"
+                                                                                value="0"
+                                                                                className='input-increment'
+                                                                                disabled
+                                                                            />
                                                                             <button
                                                                                 className="btn btn-icon btn-outline-light number-spinner-btn number-plus"
                                                                                 data-number="plus"
                                                                                 onClick={() => {
-                                                                                    const input = document.querySelector('.number-spinner');
+                                                                                    const input = document.querySelector('.input-increment');
                                                                                     const currentValue = parseInt(input.value);
+                                                                                    const totalElement = document.querySelector('.total');
+                                                                                    const productoPrecio = producto.precio; // Reemplaza con el precio real del producto
                                                                                     input.value = currentValue + 1;
+                                                                                    totalElement.innerText = `$${(currentValue + 1) * productoPrecio}`;
                                                                                 }}
                                                                             >
                                                                                 <i className="icon bi bi-plus"></i>
                                                                             </button>
                                                                         </div>
-                                                                    </li>
-                                                                    <li>
                                                                         <button className="btn btn-primary">Añadir al carrito</button>
                                                                     </li>
                                                                 </ul>

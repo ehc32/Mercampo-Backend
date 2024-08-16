@@ -1,0 +1,34 @@
+.titleProductoPreview {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cantidadOrden {
+    width: 150px !important;
+    display: flex;
+    flex-direction: row;
+    border-radius: 3px;
+}
+
+.cantidadOrden input {
+    text-align: center;
+    width: 50%;
+    outline: none;
+}
+
+.item-row {
+    width: 450px !important;
+    gap: 4em;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.product-meta {
+    display: flex;
+    flex-direction: row;
+}
+
+.productCatn {
+    min-width: 100px;
+}
