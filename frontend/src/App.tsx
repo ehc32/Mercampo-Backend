@@ -5,6 +5,7 @@ import Layout from "./components/Layout"
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
+import DetallesProd from "./pages/DetallesProd"
 import SoloProduct from "./pages/SoloProduct"
 import CatePage from "./pages/CatePage"
 
@@ -30,6 +31,7 @@ function App() {
 
                     <Route index element={<HomePage />} />
                     <Route path="product/:slug" element={<SoloProduct />} />
+                    <Route path="product/prueba" element={<DetallesProd />} />
 
                     <Route path="cate" element={<CatePage />} />
                     <Route path="cate/:cate" element={<SearchByCate />} />

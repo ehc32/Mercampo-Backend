@@ -1,7 +1,5 @@
 
-import './dashlite.css'
-import './bundle.js'
-import './scripts.js'
+import './../../../global/dashlite.css'
 
 const ProductDetail = () => {
     return (
