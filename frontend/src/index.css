@@ -46,13 +46,6 @@ button {
   height: 100vh;
 }
 
-#footer{
-  /* position: fixed !important; */
-  bottom: 0;
-  /* z-index: 1; */
-  overflow-y: unset;
-}
-
 .productContainer{
   --tw-bg-opacity: 1;
   background: rgb(17 24 39 / var(--tw-bg-opacity));
