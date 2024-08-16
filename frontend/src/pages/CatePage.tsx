@@ -1,15 +1,18 @@
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import Footer from "../components/Footer";
+import { useDarkMode } from "../store/theme";
 import Content from "../components/tienda/Content/Content";
 import { useState } from "react";
 import './style.css'
 
 interface CarrouselLast12Props {
-    darkMode: boolean;
     byCategory: [];
 }
 
-const CatePage: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
+const CatePage: React.FC<CarrouselLast12Props> = () => {
+
+
+    const { toggleDarkMode, darkMode } = useDarkMode();
 
     const productos = [
         {
