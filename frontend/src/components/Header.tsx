@@ -90,24 +90,16 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         <>
                           <Link
                             to={'/'}
-<<<<<<< HEAD
-                            className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                            onClick={() => setImgMenu(false)}
-=======
                             className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
->>>>>>> 15e25c6fabda2a1a09ef0470932babe903cee710
+                            onClick={() => setImgMenu(false)}
                           >
                             Inicio
                           </Link>
 
                           <Link
                             to={'/cate'}
-<<<<<<< HEAD
-                            className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                            onClick={() => setImgMenu(true)}
-=======
                             className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
->>>>>>> 15e25c6fabda2a1a09ef0470932babe903cee710
+                            onClick={() => setImgMenu(true)}
                           >
                             Tienda
                           </Link>
