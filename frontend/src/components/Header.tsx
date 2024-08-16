@@ -73,7 +73,7 @@ const Header = () => {
 
                     <img
                       className=" h-8 w-auto lg:block"
-                      src="/public/logo.png"
+                      src="/public/lo.ico"
                       alt="Logo"
                     />
                   </div>
@@ -90,7 +90,7 @@ const Header = () => {
                         to={'/cate'}
                         className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                       >
-                        Categorias
+                        Tienda
                       </Link>
                     </>
 

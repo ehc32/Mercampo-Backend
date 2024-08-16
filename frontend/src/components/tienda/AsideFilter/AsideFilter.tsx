@@ -1,5 +1,4 @@
 import './Aside.css';
-import './../../../assets/dashlite.css'
 import { useState } from 'react';
 import DatePickers from '../date/date';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -8,7 +7,7 @@ interface CarrouselLast12Props {
 }
 
 const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
-    const [showNav, setShowNav] = useState(false);
+    const [showNav, setShowNav] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [location, setLocation] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
