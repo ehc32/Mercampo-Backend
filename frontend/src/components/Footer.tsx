@@ -1,9 +1,13 @@
 
 import { FaFacebook, FaTwitter, FaYoutube, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import { useDarkMode } from '../hooks/theme';
 
 const Footer = () => {
+
+  const { darkMode } = useDarkMode();
+
   return (
-    <footer id="footer" className="bg-gray-800 text-white py-8 absolute botom-0 right-0 left-0">
+    <footer id="footer" className={darkMode ? 'footer-dark' : 'footer-light'}>
       <div className="flex justify-center mb-4">
         {/* Logos footer - Aquí puedes agregar tus logos */}
       </div>

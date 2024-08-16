@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
-import { useDarkMode } from "../hooks/theme";
+// import { useDarkMode } from "../hooks/theme";
 import Header from './Header';
-import AsideFilter from './tienda/AsideFilter/AsideFilter';
+// import AsideFilter from './tienda/AsideFilter/AsideFilter';
 
 const Layout = () => {
 
   const [estadoAside, setEstadoAside] = useState(false);
-  const { toggleDarkMode, darkMode } = useDarkMode();
+  // const { toggleDarkMode, darkMode } = useDarkMode();
 
   return (
     <div>

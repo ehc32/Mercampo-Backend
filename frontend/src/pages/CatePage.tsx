@@ -11,7 +11,7 @@ interface CarrouselLast12Props {
 const CatePage: React.FC<CarrouselLast12Props> = () => {
 
 
-    const { toggleDarkMode, darkMode } = useDarkMode();
+    const { darkMode } = useDarkMode();
 
     const productos = [
         {
@@ -175,15 +175,17 @@ const CatePage: React.FC<CarrouselLast12Props> = () => {
         },
     ];
 
-    const [byCategory, setCategory] = useState(["all"])
+    const [byCategory,] = useState(["all"])
 
     return (
-        <section>
+        <section className="sectionCatePage">
             <main className="mainTienda">
                 {/* <AsideFilter darkMode={darkMode} /> */}
                 <Content byCategory={byCategory} darkMode={darkMode} productos={productos} />
             </main>
-            {/* <Footer /> */}
+            <div className="footerCatePage">
+                <Footer />
+            </div>
         </section>
     );
 };

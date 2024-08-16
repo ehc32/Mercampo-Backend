@@ -8,7 +8,7 @@ import { useDarkMode } from "../hooks/theme";
 
 export default function Tienda() {
 
-    const { toggleDarkMode, darkMode } = useDarkMode();
+    const { darkMode } = useDarkMode();
 
     const productos = [
         {

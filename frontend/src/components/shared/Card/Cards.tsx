@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import './Card.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-
 interface Producto {
     nombre?: string;
     foto?: string;
@@ -12,7 +11,6 @@ interface Producto {
     categoria?: string;
     fecha?: string;
 }
-
 
 interface CarrouselLast12Props {
     producto: Producto[];
