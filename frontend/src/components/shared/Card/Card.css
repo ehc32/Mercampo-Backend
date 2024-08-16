@@ -7,7 +7,7 @@
     font-style: normal;
 }
 
-.cardBody {
+.cardbody {
     height: 400px;
     width: 200px ;
     min-width: 300px;
@@ -17,6 +17,17 @@
     border: transparent solid 1px;
     border-radius: 7px;
     transition: .2s ease;
+}
+
+.cardBodyLight {
+}
+
+.cardBodyDark {
+    background-color: #1F2937;
+}
+
+.cardBodyDark:has(p, h6) {
+    color: #fff
 }
 
 .cardBody:hover {

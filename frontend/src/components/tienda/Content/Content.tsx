@@ -19,7 +19,10 @@ interface Producto {
     fecha?: string;
 }
 
-const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, productos }) => {
+const Content: React.FC<CarrouselLast12Props> = ({ byCategory, productos }) => {
+
+    
+    const { toggleDarkMode, darkMode } = useDarkMode();
 
     const carrouselData = [
         {

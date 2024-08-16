@@ -173,9 +173,8 @@ const CatePage: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
         },
     ];
 
-   
     const [byCategory, setCategory] = useState(["all"])
-
+    
     return (
         <section>
             <main className="mainTienda">

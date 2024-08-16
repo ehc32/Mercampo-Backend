@@ -21,7 +21,7 @@ interface CarrouselLast12Props {
 const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
     return (
         <>
-            <div className='cardBody'>
+            <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight' }>
                 <div className='imgContent'>
                     <img src={producto.foto} alt="Imagen del producto" />
                 </div>
