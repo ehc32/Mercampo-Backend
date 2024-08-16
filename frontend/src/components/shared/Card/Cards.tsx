@@ -36,7 +36,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                 </Link>
                 <div className='infoContent'>
                     <div>
-                        <h4 className='headInfo'>{producto.nombre}</h4>
+                        <h4 className={darkMode ? 'headInfo-dark' : 'headInfo-light'}>{producto.nombre}</h4>
                         <h4 className='headInfo'>{producto.categoria}</h4>
                     </div>
                     <p className='headInfo'>{producto.description.slice(0, 100)}</p>

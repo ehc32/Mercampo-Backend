@@ -157,9 +157,14 @@
 
 }
 
-.headInfo:first-child {
+.headInfo-dark {
     font-size: 16px;
-    font-weight: bold;
+    color: #fff;
+}
+
+.headInfo-light{
+    font-size: 16px;
+    color: #526484;
 }
 
 .headInfo:last-child {

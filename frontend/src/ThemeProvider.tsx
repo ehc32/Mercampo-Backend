@@ -10,7 +10,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const { darkMode } = useDarkMode();
 
   return (
-    <div className={darkMode ? "dark" : ""}>
+    <div className={darkMode ? "dark" : "light"}>
       {children}
     </div>
   );

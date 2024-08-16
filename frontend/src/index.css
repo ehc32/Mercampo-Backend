@@ -15,7 +15,7 @@ button {
   color: #ccc;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 7px;
   height: 12px;
 }
@@ -32,7 +32,50 @@ button {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+} */
+
+/* Estilos para el modo claro */
+@media (prefers-color-scheme: light) {
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+  }
 }
+
+/* Estilos para el modo oscuro */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #111827;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #f3f4f6;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+}
+
 
 .mainTienda{
   min-height: 1000px;

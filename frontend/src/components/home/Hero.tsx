@@ -5,7 +5,7 @@ interface CarrouselLast12Props {
 }
 const Hero: React.FC<CarrouselLast12Props> = ({ darkMode }) => {
     return (
-        <section className={darkMode ? 'hero-dark' : 'hero'}>
+        <section className={darkMode ? 'hero-dark' : 'hero-light'}>
             <div className={darkMode ? 'hero-text-dark' : 'hero-text-light'}>
                 <h1>Descubre las mejores ofertas</h1>
                 <p>En nuestra tienda online encontrarás los productos que necesitas</p>
