@@ -23,12 +23,14 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
     return (
         <>
             <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
-                <div className='imgContent'>
-                    <img src={producto.foto} alt="Imagen del producto" />
-                </div>
-                <div className='minihead'>
-                    <hr />
-                </div>
+                <Link to="/product/prueba">
+                    <div className='imgContent'>
+                        <img src={producto.foto} alt="Imagen del producto" />
+                    </div>
+                    <div className='minihead'>
+                        <hr />
+                    </div>
+                </Link>
                 <div className='infoContent'>
                     <div>
                         <h4 className='headInfo'>{producto.nombre}</h4>
@@ -40,9 +42,9 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                             <h6>$ {producto.precio}</h6>
                             <span>{producto.locate}, {producto.fecha}</span>
                         </div>
-                        <Link to="/product/prueba">
-                            <i className='bi bi-bag-plus'></i>
-                        </Link>
+                        <i
+                            className='bi bi-cart3'
+                            onClick={() => addToCart(product)}></i>
                     </div>
                 </div>
             </div>

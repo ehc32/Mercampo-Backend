@@ -189,7 +189,7 @@ export default function Tienda() {
             <RandomProducts productos={productos} darkMode={darkMode} />
             {/* <Contacto darkMode={darkMode} /> */}
             <Swiper width="100%" height="300px" datos={carrouselData} />
-            <About />
+            <About darkMode={darkMode} />
             <Footer />
         </React.Fragment>
     )

@@ -7,25 +7,27 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 interface AccordionProps {
     titulo: string;
     contenido: string;
+    darkMode: boolean;
 }
 
-const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido }) => {
+const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido, darkMode }) => {
+    const className = darkMode ? 'dark-mode-accordion' : 'light-mode-accordion';
+
     return (
-        <div>
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                >
-                    {titulo}
-                </AccordionSummary>
-                <AccordionDetails>
-                    {contenido}
-                </AccordionDetails>
-            </Accordion>
-        </div>
+        <Accordion className={className}>
+            <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+                className={className}
+            >
+                {titulo}
+            </AccordionSummary>
+            <AccordionDetails className={className}>
+                {contenido}
+            </AccordionDetails>
+        </Accordion>
     );
-}
+};
 
 export default AccordionSet;

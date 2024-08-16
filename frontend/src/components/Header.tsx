@@ -83,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                     <div className="flex space-x-4">
 
-                      {!isAuth ? (
+                      {isAuth ? (
                         <>
                           <Link
                             to={'/'}
