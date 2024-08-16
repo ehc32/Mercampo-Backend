@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
-import './Card.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Link } from 'react-router-dom';
 import { useCartStore } from '../../../store/cart';
+import './Card.css';
 
 interface Producto {
     nombre?: string;
     foto?: string;
-    precio?: number;
+    price?: number;
     description?: string;
     locate?: string;
     categoria?: string;

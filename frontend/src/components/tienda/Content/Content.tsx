@@ -2,8 +2,8 @@ import { useState } from "react";
 import Card from "../../shared/Card/Cards";
 import Swiper from "../../shared/Swiper/swiper";
 
-import './Content.css';
 import Footer from "../../Footer";
+import './Content.css';
 
 interface CarrouselLast12Props {
     darkMode: boolean;
@@ -14,7 +14,7 @@ interface CarrouselLast12Props {
 interface Producto {
     nombre?: string;
     foto?: string;
-    precio?: number;
+    price?: number;
     description?: string;
     locate?: string;
     categoria?: string;
@@ -48,7 +48,7 @@ const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, product
                     (
                         <div>
                             <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Una gran variedad de productos</h2>
-                            <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra productos de alta calidad a los mejores precios</h4>
+                            <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra productos de alta calidad a los mejores prices</h4>
                             <div className={darkMode ? 'product-container-dark' : 'product-container-light'}>
                                 {
                                     productos.map((producto) => (

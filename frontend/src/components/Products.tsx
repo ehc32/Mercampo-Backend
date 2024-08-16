@@ -1,17 +1,17 @@
-import { BsFillTrashFill } from "react-icons/bs";
-import { AiFillEdit, AiFillPlusSquare } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { delete_product, get_products } from "../api/products";
 import {
+    useInfiniteQuery,
     useMutation,
     useQueryClient,
-    useInfiniteQuery,
 } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import Loader from "./Loader";
-import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { AiFillEdit, AiFillPlusSquare } from "react-icons/ai";
+import { BsFillTrashFill } from "react-icons/bs";
+import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
+import { delete_product, get_products } from "../api/products";
 import { Product } from "../Interfaces";
+import Loader from "./Loader";
 
 interface Props {
     results: any;
@@ -59,14 +59,14 @@ const Products = ({ results }: Props) => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-4 py-3">
-                           ID producto
+                            ID producto
                         </th>
                         <th scope="col" className="px-4 py-3">
                             Nombre
                         </th>
 
                         <th scope="col" className="px-4 py-3">
-                            Precio
+                            price
                         </th>
 
                         <th scope="col" className="px-4 py-3">

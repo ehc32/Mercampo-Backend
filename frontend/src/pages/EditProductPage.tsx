@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { edit_product, get_solo_prod } from "../api/products";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { edit_product, get_solo_prod } from "../api/products";
 
 const EditProductPage = () => {
 
@@ -29,14 +29,14 @@ const EditProductPage = () => {
     })
 
     useEffect(() => {
-       if (data) {
-        setName(data.name)
-        setCountInStock(data.count_in_stock)
-        setDescription(data.description)
-        setCategory(data.category)
-        setPrice(data.price)
-        setImage(data.image)
-       }
+        if (data) {
+            setName(data.name)
+            setCountInStock(data.count_in_stock)
+            setDescription(data.description)
+            setCategory(data.category)
+            setPrice(data.price)
+            setImage(data.image)
+        }
     }, [data])
 
     const navigate = useNavigate()
@@ -192,7 +192,7 @@ const EditProductPage = () => {
                                         htmlFor="price"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Precio
+                                        price
                                     </label>
                                     <input
                                         value={price}
@@ -201,7 +201,7 @@ const EditProductPage = () => {
                                         name="price"
                                         id="price"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="$Precio"
+                                        placeholder="$price"
                                     />
                                 </div>
 
@@ -246,9 +246,8 @@ const EditProductPage = () => {
                                                 htmlFor="dropzone-file"
                                                 className={`flex flex-col items-center justify-center w-full h-64 
         border-2 border-gray-600 border-dashed rounded-lg 
-        cursor-pointer bg-gray-40 ${
-            isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-        }`}
+        cursor-pointer bg-gray-40 ${isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                                                    }`}
                                                 onDragEnter={handleDragEnter}
                                                 onDragLeave={handleDragLeave}
                                             >

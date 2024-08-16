@@ -75,37 +75,32 @@ const CartPage = () => {
             <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
                 <div className="px-4 lg:px-12">
                     <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
-                        <div className="bg-white dark:bg-gray-800 relative  shadow-md sm:rounded-lg overflow-hidden p-8">
-                            <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Dirección de compra
-                            </h1>
+                        <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden p-8">
+                            <h4 className="fs-22px font-bold text-center text-white mb-2">Formulario de pago</h4>
+                            <h6 className="fs-16px text-white text-center mb-2">¿Terminaste? ¡Haz tu pedido!</h6>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-
-                                <div>
+                                <div className="inputForm">
                                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-default">Dirección</label>
                                     <input
                                         onChange={(e) => setAddress(e.target.value)}
                                         value={address}
-                                        type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" />
+                                        type="text" className="inputForm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" />
                                 </div>
-
                                 <div>
                                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-default">Ciudad</label>
                                     <input
                                         onChange={(e) => setCity(e.target.value)}
                                         value={city}
-                                        type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ciudad" />
+                                        type="text" className="inputForm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ciudad" />
                                 </div>
-
                                 <div>
                                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-default">Codigo Postal</label>
                                     <input
                                         onChange={(e) => setPostal_code(e.target.value)}
                                         value={postal_code}
-                                        type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Codigo Postal" />
+                                        type="text" className="inputForm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Codigo Postal" />
                                 </div>
-
-                                <div className="ml-[180px]">
+                                <div className="botonDePaypal">
                                     <PayPalScriptProvider
                                         options={{
                                             clientId: "AcvM04ycLuatoHGj4mz_xumwdLrJbM1g3n_Vy-fCiVmFD9DULLcxSnKZ_kil0RIgU490rEk9okpAxicZ",
@@ -127,7 +122,7 @@ const CartPage = () => {
                                 <div className="flex flex-col px-4 box-titlesCart  lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                                     <div className="flex flex-col box-titlesCart items-center w-full space-y-4">
                                         <h4 className="fs-22px font-bold text-white">Tu carrito de compras</h4>
-                                        <h6 className="fs-16px text-white">¿Terminaste? Haz tu pedido</h6>
+                                        <h6 className="fs-16px text-white">Aqui tu lista de deseos</h6>
                                         <div className="flex flex-row justify-between w-full">
                                             <h5>
                                                 <span className="text-gray-300 text-xl font-bold">

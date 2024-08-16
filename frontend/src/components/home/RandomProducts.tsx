@@ -5,7 +5,7 @@ import './Style.css';
 interface Producto {
     nombre?: string;
     foto?: string;
-    precio?: number;
+    price?: number;
     description?: string;
     locate?: string;
 }

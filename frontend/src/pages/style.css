@@ -26,7 +26,7 @@
     z-index: 1100;
 }
 
-.content-layout{
+.content-layout {
     padding-top: 5%;
 }
 
@@ -66,7 +66,7 @@
     .tablaCart {
         width: 100% !important;
     }
-    
+
     .contenedorSobreTabla {
         width: 90% !important;
         margin: auto !important;
@@ -77,4 +77,18 @@
         width: 100% !important;
     }
 
+
+    .paypal-button-container {
+
+        width: 100% !important;
+    }
+
+    .botonDePaypal {
+        width: 100% !important;
+        margin: 4em;
+    }
+}
+
+.inputForm {
+    width: 100% !important;
 }

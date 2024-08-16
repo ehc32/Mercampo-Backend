@@ -6,7 +6,7 @@ import './Style.css';
 interface Producto {
     nombre: string;
     foto: string;
-    precio: number;
+    price: number;
 }
 
 interface CarrouselLast12Props {
@@ -18,7 +18,7 @@ const CarrouselLast12: React.FC<CarrouselLast12Props> = ({ productos, darkMode }
     return (
         <>
             <h4 className={darkMode ? 'card-name-dark' : 'card-name-light'}>Ultimos añadidos</h4>
-            <h6 className={darkMode ? 'card-subname-dark' : 'card-subname-light'}>Descubre ofertas recientemente añadidas a un precio unico</h6>
+            <h6 className={darkMode ? 'card-subname-dark' : 'card-subname-light'}>Descubre ofertas recientemente añadidas a un price unico</h6>
 
             <Swiper
                 className='carrousel'
@@ -52,7 +52,7 @@ const CarrouselLast12: React.FC<CarrouselLast12Props> = ({ productos, darkMode }
                         <div className={darkMode ? 'card-products-dark' : 'card-products-light'}>
                             <img src={dato.foto} alt={dato.nombre} />
                             <h5>{dato?.nombre}</h5>
-                            <h6>$ {dato?.precio ? dato.precio : "--"} </h6>
+                            <h6>$ {dato?.price ? dato.price : "--"} </h6>
                         </div>
                     </SwiperSlide>
                 ))}

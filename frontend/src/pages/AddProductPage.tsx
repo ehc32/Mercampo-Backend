@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { post_product } from "../api/products";
-import { Link, useNavigate } from "react-router-dom";
+import React, { ChangeEvent, useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { post_product } from "../api/products";
 
 const AddProductPage = () => {
 
@@ -15,7 +15,7 @@ const AddProductPage = () => {
     const [filePreview, setFilePreview] = useState<string>("");
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
-    
+
     const navigate = useNavigate()
     const queryClient = useQueryClient();
 
@@ -167,7 +167,7 @@ const AddProductPage = () => {
                                         htmlFor="price"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Precio
+                                        price
                                     </label>
                                     <input
                                         value={price}
@@ -176,7 +176,7 @@ const AddProductPage = () => {
                                         name="price"
                                         id="price"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="$Precio"
+                                        placeholder="$price"
                                     />
                                 </div>
 
@@ -221,9 +221,8 @@ const AddProductPage = () => {
                                                 htmlFor="dropzone-file"
                                                 className={`flex flex-col items-center justify-center w-full h-64 
         border-2 border-gray-600 border-dashed rounded-lg 
-        cursor-pointer bg-gray-40 ${
-            isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-        }`}
+        cursor-pointer bg-gray-40 ${isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                                                    }`}
                                                 onDragEnter={handleDragEnter}
                                                 onDragLeave={handleDragLeave}
                                             >
@@ -245,7 +244,7 @@ const AddProductPage = () => {
                                                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                                         <span className="font-semibold">
-                                                            Click para 
+                                                            Click para
                                                         </span>{" "}
                                                         subir imagen
                                                     </p>

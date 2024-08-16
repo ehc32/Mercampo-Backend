@@ -1,3 +1,42 @@
 .acordionContainer {
-    padding: 2em;
+    padding: 3em 7em;
+}
+
+.headAbout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.headAbout p {
+    font-size: 1rem;
+    width: 70%;
+}
+
+.headAbout img {
+    width: 30%;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.headAboutDark {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.headAboutDark p {
+    color: #fff;
+    width: 70%;
+}
+
+.headAboutDark img {
+    width: 30%;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
 }

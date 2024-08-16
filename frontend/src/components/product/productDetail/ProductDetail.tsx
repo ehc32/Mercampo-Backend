@@ -1,9 +1,9 @@
 
+import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import MySwiper from '../../shared/Swiper/swiper';
 import Map from '../map/Map';
-import './../../../global/dashlite.css'
-import 'bootstrap-icons/font/bootstrap-icons.min.css'
-import './styles.css'
+import './../../../global/dashlite.css';
+import './styles.css';
 
 interface productProps {
     darkMode: boolean;
@@ -24,7 +24,7 @@ const ProductDetail: React.FC<productProps> = ({ darkMode }) => {
     {
         nombre: 'Mango2',
         foto: 'https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg',
-        precio: 14.00,
+        price: 14.00,
         locate: "Neiva",
         description: "La piña es una fruta tropical dulce y jugosa que se consume fresca o en jugos, batidos y otras bebidas refrescantes. Su pulpa suave y fibrosa es rica en vitaminas, minerales y antioxidantes, lo que la hace una excelente opción para una dieta saludable. La piña también se utiliza en la cocina para agregar sabor y textura a platos salados y postres, y su jugo se utiliza como ingrediente en marinadas y salsas. Además, la piña tiene propiedades antiinflamatorias y digestivas, lo que la hace una fruta beneficiosa para la salud en general.",
         fecha: "Agosto 15",
@@ -51,7 +51,7 @@ const ProductDetail: React.FC<productProps> = ({ darkMode }) => {
                                                     </div>
                                                     <div className="col-lg-6">
                                                         <div className="product-info mt-5 mr-xxl-5">
-                                                            <h4 className="product-price text-primary">$ {producto.precio}</h4>
+                                                            <h4 className="product-price text-primary">$ {producto.price}</h4>
                                                             <h2 className="product-title">{producto.nombre}</h2>
                                                             <div className="product-rating">
                                                                 <ul className="rating">
@@ -94,9 +94,9 @@ const ProductDetail: React.FC<productProps> = ({ darkMode }) => {
                                                                                     const input = document.querySelector('.input-increment');
                                                                                     const currentValue = parseInt(input.value);
                                                                                     const totalElement = document.querySelector('.total');
-                                                                                    const productoPrecio = producto.precio; // Reemplaza con el precio real del producto
+                                                                                    const productoprice = producto.price; // Reemplaza con el price real del producto
                                                                                     input.value = currentValue <= 0 ? 0 : currentValue - 1;
-                                                                                    totalElement.innerText = currentValue <= 0 ? '$0' : `$${(currentValue - 1) * productoPrecio}`;
+                                                                                    totalElement.innerText = currentValue <= 0 ? '$0' : `$${(currentValue - 1) * productoprice}`;
                                                                                 }}
                                                                             >
                                                                                 <em className="icon bi bi-dash"></em>
@@ -114,9 +114,9 @@ const ProductDetail: React.FC<productProps> = ({ darkMode }) => {
                                                                                     const input = document.querySelector('.input-increment');
                                                                                     const currentValue = parseInt(input.value);
                                                                                     const totalElement = document.querySelector('.total');
-                                                                                    const productoPrecio = producto.precio; // Reemplaza con el precio real del producto
+                                                                                    const productoprice = producto.price; // Reemplaza con el price real del producto
                                                                                     input.value = currentValue + 1;
-                                                                                    totalElement.innerText = `$ ${(currentValue + 1) * productoPrecio}`;
+                                                                                    totalElement.innerText = `$ ${(currentValue + 1) * productoprice}`;
                                                                                 }}
                                                                             >
                                                                                 <i className="icon bi bi-plus"></i>

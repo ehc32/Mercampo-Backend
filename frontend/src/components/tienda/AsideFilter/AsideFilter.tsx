@@ -1,7 +1,6 @@
-import './Aside.css';
-import { useState } from 'react';
-import DatePickers from '../date/date';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useState } from 'react';
+import './Aside.css';
 interface CarrouselLast12Props {
     darkMode: boolean;
     estadoAside: boolean;
@@ -23,7 +22,7 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode, estadoAside }) 
             console.log("Buscar: " + searchTerm)
         }
     }
-    
+
     const handleCategoryChange = (e) => {
         const { checked, value } = e.target;
         if (checked) {
@@ -99,7 +98,7 @@ const AsideFilter: React.FC<CarrouselLast12Props> = ({ darkMode, estadoAside }) 
                     }
                 </div>
                 <div className='asideBox'>
-                    <h4 className='cardTitles'>Precio máximo</h4>
+                    <h4 className='cardTitles'>price máximo</h4>
                     <ul>
                         <li><p>Menos de $ 100.000</p></li>
                         <li><p>Entre $100.000 y $150.000</p></li>

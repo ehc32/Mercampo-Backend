@@ -13431,7 +13431,7 @@ h6,
 }
 
 .text-soft {
-  color: #8094ae !important;
+  /* color: #8094ae !important; */
 }
 
 .text-base {
@@ -27656,7 +27656,6 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
   .fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk .fc-timeGridWeek-button:before,
   .fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk .fc-timeGridDay-button:before,
   .fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk .fc-listWeek-button:before {
-    color: #8094ae;
     position: absolute;
     top: 50%;
     left: 50%;
