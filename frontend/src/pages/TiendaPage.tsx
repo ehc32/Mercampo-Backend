@@ -4,6 +4,7 @@ import { useDarkMode } from "../store/theme";
 import Hero from "../components/home/Hero";
 import Swiper from "../components/shared/Swiper/swiper";
 import Footer from "../components/Footer";
+import About from "../components/home/About/About";
 
 export default function Tienda() {
 
@@ -188,7 +189,7 @@ export default function Tienda() {
             <RandomProducts productos={productos} darkMode={darkMode} />
             {/* <Contacto darkMode={darkMode} /> */}
             <Swiper width="100%" height="300px" datos={carrouselData} />
-
+            <About />
             <Footer />
         </React.Fragment>
     )
