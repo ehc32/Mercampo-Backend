@@ -5,8 +5,13 @@ from django.contrib.auth.models import (
     PermissionsMixin,
     UserManager
 )
+from enum import Enum
 
-
+class Role(Enum):
+    ADMIN = "admin"
+    CLIENT = "client"
+    SELLER = "seller"
+    
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
@@ -27,14 +32,17 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault("is_staff", True)
         return self._create_user(email, password, **extra_fields)
 
-
+def validate_role(value):
+    if value not in [tag.value for tag in Role]:
+        raise ValueError("Rol no válido")
+    
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     avatar = models.ImageField(default="avatar.png")
     date_joined = models.DateTimeField(default=timezone.now)
-    is_staff = models.BooleanField(default=False)
+    role = models.CharField(max_length=10, choices=[(tag.name, tag.value) for tag in Role], default=Role.CLIENT.value)
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

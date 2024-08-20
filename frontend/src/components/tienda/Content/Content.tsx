@@ -40,7 +40,7 @@ const Content: React.FC<CarrouselLast12Props> = ({ byCategory, darkMode, product
 
     return (
         <section className="contenidoTienda">
-            <Swiper width="80%" height="300px" datos={carrouselData} isUpSwiper={true} />
+            <Swiper width="92%" height="300px" datos={carrouselData} isUpSwiper={true} />
             {/* aqui las cards de productos*/}
 
             {

@@ -56,12 +56,9 @@ def delete_user(request, pk):
 
 @api_view(['GET'])
 def get_users(request):
-    if request.user.is_staff:
-        users = User.objects.exclude(email='admin@admin.com')
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
-    return Response(serializer.data, status=status.HTTP_401_UNAUTHORIZED)
-
+    users = User.objects.exclude(email='admin@admin.com')
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def register(request):
@@ -70,6 +67,7 @@ def register(request):
         email=data['email'],
         name=data['name'],
         last_name=data['last_name'],
+        role=data['role'],
         password=make_password(data['password'])
     )
     serializer = RegisterUserSerializer(user, many=False)
