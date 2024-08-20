@@ -6,6 +6,7 @@ import Products from "../components/Products";
 import Orders from "../components/Orders";
 import Users from "../components/Users";
 import { search_order } from "../api/orders";
+import Footer from "../components/Footer";
 
 const AdminPage = () => {
 
@@ -112,6 +113,7 @@ const AdminPage = () => {
 
                 </div>
             </div>
+            {/* <Footer/> */}
         </section>
     );
 };

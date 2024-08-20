@@ -17,6 +17,7 @@ import CartPage from "./pages/CartPage"
 import UserProfile from "./pages/UserProfile"
 import SoloOrder from "./pages/SoloOrder"
 import Tienda from "./pages/TiendaPage"
+import PurchaseHistory from "./pages/HistorialCompra"
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                     <Route element={<PrivateRoute />} >
                         <Route path="cart" element={<CartPage />} />
                         <Route path="profile" element={<UserProfile />} />
+                        <Route path="/purchase-history" element={<PurchaseHistory />} />
                         <Route path="order/:id" element={<SoloOrder />} />
                     </Route>
 
