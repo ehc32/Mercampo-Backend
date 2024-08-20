@@ -9,7 +9,6 @@ urlpatterns = [
     path('get_all_locate/', views.get_all_locate),
     path('getLast12/last_products/', views.get_last_12_products),
     path('get/admin/<int:id>/', views.get_product_admin),
-    path('getProductImg/<int:id>/', views.get_product_img),
     path('get/<slug:slug>/', views.get_product),
     path('post/', views.create_product),
     path('edit/<int:pk>/', views.edit_product),
