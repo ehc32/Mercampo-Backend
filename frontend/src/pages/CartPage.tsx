@@ -1,12 +1,12 @@
-import { useCartStore } from "../store/cart";
-import { useState } from "react";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { create_order } from "../api/orders";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import './style.css'
+import { useNavigate } from "react-router-dom";
+import { create_order } from "../api/orders";
 import Footer from "../components/Footer";
+import { useCartStore } from "../store/cart";
+import './style.css';
 
 const CartPage = () => {
 
@@ -131,7 +131,7 @@ const CartPage = () => {
                                             </h5>
                                             <h5>
                                                 <span className="text-gray-300 text-xl font-bold">
-                                                    Total: {total_price === null ? "$0" : `$${total_price}`}
+                                                    Total: $ {total_price === null ? " 0" : ` ${total_price.toFixed(2)}`}
                                                 </span>
                                             </h5>
                                         </div>
@@ -169,7 +169,7 @@ const CartPage = () => {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    Precio
+                                                    price
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -193,7 +193,7 @@ const CartPage = () => {
                                                             <img
                                                                 src={`https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg`}
                                                                 // src={`http://127.0.0.1:8000${product.image}`}
-                                                                alt={product.nombre}
+                                                                alt={product.name}
                                                                 className="w-auto h-8 mr-3"
                                                             />
 
@@ -201,12 +201,12 @@ const CartPage = () => {
                                                         </td>
                                                         <td className="px-4 py-2">
                                                             <span className="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
-                                                                {product.nombre}
+                                                                {product.name}
                                                             </span>
                                                         </td>
                                                         <td className="px-4 py-2">
                                                             <span className="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
-                                                                {product.categoria}
+                                                                {product.category}
                                                             </span>
                                                         </td>
                                                         <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -280,11 +280,11 @@ const CartPage = () => {
                                                             </div>
                                                         </td>
                                                         <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            ${product.precio}
+                                                            ${product.price}
                                                         </td>
 
                                                         <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            $ {product.quantity !== undefined ? product.precio * product.quantity : 0}
+                                                        $ {(product.quantity !== undefined ? (product.price * product.quantity).toFixed(2) : "0.00")}
                                                         </td>
                                                     </tr>
                                                 </>

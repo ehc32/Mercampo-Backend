@@ -34,7 +34,7 @@ const HistorialDeCompras = () => {
                             <th className="py-2 px-4 border-b dark:border-gray-700">Imagen</th>
                             <th className="py-2 px-4 border-b dark:border-gray-700">Producto</th>
                             <th className="py-2 px-4 border-b dark:border-gray-700">Fecha</th>
-                            <th className="py-2 px-4 border-b dark:border-gray-700">Precio</th>
+                            <th className="py-2 px-4 border-b dark:border-gray-700">price</th>
                             <th className="py-2 px-4 border-b dark:border-gray-700">Acción</th>
                         </tr>
                     </thead>
@@ -46,28 +46,28 @@ const HistorialDeCompras = () => {
                                 imagen: "https://via.placeholder.com/50",
                                 producto: "Producto 1",
                                 fecha: "2024-08-19",
-                                precio: "$50.00",
+                                price: "$50.00",
                             },
                             {
                                 id: 2,
                                 imagen: "https://via.placeholder.com/50",
                                 producto: "Producto 1",
                                 fecha: "2024-08-19",
-                                precio: "$50.00",
+                                price: "$50.00",
                             },
                             {
                                 id: 3,
                                 imagen: "https://via.placeholder.com/50",
                                 producto: "Producto 1",
                                 fecha: "2024-08-19",
-                                precio: "$50.00",
+                                price: "$50.00",
                             },
                             {
                                 id: 4,
                                 imagen: "https://via.placeholder.com/50",
                                 producto: "Producto 2",
                                 fecha: "2024-08-15",
-                                precio: "$30.00",
+                                price: "$30.00",
                             },
                         ].map((compra) => (
                             <tr key={compra.id}>
@@ -76,7 +76,7 @@ const HistorialDeCompras = () => {
                                 </td>
                                 <td className="py-2 px-4 border-b dark:border-gray-700">{compra.producto}</td>
                                 <td className="py-2 px-4 border-b dark:border-gray-700">{compra.fecha}</td>
-                                <td className="py-2 px-4 border-b dark:border-gray-700">{compra.precio}</td>
+                                <td className="py-2 px-4 border-b dark:border-gray-700">{compra.price}</td>
                                 <td className="py-2 px-4 border-b dark:border-gray-700">
                                     <button
                                         onClick={() => DescargaMutation.mutate()}

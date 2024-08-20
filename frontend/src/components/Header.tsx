@@ -1,14 +1,12 @@
 import { BsFillMoonStarsFill, BsFillSunFill, BsFillCartFill } from "react-icons/bs";
-
-import { Fragment, useState } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Fragment, useState } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/auth";
-import jwt_decode from "jwt-decode"
-import { useCartStore } from "../store/cart"
+import jwt_decode from "jwt-decode";
+import { useCartStore } from "../store/cart";
 import { Token } from "../Interfaces";
-// import { useSearchStore } from "../store/search";
 import { useDarkMode } from "../hooks/theme";
 
 interface HeaderProps {
@@ -21,40 +19,33 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
   const { toggleDarkMode, darkMode } = useDarkMode();
   const token: string = useAuthStore.getState().access;
   const cart = useCartStore(state => state.cart);
-  const { isAuth } = useAuthStore()
-  const [ imgMenu, setImgMenu ] = useState(false);
+  const { isAuth, role } = useAuthStore();
+  const [imgMenu, setImgMenu] = useState(false);
 
-  let is_admin: boolean;
+  let is_admin: boolean = false;
   let user_id: number;
   let avatar: string;
 
   if (isAuth) {
-    const tokenDecoded: Token = jwt_decode(token)
-    is_admin = tokenDecoded.is_staff;
+    const tokenDecoded: Token = jwt_decode(token);
+    is_admin = role == 'admin';  // Se utiliza el rol almacenado para verificar si es admin
     user_id = tokenDecoded.user_id;
-    avatar = String(tokenDecoded.avatar)
+    avatar = String(tokenDecoded.avatar);
+    console.log(is_admin)
   }
 
-  // const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
-
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSearchTerm(event.target.value)
-  // }
-
-
   function logOutFun() {
-    useAuthStore.getState().logout()
-    window.location.href = '/login'
+    useAuthStore.getState().logout();
+    window.location.href = '/login';
   }
 
   function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(' ');
   }
 
   const handleToggleMenu = () => {
     setEstadoAside(!estadoAside);
   };
-
 
   return (
     <Disclosure as="nav" className={darkMode ? 'nav-dark' : 'nav-light'}>
@@ -73,8 +64,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       )
                     )}
                   </button>
-                  <Link
-                    to={'/'}>
+                  <Link to={'/'}>
                     <img
                       className="h-10 w-auto lg:block"
                       src="/public/lo.ico"
@@ -82,10 +72,8 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                     />
                   </Link>
 
-                  <div className=" sm:ml-6 sm:block">
-
+                  <div className="sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-
                       {isAuth ? (
                         <>
                           <Link
@@ -104,7 +92,6 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                             Tienda
                           </Link>
                         </>
-
                       ) : (
                         <>
                           <Link
@@ -123,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         </>
                       )}
 
-                      {is_admin && is_admin && (
+                      {is_admin && (
                         <Link
                           to={'/admin'}
                           className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
@@ -131,15 +118,10 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                           Panel de administración
                         </Link>
                       )}
-
                     </div>
-
                   </div>
-
                 </div>
               </div>
-
-
 
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
@@ -147,13 +129,10 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                   type="button"
                 >
                   {darkMode ?
-
                     <BsFillMoonStarsFill size={20} className="text-slate-200 hover:text-white " />
-
                     :
-
-                    <BsFillSunFill size={23} className="text-slate-900 hover:text-black" />}
-
+                    <BsFillSunFill size={23} className="text-slate-900 hover:text-black" />
+                  }
                 </button>
 
                 <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white d-flex row align-center">
@@ -164,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                 {isAuth && (
                   <Menu as="div" className="relative ml-2">
                     <div>
-                      <Menu.Button className="flex rounded-full ml-8 text-sm focus:outline-none ">
+                      <Menu.Button className="flex rounded-full ml-8 text-sm focus:outline-none">
                         <span className="sr-only">Menú de usuario</span>
                         <img
                           className="h-8 w-8 rounded-full"
@@ -206,26 +185,23 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       </Menu.Items>
                     </Transition>
                   </Menu>
-
                 )}
-
               </div>
             </div>
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-
-
             <div className="flex mx-2">
               <div className="absolute inset-y-[72px] left-2 px-4 flex pl-3 pointer-events-none">
-                <svg className="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                <svg className="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                 <span className="sr-only">Buscar</span>
               </div>
-              <input type="text" id="search-navbar" className="block w-full p-2
-                pl-10 text-sm text-gray-900 border border-gray-300 rounded-full 
-                bg-gray-50 dark:bg-gray-700 outline-none
-                dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  
-                " placeholder="Buscar..." />
+              <input
+                type="text"
+                id="search-navbar"
+                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 dark:bg-gray-700 outline-none dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                placeholder="Buscar..."
+              />
             </div>
 
             <div className="space-y-1 px-2 pb-3 pt-2">
@@ -235,31 +211,30 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                     to={'/'}
                     className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
                   >
-                    Home
+                    Inicio
                   </Link>
 
                   <Link
                     to={'/cate'}
                     className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                   >
-                    Categorias
+                    Tienta
                   </Link>
                 </div>
-
               ) : (
                 <div className="w-full grid grid-cols-1">
                   <Link
                     to={'/login'}
                     className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
                   >
-                    Log in
+                    Ingresar
                   </Link>
 
                   <Link
                     to={'/register'}
                     className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                   >
-                    Sign up
+                    Cerrar sesión
                   </Link>
                 </div>
               )}
@@ -267,21 +242,19 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
               {is_admin && (
                 <div className="w-full">
                   <Link
-                    to={'/'}
+                    to={'/admin'}
                     className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                   >
                     Administrador
                   </Link>
                 </div>
               )}
-
             </div>
           </Disclosure.Panel>
         </>
-      )
-      }
-    </Disclosure >
-  )
+      )}
+    </Disclosure>
+  );
 }
 
-export default Header
+export default Header;
