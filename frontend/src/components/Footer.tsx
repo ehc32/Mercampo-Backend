@@ -35,7 +35,6 @@ const Footer = () => {
             </a>
           </div>
           <div className="mt-4 space-y-2">
-            <a href="#" className="block">@SENAComunica</a>
             <a href="https://www.sena.edu.co" target="_blank" rel="noopener noreferrer" className="block">www.sena.edu.co</a>
             <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="block">
               Servicios Tecnologicos - Regional Huila
