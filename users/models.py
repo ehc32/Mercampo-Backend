@@ -41,6 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     avatar = models.ImageField(default="avatar.png")
+    can_publish = models.BooleanField(default=False, null=False)
     date_joined = models.DateTimeField(default=timezone.now)
     role = models.CharField(max_length=10, choices=[(tag.name, tag.value) for tag in Role], default=Role.CLIENT.value)
     objects = CustomUserManager()
