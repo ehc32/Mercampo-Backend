@@ -1,11 +1,19 @@
+from enum import Enum
 from django.db import models
 from users.models import User
+
+class Category(Enum):
+    FRUTAS = 'Frutas'
+    VERDURAS = 'Verduras'
+    GRANOS = 'Granos'
+    ABARROTES = 'Abarrotes'
+    OTROS = 'Otros'
 
 
 class Product(models.Model):
     slug = models.SlugField(max_length=50, null=True, blank=True)
     name = models.CharField(max_length=100, blank=True)
-    category = models.CharField(max_length=100, blank=True)
+    category = models.CharField(max_length=100, choices=[(tag.name, tag.value) for tag in Category])
     description = models.CharField(max_length=100, blank=True, null=False)
     map_locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # location google maps
     locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # this is the place where's product offer
