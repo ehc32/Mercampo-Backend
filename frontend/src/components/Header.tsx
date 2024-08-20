@@ -123,14 +123,12 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         </>
                       )}
 
-                      {is_admin && is_admin && (
                         <Link
                           to={'/admin'}
                           className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                         >
                           Panel de administración
                         </Link>
-                      )}
 
                     </div>
 
