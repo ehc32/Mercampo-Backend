@@ -17,7 +17,6 @@ export const search_prod = async (query: string) => {
     return response.data;
 };
 
-
 export const get_solo = async (slug: string) => {
     const response = await authAxios.get(`/products/get/${slug}/`)
     return response.data
@@ -60,5 +59,10 @@ export const post_product = async (data: Product) => {
 
 export const get_products = async ({ pageParam = 1 }) => {
     const response = await axi.get(`/products/?page=${pageParam}&pages=9`)
+    return response.data
+};
+
+export const get_all_products = async () => {
+    const response = await axi.get(`/products/getRandom/random_products/`)
     return response.data
 };

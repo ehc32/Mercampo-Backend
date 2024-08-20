@@ -73,12 +73,12 @@ def get_products_by_locate(request):
 
 @api_view(['GET'])
 def get_all_locate(request):
-    locations = Product.objects.values_list('location', flat=True).distinct()
+    locations = Product.objects.values_list('locate', flat=True).distinct()
     return Response(list(locations))
 
 @api_view(['GET'])
 def get_products_random(request):
-    products = Product.objects.order_by('?')[:20]
+    products = Product.objects.order_by('?')[:12]
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -87,7 +87,7 @@ def get_last_12_products(request):
     order_by = request.query_params.get('order_by')
     if order_by is None:
         order_by = '-created'
-    products = Product.objects.all().order_by(order_by)[:12]
+    products = Product.objects.all().order_by(order_by)[:8]
     
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)

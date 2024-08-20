@@ -38,14 +38,14 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
       )
       set(state => ({
         cart: updatedCart,
-        totalPrice: state.totalPrice + Number(product.precio),
+        totalPrice: state.totalPrice + Number(product.price),
       }))
     } else {
       const updatedCart = [...cart, { ...product, quantity: 1 }]
 
       set(state => ({
         cart: updatedCart,
-        totalPrice: state.totalPrice + Number(product.precio),
+        totalPrice: state.totalPrice + Number(product.price),
       }))
     }
   },
@@ -60,12 +60,12 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
       )
       set(state => ({
         cart: updatedCart,
-        totalPrice: state.totalPrice - Number(product.precio),
+        totalPrice: state.totalPrice - Number(product.price),
       }))
     } else {
       set(state => ({
         cart: state.cart.filter(item => item.id !== product.id),
-        totalPrice: state.totalPrice - Number(product.precio),
+        totalPrice: state.totalPrice - Number(product.price),
       }))
     }
   },

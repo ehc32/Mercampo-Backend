@@ -14,8 +14,13 @@ class ReviewSerializer(serializers.ModelSerializer):
     def get_avatar(self, obj):
         return obj.user.avatar.url
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['image']
+
 class ProductSerializer(serializers.ModelSerializer):
-    images = serializers.ListField(child=serializers.CharField(), write_only=True)
+    images = ProductImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
