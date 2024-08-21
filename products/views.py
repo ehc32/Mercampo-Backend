@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
 from . models import Product, ProductImage
-from . serializers import ProductSerializer, ReviewSerializer
+from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
 
 from django.views.decorators.csrf import csrf_exempt
@@ -24,7 +24,7 @@ def create_product(request):
     print("llega hasta aqui")
     if request.user.role == 'client' or 'admin':
         print("Entra")
-        product_serializer = ProductSerializer(data=request.data)
+        product_serializer = ProductCreateSerializer(data=request.data)
         if product_serializer.is_valid():
             name = product_serializer.validated_data['name']
             category = product_serializer.validated_data['category']
@@ -48,7 +48,7 @@ def create_product(request):
 @api_view(['GET'])
 def get_prod_by_cate(request, category):
     products = Product.objects.filter(category=category)
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -57,7 +57,7 @@ def search(request):
     if query is None:
         query = ''
     product = Product.objects.filter(name__icontains=query)
-    serializer = ProductSerializer(product, many=True)
+    serializer = ProductReadSerializer(product, many=True)
     return Response({'products': serializer.data})
 
 @api_view(['GET'])
@@ -68,7 +68,7 @@ def get_products_by_locate(request):
     products = Product.objects.filter(location__icontains=locate)
     if not products:
         return Response({'error': 'No se encontraron productos con esa ubicación'}, status=404)
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -79,7 +79,7 @@ def get_all_locate(request):
 @api_view(['GET'])
 def get_products_random(request):
     products = Product.objects.order_by('?')[:12]
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -89,7 +89,7 @@ def get_last_12_products(request):
         order_by = '-created'
     products = Product.objects.all().order_by(order_by)[:8]
     
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -97,26 +97,26 @@ def get_products(request):
     products = Product.objects.all()
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
-    serializer = ProductSerializer(paginated_products, many=True)
+    serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
 
 @api_view(['GET'])
 def get_product_admin(request, id):
     products = Product.objects.get(id=id)
-    serializer = ProductSerializer(products, many=False)
+    serializer = ProductReadSerializer(products, many=False)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def get_product(request, slug):
     products = Product.objects.get(slug=slug)
-    serializer = ProductSerializer(products, many=False)
+    serializer = ProductReadSerializer(products, many=False)
     return Response(serializer.data)
 
 @api_view(['PUT'])
 def edit_product(request, pk):
     product = Product.objects.get(pk=pk)
     if request.user.is_staff:
-        serializer = ProductSerializer(product, data=request.data)
+        serializer = ProductReadSerializer(product, data=request.data)
         if serializer.is_valid():
             name = serializer.validated_data['name']
             category = serializer.validated_data['category']

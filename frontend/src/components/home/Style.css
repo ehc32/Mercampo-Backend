@@ -62,7 +62,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: start;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .cardFooter {

@@ -1,22 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { PrivateRoute, AdminPrivateRoute } from "./components/PrivateRoute"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Layout from "./components/Layout"
+import { AdminPrivateRoute, PrivateRoute } from "./components/PrivateRoute"
 
-import HomePage from "./pages/HomePage"
-import LoginPage from "./pages/LoginPage"
-import RegisterPage from "./pages/RegisterPage"
-import DetallesProd from "./pages/DetallesProd"
-import CatePage from "./pages/CatePage"
+import LoginPage from "./pages/Login"
+import DetallesProd from "./pages/ProductDetail"
+import RegisterPage from "./pages/Register"
+import Shop from "./pages/Shop"
 
+import AddProduct from "./pages/AddProductPage"
 import AdminPage from "./pages/AdminPage"
-import AddProductPage from "./pages/AddProductPage"
-import EditProductPage from "./pages/EditProductPage"
-import SearchByCate from "./pages/SearchByCate"
-import CartPage from "./pages/CartPage"
+import Home from "./pages/Home"
+import ShopHistory from "./pages/ShopHistory"
+import ShoppingCart from "./pages/ShoppingCart"
 import UserProfile from "./pages/UserProfile"
-import SoloOrder from "./pages/SoloOrder"
-import Tienda from "./pages/TiendaPage"
-import PurchaseHistory from "./pages/HistorialCompra"
 import VendedorProduct from "./pages/VendedorProduct"
 
 function App() {
@@ -25,28 +21,26 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />} >
-                    <Route index element={<Tienda />} />
+                    <Route index element={<Home />} />
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
 
-                    <Route index element={<HomePage />} />
+                    <Route index element={<Home />} /> {/* vista principal */}
                     <Route path="product/:slug" element={<DetallesProd />} />
+                    <Route path="cate" element={<Shop />} />    
+                    <Route path="add" element={<AddProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
+                    <Route path="vendedor-order" element={<VendedorProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
 
-                    <Route path="cate" element={<CatePage />} />
-                    <Route path="cate/:cate" element={<SearchByCate />} />
+                    
 
                     <Route element={<PrivateRoute />} >
-                        <Route path="cart" element={<CartPage />} />
+                        <Route path="cart" element={<ShoppingCart />} />
                         <Route path="profile" element={<UserProfile />} />
-                        <Route path="/purchase-history" element={<PurchaseHistory />} />
-                        <Route path="vendedor-product" element={<VendedorProduct />} />
-                        <Route path="order/:id" element={<SoloOrder />} />
+                        <Route path="/purchase-history" element={<ShopHistory />} />
                     </Route>
 
                     <Route path="admin" element={<AdminPrivateRoute />} >
                         <Route index element={<AdminPage />} />
-                        <Route path="add" element={<AddProductPage />} />
-                        <Route path="edit/:id" element={<EditProductPage />} />
                     </Route>
                 </Route>
             </Routes>

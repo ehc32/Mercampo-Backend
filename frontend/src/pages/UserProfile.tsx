@@ -1,13 +1,13 @@
-import { useAuthStore } from "../store/auth";
-import { Token } from "../Interfaces";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import jwt_decode from "jwt-decode";
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { edit_user, get_solo_user } from "../api/users";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { my_orders } from "../api/orders";
-import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
+import { my_orders } from "../api/orders";
+import { edit_user, get_solo_user } from "../api/users";
+import Loader from "../components/Loader";
+import { useAuthStore } from "../hooks/auth";
+import { Token } from "../Interfaces";
 
 const UserProfile = () => {
   const [show, setShow] = useState(true);

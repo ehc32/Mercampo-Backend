@@ -1,13 +1,13 @@
-import { BsFillMoonStarsFill, BsFillSunFill, BsFillCartFill } from "react-icons/bs";
-import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Link } from "react-router-dom";
-import { useAuthStore } from "../store/auth";
 import jwt_decode from "jwt-decode";
-import { useCartStore } from "../store/cart";
-import { Token } from "../Interfaces";
+import { Fragment, useState } from 'react';
+import { BsFillCartFill, BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { useAuthStore } from "../hooks/auth";
+import { useCartStore } from "../hooks/cart";
 import { useDarkMode } from "../hooks/theme";
+import { Token } from "../Interfaces";
 
 interface HeaderProps {
   estadoAside: boolean;
@@ -110,12 +110,12 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         </>
                       )}
 
-                        <Link
-                          to={'/admin'}
-                          className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
-                        >
-                          Panel de administración
-                        </Link>
+                      <Link
+                        to={'/admin'}
+                        className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                      >
+                        Panel de administración
+                      </Link>
                     </div>
                   </div>
                 </div>
