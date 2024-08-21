@@ -13,6 +13,7 @@ import Home from "./pages/Home"
 import ShopHistory from "./pages/ShopHistory"
 import ShoppingCart from "./pages/ShoppingCart"
 import UserProfile from "./pages/UserProfile"
+import VendedorProduct from "./pages/VendedorProduct"
 
 function App() {
 
@@ -28,6 +29,9 @@ function App() {
                     <Route path="product/:slug" element={<DetallesProd />} />
                     <Route path="store" element={<Store />} />
                     <Route path="add" element={<AddProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
+                    <Route path="vendedor-order" element={<VendedorProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
+
+                    
 
                     <Route path="login" element={<LoginPage />} />
 
