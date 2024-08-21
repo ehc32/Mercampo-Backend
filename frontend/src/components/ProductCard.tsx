@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Product } from "../Interfaces";
-import { useCartStore } from "../store/cart";
+import { useCartStore } from "../hooks/cart";
 import Rating from "./Rating";
 
 interface Props {
@@ -35,7 +35,7 @@ const ProductCard = ({ product }: Props) => {
 
 
                                 <span className="ml-1 text-gray-500 dark:text-gray-400">
-                                    {product.rating === null && 
+                                    {product.rating === null &&
                                         <Rating value={product.rating} />
                                     }
                                 </span>
@@ -75,7 +75,7 @@ const ProductCard = ({ product }: Props) => {
         focus:outline-none focus:ring-blue-300 dark:bg-blue-600 
         dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                    Ver
+                        Ver
                         <svg
                             aria-hidden="true"
                             className="w-4 h-4 ml-2 -mr-1"

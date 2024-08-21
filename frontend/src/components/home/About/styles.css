@@ -11,13 +11,14 @@
 
 .headAbout p {
     font-size: 1rem;
-    width: 70%;
+    width: 50%;
+    height: 300px;
+    text-align: justify;
 }
 
 .headAbout img {
-    width: 30%;
-    height: 200px;
-    width: 200px;
+    height: 400px;
+    width: 400px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -30,13 +31,15 @@
 
 .headAboutDark p {
     color: #fff;
-    width: 70%;
+    font-size: 1rem;
+    width: 50%;
+    height: 300px;
+    text-align: justify;
 }
 
 .headAboutDark img {
-    width: 30%;
-    height: 200px;
-    width: 200px;
+    height: 400px;
+    width: 400px;
     border-radius: 50%;
     object-fit: cover;
 }

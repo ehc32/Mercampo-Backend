@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { create_order } from "../api/orders";
 import Footer from "../components/Footer";
-import { useCartStore } from "../store/cart";
+import { useCartStore } from "../hooks/cart";
 import './style.css';
 
 const CartPage = () => {
@@ -169,7 +169,7 @@ const CartPage = () => {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    price
+                                                    Precio
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -284,7 +284,7 @@ const CartPage = () => {
                                                         </td>
 
                                                         <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        $ {(product.quantity !== undefined ? (product.price * product.quantity).toFixed(2) : "0.00")}
+                                                            $ {(product.quantity !== undefined ? (product.price * product.quantity).toFixed(2) : "0.00")}
                                                         </td>
                                                     </tr>
                                                 </>

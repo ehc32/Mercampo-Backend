@@ -1,13 +1,13 @@
-import { useAuthStore } from "../store/auth";
-import { Token } from "../Interfaces";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import jwt_decode from "jwt-decode";
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { edit_user, get_solo_user } from "../api/users";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { my_orders } from "../api/orders";
-import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
+import { my_orders } from "../api/orders";
+import { edit_user, get_solo_user } from "../api/users";
+import Loader from "../components/Loader";
+import { useAuthStore } from "../hooks/auth";
+import { Token } from "../Interfaces";
 
 const UserProfile = () => {
     const [show, setShow] = useState(true);
@@ -202,9 +202,8 @@ const UserProfile = () => {
                                             htmlFor="dropzone-file"
                                             className={`flex flex-col items-center justify-center w-full h-64 
         border-2 border-gray-600 border-dashed rounded-lg 
-        cursor-pointer bg-gray-40 ${
-            isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-        }`}
+        cursor-pointer bg-gray-40 ${isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                                                }`}
                                             onDragEnter={handleDragEnter}
                                             onDragLeave={handleDragLeave}
                                         >

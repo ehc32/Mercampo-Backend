@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Import Swiper React components
 import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 
@@ -25,26 +25,27 @@ interface SwiperPropsP {
 const MySwiper: React.FC<SwiperPropsP> = ({ width, height, datos, isUpSwiper }) => {
 
   return (
-    <SwiperReact
-      navigation={true}
-      modules={[Navigation]}
-      className="mySwiper"
-      style={{ width, height }} // Correct syntax for style
-    >
-      {datos.map((producto, index) => (
-        <SwiperSlide key={index}>
-          <img src={producto.foto} alt="alt" />
-          {
-            isUpSwiper && (
+  
+                        <SwiperReact
+                          navigation={true}
+                          modules={[Navigation]}
+                          className="mySwiper"
+                          style={{ width, height }}
+                        >
+                          {datos.map((producto, index) => (
+                            <SwiperSlide key={index}>
+                              <img src={producto.foto} alt="alt" />
+                              {
+                                isUpSwiper && (
 
-              <div className="contenedorSwiper">
-                Promociones o mensajes aqui junto a la imagen
-              </div>
-            )
-          }
-        </SwiperSlide>
-      ))}
-    </SwiperReact>
+                                  <div className="contenedorSwiper">
+                                    Promociones o mensajes aqui junto a la imagen
+                                  </div>
+                                )
+                              }
+                            </SwiperSlide>
+                          ))}
+                        </SwiperReact>
   );
 }
 

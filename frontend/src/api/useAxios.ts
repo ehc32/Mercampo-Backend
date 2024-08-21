@@ -1,6 +1,6 @@
 import axios, { AxiosRequestHeaders } from "axios";
-import { useAuthStore } from "../store/auth";
 import jwt_decode from "jwt-decode";
+import { useAuthStore } from "../hooks/auth";
 import { Token } from "../Interfaces";
 
 function logout() {
@@ -31,14 +31,14 @@ authAxios.interceptors.request.use(async (config) => {
     const now = new Date();
     const fiveMin = 1000 * 60 * 5;
 
-    if (expiration.getTime() - now.getTime() < fiveMin) 
+    if (expiration.getTime() - now.getTime() < fiveMin)
         try {
             const response = await axi.post('/users/refresh/', { refresh: useAuthStore.getState().refresh })
             useAuthStore.getState().setToken(response.data.access, response.data.refresh)
         } catch (err) {
             logout()
         }
-        return config
+    return config
 });
 
 

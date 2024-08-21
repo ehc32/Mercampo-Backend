@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { get_all_products } from '../api/products';
 import Footer from "../components/Footer";
 import About from "../components/home/About/About";
 import Hero from "../components/home/Hero";
 import RandomProducts from "../components/home/RandomProducts";
 import Swiper from "../components/shared/Swiper/swiper";
 import { useDarkMode } from "../hooks/theme";
-import { get_all_products } from './../api/products';
 
 export default function Tienda() {
     const { darkMode } = useDarkMode();
     const [productosRandom, setProductosRandom] = useState([]);
-    const [loading, setLoading] = useState(false)
+
 
     useEffect(() => {
         const fetchProductos = async () => {
@@ -38,8 +38,8 @@ export default function Tienda() {
     return (
         <React.Fragment>
             <Hero darkMode={darkMode} />
-            <RandomProducts productos={productosRandom} darkMode={darkMode} loading={loading} />
-            <Swiper width="100%" height="300px" datos={carrouselData} isUpSwiper={true} />
+            <RandomProducts productos={productosRandom} darkMode={darkMode} />
+            <Swiper width="100%" height="50vh" datos={carrouselData} isUpSwiper={false} />
             <About darkMode={darkMode} />
             <Footer />
         </React.Fragment>
