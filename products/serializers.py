@@ -14,35 +14,39 @@ class ReviewSerializer(serializers.ModelSerializer):
     def get_avatar(self, obj):
         return obj.user.avatar.url
 
-class ProductSerializer(serializers.ModelSerializer):
-    images = serializers.ListField(child=serializers.CharField(), write_only=True)
+class ProductReadSerializer(serializers.ModelSerializer):
+    first_image = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = "__all__"
 
-    def validate_images(self, value):
-        for image in value:
-            try:
-                base64.b64decode(image)
-            except Exception as e:
-                raise serializers.ValidationError("La imagen no es una cadena de base64 válida")
-        return value
+    def get_first_image(self, obj):
+        first_image_instance = ProductImage.objects.filter(product=obj).first()
+        if first_image_instance and first_image_instance.image:
+            with first_image_instance.image.open("rb") as image_file:
+                encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+            return encoded_image
+        return None
+
+
+class ProductCreateSerializer(serializers.ModelSerializer):
+    images = serializers.ListField(
+        child=serializers.CharField(), write_only=True, required=False
+    )
+
+    class Meta:
+        model = Product
+        fields = "__all__"
 
     def create(self, validated_data):
         images = validated_data.pop('images', [])
         product = super().create(validated_data)
-        
+
         for i, image in enumerate(images):
             image_data = base64.b64decode(image)
-            
-            # Crear un nombre único para el archivo de imagen
             image_name = f'image_{i}.jpg'
-            
-            # Usar ContentFile para crear el archivo en memoria
             image_file = ContentFile(image_data, name=image_name)
-            
-            # Crear la instancia de ProductImage con el campo product
             ProductImage.objects.create(product=product, image=image_file)
-        
+
         return product

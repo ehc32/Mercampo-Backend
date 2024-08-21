@@ -30,7 +30,6 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True) # when was created
 
 class ProductImage(models.Model):
-    slug = models.SlugField(max_length=50, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)  # Cambiado a 'product'
     image = models.ImageField(default='placeholder.png')
 
