@@ -3,6 +3,7 @@ import { get_all_products } from '../api/products';
 import ProductDetail from '../components/product/productDetail/ProductDetail';
 import SwiperProducts from '../components/shared/SwiperProducts/swiperProducts';
 import { useDarkMode } from "../hooks/theme";
+import Footer from '../components/Footer';
 
 
 
@@ -30,6 +31,7 @@ const DetallesProd = () => {
     <main>
       <ProductDetail darkMode={darkMode} />
       <SwiperProducts darkMode={darkMode} datos={productos} height='50vh' width='100%' />
+      <Footer />
     </main>
   );
 };

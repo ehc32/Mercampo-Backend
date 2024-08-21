@@ -158,12 +158,14 @@
 
 .headInfo-dark {
     font-size: 16px;
+    font-weight: bold;
     color: #fff;
 }
 
 .headInfo-light{
     font-size: 16px;
-    color: #526484;
+    font-weight: bold;
+    color: #000;
 }
 
 .headInfo:last-child {

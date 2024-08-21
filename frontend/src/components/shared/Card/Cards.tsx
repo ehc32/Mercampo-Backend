@@ -25,21 +25,27 @@ interface CarrouselLast12Props {
 const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
     const addToCart = useCartStore(state => state.addToCart);
 
-    const getImageSrc = (base64Image: string | undefined) => {
-        // Si la imagen base64 ya tiene un prefijo, simplemente la retorna
-        console.log("entra")
-        if (base64Image && base64Image.startsWith('data:image/')) {
-            return base64Image;
-        }
-        // Si no tiene prefijo, asume que es JPEG como default
-        return base64Image ? `data:image/jpeg;base64,${base64Image}` : '';
-    };
+
+    function formatearFecha(fechaISO) {
+        const fecha = new Date(fechaISO);
+        const meses = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+
+        const dia = fecha.getDate();
+        const mes = meses[fecha.getMonth()];
+        const año = fecha.getFullYear(); // getFullYear() para obtener el año completo
+
+        return `${dia} de ${mes}`;
+    }
+
 
     return (
         <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
             <Link to={`/product/${producto.slug}`}>
                 <div className='imgContent'>
-                    <img src={getImageSrc(producto.first_image)} alt="Imagen del producto" />
+                    <img src={producto.first_image} alt="Imagen del producto" />
                 </div>
                 <div className='minihead'>
                     <hr />
@@ -51,7 +57,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                         {producto.name}
                     </h4>
                     <h4 className='headInfo'>
-                        {producto.category}
+                        {(producto.category.charAt(0).toUpperCase() + producto.category.slice(1).toLowerCase())}
                     </h4>
                 </div>
                 <p className='headInfo'>
@@ -59,8 +65,8 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                 </p>
                 <div className='footerInfo'>
                     <div>
-                        <h6>${producto.price}</h6>
-                        <span>{producto.locate?.slice(0, 15)}, {producto.fecha}</span>
+                        <h6>$ {producto.price}</h6>
+                        <span>{producto.locate?.slice(0, 15)}, {formatearFecha(producto.created)}</span>
                     </div>
                     <i
                         className='bi bi-cart3'

@@ -28,10 +28,13 @@ export default function Tienda() {
 
     const carrouselData = [
         {
-            foto: 'https://c.wallhere.com/photos/d1/7d/1920x1080_px_Blurred_Clear_Sky_Depth_Of_Field_grass_Green_landscape_macro-789849.jpg!d'
+            foto: 'https://periodismopublico.com/wp-content/uploads/2019/06/Sena-.jpg'
         },
         {
-            foto: 'https://c.wallhere.com/photos/8b/29/nature_sunlight_grass_macro_trees_shadow_lens_flare-167088.jpg!d',
+            foto: 'https://www.elolfato.com/sites/default/files/styles/news_full_image/public/assets/news/foto-home-03022023.png?itok=OVxS2L5E',
+        },
+        {
+            foto: 'https://www.tropicanafm.com/wp-content/uploads/2024/01/188012024-SENA.jpg',
         },
     ];
 

@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import Carousel from "react-spring-3d-carousel";
 import uuidv4 from "uuid";
 import { config } from "react-spring";
-import RandomImage from "./random";
 
 const getTouches = (evt) => {
     return (
