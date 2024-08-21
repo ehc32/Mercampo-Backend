@@ -101,10 +101,23 @@ const UserProfile = () => {
     <div className="flex justify-center pt-[100px]">
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <button
-          className="mb-4 text-white underline"
-          onClick={() => (window.location.href = "/profile")}
+          className="mb-4 text-white"
+          onClick={() => (window.location.href = "/")}
         >
-          Volver al perfil
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 14.25l7.5-7.5M3 14.25l7.5 7.5 7.5-7.5"
+            />
+          </svg>
         </button>
         {show ? (
           <>
@@ -122,58 +135,33 @@ const UserProfile = () => {
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 {user.name} {user.last_name}
               </span>
-              <div className="flex mt-4 space-x-3 md:mt-6">
+              <div className="flex flex-col items-center mb-4 space-y-4">
                 <button
                   onClick={() => setShow(false)}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
                 >
                   Editar perfil
                 </button>
-                {/* Nuevo botón para redirigir a "historial de compras" */}
                 <Link
                   to="/purchase-history"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
                 >
                   Historial Compras
                 </Link>
                 <Link
-                  to="/vendedor-product"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+                  to="/vendedor-order"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
                 >
                   Historial Ventas
                 </Link>
-
+                <Link
+                  to="/addprod"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
+                >
+                  Añadir Prod
+                </Link>
               </div>
             </div>
-
-            {/* Comentado porque se creará una nueva página */}
-            {/* <div className="overflow-x-auto">
-                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" className="px-4 py-3">Order ID</th>
-                                        <th scope="col" className="px-4 py-3">Ver</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data && data.map((order: any) => (
-                                        <tr className="border-b dark:border-gray-700">
-                                            <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {order.id}
-                                            </th>
-                                            <td className="px-4 py-3">
-                                                <Link 
-                                                    to={`/order/${order.id}/`}
-                                                    className="p-2 cursor-pointer rounded-lg bg-gray-900 hover:bg-gray-700"
-                                                >
-                                                    See
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div> */}
           </>
         ) : (
           <div className="p-11">

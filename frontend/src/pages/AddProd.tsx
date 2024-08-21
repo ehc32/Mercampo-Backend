@@ -1,168 +1,242 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useMutation } from "react-query";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddProd = () => {
-    // Estados para los campos del formulario
-    const [name, setName] = useState('Ejemplo de Producto');
-    const [category, setCategory] = useState('Electrónica');
-    const [countInStock, setCountInStock] = useState(10);
-    const [price, setPrice] = useState(100);
-    const [unit, setUnit] = useState('Unidad');
-    const [locate, setLocate] = useState('Neiva');
-    const [mapLocate, setMapLocate] = useState('Ubicación en el mapa');
+  const [nombre, setNombre] = useState("");
+  const [categoria, setCategoria] = useState("VERDURAS");
+  const [descripcion, setDescripcion] = useState("");
+  const [latitud, setLatitud] = useState("");
+  const [longitud, setLongitud] = useState("");
+  const [ubicacion, setUbicacion] = useState("Neiva");
+  const [cantidad, setCantidad] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [unidad, setUnidad] = useState("Kilos");
+  const [imagenes, setImagenes] = useState<File[]>([]);
 
-    // Manejo de cambios en los campos del formulario
-    const handleNameChange = (e) => setName(e.target.value);
-    const handleCategoryChange = (e) => setCategory(e.target.value);
-    const handleCountChange = (e) => setCountInStock(e.target.value);
-    const handlePriceChange = (e) => setPrice(e.target.value);
-    const handleUnitChange = (e) => setUnit(e.target.value);
-    const handleLocateChange = (e) => setLocate(e.target.value);
-    const handleMapLocateChange = (e) => setMapLocate(e.target.value);
+  const agregarProductoMutation = useMutation(
+    async (nuevoProducto: FormData) => {
+      const response = await axios.post(
+        "/api/productos/agregar",
+        nuevoProducto
+      );
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        toast.success("Producto agregado exitosamente");
+        // Reset fields
+        setNombre("");
+        setCategoria("VERDURAS");
+        setDescripcion("");
+        setLatitud("");
+        setLongitud("");
+        setUbicacion("Neiva");
+        setCantidad("");
+        setPrecio("$$$$$");
+        setUnidad("Kilos");
+        setImagenes([]);
+      },
+      onError: () => {
+        toast.error("Error al agregar el producto");
+      },
+    }
+  );
 
-    // Manejo del envío del formulario
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Aquí puedes agregar la lógica para enviar el formulario
-    };
+  const manejarCambioArchivos = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const fileArray = Array.from(e.target.files).slice(0, 4); // Limitar a 4 imágenes
+      setImagenes(fileArray);
+    }
+  };
 
-    return (
-        <div className="flex justify-center">
-            <div className="w-full max-w-2xl p-4 bg-white rounded-lg shadow sm:p-8 dark:bg-gray-800">
-                <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Añadir Producto</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label
-                            htmlFor="name"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Nombre del Producto
-                        </label>
-                        <input
-                            value={name}
-                            onChange={handleNameChange}
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        />
-                    </div>
+  const manejarSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-                    <div>
-                        <label
-                            htmlFor="category"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Categoría
-                        </label>
-                        <input
-                            value={category}
-                            onChange={handleCategoryChange}
-                            type="text"
-                            name="category"
-                            id="category"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        />
-                    </div>
+    const formData = new FormData();
+    formData.append("nombre", nombre);
+    formData.append("categoria", categoria);
+    formData.append("descripcion", descripcion);
+    formData.append("latitud", latitud);
+    formData.append("longitud", longitud);
+    formData.append("ubicacion", ubicacion);
+    formData.append("cantidad", cantidad);
+    formData.append("precio", precio);
+    formData.append("unidad", unidad);
+    imagenes.forEach((imagen, index) => {
+      formData.append(`imagen${index + 1}`, imagen);
+    });
 
-                    <div>
-                        <label
-                            htmlFor="count_in_stock"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Cantidad disponible
-                        </label>
-                        <input
-                            value={countInStock}
-                            onChange={handleCountChange}
-                            type="number"
-                            name="count_in_stock"
-                            id="count_in_stock"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        />
-                    </div>
+    agregarProductoMutation.mutate(formData);
+  };
 
-                    <div>
-                        <label
-                            htmlFor="price"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Precio
-                        </label>
-                        <input
-                            value={price}
-                            onChange={handlePriceChange}
-                            type="number"
-                            name="price"
-                            id="price"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            htmlFor="unit"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Unidad
-                        </label>
-                        <select
-                            value={unit}
-                            onChange={handleUnitChange}
-                            name="unit"
-                            id="unit"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        >
-                            <option value="Kg">Kg</option>
-                            <option value="Litro">Litro</option>
-                            <option value="Unidad">Unidad</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label
-                            htmlFor="locate"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Ubicación
-                        </label>
-                        <select
-                            value={locate}
-                            onChange={handleLocateChange}
-                            name="locate"
-                            id="locate"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        >
-                            <option value="Neiva">Neiva</option>
-                            <option value="Bogotá">Bogotá</option>
-                            <option value="Cali">Cali</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label
-                            htmlFor="map_locate"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Ubicación en el mapa
-                        </label>
-                        <input
-                            value={mapLocate}
-                            onChange={handleMapLocateChange}
-                            id="map_locate"
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        className="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    >
-                        Crear Producto
-                    </button>
-                </form>
-            </div>
+  return (
+    <div className="max-w-lg mx-auto p-6 bg-gray-800 text-white rounded-md shadow-md">
+      <h2 className="text-2xl font-semibold mb-4">Añadir Producto</h2>
+      <form onSubmit={manejarSubmit} className="space-y-6">
+        <div>
+          <label htmlFor="nombre" className="block text-sm font-medium">
+            Nombre del Producto
+          </label>
+          <input
+            type="text"
+            id="nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
         </div>
-    );
+
+        <div>
+          <label htmlFor="categoria" className="block text-sm font-medium">
+            Categoría
+          </label>
+          <select
+            id="categoria"
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          >
+            <option value="VERDURAS">Verduras</option>
+            <option value="FRUTAS">Frutas</option>
+            <option value="CEREALES">Cereales</option>
+            <option value="LACTEOS">Lácteos</option>
+            {/* Agrega más opciones según sea necesario */}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="descripcion" className="block text-sm font-medium">
+            Descripción
+          </label>
+          <textarea
+            id="descripcion"
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="latitud" className="block text-sm font-medium">
+            Latitud
+          </label>
+          <input
+            type="text"
+            id="latitud"
+            value={latitud}
+            onChange={(e) => setLatitud(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="longitud" className="block text-sm font-medium">
+            Longitud
+          </label>
+          <input
+            type="text"
+            id="longitud"
+            value={longitud}
+            onChange={(e) => setLongitud(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="ubicacion" className="block text-sm font-medium">
+            Ubicación
+          </label>
+          <select
+            id="ubicacion"
+            value={ubicacion}
+            onChange={(e) => setUbicacion(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          >
+            <option value="Neiva">Neiva</option>
+            <option value="Cali">Cali</option>
+            <option value="Bogotá">Bogotá</option>
+            <option value="Medellín">Medellín</option>
+            {/* Agrega más opciones según sea necesario */}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="cantidad" className="block text-sm font-medium">
+            Cantidad en Stock
+          </label>
+          <input
+            type="number"
+            id="cantidad"
+            value={cantidad}
+            onChange={(e) => setCantidad(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="precio" className="block text-sm font-medium">
+            Precio
+          </label>
+          <input
+            type="number"
+            id="precio"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="unidad" className="block text-sm font-medium">
+            Unidad
+          </label>
+          <select
+            id="unidad"
+            value={unidad}
+            onChange={(e) => setUnidad(e.target.value)}
+            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          >
+            <option value="Kilos">Kilos</option>
+            <option value="Gramos">Gramos</option>
+            <option value="Miligramos">Miligramos</option>
+            {/* Agrega más opciones según sea necesario */}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="imagenes" className="block text-sm font-medium">
+            Imágenes del Producto (Máximo 4)
+          </label>
+          <input
+            type="file"
+            id="imagenes"
+            onChange={manejarCambioArchivos}
+            multiple
+            accept="image/*"
+            className="mt-1 block w-full text-gray-300"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md font-semibold text-white"
+        >
+          Añadir Producto
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default AddProd;

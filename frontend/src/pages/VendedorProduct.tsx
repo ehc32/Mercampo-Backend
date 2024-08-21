@@ -35,7 +35,7 @@ const fetchOrders = async (searchTerm: string) => {
     ];
 };
 
-const VendedorProduct = () => {
+const SellerProduct = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const { data: orders = [], isLoading } = useQuery({
@@ -120,4 +120,4 @@ const VendedorProduct = () => {
     );
 };
 
-export default VendedorProduct;
+export default SellerProduct;
