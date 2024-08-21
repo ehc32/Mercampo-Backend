@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useAuthStore } from "../store/auth";
+import jwt_decode from "jwt-decode";
 import { Token } from "../Interfaces";
-import jwt_decode from "jwt-decode"
 
 export const PrivateRoute = () => {
     const { isAuth } = useAuthStore();
@@ -11,11 +11,19 @@ export const PrivateRoute = () => {
 };
 
 export const AdminPrivateRoute = () => {
+    const { isAuth } = useAuthStore();
+    
+    // La decodificación del token se puede mantener si es necesario para otros usos
     const token: string = useAuthStore.getState().access;
-    const tokenDecoded: Token = jwt_decode(token)
-    const isAdmin = (tokenDecoded.is_staff);  
+    if (token) {
+        try {
+            // Puedes realizar acciones adicionales con tokenDecoded si es necesario
+        } catch (error) {
+            console.error("Error decoding token:", error);
+        }
+    }
+    
     return (
-        isAdmin ? <Outlet /> : <Navigate to='/AdminPages' />   
+        isAuth ? <Outlet /> : <Navigate to='/login' />
     );
 };
-
