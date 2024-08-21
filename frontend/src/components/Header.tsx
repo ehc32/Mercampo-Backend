@@ -113,6 +113,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       <Link
                         to={'/admin'}
                         className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                        onClick={() => setImgMenu(false)}
                       >
                         Panel de administración
                       </Link>

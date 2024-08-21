@@ -57,3 +57,18 @@ class ProductCreateSerializer(serializers.ModelSerializer):
             ProductImage.objects.create(product=product, image=image_file)
 
         return product
+    
+    
+class ProductImagesSerializer(serializers.Serializer): # brings the imgs from that product
+    images = serializers.SerializerMethodField()
+
+    def get_images(self, obj):
+        product_images = ProductImage.objects.filter(product=obj)
+        images_data = []
+        for image in product_images:
+            with image.image.open("rb") as image_file:
+                image_data = image_file.read()
+                encoded_image = base64.b64encode(image_data).decode('utf-8')
+                image_type = imghdr.what(None, image_data) or 'jpg'
+                images_data.append(f'data:image/{image_type};base64,{encoded_image}')
+        return images_data

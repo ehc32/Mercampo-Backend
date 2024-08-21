@@ -66,3 +66,8 @@ export const get_all_products = async () => {
     const response = await axi.get(`/products/getRandom/random_products/`)
     return response.data
 };
+
+export const get_all_images_product = async (id: number | string) => {
+    const response = await axi.get(`/products/get_product_images/${id}/`)
+    return response.data
+};

@@ -1,12 +1,12 @@
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
+import { useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import { useParams } from 'react-router-dom';
 import MySwiper from '../../shared/Swiper/swiper';
 import Map from '../map/Map';
+import { get_solo, get_all_images_product } from './../../../api/products';
 import './../../../global/dashlite.css';
 import './styles.css';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { get_solo } from './../../../api/products';
-import Skeleton from 'react-loading-skeleton';
 
 interface ProductProps {
     darkMode: boolean;
@@ -40,6 +40,20 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                 const productoData = await get_solo(slug);
                 setProducto(productoData);
                 setLoading(false);
+                fetchProductoImages(productoData.id)
+            } catch (error) {
+                console.error('Error al obtener el producto: ', error);
+                setLoading(false);
+            }
+        };
+
+        const fetchProductoImages = async (id) => {
+            
+            try {
+                const productoData = await get(id);
+                setProducto(productoData);
+                setLoading(false);
+                
             } catch (error) {
                 console.error('Error al obtener el producto: ', error);
                 setLoading(false);
@@ -47,6 +61,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
         };
 
         fetchProducto();
+        
     }, [slug]);
 
     function formatearFecha(fechaISO) {
@@ -123,7 +138,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                         <div className="fs-16px fw-bold text-secondary">{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Localización</div>
+                                                                        <div className="fs-14px text-muted">Ciudad</div>
                                                                         <div className="fs-16px fw-bold text-secondary">{producto?.locate}</div>
                                                                     </li>
                                                                     <li>

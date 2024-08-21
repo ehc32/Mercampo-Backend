@@ -10,6 +10,7 @@ urlpatterns = [
     path('getLast12/last_products/', views.get_last_12_products), # funcional - trae los ultimos 12 productos
     path('get/admin/<int:id>/', views.get_product_admin), # funcional - trae un producto productos como administrador
     path('get/<slug:slug>/', views.get_product), # funcional - trae un producto y sus datos
+    path('get_product_images/<int:product_id>/', views.get_product_images), # funcional - trae un producto y sus datos
     path('post/', views.create_product), # funcional - crea un producto
     path('edit/<int:pk>/', views.edit_product),
     path('delete/<int:pk>/', views.delete_product),

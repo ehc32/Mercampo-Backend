@@ -23,11 +23,16 @@
 .contenedorSwiper {
     position: absolute;
     left: 10%;
-    color: #fff;
+    background-color: #fff;
+    opacity: 0.5;
     display: flex;
     align-items: center;
     padding: 1em;
     border-radius: 2.5px;
     height: 40%;
     width: 20%;
+}
+
+.contenedorSwiper p {
+    color: rgba(000, 000, 000, 1);
 }

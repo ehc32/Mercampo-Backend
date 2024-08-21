@@ -20,10 +20,8 @@ const Map: React.FC<locationStatus> = ({ address, darkMode }) => {
     const geocodeAddress = async () => {
         const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDWmh4H4O1AqdP5-nzLJft-EdFo9m6TDk8`);
         const data = await response.json();
-        console.log(data)
         if (data.results.length > 0) {
             const coordinates = data.results[0].geometry.location;
-            console.log(coordinates)
             setLat(coordinates.lat);
             setLng(coordinates.lng);
         }

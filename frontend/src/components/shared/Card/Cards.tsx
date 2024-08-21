@@ -1,7 +1,7 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router-dom';
-import { useCartStore } from '../../../hooks/cart';
 import './Card.css';
+import BasicTooltip from '../tooltip/Tooltip';
 
 interface Producto {
     nombre?: string;
@@ -23,7 +23,6 @@ interface CarrouselLast12Props {
 }
 
 const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
-    const addToCart = useCartStore(state => state.addToCart);
 
 
     function formatearFecha(fechaISO) {
@@ -61,17 +60,14 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                     </h4>
                 </div>
                 <p className='headInfo'>
-                    {producto.description?.slice(0, 100)}
+                    {producto.description?.length > 100 ? `${producto.description?.slice(0, 100)}...` : producto.description}
                 </p>
                 <div className='footerInfo'>
                     <div>
                         <h6>$ {producto.price}</h6>
                         <span>{producto.locate?.slice(0, 15)}, {formatearFecha(producto.created)}</span>
                     </div>
-                    <i
-                        className='bi bi-cart3'
-                        onClick={() => addToCart(producto)}
-                    ></i>
+                    <BasicTooltip producto={producto} />
                 </div>
             </div>
         </div>
