@@ -120,7 +120,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                 <ul className="d-flex g-3 gx-5">
                                                                     <li>
                                                                         <div className="fs-14px text-muted">Categoría</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.category}</div>
+                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="fs-14px text-muted">Localización</div>

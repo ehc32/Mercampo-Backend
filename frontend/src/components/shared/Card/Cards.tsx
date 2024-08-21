@@ -26,6 +26,21 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
     const addToCart = useCartStore(state => state.addToCart);
 
 
+    function formatearFecha(fechaISO) {
+        const fecha = new Date(fechaISO);
+        const meses = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+
+        const dia = fecha.getDate();
+        const mes = meses[fecha.getMonth()];
+        const año = fecha.getFullYear(); // getFullYear() para obtener el año completo
+
+        return `${dia} de ${mes}`;
+    }
+
+
     return (
         <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
             <Link to={`/product/${producto.slug}`}>
@@ -42,7 +57,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                         {producto.name}
                     </h4>
                     <h4 className='headInfo'>
-                        {producto.category}
+                        {(producto.category.charAt(0).toUpperCase() + producto.category.slice(1).toLowerCase())}
                     </h4>
                 </div>
                 <p className='headInfo'>
@@ -51,7 +66,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                 <div className='footerInfo'>
                     <div>
                         <h6>$ {producto.price}</h6>
-                        <span>{producto.locate?.slice(0, 15)}, {producto.fecha}</span>
+                        <span>{producto.locate?.slice(0, 15)}, {formatearFecha(producto.created)}</span>
                     </div>
                     <i
                         className='bi bi-cart3'
