@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                           </Link>
 
                           <Link
-                            to={'/cate'}
+                            to={'/store'}
                             className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                             onClick={() => setImgMenu(true)}
                           >

@@ -92,11 +92,11 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                             producto?.name
                                                                         )}
                                                                     </h2>
-                                                                    <h4 className="fs-21px product-price text-primary w-40  text-center">
+                                                                    <h4 className="fs-21px fw-bold product-price text-primary w-40  text-center">
                                                                         {loading ? (
                                                                             <Skeleton style={{ width: '100px', height: '100px' }} />
                                                                         ) : (
-                                                                            `$${producto?.price}`
+                                                                            `$ ${producto?.price}`
                                                                         )}
                                                                     </h4>
                                                                 </div>

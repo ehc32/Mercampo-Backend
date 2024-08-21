@@ -20,7 +20,7 @@ const Map: React.FC<locationStatus> = ({ lat, lng, darkMode }) => {
 
     return (
         <section className="sectionMap">
-            <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Lozalización</h2>
+            <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Localización</h2>
             <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra lo que te gusta de manera eficiente</h4>
 
             <GoogleMap

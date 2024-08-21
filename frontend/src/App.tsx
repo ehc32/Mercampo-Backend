@@ -5,7 +5,7 @@ import { AdminPrivateRoute, PrivateRoute } from "./components/PrivateRoute"
 import LoginPage from "./pages/Login"
 import DetallesProd from "./pages/ProductDetail"
 import RegisterPage from "./pages/Register"
-import Shop from "./pages/Shop"
+import Store from "./pages/Store"
 
 import AddProduct from "./pages/AddProductPage"
 import AdminPage from "./pages/AdminPage"
@@ -26,8 +26,10 @@ function App() {
 
                     <Route index element={<Home />} /> {/* vista principal */}
                     <Route path="product/:slug" element={<DetallesProd />} />
-                    <Route path="cate" element={<Shop />} />
+                    <Route path="store" element={<Store />} />
                     <Route path="add" element={<AddProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
+
+                    <Route path="login" element={<LoginPage />} />
 
                     <Route element={<PrivateRoute />} >
                         <Route path="cart" element={<ShoppingCart />} />
