@@ -2,13 +2,13 @@ from enum import Enum
 from django.db import models
 from users.models import User
 
+
 class Category(Enum):
     FRUTAS = 'Frutas'
     VERDURAS = 'Verduras'
     GRANOS = 'Granos'
     ABARROTES = 'Abarrotes'
     OTROS = 'Otros'
-
 
 class Product(models.Model):
     slug = models.SlugField(max_length=50, null=True, blank=True)
@@ -29,13 +29,10 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) # user who's offer the product
     created = models.DateTimeField(auto_now_add=True) # when was created
 
-
-
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product_images/')
-
-
+    slug = models.SlugField(max_length=50, null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)  # Cambiado a 'product'
+    image = models.ImageField(default='placeholder.png')
 
 class Reviews(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
