@@ -51,11 +51,6 @@
     "@types/swiper": "^6.0.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.14",
-<<<<<<< HEAD
-=======
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.1",
->>>>>>> d06c6a6812e73c9d344399104bdeee4a35e69022
     "postcss": "^8.4.26",
     "tailwindcss": "^3.4.9",
     "typescript": "^5.0.2",
