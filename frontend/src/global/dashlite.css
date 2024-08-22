@@ -39376,6 +39376,15 @@ span+.icon {
   border: 1px solid #e5e9f2;
 }
 
+.product-gallery2 {
+  position: relative;
+  height: auto;
+  margin: 0 0 30px 0;
+  border-radius: 4px;
+  width: 100%;
+  border: 1px solid transparent;
+}
+
 .product-gallery .slick-list {
   padding-left: 0 !important;
   padding-right: 0 !important;

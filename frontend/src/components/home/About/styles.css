@@ -17,8 +17,8 @@
 }
 
 .headAbout img {
-    height: 400px;
-    width: 400px;
+    height: 320px;
+    width: 320px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -38,8 +38,8 @@
 }
 
 .headAboutDark img {
-    height: 400px;
-    width: 400px;
+    height: 320px;
+    width: 320px;
     border-radius: 50%;
     object-fit: cover;
 }

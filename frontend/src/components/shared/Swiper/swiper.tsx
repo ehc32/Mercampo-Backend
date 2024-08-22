@@ -15,7 +15,7 @@ import { Navigation } from 'swiper/modules';
 interface SwiperPropsP {
   width: string;
   height: string;
-  isUpSwiper: boolean;
+  isUpSwiper?: boolean;
   datos: {
     foto: string;
   }[];
@@ -25,27 +25,29 @@ interface SwiperPropsP {
 const MySwiper: React.FC<SwiperPropsP> = ({ width, height, datos, isUpSwiper }) => {
 
   return (
-  
-                        <SwiperReact
-                          navigation={true}
-                          modules={[Navigation]}
-                          className="mySwiper"
-                          style={{ width, height }}
-                        >
-                          {datos.map((producto, index) => (
-                            <SwiperSlide key={index}>
-                              <img src={producto.foto} alt="alt" />
-                              {
-                                isUpSwiper && (
 
-                                  <div className="contenedorSwiper">
-                                    Promociones o mensajes aqui junto a la imagen
-                                  </div>
-                                )
-                              }
-                            </SwiperSlide>
-                          ))}
-                        </SwiperReact>
+    <SwiperReact
+      navigation={true}
+      modules={[Navigation]}
+      className="mySwiper"
+      style={{ width, height }}
+    >
+      {datos.map((producto, index) => (
+        <SwiperSlide key={index}>
+          <img src={producto.foto} alt="alt" />
+          {
+            isUpSwiper && (
+
+              <div className="contenedorSwiper">
+                <p>
+                  Promociones o mensajes aqui junto a la imagen
+                </p>
+              </div>
+            )
+          }
+        </SwiperSlide>
+      ))}
+    </SwiperReact>
   );
 }
 

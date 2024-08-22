@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
 from . models import Product, ProductImage
-from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer
+from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer, ProductImagesSerializer
 from backend.pagination import CustomPagination
 
 from django.views.decorators.csrf import csrf_exempt
@@ -49,6 +49,12 @@ def create_product(request):
 def get_prod_by_cate(request, category):
     products = Product.objects.filter(category=category)
     serializer = ProductReadSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_product_images(request, product_id):
+    product = Product.objects.get(id=product_id)
+    serializer = ProductImagesSerializer(product)
     return Response(serializer.data)
 
 @api_view(['GET'])

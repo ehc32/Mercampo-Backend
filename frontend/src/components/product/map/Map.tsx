@@ -20,10 +20,8 @@ const Map: React.FC<locationStatus> = ({ address, darkMode }) => {
     const geocodeAddress = async () => {
         const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDWmh4H4O1AqdP5-nzLJft-EdFo9m6TDk8`);
         const data = await response.json();
-        console.log(data)
         if (data.results.length > 0) {
             const coordinates = data.results[0].geometry.location;
-            console.log(coordinates)
             setLat(coordinates.lat);
             setLng(coordinates.lng);
         }
@@ -55,7 +53,7 @@ const Map: React.FC<locationStatus> = ({ address, darkMode }) => {
                     <Marker
                         position={{ lat: lat, lng: lng }}
                         icon={{
-                            url: 'https://sena.edu.co/Style%20Library/alayout/images/logoSena.png',
+                            url: '../../../../public/logoSena.png',
                             scaledSize: new window.google.maps.Size(40, 40),
                         }}
                     />

@@ -18,6 +18,7 @@ export default function Tienda() {
                 const productos = await get_all_products();
                 setProductosRandom(productos);
                 setLoading(true)
+                
             } catch (error) {
                 console.error('Error al obtener los productos: ', error);
             }
@@ -33,10 +34,7 @@ export default function Tienda() {
         {
             foto: 'https://www.elolfato.com/sites/default/files/styles/news_full_image/public/assets/news/foto-home-03022023.png?itok=OVxS2L5E',
         },
-        {
-            foto: 'https://www.tropicanafm.com/wp-content/uploads/2024/01/188012024-SENA.jpg',
-        },
-    ];
+    ]
 
     return (
         <React.Fragment>

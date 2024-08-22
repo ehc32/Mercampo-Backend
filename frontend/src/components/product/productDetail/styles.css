@@ -39,3 +39,15 @@
 .productCatn {
     min-width: 100px;
 }
+
+.card2 {
+    background-color: #1F2937;
+}
+
+.color-light {
+    color: #000;
+}
+
+.color-dark {
+    color: #fff;
+}

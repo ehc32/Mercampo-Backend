@@ -7,7 +7,6 @@ import DetallesProd from "./pages/ProductDetail"
 import RegisterPage from "./pages/Register"
 import Store from "./pages/Store"
 
-import AddProductPage from "./pages/AddProductPage"
 import AdminPage from "./pages/AdminPage"
 import Home from "./pages/Home"
 import ShopHistory from "./pages/ShopHistory"
@@ -29,8 +28,7 @@ function App() {
 
                     <Route index element={<Home />} /> {/* vista principal */}
                     <Route path="product/:slug" element={<DetallesProd />} />
-                    <Route path="cate" element={<Store />} />    
-                    <Route path="add" element={<AddProductPage />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
+                    <Route path="store" element={<Store />} />     {/* Vista para ingresar productos - solo con permisos de venta */}
                     <Route path="vendedor-order" element={<VendedorProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
                     <Route path="addprod" element={<AddProd />} />
                     
