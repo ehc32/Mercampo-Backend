@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useMutation } from "react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -15,35 +14,6 @@ const AddProd = () => {
   const [unidad, setUnidad] = useState("Kilos");
   const [imagenes, setImagenes] = useState<File[]>([]);
 
-  const agregarProductoMutation = useMutation(
-    async (nuevoProducto: FormData) => {
-      const response = await axios.post(
-        "/api/productos/agregar",
-        nuevoProducto
-      );
-      return response.data;
-    },
-    {
-      onSuccess: () => {
-        toast.success("Producto agregado exitosamente");
-        // Reset fields
-        setNombre("");
-        setCategoria("VERDURAS");
-        setDescripcion("");
-        setLatitud("");
-        setLongitud("");
-        setUbicacion("Neiva");
-        setCantidad("");
-        setPrecio("$$$$$");
-        setUnidad("Kilos");
-        setImagenes([]);
-      },
-      onError: () => {
-        toast.error("Error al agregar el producto");
-      },
-    }
-  );
-
   const manejarCambioArchivos = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const fileArray = Array.from(e.target.files).slice(0, 4); // Limitar a 4 imágenes
@@ -51,7 +21,7 @@ const AddProd = () => {
     }
   };
 
-  const manejarSubmit = (e: React.FormEvent) => {
+  const manejarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -68,7 +38,24 @@ const AddProd = () => {
       formData.append(`imagen${index + 1}`, imagen);
     });
 
-    agregarProductoMutation.mutate(formData);
+    try {
+      await axios.post("/api/productos/agregar", formData);
+      toast.success("Producto agregado exitosamente");
+
+      // Reset fields
+      setNombre("");
+      setCategoria("VERDURAS");
+      setDescripcion("");
+      setLatitud("");
+      setLongitud("");
+      setUbicacion("Neiva");
+      setCantidad("");
+      setPrecio("");
+      setUnidad("Kilos");
+      setImagenes([]);
+    } catch (error) {
+      toast.error("Error al agregar el producto");
+    }
   };
 
   return (

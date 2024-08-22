@@ -67,7 +67,6 @@ def register(request):
         email=data['email'],
         name=data['name'],
         last_name=data['last_name'],
-        role=data['role'],
         password=make_password(data['password'])
     )
     serializer = RegisterUserSerializer(user, many=False)

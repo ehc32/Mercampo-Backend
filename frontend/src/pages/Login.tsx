@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginRequest } from "../api/users";
 import { useAuthStore } from "../hooks/auth";
+import MySwiper from "../components/shared/Swiper/swiper";
 
 const LoginPage = () => {
 
@@ -26,6 +27,15 @@ const LoginPage = () => {
     }
   })
 
+  const carrouselData = [
+    {
+      foto: 'https://periodismopublico.com/wp-content/uploads/2019/06/Sena-.jpg'
+    },
+    {
+      foto: 'https://www.elolfato.com/sites/default/files/styles/news_full_image/public/assets/news/foto-home-03022023.png?itok=OVxS2L5E',
+    },
+  ]
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     loginMutation.mutate()
@@ -35,15 +45,16 @@ const LoginPage = () => {
   if (isAuth) return (<Navigate to="/" />)
 
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-[800px] lg:py-0">
-      <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+
+    <div className="flex flex-row items-center justify-center px-6 py-8 mx-auto md:h-[800px] lg:py-0">
+      {/* <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
         <img className="w-8 h-8 mr-2"
           src="/logo.png"
           alt="logo" />
         <span>¡Bienvenidos!</span>
-      </Link>
-      <div className="w-full md:w-[400px] lg:w-[500px] bg-slate-300 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+      </Link> */}
+      <div className="w-full md:w-[400px] lg:w-[500px] bg-slate-300 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 flex flex-row">
+        <div className="p-6 space-y-4 md:space-y-6 sm:p-8 ">
           <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Inicia sesión
           </h1>
@@ -71,6 +82,7 @@ const LoginPage = () => {
             </p>
           </form>
         </div>
+      <MySwiper width="90%" height="50vh" datos={carrouselData} />  
       </div>
     </div>
   )

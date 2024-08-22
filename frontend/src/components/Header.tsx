@@ -31,7 +31,6 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
     is_admin = role == 'admin';  // Se utiliza el rol almacenado para verificar si es admin
     user_id = tokenDecoded.user_id;
     avatar = String(tokenDecoded.avatar);
-    console.log(is_admin)
   }
 
   function logOutFun() {

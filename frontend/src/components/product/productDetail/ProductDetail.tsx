@@ -48,12 +48,12 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
         };
 
         const fetchProductoImages = async (id) => {
-            
+
             try {
                 const productoData = await get(id);
                 setProducto(productoData);
                 setLoading(false);
-                
+
             } catch (error) {
                 console.error('Error al obtener el producto: ', error);
                 setLoading(false);
@@ -61,7 +61,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
         };
 
         fetchProducto();
-        
+
     }, [slug]);
 
     function formatearFecha(fechaISO) {
@@ -86,11 +86,11 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                         <div className="container-fluid">
                             <div className="nk-content-body">
                                 <div className="nk-block">
-                                    <div className="card card-bordered">
+                                    <div className={darkMode ? "card2" : "card card-bordered"}>
                                         <div className="card-inner">
                                             <div className="row pb-5">
                                                 <div className="col-lg-6">
-                                                    <div className="product-gallery mr-xl-1 mr-xxl-5 p-4">
+                                                    <div className={darkMode ? "product-gallery2 mr-xl-1 mr-xxl-5 p-4" : "product-gallery mr-xl-1 mr-xxl-5 p-4"}>
                                                         <h4 className='titleProductoPreview'>Visualización del producto</h4>
                                                         <MySwiper width={"100%"} height={"40vh"} datos={carrouselData} isUpSwiper={false} />
                                                     </div>
@@ -100,7 +100,8 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                         <div>
                                                             <div className='flex flex-row justify-between'>
 
-                                                                <h2 className="fs-21px fw-bold mb-3 product-title">
+                                                                <h2 className={`fs-21px fw-bold mb-3 ${darkMode ? "color-dark" : "color-light"}`}>
+
                                                                     {loading ? (
                                                                         <Skeleton />
                                                                     ) : (
@@ -123,7 +124,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                     <li><em className="icon ni ni-star-fill"></em></li>
                                                                     <li><em className="icon ni ni-star-half"></em></li>
                                                                 </ul>
-                                                                <div className="amount">(2 Reviews)</div>
+                                                                <div className={`amount ${darkMode ? "color-dark" : "color-light"}`}>(2 Reviews)</div>
                                                             </div>
                                                         </div>
                                                         <div className="product-excrept text-soft h-32">
@@ -165,8 +166,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                                     const productoprice = producto?.price || 0;
                                                                                     input.value = (currentValue <= 0 ? 0 : currentValue - 1).toString();
                                                                                     totalElement!.innerText = currentValue <= 0 ? '$0' : `$${(currentValue - 1) * productoprice}`;
-                                                                                }}
-                                                                            >
+                                                                                }}>
                                                                                 <em className="icon bi bi-dash"></em>
                                                                             </button>
                                                                             <input

@@ -53,7 +53,7 @@ const Map: React.FC<locationStatus> = ({ address, darkMode }) => {
                     <Marker
                         position={{ lat: lat, lng: lng }}
                         icon={{
-                            url: 'https://sena.edu.co/Style%20Library/alayout/images/logoSena.png',
+                            url: '../../../../public/logoSena.png',
                             scaledSize: new window.google.maps.Size(40, 40),
                         }}
                     />

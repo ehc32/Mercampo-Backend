@@ -15,7 +15,7 @@ import { Navigation } from 'swiper/modules';
 interface SwiperPropsP {
   width: string;
   height: string;
-  isUpSwiper: boolean;
+  isUpSwiper?: boolean;
   datos: {
     foto: string;
   }[];
