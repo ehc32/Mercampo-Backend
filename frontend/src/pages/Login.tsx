@@ -18,7 +18,7 @@ const LoginPage = () => {
   const loginMutation = useMutation({
     mutationFn: () => loginRequest(email, password),
     onSuccess: (response) => {
-      setToken(response.data.access, response.data.refresh)
+      setToken(response.data.access, response.data.refresh, response.data.role)
       toast.success("Login exitoso!")
       navigate("/")
     },

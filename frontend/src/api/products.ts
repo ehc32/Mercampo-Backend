@@ -74,5 +74,6 @@ export const get_all_images_product = async (id: number | string) => {
 
 export const get_all_products_paginated = async (page: number | string) => {
     const reponse = await axi.get(`/products/?page=${page}&page_size=20`)
-    return reponse.data
+    const data = reponse.data.data
+    return reponse.data.data
 }

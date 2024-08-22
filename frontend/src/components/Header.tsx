@@ -140,7 +140,6 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                 <Link to={'/addprod'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white d-flex row align-center">
                   <BsCup size={23} />
-                  <span className="text-slate-900 dark:text-slate-200 mx-1">{cart.length}</span>
                 </Link>
 
                 {isAuth && (
