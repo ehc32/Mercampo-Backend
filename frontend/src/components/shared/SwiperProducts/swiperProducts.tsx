@@ -11,6 +11,7 @@ import './styles.css';
 // import required modules
 import { Pagination } from 'swiper/modules';
 import Card from '../Card/Cards';
+import Loader from './../../shared/Loaders/Loader';
 
 interface Producto {
   nombre?: string;
@@ -31,10 +32,11 @@ interface SwiperPropsP {
   height: string;
   darkMode: boolean;
   isUpSwiper?: boolean;
+  loader: boolean;
   datos: Producto[];
 }
 
-const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos }) => {
+const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos, loader }) => {
   return (<div className="nk-main main-detail-product">
     <div className="nk-wrap">
       <div className="nk-content ">
@@ -47,49 +49,58 @@ const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos
                     <div className="col-lg-12">
                       <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Productos similares</h2>
                       <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Variedad de productos de la misma categoria</h4>
-                      <Swiper
-                        slidesPerView={5}
-                        spaceBetween={10}
-                        pagination={{
-                          clickable: true,
-                        }}
-                        style={{ width, height }}
-                        modules={[Pagination]}
-                        className="mySwiper"
-                        breakpoints={{
-                          0: {
-                            slidesPerView: 1,
-                            spaceBetween: 10,
-                          },
-                          720: {
-                            slidesPerView: 1,
-                            spaceBetween: 10,
-                          },
-                          810: {
-                            slidesPerView: 2,
-                            spaceBetween: 15,
-                          },
-                          1074: {
-                            slidesPerView: 3,
-                            spaceBetween: 20,
-                          },
-                          1280: {
-                            slidesPerView: 4,
-                            spaceBetween: 25,
-                          },
-                          1600: {
-                            
-                            slidesPerView: 5,
-                            spaceBetween: 30,
-                          }
-                        }}
-                      >
-                        {datos.map((item, index) => (
-                          <SwiperSlide key={index}>
-                            <Card producto={item} darkMode={darkMode} />
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+
+                      {
+                        loader ? (
+                          <Swiper
+                            slidesPerView={5}
+                            spaceBetween={10}
+                            pagination={{
+                              clickable: true,
+                            }}
+                            style={{ width, height }}
+                            modules={[Pagination]}
+                            className="mySwiper"
+                            breakpoints={{
+                              0: {
+                                slidesPerView: 1,
+                                spaceBetween: 10,
+                              },
+                              720: {
+                                slidesPerView: 1,
+                                spaceBetween: 10,
+                              },
+                              810: {
+                                slidesPerView: 2,
+                                spaceBetween: 15,
+                              },
+                              1074: {
+                                slidesPerView: 3,
+                                spaceBetween: 20,
+                              },
+                              1280: {
+                                slidesPerView: 4,
+                                spaceBetween: 25,
+                              },
+                              1600: {
+
+                                slidesPerView: 5,
+                                spaceBetween: 30,
+                              }
+                            }}
+                          >
+                            {datos.map((item, index) => (
+                              <SwiperSlide key={index}>
+                                <Card producto={item} darkMode={darkMode} />
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                        ) : (
+                          <Loader />
+                        )
+                      }
+
+
                     </div>
                   </div>
                 </div>
