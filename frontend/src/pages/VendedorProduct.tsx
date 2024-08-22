@@ -56,12 +56,6 @@ const SellerProduct = () => {
   return (
     <div className="flex flex-col items-center px-4 mt-10">
       <div className="w-full max-w-5xl p-6 bg-gray-800 rounded-lg shadow-md">
-        <button
-          className="mb-4 text-white underline"
-          onClick={() => (window.location.href = "/profile")}
-        >
-          Volver al perfil
-        </button>
         <h2 className="text-xl font-semibold mb-4 text-center text-white">
           Historial de Órdenes
         </h2>
@@ -122,7 +116,7 @@ const SellerProduct = () => {
                         onClick={() => generarPDF(order)}
                         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                       >
-                        PDF
+                        
                       </button>
                     </td>
                   </tr>

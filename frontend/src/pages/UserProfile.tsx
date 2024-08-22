@@ -2,21 +2,23 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import jwt_decode from "jwt-decode";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
 import { my_orders } from "../api/orders";
 import { edit_user, get_solo_user } from "../api/users";
 import Loader from "../components/Loader";
 import { useAuthStore } from "../hooks/auth";
 import { Token } from "../Interfaces";
+import VendedorProduct from "./VendedorProduct";
+import ShopHistory from "./ShopHistory";
 
 const UserProfile = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState<string>("purchase-history");
   const [stateName, setStateName] = useState<string>("");
   const [stateLast, setStateLast] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string>("");
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [search] = useState<string>("");
 
   const token: string = useAuthStore.getState().access;
   const tokenDecoded: Token = jwt_decode(token);
@@ -40,7 +42,7 @@ const UserProfile = () => {
   const editProfileMut = useMutation({
     mutationFn: edit_user,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      void queryClient.invalidateQueries({ queryKey: ["users"] });
       toast.success("Profile updated!");
       setShow(true);
     },
@@ -97,9 +99,13 @@ const UserProfile = () => {
   if (isError) return toast.error("Error!");
   if (isLoading) return <Loader />;
 
+  function setSearch(value: string) {
+    throw new Error("Function not implemented.");
+  }
+
   return (
-    <div className="w-full justify-left ml-5  pt-[40px] ">
-      <div className="w-full max-w-sm bg-white border-spacing-4 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="flex justify-center ml-5 gap-6">
+      <div className="w-1/2 max-w-sm bg-white border-spacing-4 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         {show ? (
           <>
             <div className="flex flex-col items-center pb-100">
@@ -122,36 +128,18 @@ const UserProfile = () => {
                   {user.last_name}
                 </span>
               </div>
-              <p className="text-base text-left text-gray-800 dark:text-gray-300 mb-4">
+              <p className="text-base text-left font-semibold text-gray-800 dark:text-gray-300 mb-4">
                 Correo:
                 <br />
                 {user.email}
               </p>
               <div className="flex flex-col items-center mt-6 space-y-4">
                 <button
-                  onClick={() => setShow(false)}
+                  onClick={() => setShow(false)} //supongamos que esta monda ta sirviendo
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
                 >
                   Editar perfil
                 </button>
-                <Link
-                  to="/purchase-history"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
-                >
-                  Historial Compras
-                </Link>
-                <Link
-                  to="/vendedor-order"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
-                >
-                  Historial Ventas
-                </Link>
-                <Link
-                  to="/addprod"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
-                >
-                  Añadir Prod
-                </Link>
               </div>
             </div>
           </>
@@ -257,6 +245,55 @@ const UserProfile = () => {
             </form>
           </div>
         )}
+      </div>
+      {/* aqui es la otra columna */}
+      <div className="w-1/2 mx-auto max-w-screen-lg px-4 lg:px-12">
+        <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+            <div className="w-full md:w-1/2">
+              <form className="flex items-center">
+                <label htmlFor="simple-search" className="sr-only">
+                  Buscar
+                </label>
+                <div className="relative w-full">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <path
+                      fillRule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clipRule="evenodd"
+                    />
+                  </div>
+                  <input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Buscar"
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+              <button
+                onClick={() => setShow("purchase-history")}
+                type="button"
+                className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+              >
+                Historial de Compras
+              </button>
+              <button
+                onClick={() => setShow("vendedor-order")}
+                type="button"
+                className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+              >
+                Órdenes del Vendedor
+              </button>
+            </div>
+          </div>
+
+          {show === "purchase-history" && <ShopHistory search={search} />}
+          {show === "vendedor-order" && <VendedorProduct search={search} />}
+        </div>
       </div>
     </div>
   );
