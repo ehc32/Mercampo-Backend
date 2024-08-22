@@ -28,12 +28,6 @@ const HistorialDeCompras = () => {
   return (
     <div className="flex flex-col items-center px-4 mt-10">
       <div className="w-full max-w-5xl p-6 bg-gray-800 rounded-lg shadow-md">
-        <button
-          className="mb-4 text-white underline"
-          onClick={() => (window.location.href = "/profile")}
-        >
-          Volver
-        </button>
         <h2 className="text-xl font-semibold mb-4 text-center text-white">
           Historial de Compras
         </h2>
@@ -78,13 +72,10 @@ const HistorialDeCompras = () => {
                 <th className="py-2 px-4 border-b border-gray-600 text-white">
                   Precio
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
-                  Factura
-                </th>
               </tr>
             </thead>
             <tbody>
-              {/* Ejemplo de datos de compras */}
+              {/* Ejemplo datos de compras */}
               {[
                 {
                   id: 1,

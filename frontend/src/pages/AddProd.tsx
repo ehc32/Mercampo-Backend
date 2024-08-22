@@ -4,14 +4,12 @@ import { toast } from "react-toastify";
 
 const AddProd = () => {
   const [nombre, setNombre] = useState("");
-  const [categoria, setCategoria] = useState("VERDURAS");
+  const [categoria, setCategoria] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  const [latitud, setLatitud] = useState("");
-  const [longitud, setLongitud] = useState("");
-  const [ubicacion, setUbicacion] = useState("Neiva");
+  const [ubicacion, setUbicacion] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [precio, setPrecio] = useState("");
-  const [unidad, setUnidad] = useState("Kilos");
+  const [unidad, setUnidad] = useState("");
   const [imagenes, setImagenes] = useState<File[]>([]);
 
   const manejarCambioArchivos = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,8 +26,6 @@ const AddProd = () => {
     formData.append("nombre", nombre);
     formData.append("categoria", categoria);
     formData.append("descripcion", descripcion);
-    formData.append("latitud", latitud);
-    formData.append("longitud", longitud);
     formData.append("ubicacion", ubicacion);
     formData.append("cantidad", cantidad);
     formData.append("precio", precio);
@@ -46,8 +42,6 @@ const AddProd = () => {
       setNombre("");
       setCategoria("VERDURAS");
       setDescripcion("");
-      setLatitud("");
-      setLongitud("");
       setUbicacion("Neiva");
       setCantidad("");
       setPrecio("");
@@ -59,10 +53,10 @@ const AddProd = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-800 text-white rounded-md shadow-md">
+    <div className="max-w-4xl mx-auto p-6 dark:bg-gray-800 bg-white text-white dark:text-black rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Añadir Producto</h2>
-      <form onSubmit={manejarSubmit} className="space-y-6">
-        <div>
+      <form onSubmit={manejarSubmit} className="flex flex-wrap -mx-3">
+        <div className="w-full md:w-1/2 px-3 mb-6">
           <label htmlFor="nombre" className="block text-sm font-medium">
             Nombre del Producto
           </label>
@@ -71,12 +65,12 @@ const AddProd = () => {
             id="nombre"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>
 
-        <div>
+        <div className="w-full md:w-1/2 px-3 mb-6">
           <label htmlFor="categoria" className="block text-sm font-medium">
             Categoría
           </label>
@@ -95,7 +89,7 @@ const AddProd = () => {
           </select>
         </div>
 
-        <div>
+        <div className="w-full md:w-1/2 px-3 mb-6">
           <label htmlFor="descripcion" className="block text-sm font-medium">
             Descripción
           </label>
@@ -108,35 +102,7 @@ const AddProd = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="latitud" className="block text-sm font-medium">
-            Latitud
-          </label>
-          <input
-            type="text"
-            id="latitud"
-            value={latitud}
-            onChange={(e) => setLatitud(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="longitud" className="block text-sm font-medium">
-            Longitud
-          </label>
-          <input
-            type="text"
-            id="longitud"
-            value={longitud}
-            onChange={(e) => setLongitud(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
-
-        <div>
+        <div className="w-full md:w-1/2 px-3 mb-6">
           <label htmlFor="ubicacion" className="block text-sm font-medium">
             Ubicación
           </label>
@@ -144,18 +110,20 @@ const AddProd = () => {
             id="ubicacion"
             value={ubicacion}
             onChange={(e) => setUbicacion(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
             required
           >
             <option value="Neiva">Neiva</option>
             <option value="Cali">Cali</option>
             <option value="Bogotá">Bogotá</option>
             <option value="Medellín">Medellín</option>
+            <option value="Bogotá">Campotriste</option>
+            <option value="Medellín">Palermo</option>
             {/* Agrega más opciones según sea necesario */}
           </select>
         </div>
 
-        <div>
+        <div className="w-full md:w-1/2 px-3 mb-6">
           <label htmlFor="cantidad" className="block text-sm font-medium">
             Cantidad en Stock
           </label>
@@ -164,12 +132,12 @@ const AddProd = () => {
             id="cantidad"
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>
 
-        <div>
+        <div className="w-full md:w-1/2 px-3 mb-6">
           <label htmlFor="precio" className="block text-sm font-medium">
             Precio
           </label>
@@ -178,12 +146,12 @@ const AddProd = () => {
             id="precio"
             value={precio}
             onChange={(e) => setPrecio(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>
 
-        <div>
+        <div className="w-full md:w-1/2 px-3 mb-6">
           <label htmlFor="unidad" className="block text-sm font-medium">
             Unidad
           </label>
@@ -191,17 +159,19 @@ const AddProd = () => {
             id="unidad"
             value={unidad}
             onChange={(e) => setUnidad(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
             required
           >
             <option value="Kilos">Kilos</option>
             <option value="Gramos">Gramos</option>
-            <option value="Miligramos">Miligramos</option>
+            <option value="Miligramos">Arroba</option>
+            <option value="Miligramos">Tonelada</option>
+
             {/* Agrega más opciones según sea necesario */}
           </select>
         </div>
 
-        <div>
+        <div className="w-full px-3 mb-6">
           <label htmlFor="imagenes" className="block text-sm font-medium">
             Imágenes del Producto (Máximo 4)
           </label>
@@ -217,7 +187,7 @@ const AddProd = () => {
 
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md font-semibold text-white"
+          className="w-full py-2 px-4 bg-lime-600 hover:bg-#3e8e41 rounded-md font-semibold text-white"
         >
           Añadir Producto
         </button>
