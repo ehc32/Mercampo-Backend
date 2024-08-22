@@ -3,11 +3,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
-from . models import Product, ProductImage
+from . models import Product
 from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer, ProductImagesSerializer
 from backend.pagination import CustomPagination
 
-from django.views.decorators.csrf import csrf_exempt
 
 @api_view(['POST'])
 def create_review(request, pk):
@@ -18,6 +17,7 @@ def create_review(request, pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 def create_product(request):
@@ -45,17 +45,21 @@ def create_product(request):
     else:
         return Response({'detail': 'No autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
     
+    
 @api_view(['GET'])
 def get_prod_by_cate(request, category):
     products = Product.objects.filter(category=category)
-    serializer = ProductReadSerializer(products, many=True)
-    return Response(serializer.data)
+    paginator = CustomPagination()
+    result_page = paginator.paginate_queryset(products, request)
+    serializer = ProductReadSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
 
 @api_view(['GET'])
 def get_product_images(request, product_id):
     product = Product.objects.get(id=product_id)
     serializer = ProductImagesSerializer(product)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def search(request):
@@ -65,6 +69,7 @@ def search(request):
     product = Product.objects.filter(name__icontains=query)
     serializer = ProductReadSerializer(product, many=True)
     return Response({'products': serializer.data})
+
 
 @api_view(['GET'])
 def get_products_by_locate(request):
@@ -77,16 +82,19 @@ def get_products_by_locate(request):
     serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_all_locate(request):
     locations = Product.objects.values_list('locate', flat=True).distinct()
     return Response(list(locations))
 
+
 @api_view(['GET'])
 def get_products_random(request):
-    products = Product.objects.order_by('?')[:12]
+    products = Product.objects.order_by('?')[:8]
     serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def get_last_12_products(request):
@@ -98,6 +106,7 @@ def get_last_12_products(request):
     serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_products(request):
     products = Product.objects.all()
@@ -106,17 +115,20 @@ def get_products(request):
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
 
+
 @api_view(['GET'])
 def get_product_admin(request, id):
     products = Product.objects.get(id=id)
     serializer = ProductReadSerializer(products, many=False)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_product(request, slug):
     products = Product.objects.get(slug=slug)
     serializer = ProductReadSerializer(products, many=False)
     return Response(serializer.data)
+
 
 @api_view(['PUT'])
 def edit_product(request, pk):

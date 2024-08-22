@@ -13,9 +13,12 @@ const Footer = () => {
       </div>
       <div className="container mx-auto px-4">
         <div className="text-center">
+            <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="fs-16px block">
+              Servicios Tecnologicos - Regional Huila
+            </a>
           <div>
-            <p className="text-lg font-semibold">Centro de la Empresa la Industria, la Empresa y los Servicios</p>
-            <p className="text-sm">Carrera 9 No 68-50, SENA - PBX (60 8) 8757040 IP 83352</p>
+            <p className="fs-16px text-lg font-semibold">Centro de la Empresa la Industria, la Empresa y los Servicios</p>
+            <p className="fs-16px text-sm">Carrera 9 No 68-50, SENA - PBX (60 8) 8757040 IP 83352</p>
           </div>
           <div className="flex justify-center mt-4 space-x-4">
             <a href="https://www.facebook.com/SENAHuila" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
@@ -35,10 +38,6 @@ const Footer = () => {
             </a>
           </div>
           <div className="mt-4 space-y-2">
-            <a href="https://www.sena.edu.co" target="_blank" rel="noopener noreferrer" className="block">www.sena.edu.co</a>
-            <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="block">
-              Servicios Tecnologicos - Regional Huila
-            </a>
           </div>
           <div className="mt-4 text-sm">&copy; Copyright. Todos los derechos reservados</div>
         </div>

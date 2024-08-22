@@ -49,5 +49,6 @@
 }
 
 .color-dark {
-    color: #fff;
+    color: #fff !important;
+    background-color: transparent;
 }

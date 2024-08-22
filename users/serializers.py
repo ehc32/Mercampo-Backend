@@ -19,10 +19,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         token['email'] = user.email
+        token['name'] = user.name
+        token['last_name'] = user.last_name
         token['avatar'] = user.avatar.url
         token['role'] = user.role
-        token['name'] = user.name
         token['can_publish'] = user.can_publish
-        token['last_name'] = user.last_name
 
         return token

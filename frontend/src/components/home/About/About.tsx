@@ -36,6 +36,13 @@ const About: React.FC<aboutProps> = ({ darkMode }) => {
 
                 }
             </div>
+            <div className="peopleContainer">
+                <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Preguntas frecuentes</h2>
+                <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Conoce más acerca del proyecto</h4>
+               <div>
+                persons
+               </div>
+            </div>
         </section>
     )
 }

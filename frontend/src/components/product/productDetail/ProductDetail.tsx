@@ -18,20 +18,16 @@ interface Producto {
     description?: string;
     category?: string;
     locate?: string;
+    count_in_stock?: number;
+    unit?: string;
+    num_reviews?: number;
+    map_locate?: string;
 }
 
 const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
-    const carrouselData = [
-        {
-            foto: 'https://c.wallhere.com/photos/d1/7d/1920x1080_px_Blurred_Clear_Sky_Depth_Of_Field_grass_Green_landscape_macro-789849.jpg!d',
-        },
-        {
-            foto: 'https://c.wallhere.com/photos/8b/29/nature_sunlight_grass_macro_trees_shadow_lens_flare-167088.jpg!d',
-        },
-    ];
-
-    const { slug } = useParams<{ slug: string }>(); // Accede al slug de la URL
+    const { slug } = useParams<{ slug: string }>();
     const [producto, setProducto] = useState<Producto | null>(null);
+    const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -39,21 +35,9 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
             try {
                 const productoData = await get_solo(slug);
                 setProducto(productoData);
+                const imagesData = await get_all_images_product(productoData.id);
+                setImages(imagesData.images);
                 setLoading(false);
-                fetchProductoImages(productoData.id)
-            } catch (error) {
-                console.error('Error al obtener el producto: ', error);
-                setLoading(false);
-            }
-        };
-
-        const fetchProductoImages = async (id) => {
-
-            try {
-                const productoData = await get(id);
-                setProducto(productoData);
-                setLoading(false);
-
             } catch (error) {
                 console.error('Error al obtener el producto: ', error);
                 setLoading(false);
@@ -61,7 +45,6 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
         };
 
         fetchProducto();
-
     }, [slug]);
 
     function formatearFecha(fechaISO) {
@@ -73,10 +56,14 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
 
         const dia = fecha.getDate();
         const mes = meses[fecha.getMonth()];
-        const año = fecha.getFullYear(); // getFullYear() para obtener el año completo
+        const año = fecha.getFullYear();
 
         return `${dia} de ${mes} de ${año}`;
     }
+
+    const imagesData = images.map((image) => ({
+        foto: image,
+    }));
 
     return (
         <>
@@ -91,8 +78,8 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                             <div className="row pb-5">
                                                 <div className="col-lg-6">
                                                     <div className={darkMode ? "product-gallery2 mr-xl-1 mr-xxl-5 p-4" : "product-gallery mr-xl-1 mr-xxl-5 p-4"}>
-                                                        <h4 className='titleProductoPreview'>Visualización del producto</h4>
-                                                        <MySwiper width={"100%"} height={"40vh"} datos={carrouselData} isUpSwiper={false} />
+                                                        <h4 className={darkMode ? 'titleProductoPreview color-dark' : 'titleProductoPreview'}>Visualización del producto</h4>
+                                                        <MySwiper width={"100%"} height={"40vh"} datos={imagesData} isUpSwiper={false} />
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-6">
@@ -100,8 +87,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                         <div>
                                                             <div className='flex flex-row justify-between'>
 
-                                                                <h2 className={`fs-21px fw-bold mb-3 ${darkMode ? "color-dark" : "color-light"}`}>
-
+                                                                <h2 className={darkMode ? "fs-21px fw-bold mb-3 color-dark" : "fs-21px fw-bold mb-3 color-light"}>
                                                                     {loading ? (
                                                                         <Skeleton />
                                                                     ) : (
@@ -124,40 +110,54 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                     <li><em className="icon ni ni-star-fill"></em></li>
                                                                     <li><em className="icon ni ni-star-half"></em></li>
                                                                 </ul>
-                                                                <div className={`amount ${darkMode ? "color-dark" : "color-light"}`}>(2 Reviews)</div>
+                                                                <div className={darkMode ? "amount color-dark" : "amount color-light"}>({producto?.num_reviews} Opiniones)</div>
                                                             </div>
                                                         </div>
                                                         <div className="product-excrept text-soft h-32">
-                                                            <p className="lead">{producto?.description}</p>
+                                                            <p className={darkMode ? "lead color-dark" : "lead"}>{producto?.description}</p>
                                                         </div>
                                                         <div>
 
                                                             <div className="product-meta">
                                                                 <ul className="d-flex g-3 gx-5">
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Categoría</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Cantidad en stock</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.count_in_stock}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Ciudad</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.locate}</div>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Unidad de medida</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.unit}</div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+
+                                                            <div className="product-meta">
+                                                                <ul className="d-flex g-3 gx-5">
+                                                                    <li>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Categoría</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Fecha de publicación</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{formatearFecha(producto?.created)}</div>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Ciudad</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.locate}</div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Fecha de publicación</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{formatearFecha(producto?.created)}</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="product-meta">
                                                                 <div className='productCatn'>
-                                                                    <div className="fs-14px text-muted">Selecciona una cantidad</div>
-                                                                    <div className="fs-16px fw-bold text-secondary total">$0</div>
+                                                                    <div className={darkMode ? "fs-14px text-muted  color-dark" : "fs-14px text-muted"}>Selecciona una cantidad</div>
+                                                                    <div className={darkMode ? "fs-16px fw-bold text-secondary total  color-dark" : "fs-16px fw-bold text-secondary total"}>$ 0</div>
                                                                 </div>
                                                                 <ul className="d-flex flex-wrap ailgn-center g-2 pt-1 pl-4">
                                                                     <li className="w-140px item-row">
                                                                         <div className="cantidadOrden">
                                                                             <button
-                                                                                className="btn btn-icon btn-outline-light number-spinner-btn number-minus"
+                                                                                className={darkMode ? "btn btn-icon btn-outline-light number-spinner-btn number-minus  color-dark" : "btn btn-icon btn-outline-light number-spinner-btn number-minus"}
                                                                                 data-number="minus"
                                                                                 onClick={() => {
                                                                                     const input = document.querySelector('.input-increment') as HTMLInputElement;
@@ -165,18 +165,18 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                                     const totalElement = document.querySelector('.total');
                                                                                     const productoprice = producto?.price || 0;
                                                                                     input.value = (currentValue <= 0 ? 0 : currentValue - 1).toString();
-                                                                                    totalElement!.innerText = currentValue <= 0 ? '$0' : `$${(currentValue - 1) * productoprice}`;
+                                                                                    totalElement!.innerText = currentValue <= 0 ? '$ 0' : `$ ${(currentValue - 1) * productoprice}`;
                                                                                 }}>
                                                                                 <em className="icon bi bi-dash"></em>
                                                                             </button>
                                                                             <input
                                                                                 type="number"
                                                                                 value="0"
-                                                                                className='input-increment'
+                                                                                className={darkMode ? 'input-increment  color-dark' : 'input-increment'}
                                                                                 disabled
                                                                             />
                                                                             <button
-                                                                                className="btn btn-icon btn-outline-light number-spinner-btn number-plus"
+                                                                                className={darkMode ? "btn btn-icon btn-outline-light number-spinner-btn number-plus  color-dark" : "btn btn-icon btn-outline-light number-spinner-btn number-plus"}
                                                                                 data-number="plus"
                                                                                 onClick={() => {
                                                                                     const input = document.querySelector('.input-increment') as HTMLInputElement;
@@ -184,13 +184,13 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                                     const totalElement = document.querySelector('.total');
                                                                                     const productoprice = producto?.price || 0;
                                                                                     input.value = (currentValue + 1).toString();
-                                                                                    totalElement!.innerText = `$${(currentValue + 1) * productoprice}`;
+                                                                                    totalElement!.innerText = `$ ${(currentValue + 1) * productoprice}`;
                                                                                 }}
                                                                             >
                                                                                 <i className="icon bi bi-plus"></i>
                                                                             </button>
                                                                         </div>
-                                                                        <button className="btn btn-primary">Añadir al carrito</button>
+                                                                        <button className="btn btn-primary" style={{ backgroundColor: "#39A900" }}>Añadir al carrito</button>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -198,8 +198,37 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Map address='el tablon, palermo huila' darkMode={darkMode} />
-                                        </div>
+                                            <div className="row pb-5">
+
+                                                <div className="col-lg-12">
+                                                    <div className={darkMode ? "product-gallery2 mr-xl-1 mr-xxl-5 p-4" : "product-gallery mr-xl-1 mr-xxl-5 p-4"}>
+                                                        <h4 className={darkMode ? 'titleProductoPreview color-dark' : 'titleProductoPreview'}>Datos del vendedor</h4>
+                                                        <div>
+                                                            <div className="product-meta">
+                                                                <ul className="d-flex justify-start w-full gap-8 flex-wrap">
+                                                                    <li>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Nombre</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Teléfono</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.locate}</div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Correo electronico</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{formatearFecha(producto?.created)}</div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Fecha en que se unió</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{formatearFecha(producto?.created)}</div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <Map address={producto?.map_locate || ''} darkMode={darkMode} />                                        </div>
                                     </div>
                                 </div>
                             </div>

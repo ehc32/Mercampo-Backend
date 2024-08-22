@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
   if (isAuth) {
     const tokenDecoded: Token = jwt_decode(token);
-    is_admin = role == 'admin';  // Se utiliza el rol almacenado para verificar si es admin
+    is_admin = role == 'admin';
     user_id = tokenDecoded.user_id;
     avatar = String(tokenDecoded.avatar);
   }

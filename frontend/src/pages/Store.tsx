@@ -1,44 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { get_all_products } from '../api/products';
+import { get_all_products_paginated } from '../api/products';
 import Content from "../components/tienda/Content/Content";
 import { useDarkMode } from "../hooks/theme";
 
 import './style.css';
 
-interface CarrouselLast12Props {
-    byCategory: [];
-}
 
-const Shop: React.FC<CarrouselLast12Props> = () => {
-
-
+const Store = () => {
     const { darkMode } = useDarkMode();
     const [productos, setProductos] = useState([]);
-
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchProductos = async () => {
+            setLoading(true);
             try {
-                const productos = await get_all_products();
+                const productos = await get_all_products_paginated(1);
                 setProductos(productos);
-                setLoading(true)
             } catch (error) {
-                console.error('Error al obtener los productos: ', error);
+                console.error(error)
+            } finally {
+                setLoading(false);
             }
         };
 
         void fetchProductos();
     }, []);
 
-    const [byCategory,] = useState(["all"])
 
     return (
         <section className="sectionCatePage">
             <main className="mainTienda">
                 {/* <AsideFilter darkMode={darkMode} /> */}
-                <Content byCategory={byCategory} darkMode={darkMode} productos={productos} />
+                <Content darkMode={darkMode} productos={productos} loading={loading} />
             </main>
         </section>
     );
 };
-export default Shop;
+export default Store;

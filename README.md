@@ -1,25 +1,10 @@
 # PlataformaComercio
 Plataforma de comercio electronico con implementación de pagos a travez de paypal.
 
-
-# Modelo del usuario
-
-Este puede ser usuario, vendedor, admin
-
-    debe existir una vista donde el adminsitrador aprueba si el usuario puede o no ser comprador
+-   traer 8 productos
+-   traer productos paginados
+-   traer productos por categorias seleccioandas y paginadas
 
 
-## falta
-    - implementar comentarios del producto
-    - implementar fotos por id
 
-# vistas
-    # admin
-    - Administrar usuario
-    - Adminstrar productos con el id usuario
-    - Administrar ordenes
-    - Administrar peticiones para vender
-  
-    # usuario vendedor
-    - Vista productos ofertados
-    - Vista de registro de productos
+# traer por categoriashttp://127.0.0.1:8000/products/cate/VERDURAS?page=1&page_size=20

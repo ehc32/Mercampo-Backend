@@ -17,7 +17,6 @@ export default function Tienda() {
             try {
                 const productos = await get_all_products();
                 setProductosRandom(productos);
-                setLoading(true)
                 
             } catch (error) {
                 console.error('Error al obtener los productos: ', error);
