@@ -98,44 +98,36 @@ const UserProfile = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex justify-center pt-[100px]">
-      <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <button
-          className="mb-4 text-white"
-          onClick={() => (window.location.href = "/")}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.5 19.5L3 14.25l7.5-7.5M3 14.25l7.5 7.5 7.5-7.5"
-            />
-          </svg>
-        </button>
+    <div className="w-full justify-left ml-5  pt-[40px] ">
+      <div className="w-full max-w-sm bg-white border-spacing-4 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         {show ? (
           <>
-            <div className="flex flex-col items-center pb-10">
+            <div className="flex flex-col items-center pb-100">
               {user && user.avatar !== undefined && (
                 <img
-                  className="w-24 h-24 mb-3 mt-3 rounded-full shadow-lg"
+                  className="w-24 h-24 mb-6 mt-3 rounded-full shadow-lg"
                   src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
                   alt="User image"
                 />
               )}
-              <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+              <div className="flex space-x-4 mb-2">
+                <span className="text-lg font-medium text-gray-900 dark:text-white">
+                  Nombre:
+                  <br />
+                  {user.name}
+                </span>
+                <span className="text-lg font-medium text-gray-900 dark:text-white">
+                  Apellido:
+                  <br />
+                  {user.last_name}
+                </span>
+              </div>
+              <p className="text-base text-left text-gray-800 dark:text-gray-300 mb-4">
+                Correo:
+                <br />
                 {user.email}
-              </h5>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {user.name} {user.last_name}
-              </span>
-              <div className="flex flex-col items-center mb-4 space-y-4">
+              </p>
+              <div className="flex flex-col items-center mt-6 space-y-4">
                 <button
                   onClick={() => setShow(false)}
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
