@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import jsPDF from "jspdf";
 
@@ -114,7 +112,7 @@ const SellerProduct = () => {
                     <td className="py-2 px-4 border-b border-gray-600">
                       <button
                         onClick={() => generarPDF(order)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600"
                       >
                         
                       </button>

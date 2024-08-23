@@ -37,23 +37,9 @@ const HistorialDeCompras = () => {
             placeholder="Buscar por producto, fecha, etc."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 pl-10 rounded border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+            className="p-2 pl-10 rounded border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-lime-500 transition-all duration-300 ease-in-out"
           />
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <svg
-              className="w-5 h-5 text-gray-400"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M11 4a7 7 0 017 7 7 7 0 01-7 7 7 7 0 010-14zm0 0l7 7"
-              />
-            </svg>
           </span>
         </div>
         <div className="overflow-x-auto">
@@ -71,6 +57,9 @@ const HistorialDeCompras = () => {
                 </th>
                 <th className="py-2 px-4 border-b border-gray-600 text-white">
                   Precio
+                </th>
+                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                  Acciones
                 </th>
               </tr>
             </thead>
@@ -126,9 +115,9 @@ const HistorialDeCompras = () => {
                   <td className="py-2 px-4 border-b border-gray-600">
                     <button
                       onClick={() => DescargaMutation.mutate()}
-                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300 ease-in-out"
+                      className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300 ease-in-out"
                     >
-                      PDF
+                     
                     </button>
                   </td>
                 </tr>

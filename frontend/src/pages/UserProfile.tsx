@@ -104,8 +104,8 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="flex justify-center ml-5 gap-6">
-      <div className="w-1/2 max-w-sm bg-white border-spacing-4 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="flex flex-col  mt-4 lg:flex-row ml-5 mx-auto gap-6 w-full max-w-screen-xl">
+      <div className="w-full lg:w-1/2 bg-whites lg:max-w-sm mb-8 lg:mb-0 hadow dark:bg-gray-800 dark:border-gray-700">
         {show ? (
           <>
             <div className="flex flex-col items-center pb-100">
@@ -237,7 +237,7 @@ const UserProfile = () => {
               <div className="p-2">
                 <button
                   type="submit"
-                  className="w-full text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  className="w-full text-white  bg-lime-600  hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
                 >
                   Guardar cambios
                 </button>
@@ -247,7 +247,7 @@ const UserProfile = () => {
         )}
       </div>
       {/* aqui es la otra columna */}
-      <div className="w-1/2 mx-auto max-w-screen-lg px-4 lg:px-12">
+      <div className="w-full lg:w-2/3 max-w-full px-4 lg:px-16">
         <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div className="w-full md:w-1/2">
@@ -277,14 +277,14 @@ const UserProfile = () => {
               <button
                 onClick={() => setShow("purchase-history")}
                 type="button"
-                className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                className="flex items-center justify-center text-white  bg-lime-600  hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
               >
                 Historial de Compras
               </button>
               <button
                 onClick={() => setShow("vendedor-order")}
                 type="button"
-                className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                className="flex items-center justify-center text-white  bg-lime-200  hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
               >
                 Órdenes del Vendedor
               </button>

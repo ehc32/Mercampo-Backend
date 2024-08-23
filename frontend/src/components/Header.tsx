@@ -2,7 +2,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import jwt_decode from "jwt-decode";
 import { Fragment, useState } from 'react';
-import { BsFillCartFill, BsFillMoonStarsFill, BsFillSunFill, BsCup } from "react-icons/bs";
+import { BsFillCartFill, BsFillMoonStarsFill, BsFillSunFill, BsShopWindow } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
@@ -133,7 +133,8 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                 </Link>
 
                 <Link to={'/addprod'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white d-flex row align-center">
-                  <BsCup size={23} />
+                  <BsShopWindow size={23} />
+                  <span className="text-slate-900 dark:text-slate-200 mx-1">{cart.length}</span>
                 </Link>
 
                 {isAuth && (
