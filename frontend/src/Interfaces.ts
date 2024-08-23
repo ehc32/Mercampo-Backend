@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface Product {
     id?: number;
     name: string;
@@ -25,6 +27,7 @@ export interface Order {
 
 
 export interface User {
+    role: ReactNode
     id?: number;
     avatar: File | null;
     email: string;
