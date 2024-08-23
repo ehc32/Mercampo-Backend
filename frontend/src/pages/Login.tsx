@@ -44,9 +44,9 @@ const LoginPage = () => {
   if (isAuth) return <Navigate to="/" />;
 
   return (
-    <div className="flex flex-row items-center justify-center px-6 py-12 mx-auto md:h-[600px] lg:py-12">
-      <div className="w-full md:w-[80%] lg:w-[80%] bg-slate-300 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700 flex flex-row">
-        <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-[35%]">
+    <div className="flex flex-row items-center justify-center px-6 py-12 mx-auto md:h-[600px] lg:py-12 fondo-login">
+      <div className="w-96   bg-slate-300 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700 flex flex-row">
+        <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">
           <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Inicia sesión
           </h1>
@@ -64,7 +64,7 @@ const LoginPage = () => {
                 type="email"
                 name="email"
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                 placeholder="name@company.com"
               />
             </div>
@@ -83,13 +83,13 @@ const LoginPage = () => {
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
               />
             </div>
 
             <button
               type="submit"
-              className="w-full text-white bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
+              className="w-full text-white bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-[39A900] dark:hover:bg-lime-700 dark:focus:ring-lime-800"
             >
               Ingresar
             </button>
@@ -97,16 +97,12 @@ const LoginPage = () => {
               No tienes cuenta?{" "}
               <Link
                 to={"/register"}
-                className="font-medium text-lime-500 hover:underline dark:text-lime-600"
+                className="font-medium text-lime-500 hover:underline "
               >
                 Registrate
               </Link>
             </p>
           </form>
-        </div>
-
-        <div className="w-[65%]">
-          <MySwiper width="100%" height="60vh" datos={carrouselData} />
         </div>
       </div>
     </div>

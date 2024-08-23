@@ -99,7 +99,7 @@ const AddProd = () => {
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                   placeholder="Ej: Tomate cherry"
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:outline-none "
                   required
                 />
               </div>
@@ -109,7 +109,7 @@ const AddProd = () => {
                   id="categoria"
                   value={categoria}
                   onChange={(e) => setCategoria(e.target.value)}
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black"
                   required
                 >
                   <option hidden selected>Selecciona una categoría</option>
@@ -130,7 +130,7 @@ const AddProd = () => {
                 }
               }}
               placeholder="Ej: Tomate cherry de alta calidad"
-              className="w-full p-3 mt-2 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+              className="w-full p-3 mt-2 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
               rows={4}
               required
             />
@@ -144,7 +144,7 @@ const AddProd = () => {
                   value={precio}
                   onChange={(e) => setPrecio(e.target.value)}
                   placeholder="Ej: 5000"
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
                   required
                 />
               </div>
@@ -156,7 +156,7 @@ const AddProd = () => {
                   value={cantidad}
                   onChange={(e) => setCantidad(e.target.value)}
                   placeholder="Ej: 100"
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
                   required
                 />
               </div>
@@ -166,7 +166,7 @@ const AddProd = () => {
                   id="unidad"
                   value={unidad}
                   onChange={(e) => setUnidad(e.target.value)}
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
                   required
                 >
                   <option hidden selected>Selecciona una unidad</option>
@@ -184,7 +184,7 @@ const AddProd = () => {
                   id="ubicacion"
                   value={ubicacion}
                   onChange={(e) => setUbicacion(e.target.value)}
-                  className="w-full  p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+                  className="w-full  p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
                   required
                 >
                   <option hidden selected>Selecciona una ubicación</option>
@@ -206,7 +206,7 @@ const AddProd = () => {
                   value={ubicacionDescriptiva}
                   onChange={(e) => setUbicacionDescriptiva(e.target.value)}
                   placeholder="Ej: Dirección exacta"
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-[#39A900]"
+                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
                   required
                 />
               </div>
@@ -219,7 +219,7 @@ const AddProd = () => {
               <div></div>
               <button
                 type="submit"
-                className="px-8 py-2 bg-[#39A900] hover:bg-[#2f6d30] text-white rounded-md focus:ring-2 focus:ring-[#39A900]"
+                className="px-8 py-2 bg-[#39A900] hover:bg-[#2f6d30] text-white rounded-md "
               >
                 Añadir Producto
               </button>

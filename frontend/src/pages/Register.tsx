@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { registerRequest } from "../api/users";
 import { useAuthStore } from "../hooks/auth";
-import MySwiper from "../components/shared/Swiper/swiper";
+import './style.css'
 
 const RegisterPage = () => {
 
@@ -59,18 +59,11 @@ const RegisterPage = () => {
   if (isAuth) return (<Navigate to="/" />)
 
   return (
-    <div className="flex flex-row items-center justify-center px-6 py-12 mx-auto md:h-[800px] lg:py-12">
-    <div className="w-full md:w-[80%] lg:w-[80%] bg-slate-300 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700 flex flex-row">
+    <div className="flex flex-row items-center justify-center px-6 py-12 mx-auto md:h-[800px] lg:py-12 fondo-login">
+    <div className="w-full md:w-[80%] lg:w-96 bg-slate-300 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700 flex flex-row">
       {/* Comentario: El contenedor se expande para ocupar el 80% del ancho de la página */}
-  
-      <div className="w-[65%]">
-        {/* Comentario: MySwiper ocupa el 65% del contenedor */}
-  
-        <MySwiper width="100%" height="60vh" datos={carrouselData} />
-        {/* Comentario: Ajustamos la altura a `60vh` para que se adapte al nuevo tamaño */}
-      </div>
-  
-      <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-[35%]">
+
+      <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">
         {/* Comentario: El formulario ocupa el 35% del contenedor */}
   
         {/* <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">

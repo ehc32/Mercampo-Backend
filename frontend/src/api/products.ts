@@ -60,7 +60,7 @@ export const post_product = async (data: Product) => {
     await authAxios.post("/products/post/", formData);
 };
 export const get_products = async ({ pageParam = 1 }) => {
-    const response = await axi.get(`/products/?page=${pageParam}&pages=9`)
+    const response = await axi.get(`/products/?page=${pageParam}&pages=20`)
     return response.data
 };
 

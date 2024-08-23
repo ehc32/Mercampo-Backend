@@ -91,8 +91,8 @@ const Products = ({ results }: Props) => {
                 {results && results.products.length > 0 ? (
                     <>
                         {results &&
-                            results.products.map((product: Product) => (
-                                <tbody>
+                            results.products.map((product: Product, index) => (
+                                <tbody key={index}>
                                     <tr className="border-b dark:border-gray-700">
                                         <th
                                             scope="row"

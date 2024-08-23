@@ -92,3 +92,9 @@
 .inputForm {
     width: 100% !important;
 }
+
+.fondo-login {
+    background-image: url('/public/campesena.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

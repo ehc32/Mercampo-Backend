@@ -20,7 +20,7 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-    };
+    };  
 
     const carrouselData = [
         {
@@ -65,7 +65,6 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
 
                                     {
                                         productosNuevos.length > 0 && productosNuevos.map((producto, index) => {
-                                            console.log(producto)
                                             return (
                                                 <Card key={index} producto={producto} darkMode={darkMode} />
                                             )
