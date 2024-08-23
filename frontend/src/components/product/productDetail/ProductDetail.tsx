@@ -37,7 +37,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
     const { slug } = useParams<{ slug: string }>();
     const [producto, setProducto] = useState<Producto | null>(null);
     const [usuario, setUsuario] = useState<User | null>(null);
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -46,19 +46,19 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                 const productoData = await get_solo(slug);
                 setProducto(productoData);
                 const imagesData = await get_all_images_product(productoData.id);
+                console.log(imagesData);
                 setImages(imagesData.images);
+                console.log(images);
                 const userContact = await get_solo_user(productoData.user);
                 setUsuario(userContact);
-                setCategory(producto?.category)
+                setCategory(producto?.category);
                 setLoading(false);
-
             } catch (error) {
                 console.error('Error al obtener el producto: ', error);
                 setLoading(false);
             }
         };
-
-
+    
         fetchProducto();
     }, [slug]);
 
@@ -75,7 +75,6 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
 
         return `${dia} de ${mes} de ${año}`;
     }
-
     const imagesData = images.map((image) => ({
         foto: image,
     }));
@@ -168,7 +167,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                                                                     <div className={darkMode ? "fs-14px text-muted  color-dark" : "fs-14px text-muted"}>Selecciona una cantidad</div>
                                                                     <div className={darkMode ? "fs-16px fw-bold text-secondary total  color-dark" : "fs-16px fw-bold text-secondary total"}>$ 0</div>
                                                                 </div>
-                                                                <ul className="d-flex flex-wrap ailgn-center g-2 pt-1 pl-4">
+                                                                <ul className="d-flex flex-wrap max-w-64 g-2 pt-1">
                                                                     <li className="w-140px item-row">
                                                                         <div className="cantidadOrden">
                                                                             <button
@@ -205,10 +204,10 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                                                                                 <i className="icon bi bi-plus"></i>
                                                                             </button>
                                                                         </div>
-                                                                        <button className="btn btn-primary" style={{ backgroundColor: "#39A900" }}>Añadir al carrito</button>
                                                                     </li>
                                                                 </ul>
                                                             </div>
+                                                            <button className="btn btn-primary mt-3" style={{ backgroundColor: "#39A900" }}>Añadir al carrito</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,6 +235,10 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                                                                     <li>
                                                                         <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Fecha en que se unió</div>
                                                                         <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{formatearFecha(usuario?.date_joined)}</div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Localización ingresada ( mapa )</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.map_locate?.slice(0, 40)}</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>

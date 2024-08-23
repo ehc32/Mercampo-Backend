@@ -3,11 +3,11 @@ import { authAxios, axi } from "./useAxios";
 
 
 export const create_review = async (description: string, rating: number, productId: number) => {
-   await authAxios.post(`/products/review/${productId}/`, {description, rating})
+    await authAxios.post(`/products/review/${productId}/`, { description, rating })
 };
 
 export const cate_api = async (cateogry: string) => {
-    const response = await authAxios.get(`/products/cate/${cateogry}/`)
+    const response = await authAxios.get(`/products/cate/VERDURAS/`)
     return response.data;
 };
 
@@ -46,17 +46,19 @@ export const delete_product = async (id: number) => {
 
 export const post_product = async (data: Product) => {
     const formData = new FormData();
-    formData.append("name", data.name)
-    formData.append("description", data.description)
-    formData.append("count_in_stock", data.count_in_stock.toString())
-    formData.append("category", data.category)
-    formData.append("price", data.price.toString())
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("count_in_stock", data.count_in_stock.toString());
+    formData.append("category", data.category);
+    formData.append("price", data.price.toString());
+    formData.append("unit", data.unit);
+    formData.append("map_locate", data.map_locate);
+    formData.append("locate", data.locate);
     if (data.image) {
-        formData.append("image", data.image)
+        formData.append("images ", data.image);
     }
-    await authAxios.post('/products/post/', formData)
+    await authAxios.post("/products/post/", formData);
 };
-
 export const get_products = async ({ pageParam = 1 }) => {
     const response = await axi.get(`/products/?page=${pageParam}&pages=9`)
     return response.data

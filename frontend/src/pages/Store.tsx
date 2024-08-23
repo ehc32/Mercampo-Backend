@@ -5,7 +5,6 @@ import { useDarkMode } from "../hooks/theme";
 
 import './style.css';
 
-
 const Store = () => {
     const { darkMode } = useDarkMode();
     const [productos, setProductos] = useState([]);
@@ -17,9 +16,10 @@ const Store = () => {
         const fetchProductos = async (page: number) => {
             setLoading(true);
             try {
-                const productos = await get_all_products_paginated(page);
-                setProductos(productos.data);
-                setDataLenght(productos.meta.count)
+                console.log("trayendo productos de la pagina: " + page)
+                const productosAPI = await get_all_products_paginated(page);
+                setProductos(productosAPI.data);
+                setDataLenght(productosAPI.meta.count)
             } catch (error) {
                 console.error(error)
             } finally {
@@ -28,8 +28,7 @@ const Store = () => {
         };
 
         fetchProductos(page);
-    }, [page]);
-
+    }, [page]); // Agrega page como dependencia
 
     return (
         <section className="sectionCatePage">

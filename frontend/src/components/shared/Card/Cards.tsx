@@ -34,7 +34,6 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
 
         const dia = fecha.getDate();
         const mes = meses[fecha.getMonth()];
-        const año = fecha.getFullYear(); // getFullYear() para obtener el año completo
 
         return `${dia} de ${mes}`;
     }

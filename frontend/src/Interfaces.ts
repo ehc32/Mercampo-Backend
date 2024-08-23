@@ -1,17 +1,20 @@
 import { ReactNode } from "react"
 
 export interface Product {
-  id?: number
-  name: string
-  slug?: string
-  description: string
-  price: number
-  rating?: number
-  count_in_stock : number
-  category: string
-  image: File | null;
-  quantity?: number
-  num_reviews?: number
+    id?: number;
+    name: string;
+    slug?: string;
+    description: string;
+    price: number;
+    rating?: number;    
+    count_in_stock: number;
+    category: string;
+    image: File | null;
+    quantity?: number;
+    num_reviews?: number;
+    unit?: string;
+    map_locate?: string;
+    locate?: string;
 }
 
 export interface Order {
