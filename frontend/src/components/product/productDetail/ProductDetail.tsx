@@ -4,12 +4,21 @@ import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 import MySwiper from '../../shared/Swiper/swiper';
 import Map from '../map/Map';
+import { get_solo_user } from '../../../api/users';
 import { get_solo, get_all_images_product } from './../../../api/products';
 import './../../../global/dashlite.css';
 import './styles.css';
 
 interface ProductProps {
     darkMode: boolean;
+    setCategory: any;
+}
+interface User {
+    name: string;
+    phone?: string;
+    email: string;
+    date_joined: string;
+    last_name: string;
 }
 
 interface Producto {
@@ -24,9 +33,10 @@ interface Producto {
     map_locate?: string;
 }
 
-const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
+const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
     const { slug } = useParams<{ slug: string }>();
     const [producto, setProducto] = useState<Producto | null>(null);
+    const [usuario, setUsuario] = useState<User | null>(null);
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -37,12 +47,17 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                 setProducto(productoData);
                 const imagesData = await get_all_images_product(productoData.id);
                 setImages(imagesData.images);
+                const userContact = await get_solo_user(productoData.user);
+                setUsuario(userContact);
+                setCategory(producto?.category)
                 setLoading(false);
+                
             } catch (error) {
                 console.error('Error al obtener el producto: ', error);
                 setLoading(false);
             }
         };
+        
 
         fetchProducto();
     }, [slug]);
@@ -208,19 +223,19 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode }) => {
                                                                 <ul className="d-flex justify-start w-full gap-8 flex-wrap">
                                                                     <li>
                                                                         <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Nombre</div>
-                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{usuario?.name} {usuario?.last_name}</div>
                                                                     </li>
                                                                     <li>
                                                                         <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Teléfono</div>
-                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{producto?.locate}</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{usuario?.phone ? "null" : "Sin definir"}</div>
                                                                     </li>
                                                                     <li>
                                                                         <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Correo electronico</div>
-                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{formatearFecha(producto?.created)}</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{usuario?.email}</div>
                                                                     </li>
                                                                     <li>
                                                                         <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Fecha en que se unió</div>
-                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{formatearFecha(producto?.created)}</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{formatearFecha(usuario?.date_joined)}</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>

@@ -12,8 +12,8 @@ const Footer = () => {
         {/* Logos footer - Aquí puedes agregar tus logos */}
       </div>
       <div className="container mx-auto px-4">
-        <div className="text-center">
-            <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="fs-16px block">
+        <div className="text-center m-auto">
+            <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="fs-16px block w-35 m-auto">
               Servicios Tecnologicos - Regional Huila
             </a>
           <div>

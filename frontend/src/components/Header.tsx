@@ -2,7 +2,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import jwt_decode from "jwt-decode";
 import { Fragment, useState } from 'react';
-import { BsFillCartFill, BsFillMoonStarsFill, BsFillSunFill, BsCup, BsShopWindow } from "react-icons/bs";
+import { BsFillCartFill, BsFillMoonStarsFill, BsFillSunFill, BsShopWindow } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";

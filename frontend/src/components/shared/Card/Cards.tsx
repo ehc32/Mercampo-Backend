@@ -41,33 +41,35 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
 
 
     return (
-        <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
-            <Link to={`/product/${producto.slug}`}>
-                <div className='imgContent'>
-                    <img src={producto.first_image} alt="Imagen del producto" />
-                </div>
-                <div className='minihead'>
-                    <hr />
-                </div>
-            </Link>
-            <div className='infoContent'>
-                <div>
-                    <h4 className={darkMode ? 'headInfo-dark' : 'headInfo-light'}>
-                        {producto.name}
-                    </h4>
-                    <h4 className='headInfo'>
-                        {(producto.category.charAt(0).toUpperCase() + producto.category.slice(1).toLowerCase())}
-                    </h4>
-                </div>
-                <p className='headInfo'>
-                    {producto.description?.length > 100 ? `${producto.description?.slice(0, 100)}...` : producto.description}
-                </p>
-                <div className='footerInfo'>
-                    <div>
-                        <h6>$ {producto.price}</h6>
-                        <span>{producto.locate?.slice(0, 15)}, {formatearFecha(producto.created)}</span>
+        <div className='beforecard'>
+            <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
+                <Link to={`/product/${producto.slug}`}>
+                    <div className='imgContent'>
+                        <img src={producto.first_image} alt="Imagen del producto" />
                     </div>
-                    <BasicTooltip producto={producto} />
+                    <div className='minihead'>
+                        <hr />
+                    </div>
+                </Link>
+                <div className='infoContent'>
+                    <div>
+                        <h4 className={darkMode ? 'headInfo-dark' : 'headInfo-light'}>
+                            {producto.name}
+                        </h4>
+                        <h4 className='headInfo'>
+                            {(producto.category.charAt(0).toUpperCase() + producto.category.slice(1).toLowerCase())}
+                        </h4>
+                    </div>
+                    <p className='headInfo'>
+                        {producto.description?.length > 100 ? `${producto.description?.slice(0, 100)}...` : producto.description}
+                    </p>
+                    <div className='footerInfo'>
+                        <div>
+                            <h6>$ {producto.price}</h6>
+                            <span>{producto.locate?.slice(0, 15)}, {formatearFecha(producto.created)}</span>
+                        </div>
+                        <BasicTooltip producto={producto} />
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { get_all_products } from '../api/products';
+import { cate_api } from '../api/products';
 import ProductDetail from '../components/product/productDetail/ProductDetail';
 import SwiperProducts from '../components/shared/SwiperProducts/swiperProducts';
 import { useDarkMode } from "../hooks/theme";
@@ -10,14 +10,14 @@ import Footer from '../components/Footer';
 const DetallesProd = () => {
 
   const { darkMode } = useDarkMode();
-
-
+  const [category, setCategory] = useState<string>("")
+  const [loader, setLoader] = useState<boolean>(false)
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const productos = await get_all_products();
+        const productos = await cate_api(category);
         setProductos(productos);
       } catch (error) {
         console.error('Error al obtener los productos: ', error);
@@ -29,8 +29,8 @@ const DetallesProd = () => {
 
   return (
     <main>
-      <ProductDetail darkMode={darkMode} />
-      <SwiperProducts darkMode={darkMode} datos={productos} height='50vh' width='100%' />
+      <ProductDetail darkMode={darkMode} setCategory={setCategory} />
+      <SwiperProducts darkMode={darkMode} datos={productos} height='50vh' width='100%' loader={loader} />
       <Footer />
     </main>
   );

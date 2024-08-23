@@ -53,145 +53,157 @@ const AddProd = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 dark:bg-gray-800 bg-white text-white dark:text-black rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Añadir Producto</h2>
-      <form onSubmit={manejarSubmit} className="flex flex-wrap -mx-3">
-        <div className="w-full md:w-1/2 px-3 mb-6">
-          <label htmlFor="nombre" className="block text-sm font-medium">
-            Nombre del Producto
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
+    <div className="flex h-screen  dark:bg-gray-900">
+      <div className="w-11/12 max-w-7xl flex m-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        <div className="w-2/3 p-10">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-normal text-gray-800 dark:text-white">
+              Añadir Producto
+            </h1>
+            <img src="logo" alt="Logo-sena" className="h-10" />
+          </div>
+
+          <form onSubmit={manejarSubmit} className="space-y-6">
+            <div className="flex space-x-4">
+              <div className="flex-1">
+                <input
+                  type="text"
+                  id="nombre"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  placeholder="Nombre del Producto"
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="flex-1">
+                <select
+                  id="categoria"
+                  value={categoria}
+                  onChange={(e) => setCategoria(e.target.value)}
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                >
+                  <option value="">Selecciona una categoría</option>
+                  <option value="VERDURAS">Verduras</option>
+                  <option value="FRUTAS">Frutas</option>
+                  <option value="CEREALES">Cereales</option>
+                  <option value="LACTEOS">Lácteos</option>
+                </select>
+              </div>
+            </div>
+
+            <textarea
+              id="descripcion"
+              value={descripcion}
+              onChange={(e) => setDescripcion(e.target.value)}
+              placeholder="Descripción del producto"
+              className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500 resize-none"
+              rows={4}
+              required
+            />
+
+            <div className="flex space-x-4">
+              <div className="flex-1">
+                <select
+                  id="ubicacion"
+                  value={ubicacion}
+                  onChange={(e) => setUbicacion(e.target.value)}
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                >
+                  <option value="">Selecciona una ubicación</option>
+                  <option value="Neiva">Neiva</option>
+                  <option value="Cali">Cali</option>
+                  <option value="Bogotá">Bogotá</option>
+                  <option value="Medellín">Medellín</option>
+                  <option value="Campotriste">Campotriste</option>
+                  <option value="Palermo">Palermo</option>
+                </select>
+              </div>
+              <div className="flex-1">
+                <input
+                  type="number"
+                  id="cantidad"
+                  value={cantidad}
+                  onChange={(e) => setCantidad(e.target.value)}
+                  placeholder="Cantidad en Stock"
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex space-x-4">
+              <div className="flex-1">
+                <input
+                  type="number"
+                  id="precio"
+                  value={precio}
+                  onChange={(e) => setPrecio(e.target.value)}
+                  placeholder= "$ Precio"
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="flex-1">
+                <select
+                  id="unidad"
+                  value={unidad}
+                  onChange={(e) => setUnidad(e.target.value)}
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                >
+                  <option value="">Selecciona una unidad</option>
+                  <option value="Kilos">Kilos</option>
+                  <option value="Gramos">Gramos</option>
+                  <option value="Arroba">Arroba</option>
+                  <option value="Tonelada">Tonelada</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="imagenes"
+                className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              >
+                Imágenes del Producto (Máximo 4)
+              </label>
+              <input
+                type="file"
+                id="imagenes"
+                onChange={manejarCambioArchivos}
+                multiple
+                accept="image/*"
+                className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="flex justify-between items-center mt-8">
+              <a href="#" className="text-blue-500 hover:underline">
+                Ayuda
+              </a>
+              <button
+                type="submit"
+                className="px-8 py-3 bg-lime-600 hover:bg-lime-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
+              >
+                Añadir Producto
+              </button>
+            </div>
+          </form>
         </div>
 
-        <div className="w-full md:w-1/2 px-3 mb-6">
-          <label htmlFor="categoria" className="block text-sm font-medium">
-            Categoría
-          </label>
-          <select
-            id="categoria"
-            value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          >
-            <option value="VERDURAS">Verduras</option>
-            <option value="FRUTAS">Frutas</option>
-            <option value="CEREALES">Cereales</option>
-            <option value="LACTEOS">Lácteos</option>
-            {/* Agrega más opciones según sea necesario */}
-          </select>
+        <div className="w-1/3 bg-lime-600 flex items-center justify-center p-6">
+          <div className="w-full h-full rounded-lg overflow-hidden">
+            <img
+              src=""
+              alt="Ppp"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
-
-        <div className="w-full md:w-1/2 px-3 mb-6">
-          <label htmlFor="descripcion" className="block text-sm font-medium">
-            Descripción
-          </label>
-          <textarea
-            id="descripcion"
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-            className="mt-1 p-2 block w-full bg-gray-700 rounded-md border border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
-
-        <div className="w-full md:w-1/2 px-3 mb-6">
-          <label htmlFor="ubicacion" className="block text-sm font-medium">
-            Ubicación
-          </label>
-          <select
-            id="ubicacion"
-            value={ubicacion}
-            onChange={(e) => setUbicacion(e.target.value)}
-            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          >
-            <option value="Neiva">Neiva</option>
-            <option value="Cali">Cali</option>
-            <option value="Bogotá">Bogotá</option>
-            <option value="Medellín">Medellín</option>
-            <option value="Bogotá">Campotriste</option>
-            <option value="Medellín">Palermo</option>
-            {/* Agrega más opciones según sea necesario */}
-          </select>
-        </div>
-
-        <div className="w-full md:w-1/2 px-3 mb-6">
-          <label htmlFor="cantidad" className="block text-sm font-medium">
-            Cantidad en Stock
-          </label>
-          <input
-            type="number"
-            id="cantidad"
-            value={cantidad}
-            onChange={(e) => setCantidad(e.target.value)}
-            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
-
-        <div className="w-full md:w-1/2 px-3 mb-6">
-          <label htmlFor="precio" className="block text-sm font-medium">
-            Precio
-          </label>
-          <input
-            type="number"
-            id="precio"
-            value={precio}
-            onChange={(e) => setPrecio(e.target.value)}
-            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-        </div>
-
-        <div className="w-full md:w-1/2 px-3 mb-6">
-          <label htmlFor="unidad" className="block text-sm font-medium">
-            Unidad
-          </label>
-          <select
-            id="unidad"
-            value={unidad}
-            onChange={(e) => setUnidad(e.target.value)}
-            className="mt-1 p-2 block w-full dark:bg-gray-700 bg-white dark:text-white text-black rounded-md border dark:border-gray-600 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          >
-            <option value="Kilos">Kilos</option>
-            <option value="Gramos">Gramos</option>
-            <option value="Miligramos">Arroba</option>
-            <option value="Miligramos">Tonelada</option>
-
-            {/* Agrega más opciones según sea necesario */}
-          </select>
-        </div>
-
-        <div className="w-full px-3 mb-6">
-          <label htmlFor="imagenes" className="block text-sm font-medium">
-            Imágenes del Producto (Máximo 4)
-          </label>
-          <input
-            type="file"
-            id="imagenes"
-            onChange={manejarCambioArchivos}
-            multiple
-            accept="image/*"
-            className="mt-1 block w-full text-gray-300"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-lime-600 hover:bg-#3e8e41 rounded-md font-semibold text-white"
-        >
-          Añadir Producto
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
