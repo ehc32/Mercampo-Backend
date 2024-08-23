@@ -47,13 +47,13 @@ const Map: React.FC<locationStatus> = ({ address, darkMode }) => {
             <GoogleMap
                 mapContainerStyle={{ width: '100%', height: '400px' }}
                 center={{ lat: lat, lng: lng }}
-                zoom={12}
+                zoom={15}
             >
                 {lat && lng && (
                     <Marker
                         position={{ lat: lat, lng: lng }}
                         icon={{
-                            url: '../../../../public/logoSena.png',
+                            url: '/public/logoSena.png',
                             scaledSize: new window.google.maps.Size(40, 40),
                         }}
                     />

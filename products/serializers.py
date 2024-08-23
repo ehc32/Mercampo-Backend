@@ -31,7 +31,7 @@ class ProductReadSerializer(serializers.ModelSerializer):
                 image_data = image_file.read()
                 encoded_image = base64.b64encode(image_data).decode('utf-8')
                 image_type = imghdr.what(None, image_data) or 'jpg'
-                return f'data:image/{image_type};base64,{encoded_image}'
+                return f'data:image/{image_type};base64,{encoded_image.replace("dataimage/jpegbase64", "")}'
         return None
 
 class ProductCreateSerializer(serializers.ModelSerializer):
@@ -70,5 +70,5 @@ class ProductImagesSerializer(serializers.Serializer): # brings the imgs from th
                 image_data = image_file.read()
                 encoded_image = base64.b64encode(image_data).decode('utf-8')
                 image_type = imghdr.what(None, image_data) or 'jpg'
-                images_data.append(f'data:image/{image_type};base64,{encoded_image}')
+                images_data.append(f'data:image/{image_type};base64,{encoded_image.replace("dataimage/jpegbase64", "")}')
         return images_data

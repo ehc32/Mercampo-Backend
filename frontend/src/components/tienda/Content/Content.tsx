@@ -31,14 +31,18 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
         },
     ];
 
-
     useEffect(() => {
-        const agregarProductos = () => {
-            const productosPagina = productos.slice((page - 1) * 20, page * 20);
-            setProductosNuevos(productosPagina);
-        };
-        agregarProductos();
-    }, [productos, page]);
+        setProductosNuevos([]); // Vacía el estado de productosNuevos
+        if (productos.length > 0) { // Asegúrate de que productos tenga elementos
+            const agregarProductos = () => {
+                const productosPagina = productos.slice((page - 1) * 20, page * 20);
+                setProductosNuevos(productosPagina);
+            }
+            agregarProductos();
+        }
+    }, [productos, page]); // Agrega productos y page como dependencias
+    
+
 
     return (
         <section className="contenidoTienda">
@@ -60,7 +64,8 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
                                 <div className="h-min-500px flex flex-wrap">
 
                                     {
-                                        productosNuevos.map((producto, index) => {
+                                        productosNuevos.length > 0 && productosNuevos.map((producto, index) => {
+                                            console.log(producto)
                                             return (
                                                 <Card key={index} producto={producto} darkMode={darkMode} />
                                             )

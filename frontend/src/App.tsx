@@ -13,13 +13,15 @@ import ShopHistory from "./pages/ShopHistory"
 import ShoppingCart from "./pages/ShoppingCart"
 import UserProfile from "./pages/UserProfile"
 import VendedorProduct from "./pages/VendedorProduct"
-import AddProd  from "./pages/AddProd"
+import AddProd from "./pages/AddProd"
+import { ToastContainer } from "react-toastify"
 
 
 function App() {
 
     return (
         <BrowserRouter>
+            <ToastContainer />
             <Routes>
                 <Route path="/" element={<Layout />} >
                     <Route index element={<Home />} />
@@ -31,7 +33,7 @@ function App() {
                     <Route path="store" element={<Store />} />     {/* Vista para ingresar productos - solo con permisos de venta */}
                     <Route path="vendedor-order" element={<VendedorProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
                     <Route path="addprod" element={<AddProd />} />
-                    
+
 
                     <Route path="login" element={<LoginPage />} />
 

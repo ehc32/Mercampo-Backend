@@ -14,7 +14,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=50, null=True, blank=True)
     name = models.CharField(max_length=100, blank=True)
     category = models.CharField(max_length=100, choices=[(tag.name, tag.value) for tag in Category])
-    description = models.CharField(max_length=250, blank=True, null=False)
+    description = models.CharField(max_length=350, blank=True, null=False)
     map_locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # location google maps
     locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # this is the place where's product offer
     count_in_stock = models.IntegerField(default=0) # how many units

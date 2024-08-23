@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { Fragment, useState } from 'react';
 import { BsFillCartFill, BsFillMoonStarsFill, BsFillSunFill, BsShopWindow } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
 import { useDarkMode } from "../hooks/theme";
@@ -22,6 +23,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
   const cart = useCartStore(state => state.cart);
   const { isAuth, role } = useAuthStore();
   const [imgMenu, setImgMenu] = useState(false);
+  const location = useLocation();
 
   let is_admin: boolean = false;
   let user_id: number;
@@ -134,7 +136,6 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                 <Link to={'/addprod'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white d-flex row align-center">
                   <BsShopWindow size={23} />
-                  <span className="text-slate-900 dark:text-slate-200 mx-1">{cart.length}</span>
                 </Link>
 
                 {isAuth && (
