@@ -86,7 +86,6 @@ const Users = ({ results }: Props) => {
                       size={22}
                       className="text-red-300 cursor-pointer"
                     />
-                    <NestedModal />
                   </td>
                 </tr>
               ))}
@@ -105,6 +104,7 @@ const Users = ({ results }: Props) => {
                   <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.name}</td>
                   <td className="px-4 py-3">{user.last_name}</td>
+                  <td className="px-4 py-3">{user.role}</td>
                   <td className="px-4 py-3 flex items-center justify-center gap-4">
                     {/* Ícono de eliminar usuario */}
                     <svg
@@ -127,26 +127,7 @@ const Users = ({ results }: Props) => {
                       />
                     </svg>
 
-
-                    <NestedModal />                     {/* Ícono de editar usuario */}
-                    <svg
-                      onClick={() => {
-                        // Aquí puedes agregar la lógica para editar el usuario
-                        console.log("Editar usuario", user.id);
-                      }}
-                      className="w-6 h-6 text-blue-300 cursor-pointer" // Estilo de cursor y color del ícono
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                      />
-                    </svg>
+                    <NestedModal/>
                   </td>
                 </tr>
               ))}
