@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import Loader from "./Loader";
 import { User } from "../Interfaces";
+import NestedModal from "./shared/Modal/Modal";
 
 interface Props {
   results: any;
@@ -85,6 +86,7 @@ const Users = ({ results }: Props) => {
                       size={22}
                       className="text-red-300 cursor-pointer"
                     />
+                    <NestedModal />
                   </td>
                 </tr>
               ))}
@@ -124,7 +126,9 @@ const Users = ({ results }: Props) => {
                         d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                       />
                     </svg>
-                    {/* Ícono de editar usuario */}
+
+
+                    <NestedModal />                     {/* Ícono de editar usuario */}
                     <svg
                       onClick={() => {
                         // Aquí puedes agregar la lógica para editar el usuario

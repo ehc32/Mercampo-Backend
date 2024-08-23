@@ -8,6 +8,7 @@ import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
 import { useDarkMode } from "../hooks/theme";
 import { Token } from "../Interfaces";
+import ST_Icon from './assets/ST/ST_Icon';
 
 interface HeaderProps {
   estadoAside: boolean;
@@ -53,9 +54,9 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
           <div className="px-5">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
-                <div className="flex space-x-4">
+                <div className="flex space-x-1">
                   <button onClick={handleToggleMenu}>
-                    {imgMenu && (
+                    {location.pathname === '/store' && (
                       estadoAside ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
@@ -63,30 +64,24 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       )
                     )}
                   </button>
-                  <Link to={'/'}>
-                    <img
-                      className="h-10 w-auto lg:block"
-                      src="/public/lo.ico"
-                      alt="Logo"
-                    />
+                  <Link to={'/'} className='flex flex-row'>
+                    <ST_Icon />
                   </Link>
 
                   <div className="sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-1">
                       {isAuth ? (
                         <>
                           <Link
                             to={'/'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
-                            onClick={() => setImgMenu(false)}
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Inicio
                           </Link>
 
                           <Link
                             to={'/store'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
-                            onClick={() => setImgMenu(true)}
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Tienda
                           </Link>
@@ -95,14 +90,14 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         <>
                           <Link
                             to={'/login'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Iniciar sesión
                           </Link>
 
                           <Link
                             to={'/register'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Registrar cuenta
                           </Link>
@@ -111,8 +106,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                       <Link
                         to={'/admin'}
-                        className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
-                        onClick={() => setImgMenu(false)}
+                        className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                       >
                         Panel de administración
                       </Link>
@@ -194,18 +188,6 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="flex mx-2">
-              <div className="absolute inset-y-[72px] left-2 px-4 flex pl-3 pointer-events-none">
-                <svg className="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
-                <span className="sr-only">Buscar</span>
-              </div>
-              <input
-                type="text"
-                id="search-navbar"
-                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 dark:bg-gray-700 outline-none dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                placeholder="Buscar..."
-              />
-            </div>
 
             <div className="space-y-1 px-2 pb-3 pt-2">
               {isAuth ? (
