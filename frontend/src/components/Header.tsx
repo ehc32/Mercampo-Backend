@@ -8,6 +8,7 @@ import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
 import { useDarkMode } from "../hooks/theme";
 import { Token } from "../Interfaces";
+import ST_Icon from './assets/ST/ST_Icon';
 
 interface HeaderProps {
   estadoAside: boolean;
@@ -53,9 +54,9 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
           <div className="px-5">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
-                <div className="flex space-x-4">
+                <div className="flex space-x-1">
                   <button onClick={handleToggleMenu}>
-                    {imgMenu && (
+                    {location.pathname === '/store' && (
                       estadoAside ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
@@ -63,30 +64,24 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       )
                     )}
                   </button>
-                  <Link to={'/'}>
-                    <img
-                      className="h-10 w-auto lg:block"
-                      src="/public/lo.ico"
-                      alt="Logo"
-                    />
+                  <Link to={'/'} className='flex flex-row'>
+                    <ST_Icon />
                   </Link>
 
                   <div className="sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-1">
                       {isAuth ? (
                         <>
                           <Link
                             to={'/'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
-                            onClick={() => setImgMenu(false)}
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Inicio
                           </Link>
 
                           <Link
                             to={'/store'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
-                            onClick={() => setImgMenu(true)}
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Tienda
                           </Link>
@@ -95,14 +90,14 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         <>
                           <Link
                             to={'/login'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Iniciar sesión
                           </Link>
 
                           <Link
                             to={'/register'}
-                            className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                           >
                             Registrar cuenta
                           </Link>
@@ -111,8 +106,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                       <Link
                         to={'/admin'}
-                        className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
-                        onClick={() => setImgMenu(false)}
+                        className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
                       >
                         Panel de administración
                       </Link>

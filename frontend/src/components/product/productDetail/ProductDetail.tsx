@@ -51,18 +51,18 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                 setUsuario(userContact);
                 setCategory(producto?.category)
                 setLoading(false);
-                
+
             } catch (error) {
                 console.error('Error al obtener el producto: ', error);
                 setLoading(false);
             }
         };
-        
+
 
         fetchProducto();
     }, [slug]);
 
-    function formatearFecha(fechaISO) {
+    function formatearFecha(fechaISO: any) {
         const fecha = new Date(fechaISO);
         const meses = [
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
