@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ImageInput from "../components/assets/imageInput/ImageInput";
+import BasicTooltip from "../components/shared/TooltipHelp/Tooltip";
 
 const AddProd = () => {
+  const [images, setImages] = useState<string[]>([]);
   const [nombre, setNombre] = useState("");
   const [categoria, setCategoria] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [ubicacion, setUbicacion] = useState("");
+  const [ubicacionDescriptiva, setUbicacionDescriptiva] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [precio, setPrecio] = useState("");
   const [unidad, setUnidad] = useState("");
-  const [imagenes, setImagenes] = useState<File[]>([]);
-
-  const manejarCambioArchivos = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const fileArray = Array.from(e.target.files).slice(0, 4); // Limitar a 4 imágenes
-      setImagenes(fileArray);
-    }
-  };
-
+  
+  const ciudades = [""]
+  
   const manejarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
 
     const formData = new FormData();
     formData.append("nombre", nombre);
@@ -30,7 +29,7 @@ const AddProd = () => {
     formData.append("cantidad", cantidad);
     formData.append("precio", precio);
     formData.append("unidad", unidad);
-    imagenes.forEach((imagen, index) => {
+    images.forEach((imagen, index) => {
       formData.append(`imagen${index + 1}`, imagen);
     });
 
@@ -46,7 +45,7 @@ const AddProd = () => {
       setCantidad("");
       setPrecio("");
       setUnidad("Kilos");
-      setImagenes([]);
+      setImages([]);
     } catch (error) {
       toast.error("Error al agregar el producto");
     }
@@ -54,29 +53,31 @@ const AddProd = () => {
 
   return (
     <div className="flex h-screen  dark:bg-gray-900">
-      <div className="w-11/12 max-w-7xl flex m-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+      <div className="w-5/6  flex m-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
         <div className="w-2/3 p-10">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-normal text-gray-800 dark:text-white">
               Añadir Producto
             </h1>
-            <img src="logo" alt="Logo-sena" className="h-10" />
+            <img src="/public/logoSena.png" alt="Logo-sena" className="h-16" />
           </div>
 
           <form onSubmit={manejarSubmit} className="space-y-6">
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 ">
               <div className="flex-1">
+                <h6 className="text-gray-800  m-1 dark:text-white">Nombre del Producto</h6>
                 <input
                   type="text"
                   id="nombre"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  placeholder="Nombre del Producto"
+                  placeholder="Ej: Tomate cherry"
                   className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
               <div className="flex-1">
+                <h6 className="text-gray-800  m-1 dark:text-white">Categoría</h6>
                 <select
                   id="categoria"
                   value={categoria}
@@ -84,69 +85,52 @@ const AddProd = () => {
                   className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
                   required
                 >
-                  <option value="">Selecciona una categoría</option>
+                  <option hidden selected>Selecciona una categoría</option>
                   <option value="VERDURAS">Verduras</option>
+                  <option value="GRANOS">Granos</option>
                   <option value="FRUTAS">Frutas</option>
-                  <option value="CEREALES">Cereales</option>
-                  <option value="LACTEOS">Lácteos</option>
                 </select>
               </div>
             </div>
 
+            <h6 className="text-gray-800  mx-1 dark:text-white">Descripción del Producto</h6>
             <textarea
               id="descripcion"
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
-              placeholder="Descripción del producto"
-              className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500 resize-none"
+              placeholder="Ej: Tomate cherry de alta calidad"
+              className="w-full p-3 mt-2 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500 resize-none"
               rows={4}
               required
             />
 
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mt-1">
               <div className="flex-1">
-                <select
-                  id="ubicacion"
-                  value={ubicacion}
-                  onChange={(e) => setUbicacion(e.target.value)}
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="">Selecciona una ubicación</option>
-                  <option value="Neiva">Neiva</option>
-                  <option value="Cali">Cali</option>
-                  <option value="Bogotá">Bogotá</option>
-                  <option value="Medellín">Medellín</option>
-                  <option value="Campotriste">Campotriste</option>
-                  <option value="Palermo">Palermo</option>
-                </select>
-              </div>
-              <div className="flex-1">
-                <input
-                  type="number"
-                  id="cantidad"
-                  value={cantidad}
-                  onChange={(e) => setCantidad(e.target.value)}
-                  placeholder="Cantidad en Stock"
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="flex space-x-4">
-              <div className="flex-1">
+                <h6 className="text-gray-800  m-1 dark:text-white">Precio</h6>
                 <input
                   type="number"
                   id="precio"
                   value={precio}
                   onChange={(e) => setPrecio(e.target.value)}
-                  placeholder= "$ Precio"
+                  placeholder="Ej: 5000"
                   className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
               <div className="flex-1">
+                <h6 className="text-gray-800  m-1 dark:text-white">Cantidad en Stock</h6>
+                <input
+                  type="number"
+                  id="cantidad"
+                  value={cantidad}
+                  onChange={(e) => setCantidad(e.target.value)}
+                  placeholder="Ej: 100"
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="flex-1">
+                <h6 className="text-gray-800  m-1 dark:text-white">Unidad</h6>
                 <select
                   id="unidad"
                   value={unidad}
@@ -154,31 +138,47 @@ const AddProd = () => {
                   className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
                   required
                 >
-                  <option value="">Selecciona una unidad</option>
-                  <option value="Kilos">Kilos</option>
-                  <option value="Gramos">Gramos</option>
-                  <option value="Arroba">Arroba</option>
-                  <option value="Tonelada">Tonelada</option>
+                  <option hidden selected>Selecciona una unidad</option>
+                  <option value="Kg">Kilos</option>
+                  <option value="L">Litros</option>
                 </select>
               </div>
             </div>
 
-            <div>
-              <label
-                htmlFor="imagenes"
-                className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
-              >
-                Imágenes del Producto (Máximo 4)
-              </label>
-              <input
-                type="file"
-                id="imagenes"
-                onChange={manejarCambioArchivos}
-                multiple
-                accept="image/*"
-                className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
-              />
+            <h6 className="fs-22px mt-3 text-gray-800 dark:text-white">Agrega una ubicación</h6>
+            <div className="flex space-x-4 mt-2">
+              <div className="flex-1">
+                <h6 className="text-gray-800 m-1 dark:text-white">Ubicación</h6>
+                <select
+                  id="ubicacion"
+                  value={ubicacion}
+                  onChange={(e) => setUbicacion(e.target.value)}
+                  className="w-full  p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                  required
+                >
+                  <option hidden selected>Selecciona una ubicación</option>
+                  {
+                    ciudades.map((ciudad, index) => {
+                      <option key={index} value={ciudad}>{ciudad}</option>
+                    })
+                  }
+                </select>
+              </div>
+              <div className="flex-1">
+                <h6 className="text-gray-800  dark:text-white flex-nowrap flex flex-row  "> <p className="m-1">Ubicación descriptiva</p> <BasicTooltip /> </h6>
+                <input
+                  type="text"
+                  id="ubicacion-descriptiva"
+                  value={ubicacionDescriptiva}
+                  onChange={(e) => setUbicacionDescriptiva(e.target.value)}
+                  placeholder="Ej: Dirección exacta"
+                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
             </div>
+
+            <h6 className="fs-22px pb-2 text-gray-800 dark:text-white">Agrega hasta 4 imágenes</h6>
+            <ImageInput images={images} setImages={setImages} />
 
             <div className="flex justify-between items-center mt-8">
               <a href="#" className="text-blue-500 hover:underline">
@@ -195,10 +195,11 @@ const AddProd = () => {
         </div>
 
         <div className="w-1/3 bg-lime-600 flex items-center justify-center p-6">
+
           <div className="w-full h-full rounded-lg overflow-hidden">
             <img
               src=""
-              alt="Ppp"
+              alt="AddProductIMG"
               className="w-full h-full object-cover"
             />
           </div>
