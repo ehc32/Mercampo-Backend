@@ -48,6 +48,9 @@ const Users = ({ results }: Props) => {
             <th scope="col" className="px-4 py-3">
               Apellido
             </th>
+            <th scope="col" className="px-4 py-3">
+              Rol
+            </th>
             <th
               scope="col"
               className="px-4 py-3 flex items-center justify-center gap-4"
@@ -71,6 +74,7 @@ const Users = ({ results }: Props) => {
                   <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.name}</td>
                   <td className="px-4 py-3">{user.last_name}</td>
+                  <td className="px-4 py-3">{user.role}</td>
                   <td className="px-4 py-3 flex items-center justify-center gap-4">
                     <BsFillTrashFill
                       onClick={() => {

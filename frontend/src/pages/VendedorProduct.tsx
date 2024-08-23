@@ -53,7 +53,7 @@ const SellerProduct = () => {
 
   return (
     <div className="flex flex-col items-center px-4 mt-10">
-      <div className="w-full max-w-5xl p-6 bg-gray-800 rounded-lg shadow-md">
+      <div className="w-full max-w-5xl p-6 bg-gray-800 dark:bg-slate-300 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-4 text-center text-white">
           Historial de Órdenes
         </h2>
