@@ -52,7 +52,7 @@ const UserProfile = () => {
     },
   });
 
-  const { data, isError, isLoading } = useQuery({
+  const { isError, isLoading } = useQuery({
     queryKey: ["orders"],
     queryFn: my_orders,
   });
@@ -64,6 +64,7 @@ const UserProfile = () => {
       last_name: stateLast,
       avatar: image,
       email: user.email,
+      role: "",
     });
   };
 
@@ -99,53 +100,48 @@ const UserProfile = () => {
   if (isError) return toast.error("Error!");
   if (isLoading) return <Loader />;
 
-  function setSearch(value: string) {
+  function setSearch(_value: string) {
     throw new Error("Function not implemented.");
   }
 
   return (
     <div className="flex flex-col mt-4 lg:flex-row ml-5 mx-auto gap-6 w-full max-w-screen-xl">
-      <div className="w-full lg:w-1/2 bg-whites lg:max-w-sm mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full lg:w-1/2 bg-white lg:max-w-sm mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700 border border-gray-200 rounded-lg">
         {show ? (
           <>
-            <div className="flex flex-col items-center pb-10">
-              {user && user.avatar !== undefined && (
-                <img
-                  className="w-24 h-24 mb-6 mt-3 rounded-full shadow-lg"
-                  src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
-                  alt="User image"
-                />
-              )}
-              <div className="flex flex-col space-y-2 mb-4">
-                <span className="text-lg font-medium text-gray-900 dark:text-white">
-                  Nombre:
-                  <br />
-                  {user.name}
-                </span>
-                <span className="text-lg font-medium text-gray-900 dark:text-white">
-                  Apellido:
-                  <br />
-                  {user.last_name}
-                </span>
-                <span className="text-lg font-medium text-gray-900 dark:text-white">
-                  Correo:
-                  <br />
-                  {user.email}
-                </span>
-                <span className="text-lg font-medium text-gray-900 dark:text-white">
-                  Rol:
-                  <br />
-                  {user.role}
-                </span>
+            <div className="flex flex-col items-start pb-10 px-6">
+              {/* Contenedor de la información principal */}
+              <div className="flex items-center space-x-4 mb-4 w-full bg-white p-4 rounded-lg">
+                {user && user.avatar !== undefined && (
+                  <img
+                    className="w-24 h-24 rounded-full shadow-lg"
+                    src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
+                    alt="User image"
+                  />
+                )}
+                <div className="flex flex-col w-full">
+                  <span className="text-lg font-medium text-gray-900 dark:text-white">
+                    {user.name} {user.last_name}
+                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    {user.email}
+                  </span>
+                  <span className="text-sm text-gray-700 font-bold dark:text-gray-400 mt-1">
+                    {user.role}
+                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    <strong>Ciudad:</strong> {user.city || "Neiva York"}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col items-center mt-6 space-y-4">
-                <button
-                  onClick={() => setShow(false)}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
-                >
-                  Editar perfil
-                </button>
-              </div>
+
+              {/* Botón expandido de Editar perfil */}
+              <button
+                onClick={() => setShow(false)}
+                className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+              >
+                Editar perfil
+              </button>
             </div>
           </>
         ) : (
@@ -183,10 +179,10 @@ const UserProfile = () => {
                     <label
                       htmlFor="dropzone-file"
                       className={`flex flex-col items-center justify-center w-full h-64 
-        border-2 border-gray-600 border-dashed rounded-lg 
-        cursor-pointer bg-gray-40 ${
-          isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-        }`}
+                      border-2 border-gray-600 border-dashed rounded-lg 
+                      cursor-pointer bg-gray-40 ${
+                        isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                      }`}
                       onDragEnter={handleDragEnter}
                       onDragLeave={handleDragLeave}
                     >
@@ -199,9 +195,9 @@ const UserProfile = () => {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M7 16a4 4 0 01-.88-7.903A5 5 0 1117 8h1a3 3 0 010 6h-1m-4 4v-4m0 0H9m4 0h2"
                         ></path>
                       </svg>
@@ -242,7 +238,7 @@ const UserProfile = () => {
               <div className="p-2">
                 <button
                   type="submit"
-                  className="w-full text-white  bg-lime-600  hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
+                  className="w-full text-white bg-lime-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
                 >
                   Guardar cambios
                 </button>
@@ -303,5 +299,4 @@ const UserProfile = () => {
     </div>
   );
 };
-
 export default UserProfile;

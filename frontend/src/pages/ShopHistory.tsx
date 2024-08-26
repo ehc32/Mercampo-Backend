@@ -1,11 +1,11 @@
-import { useState } from "react";
+
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const HistorialDeCompras = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  
 
   const DescargaRequest = (email: string, password: string) => {
     // Lógica para la solicitud de descarga
@@ -27,18 +27,12 @@ const HistorialDeCompras = () => {
 
   return (
     <div className="flex flex-col items-center px-4 mt-10 ">
-      <div className="w-full max-w-5xl p-6 bg-gray-800 dark:bg-slate-300 rounded-lg shadow-md h-svh">
-        <h2 className="text-xl font-semibold mb-4 text-center text-white">
+      <div className="w-full max-w-5xl p-6 bg-gray-50 dark:bg-slate-300 rounded-lg shadow-md h-svh">
+        <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Compras
         </h2>
         <div className="mb-4 relative">
-          <input
-            type="text"
-            placeholder="Buscar por producto, fecha, etc."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 pl-10 rounded border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-lime-500 transition-all duration-300 ease-in-out"
-          />
+
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
           </span>
         </div>
@@ -46,19 +40,19 @@ const HistorialDeCompras = () => {
           <table className="min-w-full bg-gray-800">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Imagen
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Producto
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Fecha
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Precio
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Acciones
                 </th>
               </tr>
@@ -96,23 +90,23 @@ const HistorialDeCompras = () => {
                 },
               ].map((compra) => (
                 <tr key={compra.id}>
-                  <td className="py-2 px-4 border-b border-gray-600">
+                  <td className="py-2 px-4 border-b border-gray-600 bg-gray-50">
                     <img
                       src={compra.imagen}
                       alt={compra.producto}
                       className="w-12 h-12"
                     />
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600 text-white">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.producto}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600 text-white">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.fecha}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600 text-white">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.precio}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     <button
                       onClick={() => DescargaMutation.mutate()}
                       className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300 ease-in-out"
