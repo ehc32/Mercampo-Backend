@@ -3,7 +3,7 @@
     top: 7%;
     left: 0;
     height: 100vh;
-    width: 250px;
+    width: 450px;
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -12,17 +12,9 @@
 }
 
 .asideCardDark {
-    position: fixed;
-    left: 0;
-    top: 7%;
-    height: 100vh;
     width: 250px;
-    padding: 20px;
-    --tw-bg-opacity: 1;
-    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+    background-color: rgba(17, 24, 39, 1);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease-in-out;
-    z-index: 1000;
 }
 
 .asideCard.hide {
@@ -37,7 +29,7 @@
     width: 40%;
     display: flex;
     flex-direction: row;
-    margin-left: .8em;
+    margin-left: 0.8em;
     margin-bottom: 1em;
     align-items: center;
 }
@@ -47,7 +39,7 @@ i {
 }
 
 ul {
-    margin-left: .8em !important;
+    margin-left: 0.8em !important;
 }
 
 .box-inputs {
@@ -59,31 +51,34 @@ ul {
 }
 
 .box-inputs input {
-    border: #000 solid .2px;
-    padding:  .2em;
+    border: 1px solid #000;
+    padding: 0.2em;
     max-width: 40% !important;
     outline: none;
     border-radius: 2px;
 }
 
-.box-inputs i {
-    
+.busquedaAside {
+    padding: 0.5em 1em;
+    border-radius: 2.5px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #000;
 }
 
-.asideCard:has(p, h4, input, label, span, li) {
-    color: #000;
-    font-size: 14px;
-    transition: .1s ease;
+.busquedaAsideDark {
+    border: 1px solid #fff;
 }
 
-.asideCardDark:has(p, h4, input, label, span, li) {
-    color: #fff;
-    font-size: 14px;
-    transition: .1s ease;
+.cardTitles {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-h4 {
-    margin: .8em 0 !important;
+.dateField {
+    display: flex;
+    flex-direction: column;
 }
 
 .asideCard li p {
@@ -95,37 +90,52 @@ h4 {
     cursor: pointer;
 }
 
-
-.busquedaAside {
-    padding: .5em 1em;
-    border-radius: 2.5px;
-    width: 100%;
-    outline: none;
-    border: 1px solid #000;
+.asideBox li {
+    margin-bottom: 1em;
 }
 
-.asideCardDark .busquedaAside {
-    border: 1px solid #fff;
+.asideCard {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 93.5vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f0f0f0;
+}
+
+.asideBox {
+    margin-bottom: 20px;
 }
 
 .cardTitles {
     font-weight: bold;
-    font-size: 16px;
     margin-bottom: 10px;
 }
 
-.btnSearchDark:active {
-    outline: none;
+.busquedaAside {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.dateField {
+.box-inputs {
     display: flex;
-    flex-direction: column;
+    align-items: center;
 }
 
-.asideCard li p {
+.min-price,
+.max-price {
+    width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.asideBox li {
-    margin-bottom: 1em;
+.bi-dash {
+    margin: 0 10px;
 }

@@ -4,6 +4,11 @@ import ImageInput from "../components/assets/imageInput/ImageInput";
 import 'react-toastify/dist/ReactToastify.css';
 import BasicTooltip from "../components/shared/TooltipHelp/Tooltip";
 import { post_product } from "../api/products";
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import ScaleIcon from '@mui/icons-material/Scale';
+import WaterIcon from '@mui/icons-material/Water';
 
 const AddProd = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -104,21 +109,24 @@ const AddProd = () => {
                 />
               </div>
               <div className="flex-1">
-                <h6 className="text-gray-800  m-1 dark:text-white">Categoría</h6>
-                <select
-                  id="categoria"
-                  value={categoria}
-                  onChange={(e) => setCategoria(e.target.value)}
-                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black"
-                  required
-                >
-                  <option hidden selected>Selecciona una categoría</option>
-                  <option value="VERDURAS">Verduras</option>
-                  <option value="GRANOS">Granos</option>
-                  <option value="FRUTAS">Frutas</option>
-                </select>
+                <h6 className="text-gray-800  m-1 dark:text-white">Unidad</h6>
+                <FormControl fullWidth sx={{ mb: 2 }}>
+                  <Select
+                    value={unidad}
+                    onChange={(e) => setUnidad(e.target.value)}
+                  >
+                    <MenuItem selected hidden>Selecciona una unidad</MenuItem>
+                    <MenuItem value="Kg">
+                      <ScaleIcon fontSize="small" /> Kilos
+                    </MenuItem>
+                    <MenuItem value="L">
+                      <WaterIcon fontSize="small" /> Litros
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
+
 
             <h6 className="text-gray-800  mx-1 dark:text-white">Descripción del Producto</h6>
             <textarea
@@ -160,40 +168,25 @@ const AddProd = () => {
                   required
                 />
               </div>
-              <div className="flex-1">
-                <h6 className="text-gray-800  m-1 dark:text-white">Unidad</h6>
-                <select
-                  id="unidad"
-                  value={unidad}
-                  onChange={(e) => setUnidad(e.target.value)}
-                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
-                  required
-                >
-                  <option hidden selected>Selecciona una unidad</option>
-                  <option value="Kg">Kilos</option>
-                  <option value="L">Litros</option>
-                </select>
-              </div>
             </div>
 
             <h6 className="fs-22px mt-3 text-gray-800 dark:text-white">Agrega una ubicación</h6>
             <div className="flex space-x-4 mt-2">
               <div className="flex-1">
-                <h6 className="text-gray-800 m-1 dark:text-white">Ubicación</h6>
-                <select
-                  id="ubicacion"
-                  value={ubicacion}
-                  onChange={(e) => setUbicacion(e.target.value)}
-                  className="w-full  p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
-                  required
-                >
-                  <option hidden selected>Selecciona una ubicación</option>
-                  {ciudades.map((ciudad, index) => (
-                    <option key={index} value={ciudad}>
-                      {ciudad}
-                    </option>
-                  ))}
-                </select>
+                <h6 className="text-gray-800  m-1 dark:text-white">Ubicación</h6>
+                <FormControl fullWidth sx={{ mb: 2 }}>
+                  <Select
+                    value={ubicacion}
+                    onChange={(e) => setUbicacion(e.target.value)}
+                  >
+                    <MenuItem selected hidden>Selecciona una ubicación</MenuItem>
+                    {ciudades.map((ciudad, index) => (
+                      <MenuItem key={index} value={ciudad}>
+                        {ciudad}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </div>
               <div className="flex-1">
                 <h6 className="text-gray-800  dark:text-white flex-nowrap flex flex-row  ">

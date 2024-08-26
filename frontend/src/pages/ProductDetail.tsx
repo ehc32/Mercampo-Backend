@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { cate_api } from '../api/products';
+import Footer from '../components/Footer';
 import ProductDetail from '../components/product/productDetail/ProductDetail';
 import SwiperProducts from '../components/shared/SwiperProducts/swiperProducts';
 import { useDarkMode } from "../hooks/theme";
-import Footer from '../components/Footer';
 
 
 
@@ -29,8 +29,8 @@ const DetallesProd = () => {
 
   return (
     <main>
-      <ProductDetail darkMode={darkMode} setCategory={setCategory} />
-      <SwiperProducts darkMode={darkMode} datos={productos} height='50vh' width='100%' loader={loader} />
+      <ProductDetail setCategory={setCategory} />
+      <SwiperProducts datos={productos} height='50vh' width='100%' loader={loader} />
       <Footer />
     </main>
   );

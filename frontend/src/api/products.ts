@@ -59,6 +59,19 @@ export const post_product = async (data: Product) => {
     }
     await authAxios.post("/products/post/", formData);
 };
+
+export const filter_request = async (data) => {
+    const formData = new FormData();
+    formData.append("locate", data.locate);
+    formData.append("price_min", data.price.min.toString());
+    formData.append("price_max", data.price.max.toString());
+    formData.append("categories", data.categories.join(","));
+    formData.append("searchItem", data.searchItem);
+    formData.append("startDate", data.startDate?.toISOString() ?? "");
+    formData.append("endDate", data.endDate?.toISOString() ?? "");
+    await authAxios.post("/filterdata", formData);
+};
+
 export const get_products = async ({ pageParam = 1 }) => {
     const response = await axi.get(`/products/?page=${pageParam}&pages=20`)
     return response.data

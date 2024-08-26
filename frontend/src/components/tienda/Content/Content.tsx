@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import Pagination from '@mui/material/Pagination';
+import React, { useEffect, useState } from "react";
+import Footer from "../../Footer";
 import Card from "../../shared/Card/Cards";
 import Swiper from "../../shared/Swiper/swiper";
-import Pagination from '@mui/material/Pagination';
-import Footer from "../../Footer";
+import Loader from './../../shared/Loaders/Loader';
 import './Content.css';
-import Loader from './../../shared/Loaders/Loader'
 
 interface ContenidoProps {
-    darkMode: boolean;
     productos: any[];
     loading: boolean;
     dataLenght: number;
@@ -15,12 +14,12 @@ interface ContenidoProps {
     setPage: (page: number) => void;
 }
 
-const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataLenght, page, setPage }) => {
+const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, page, setPage }) => {
     const [productosNuevos, setProductosNuevos] = useState<any[]>([]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-    };  
+    };
 
     const carrouselData = [
         {
@@ -41,7 +40,7 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
             agregarProductos();
         }
     }, [productos, page]); // Agrega productos y page como dependencias
-    
+
 
 
     return (
@@ -50,8 +49,8 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
             {/* aqui las cards de productos*/}
 
             <div>
-                <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Una gran variedad de productos</h2>
-                <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra productos de alta calidad a los mejores precios</h4>
+                <h2 className='titulo-sala-compra-light'>Una gran variedad de productos</h2>
+                <h4 className='sub-titulo-sala-compra-light'>Encuentra productos de alta calidad a los mejores precios</h4>
 
                 {
                     loading ? (
@@ -60,13 +59,13 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
                         </div>
                     ) : (
                         <>
-                            <div className={darkMode ? 'product-container-dark' : 'product-container-light'}>
+                            <div className='product-container-light'>
                                 <div className="h-min-500px flex flex-wrap">
 
                                     {
                                         productosNuevos.length > 0 && productosNuevos.map((producto, index) => {
                                             return (
-                                                <Card key={index} producto={producto} darkMode={darkMode} />
+                                                <Card key={index} producto={producto} />
                                             )
                                         })
                                     }
@@ -80,12 +79,12 @@ const Content: React.FC<ContenidoProps> = ({ darkMode, productos, loading, dataL
                                         showFirstButton
                                         showLastButton
                                         sx={{
-                                            color: darkMode ? '#fff' : '#000',
+                                            color:  '#000',
                                             '.MuiPaginationItem-root': {
-                                                color: darkMode ? '#fff' : '#000',
+                                                color:  '#000',
                                             },
                                             '.Mui-selected': {
-                                                backgroundColor: darkMode ? '#333' : '#ccc',
+                                                backgroundColor:  '#ccc',
                                             },
                                             '.MuiPaginationItem-root.Mui-focused': {
                                                 outline: 'none', // Elimina el borde de foco

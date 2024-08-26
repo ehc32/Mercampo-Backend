@@ -19,10 +19,9 @@ interface Producto {
 
 interface CarrouselLast12Props {
     producto: Producto;
-    darkMode: boolean;
 }
 
-const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
+const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
 
 
     function formatearFecha(fechaISO) {
@@ -41,7 +40,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
 
     return (
         <div className='beforecard'>
-            <div className={darkMode ? 'cardbody cardBodyDark' : 'cardbody cardBodyLight'}>
+            <div className='cardbody cardBodyLight'>
                 <Link to={`/product/${producto.slug}`}>
                     <div className='imgContent'>
                         <img src={producto.first_image} alt="Imagen del producto" />
@@ -52,7 +51,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto, darkMode }) => {
                 </Link>
                 <div className='infoContent'>
                     <div>
-                        <h4 className={darkMode ? 'headInfo-dark' : 'headInfo-light'}>
+                        <h4 className='headInfo-light'>
                             {producto.name}
                         </h4>
                         <h4 className='headInfo'>

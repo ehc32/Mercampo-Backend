@@ -91,7 +91,7 @@ const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos
                           >
                             {datos.map((item, index) => (
                               <SwiperSlide key={index}>
-                                <Card producto={item} darkMode={darkMode} />
+                                <Card producto={item} />
                               </SwiperSlide>
                             ))}
                           </Swiper>
