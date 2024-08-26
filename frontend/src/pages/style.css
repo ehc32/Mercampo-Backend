@@ -94,7 +94,10 @@
 }
 
 .fondo-login {
-    background-image: url('/public/campesena.jpg');
+    background-image: url('/public/fondoa.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100%;
 }
