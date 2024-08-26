@@ -40,7 +40,7 @@ const LoginPage = () => {
     loginMutation.mutate();
   };
 
-  if (loginMutation.isLoading) return <p>Loading...</p>;
+  if (loginMutation.isLoading) return <p>Cargando...</p>;
   if (isAuth) return <Navigate to="/" />;
 
   return (

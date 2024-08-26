@@ -26,3 +26,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['can_publish'] = user.can_publish
 
         return token
+
+class EditUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email", "name", "last_name", "password"]

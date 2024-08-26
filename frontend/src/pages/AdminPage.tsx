@@ -6,7 +6,7 @@ import Products from "../components/Products";
 import Orders from "../components/Orders";
 import Users from "../components/Users";
 import { search_order } from "../api/orders";
-import Footer from "../components/Footer";
+import Footer from '../components/Footer';
 
 const AdminPage = () => {
   const [show, setShow] = useState(0);
@@ -43,9 +43,9 @@ const AdminPage = () => {
   });
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-      <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
-        <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+    <section className="bg-gray-50 dark:bg-gray-900">
+      <div className="mx-auto max-w-screen-xl mb-10 px-4 lg:px-12 h-svh">
+        <div className="bg-white dark:bg-gray-800 card-bordered relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div className="w-full md:w-1/2">
               <form className="flex items-center">
@@ -74,21 +74,21 @@ const AdminPage = () => {
               <button
                 onClick={() => setShow(0)}
                 type="button"
-                className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                className="flex items-center justify-center text-white bg-[#39A900] hover:bg-[#3e8e41] focus:ring-4 focus:ring-[#3e8e41] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#3e8e41] dark:hover:bg-[#357a38] focus:outline-none dark:focus:ring-[#357a38]"
               >
                 Productos
               </button>
               <button
                 onClick={() => setShow(1)}
                 type="button"
-                className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                className="flex items-center justify-center text-white bg-[#39A900] hover:bg-[#3e8e41] focus:ring-4 focus:ring-[#3e8e41] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#3e8e41] dark:hover:bg-[#357a38] focus:outline-none dark:focus:ring-[#357a38]"
               >
                 Ordenes
               </button>
               <button
                 onClick={() => setShow(2)}
                 type="button"
-                className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                className="flex items-center justify-center text-white bg-[#39A900] hover:bg-[#3e8e41] focus:ring-4 focus:ring-[#3e8e41] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#3e8e41] dark:hover:bg-[#357a38] focus:outline-none dark:focus:ring-[#357a38]"
               >
                 Usuarios
               </button>
@@ -100,7 +100,7 @@ const AdminPage = () => {
           {show === 2 && <Users results={users} />}
         </div>
       </div>
-      {/* <Footer/> */}
+      <Footer />
     </section>
   );
 };

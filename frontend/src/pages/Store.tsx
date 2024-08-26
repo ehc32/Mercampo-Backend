@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { get_all_products_paginated } from '../api/products';
+import { get_all_products_paginated_to_shop } from '../api/products';
 import Content from "../components/tienda/Content/Content";
 import { useDarkMode } from "../hooks/theme";
 
@@ -17,7 +17,7 @@ const Store = () => {
             setLoading(true);
             try {
                 console.log("trayendo productos de la pagina: " + page)
-                const productosAPI = await get_all_products_paginated(page);
+                const productosAPI = await get_all_products_paginated_to_shop(page);
                 setProductos(productosAPI.data);
                 setDataLenght(productosAPI.meta.count)
             } catch (error) {

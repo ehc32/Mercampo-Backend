@@ -75,6 +75,11 @@ export const get_all_images_product = async (id: number | string) => {
 };
 
 export const get_all_products_paginated = async (page: number | string) => {
-    const reponse = await axi.get(`/products/?page=${page}`)
+    const reponse = await axi.get(`/products/?page=${page}&page_size=10`)
+    return reponse.data
+}
+
+export const get_all_products_paginated_to_shop = async (page: number | string) => {
+    const reponse = await axi.get(`/products/?page=${page}&page_size=20`)
     return reponse.data
 }
