@@ -104,11 +104,11 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="flex flex-col  mt-4 lg:flex-row ml-5 mx-auto gap-6 w-full max-w-screen-xl">
-      <div className="w-full lg:w-1/2 bg-whites lg:max-w-sm mb-8 lg:mb-0 hadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="flex flex-col mt-4 lg:flex-row ml-5 mx-auto gap-6 w-full max-w-screen-xl">
+      <div className="w-full lg:w-1/2 bg-whites lg:max-w-sm mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700">
         {show ? (
           <>
-            <div className="flex flex-col items-center pb-100">
+            <div className="flex flex-col items-center pb-10">
               {user && user.avatar !== undefined && (
                 <img
                   className="w-24 h-24 mb-6 mt-3 rounded-full shadow-lg"
@@ -116,7 +116,7 @@ const UserProfile = () => {
                   alt="User image"
                 />
               )}
-              <div className="flex space-x-4 mb-2">
+              <div className="flex flex-col space-y-2 mb-4">
                 <span className="text-lg font-medium text-gray-900 dark:text-white">
                   Nombre:
                   <br />
@@ -127,15 +127,20 @@ const UserProfile = () => {
                   <br />
                   {user.last_name}
                 </span>
+                <span className="text-lg font-medium text-gray-900 dark:text-white">
+                  Correo:
+                  <br />
+                  {user.email}
+                </span>
+                <span className="text-lg font-medium text-gray-900 dark:text-white">
+                  Rol:
+                  <br />
+                  {user.role}
+                </span>
               </div>
-              <p className="text-base text-left font-semibold text-gray-800 dark:text-gray-300 mb-4">
-                Correo:
-                <br />
-                {user.email}
-              </p>
               <div className="flex flex-col items-center mt-6 space-y-4">
                 <button
-                  onClick={() => setShow(false)} //supongamos que esta monda ta sirviendo
+                  onClick={() => setShow(false)}
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 max-w-btn"
                 >
                   Editar perfil
