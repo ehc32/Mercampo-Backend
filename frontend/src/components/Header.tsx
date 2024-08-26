@@ -2,13 +2,12 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import jwt_decode from "jwt-decode";
 import { Fragment, useState } from 'react';
-import { BsFillCartFill, BsFillMoonStarsFill, BsFillSunFill, BsShopWindow } from "react-icons/bs";
+import { BsFillCartFill, BsShopWindow } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
-import { useDarkMode } from "../hooks/theme";
-import { Token } from "../Interfaces";
+import { useAbierto } from "../hooks/aside"; // Importa el hook useAbierto
 import ST_Icon from './assets/ST/ST_Icon';
 
 interface HeaderProps {
@@ -18,12 +17,11 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
-  const { toggleDarkMode, darkMode } = useDarkMode();
   const token: string = useAuthStore.getState().access;
   const cart = useCartStore(state => state.cart);
   const { isAuth, role } = useAuthStore();
-  const [imgMenu, setImgMenu] = useState(false);
   const location = useLocation();
+  const { abierto, toggleAbierto } = useAbierto(); // Usa el hook useAbierto
 
   let is_admin: boolean = false;
   let user_id: number;
@@ -44,22 +42,17 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
   }
-
-  const handleToggleMenu = () => {
-    setEstadoAside(!estadoAside);
-  };
-
   return (
-    <Disclosure as="nav" className={darkMode ? 'nav-dark' : 'nav-light'}>
+    <Disclosure as="nav" className="nav shadow fixed top-0 left-0 w-full bg-white z-50">
       {() => (
         <>
-          <div className="px-5">
-            <div className="relative flex h-16 items-center justify-between">
+          <div className="px-5 py-1 w-full">
+            <div className="relative flex h-16 items-center justify-between ">
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
                 <div className="flex space-x-1">
-                  <button onClick={handleToggleMenu}>
+                  <button onClick={toggleAbierto}>
                     {location.pathname === '/store' && (
-                      estadoAside ? (
+                      abierto ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
                         <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
@@ -76,14 +69,14 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         <>
                           <Link
                             to={'/'}
-                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px'
                           >
                             Inicio
                           </Link>
 
                           <Link
                             to={'/store'}
-                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px'
                           >
                             Tienda
                           </Link>
@@ -92,14 +85,14 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         <>
                           <Link
                             to={'/login'}
-                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px'
                           >
                             Iniciar sesión
                           </Link>
 
                           <Link
                             to={'/register'}
-                            className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                            className='text-black p-4 px-2 rounded-lg fs-16px'
                           >
                             Registrar cuenta
                           </Link>
@@ -108,7 +101,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
 
                       <Link
                         to={'/admin'}
-                        className='text-black p-4 px-2 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                        className='text-black p-4 px-2 rounded-lg fs-16px'
                       >
                         Panel de administración
                       </Link>
@@ -118,13 +111,9 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
               </div>
 
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white d-flex row align-center">
+                <Link to={'/cart'} className="text-slate-900 hover:text-black d-flex row align-center">
                   <BsFillCartFill size={23} />
-                  <span className="text-slate-900 dark:text-slate-200 mx-1">{cart.length}</span>
-                </Link>
-
-                <Link to={'/addprod'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white d-flex row align-center">
-                  <BsShopWindow size={23} />
+                  <span className="text-slate-900 mx-1">{cart.length}</span>
                 </Link>
 
                 {isAuth && (
@@ -148,12 +137,12 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-white dark:bg-slate-950 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
                             <Link
                               to="/profile"
-                              className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 dark:text-slate-200')}
+                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Perfil
                             </Link>
@@ -161,9 +150,19 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
+                            <Link
+                              to="/addprod"
+                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            >
+                              Nuevo producto
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
                             <span
                               onClick={logOutFun}
-                              className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer dark:text-slate-200')}
+                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                             >
                               Cerrar sesión
                             </span>
@@ -177,39 +176,39 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden border-green">
 
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            <div className="space-y-1 px-2 pb-3 pt-2 b">
               {isAuth ? (
                 <div className="w-full grid grid-cols-1">
                   <Link
                     to={'/'}
-                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                    className='bg-slate-400 p-2 px-4 rounded-lg text-black'
                   >
                     Inicio
                   </Link>
 
                   <Link
                     to={'/cate'}
-                    className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                    className='text-black p-2 px-4 rounded-lg fs-16px'
                   >
-                    Tienta
+                    Tienda
                   </Link>
                 </div>
               ) : (
                 <div className="w-full grid grid-cols-1">
                   <Link
                     to={'/login'}
-                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                    className='bg-slate-400 p-2 px-4 rounded-lg text-black'
                   >
                     Ingresar
                   </Link>
 
                   <Link
                     to={'/register'}
-                    className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                    className='text-black p-2 px-4 rounded-lg fs-16px'
                   >
-                    Cerrar sesión
+                    Registrar cuenta
                   </Link>
                 </div>
               )}
@@ -218,7 +217,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                 <div className="w-full">
                   <Link
                     to={'/admin'}
-                    className='text-black p-2 px-4 rounded-lg fs-16px dark:text-gray-300 dark:hover:text-white'
+                    className='text-black p-2 px-4 rounded-lg fs-16px'
                   >
                     Administrador
                   </Link>

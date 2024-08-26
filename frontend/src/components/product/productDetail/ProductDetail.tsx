@@ -2,10 +2,10 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
+import { get_solo_user } from '../../../api/users';
 import MySwiper from '../../shared/Swiper/swiper';
 import Map from '../map/Map';
-import { get_solo_user } from '../../../api/users';
-import { get_solo, get_all_images_product } from './../../../api/products';
+import { get_all_images_product, get_solo } from './../../../api/products';
 import './../../../global/dashlite.css';
 import './styles.css';
 
@@ -58,7 +58,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                 setLoading(false);
             }
         };
-    
+
         fetchProducto();
     }, [slug]);
 
@@ -246,7 +246,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Map address={producto?.map_locate || ''} darkMode={darkMode} />                                        </div>
+                                            <Map address={producto?.map_locate || ''} />                                        </div>
                                     </div>
                                 </div>
                             </div>

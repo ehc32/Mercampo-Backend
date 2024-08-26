@@ -17,7 +17,7 @@ export default function Tienda() {
             try {
                 const productos = await get_all_products();
                 setProductosRandom(productos);
-                
+
             } catch (error) {
                 console.error('Error al obtener los productos: ', error);
             }
@@ -37,10 +37,10 @@ export default function Tienda() {
 
     return (
         <React.Fragment>
-            <Hero darkMode={darkMode} />
-            <RandomProducts productos={productosRandom} darkMode={darkMode} />
+            <Hero />
+            <RandomProducts productos={productosRandom} />
             <Swiper width="100%" height="50vh" datos={carrouselData} isUpSwiper={false} />
-            <About darkMode={darkMode} />
+            <About />
             <Footer />
         </React.Fragment>
     );
