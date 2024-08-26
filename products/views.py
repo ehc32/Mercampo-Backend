@@ -133,7 +133,7 @@ def get_product(request, slug):
 @api_view(['PUT'])
 def edit_product(request, pk):
     product = Product.objects.get(pk=pk)
-    if request.user.is_staff:
+    if request.user.role == "admin":
         serializer = ProductReadSerializer(product, data=request.data)
         if serializer.is_valid():
             name = serializer.validated_data['name']
@@ -151,7 +151,7 @@ def edit_product(request, pk):
 @permission_classes([IsAuthenticated])
 def delete_product(request, pk):
     product = Product.objects.get(pk=pk)
-    if request.user.is_staff:
+    if request.user.role == "admin":
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     else:

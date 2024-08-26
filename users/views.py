@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 from . models import User
-from . serializers import RegisterUserSerializer, MyTokenObtainPairSerializer, UserSerializer
+from . serializers import RegisterUserSerializer, MyTokenObtainPairSerializer, UserSerializer, EditUserSerializer
 
 
 @api_view(['GET'])
@@ -17,15 +17,14 @@ def get_solo_user(request, pk):
     return Response(serializer.data)
 
 
-@api_view(['PUT'])
 def edit_profile(request, email):
+    print("here i am")
     try:
         user = User.objects.get(email=email)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
-    if request.user == user:
-        serializer = UserSerializer(user, data=request.data)
+    if request.user.role == "admin":
+        serializer = EditUserSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -33,8 +32,8 @@ def edit_profile(request, email):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
-
-
+    
+    
 @api_view(['GET'])
 def search(request):
     query = request.query_params.get('query')
@@ -48,7 +47,7 @@ def search(request):
 @api_view(['DELETE'])
 def delete_user(request, pk):
     user = User.objects.get(pk=pk)
-    if request.user.is_staff:
+    if request.user.role == "admin":
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     return Response(status=status.HTTP_401_UNAUTHORIZED)

@@ -1,0 +1,32 @@
+En este archivo se muestran las vistas contempladas y su desarrollo actual, siendo el 0% cuando no se ha realizado nada y el 100% cuando se han aprobado como completadas, 90 antes de revisión.
+
+Módulo de autentificación:
+	- Vista de inicio de sesión
+	- Vista de registro
+
+Módulo usuario natural:
+	- Vista Home -- 80%
+	- Vista Tienda -- 80%
+	- Vista detalle producto -- 70% (faltan los comentarios del producto y demás)
+	- Vista de perfil de usuario -- 80%
+	- Vista de carrito de compras -- 80%
+	- Formulario de solicitud para vender ( modal en vista de perfil )
+		- Historial compras 
+		- Ordenes vendedor
+	
+Módulo vendedor:
+	- Vista de agregar productos
+	- Vista de sus productos
+	- Vista de sus ventas
+
+Módulo administrador:
+	- Vista de administración -- 60%
+		- Tabla de usuario natural
+		- Tabla de productos
+		- Tabla de ordenes
+		- Tabla de usuario vendedor
+			--- MODALES Y PAGINACION PENDIENTES
+	- Vista de aprobación de vendedores
+
+
+Backend -- 80%

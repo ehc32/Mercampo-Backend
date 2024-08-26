@@ -6,15 +6,18 @@ export const get_solo_user = async (id: number) => {
     return response.data
 };
 
-export const edit_user = async (data: User) => {
+export const edit_user = async (data: User, id: number) => {
+    console.log(data)
     const formData = new FormData();
     formData.append("name", data.name)
     formData.append("last_name", data.last_name)
     formData.append("email", data.email)
-    if (data.avatar) {
-        formData.append("avatar", data.avatar)
-    }
-    await authAxios.put(`/users/edit/${data.email}/`, formData)
+    formData.append("role", data.role)
+    await authAxios.put(`/users/edit/${id}/`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
 };
 
 export const search_users = async (query: string) => {
@@ -26,8 +29,8 @@ export const delete_user = async (id: number) => {
     await authAxios.delete(`/users/delete/${id}/`) 
 };
 
-export const get_users = async () => {
-   const response = await authAxios.get("/users/get/") 
+export const get_users = async (page?: number) => {
+   const response = await authAxios.get(`/users/get/?page=${page}`) 
    return response.data
 };
 
