@@ -6,9 +6,15 @@ export const create_review = async (description: string, rating: number, product
     await authAxios.post(`/products/review/${productId}/`, { description, rating })
 };
 
-export const cate_api = async (cateogry: string) => {
-    const response = await authAxios.get(`/products/cate/VERDURAS/`)
-    return response.data;
+export const cate_api = async (category: string) => {
+    const response = await authAxios.get(`/products/cate/${category}/`)
+    return response.data.data.map((item) => item);
+};
+
+export const cate_api_random = async (category: string) => {
+    const response = await authAxios.get(`/products/caterandom/${category}/`)
+    console.log(response.data)
+    return response.data
 };
 
 
@@ -63,13 +69,18 @@ export const post_product = async (data: Product) => {
 export const filter_request = async (data) => {
     const formData = new FormData();
     formData.append("locate", data.locate);
-    formData.append("price_min", data.price.min.toString());
-    formData.append("price_max", data.price.max.toString());
-    formData.append("categories", data.categories.join(","));
+    formData.append('price', data.price);
+    if (data.categories) {
+        formData.append("categories", data.categories.join(","));
+    }
+    if (data.startDate && data.endDate) {
+        formData.append("startDate", data.startDate.toISOString());
+        formData.append("endDate", data.endDate.toISOString());
+    }
+    formData.append("time", data.time);
     formData.append("searchItem", data.searchItem);
-    formData.append("startDate", data.startDate?.toISOString() ?? "");
-    formData.append("endDate", data.endDate?.toISOString() ?? "");
-    await authAxios.post("/filterdata", formData);
+    const response = await axi.get("/products/filterdata/", formData);
+    return response
 };
 
 export const get_products = async ({ pageParam = 1 }) => {

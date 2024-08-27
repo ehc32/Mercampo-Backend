@@ -3,8 +3,8 @@
     top: 7%;
     left: 0;
     height: 100vh;
-    width: 450px;
-    background-color: #fff;
+    width: 400px;
+    background-color: #fff !important;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
@@ -138,4 +138,43 @@ ul {
 
 .bi-dash {
     margin: 0 10px;
+}
+
+.nav-responsive {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.nav-responsive .item-res {
+    height: 3em;
+}
+.nav-responsive {
+    display: none;
+}
+
+@media (max-width: 850px) {
+    .nav-responsive {
+        display: flex;
+    }
+}
+
+.nav_items_block {
+    display: block;
+}
+
+@media (max-width: 850px) {
+    .nav_items_block {
+        display: none;
+    }
+}
+
+.toggle-openaside {
+    display: none;
+}
+
+@media (max-width: 850px) {
+    .toggle-openaside {
+        display: block;
+    }
 }
