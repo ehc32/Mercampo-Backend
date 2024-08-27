@@ -85,7 +85,7 @@ const AddProd = () => {
 
   return (
     <div className="flex h-screen  dark:bg-gray-900">
-      <div className="w-5/6  flex m-auto  bg-[#F7F7F7] dark:bg-gray-800 rounded-xl  shadow-lg overflow-hidden">
+      <div className="w-4/6  flex m-auto  bg-[#F7F7F7] dark:bg-gray-800 rounded-xl  shadow-lg overflow-hidden">
         <div className="w-full p-10 card-bordered">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-normal text-gray-800 dark:text-white">
@@ -108,19 +108,23 @@ const AddProd = () => {
                   required
                 />
               </div>
+              
               <div className="flex-1">
-                <h6 className="text-gray-800  m-1 dark:text-white">Unidad</h6>
+                <h6 className="text-gray-800  m-1 dark:text-white">Categoria</h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
                   <Select
-                    value={unidad}
-                    onChange={(e) => setUnidad(e.target.value)}
+                    value={categoria}
+                    onChange={(e) => setCategoria(e.target.value)}
                   >
                     <MenuItem selected hidden>Selecciona una unidad</MenuItem>
-                    <MenuItem value="Kg">
-                      <ScaleIcon fontSize="small" /> Kilos
+                    <MenuItem value="VERDURAS">
+                      <ScaleIcon fontSize="small" /> Verduras
                     </MenuItem>
-                    <MenuItem value="L">
-                      <WaterIcon fontSize="small" /> Litros
+                    <MenuItem value="FRUTAS">
+                      <WaterIcon fontSize="small" /> Frutas
+                    </MenuItem>
+                    <MenuItem value="GRANOS">
+                      <WaterIcon fontSize="small" /> Grano
                     </MenuItem>
                   </Select>
                 </FormControl>
@@ -167,6 +171,23 @@ const AddProd = () => {
                   className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black "
                   required
                 />
+              </div>
+              <div className="flex-1">
+                <h6 className="text-gray-800  m-1 dark:text-white">Unidad</h6>
+                <FormControl fullWidth sx={{ mb: 2 }}>
+                  <Select
+                    value={unidad}
+                    onChange={(e) => setUnidad(e.target.value)}
+                  >
+                    <MenuItem selected hidden>Selecciona una unidad</MenuItem>
+                    <MenuItem value="Kg">
+                      <ScaleIcon fontSize="small" /> Kilos
+                    </MenuItem>
+                    <MenuItem value="L">
+                      <WaterIcon fontSize="small" /> Litros
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
 

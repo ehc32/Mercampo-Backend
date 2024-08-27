@@ -8,15 +8,16 @@ interface People {
 
 interface ParticipantsProps {
     people: People[];
-    darkMode: boolean;
 }
 
-const Participants: React.FC<ParticipantsProps> = ({ people, darkMode }) => {
+const Participants: React.FC<ParticipantsProps> = ({ people }) => {
     return (
-        <div className="peopleContainer">
-            <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Participantes del proyecto</h2>
-            <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}></h4>
-            <div>
+        <div>
+            <h2 className='titulo-sala-compra-light'>Participantes del proyecto</h2>
+            <h4 className="sub-titulo-sala-compra-light text-center mb-4">
+                En servicios tecnológicos, nos enorgullece contar con un equipo de trabajo excepcional, comprometido con la excelencia y dedicado a brindar la mejor experiencia a nuestros clientes.
+            </h4>
+            <div className='flex flex-row flex-wrap text-center justify-around'>
                 {
                     people.map((person, index) => (
                         <Participant key={index} person={person} darkMode={false} />

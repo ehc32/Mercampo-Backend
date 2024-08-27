@@ -9,14 +9,38 @@ import { useDarkMode } from "../hooks/theme";
 import { AnimatePresence, motion } from "framer-motion";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useAbierto } from "../hooks/aside";
+import Participants from "../components/home/Participants/Participants";
 
 export default function Tienda() {
     const { darkMode } = useDarkMode();
     const [productosRandom, setProductosRandom] = useState([]);
 
+    const people = [
+        {
+            name: "Nicolás Cerquera Nieva",
+            photo: "/public/fondoa.jpg",
+            role: "Desarrollador de software y diseñador gráfico",
+        },
+        {
+            name: "Nicolás Cerquera Nieva",
+            photo: "/public/fondoa.jpg",
+            role: "Desarrollador de software y diseñador gráfico",
+        },
+        {
+            name: "Nicolás Cerquera Nieva",
+            photo: "/public/fondoa.jpg",
+            role: "Desarrollador de software y diseñador gráfico",
+        },
+        {
+            name: "Nicolás Cerquera Nieva",
+            photo: "/public/fondoa.jpg",
+            role: "Desarrollador de software y diseñador gráfico",
+        },
+    ]
+
 
     const { abierto, toggleAbierto } = useAbierto();
-    
+
     useEffect(() => {
         const fetchProductos = async () => {
             try {
@@ -58,6 +82,7 @@ export default function Tienda() {
             <RandomProducts productos={productosRandom} />
             <Swiper width="100%" height="50vh" datos={carrouselData} isUpSwiper={false} />
             <About />
+            <Participants people={people} />
             <Footer />
         </React.Fragment>
     );

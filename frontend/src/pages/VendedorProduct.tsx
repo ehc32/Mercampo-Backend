@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 // import jsPDF from "jspdf";
 
@@ -53,7 +53,7 @@ const SellerProduct = () => {
 
   return (
     <div className="flex flex-col items-center px-4 mt-10">
-      <div className="w-full max-w-5xl p-6 bg-gray-50 dark:bg-slate-300 rounded-lg shadow-md h-svh">
+      <div className="w-full max-w-5xl p-6 dark:bg-slate-300 rounded-lg shadow-md h-svh">
         <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Órdenes
         </h2>
@@ -105,7 +105,7 @@ const SellerProduct = () => {
                         // onClick={() => generarPDF(order)}
                         className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600"
                       >
-                        
+
                       </button>
                     </td>
                   </tr>

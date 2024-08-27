@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const HistorialDeCompras = () => {
-  
+
 
   const DescargaRequest = (email: string, password: string) => {
     // Lógica para la solicitud de descarga
@@ -27,7 +27,7 @@ const HistorialDeCompras = () => {
 
   return (
     <div className="flex flex-col items-center px-4 mt-10 ">
-      <div className="w-full max-w-5xl p-6 bg-gray-50 dark:bg-slate-300 rounded-lg shadow-md h-svh">
+      <div className="w-full max-w-5xl p-6 dark:bg-slate-300 rounded-lg shadow-md h-svh">
         <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Compras
         </h2>
@@ -111,7 +111,7 @@ const HistorialDeCompras = () => {
                       onClick={() => DescargaMutation.mutate()}
                       className=" bg-[#39A900]  text-white px-4 py-2 rounded hover:bg-[#1f641b] transition-all duration-300 ease-in-out"
                     >
-                     
+
                     </button>
                   </td>
                 </tr>

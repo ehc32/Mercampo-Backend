@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { get_orders, edit_order } from "../api/orders";
 import { toast } from "react-hot-toast";
-import Loader from "./Loader";
 import { Link } from "react-router-dom";
+import { edit_order, get_orders } from "../api/orders";
+import Loader from "./Loader";
 
 interface Props {
   results: any;
@@ -35,7 +35,7 @@ const Orders = ({ results }: Props) => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="p-4">
               <div className="flex items-center">
@@ -78,7 +78,7 @@ const Orders = ({ results }: Props) => {
             {results &&
               results.orders.map((o: any) => (
                 <tbody>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:dark:hover:bg-gray-600">
                     <td className="w-4 p-4">
                       <div className="flex items-center">
                         <input
@@ -130,7 +130,7 @@ const Orders = ({ results }: Props) => {
           <tbody>
             {data &&
               data.map((o: any) => (
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:dark:hover:bg-gray-600">
                   <td className="w-4 p-4">
                     <div className="flex items-center">
                       <input

@@ -1,12 +1,12 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { search_order } from "../api/orders";
 import { search_prod } from "../api/products";
 import { search_users } from "../api/users";
-import { useQuery } from "@tanstack/react-query";
-import Products from "../components/Products";
-import Orders from "../components/Orders";
-import Users from "../components/Users";
-import { search_order } from "../api/orders";
 import Footer from '../components/Footer';
+import Orders from "../components/Orders";
+import Products from "../components/Products";
+import Users from "../components/Users";
 
 const AdminPage = () => {
   const [show, setShow] = useState(0);
@@ -43,7 +43,7 @@ const AdminPage = () => {
   });
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
+    <section className="dark:bg-gray-900">
       <div className="mx-auto max-w-screen-xl mb-10 px-4 lg:px-12 h-svh">
         <div className="bg-white dark:bg-gray-800 card-bordered relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -64,7 +64,7 @@ const AdminPage = () => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Search"
                   />
                 </div>
