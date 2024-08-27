@@ -105,13 +105,13 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="flex flex-col mt-4 lg:flex-row ml-5 mx-auto gap-6 w-full max-w-screen-xl">
+    <div className="flex flex-col mt-4 lg:flex-row  mx-auto gap-6 w-full max-w-screen-xl">
       <div className="w-full lg:w-1/2 bg-white lg:max-w-sm mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700 border border-gray-200 rounded-lg">
         {show ? (
           <>
-            <div className="flex flex-col items-start pb-10 px-6">
               {/* Contenedor de la información principal */}
-              <div className="flex items-center space-x-4 mb-4 w-full bg-white p-4 rounded-lg">
+            <div className="flex flex-col items-start  px-8 h-80 justify-start  ">
+              <div className="flex items-center space-x-4 mb-4 w-full bg-white p-4 rounded-lg pl-10" >
                 {user && user.avatar !== undefined && (
                   <img
                     className="w-24 h-24 rounded-full shadow-lg"
@@ -134,10 +134,9 @@ const UserProfile = () => {
                   </span>
                 </div>
               </div>
-
               {/* Botón expandido de Editar perfil */}
               <button
-                onClick={() => setShow(false)}
+                onClick={() => setShow(true)}
                 className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
               >
                 Editar perfil
@@ -238,7 +237,7 @@ const UserProfile = () => {
               <div className="p-2">
                 <button
                   type="submit"
-                  className="w-full text-white bg-lime-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
+                  className="w-full text-white bg-[#39A900] hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
                 >
                   Guardar cambios
                 </button>
@@ -278,22 +277,22 @@ const UserProfile = () => {
               <button
                 onClick={() => setShow("purchase-history")}
                 type="button"
-                className="flex items-center justify-center text-white  bg-lime-600  hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
+                className="flex items-center justify-center text-white  bg-[#39A900] hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
               >
                 Historial de Compras
               </button>
               <button
                 onClick={() => setShow("vendedor-order")}
                 type="button"
-                className="flex items-center justify-center text-white  bg-lime-200  hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
+                className="flex items-center justify-center text-white  bg-[#39A900] hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
               >
                 Órdenes del Vendedor
               </button>
             </div>
           </div>
 
-          {show === "purchase-history" && <ShopHistory search={search} />}
-          {show === "vendedor-order" && <VendedorProduct search={search} />}
+          {show === "purchase-history" && <ShopHistory />}
+          {show === "vendedor-order" && <VendedorProduct />}
         </div>
       </div>
     </div>

@@ -109,7 +109,7 @@ const HistorialDeCompras = () => {
                   <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     <button
                       onClick={() => DescargaMutation.mutate()}
-                      className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300 ease-in-out"
+                      className=" bg-[#39A900]  text-white px-4 py-2 rounded hover:bg-[#1f641b] transition-all duration-300 ease-in-out"
                     >
                      
                     </button>

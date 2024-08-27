@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import "react-toastify/dist/ReactToastify.css";
-import jsPDF from "jspdf";
+// import jsPDF from "jspdf";
 
-const generarPDF = (order) => {
-  const pdf = new jsPDF();
-  pdf.text(`Orden #${order.id}`, 10, 10);
-  pdf.text(`Comprador: ${order.comprador}`, 10, 20);
-  pdf.text(`Fecha: ${order.fecha}`, 10, 30);
-  pdf.text(`Total: ${order.total}`, 10, 40);
-  pdf.saveAs(`orden-${order.id}.pdf`, { destination: "download" });
-};
+// const generarPDF = (order: { id: any; comprador: any; fecha: any; total: any; }) => {
+//   const pdf = new jsPDF();
+//   pdf.text(`Orden #${order.id}`, 10, 10);
+//   pdf.text(`Comprador: ${order.comprador}`, 10, 20);
+//   pdf.text(`Fecha: ${order.fecha}`, 10, 30);
+//   pdf.text(`Total: ${order.total}`, 10, 40);
+// //  pdf.saveAs(`orden-${order.id}.pdf`, { destination: "download" });
+// };
 
 // Función de ejemplo para simular la solicitud de órdenes
 const fetchOrders = async (searchTerm: string) => {
@@ -53,36 +53,27 @@ const SellerProduct = () => {
 
   return (
     <div className="flex flex-col items-center px-4 mt-10">
-      <div className="w-full max-w-5xl p-6 bg-gray-800 dark:bg-slate-300 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-center text-white">
+      <div className="w-full max-w-5xl p-6 bg-gray-50 dark:bg-slate-300 rounded-lg shadow-md h-svh">
+        <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Órdenes
         </h2>
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Buscar por ID, nombre del comprador o fecha"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 rounded border border-gray-600 bg-gray-700 text-white"
-          />
-        </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-800">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   ID
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Comprador
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Fecha
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Total
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-white">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                   Acciones
                 </th>
               </tr>
@@ -97,21 +88,21 @@ const SellerProduct = () => {
               ) : orders.length > 0 ? (
                 orders.map((order) => (
                   <tr key={order.id}>
-                    <td className="py-2 px-4 border-b border-gray-600 text-white">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       {order.id}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-600 text-white">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       {order.comprador}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-600 text-white">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       {order.fecha}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-600 text-white">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       {order.total}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-600">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       <button
-                        onClick={() => generarPDF(order)}
+                        // onClick={() => generarPDF(order)}
                         className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600"
                       >
                         
