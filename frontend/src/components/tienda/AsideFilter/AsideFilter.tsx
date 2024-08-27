@@ -46,7 +46,7 @@ const AsideFilter = ({
     ];
     const { abierto, toggleAbierto } = useAbierto(); // Usa el hook useAbierto
 
-    const categorias = ['Frutas', 'Verduras', 'Grano', 'Otros'];
+    const categorias = ['FRUTAS', 'VERDURAS', 'GRANOS', 'OTROS'];
 
     const buscarSimilitudes = () => {
         if (searchItem.length > 0) {

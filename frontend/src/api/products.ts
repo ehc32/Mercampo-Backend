@@ -66,21 +66,33 @@ export const post_product = async (data: Product) => {
     await authAxios.post("/products/post/", formData);
 };
 
-export const filter_request = async (data) => {
-    const formData = new FormData();
-    formData.append("locate", data.locate);
-    formData.append('price', data.price);
-    if (data.categories) {
-        formData.append("categories", data.categories.join(","));
+export const filter_request = async (locate, price, categories, time, startDate, endDate, searchItem, pageParam) => {
+    const urlParams = new URLSearchParams();
+
+    if (locate) {
+        urlParams.append("locate", locate);
     }
-    if (data.startDate && data.endDate) {
-        formData.append("startDate", data.startDate.toISOString());
-        formData.append("endDate", data.endDate.toISOString());
+    if (price) {
+        urlParams.append("price", price);
     }
-    formData.append("time", data.time);
-    formData.append("searchItem", data.searchItem);
-    const response = await axi.get("/products/filterdata/", formData);
-    return response
+    if (categories) {
+        urlParams.append("categories", categories.join(","));
+    }
+
+    if (time) {
+        urlParams.append("time", time);
+    } else {
+        if (startDate && endDate) {
+            urlParams.append("startDate", startDate.toISOString());
+            urlParams.append("endDate", endDate.toISOString());
+        }
+    }
+    if (searchItem) {
+        urlParams.append("searchItem", searchItem);
+    }
+
+    const response = await axi.get(`/products/filterdata/?${urlParams.toString()}&page=${pageParam}&pages=20`);
+    return response;
 };
 
 export const get_products = async ({ pageParam = 1 }) => {

@@ -127,40 +127,11 @@ def get_products(request):
 def FilterProductsView(request):
     products = Product.objects.all()
 
-    # Filtrar por fecha
-    start_date = request.POST.get('startDate')
-    end_date = request.POST.get('endDate')
-    if start_date and end_date:
-        start_date = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_date = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S.%fZ')
-        products = products.filter(created_at__range=(start_date, end_date))
-
-    # Filtrar por categorías
-    categories = request.POST.get('categories')
+    categories = request.GET.get('categories')
     if categories:
-        categories = [Category[tag].name for tag in categories.split(',')]
-        products = products.filter(category__in=categories)
-
-    # Filtrar por localización
-    locate = request.POST.get('locate')
-    if locate:
-        products = products.filter(locate=locate)
-
-    # Filtrar por rango de precio
-    price = request.POST.get('price')
-    if price:
-        if price == '1': # Menos de 50 mil pesos
-            products = products.filter(price__lt=50000)
-        elif price == '2': # Entre 50 mil y 150 mil
-            products = products.filter(price__range=(50000, 150000))
-        elif price == '3': # Más de 150 mil
-            products = products.filter(price__gt=150000)
-
-    # Filtrar por búsqueda de ítem
-    search_item = request.POST.get('searchItem')
-    if search_item:
-        products = products.filter(Q(name__icontains=search_item) | Q(description__icontains=search_item))
-
+        category_names = categories.split(',')
+        products = products.filter(category__in=category_names)
+    
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductReadSerializer(paginated_products, many=True)
