@@ -9,6 +9,8 @@ import { useAuthStore } from "../hooks/auth";
 import { Token } from "../Interfaces";
 import VendedorProduct from "./VendedorProduct";
 import ShopHistory from "./ShopHistory";
+import ModalEditProfile from "../components/shared/Modal/ModalEditUser";
+import { Any } from "react-spring";
 
 const UserProfile = () => {
   const [show, setShow] = useState<string>("purchase-history");
@@ -47,7 +49,7 @@ const UserProfile = () => {
       setShow(true);
     },
     onError: () => {
-      toast.error("Error!");
+      toast.error("Error, u not added nothing!");
       setShow(true);
     },
   });
@@ -105,42 +107,52 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="flex flex-col mt-4 lg:flex-row  mx-auto gap-6 w-full max-w-screen-xl">
+    <div className="flex flex-col mt-4 lg:flex-row ml-5 mx-auto gap-6 w-full max-w-screen-xl">
       <div className="w-full lg:w-1/2 bg-white lg:max-w-sm mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700 border border-gray-200 rounded-lg">
         {show ? (
           <>
+            <div className="flex flex-col items-start pb-10 px-6">
               {/* Contenedor de la información principal */}
-            <div className="flex flex-col items-start  px-8 h-80 justify-start  ">
-              <div className="flex items-center space-x-4 mb-4 w-full bg-white p-4 rounded-lg pl-10" >
+              <div className="flex items-center space-x-4 mb-4 w-full bg-white p-3 rounded-lg">
                 {user && user.avatar !== undefined && (
-                  <img
-                    className="w-24 h-24 rounded-full shadow-lg"
-                    src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
-                    alt="User image"
-                  />
+                  <div className="flex flex-col">
+                    <img
+                      className="w-48 h-24  rounded-full shadow-lg"
+                      src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
+                      alt="User image"
+                    />
+                    <ModalEditProfile
+                      stateName={stateName}
+                      setStateName={setStateName}
+                      stateLast={stateLast}
+                      setStateLast={setStateLast}
+                      image={image}
+                      handleFileChange={handleFileChange}
+                      removeImage={removeImage}
+                      setShow={function (): void {
+                        throw new Error("Function not implemented.");
+                      }}
+                      handleSubmit={function (): void {
+                        throw new Error("Function not implemented.");
+                      }}
+                    />
+                  </div>
                 )}
                 <div className="flex flex-col w-full">
                   <span className="text-lg font-medium text-gray-900 dark:text-white">
                     {user.name} {user.last_name}
                   </span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  <span className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">
                     {user.email}
                   </span>
-                  <span className="text-sm text-gray-700 font-bold dark:text-gray-400 mt-1">
+                  <span className="text-sm text-gray-700 font-bold dark:text-gray-400 mt-1.5">
                     {user.role}
                   </span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  <span className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">
                     <strong>Ciudad:</strong> {user.city || "Neiva York"}
                   </span>
                 </div>
               </div>
-              {/* Botón expandido de Editar perfil */}
-              <button
-                onClick={() => setShow(true)}
-                className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              >
-                Editar perfil
-              </button>
             </div>
           </>
         ) : (
@@ -291,8 +303,8 @@ const UserProfile = () => {
             </div>
           </div>
 
-          {show === "purchase-history" && <ShopHistory />}
-          {show === "vendedor-order" && <VendedorProduct />}
+          {show === "purchase-history" && <ShopHistory search={search} />}
+          {show === "vendedor-order" && <VendedorProduct search={search} />}
         </div>
       </div>
     </div>
