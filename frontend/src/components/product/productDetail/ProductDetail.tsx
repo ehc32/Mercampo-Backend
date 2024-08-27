@@ -33,7 +33,7 @@ interface Producto {
     map_locate?: string;
 }
 
-const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
+const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchProductos }) => {
     const { slug } = useParams<{ slug: string }>();
     const [producto, setProducto] = useState<Producto | null>(null);
     const [usuario, setUsuario] = useState<User | null>(null);
@@ -46,12 +46,9 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
                 const productoData = await get_solo(slug);
                 setProducto(productoData);
                 const imagesData = await get_all_images_product(productoData.id);
-                console.log(imagesData);
                 setImages(imagesData.images);
-                console.log(images);
                 const userContact = await get_solo_user(productoData.user);
                 setUsuario(userContact);
-                setCategory(producto?.category);
                 setLoading(false);
             } catch (error) {
                 console.error('Error al obtener el producto: ', error);
@@ -61,6 +58,13 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory }) => {
 
         fetchProducto();
     }, [slug]);
+
+    useEffect(() => {
+        if (!loading && producto) {
+            setCategory(producto.category);
+            fetchProductos();
+        }
+    }, [loading, producto]);
 
     function formatearFecha(fechaISO: any) {
         const fecha = new Date(fechaISO);

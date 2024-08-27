@@ -140,53 +140,55 @@ const CartPage = () => {
                                     <table className="w-full text-sm text-left text-gray-500">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                             <tr>
-                                                <th scope="col" className="px-4 py-3">Foto</th>
-                                                <th scope="col" className="px-4 py-3">Producto</th>
-                                                <th scope="col" className="px-4 py-3">Categoria</th>
-                                                <th scope="col" className="px-4 py-3">Cantidad</th>
-                                                <th scope="col" className="px-4 py-3">Precio</th>
-                                                <th scope="col" className="px-4 py-3">Total</th>
+                                                <th scope="col" className="px-4 py-3 text-center">Foto</th>
+                                                <th scope="col" className="px-4 py-3 text-center">Producto</th>
+                                                <th scope="col" className="px-4 py-3 text-center">Categoria</th>
+                                                <th scope="col" className="px-4 py-3 text-center">Cantidad</th>
+                                                <th scope="col" className="px-4 py-3 text-center">Precio</th>
+                                                <th scope="col" className="px-4 py-3 text-center">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {cart.map((product) => (
-                                                <tr key={product.id} className="border-b cursor-pointer hover:bg-gray-100">
-                                                    <td scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-                                                        <img src={`https://st4.depositphotos.com/12499764/28026/i/450/depositphotos_280260174-stock-photo-holding-pineapple-sunglasses-hand.jpg`} alt={product.name} className="w-auto h-8 mr-3" />
-                                                        {product.name}
-                                                    </td>
-                                                    <td className="px-4 py-2">
-                                                        <span className="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded">
-                                                            {product.name}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-4 py-2">
-                                                        <span className="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded">
-                                                            {product.category}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-                                                        <div className="flex items-center space-x-3">
-                                                            <button onClick={() => removeFromCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200" type="button">
-                                                                <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                                                                </svg>
-                                                            </button>
-                                                            <div>
-                                                                {product.quantity}
-                                                                <input type="number" id="first_product" className="hidden bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block-px-2.5 py-1" placeholder="1" required />
+                                            {
+
+                                                cart.map((product) => (
+
+                                                    <tr key={product.id} className="border-b cursor-pointer hover:bg-gray-100" >
+                                                        <td scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap text-center">
+                                                            <img src={product.first_image} alt={product.name} className="mx-auto w-40 h-12 rounded-full border-1 border-green-500" />
+                                                        </td>
+                                                        <td className="px-4 py-2 text-start">
+                                                            <span className=" fs-16px font-medium px-2 py-0.5 rounded">
+                                                                {product.name}
+                                                            </span>
+                                                        </td>
+                                                        <td className="px-4 py-2 text-center">
+                                                            <span className=" fs-16px font-medium px-2 py-0.5 rounded">
+                                                                {product.category}
+                                                            </span>
+                                                        </td>
+                                                        <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
+                                                            <div className="flex items-center  text-center space-x-3">
+                                                                <button onClick={() => removeFromCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 b g-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                    <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </button>
+                                                                <div>
+                                                                    {product.quantity}
+                                                                    <input type="number" id="first_product" className="hidden bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block-px-2.5 py-1" placeholder="1" required />
+                                                                </div>
+                                                                <button onClick={() => addToCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                    <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </button>
                                                             </div>
-                                                            <button onClick={() => addToCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200" type="button">
-                                                                <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                    <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">${product.price}</td>
-                                                    <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">$ {(product.quantity !== undefined ? (product.price * product.quantity).toFixed(2) : "0.00")}</td>
-                                                </tr>
-                                            ))}
+                                                        </td>
+                                                        <td className="px-4 text-center py-2 font-medium text-gray-900 whitespace-nowrap">${product.price}</td>
+                                                        <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">$ {(product.quantity !== undefined ? (product.price * product.quantity).toFixed(2) : "0.00")}</td>
+                                                    </tr>
+                                                ))}
                                         </tbody>
                                     </table>
                                 </div>
@@ -194,7 +196,7 @@ const CartPage = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
             <Footer />
         </>
     );

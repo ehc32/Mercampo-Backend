@@ -32,6 +32,7 @@ const Products = ({ results }: Props) => {
                 const productosAPI = await get_all_products_paginated(page);
                 setProductos(productosAPI.data);
                 setDataLenght(productosAPI.meta.count)
+               
             } catch (error) {
                 console.error(error)
             } finally {

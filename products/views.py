@@ -1,9 +1,10 @@
+import datetime
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
-from . models import Product
+from . models import Category, Product
 from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer, ProductImagesSerializer
 from backend.pagination import CustomPagination
 
@@ -53,6 +54,12 @@ def get_prod_by_cate(request, category):
     result_page = paginator.paginate_queryset(products, request)
     serializer = ProductReadSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
+
+@api_view(['GET'])
+def get_prod_by_caterandom(request, category):
+    products = Product.objects.filter(category=category).order_by('?')[:12]
+    serializer = ProductReadSerializer(products, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def get_product_images(request, product_id):
@@ -116,38 +123,48 @@ def get_products(request):
     return paginator.get_paginated_response(serializer.data)
 
 
-@api_view(['POST'])
-def filter_products(request):
+@api_view(['GET'])
+def FilterProductsView(request):
     products = Product.objects.all()
-    
+
     # Filtrar por fecha
-    if request.POST.get('startDate') and request.POST.get('endDate'):
-        start_date = datetime.strptime(request.POST.get('startDate'), '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_date = datetime.strptime(request.POST.get('endDate'), '%Y-%m-%dT%H:%M:%S.%fZ')
+    start_date = request.POST.get('startDate')
+    end_date = request.POST.get('endDate')
+    if start_date and end_date:
+        start_date = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S.%fZ')
+        end_date = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S.%fZ')
         products = products.filter(created_at__range=(start_date, end_date))
-    
+
     # Filtrar por categorías
-    if request.POST.get('categories'):
-        categories = request.POST.get('categories').split(',')
+    categories = request.POST.get('categories')
+    if categories:
+        categories = [Category[tag].name for tag in categories.split(',')]
         products = products.filter(category__in=categories)
-    
+
     # Filtrar por localización
-    if request.POST.get('locate'):
-        products = products.filter(locate=request.POST.get('locate'))
-    
+    locate = request.POST.get('locate')
+    if locate:
+        products = products.filter(locate=locate)
+
     # Filtrar por rango de precio
-    if request.POST.get('price_min') and request.POST.get('price_max'):
-        products = products.filter(price__range=(request.POST.get('price_min'), request.POST.get('price_max')))
-    
+    price = request.POST.get('price')
+    if price:
+        if price == '1': # Menos de 50 mil pesos
+            products = products.filter(price__lt=50000)
+        elif price == '2': # Entre 50 mil y 150 mil
+            products = products.filter(price__range=(50000, 150000))
+        elif price == '3': # Más de 150 mil
+            products = products.filter(price__gt=150000)
+
     # Filtrar por búsqueda de ítem
-    if request.POST.get('searchItem'):
-        products = products.filter(Q(name__icontains=request.POST.get('searchItem')) | Q(description__icontains=request.POST.get('searchItem')))
-    
+    search_item = request.POST.get('searchItem')
+    if search_item:
+        products = products.filter(Q(name__icontains=search_item) | Q(description__icontains=search_item))
+
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
-
 
 @api_view(['GET'])
 def get_product_admin(request, id):

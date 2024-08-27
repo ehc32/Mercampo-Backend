@@ -2,3 +2,34 @@
     overflow-y: scroll;
     max-height: 80vh;
 } */
+
+.nav_items_block {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1.7em;
+}
+
+.nav_items_block .item_navbar {
+    height: 100%;
+}
+
+@media (max-width: 850px) {
+    .nav_items_block {
+        display: none !important;
+    }
+
+    .toggle-openaside {
+        display: block;
+    }
+}
+
+@media (min-width: 850px) {
+    .nav_items_block {
+        display: block !important;
+    }
+
+    .toggle-openaside {
+        display: none;
+    }
+}

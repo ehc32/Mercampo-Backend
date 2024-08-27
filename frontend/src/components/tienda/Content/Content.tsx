@@ -15,33 +15,18 @@ interface ContenidoProps {
 }
 
 const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, page, setPage }) => {
-    const [productosNuevos, setProductosNuevos] = useState<any[]>([]);
-
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
     };
 
     const carrouselData = [
         {
-            foto: 'https://c.wallhere.com/photos/d1/7d/1920x1080_px_Blurred_Clear_Sky_Depth_Of_Field_grass_Green_landscape_macro-789849.jpg!d'
+            foto: '/public/d.png'
         },
         {
-            foto: 'https://c.wallhere.com/photos/8b/29/nature_sunlight_grass_macro_trees_shadow_lens_flare-167088.jpg!d',
+            foto: '/head.jpg',
         },
     ];
-
-    useEffect(() => {
-        setProductosNuevos([]); // Vacía el estado de productosNuevos
-        if (productos.length > 0) { // Asegúrate de que productos tenga elementos
-            const agregarProductos = () => {
-                const productosPagina = productos.slice((page - 1) * 20, page * 20);
-                setProductosNuevos(productosPagina);
-            }
-            agregarProductos();
-        }
-    }, [productos, page]); // Agrega productos y page como dependencias
-
-
 
     return (
         <section className="contenidoTienda">
@@ -61,9 +46,8 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
                         <>
                             <div className='product-container-light'>
                                 <div className="h-min-500px flex flex-wrap">
-
                                     {
-                                        productosNuevos.length > 0 && productosNuevos.map((producto, index) => {
+                                        productos?.length > 0 && productos.map((producto, index) => {
                                             return (
                                                 <Card key={index} producto={producto} />
                                             )
@@ -71,25 +55,13 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
                                     }
                                 </div>
                                 <div className="w-95 flex align-center justify-center h-min-100px">
-
                                     <Pagination
-                                        count={Math.floor(dataLenght / 20) + 1}
+                                        count={Math.ceil(dataLenght / 20)}
                                         page={page}
-                                        onChange={handleChange}
                                         showFirstButton
                                         showLastButton
-                                        sx={{
-                                            color:  '#000',
-                                            '.MuiPaginationItem-root': {
-                                                color:  '#000',
-                                            },
-                                            '.Mui-selected': {
-                                                backgroundColor:  '#ccc',
-                                            },
-                                            '.MuiPaginationItem-root.Mui-focused': {
-                                                outline: 'none', // Elimina el borde de foco
-                                            },
-                                        }}
+                                        onChange={(event, value) => setPage(value)}
+                                        className="flex flex-row w-full justify-center my-6"
                                     />
                                 </div>
                             </div>

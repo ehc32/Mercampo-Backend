@@ -18,8 +18,9 @@ const Store = () => {
     // FILTROS
 
     const [locate, setLocate] = useState<string>("");
-    const [price, setPrice] = useState<{ min: number; max: number }>({ min: 0, max: 0 });
+    const [price, setPrice] = useState<string>("");
     const [categories, setCategories] = useState<string[]>([]);
+    const [time, setTime] = useState<string>("");
     const [searchItem, setSearchItem] = useState<string>("");
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
@@ -28,19 +29,24 @@ const Store = () => {
 
     const bringDataFilter = async () => {
         try {
+            console.log("daa")
             const formData = new FormData();
 
-            // Agregar filtros al FormData
             formData.append('locate', locate);
-            formData.append('price_min', price.min.toString());
-            formData.append('price_max', price.max.toString());
-            formData.append('categories', categories.join(','));
+            formData.append('price', price);
+            formData.append('categories', categories ? categories.join(',') : '');
+
+            if (startDate && endDate) {
+                formData.append('startDate', startDate?.toISOString() ?? '');
+                formData.append('endDate', endDate?.toISOString() ?? '');
+            }
+
+            formData.append('time', time);
             formData.append('searchItem', searchItem);
-            formData.append('startDate', startDate?.toISOString() ?? '');
-            formData.append('endDate', endDate?.toISOString() ?? '');
+
+            console.log(locate, price, categories, time, searchItem);
 
             const response = await filter_request(formData);
-
 
             console.log(response);
 
@@ -50,23 +56,26 @@ const Store = () => {
     };
     // END FILTROS
 
-    useEffect(() => {
-        const fetchProductos = async (page: number) => {
-            setLoading(true);
-            try {
-                console.log("trayendo productos de la pagina: " + page)
-                const productosAPI = await get_all_products_paginated_to_shop(page);
-                setProductos(productosAPI.data);
-                setDataLenght(productosAPI.meta.count)
-            } catch (error) {
-                console.error(error)
-            } finally {
-                setLoading(false);
-            }
-        };
+        useEffect(() => {
+            console.log("la pagina actual es " + page)
 
-        fetchProductos(page);
-    }, [page]); // Agrega page como dependencia
+            const fetchProductos = async (page: number) => {
+                try {
+                    console.log("trayendo productos de la pagina: " + page)
+                    const productosAPI = await get_all_products_paginated_to_shop(page);
+                    setProductos(productosAPI.data);
+                    setDataLenght(productosAPI.meta.count) 
+                    console.log(productos)
+                } catch (error) {
+                    console.error(error)
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchProductos(page);
+
+        }, [page])
 
     return (
         <section className="sectionCatePage">
@@ -74,12 +83,28 @@ const Store = () => {
                 <AnimatePresence>
                     {abierto && (
                         <motion.aside
-                            initial={{ x: -300, opacity: 0 }}
+                            initial={{ x: -300, opacity: 0, zIndex: 50 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: -300, opacity: 0 }}
-                            transition={{ duration: 0.5 }}
+                            transition={{ duration: 0.2 }}
                         >
-                            <AsideFilter bringDataFilter={bringDataFilter} />
+                            <AsideFilter
+                                bringDataFilter={bringDataFilter}
+                                setTime={setTime}
+                                setLocate={setLocate}
+                                setSearchItem={setSearchItem}
+                                setCategories={setCategories}
+                                setStartDate={setStartDate}
+                                setPrice={setPrice}
+                                setEndDate={setEndDate}
+                                locate={locate}
+                                price={price}
+                                categories={categories}
+                                time={time}
+                                searchItem={searchItem}
+                                startDate={startDate}
+                                endDate={endDate}
+                            />
                         </motion.aside>
                     )}
                 </AnimatePresence>
