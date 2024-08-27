@@ -82,6 +82,7 @@ export const filter_request = async (locate, price, categories, time, startDate,
     if (time) {
         urlParams.append("time", time);
     } else {
+        urlParams.append("time", "manual");
         if (startDate && endDate) {
             urlParams.append("startDate", startDate.toISOString());
             urlParams.append("endDate", endDate.toISOString());

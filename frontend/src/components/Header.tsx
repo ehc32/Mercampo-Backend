@@ -90,6 +90,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                             <Link
                               to={'/'}
                               className='text-black  px-2 rounded-lg fs-18px item_navbar'
+                              
                             >
                               Inicio
                             </Link>

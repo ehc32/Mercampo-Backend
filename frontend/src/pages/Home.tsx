@@ -80,8 +80,8 @@ export default function Tienda() {
             </AnimatePresence>
             <Hero />
             <RandomProducts productos={productosRandom} />
-            <Swiper width="100%" height="50vh" datos={carrouselData} isUpSwiper={false} />
             <About />
+            <Swiper width="100%" height="50vh" datos={carrouselData} isUpSwiper={false} />
             <Participants people={people} />
             <Footer />
         </React.Fragment>

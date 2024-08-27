@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Aside.css';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -44,15 +44,9 @@ const AsideFilter = ({
         { label: 'Entre 50 mil y 150 mil', value: 2 },
         { label: 'Más de 150 mil', value: 3 },
     ];
-    const { abierto, toggleAbierto } = useAbierto(); // Usa el hook useAbierto
+    const { abierto, toggleAbierto } = useAbierto();
 
     const categorias = ['FRUTAS', 'VERDURAS', 'GRANOS', 'OTROS'];
-
-    const buscarSimilitudes = () => {
-        if (searchItem.length > 0) {
-            console.log(searchItem);
-        }
-    };
 
     const locationPath = useLocation();
 
@@ -65,6 +59,16 @@ const AsideFilter = ({
                 prevCategories.filter((category) => category !== value)
             );
         }
+    };
+
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     const handleTimeRangeChange = (e) => {
@@ -131,13 +135,12 @@ const AsideFilter = ({
                                 action=""
                                 onSubmit={(e) => {
                                     e.preventDefault();
-                                    buscarSimilitudes();
                                 }}
                             >
                                 <TextField
                                     fullWidth
                                     id="search"
-                                    label="Buscar..."
+                                    label="Buscar ..."
                                     value={searchItem}
                                     onChange={(e) => setSearchItem(e.target.value)}
                                 />
@@ -211,14 +214,15 @@ const AsideFilter = ({
                                 >
                                     <MenuItem value="todos">Todos</MenuItem>
                                     <MenuItem value="hoy">Publicados hoy</MenuItem>
+                                    <MenuItem value="ayer">Publicados ayer</MenuItem>
                                     <MenuItem value="semana">Esta semana</MenuItem>
                                     <MenuItem value="mes">Este mes</MenuItem>
-                                    <MenuItem value="manual">Fechas manual</MenuItem>
                                 </Select>
                                 <Button
                                     variant="contained"
                                     color="success"
                                     fullWidth
+                                    onClick={handleOpen}
                                     className='my-2'
                                 >
                                     Establecer fechas manualmente
@@ -245,13 +249,15 @@ const AsideFilter = ({
                                 <MenuItem value="bogota">Bogotá</MenuItem>
                                 <MenuItem value="medellin">Medellín</MenuItem>
                                 <MenuItem value="cali">Cali</MenuItem>
+                                <MenuItem value="Neiva">Neiva</MenuItem>
                             </Select>
                         </Box>
 
                         <Modal
                             aria-labelledby="spring-modal-title"
                             aria-describedby="spring-modal-description"
-
+                            open={open}
+                            onClose={handleClose}
                             closeAfterTransition
                             slots={{ backdrop: Backdrop }}
                             slotProps={{

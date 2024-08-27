@@ -122,20 +122,72 @@ def get_products(request):
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
 
+#  categories = request.GET.get('categories')
+#     if categories:
+#         category_names = categories.split(',')
+#         products = products.filter(category__in=category_names)
+    
+    #  if locate:
+    #     products = products.filter(locate=locate)
+
+    # price_range = request.GET.get('price')
+    # if price_range:
+    #     if price_range == '1':
+    #         products = products.filter(price__gte=0, price__lte=50000)
+    #     elif price_range == '2':
+    #         products = products.filter(price__gte=50000, price__lte=150000)
+    #     elif price_range == '3':
+    #         products = products.filter(price__gt=150000)
+
 
 @api_view(['GET'])
 def FilterProductsView(request):
     products = Product.objects.all()
 
+    locate = request.GET.get('locate')
+    if locate:
+        products = products.filter(locate=locate)
+
     categories = request.GET.get('categories')
     if categories:
         category_names = categories.split(',')
         products = products.filter(category__in=category_names)
-    
+
+    price_range = request.GET.get('price')
+    if price_range:
+        if price_range == '1':
+            products = products.filter(price__gte=0, price__lte=50000)
+        elif price_range == '2':
+            products = products.filter(price__gte=50000, price__lte=150000)
+        elif price_range == '3':
+            products = products.filter(price__gt=150000)
+
+    time_range = request.GET.get('time')
+    if time_range:
+        if time_range == 'hoy':
+            products = products.filter(created_at__date=datetime.date.today())
+        elif time_range == 'semana':
+            products = products.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=7))
+        elif time_range == 'mes':
+            products = products.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=30))
+        elif time_range == 'manual':
+            start_date = request.GET.get('startDate')
+            end_date = request.GET.get('endDate')
+            if start_date and end_date:
+                products = products.filter(created_at__range=[start_date, end_date])
+        elif time_range == 'todos':
+            # No se aplica ningún filtro de fecha
+            pass
+
+    search_item = request.GET.get('searchItem')
+    if search_item:
+        products = products.filter(name__icontains=search_item)
+
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
+
 
 @api_view(['GET'])
 def get_product_admin(request, id):

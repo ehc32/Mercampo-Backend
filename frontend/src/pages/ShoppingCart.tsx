@@ -162,7 +162,7 @@ const CartPage = () => {
                                             {cartPagina.map((product) => (
                                                 <tr key={product.id} className="border-b cursor-pointer hover:bg-gray-100" >
                                                     <td scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap text-center">
-                                                        <img src={product.first_image} alt={product.name} className="mx-auto w-40 h-12 rounded-full border-1 border-green-500" />
+                                                        <img src={product.first_image} alt={product.name} className="mx-auto h-12 rounded-full border-1 border-green-500" />
                                                     </td>
                                                     <td className="px-4 py-2 text-start">
                                                         <span className=" fs-16px font-medium px-2 py-0.5 rounded">

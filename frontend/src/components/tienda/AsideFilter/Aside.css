@@ -1,11 +1,12 @@
 .asideCard {
     position: fixed;
-    top: 7%;
     left: 0;
+    top: 0;
     height: 100vh;
     width: 400px;
     background-color: #fff !important;
     padding: 20px;
+    padding-top: 5% !important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
     z-index: 1000;
@@ -30,7 +31,7 @@
     display: flex;
     flex-direction: row;
     margin-left: 0.8em;
-    margin-bottom: 1em;
+
     align-items: center;
 }
 
@@ -99,7 +100,7 @@ ul {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 93.5vh;
+    height: 100vh;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #ccc #f0f0f0;

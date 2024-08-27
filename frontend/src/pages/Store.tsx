@@ -46,8 +46,8 @@ const Store = () => {
 
             const response = await filter_request(locate, price, categories, time, startDate, endDate, searchItem, page);
 
-            console.log(response);
-
+            console.log(response.data.data);
+            setProductos(response.data.data)
         } catch (e) {
             console.error(e);
         }
