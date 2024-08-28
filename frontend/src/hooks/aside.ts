@@ -5,12 +5,11 @@ interface AbiertoStore {
     abierto: boolean;
     toggleAbierto: () => void;
 }
-
 export const useAbierto = create<AbiertoStore>()(
     persist(
         (set) => ({
             abierto: false,
-            toggleAbierto: () => set((state) => ({ abierto: !state.abierto })),
+            toggleAbierto: (newState: boolean) => set({ abierto: newState }),
         }),
         {
             name: 'abierto',

@@ -12,8 +12,7 @@ const Store = () => {
     const [dataLenght, setDataLenght] = useState(0);
     const [page, setPage] = useState<number>(1)
     const { abierto, toggleAbierto } = useAbierto();
-
-
+    const [filtrado, toggleFiltrado] = useState(); // revisar si se está filtrado
 
     // FILTROS
 
@@ -29,7 +28,6 @@ const Store = () => {
 
     const bringDataFilter = async () => {
         try {
-            console.log("daa")
             const formData = new FormData();
 
             formData.append('locate', locate);
@@ -44,38 +42,38 @@ const Store = () => {
             formData.append('time', time);
             formData.append('searchItem', searchItem);
 
-            console.log(locate, price, categories, time, searchItem);
+            console.log();
 
-            const response = await filter_request(formData);
+            const response = await filter_request(locate, price, categories, time, startDate, endDate, searchItem, page);
 
-            console.log(response);
-
+            console.log(response.data.data);
+            setProductos(response.data.data)
         } catch (e) {
             console.error(e);
         }
     };
     // END FILTROS
 
-        useEffect(() => {
-            console.log("la pagina actual es " + page)
+    useEffect(() => {
+        console.log("la pagina actual es " + page)
 
-            const fetchProductos = async (page: number) => {
-                try {
-                    console.log("trayendo productos de la pagina: " + page)
-                    const productosAPI = await get_all_products_paginated_to_shop(page);
-                    setProductos(productosAPI.data);
-                    setDataLenght(productosAPI.meta.count) 
-                    console.log(productos)
-                } catch (error) {
-                    console.error(error)
-                } finally {
-                    setLoading(false);
-                }
-            };
+        const fetchProductos = async (page: number) => {
+            try {
+                console.log("trayendo productos de la pagina: " + page)
+                const productosAPI = await get_all_products_paginated_to_shop(page);
+                setProductos(productosAPI.data);
+                setDataLenght(productosAPI.meta.count)
+                console.log(productos)
+            } catch (error) {
+                console.error(error)
+            } finally {
+                setLoading(false);
+            }
+        };
 
-            fetchProductos(page);
+        fetchProductos(page);
 
-        }, [page])
+    }, [page])
 
     return (
         <section className="sectionCatePage">
@@ -83,7 +81,7 @@ const Store = () => {
                 <AnimatePresence>
                     {abierto && (
                         <motion.aside
-                            initial={{ x: -300, opacity: 0, zIndex: 50 }}
+                            initial={{ x: -300, opacity: 0, zIndex: 10 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: -300, opacity: 0 }}
                             transition={{ duration: 0.2 }}

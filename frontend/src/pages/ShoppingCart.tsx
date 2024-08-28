@@ -2,6 +2,8 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import ReactPaginate from 'react-paginate';
+import 'react-paginate/theme/basic/react-paginate.css';
 import { useNavigate } from "react-router-dom";
 import { create_order } from "../api/orders";
 import Footer from "../components/Footer";
@@ -16,6 +18,14 @@ const CartPage = () => {
 
     const cart = useCartStore((state) => state.cart);
     const total_price = useCartStore((state) => state.totalPrice);
+
+    const [pagina, setPagina] = useState(1);
+    const [productosPorPagina, setProductosPorPagina] = useState(10);
+
+    const ultimaPagina = Math.ceil(cart.length / productosPorPagina);
+    const primerProducto = (pagina - 1) * productosPorPagina;
+    const ultimoProducto = primerProducto + productosPorPagina;
+    const cartPagina = cart.slice(primerProducto, ultimoProducto);
 
     const [address, setAddress] = useState<string>("");
     const [city, setCity] = useState<string>("");
@@ -72,7 +82,7 @@ const CartPage = () => {
 
     return (
         <>
-            <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+            <section className="dark:bg-gray-900 p-3 sm:p-5">
                 <div className="px-4 lg:px-12">
                     <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
                         <div className="card-bordered bg-white relative shadow-md sm:rounded-lg overflow-hidden p-8">
@@ -84,21 +94,21 @@ const CartPage = () => {
                                     <input
                                         onChange={(e) => setAddress(e.target.value)}
                                         value={address}
-                                        type="text" className="inputForm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Dirección" />
+                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Dirección" />
                                 </div>
                                 <div>
                                     <label className="block mb-2 text-sm font-medium text-gray-900 cursor-default">Ciudad</label>
                                     <input
                                         onChange={(e) => setCity(e.target.value)}
                                         value={city}
-                                        type="text" className="inputForm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Ciudad" />
+                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Ciudad" />
                                 </div>
                                 <div>
                                     <label className="block mb-2 text-sm font-medium text-gray-900 cursor-default">Codigo Postal</label>
                                     <input
                                         onChange={(e) => setPostal_code(e.target.value)}
                                         value={postal_code}
-                                        type="text" className="inputForm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Codigo Postal" />
+                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Codigo Postal" />
                                 </div>
                                 <div className="botonDePaypal">
                                     <PayPalScriptProvider
@@ -149,54 +159,64 @@ const CartPage = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {
-
-                                                cart.map((product) => (
-
-                                                    <tr key={product.id} className="border-b cursor-pointer hover:bg-gray-100" >
-                                                        <td scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap text-center">
-                                                            <img src={product.first_image} alt={product.name} className="mx-auto w-40 h-12 rounded-full border-1 border-green-500" />
-                                                        </td>
-                                                        <td className="px-4 py-2 text-start">
-                                                            <span className=" fs-16px font-medium px-2 py-0.5 rounded">
-                                                                {product.name}
-                                                            </span>
-                                                        </td>
-                                                        <td className="px-4 py-2 text-center">
-                                                            <span className=" fs-16px font-medium px-2 py-0.5 rounded">
-                                                                {product.category}
-                                                            </span>
-                                                        </td>
-                                                        <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
-                                                            <div className="flex items-center  text-center space-x-3">
-                                                                <button onClick={() => removeFromCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 b g-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
-                                                                    <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                                                                    </svg>
-                                                                </button>
-                                                                <div>
-                                                                    {product.quantity}
-                                                                    <input type="number" id="first_product" className="hidden bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block-px-2.5 py-1" placeholder="1" required />
-                                                                </div>
-                                                                <button onClick={() => addToCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
-                                                                    <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                        <td className="px-4 text-center py-2 font-medium text-gray-900 whitespace-nowrap">${product.price}</td>
-                                                        <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">$ {(product.quantity !== undefined ? (product.price * product.quantity).toFixed(2) : "0.00")}</td>
-                                                    </tr>
-                                                ))}
+                                            {cartPagina.map((product) => (
+                                                <tr key={product.id} className="border-b cursor-pointer hover:bg-gray-100" >
+                                                    <td scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap text-center">
+                                                        <img src={product.first_image} alt={product.name} className="mx-auto h-12 rounded-full border-1 border-green-500" />
+                                                    </td>
+                                                    <td className="px-4 py-2 text-start">
+                                                        <span className=" fs-16px font-medium px-2 py-0.5 rounded">
+                                                            {product.name}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-4 py-2 text-center">
+                                                        <span className=" fs-16px font-medium px-2 py-0.5 rounded">
+                                                            {product.category}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
+                                                        <div className="flex items-center  text-center space-x-3">
+                                                            <button onClick={() => removeFromCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 12H6"></path></svg>
+                                                            </button>
+                                                            <span className="fs-16px font-medium">{product.quantity}</span>
+                                                            <button onClick={() => addToCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
+                                                        <span className="fs-16px font-medium">
+                                                            $ {product.price}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
+                                                        <span className="fs-16px font-medium">
+                                                            $ {product.price * product.quantity}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
+                                <ReactPaginate
+                                    pageCount={ultimaPagina}
+                                    onPageChange={(pagina) => setPagina(pagina.selected + 1)}
+                                    containerClassName="paginacion"
+                                    pageClassName="pagina"
+                                    pageLinkClassName="pagina-link"
+                                    activeClassName="pagina-activa"
+                                    previousClassName="pagina-anterior"
+                                    previousLinkClassName="pagina-anterior-link"
+                                    nextClassName="pagina-siguiente"
+                                    nextLinkClassName="pagina-siguiente-link"
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
             <Footer />
         </>
     );

@@ -7,10 +7,13 @@ import { edit_user, get_solo_user } from "../api/users";
 import Loader from "../components/Loader";
 import { useAuthStore } from "../hooks/auth";
 import { Token } from "../Interfaces";
-import VendedorProduct from "./VendedorProduct";
 import ShopHistory from "./ShopHistory";
+<<<<<<< HEAD
 import ModalEditProfile from "../components/shared/Modal/ModalEditUser";
 import { Any } from "react-spring";
+=======
+import VendedorProduct from "./VendedorProduct";
+>>>>>>> ecfaa9aa04e4aedbfb166b72f838bfc6f902f770
 
 const UserProfile = () => {
   const [show, setShow] = useState<string>("purchase-history");
@@ -111,9 +114,15 @@ const UserProfile = () => {
       <div className="w-full lg:w-1/2 bg-white lg:max-w-sm mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700 border border-gray-200 rounded-lg">
         {show ? (
           <>
+<<<<<<< HEAD
             <div className="flex flex-col items-start pb-10 px-6">
               {/* Contenedor de la información principal */}
               <div className="flex items-center space-x-4 mb-4 w-full bg-white p-3 rounded-lg">
+=======
+            {/* Contenedor de la información principal */}
+            <div className="flex flex-col items-start  px-8 h-80 justify-start  ">
+              <div className="flex items-center space-x-4 mb-4 w-full bg-white p-4 rounded-lg pl-10" >
+>>>>>>> ecfaa9aa04e4aedbfb166b72f838bfc6f902f770
                 {user && user.avatar !== undefined && (
                   <div className="flex flex-col">
                     <img
@@ -166,7 +175,7 @@ const UserProfile = () => {
                   type="text"
                   value={stateName}
                   onChange={(e) => setStateName(e.target.value)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Nombre"
                 />
               </div>
@@ -179,7 +188,7 @@ const UserProfile = () => {
                   type="text"
                   value={stateLast}
                   onChange={(e) => setStateLast(e.target.value)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Apellido"
                 />
               </div>
@@ -191,9 +200,8 @@ const UserProfile = () => {
                       htmlFor="dropzone-file"
                       className={`flex flex-col items-center justify-center w-full h-64 
                       border-2 border-gray-600 border-dashed rounded-lg 
-                      cursor-pointer bg-gray-40 ${
-                        isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-                      }`}
+                      cursor-pointer bg-gray-40 ${isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                        }`}
                       onDragEnter={handleDragEnter}
                       onDragLeave={handleDragLeave}
                     >
@@ -279,7 +287,7 @@ const UserProfile = () => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Buscar"
                   />
                 </div>

@@ -1,0 +1,20 @@
+.card-people img {
+    border-radius: 7px;
+    margin: 1em;
+    width: 350px;
+    height: 250px;
+}
+
+.card-people h4 {
+    font-size: 18px;
+}
+
+.card-people p {
+    font-size: 16px;
+}
+
+.card-people {
+    width: 400px;
+    flex-wrap: wrap;
+    align-items: center;
+}

@@ -16,9 +16,9 @@ interface CarrouselLast12Props {
 const Participant: React.FC<CarrouselLast12Props> = ({ person, darkMode }) => {
 
     return (
-        <div>
+        <div className='flex flex-column card-people'>
             <img src={person.photo} alt={person.name} />
-            <div>
+            <div className='flex flex-column justify-center text-center'>
                 <h4>{person.name}</h4>
                 <p>{person.role}</p>
             </div>

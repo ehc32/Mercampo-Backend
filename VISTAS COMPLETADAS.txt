@@ -6,18 +6,18 @@ Módulo de autentificación:
 
 Módulo usuario natural:
 	- Vista Home -- 80%
-	- Vista Tienda -- 80%
-	- Vista detalle producto -- 70% (faltan los comentarios del producto y demás)
+	- Vista Tienda -- 85%
+	- Vista detalle producto -- 80% (faltan los comentarios del producto)
 	- Vista de perfil de usuario -- 80%
-	- Vista de carrito de compras -- 80%
+	- Vista de carrito de compras -- 90%
 	- Formulario de solicitud para vender ( modal en vista de perfil )
 		- Historial compras 
-		- Ordenes vendedor
+		- Ordenes vendedor 
 	
 Módulo vendedor:
-	- Vista de agregar productos
-	- Vista de sus productos
-	- Vista de sus ventas
+	- Vista de agregar productos - 90%
+	- Vista de sus productos 
+	- Vista de sus ventas 
 
 Módulo administrador:
 	- Vista de administración -- 60%
@@ -30,3 +30,9 @@ Módulo administrador:
 
 
 Backend -- 80%
+
+
+////////////////////////
+Pendientes
+	- Home
+		-

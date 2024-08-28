@@ -1,16 +1,15 @@
+import Pagination from '@mui/material/Pagination';
 import {
     useQueryClient,
 } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiFillPlusSquare } from "react-icons/ai";
-import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import { delete_product, get_all_products_paginated } from "../api/products";
 import { Product } from "../Interfaces";
 import ModalProducts from "./shared/Modal/ModalProducts";
 import './style.css';
-import Pagination from '@mui/material/Pagination';
 
 interface Props {
     results: any;
@@ -32,7 +31,7 @@ const Products = ({ results }: Props) => {
                 const productosAPI = await get_all_products_paginated(page);
                 setProductos(productosAPI.data);
                 setDataLenght(productosAPI.meta.count)
-               
+
             } catch (error) {
                 console.error(error)
             } finally {
@@ -66,7 +65,7 @@ const Products = ({ results }: Props) => {
     return (
         <div className="overflow-x-auto scroll-tablas">
             <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-4 py-3">
                             ID producto
