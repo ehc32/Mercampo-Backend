@@ -4,6 +4,7 @@ import Content from "../components/tienda/Content/Content";
 import { useAbierto } from "../hooks/aside";
 import { motion, AnimatePresence } from 'framer-motion';
 import './style.css';
+import { toast } from "react-toastify";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const Store = () => {
@@ -42,34 +43,43 @@ const Store = () => {
             formData.append('time', time);
             formData.append('searchItem', searchItem);
 
-            console.log();
-
             const response = await filter_request(locate, price, categories, time, startDate, endDate, searchItem, page);
 
-            console.log(response.data.data);
+            toast.success("Filtros aplicados con éxito!");
             setProductos(response.data.data)
         } catch (e) {
+
+            toast.error("Ha ocurrido un error al filtrar");
             console.error(e);
         }
     };
+
+    // delete filtros
+    const deleteDataFilter = () => {
+        try {
+            fetchProductos(page)
+            toast.info(("Filtros restablecidos"));
+        } catch (error) {
+
+        }
+    }
+
     // END FILTROS
 
-    useEffect(() => {
-        console.log("la pagina actual es " + page)
+    const fetchProductos = async (page: number) => {
+        try {
+            const productosAPI = await get_all_products_paginated_to_shop(page);
+            setProductos(productosAPI.data);
+            setDataLenght(productosAPI.meta.count)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        const fetchProductos = async (page: number) => {
-            try {
-                console.log("trayendo productos de la pagina: " + page)
-                const productosAPI = await get_all_products_paginated_to_shop(page);
-                setProductos(productosAPI.data);
-                setDataLenght(productosAPI.meta.count)
-                console.log(productos)
-            } catch (error) {
-                console.error(error)
-            } finally {
-                setLoading(false);
-            }
-        };
+    useEffect(() => {
+
 
         fetchProductos(page);
 
@@ -88,6 +98,7 @@ const Store = () => {
                         >
                             <AsideFilter
                                 bringDataFilter={bringDataFilter}
+                                deleteDataFilter={deleteDataFilter}
                                 setTime={setTime}
                                 setLocate={setLocate}
                                 setSearchItem={setSearchItem}

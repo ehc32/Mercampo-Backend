@@ -179,3 +179,7 @@ ul {
         display: block;
     }
 }
+
+.bg-boton {
+    background-color: rgb(186, 7, 7) !important;
+}

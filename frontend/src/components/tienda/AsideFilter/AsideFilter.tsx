@@ -18,12 +18,12 @@ import {
     Fade,
     Chip,
 } from '@mui/material';
-import FilterIcon from '@mui/icons-material/Filter';
+
 import { useAbierto } from '../../../hooks/aside';
-import value from '../../../types/globals';
 
 const AsideFilter = ({
     bringDataFilter,
+    deleteDataFilter,
     setTime,
     setSearchItem,
     setCategories,
@@ -306,20 +306,27 @@ const AsideFilter = ({
                                         <Button variant="contained">
                                             Aceptar
                                         </Button>
-                                        <Button variant="outlined">
-                                            Eliminar filtros
-                                        </Button>
                                     </Box>
                                 </Box>
                             </Fade>
                         </Modal>
                         <Button
+                            className='mt-2'
                             variant="contained"
                             color="success"
                             fullWidth
                             onClick={bringDataFilter}
                         >
                             Establecer filtros
+                        </Button>
+                        <Button
+                            className='mt-2 bg-boton'
+                            variant="contained"
+                            color="success"
+                            fullWidth
+                            onClick={deleteDataFilter}
+                        >
+                            Eliminar filtros
                         </Button>
                     </>
                 )
