@@ -61,20 +61,23 @@ const Users = ({ results }: Props) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+      <h2 className="text-xl font-semibold mb-5 mt-5 text-center text-black ">
+          Lista de Usuarios
+        </h2>
+        <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-50">
+        <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 bg-slate-100">
           <tr>
             <th scope="col" className="px-4 py-3">
               Id
-            </th>
-            <th scope="col" className="px-4 py-3">
-              Correo Electronico
             </th>
             <th scope="col" className="px-4 py-3">
               Nombre
             </th>
             <th scope="col" className="px-4 py-3">
               Apellido
+            </th>
+            <th scope="col" className="px-4 py-3">
+              Correo Electronico
             </th>
             <th scope="col" className="px-4 py-3">
               Rol
@@ -99,9 +102,9 @@ const Users = ({ results }: Props) => {
                   >
                     {user.id}
                   </th>
-                  <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.name}</td>
                   <td className="px-4 py-3">{user.last_name}</td>
+                  <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.role}</td>
                   <td className="px-4 py-3 flex items-center justify-center gap-4 h-full">
 
@@ -143,9 +146,9 @@ const Users = ({ results }: Props) => {
                   >
                     {user.id}
                   </th>
-                  <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.name}</td>
                   <td className="px-4 py-3">{user.last_name}</td>
+                  <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.role}</td>
                   <td className="px-4 py-3 flex items-center justify-center gap-4 h-full">
 

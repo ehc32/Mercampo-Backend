@@ -64,8 +64,11 @@ const Products = ({ results }: Props) => {
 
     return (
         <div className="overflow-x-auto scroll-tablas">
-            <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+            <h2 className="text-xl font-semibold mb-5 mt-5 text-center text-black ">
+          Lista de Productos
+        </h2>
+            <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-100">
+                <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 bg-slate-50">
                     <tr>
                         <th scope="col" className="px-4 py-3">
                             ID producto

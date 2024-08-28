@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import Orders from "../components/Orders";
 import Products from "../components/Products";
 import Users from "../components/Users";
+import Aprove from "../components/AprovSellerUser"
 
 const AdminPage = () => {
   const [show, setShow] = useState(0);
@@ -25,7 +26,7 @@ const AdminPage = () => {
   const { data: users } = useQuery({
     queryKey: ["users", search],
     queryFn: () => {
-      if (search && show === 2) {
+      if (search && show === 3) {
         return search_users(search);
       }
       return { users: [] };
@@ -35,7 +36,7 @@ const AdminPage = () => {
   const { data: orders } = useQuery({
     queryKey: ["orders", search],
     queryFn: () => {
-      if (search && show === 1) {
+      if (search && show === 2) {
         return search_order(search);
       }
       return { orders: [] };
@@ -76,17 +77,24 @@ const AdminPage = () => {
                 type="button"
                 className="flex items-center justify-center text-white bg-[#39A900] hover:bg-[#3e8e41] focus:ring-4 focus:ring-[#3e8e41] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#3e8e41] dark:hover:bg-[#357a38] focus:outline-none dark:focus:ring-[#357a38]"
               >
-                Productos
+                Solicitudes Vendedor
               </button>
               <button
                 onClick={() => setShow(1)}
                 type="button"
                 className="flex items-center justify-center text-white bg-[#39A900] hover:bg-[#3e8e41] focus:ring-4 focus:ring-[#3e8e41] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#3e8e41] dark:hover:bg-[#357a38] focus:outline-none dark:focus:ring-[#357a38]"
               >
-                Ordenes
+                Productos
               </button>
               <button
                 onClick={() => setShow(2)}
+                type="button"
+                className="flex items-center justify-center text-white bg-[#39A900] hover:bg-[#3e8e41] focus:ring-4 focus:ring-[#3e8e41] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#3e8e41] dark:hover:bg-[#357a38] focus:outline-none dark:focus:ring-[#357a38]"
+              >
+                Ordenes
+              </button>
+              <button
+                onClick={() => setShow(3)}
                 type="button"
                 className="flex items-center justify-center text-white bg-[#39A900] hover:bg-[#3e8e41] focus:ring-4 focus:ring-[#3e8e41] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#3e8e41] dark:hover:bg-[#357a38] focus:outline-none dark:focus:ring-[#357a38]"
               >
@@ -95,9 +103,11 @@ const AdminPage = () => {
             </div>
           </div>
 
-          {show === 0 && <Products results={data} />}
-          {show === 1 && <Orders results={orders} />}
-          {show === 2 && <Users results={users} />}
+          {show === 0 && <Aprove results={data} />}
+          {show === 1 && <Products results={data} />}
+          {show === 2 && <Orders results={orders} />}
+          {show === 3 && <Users results={users} />}
+          
         </div>
       </div>
       <Footer />
