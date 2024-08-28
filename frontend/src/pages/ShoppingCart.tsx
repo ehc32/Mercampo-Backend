@@ -126,8 +126,8 @@ const CartPage = () => {
                                 </div>
                             </form>
                         </div>
-                        <div className="card-bordered bg-white relative shadow-md sm:rounded-lg overflow-hidden">
-                            <div className="relative contenedorSobreTabla mt-5 overflow-hidden bg-white shadow-md sm:rounded-lg">
+                        <div className="card-bordered bg-white  shadow-md sm:rounded-lg overflow-hidden">
+                            <div className="relative contenedorSobreTabla mt-5 overflow-hidden bg-white  sm:rounded-lg">
                                 <div className="flex flex-col px-4 box-titlesCart lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                                     <div className="flex flex-col box-titlesCart items-center w-full space-y-4">
                                         <h4 className="fs-22px font-bold text-gray-900">Tu carrito de compras</h4>

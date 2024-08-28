@@ -13,7 +13,7 @@ const Store = () => {
     const [dataLenght, setDataLenght] = useState(0);
     const [page, setPage] = useState<number>(1)
     const { abierto, toggleAbierto } = useAbierto();
-    const [filtrado, toggleFiltrado] = useState(); // revisar si se está filtrado
+    const [filtrado, toggleFiltrado] = useState<boolean>(false); // revisar si se está filtrado
 
     // FILTROS
 
@@ -46,9 +46,12 @@ const Store = () => {
             const response = await filter_request(locate, price, categories, time, startDate, endDate, searchItem, page);
 
             toast.success("Filtros aplicados con éxito!");
+            setDataLenght(response.data.meta.count)
             setProductos(response.data.data)
+            toggleFiltrado(true)
         } catch (e) {
 
+            toggleFiltrado(false)
             toast.error("Ha ocurrido un error al filtrar");
             console.error(e);
         }

@@ -131,6 +131,7 @@ def FilterProductsView(request):
         products = products.filter(locate=locate)
 
     categories = request.GET.get('categories')
+    
     if categories:
         category_names = categories.split(',')
         products = products.filter(category__in=category_names)
@@ -147,16 +148,16 @@ def FilterProductsView(request):
     time_range = request.GET.get('time')
     if time_range:
         if time_range == 'hoy':
-            products = products.filter(created_at__date=datetime.date.today())
+            products = products.filter(created__date=datetime.date.today())
         elif time_range == 'semana':
-            products = products.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=7))
+            products = products.filter(created__gte=datetime.date.today() - datetime.timedelta(days=7))
         elif time_range == 'mes':
-            products = products.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=30))
+            products = products.filter(created__gte=datetime.date.today() - datetime.timedelta(days=30))
         elif time_range == 'manual':
             start_date = request.GET.get('startDate')
             end_date = request.GET.get('endDate')
             if start_date and end_date:
-                products = products.filter(created_at__range=[start_date, end_date])
+                products = products.filter(created__range=[start_date, end_date])
         elif time_range == 'todos':
             # No se aplica ningún filtro de fecha
             pass

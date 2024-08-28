@@ -16,8 +16,6 @@ const Orders = ({ results }: Props) => {
     queryFn: get_orders,
   });
 
-  console.log(results);
-
   const editOrderMut = useMutation({
     mutationFn: edit_order,
     onSuccess: () => {

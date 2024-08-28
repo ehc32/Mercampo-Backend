@@ -39,6 +39,30 @@ const AsideFilter = ({
     endDate, setLocate
 }) => {
 
+    const [timer, setTimer] = useState(null);
+    const buscarTextfield = (e) => {
+        setSearchItem(e);
+        bringDataFilter();
+    };
+
+    const handleChange = (e:any) => {
+        const value = e.target.value;
+        setSearchItem(value);
+
+        // Limpiar el temporizador anterior
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        // Configurar un nuevo temporizador
+        const newTimer = setTimeout(() => {
+            buscarTextfield(value);
+        }, 1000); // 1000 ms = 1 segundo
+
+        setTimer(newTimer);
+    };
+
+
     const precioOptions = [
         { label: 'Menos de 50 mil pesos', value: 1 },
         { label: 'Entre 50 mil y 150 mil', value: 2 },
@@ -142,7 +166,7 @@ const AsideFilter = ({
                                     id="search"
                                     label="Buscar ..."
                                     value={searchItem}
-                                    onChange={(e) => setSearchItem(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </form>
                         </Box>
@@ -303,7 +327,7 @@ const AsideFilter = ({
                                         />
                                     </Box>
                                     <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
-                                        <Button variant="contained">
+                                        <Button variant="contained" onClick={handleClose}>
                                             Aceptar
                                         </Button>
                                     </Box>

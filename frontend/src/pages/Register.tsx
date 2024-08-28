@@ -13,11 +13,12 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [last_name, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [re_password, setRePassword] = useState("");
 
   const registerMutation = useMutation({
-    mutationFn: () => registerRequest(email, name, last_name, password),
+    mutationFn: () => registerRequest(email, name, last_name, phone, password),
     onSuccess: () => {
       toast.success("Registro exitoso! logueate!");
       navigate("/login");
@@ -107,6 +108,21 @@ const RegisterPage = () => {
                 id="last_name"
                 className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
                 placeholder="Apellido"
+              />
+            </div>
+            <div>
+              <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                Teléfono de contacto
+              </label>
+              <input
+                value={phone}
+                required
+                onChange={(e) => setPhone(e.target.value)}
+                type="phone"
+                name="phone"
+                id="phone"
+                className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
+                placeholder="phone"
               />
             </div>
 

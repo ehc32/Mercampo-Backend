@@ -81,7 +81,7 @@ export default function Tienda() {
             <Hero />
             <RandomProducts productos={productosRandom} />
             <About />
-            <Swiper width="100%" height="50vh" datos={carrouselData} isUpSwiper={false} />
+            <Swiper width="80%" height="50vh" datos={carrouselData} isUpSwiper={false} />
             <Participants people={people} />
             <Footer />
         </React.Fragment>
