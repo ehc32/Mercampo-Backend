@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { registerRequest } from "../api/users";
 import { useAuthStore } from "../hooks/auth";
@@ -63,7 +63,7 @@ const RegisterPage = () => {
           </h1>
           <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="email" className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-200">
                 Correo electrónico
               </label>
               <input
@@ -79,7 +79,7 @@ const RegisterPage = () => {
             </div>
 
             <div>
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-200">
                 Nombre
               </label>
               <input
@@ -151,7 +151,7 @@ const RegisterPage = () => {
               Registrarse
             </button>
             <p className="text-sm font-light text-gray-900 dark:text-gray-300">
-              Ya tienes una cuenta? <Link to={'/login'} className="font-medium text-[#39A900] hover:underline dark:text-lime-400">Ingresar</Link>
+              ¿Ya tienes una cuenta? <Link to={'/login'} className="font-medium text-white hover:underline dark:text-lime-400">Ingresar</Link>
             </p>
           </form>
         </div>
