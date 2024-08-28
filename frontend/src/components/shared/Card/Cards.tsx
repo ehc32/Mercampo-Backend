@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Card.css';
 import BasicTooltip from '../tooltip/Tooltip';
 
+import { toast } from "react-toastify";
 interface Producto {
     nombre?: string;
     foto?: string;
