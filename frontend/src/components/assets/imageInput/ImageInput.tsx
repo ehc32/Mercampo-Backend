@@ -38,7 +38,7 @@ const ImageInput = ({ setImages, images }: ImageInputProps) => {
     };
 
     return (
-        <div>
+        <div className='w-full flex flex-wrap'>
             <Grid container spacing={2} style={{ maxHeight: '200px', overflowY: 'auto' }}>
                 {images.map((image, index) => (
                     <Grid item xs={4} sm={3} md={2} key={index}>
