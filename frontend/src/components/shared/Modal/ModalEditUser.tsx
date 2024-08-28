@@ -13,11 +13,11 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: '#FFFFFF',
-  border: '2px solid #000',
   boxShadow: 24,
   pt: 2,
   px: 4,
   pb: 3,
+  transition: 'all 0.5s ease-in-out',
 };
 
 interface Props {
@@ -43,6 +43,8 @@ export default function ModalEditProfile({
   handleSubmit,
 }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [nameError, setNameError] = React.useState(false);
+  const [lastError, setLastError] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -50,6 +52,18 @@ export default function ModalEditProfile({
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (!stateName) {
+      setNameError(true);
+    } else if (!stateLast) {
+      setLastError(true);
+    } else {
+      handleSubmit();
+      setOpen(false);
+    }
   };
 
   return (
@@ -62,10 +76,15 @@ export default function ModalEditProfile({
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
+        onClick={(e) => {
+          if (e.target.id === 'modal-container') {
+            handleClose();
+          }
+        }}
       >
-        <Box sx={{ ...style, width: 400 }}>
+        <Box sx={{ ...style, width: 400 }} id="modal-container">
           <h2 id="child-modal-title" className='form-title'>Editar perfil</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleFormSubmit}>
             <div className="p-3">
               <InputLabel id="name-label">Nombre</InputLabel>
               <TextField
@@ -74,6 +93,8 @@ export default function ModalEditProfile({
                 sx={{ mb: 2 }}
                 value={stateName}
                 onChange={(e) => setStateName(e.target.value)}
+                error={nameError}
+                helperText={nameError ? 'Por favor ingresa un nombre' : ''}
               />
             </div>
             <div className="p-3">
@@ -84,6 +105,8 @@ export default function ModalEditProfile({
                 sx={{ mb: 2 }}
                 value={stateLast}
                 onChange={(e) => setStateLast(e.target.value)}
+                error={lastError}
+                helperText={lastError ? 'Por favor ingresa un apellido' : ''}
               />
             </div>
             <div className="sm:col-span-2 p-2">
@@ -93,7 +116,7 @@ export default function ModalEditProfile({
                     htmlFor="dropzone-file"
                     className={`flex flex-col items-center justify-center w-full h-64 
                     border-2 border-gray-600 border-dashed rounded-lg 
-                    cursor-pointer bg-gray-40`}
+                                        cursor-pointer bg-gray-40`}
                   >
                     <svg
                       aria-hidden="true"
@@ -131,7 +154,7 @@ export default function ModalEditProfile({
                       alt="Preview"
                       className="h-32 w-32 object-cover rounded-full mb-2"
                     />
-                    
+
                     <button
                       onClick={removeImage}
                       type="button"
@@ -154,6 +177,9 @@ export default function ModalEditProfile({
           </form>
         </Box>
       </Modal>
+      {open && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50" />
+      )}
     </div>
   );
 }

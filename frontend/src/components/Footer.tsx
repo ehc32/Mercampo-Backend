@@ -9,7 +9,6 @@ const Footer = () => {
   return (
     <footer id="footer" className={darkMode ? 'footer-dark' : 'footer-light'}>
       <div className="flex justify-center mb-4">
-        {/* Logos footer - Aquí puedes agregar tus logos */}
       </div>
       <div className="container mx-auto px-4">
         <div className="text-center m-auto">
