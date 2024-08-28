@@ -122,24 +122,6 @@ def get_products(request):
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
 
-#  categories = request.GET.get('categories')
-#     if categories:
-#         category_names = categories.split(',')
-#         products = products.filter(category__in=category_names)
-    
-    #  if locate:
-    #     products = products.filter(locate=locate)
-
-    # price_range = request.GET.get('price')
-    # if price_range:
-    #     if price_range == '1':
-    #         products = products.filter(price__gte=0, price__lte=50000)
-    #     elif price_range == '2':
-    #         products = products.filter(price__gte=50000, price__lte=150000)
-    #     elif price_range == '3':
-    #         products = products.filter(price__gt=150000)
-
-
 @api_view(['GET'])
 def FilterProductsView(request):
     products = Product.objects.all()
