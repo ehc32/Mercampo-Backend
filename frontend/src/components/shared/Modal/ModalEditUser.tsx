@@ -69,7 +69,7 @@ export default function ModalEditProfile({
             <div className="p-3">
               <InputLabel id="name-label">Nombre</InputLabel>
               <TextField
-                label="name-label"
+                label="nombre-usario"
                 fullWidth
                 sx={{ mb: 2 }}
                 value={stateName}
@@ -79,7 +79,7 @@ export default function ModalEditProfile({
             <div className="p-3">
               <InputLabel id="last-label">Apellido</InputLabel>
               <TextField
-                label="last-label"
+                label="apellido-usuario"
                 fullWidth
                 sx={{ mb: 2 }}
                 value={stateLast}
@@ -111,8 +111,8 @@ export default function ModalEditProfile({
                       ></path>
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Click to upload</span>{" "}
-                      or drag and drop
+                      <span className="font-semibold">Toca para actualizar</span>{" "}
+                      o arraste y sueltalo aca
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       SVG, PNG, JPG or GIF (MAX. 800x400px)
@@ -135,7 +135,7 @@ export default function ModalEditProfile({
                     <button
                       onClick={removeImage}
                       type="button"
-                      className="w-full text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                      className="w-full text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                     >
                       Quitar Imagen
                     </button>

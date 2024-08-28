@@ -8,8 +8,8 @@ import Loader from "../components/Loader";
 import { useAuthStore } from "../hooks/auth";
 import { Token } from "../Interfaces";
 import ShopHistory from "./ShopHistory";
-import VendedorProduct from "./VendedorProduct";
 import ModalEditProfile from "../components/shared/Modal/ModalEditUser";
+import VendedorProduct from "./VendedorProduct";
 
 const UserProfile = () => {
   const [show, setShow] = useState<string>("purchase-history");

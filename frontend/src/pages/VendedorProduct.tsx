@@ -103,7 +103,7 @@ const SellerProduct = () => {
                     <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       <button
                         // onClick={() => generarPDF(order)}
-                        className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600"
+                        className=" bg-[#39A900]  text-white px-4 py-2 rounded hover:bg-blue-600"
                       >
 
                       </button>
