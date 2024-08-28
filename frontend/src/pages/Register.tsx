@@ -58,12 +58,12 @@ const RegisterPage = () => {
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">
           {/* Comentario: Formulario de registro */}
 
-          <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-100 md:text-2xl dark:text-gray-100">
+          <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-100">
             Crear nueva cuenta
           </h1>
           <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-200">
+              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                 Correo electrónico
               </label>
               <input
@@ -73,13 +73,13 @@ const RegisterPage = () => {
                 required
                 name="email"
                 id="email"
-                className="border border-gray-300 text-gray-100 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
+                className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
                 placeholder="Correo electrónico"
               />
             </div>
 
             <div>
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-200">
+              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                 Nombre
               </label>
               <input
@@ -89,13 +89,13 @@ const RegisterPage = () => {
                 type="name"
                 name="name"
                 id="name"
-                className="border border-gray-300 text-gray-100 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
+                className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
                 placeholder="Nombre"
               />
             </div>
 
             <div>
-              <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-200">
+              <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                 Apellido
               </label>
               <input
@@ -105,13 +105,13 @@ const RegisterPage = () => {
                 type="last_name"
                 name="last_name"
                 id="last_name"
-                className="border border-gray-300 text-gray-100 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
+                className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200"
                 placeholder="Apellido"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-200">
+              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                 Contraseña
               </label>
               <input
@@ -127,7 +127,7 @@ const RegisterPage = () => {
             </div>
 
             <div>
-              <label htmlFor="re-password" className="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-200">
+              <label htmlFor="re-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                 Repite la contraseña
               </label>
               <input
@@ -150,7 +150,7 @@ const RegisterPage = () => {
             >
               Registrarse
             </button>
-            <p className="text-sm font-light text-gray-50 dark:text-gray-300">
+            <p className="text-sm font-light text-gray-900 dark:text-gray-300">
               Ya tienes una cuenta? <Link to={'/login'} className="font-medium text-[#39A900] hover:underline dark:text-lime-400">Ingresar</Link>
             </p>
           </form>

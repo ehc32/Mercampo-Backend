@@ -6,7 +6,7 @@ import LoginPage from "./pages/Login"
 import DetallesProd from "./pages/ProductDetail"
 import RegisterPage from "./pages/Register"
 import Store from "./pages/Store"
-
+import Aprove from "./components/AprovSellerUser"
 import AdminPage from "./pages/AdminPage"
 import Home from "./pages/Home"
 import ShopHistory from "./pages/ShopHistory"
@@ -23,7 +23,7 @@ function App() {
         <BrowserRouter>
             <ToastContainer />
             <Routes>
-                <Route path="/" element={<Layout />} >
+                    <Route path="/" element={<Layout />} >
                     <Route index element={<Home />} />
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
@@ -32,6 +32,7 @@ function App() {
                     <Route path="product/:slug" element={<DetallesProd />} />
                     <Route path="store" element={<Store />} />     {/* Vista para ingresar productos - solo con permisos de venta */}
                     <Route path="vendedor-order" element={<VendedorProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
+                    <Route path="aprov-seller" element={<Aprove />} />
                     <Route path="addprod" element={<AddProd />} />
 
 
