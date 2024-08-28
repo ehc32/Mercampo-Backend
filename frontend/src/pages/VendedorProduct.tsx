@@ -52,8 +52,8 @@ const SellerProduct = () => {
   });
 
   return (
-    <div className="flex flex-col items-center px-4 mt-10">
-      <div className="w-full max-w-5xl p-6 dark:bg-slate-300 rounded-lg shadow-md h-svh">
+    <div className="flex flex-col items-center px-5 mt-10">
+      <div className="w-full max-w-5xl p-8 dark:bg-slate-300 rounded-lg shadow-md h-svh">
         <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Órdenes
         </h2>
@@ -103,7 +103,7 @@ const SellerProduct = () => {
                     <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       <button
                         // onClick={() => generarPDF(order)}
-                        className=" bg-lime-600  text-white px-4 py-2 rounded hover:bg-blue-600"
+                        className=" bg-[#39A900]  text-white px-4 py-2 rounded hover:bg-blue-600"
                       >
 
                       </button>
