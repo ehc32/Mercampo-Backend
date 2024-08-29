@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginRequest } from "../api/users";
 import { useAuthStore } from "../hooks/auth";
+import Footer from "../components/Footer";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-200"
+                className="block mb-2 text-sm font-bold text-black dark:text-gray-200"
               >
                 Correo electrónico
               </label>
@@ -104,6 +105,7 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
+      {/* <Footer /> */}
     </div>
   );
 };
