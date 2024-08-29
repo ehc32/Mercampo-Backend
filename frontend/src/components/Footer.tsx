@@ -8,9 +8,9 @@ const Footer = () => {
 
   return (
     <footer id="footer" className={darkMode ? 'footer-dark' : 'footer-light'}>
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center mb-4 ">
       </div>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 text-[#39A900]">
         <div className="text-center m-auto">
             <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="fs-16px block w-35 m-auto">
               Servicios Tecnologicos - Regional Huila

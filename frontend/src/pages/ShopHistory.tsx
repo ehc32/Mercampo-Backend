@@ -27,32 +27,32 @@ const HistorialDeCompras = () => {
 
   return (
     <div className="flex flex-col items-center  text-center px-4 mt-10 ">
-      <div className="p-6 dark:bg-slate-300 w-11/12 card-bordered rounded-lg shadow-md h-svh">
+      <div className="p-6 dark:bg-slate-300 w-11/12 card-bordered rounded-lg shadow-md h-svh ">
         <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Compras
         </h2>
         <div className="mb-4 relative">
 
-          <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+          <span className="absolute inset-y-0 left-0 flex items-center pl-3 ">
           </span>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-800">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Imagen
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Producto
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Fecha
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Precio
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Acciones
                 </th>
               </tr>
@@ -90,7 +90,7 @@ const HistorialDeCompras = () => {
                 },
               ].map((compra) => (
                 <tr key={compra.id}>
-                  <td className="py-2 px-4 border-b border-gray-600 bg-gray-50">
+                  <td className="py-2 px-4 border-b border-gray-600 bg-gray-100">
                     <img
                       src={compra.imagen}
                       alt={compra.producto}
@@ -100,13 +100,13 @@ const HistorialDeCompras = () => {
                   <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.producto}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                     {compra.fecha}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.precio}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                     <button
                       onClick={() => DescargaMutation.mutate()}
                       className=" bg-[#39A900]  text-white px-4 py-2 rounded hover:bg-[#1f641b] transition-all duration-300 ease-in-out"

@@ -61,19 +61,19 @@ const SellerProduct = () => {
           <table className="min-w-full bg-gray-800">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   ID
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Comprador
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Fecha
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Total
                 </th>
-                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                <th className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                   Acciones
                 </th>
               </tr>
@@ -88,19 +88,19 @@ const SellerProduct = () => {
               ) : orders.length > 0 ? (
                 orders.map((order) => (
                   <tr key={order.id}>
-                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                       {order.id}
                     </td>
                     <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       {order.comprador}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                       {order.fecha}
                     </td>
                     <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                       {order.total}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
+                    <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
                       <button
                         // onClick={() => generarPDF(order)}
                         className=" bg-[#39A900]  text-white px-4 py-2 rounded hover:bg-blue-600"

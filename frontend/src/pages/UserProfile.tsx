@@ -10,6 +10,7 @@ import { Token } from "../Interfaces";
 import ShopHistory from "./ShopHistory";
 import ModalEditProfile from "../components/shared/Modal/ModalEditUser";
 import VendedorProduct from "./VendedorProduct";
+import ModalRequestSeller from "../components/shared/Modal/ModalARequestSeller";
 
 const UserProfile = () => {
   const [show, setShow] = useState<string>("purchase-history");
@@ -160,20 +161,11 @@ const UserProfile = () => {
                         throw new Error("Function not implemented.");
                       }}
                     />
-                    <ModalEditProfile
-                      stateName={stateName}
-                      setStateName={setStateName}
-                      stateLast={stateLast}
-                      setStateLast={setStateLast}
-                      image={image}
-                      handleFileChange={handleFileChange}
-                      removeImage={removeImage}
-                      setShow={function (): void {
-                        throw new Error("Function not implemented.");
-                      }}
-                      handleSubmit={function (): void {
-                        throw new Error("Function not implemented.");
-                      }}
+                    <ModalRequestSeller userId={""} requestSellerStatus={function (): void {
+                      throw new Error("Function not implemented.");
+                    } }                     
+                    
+                    
                     />
                   </div>
                 </div>
