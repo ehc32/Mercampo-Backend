@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { get_solo_user } from '../../../api/users';
 import MySwiper from '../../shared/Swiper/swiper';
 import Map from '../map/Map';
+import { useCartStore } from '../../../hooks/cart';
+import { toast } from 'react-toastify';
 import { get_all_images_product, get_solo } from './../../../api/products';
 import './../../../global/dashlite.css';
 import './styles.css';
@@ -35,10 +37,13 @@ interface Producto {
 
 const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchProductos }) => {
     const { slug } = useParams<{ slug: string }>();
-    const [producto, setProducto] = useState<Producto | null>(null);
-    const [usuario, setUsuario] = useState<User | null>(null);
+    const [producto, setProducto] = useState<Producto>();
+    const [usuario, setUsuario] = useState<User>();
     const [images, setImages] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const [cantidad, setCantidad] = useState(0);
+    const addToCart = useCartStore(state => state.addToCart);
 
     useEffect(() => {
         const fetchProducto = async () => {
@@ -169,40 +174,32 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchPro
                                                             <div className="product-meta">
                                                                 <div className='productCatn'>
                                                                     <div className={darkMode ? "fs-14px text-muted  color-dark" : "fs-14px text-muted"}>Selecciona una cantidad</div>
-                                                                    <div className={darkMode ? "fs-16px fw-bold text-secondary total  color-dark" : "fs-16px fw-bold text-secondary total"}>$ 0</div>
+                                                                    <div className={darkMode ? "fs-16px fw-bold text-secondary total color-dark" : "fs-16px fw-bold text-secondary total"}>
+                                                                        {`$ ${cantidad * (producto?.price || 0)}`}
+                                                                    </div>
+
                                                                 </div>
                                                                 <ul className="d-flex flex-wrap max-w-64 g-2 pt-1">
                                                                     <li className="w-140px item-row">
                                                                         <div className="cantidadOrden">
                                                                             <button
-                                                                                className={darkMode ? "btn btn-icon btn-outline-light number-spinner-btn number-minus  color-dark" : "btn btn-icon btn-outline-light number-spinner-btn number-minus"}
-                                                                                data-number="minus"
+                                                                                className={darkMode ? "btn btn-icon btn-outline-light number-spinner-btn number-minus color-dark" : "btn btn-icon btn-outline-light number-spinner-btn number-minus"}
                                                                                 onClick={() => {
-                                                                                    const input = document.querySelector('.input-increment') as HTMLInputElement;
-                                                                                    const currentValue = parseInt(input.value);
-                                                                                    const totalElement = document.querySelector('.total');
-                                                                                    const productoprice = producto?.price || 0;
-                                                                                    input.value = (currentValue <= 0 ? 0 : currentValue - 1).toString();
-                                                                                    totalElement!.innerText = currentValue <= 0 ? '$ 0' : `$ ${(currentValue - 1) * productoprice}`;
-                                                                                }}>
+                                                                                    setCantidad(prevCantidad => Math.max(prevCantidad - 1, 0));
+                                                                                }}
+                                                                            >
                                                                                 <em className="icon bi bi-dash"></em>
                                                                             </button>
                                                                             <input
                                                                                 type="number"
-                                                                                value="0"
-                                                                                className={darkMode ? 'input-increment  color-dark' : 'input-increment'}
-                                                                                disabled
+                                                                                value={cantidad}
+                                                                                className={darkMode ? 'input-increment color-dark' : 'input-increment'}
+                                                                                readOnly
                                                                             />
                                                                             <button
-                                                                                className={darkMode ? "btn btn-icon btn-outline-light number-spinner-btn number-plus  color-dark" : "btn btn-icon btn-outline-light number-spinner-btn number-plus"}
-                                                                                data-number="plus"
+                                                                                className={darkMode ? "btn btn-icon btn-outline-light number-spinner-btn number-plus color-dark" : "btn btn-icon btn-outline-light number-spinner-btn number-plus"}
                                                                                 onClick={() => {
-                                                                                    const input = document.querySelector('.input-increment') as HTMLInputElement;
-                                                                                    const currentValue = parseInt(input.value);
-                                                                                    const totalElement = document.querySelector('.total');
-                                                                                    const productoprice = producto?.price || 0;
-                                                                                    input.value = (currentValue + 1).toString();
-                                                                                    totalElement!.innerText = `$ ${(currentValue + 1) * productoprice}`;
+                                                                                    setCantidad(prevCantidad => prevCantidad + 1);
                                                                                 }}
                                                                             >
                                                                                 <i className="icon bi bi-plus"></i>
@@ -211,7 +208,22 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchPro
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <button className="btn btn-primary mt-3" style={{ backgroundColor: "#39A900" }}>Añadir al carrito</button>
+                                                            <button
+                                                                className="btn btn-primary mt-3"
+                                                                style={{ backgroundColor: "#39A900" }}
+                                                                onClick={() => {
+                                                                    if (cantidad > 0) {
+                                                                        addToCart(producto, cantidad);
+                                                                        toast.dismiss();
+                                                                        toast.success("Producto agregado al carrito exitosamente");
+                                                                    } else {
+                                                                        toast.error("Selecciona al menos una unidad para añadir al carrito");
+                                                                    }
+                                                                }}
+                                                            >
+                                                                Añadir al carrito
+                                                            </button>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -250,7 +262,8 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchPro
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Map address={producto?.map_locate || ''} />                                        </div>
+                                            <Map address={producto?.map_locate || ''} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

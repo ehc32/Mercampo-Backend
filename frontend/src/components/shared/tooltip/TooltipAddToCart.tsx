@@ -8,7 +8,7 @@ export default function BasicTooltip({ producto }) {
     const addToCart = useCartStore(state => state.addToCart);
 
     const addCart = (producto) => {
-
+        toast.dismiss();
         toast.success("Producto agregado al carrito exitosamente");
         addToCart(producto)
     }

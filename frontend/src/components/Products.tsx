@@ -23,8 +23,6 @@ const Products = ({ results }: Props) => {
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        console.log("la pagina actual es " + page)
-
         const fetchProductos = async (page: number) => {
             try {
                 console.log("trayendo productos de la pagina: " + page)

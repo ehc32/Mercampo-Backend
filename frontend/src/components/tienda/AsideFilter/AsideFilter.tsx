@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
-import './Aside.css';
-import { Link, useLocation } from 'react-router-dom';
 import {
+    Backdrop,
     Box,
-    Typography,
-    TextField,
     Button,
     Checkbox,
-    FormGroup,
-    FormControlLabel,
-    Slider,
-    MenuItem,
-    Select,
-    IconButton,
-    Backdrop,
-    Modal,
-    Fade,
     Chip,
+    Drawer,
+    Fade,
+    FormControlLabel,
+    FormGroup,
+    MenuItem,
+    Modal,
+    Select,
+    TextField,
+    Typography
 } from '@mui/material';
-
-import { useAbierto } from '../../../hooks/aside';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useDrawer } from '../../../context/DrawerProvider'; // Importa el hook del contexto
 
 const AsideFilter = ({
     bringDataFilter,
@@ -36,39 +33,38 @@ const AsideFilter = ({
     time,
     searchItem,
     startDate,
-    endDate, setLocate
+    endDate,
+    setLocate
 }) => {
+    const { abierto, toggleAbierto } = useDrawer(); // Usa el hook del contexto
 
     const [timer, setTimer] = useState(null);
+
     const buscarTextfield = (e) => {
         setSearchItem(e);
         bringDataFilter();
     };
 
-    const handleChange = (e:any) => {
+    const handleChange = (e) => {
         const value = e.target.value;
         setSearchItem(value);
 
-        // Limpiar el temporizador anterior
         if (timer) {
             clearTimeout(timer);
         }
 
-        // Configurar un nuevo temporizador
         const newTimer = setTimeout(() => {
             buscarTextfield(value);
-        }, 1000); // 1000 ms = 1 segundo
+        }, 1000);
 
         setTimer(newTimer);
     };
-
 
     const precioOptions = [
         { label: 'Menos de 50 mil pesos', value: 1 },
         { label: 'Entre 50 mil y 150 mil', value: 2 },
         { label: 'Más de 150 mil', value: 3 },
     ];
-    const { abierto, toggleAbierto } = useAbierto();
 
     const categorias = ['FRUTAS', 'VERDURAS', 'GRANOS', 'OTROS'];
 
@@ -96,7 +92,6 @@ const AsideFilter = ({
     };
 
     const handleTimeRangeChange = (e) => {
-        console.log(e.target.value);
         setTime(e.target.value);
     };
 
@@ -117,250 +112,227 @@ const AsideFilter = ({
     };
 
     return (
-        <aside className="asideCard">
-            <div className='nav-responsive'>
-                <Link
-                    to={'/'}
-                    onClick={toggleAbierto}
-                    className='text-black  px-2 rounded-lg fs-18px item_navbar item-res'
+        <Drawer
+            open={abierto} // Usa el estado del contexto para determinar si el Drawer está abierto
+            onClose={toggleAbierto} // Usa la función del contexto para alternar el Drawer
+            sx={{
+                width: 300,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    width: 300,
+                    boxSizing: 'border-box',
+                },
+            }}
+        >
+            <Box sx={{ p: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Typography variant="h6" gutterBottom>
+                        Búsqueda de productos
+                    </Typography>
+                </Box>
+                <Typography variant="body2" gutterBottom>
+                    Ingrese un término de búsqueda para encontrar productos relacionados.
+                </Typography>
+                <form
+                    action=""
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                    }}
                 >
-                    Inicio
-                </Link>
-
-                <Link
-                    to={'/store'}
-                    onClick={toggleAbierto}
-                    className='text-black px-2 rounded-lg fs-18px item_navbar item-res'
-                >
-                    Tienda
-                </Link>
-                <Link
-                    to={'/addprod'}
-                    onClick={toggleAbierto}
-                    className='text-black px-2 rounded-lg fs-18px item_navbar item-res'
-                >
-                    Carrito de compras
-                </Link>
-            </div>
-            {
-                locationPath.pathname === '/store' && (
-                    <>
-                        <Box sx={{ p: 2 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
-                                <Typography variant="h6" gutterBottom>
-                                    Busqueda de productos
-                                </Typography>
-                            </Box>
-                            <Typography variant="body2" gutterBottom>
-                                Ingrese un término de búsqueda para encontrar productos relacionados.
-                            </Typography>
-                            <form
-                                action=""
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    id="search"
-                                    label="Buscar ..."
-                                    value={searchItem}
-                                    onChange={handleChange}
-                                />
-                            </form>
-                        </Box>
-                        <Box sx={{ p: 2 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
-                                <Typography variant="h6" gutterBottom>
-                                    Categoría
-                                </Typography>
-                            </Box>
-                            <Typography variant="body2" gutterBottom>
-                                Seleccione una o varias categorías para filtrar los productos.
-                            </Typography>
-                            <FormGroup>
-                                {categorias.map((categoria, index) => (
-                                    <FormControlLabel
-                                        key={index}
-                                        control={
-                                            <Checkbox
-                                                id={categoria}
-                                                name={categoria}
-                                                value={categoria}
-                                                onChange={handleCategoryChange}
-                                            />
-                                        }
-                                        label={categoria}
+                    <TextField
+                        fullWidth
+                        id="search"
+                        label="Buscar ..."
+                        value={searchItem}
+                        onChange={handleChange}
+                    />
+                </form>
+                <Box sx={{ p: 2 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" gutterBottom>
+                            Categoría
+                        </Typography>
+                    </Box>
+                    <Typography variant="body2" gutterBottom>
+                        Seleccione una o varias categorías para filtrar los productos.
+                    </Typography>
+                    <FormGroup>
+                        {categorias.map((categoria, index) => (
+                            <FormControlLabel
+                                key={index}
+                                control={
+                                    <Checkbox
+                                        id={categoria}
+                                        name={categoria}
+                                        value={categoria}
+                                        onChange={handleCategoryChange}
                                     />
-                                ))}
-                            </FormGroup>
-                        </Box>
-                        <Box sx={{ p: 2 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                }
+                                label={categoria}
+                            />
+                        ))}
+                    </FormGroup>
+                </Box>
+                <Box sx={{ p: 2 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" gutterBottom>
+                            Precio máximo
+                        </Typography>
+                    </Box>
+                    <Typography variant="body2" gutterBottom>
+                        Seleccione el rango de precio más acorde a su bolsillo.
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                        {precioOptions.map((option) => (
+                            <Chip
+                                key={option.value}
+                                label={option.label}
+                                onClick={() => setPrice(option.value)}
+                                style={{ marginRight: 10, marginBottom: 10 }}
+                            />
+                        ))}
+                    </Box>
+                </Box>
+                <Box sx={{ p: 2 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" gutterBottom>
+                            Rango de fechas
+                        </Typography>
+                    </Box>
+                    <Typography variant="body2" gutterBottom>
+                        Seleccione un rango de fechas para filtrar los productos.
+                    </Typography>
+                    <div className='flex flex-col justify-between align-middle'>
+                        <Select
+                            id="date-range"
+                            value={time || 'todos'}
+                            style={{ height: "4em", width: "100%" }}
+                            onChange={handleTimeRangeChange}
+                        >
+                            <MenuItem value="todos">Todos</MenuItem>
+                            <MenuItem value="hoy">Publicados hoy</MenuItem>
+                            <MenuItem value="ayer">Publicados ayer</MenuItem>
+                            <MenuItem value="semana">Esta semana</MenuItem>
+                            <MenuItem value="mes">Este mes</MenuItem>
+                        </Select>
+                        <Button
+                            variant="contained"
+                            color="success"
+                            fullWidth
+                            onClick={handleOpen}
+                            className='my-2'
+                        >
+                            Establecer fechas manualmente
+                        </Button>
+                    </div>
+                </Box>
+                <Box sx={{ p: 2 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="h6" gutterBottom>
+                            Ubicación
+                        </Typography>
+                    </Box>
+                    <Typography variant="body2" gutterBottom>
+                        Seleccione una ubicación para filtrar los productos.
+                    </Typography>
+                    <Select
+                        id="location"
+                        value={locate || 'todos'}
+                        style={{ height: "4em", width: "100%" }}
+                        onChange={handleLocationChange}
+                    >
+                        <MenuItem value="todos">Todos los lugares</MenuItem>
+                        <MenuItem value="bogota">Bogotá</MenuItem>
+                        <MenuItem value="medellin">Medellín</MenuItem>
+                        <MenuItem value="cali">Cali</MenuItem>
+                        <MenuItem value="Neiva">Neiva</MenuItem>
+                    </Select>
+                </Box>
 
-                                <Typography variant="h6" gutterBottom>
-                                    Precio máximo
-                                </Typography>
-                            </Box>
-                            <Typography variant="body2" gutterBottom>
-                                Seleccione el rango de precio más acorde a su bolsillo.
+                <Modal
+                    aria-labelledby="spring-modal-title"
+                    aria-describedby="spring-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                        backdrop: {
+                            TransitionComponent: Fade,
+                        },
+                    }}
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Typography id="spring-modal-title" variant="h6" component="h2">
+                                Establecer fechas
                             </Typography>
-
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                {precioOptions.map((option) => (
-                                    <Chip
-                                        key={option.value}
-                                        label={option.label}
-                                        onClick={() => setPrice(option.value)}
-                                        style={{ marginRight: 10, marginBottom: 10 }}
-                                    />
-                                ))}
-                            </Box>
-                        </Box>
-                        <Box sx={{ p: 2 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
-                                <Typography variant="h6" gutterBottom>
-                                    Rango de fechas
-                                </Typography>
-                            </Box>
-                            <Typography variant="body2" gutterBottom>
+                            <Typography id="spring-modal-description" sx={{ mt: 2 }}>
                                 Seleccione un rango de fechas para filtrar los productos.
                             </Typography>
-                            <div className='flex flex-col justify-between align-middle'>
-                                <Select
-                                    id="date-range"
-                                    value={time || 'todos'}
-                                    style={{ height: "4em", width: "100%" }}
-                                    onChange={handleTimeRangeChange}
-                                >
-                                    <MenuItem value="todos">Todos</MenuItem>
-                                    <MenuItem value="hoy">Publicados hoy</MenuItem>
-                                    <MenuItem value="ayer">Publicados ayer</MenuItem>
-                                    <MenuItem value="semana">Esta semana</MenuItem>
-                                    <MenuItem value="mes">Este mes</MenuItem>
-                                </Select>
-                                <Button
-                                    variant="contained"
-                                    color="success"
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="body2">Fecha de inicio:</Typography>
+                                <TextField
                                     fullWidth
-                                    onClick={handleOpen}
-                                    className='my-2'
-                                >
-                                    Establecer fechas manualmente
-                                </Button>
-                            </div>
-                        </Box>
-                        <Box sx={{ p: 2 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
-                                <Typography variant="h6" gutterBottom>
-                                    Ubicación
-                                </Typography>
+                                    id="start-date"
+                                    type="date"
+                                    sx={{ mt: 1 }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={startDate}
+                                    onChange={handleStartDateChange}
+                                />
                             </Box>
-                            <Typography variant="body2" gutterBottom>
-                                Seleccione una ubicación para filtrar los productos.
-                            </Typography>
-                            <Select
-                                id="location"
-                                value={locate || 'todos'}
-                                style={{ height: "4em", width: "100%" }}
-                                onChange={handleLocationChange}
-                            >
-                                <MenuItem value="todos">Todos los lugares</MenuItem>
-                                <MenuItem value="bogota">Bogotá</MenuItem>
-                                <MenuItem value="medellin">Medellín</MenuItem>
-                                <MenuItem value="cali">Cali</MenuItem>
-                                <MenuItem value="Neiva">Neiva</MenuItem>
-                            </Select>
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="body2">Fecha de fin:</Typography>
+                                <TextField
+                                    fullWidth
+                                    id="end-date"
+                                    type="date"
+                                    sx={{ mt: 1 }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={endDate}
+                                    onChange={handleEndDateChange}
+                                />
+                            </Box>
+                            <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
+                                <Button variant="contained" onClick={handleClose}>
+                                    Aceptar
+                                </Button>
+                            </Box>
                         </Box>
-
-                        <Modal
-                            aria-labelledby="spring-modal-title"
-                            aria-describedby="spring-modal-description"
-                            open={open}
-                            onClose={handleClose}
-                            closeAfterTransition
-                            slots={{ backdrop: Backdrop }}
-                            slotProps={{
-                                backdrop: {
-                                    TransitionComponent: Fade,
-                                },
-                            }}
-                        >
-                            <Fade in={open}>
-                                <Box sx={style}>
-                                    <Typography id="spring-modal-title" variant="h6" component="h2">
-                                        Establecer fechas
-                                    </Typography>
-                                    <Typography id="spring-modal-description" sx={{ mt: 2 }}>
-                                        Seleccione un rango de fechas para filtrar los productos.
-                                    </Typography>
-                                    <Box sx={{ mt: 2 }}>
-                                        <Typography variant="body2">Fecha de inicio:</Typography>
-                                        <TextField
-                                            fullWidth
-                                            id="start-date"
-                                            type="date"
-                                            sx={{ mt: 1 }}
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                            value={startDate}
-                                            onChange={handleStartDateChange}
-                                        />
-                                    </Box>
-                                    <Box sx={{ mt: 2 }}>
-                                        <Typography variant="body2">Fecha de fin:</Typography>
-                                        <TextField
-                                            fullWidth
-                                            id="end-date"
-                                            type="date"
-                                            sx={{ mt: 1 }}
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                            value={endDate}
-                                            onChange={handleEndDateChange}
-                                        />
-                                    </Box>
-                                    <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
-                                        <Button variant="contained" onClick={handleClose}>
-                                            Aceptar
-                                        </Button>
-                                    </Box>
-                                </Box>
-                            </Fade>
-                        </Modal>
-                        <Button
-                            className='mt-2'
-                            variant="contained"
-                            color="success"
-                            fullWidth
-                            onClick={bringDataFilter}
-                        >
-                            Establecer filtros
-                        </Button>
-                        <Button
-                            className='mt-2 bg-boton'
-                            variant="contained"
-                            color="success"
-                            fullWidth
-                            onClick={deleteDataFilter}
-                        >
-                            Eliminar filtros
-                        </Button>
-                    </>
-                )
-            }
-        </aside >
+                    </Fade>
+                </Modal>
+                <Button
+                    className='mt-2'
+                    variant="contained"
+                    color="success"
+                    fullWidth
+                    onClick={bringDataFilter}
+                >
+                    Establecer filtros
+                </Button>
+                <Button
+                    className='mt-2'
+                    variant="contained"
+                    color="error"
+                    fullWidth
+                    onClick={deleteDataFilter}
+                >
+                    Borrar filtros
+                </Button>
+            </Box>
+        </Drawer>
     );
 };
 
+export default AsideFilter;
+
 const style = {
-    position: 'absolute' as 'absolute',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -370,5 +342,3 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
-export default AsideFilter;

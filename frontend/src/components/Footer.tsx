@@ -1,20 +1,19 @@
 
-import { FaFacebook, FaTwitter, FaYoutube, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
-import { useDarkMode } from '../hooks/theme';
+import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
 
-  const { darkMode } = useDarkMode();
+
 
   return (
-    <footer id="footer" className={darkMode ? 'footer-dark' : 'footer-light'}>
+    <footer id="footer" className='footer-light'>
       <div className="flex justify-center mb-4 ">
       </div>
       <div className="container mx-auto px-4 text-[#39A900]">
         <div className="text-center m-auto">
-            <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="fs-16px block w-35 m-auto">
-              Servicios Tecnologicos - Regional Huila
-            </a>
+          <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="fs-16px block w-35 m-auto">
+            Servicios Tecnologicos - Regional Huila
+          </a>
           <div>
             <p className="fs-16px text-lg font-semibold">Centro de la Empresa la Industria, la Empresa y los Servicios</p>
             <p className="fs-16px text-sm">Carrera 9 No 68-50, SENA - PBX (60 8) 8757040 IP 83352</p>

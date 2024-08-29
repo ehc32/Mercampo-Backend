@@ -9,6 +9,8 @@ import { create_order } from "../api/orders";
 import Footer from "../components/Footer";
 import { useCartStore } from "../hooks/cart";
 import './style.css';
+import { FaTrash } from 'react-icons/fa';
+
 
 const CartPage = () => {
 
@@ -149,7 +151,7 @@ const CartPage = () => {
                                 <div className="overflow-x-auto tablaCart">
                                     <table className="w-full text-sm text-left text-gray-500">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-                                            <tr>
+                                            <tr><th scope="col" className="px-1 py-3 text-center w-10"></th>
                                                 <th scope="col" className="px-4 py-3 text-center">Foto</th>
                                                 <th scope="col" className="px-4 py-3 text-center">Producto</th>
                                                 <th scope="col" className="px-4 py-3 text-center">Categoria</th>
@@ -161,6 +163,13 @@ const CartPage = () => {
                                         <tbody>
                                             {cartPagina.map((product) => (
                                                 <tr key={product.id} className="border-b cursor-pointer hover:bg-gray-100" >
+                                                    <td className="px-4 py-2 text-center">
+                                                        <button onClick={() => useCartStore.getState().removeProduct(product)} className="inline-flex items-center p-1 w-10 text-sm font-medium text-gray-500 focus:outline-none hover:text-gray-700" type="button">
+                                                            <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </td>
                                                     <td scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap text-center">
                                                         <img src={product.first_image} alt={product.name} className="mx-auto h-12 rounded-full border-1 border-green-500" />
                                                     </td>
@@ -211,6 +220,8 @@ const CartPage = () => {
                                     previousLinkClassName="pagina-anterior-link"
                                     nextClassName="pagina-siguiente"
                                     nextLinkClassName="pagina-siguiente-link"
+                                    previousLabel="Anterior"
+                                    nextLabel="Siguiente"
                                 />
                             </div>
                         </div>

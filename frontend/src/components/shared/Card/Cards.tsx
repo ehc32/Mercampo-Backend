@@ -38,7 +38,6 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
         return `${dia} de ${mes}`;
     }
 
-
     return (
         <div className='beforecard'>
             <div className='cardbody cardBodyLight'>

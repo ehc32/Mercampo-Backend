@@ -1,28 +1,25 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import jwt_decode from "jwt-decode";
 import { Fragment } from 'react';
-import { Link } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
-import { useAbierto } from "../hooks/aside"; // Importa el hook useAbierto
+
 import ST_Icon from './assets/ST/ST_Icon';
-import './style.css'
 import AsideToggle from './shared/tooltip/TooltipAside';
 import BasicTooltip from './shared/tooltip/TooltipOpenCart';
+import './style.css';
 
 interface HeaderProps {
-  estadoAside: boolean;
-  setEstadoAside: (newState: boolean) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
+const Header: React.FC<HeaderProps> = () => {
 
   const token: string = useAuthStore.getState().access;
   const cart = useCartStore(state => state.cart);
   const { isAuth, role } = useAuthStore();
   const location = useLocation();
-  const { abierto, toggleAbierto } = useAbierto(); // Usa el hook useAbierto
+
 
   let is_admin: boolean = false;
   let is_seller: boolean = false;
@@ -56,9 +53,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                 <div className="flex">
                   {
                     location.pathname == '/store' && (
-
-                      <AsideToggle toggleAbierto={() => toggleAbierto(!abierto)} abierto={abierto} />
-
+                      <AsideToggle/>
                     )
                   }
                   <Link to={'/'} className='flex flex-row'>
@@ -126,7 +121,7 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                           {({ active }) => (
                             <Link
                               to="/profile"
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2                              text-sm text-gray-700')}
                             >
                               Perfil
                             </Link>
@@ -168,19 +163,26 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
                   </Menu>
                 ) : (
                   <>
-                    <Link
-                      to={'/login'}
-                      className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
-                    >
-                      Iniciar sesión
-                    </Link>
-
-                    <Link
-                      to={'/register'}
-                      className='text-green-600 hover:bg-green-600 hover:text-white font-bold py-2 px-4 rounded border border-green-600'
-                    >
-                      Registrar cuenta
-                    </Link>
+                    {
+                      location.pathname != "/login" && (
+                        <Link
+                          to={'/login'}
+                          className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+                        >
+                          Iniciar sesión
+                        </Link>
+                      )
+                    }
+                    {
+                      location.pathname != "/register" && (
+                        <Link
+                          to={'/register'}
+                          className='text-green-600 hover:bg-green-600 hover:text-white font-bold py-2 px-4 rounded border border-green-600'
+                        >
+                          Registrar cuenta
+                        </Link>
+                      )
+                    }
                   </>
                 )
                 }
@@ -188,10 +190,9 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
             </div>
           </div>
         </>
-      )
-      }
-    </Disclosure >
+      )}
+    </Disclosure>
   );
-}
+};
 
 export default Header;
