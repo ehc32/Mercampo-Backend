@@ -20,7 +20,7 @@ const RegisterPage = () => {
   const registerMutation = useMutation({
     mutationFn: () => registerRequest(email, name, last_name, phone, password),
     onSuccess: () => {
-      toast.success("Registro exitoso! logueate!");
+      toast.success("Registro exitoso! Inicia sesión!");
       navigate("/login");
     },
     onError: () => {

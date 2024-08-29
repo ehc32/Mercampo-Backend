@@ -54,8 +54,13 @@ const Header: React.FC<HeaderProps> = ({ estadoAside, setEstadoAside }) => {
             <div className="relative flex h-16 items-center justify-between ">
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
                 <div className="flex">
+                  {
+                    location.pathname == '/store' && (
 
-                  <AsideToggle toggleAbierto={toggleAbierto} abierto={abierto} />
+                      <AsideToggle toggleAbierto={() => toggleAbierto(!abierto)} abierto={abierto} />
+
+                    )
+                  }
                   <Link to={'/'} className='flex flex-row'>
                     <ST_Icon />
                   </Link>
