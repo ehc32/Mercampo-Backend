@@ -3,7 +3,7 @@ import {
     useQueryClient,
 } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { delete_product, get_all_products_paginated } from "../api/products";
@@ -67,8 +67,8 @@ const Products = ({ results }: Props) => {
             <h2 className="text-xl font-semibold mb-5 mt-5 text-center text-black ">
           Lista de Productos
         </h2>
-            <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-100">
-                <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 bg-slate-50">
+            <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-50 border-top">
+                <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 bg-slate-100">
                     <tr>
                         <th scope="col" className="px-4 py-3">
                             ID producto
@@ -163,3 +163,7 @@ const Products = ({ results }: Props) => {
 };
 
 export default Products;
+
+function setLoading(arg0: boolean) {
+    throw new Error('Function not implemented.');
+}

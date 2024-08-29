@@ -1,23 +1,23 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
 import { AiFillEdit } from "react-icons/ai";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: '#FFFFFF',
+  bgcolor: "#FFFFFF",
   boxShadow: 24,
   pt: 2,
   px: 4,
   pb: 3,
-  transition: 'all 0.5s ease-in-out',
+  transition: "all 0.5s ease-in-out",
 };
 
 interface Props {
@@ -68,7 +68,16 @@ export default function ModalEditProfile({
 
   return (
     <div>
-      <Button onClick={handleOpen} startIcon={<AiFillEdit size={22} className="text-green-500 cursor-pointer font-thin" />}>
+      <Button
+        onClick={handleOpen}
+        startIcon={
+          <AiFillEdit
+            size={16}
+            className="text-green-500 cursor-pointer font-thin"
+          />
+        }
+        style={{ fontSize: '0.65rem' }}
+      >
         Editar
       </Button>
       <Modal
@@ -77,13 +86,15 @@ export default function ModalEditProfile({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
         onClick={(e) => {
-          if (e.target.id === 'modal-container') {
+          if (e.target.id === "modal-container") {
             handleClose();
           }
         }}
       >
         <Box sx={{ ...style, width: 400 }} id="modal-container">
-          <h2 id="child-modal-title" className='form-title'>Editar perfil</h2>
+          <h2 id="child-modal-title" className="form-title">
+            Editar perfil
+          </h2>
           <form onSubmit={handleFormSubmit}>
             <div className="p-3">
               <InputLabel id="name-label">Nombre</InputLabel>
@@ -94,7 +105,7 @@ export default function ModalEditProfile({
                 value={stateName}
                 onChange={(e) => setStateName(e.target.value)}
                 error={nameError}
-                helperText={nameError ? 'Por favor ingresa un nombre' : ''}
+                helperText={nameError ? "Por favor ingresa un nombre" : ""}
               />
             </div>
             <div className="p-3">
@@ -106,7 +117,7 @@ export default function ModalEditProfile({
                 value={stateLast}
                 onChange={(e) => setStateLast(e.target.value)}
                 error={lastError}
-                helperText={lastError ? 'Por favor ingresa un apellido' : ''}
+                helperText={lastError ? "Por favor ingresa un apellido" : ""}
               />
             </div>
             <div className="sm:col-span-2 p-2">
@@ -134,7 +145,9 @@ export default function ModalEditProfile({
                       ></path>
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Toca para actualizar</span>{" "}
+                      <span className="font-semibold">
+                        Toca para actualizar
+                      </span>{" "}
                       o arraste y sueltalo aca
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">

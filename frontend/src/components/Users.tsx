@@ -1,7 +1,7 @@
 import Pagination from '@mui/material/Pagination';
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { delete_user, edit_user, get_users } from "../api/users";
 import { User } from "../Interfaces";
 import Loader from "./Loader";
@@ -64,7 +64,7 @@ const Users = ({ results }: Props) => {
       <h2 className="text-xl font-semibold mb-5 mt-5 text-center text-black ">
           Lista de Usuarios
         </h2>
-        <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-50">
+        <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-50 border-top">
         <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 bg-slate-100">
           <tr>
             <th scope="col" className="px-4 py-3">
