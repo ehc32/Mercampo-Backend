@@ -90,7 +90,7 @@ const HistorialDeCompras = () => {
                 },
               ].map((compra) => (
                 <tr key={compra.id}>
-                  <td className="py-2 px-4 border-b border-gray-600 bg-gray-100">
+                  <td className="py-2 px-4 border-b border-gray-600 bg-gray-50">
                     <img
                       src={compra.imagen}
                       alt={compra.producto}
@@ -100,13 +100,13 @@ const HistorialDeCompras = () => {
                   <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.producto}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.fecha}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     {compra.precio}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-100">
+                  <td className="py-2 px-4 border-b border-gray-600 text-black bg-gray-50">
                     <button
                       onClick={() => DescargaMutation.mutate()}
                       className=" bg-[#39A900]  text-white px-4 py-2 rounded hover:bg-[#1f641b] transition-all duration-300 ease-in-out"
