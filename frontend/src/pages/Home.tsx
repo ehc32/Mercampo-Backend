@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useAbierto } from "../hooks/aside";
 import Participants from "../components/home/Participants/Participants";
+import CarrouselLast12 from "../components/home/LastProducts";
 
 export default function Tienda() {
     const { darkMode } = useDarkMode();
@@ -79,6 +80,7 @@ export default function Tienda() {
                 )}
             </AnimatePresence>
             <Hero />
+            <CarrouselLast12 />
             <RandomProducts productos={productosRandom} />
             <About />
             <Swiper width="80%" height="50vh" datos={carrouselData} isUpSwiper={false} />

@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { get_all_products_paginated_to_shop, filter_request } from '../api/products';
 import Content from "../components/tienda/Content/Content";
-import { useAbierto } from "../hooks/aside";
+import { useAbierto, toggleAbierto } from "../hooks/aside";
 import { motion, AnimatePresence } from 'framer-motion';
 import './style.css';
 import { toast } from "react-toastify";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
+import AsideToggle from '../components/shared/tooltip/TooltipAside';
 
 const Store = () => {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [dataLenght, setDataLenght] = useState(0);
     const [page, setPage] = useState<number>(1)
-    const { abierto, toggleAbierto } = useAbierto();
+    const { abierto } = useAbierto();
+
     const [filtrado, toggleFiltrado] = useState<boolean>(false); // revisar si se está filtrado
 
     // FILTROS
@@ -121,8 +123,9 @@ const Store = () => {
                     )}
                 </AnimatePresence>
                 <Content productos={productos} loading={loading} dataLenght={dataLenght} page={page} setPage={setPage} />
+                <AsideToggle abierto={abierto} toggleAbierto={toggleAbierto} />
             </main>
         </section>
     );
-};
+}
 export default Store;
