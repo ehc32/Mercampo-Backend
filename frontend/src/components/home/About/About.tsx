@@ -2,7 +2,7 @@
 export default function Component() {
     return (
         <div className="w-full">
-            <section className="w-full bg-[url('/public/fondoa.jpg')] bg-cover bg-center py-32 relative">
+            <section className="w-full bg-[url('/public/campesino.jpeg')] bg-cover bg-center py-32 relative">
                 <div className="container px-4 md:px-6">
                     <div className="max-w-3xl space-y-4 text-start text-primary-foreground">
                         <h1 className="text-4xl font-bold text-white tracking-tighter sm:text-5xl md:text-6xl">Nuestra Plataforma de Comercio para Campesinos</h1>

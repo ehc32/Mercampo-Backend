@@ -33,7 +33,6 @@ export interface User {
     email: string;
     phone: string;
     name: string;
-    last_name: string;
 };
 
 export interface Token {
@@ -42,6 +41,5 @@ export interface Token {
     is_staff: boolean;
     email: string;
     name: string;
-    last_name: string;
     avatar: File | null;
 };

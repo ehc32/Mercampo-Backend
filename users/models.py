@@ -7,15 +7,23 @@ from django.contrib.auth.models import (
 )
 from enum import Enum
 
+
 class Role(Enum):
     ADMIN = "admin"
     CLIENT = "client"
     SELLER = "seller"
 
+
+class PublishStatus(Enum):
+    VENDIENDO = "vendiendo"
+    SOLICITANDO = "solicitando"
+    CLIENTE = "cliente"
+
+
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError("Debes tener un correo electronico")
+            raise ValueError("Debes tener un correo electrónico")
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -32,25 +40,39 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault("role", Role.ADMIN.value)
         return self.create_user(email, password, **extra_fields)
 
+
 def validate_role(value):
     if value not in [tag.value for tag in Role]:
         raise ValueError("Rol no válido")
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=100, unique=True)
-    name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    name = models.CharField(max_length=150)
     phone = models.CharField(max_length=20, null=True, blank=True, default=None)
     avatar = models.ImageField(default="avatar.png")
-    can_publish = models.BooleanField(default=False, null=False)
+    is_active = models.BooleanField(default=True, null=False)
+    can_publish = models.CharField(
+        max_length=20,
+        choices=[(status.value, status.value) for status in PublishStatus],
+        default=PublishStatus.CLIENTE.value,
+    )
     date_joined = models.DateTimeField(default=timezone.now)
-    role = models.CharField(max_length=10, choices=[(tag.name, tag.value) for tag in Role], default=Role.CLIENT.value)
+    role = models.CharField(
+        max_length=10,
+        choices=[(tag.name, tag.value) for tag in Role],
+        default=Role.CLIENT.value,
+    )
+
     objects = CustomUserManager()
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     class Meta:
         ordering = ["-date_joined"]
 
+
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    date_requested = models.DateTimeField(default=timezone.now)

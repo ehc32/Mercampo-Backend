@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
-// import { useDarkMode } from "../hooks/theme";
+// 
 import Header from './Header';
 // import AsideFilter from './tienda/AsideFilter/AsideFilter';
 
@@ -14,7 +14,7 @@ const Layout = () => {
     <div>
       <Toaster />
       <Header estadoAside={estadoAside} setEstadoAside={setEstadoAside} />
-      <div className="min-h-[1000px] bg-white dark:bg-gray-900 content-layout">
+      <div className="min-h-[1000px] bg-white dark:bg-gray-900">
         <Outlet />
       </div>
     </div>

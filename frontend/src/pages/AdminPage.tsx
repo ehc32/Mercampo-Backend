@@ -8,6 +8,7 @@ import Orders from "../components/Orders";
 import Products from "../components/Products";
 import Users from "../components/Users";
 import Aprove from "../components/AprovSellerUser"
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const AdminPage = () => {
   const [show, setShow] = useState(0);
@@ -44,7 +45,7 @@ const AdminPage = () => {
   });
 
   return (
-    <section className="dark:bg-gray-900">
+    <section className="dark:bg-gray-900 mt-24">
       <div className="mx-auto max-w-screen-xl mb-10 px-4 lg:px-12 h-svh">
         <div className="bg-white dark:bg-gray-800 card-bordered relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -107,9 +108,11 @@ const AdminPage = () => {
           {show === 1 && <Products results={data} />}
           {show === 2 && <Orders results={orders} />}
           {show === 3 && <Users results={users} />}
-          
+
         </div>
       </div>
+
+      <AsideFilter />
       <Footer />
     </section>
   );

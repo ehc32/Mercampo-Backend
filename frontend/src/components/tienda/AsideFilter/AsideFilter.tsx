@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
-import './Aside.css';
-import { Link, useLocation } from 'react-router-dom';
 import {
+    Backdrop,
     Box,
-    Typography,
-    TextField,
     Button,
     Checkbox,
-    FormGroup,
-    FormControlLabel,
-    Slider,
-    MenuItem,
-    Select,
-    IconButton,
-    Backdrop,
-    Modal,
-    Fade,
     Chip,
+    Drawer,
+    Fade,
+    FormControlLabel,
+    FormGroup,
+    MenuItem,
+    Modal,
+    Select,
+    TextField,
+    Typography
 } from '@mui/material';
-
-import { useAbierto } from '../../../hooks/aside';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useDrawer } from '../../../context/DrawerProvider'; // Importa el hook del contexto
+import ListAsideNav from '../ListAsideNav/ListAsideNav';
 
 const AsideFilter = ({
     bringDataFilter,
@@ -36,39 +34,42 @@ const AsideFilter = ({
     time,
     searchItem,
     startDate,
-    endDate, setLocate
+    endDate,
+    setLocate
 }) => {
-
+    const { abierto, toggleAbierto } = useDrawer(); // Usa el hook del contexto
+    const location = useLocation()
     const [timer, setTimer] = useState(null);
+
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    };
+
     const buscarTextfield = (e) => {
         setSearchItem(e);
         bringDataFilter();
     };
 
-    const handleChange = (e:any) => {
+    const handleChange = (e) => {
         const value = e.target.value;
         setSearchItem(value);
 
-        // Limpiar el temporizador anterior
         if (timer) {
             clearTimeout(timer);
         }
 
-        // Configurar un nuevo temporizador
         const newTimer = setTimeout(() => {
             buscarTextfield(value);
-        }, 1000); // 1000 ms = 1 segundo
+        }, 1000);
 
         setTimer(newTimer);
     };
-
 
     const precioOptions = [
         { label: 'Menos de 50 mil pesos', value: 1 },
         { label: 'Entre 50 mil y 150 mil', value: 2 },
         { label: 'Más de 150 mil', value: 3 },
     ];
-    const { abierto, toggleAbierto } = useAbierto();
 
     const categorias = ['FRUTAS', 'VERDURAS', 'GRANOS', 'OTROS'];
 
@@ -96,7 +97,6 @@ const AsideFilter = ({
     };
 
     const handleTimeRangeChange = (e) => {
-        console.log(e.target.value);
         setTime(e.target.value);
     };
 
@@ -117,62 +117,53 @@ const AsideFilter = ({
     };
 
     return (
-        <aside className="asideCard">
-            <div className='nav-responsive'>
-                <Link
-                    to={'/'}
-                    onClick={toggleAbierto}
-                    className='text-black  px-2 rounded-lg fs-18px item_navbar item-res'
-                >
-                    Inicio
-                </Link>
-
-                <Link
-                    to={'/store'}
-                    onClick={toggleAbierto}
-                    className='text-black px-2 rounded-lg fs-18px item_navbar item-res'
-                >
-                    Tienda
-                </Link>
-                <Link
-                    to={'/addprod'}
-                    onClick={toggleAbierto}
-                    className='text-black px-2 rounded-lg fs-18px item_navbar item-res'
-                >
-                    Carrito de compras
-                </Link>
-            </div>
+        <Drawer
+            open={abierto} // Usa el estado del contexto para determinar si el Drawer está abierto
+            onClose={toggleAbierto} // Usa la función del contexto para alternar el Drawer
+            sx={{
+                width: 300,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    width: 300,
+                    boxSizing: 'border-box',
+                },
+            }}
+        >
             {
-                locationPath.pathname === '/store' && (
-                    <>
-                        <Box sx={{ p: 2 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                window.innerWidth < 900 && (
+                    <ListAsideNav />
+                )
+            }
+            {
+                location.pathname == "/store" && (
 
-                                <Typography variant="h6" gutterBottom>
-                                    Busqueda de productos
-                                </Typography>
-                            </Box>
-                            <Typography variant="body2" gutterBottom>
-                                Ingrese un término de búsqueda para encontrar productos relacionados.
+
+
+                    <Box sx={{ p: 2 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                                Búsqueda de productos
                             </Typography>
-                            <form
-                                action=""
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    id="search"
-                                    label="Buscar ..."
-                                    value={searchItem}
-                                    onChange={handleChange}
-                                />
-                            </form>
                         </Box>
+                        <Typography variant="body2" gutterBottom>
+                            Ingrese un término de búsqueda para encontrar productos relacionados.
+                        </Typography>
+                        <form
+                            action=""
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                id="search"
+                                label="Buscar ..."
+                                value={searchItem}
+                                onChange={handleChange}
+                            />
+                        </form>
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
                                 <Typography variant="h6" gutterBottom>
                                     Categoría
                                 </Typography>
@@ -192,14 +183,13 @@ const AsideFilter = ({
                                                 onChange={handleCategoryChange}
                                             />
                                         }
-                                        label={categoria}
+                                        label={capitalizeFirstLetter(categoria)}
                                     />
                                 ))}
                             </FormGroup>
                         </Box>
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
                                 <Typography variant="h6" gutterBottom>
                                     Precio máximo
                                 </Typography>
@@ -207,7 +197,6 @@ const AsideFilter = ({
                             <Typography variant="body2" gutterBottom>
                                 Seleccione el rango de precio más acorde a su bolsillo.
                             </Typography>
-
                             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                                 {precioOptions.map((option) => (
                                     <Chip
@@ -221,7 +210,6 @@ const AsideFilter = ({
                         </Box>
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
                                 <Typography variant="h6" gutterBottom>
                                     Rango de fechas
                                 </Typography>
@@ -255,7 +243,6 @@ const AsideFilter = ({
                         </Box>
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
                                 <Typography variant="h6" gutterBottom>
                                     Ubicación
                                 </Typography>
@@ -344,23 +331,25 @@ const AsideFilter = ({
                             Establecer filtros
                         </Button>
                         <Button
-                            className='mt-2 bg-boton'
+                            className='mt-2'
                             variant="contained"
-                            color="success"
+                            color="error"
                             fullWidth
                             onClick={deleteDataFilter}
                         >
-                            Eliminar filtros
+                            Borrar filtros
                         </Button>
-                    </>
+                    </Box>
                 )
             }
-        </aside >
+        </Drawer>
     );
 };
 
+export default AsideFilter;
+
 const style = {
-    position: 'absolute' as 'absolute',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -370,5 +359,3 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
-export default AsideFilter;

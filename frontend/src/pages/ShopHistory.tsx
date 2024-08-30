@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const HistorialDeCompras = () => {
 
@@ -120,6 +121,8 @@ const HistorialDeCompras = () => {
           </table>
         </div>
       </div>
+      
+      <AsideFilter />
     </div>
   );
 };

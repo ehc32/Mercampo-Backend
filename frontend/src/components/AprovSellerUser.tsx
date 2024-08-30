@@ -52,7 +52,6 @@ const AprovSellerUser = ({ results }: Props) => {
           <tr>
             <th scope="col" className="px-4 py-3">Id</th>
             <th scope="col" className="px-4 py-3">Nombre</th>
-            <th scope="col" className="px-4 py-3">Apellido</th>
             <th scope="col" className="px-4 py-3">Correo Electronico</th>
             <th scope="col" className="px-4 py-3">Telefono</th>
             <th scope="col" className="px-4 py-3">Rol</th>
@@ -65,7 +64,6 @@ const AprovSellerUser = ({ results }: Props) => {
             <tr className="border-b dark:border-gray-700" key={index}>
               <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{user.id}</th>
               <td className="px-4 py-3">{user.name}</td>
-              <td className="px-4 py-3">{user.last_name}</td>
               <td className="px-4 py-3">{user.email}</td>
               <td className="px-4 py-3">{"123124124"}</td>
               <td className="px-4 py-3">{user.role}</td>

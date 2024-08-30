@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { get_all_products_paginated_to_shop, filter_request } from '../api/products';
 import Content from "../components/tienda/Content/Content";
-import { useAbierto, toggleAbierto } from "../hooks/aside";
 import { motion, AnimatePresence } from 'framer-motion';
 import './style.css';
 import { toast } from "react-toastify";
@@ -13,7 +12,6 @@ const Store = () => {
     const [loading, setLoading] = useState(false);
     const [dataLenght, setDataLenght] = useState(0);
     const [page, setPage] = useState<number>(1)
-    const { abierto } = useAbierto();
 
     const [filtrado, toggleFiltrado] = useState<boolean>(false); // revisar si se está filtrado
 
@@ -91,39 +89,28 @@ const Store = () => {
     }, [page])
 
     return (
-        <section className="sectionCatePage">
+        <section>
             <main className="mainTienda">
-                <AnimatePresence>
-                    {abierto && (
-                        <motion.aside
-                            initial={{ x: -300, opacity: 0, zIndex: 10 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            exit={{ x: -300, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            <AsideFilter
-                                bringDataFilter={bringDataFilter}
-                                deleteDataFilter={deleteDataFilter}
-                                setTime={setTime}
-                                setLocate={setLocate}
-                                setSearchItem={setSearchItem}
-                                setCategories={setCategories}
-                                setStartDate={setStartDate}
-                                setPrice={setPrice}
-                                setEndDate={setEndDate}
-                                locate={locate}
-                                price={price}
-                                categories={categories}
-                                time={time}
-                                searchItem={searchItem}
-                                startDate={startDate}
-                                endDate={endDate}
-                            />
-                        </motion.aside>
-                    )}
-                </AnimatePresence>
+                <AsideFilter
+                    bringDataFilter={bringDataFilter}
+                    deleteDataFilter={deleteDataFilter}
+                    setTime={setTime}
+                    setLocate={setLocate}
+                    setSearchItem={setSearchItem}
+                    setCategories={setCategories}
+                    setStartDate={setStartDate}
+                    setPrice={setPrice}
+                    setEndDate={setEndDate}
+                    locate={locate}
+                    price={price}
+                    categories={categories}
+                    time={time}
+                    searchItem={searchItem}
+                    startDate={startDate}
+                    endDate={endDate}
+                />
                 <Content productos={productos} loading={loading} dataLenght={dataLenght} page={page} setPage={setPage} />
-                <AsideToggle abierto={abierto} toggleAbierto={toggleAbierto} />
+                <AsideToggle />
             </main>
         </section>
     );

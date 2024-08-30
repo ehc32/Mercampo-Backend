@@ -36,7 +36,6 @@ const Users = ({ results }: Props) => {
       const userData = {
         id: formData.get("id"),
         name: formData.get("nombre"),
-        last_name: formData.get("apellido"),
         email: formData.get("email"),
         role: formData.get("rol")
       };
@@ -103,7 +102,6 @@ const Users = ({ results }: Props) => {
                     {user.id}
                   </th>
                   <td className="px-4 py-3">{user.name}</td>
-                  <td className="px-4 py-3">{user.last_name}</td>
                   <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.role}</td>
                   <td className="px-4 py-3 flex items-center justify-center gap-4 h-full">
@@ -147,7 +145,6 @@ const Users = ({ results }: Props) => {
                     {user.id}
                   </th>
                   <td className="px-4 py-3">{user.name}</td>
-                  <td className="px-4 py-3">{user.last_name}</td>
                   <td className="px-4 py-3">{user.email}</td>
                   <td className="px-4 py-3">{user.role}</td>
                   <td className="px-4 py-3 flex items-center justify-center gap-4 h-full">
