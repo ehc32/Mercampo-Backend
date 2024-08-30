@@ -37345,8 +37345,9 @@ span+.icon {
 }
 
 .nk-error-head {
-  font-size: 160px;
+  font-size: 100px;
   font-weight: 700;
+  width: 100% !important;
   background: -webkit-linear-gradient(#0fac81, #07523d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -109,12 +109,12 @@ const UserProfile = () => {
   return (
     <>
       <div className="flex justify-between flex-col mt-24 mx-auto lg:flex-row gap-6 w-11/12  px-4">
-        <div className="flex justify-between w-full    ">
-          <div className="  h-40  mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700 border rounded-lg">
+        <div className="flex justify-between w-full flex flex-wrap   ">
+          <div className="  h-40  mb-8 lg:mb-0 dark:bg-gray-800 dark:border-gray-700 border rounded-lg " style={{ boxShadow: '0px 0px 5px rgba(0, 128, 0, 0.5)', border: 'none' }}>
             {show ? (
               <>
                 {/* Contenedor de la información principal */}
-                <div className="flex flex-col items-start w-full h-40 justify-between  w-min-350px">
+                <div className="flex flex-col items-start w-full h-40 justify-between w-min-350px" >
                   <div className="flex items-center justify-around w-full  p-2 rounded-lg pl-10">
                     {user && user.avatar !== undefined && (
                       <div className="flex flex-col ">
@@ -140,7 +140,7 @@ const UserProfile = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-row w-full justify-between align-middle px-2 ml-4 text-lg">
+                  <div className="flex flex-row w-full justify-between align-middle relative bottom-4 right-3 p-1 ml-4 text-lg">
                     <ModalEditProfile
                       stateName={stateName}
                       setStateName={setStateName}
@@ -266,7 +266,7 @@ const UserProfile = () => {
           </div>
           {/* aqui es la otra columna */}
           <div className="w-full lg:w-2/3  ">
-            <div className="bg-white dark:bg-gray-800 relative  h-40 card-bordered shadow-md sm:rounded-lg overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 relative  h-40  shadow-md sm:rounded-lg overflow-hidden" style={{ boxShadow: '0px 0px 5px rgba(0, 128, 0, 0.5)', border: 'none' }}>
               <div className="flex flex-col h-full md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 <div className="w-full md:w-1/2">
                   <form className="flex items-center">

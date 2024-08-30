@@ -15,6 +15,7 @@ import UserProfile from "./pages/UserProfile"
 import VendedorProduct from "./pages/VendedorProduct"
 import AddProd from "./pages/AddProd"
 import { ToastContainer } from "react-toastify"
+import NotfoundPage from "./global/NotfoundPage"
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
                     <Route path="admin" element={<AdminPrivateRoute />} >
                         <Route index element={<AdminPage />} />
                     </Route>
+                    <Route path="*" element={<NotfoundPage />} ></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -5,6 +5,7 @@ import Card from "../../shared/Card/Cards";
 import Swiper from "../../shared/Swiper/swiper";
 import Loader from './../../shared/Loaders/Loader';
 import './Content.css';
+import NotfoundPage from '../../../global/NotfoundPage';
 
 interface ContenidoProps {
     productos: any[];
@@ -43,29 +44,36 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
                             <Loader />
                         </div>
                     ) : (
-                        <>
-                            <div className='product-container-light'>
-                                <div className="h-min-500px flex flex-wrap">
-                                    {
-                                        productos?.length > 0 && productos.map((producto, index) => {
-                                            return (
-                                                <Card key={index} producto={producto} />
-                                            )
-                                        })
-                                    }
+                        dataLenght > 0 ? (
+
+                            <>
+                                <div className='product-container-light'>
+                                    <div className="h-min-500px flex flex-wrap">
+                                        {
+                                            productos?.length > 0 && productos.map((producto, index) => {
+                                                return (
+                                                    <Card key={index} producto={producto} />
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                    <div className="w-95 flex align-center justify-center h-min-100px">
+                                        <Pagination
+                                            count={Math.ceil(dataLenght / 20)}
+                                            page={page}
+                                            showFirstButton
+                                            showLastButton
+                                            onChange={(event, value) => setPage(value)}
+                                            className="flex flex-row w-full justify-center my-6"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="w-95 flex align-center justify-center h-min-100px">
-                                    <Pagination
-                                        count={Math.ceil(dataLenght / 20)}
-                                        page={page}
-                                        showFirstButton
-                                        showLastButton
-                                        onChange={(event, value) => setPage(value)}
-                                        className="flex flex-row w-full justify-center my-6"
-                                    />
-                                </div>
-                            </div>
-                        </>
+                            </>
+                        ) : (
+                            <>
+                                <NotfoundPage boton={true} />
+                            </>
+                        )
                     )
                 }
             </div>

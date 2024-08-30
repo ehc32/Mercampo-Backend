@@ -1,10 +1,9 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-import { AiFillEdit } from "react-icons/ai";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import * as React from "react";
 
 const style = {
   position: "absolute",
@@ -74,6 +73,7 @@ export default function ModalEditProfile({
       >
         Editar
       </Button>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -90,24 +90,44 @@ export default function ModalEditProfile({
             Editar perfil
           </h2>
           <form onSubmit={handleFormSubmit}>
-            <div className="p-3">
-              <InputLabel id="name-label">Nombre</InputLabel>
+            <div className="px-3 py-1">
+              <InputLabel id="name-label" className="mb-2">Nombre</InputLabel>
               <TextField
                 label="nombre-usario"
                 fullWidth
-                sx={{ mb: 2 }}
                 value={stateName}
                 onChange={(e) => setStateName(e.target.value)}
                 error={nameError}
                 helperText={nameError ? "Por favor ingresa un nombre" : ""}
               />
             </div>
-            <div className="p-3">
-              <InputLabel id="last-label">Apellido</InputLabel>
+            <div className="px-3 py-1">
+              <InputLabel id="last-label" className="mb-2">Correo</InputLabel>
               <TextField
                 label="apellido-usuario"
                 fullWidth
-                sx={{ mb: 2 }}
+                value={stateLast}
+                onChange={(e) => setStateLast(e.target.value)}
+                error={lastError}
+                helperText={lastError ? "Por favor ingresa un apellido" : ""}
+              />
+            </div>
+            <div className="px-3 py-1">
+              <InputLabel id="last-label" className="mb-2">Contraseña</InputLabel>
+              <TextField
+                label="apellido-usuario"
+                fullWidth
+                value={stateLast}
+                onChange={(e) => setStateLast(e.target.value)}
+                error={lastError}
+                helperText={lastError ? "Por favor ingresa un apellido" : ""}
+              />
+            </div>
+            <div className="px-3 py-1">
+              <InputLabel id="last-label" className="mb-2">Contraseña</InputLabel>
+              <TextField
+                label="apellido-usuario"
+                fullWidth
                 value={stateLast}
                 onChange={(e) => setStateLast(e.target.value)}
                 error={lastError}
