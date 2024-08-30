@@ -1,47 +1,37 @@
-
+import React from 'react';
 import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
-
-
-
   return (
-    <footer id="footer" className='footer-light flex flex-col justify-between'>
-      <div className="flex justify-center mb-4 ">
-      </div>
-      <div className="container mx-auto px-4 text-[#39A900]">
-        <div className="text-center m-auto">
-          <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="fs-16px block w-35 m-auto">
+    <footer className="bg-white text-[#39A900] py-4">
+      <div className="container mx-auto px-4">
+        <div className="text-center">
+          <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="text-sm block mb-2">
             Servicios Tecnologicos - Regional Huila
           </a>
-          <div>
-            <p className="fs-16px text-lg font-semibold">Centro de la Empresa la Industria, la Empresa y los Servicios</p>
-            <p className="fs-16px text-sm">Carrera 9 No 68-50, SENA - PBX (60 8) 8757040 IP 83352</p>
+          <div className="mb-2">
+            <p className="text-base font-semibold">Centro de la Empresa la Industria, la Empresa y los Servicios</p>
+            <p className="text-xs">Carrera 9 No 68-50, SENA - PBX (60 8) 8757040 IP 83352</p>
           </div>
-          <div className="flex justify-center mt-4 space-x-4">
+          <div className="flex justify-center space-x-4 mb-2">
             <a href="https://www.facebook.com/SENAHuila" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
-              <FaFacebook size={24} />
+              <FaFacebook size={20} />
             </a>
             <a href="https://x.com/senahuila" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600">
-              <FaTwitter size={24} />
+              <FaTwitter size={20} />
             </a>
             <a href="https://www.youtube.com/@senaneiva2716" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-800">
-              <FaYoutube size={24} />
+              <FaYoutube size={20} />
             </a>
             <a href="https://www.linkedin.com/school/servicio-nacional-de-aprendizaje-sena-/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900">
-              <FaLinkedin size={24} />
+              <FaLinkedin size={20} />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-white-900">
-              <FaWhatsapp size={24} />
+            <a href="#" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-800">
+              <FaWhatsapp size={20} />
             </a>
           </div>
-          <div className="mt-4 space-y-2">
-          </div>
-          <div className="mt-4 text-sm">&copy; Copyright. Todos los derechos reservados</div>
+          <div className="text-xs">&copy; Copyright. Todos los derechos reservados</div>
         </div>
-      </div>
-      <div className="flex justify-center mt-4">
-        {/* Logos footer 2 - Aquí puedes agregar tus logos */}
       </div>
     </footer>
   );
