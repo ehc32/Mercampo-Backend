@@ -89,7 +89,7 @@ const Store = () => {
     }, [page])
 
     return (
-        <section className="sectionCatePage">
+        <section>
             <main className="mainTienda">
                 <AsideFilter
                     bringDataFilter={bringDataFilter}

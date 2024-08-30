@@ -11,6 +11,7 @@ import ShopHistory from "./ShopHistory";
 import ModalEditProfile from "../components/shared/Modal/ModalEditUser";
 import VendedorProduct from "./VendedorProduct";
 import ModalRequestSeller from "../components/shared/Modal/ModalARequestSeller";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const UserProfile = () => {
   const [show, setShow] = useState<string>("purchase-history");
@@ -34,7 +35,6 @@ const UserProfile = () => {
   useEffect(() => {
     if (user) {
       setStateName(user.name);
-      setStateLast(user.last_name);
       setImage(user.avatar);
     }
   }, [user]);
@@ -63,7 +63,6 @@ const UserProfile = () => {
     event.preventDefault();
     editProfileMut.mutate({
       name: stateName,
-      last_name: stateLast,
       avatar: image,
       email: user.email,
       role: "",
@@ -108,7 +107,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="flex justify-between flex-col mt-4 mx-auto lg:flex-row gap-6 w-11/12  px-4">
+      <div className="flex justify-between flex-col mt-24 mx-auto lg:flex-row gap-6 w-11/12  px-4">
         <div className="flex justify-between w-full    ">
 
           <div className="  h-40  mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700 border rounded-lg">
@@ -129,7 +128,7 @@ const UserProfile = () => {
                     )}
                     <div className="flex flex-col w-6/12">
                       <span className="text-lg font-medium text-gray-900 dark:text-white">
-                        {user.name} {user.last_name}
+                        {user.name}
                       </span>
                       <span className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">
                         {user.email}
@@ -324,6 +323,8 @@ const UserProfile = () => {
       </div>
       {show === "purchase-history" && <ShopHistory search={search} />}
       {show === "vendedor-order" && <VendedorProduct search={search} />}
+      
+      <AsideFilter />
     </>);
 };
 export default UserProfile;

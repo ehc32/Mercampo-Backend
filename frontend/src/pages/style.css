@@ -1,6 +1,7 @@
 .mainTienda {
     display: flex;
     flex-direction: row;
+    margin-top: 5%;
     justify-content: space-evenly;
 }
 
@@ -15,6 +16,7 @@
     width: 100%;
     background-color: #fff;
     color: #000;
+    height: 30vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -98,7 +100,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    min-height: 100vh;
+    min-height: 75vh !important;
     width: 100%;
 }
 

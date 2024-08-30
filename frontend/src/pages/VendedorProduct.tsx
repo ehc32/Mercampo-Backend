@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 // import jsPDF from "jspdf";
 
 // const generarPDF = (order: { id: any; comprador: any; fecha: any; total: any; }) => {
@@ -121,6 +122,8 @@ const SellerProduct = () => {
           </table>
         </div>
       </div>
+      
+      <AsideFilter />
     </div>
   );
 };

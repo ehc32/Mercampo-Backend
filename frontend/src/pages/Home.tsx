@@ -7,6 +7,8 @@ import Participants from "../components/home/Participants/Participants";
 import RandomProducts from "../components/home/RandomProducts";
 import Swiper from "../components/shared/Swiper/swiper";
 import SwiperNewProducts from "../components/shared/SwiperNewsProducts/swiperNewsProducts";
+import Whatsapp from "../components/shared/WhatsappButton/Whatsapp";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 
 export default function Tienda() {
@@ -76,29 +78,19 @@ export default function Tienda() {
         {
             foto: '/public/campesena2.jpeg'
         },
-        
+
     ]
 
     return (
         <React.Fragment>
-            {/* <AnimatePresence>
-                {abierto && (
-                    <motion.aside
-                        initial={{ x: -300, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: -300, opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <AsideFilter />
-                    </motion.aside>
-                )}
-            </AnimatePresence> */}
+            <AsideFilter />
             <Hero />
             <SwiperNewProducts width="100%" height="55vh" loader={true} datos={productosRandom} />
             <RandomProducts productos={productosRandom} />
             <About />
             <Swiper width="60%" height="40vh" datos={carrouselData} isUpSwiper={false} />
             <Participants people={people} />
+            <Whatsapp />
             <Footer />
         </React.Fragment>
     );

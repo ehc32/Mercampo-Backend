@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ScaleIcon from '@mui/icons-material/Scale';
 import WaterIcon from '@mui/icons-material/Water';
 import Footer from "../components/Footer";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const AddProd = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -86,7 +87,7 @@ const AddProd = () => {
 
   return (
     <>
-      <div className="flex h-screen my-12 dark:bg-gray-900">
+      <div className="flex h-screen my-20 dark:bg-gray-900">
         <div className="w-4/6  flex m-auto   dark:bg-gray-800 rounded-xl  shadow-lg overflow-hidden">
           <div className="w-full p-10 card-bordered">
             <div className="flex justify-between items-center mb-8">
@@ -245,6 +246,7 @@ const AddProd = () => {
           </div>
         </div>
       </div>
+      <AsideFilter />
       <Footer />
     </>
   );

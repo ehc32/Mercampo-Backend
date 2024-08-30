@@ -3,6 +3,7 @@ import { cate_api_random } from '../api/products';
 import Footer from '../components/Footer';
 import ProductDetail from '../components/product/productDetail/ProductDetail';
 import SwiperProducts from '../components/shared/SwiperProducts/swiperProducts';
+import AsideFilter from '../components/tienda/AsideFilter/AsideFilter';
 
 const DetallesProd = () => {
   const [category, setCategory] = useState<string>("");
@@ -26,10 +27,11 @@ const DetallesProd = () => {
   }, [category]);
 
   return (
-    <main>
+    <main className='mt-24'>
       <ProductDetail setCategory={setCategory} fetchProductos={fetchProductos} />
       <SwiperProducts datos={productos} height='50vh' width='100%' loader={loader} />
       <Footer />
+      <AsideFilter />
     </main>
   );
 };

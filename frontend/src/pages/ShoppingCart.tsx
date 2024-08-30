@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import { useCartStore } from "../hooks/cart";
 import './style.css';
 import { FaTrash } from 'react-icons/fa';
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 
 const CartPage = () => {
@@ -84,7 +85,7 @@ const CartPage = () => {
 
     return (
         <>
-            <section className="dark:bg-gray-900 p-3 sm:p-5">
+            <section className="dark:bg-gray-900 p-3 sm:p-5 mt-20">
                 <div className="px-4 lg:px-12">
                     <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
                         <div className="card-bordered bg-white relative shadow-md sm:rounded-lg overflow-hidden p-8">
@@ -228,6 +229,7 @@ const CartPage = () => {
                     </div>
                 </div>
             </section>
+            <AsideFilter />
             <Footer />
         </>
     );

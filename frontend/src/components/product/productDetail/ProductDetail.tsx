@@ -20,7 +20,6 @@ interface User {
     phone?: string;
     email: string;
     date_joined: string;
-    last_name: string;
 }
 
 interface Producto {
@@ -238,7 +237,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchPro
                                                                 <ul className="d-flex justify-start w-full gap-8 flex-wrap">
                                                                     <li>
                                                                         <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Nombre</div>
-                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{usuario?.name} {usuario?.last_name}</div>
+                                                                        <div className={darkMode ? "fs-16px fw-bold text-secondary color-dark" : "fs-16px fw-bold text-secondary"}>{usuario?.name}</div>
                                                                     </li>
                                                                     <li>
                                                                         <div className={darkMode ? "fs-14px text-muted color-dark" : "fs-14px text-muted"}>Teléfono</div>
