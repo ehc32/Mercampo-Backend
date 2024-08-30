@@ -28,7 +28,7 @@ const HistorialDeCompras = () => {
 
   return (
     <div className="flex flex-col items-center  text-center px-4 mt-10 ">
-      <div className="p-6 dark:bg-slate-300 w-11/12 card-bordered rounded-lg shadow-md h-svh ">
+      <div className="p-6 dark:bg-slate-300 w-11/12  rounded-lg shadow-md h-svh " style={{ boxShadow: '0px 0px 5px rgba(0, 128, 0, 0.5)', border: 'none' }}>
         <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Compras
         </h2>

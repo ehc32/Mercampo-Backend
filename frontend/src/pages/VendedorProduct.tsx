@@ -54,7 +54,7 @@ const SellerProduct = () => {
 
   return (
     <div className="flex flex-col items-center w-full px-4 mt-10">
-      <div className=" w-11/12  p-6 card-bordered dark:bg-slate-300 rounded-lg shadow-md h-svh">
+      <div className=" w-11/12  p-6  dark:bg-slate-300 rounded-lg shadow-md h-svh" style={{ boxShadow: '0px 0px 5px rgba(0, 128, 0, 0.5)', border: 'none' }}>
         <h2 className="text-xl font-semibold mb-4 text-center text-black">
           Historial de Órdenes
         </h2>
@@ -122,7 +122,7 @@ const SellerProduct = () => {
           </table>
         </div>
       </div>
-      
+
       <AsideFilter />
     </div>
   );
