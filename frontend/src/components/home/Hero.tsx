@@ -6,7 +6,7 @@ interface CarrouselLast12Props {
 }
 const Hero: React.FC<CarrouselLast12Props> = () => {
     return (
-        <section className='hero-light'>
+        <section className='hero-light flex flex-row flex-wrap'>
             <div className='hero-text-light'>
                 <h1>Descubre las mejores ofertas</h1>
                 <p>En nuestra tienda online encontrarás los productos que necesitas</p>

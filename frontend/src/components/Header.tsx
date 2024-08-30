@@ -52,12 +52,15 @@ const Header: React.FC<HeaderProps> = () => {
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
                 <div className="flex">
                   {
-                    window.innerWidth < 900 || location.pathname === "/store" && (
+                    location.pathname == "/store" && (
                       <AsideToggle />
                     )
                   }
-
-
+                  {
+                    location.pathname !== "/store" && window.innerWidth < 900 && (
+                      <AsideToggle />
+                    )
+                  }
 
                   <Link to={'/'} className='flex flex-row'>
                     <ST_Icon />
@@ -97,9 +100,11 @@ const Header: React.FC<HeaderProps> = () => {
 
                 {isAuth ? (
                   <>
-                    <div className='nav_items_block flex flex-row justify-between'>
-                      <BasicTooltip />
-                      <span className="text-slate-900 mx-1 fs-18px">{cart.length}</span>
+                    <div className='nav_items_block'>
+                      <div className='nav_items_block flex flex-row justify-between'>
+                        <BasicTooltip />
+                        <span className="text-slate-900 mx-1 fs-18px">{cart.length}</span>
+                      </div>
                     </div>
                     <Menu as="div" className="relative ml-1">
 
@@ -196,8 +201,9 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
           </div>
         </>
-      )}
-    </Disclosure>
+      )
+      }
+    </Disclosure >
   );
 };
 

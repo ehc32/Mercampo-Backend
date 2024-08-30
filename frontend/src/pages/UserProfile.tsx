@@ -134,7 +134,7 @@ const UserProfile = () => {
                         {user.email}
                       </span>
                       <span className="text-sm text-gray-700 font-italic opacity-75 dark:text-gray-400 mt-1.5">
-                        {user.role}
+                        {user.role == "admin" ? "Administrador" : user.role == "seller" ? "Vendedor" : "Cliente"}
                       </span>
                       <span className="text-sm text-gray-700 font-italic opacity-75 dark:text-gray-400 mt-1.5">
                         {user.phone}
@@ -162,9 +162,9 @@ const UserProfile = () => {
                     />
                     <ModalRequestSeller userId={""} requestSellerStatus={function (): void {
                       throw new Error("Function not implemented.");
-                    } }                     
-                    
-                    
+                    }}
+
+
                     />
                   </div>
                 </div>
@@ -226,8 +226,8 @@ const UserProfile = () => {
                             ></path>
                           </svg>
                           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold">Click to upload</span>{" "}
-                            or drag and drop
+                            <span className="font-semibold">Click para cargar</span>{" "}
+                            o arrastra y suelta
                           </p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
                             SVG, PNG, JPG or GIF (MAX. 800x400px)
@@ -323,7 +323,7 @@ const UserProfile = () => {
       </div>
       {show === "purchase-history" && <ShopHistory search={search} />}
       {show === "vendedor-order" && <VendedorProduct search={search} />}
-      
+
       <AsideFilter />
     </>);
 };
