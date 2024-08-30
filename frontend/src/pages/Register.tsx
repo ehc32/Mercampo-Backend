@@ -96,7 +96,7 @@ const RegisterPage = () => {
             </div>
 
             <div>
-              <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="last_name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-200">
                 Apellido
               </label>
               <input
@@ -111,7 +111,7 @@ const RegisterPage = () => {
               />
             </div>
             <div>
-              <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="last_name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-200">
                 Teléfono de contacto
               </label>
               <input
@@ -127,7 +127,7 @@ const RegisterPage = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="password" className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-200">
                 Contraseña
               </label>
               <input
@@ -143,7 +143,7 @@ const RegisterPage = () => {
             </div>
 
             <div>
-              <label htmlFor="re-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="re-password" className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-200">
                 Repite la contraseña
               </label>
               <input
@@ -166,8 +166,8 @@ const RegisterPage = () => {
             >
               Registrarse
             </button>
-            <p className="text-sm font-light text-gray-900 dark:text-gray-300">
-              ¿Ya tienes una cuenta? <Link to={'/login'} className="font-medium text-white hover:underline dark:text-lime-400">Ingresar</Link>
+            <p className="text-sm font-bold  text-gray-900 dark:text-gray-300">
+              ¿Ya tienes una cuenta? <Link to={'/login'} className="font-bold text-white hover:underline dark:text-lime-400">Ingresar</Link>
             </p>
           </form>
         </div>

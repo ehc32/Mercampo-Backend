@@ -70,13 +70,7 @@ export default function ModalEditProfile({
     <div>
       <Button
         onClick={handleOpen}
-        startIcon={
-          <AiFillEdit
-            size={16}
-            className="text-green-500 cursor-pointer font-thin"
-          />
-        }
-        style={{ fontSize: '0.65rem' }}
+        style={{ fontSize: '0.85rem' }}
       >
         Editar
       </Button>

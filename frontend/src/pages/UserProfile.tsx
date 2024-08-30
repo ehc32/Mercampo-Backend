@@ -67,6 +67,7 @@ const UserProfile = () => {
       avatar: image,
       email: user.email,
       role: "",
+      phone: "",
     });
   };
 
@@ -110,13 +111,12 @@ const UserProfile = () => {
     <>
       <div className="flex justify-between flex-col mt-4 mx-auto lg:flex-row gap-6 w-11/12  px-4">
         <div className="flex justify-between w-full    ">
-
           <div className="  h-40  mb-8 lg:mb-0 shadow dark:bg-gray-800 dark:border-gray-700 border rounded-lg">
             {show ? (
               <>
                 {/* Contenedor de la información principal */}
                 <div className="flex flex-col items-start w-full h-40 justify-between  w-min-350px">
-                  <div className="flex items-center justify-around w-full  p-2 rounded-lg pl-10" >
+                  <div className="flex items-center justify-around w-full  p-2 rounded-lg pl-10">
                     {user && user.avatar !== undefined && (
                       <div className="flex flex-col ">
                         <img
@@ -124,7 +124,6 @@ const UserProfile = () => {
                           src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
                           alt="User image"
                         />
-
                       </div>
                     )}
                     <div className="flex flex-col w-6/12">
@@ -140,12 +139,9 @@ const UserProfile = () => {
                       <span className="text-sm text-gray-700 font-italic opacity-75 dark:text-gray-400 mt-1.5">
                         {user.phone}
                       </span>
-
                     </div>
-
                   </div>
-                  <div className="flex flex-row w-full justify-between px-2">
-
+                  <div className="flex flex-row w-full justify-between align-middle px-2 ml-4 text-lg">
                     <ModalEditProfile
                       stateName={stateName}
                       setStateName={setStateName}
@@ -154,18 +150,13 @@ const UserProfile = () => {
                       image={image}
                       handleFileChange={handleFileChange}
                       removeImage={removeImage}
-                      setShow={function (): void {
-                        throw new Error("Function not implemented.");
-                      }}
-                      handleSubmit={function (): void {
-                        throw new Error("Function not implemented.");
-                      }}
+                      setShow={() => {}}
+                      handleSubmit={() => {}}
                     />
-                    <ModalRequestSeller userId={""} requestSellerStatus={function (): void {
-                      throw new Error("Function not implemented.");
-                    } }                     
-                    
-                    
+
+                    <ModalRequestSeller
+                      userId={""}
+                      requestSellerStatus={() => {}}
                     />
                   </div>
                 </div>
@@ -206,8 +197,9 @@ const UserProfile = () => {
                           htmlFor="dropzone-file"
                           className={`flex flex-col items-center justify-center w-full h-64 
                           border-2 border-gray-600 border-dashed rounded-lg 
-                          cursor-pointer bg-gray-40 ${isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-                            }`}
+                          cursor-pointer bg-gray-40 ${
+                            isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                          }`}
                           onDragEnter={handleDragEnter}
                           onDragLeave={handleDragLeave}
                         >
@@ -227,7 +219,9 @@ const UserProfile = () => {
                             ></path>
                           </svg>
                           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold">Click to upload</span>{" "}
+                            <span className="font-semibold">
+                              Click to upload
+                            </span>{" "}
                             or drag and drop
                           </p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -316,14 +310,13 @@ const UserProfile = () => {
                   </button>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
       </div>
       {show === "purchase-history" && <ShopHistory search={search} />}
       {show === "vendedor-order" && <VendedorProduct search={search} />}
-    </>);
+    </>
+  );
 };
 export default UserProfile;
