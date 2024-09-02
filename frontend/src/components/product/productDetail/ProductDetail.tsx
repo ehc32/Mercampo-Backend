@@ -95,7 +95,7 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchPro
                         <div className="container-fluid">
                             <div className="nk-content-body">
                                 <div className="nk-block">
-                                    <div className={darkMode ? "card2" : "card card-bordered"}>
+                                    <div className="card card-bordered">
                                         <div className="card-inner">
                                             <div className="row pb-5">
                                                 <div className="col-lg-6">
@@ -152,8 +152,6 @@ const ProductDetail: React.FC<ProductProps> = ({ darkMode, setCategory, fetchPro
                                                                     </li>
                                                                 </ul>
                                                             </div>
-
-
                                                             <div className="product-meta">
                                                                 <ul className="d-flex g-3 gx-5">
                                                                     <li>

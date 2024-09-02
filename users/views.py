@@ -110,3 +110,9 @@ def request_seller(request):
 class LoginView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
     
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_request_seller(request):
+    sellers = Seller.objects.all()
+    serializer = SellerRequestSerializer(sellers, many=True)
+    return Response(serializer.data)

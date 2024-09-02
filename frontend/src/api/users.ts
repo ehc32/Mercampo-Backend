@@ -42,3 +42,8 @@ export const loginRequest = async (email: string, password: string) => {
     const response = await axi.post("/users/login/", { email, password })
     return response;
 };
+
+export const sendRequestSeller = async (idUser: number) => {
+    const response = await axi.post(`/users/sell/${idUser}`)
+    return response;
+};

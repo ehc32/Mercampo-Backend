@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = () => {
       {() => (
         <>
           <div className="px-4 py-1 w-full">
-            <div className="relative flex h-16 items-center justify-between ">
+            <div className="relative flex h-16 items-center justify-evenly">
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
                 <div className="flex">
                   {
@@ -62,7 +62,6 @@ const Header: React.FC<HeaderProps> = () => {
                       <AsideToggle />
                     )
                   }
-
                   <Link to={'/'} className='flex flex-row'>
                     <ST_Icon />
                   </Link>
@@ -93,6 +92,8 @@ const Header: React.FC<HeaderProps> = () => {
                   </div>
                 </div>
               </div>
+
+              <h1 className='fs-22px text-black'>Mercampo</h1>
 
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {isAuth ? (

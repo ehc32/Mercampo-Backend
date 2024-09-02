@@ -43,7 +43,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         token['name'] = user.name
         token['avatar'] = user.avatar.url
-        token['role'] = user.role
+        token['phone'] = user.phone
         token['can_publish'] = user.can_publish
 
         return token

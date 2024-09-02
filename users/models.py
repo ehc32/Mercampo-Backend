@@ -53,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=150)
     phone = models.CharField(max_length=20, null=True, blank=True, default=None)
     avatar = models.ImageField(default="avatar.png")
-    is_active = models.BooleanField(default=True, null=False)
+    is_active = models.BooleanField(default=True, null=True)
     can_publish = models.CharField(
         max_length=20,
         choices=[(status.value, status.value) for status in PublishStatus],

@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { sendRequestSeller } from './../../../api/users'
 
 const style = {
     position: "absolute",
@@ -53,6 +54,14 @@ export default function ModalRequestSeller({
             progress: undefined,
         });
     };
+
+    const sendRequest = async (idUser: number) => {
+        try {
+            const response = await sendRequestSeller(idUser)
+        } catch (e) {
+            toast.warning("Se ha enviado la solicitud, espera a que te aprueben")
+        }
+    }
 
     return (
         <div>
