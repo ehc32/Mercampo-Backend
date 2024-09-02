@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime
 
-from .models import Order, Orderitem, ShippingAddress
+from .models import Order, Orderitem, ShoppingAddress
 from .serializers import OrderSerializer
 from products.models import Product
 
@@ -44,7 +44,7 @@ def create_order(request):
             total_price=total_price
         )
 
-        ShippingAddress.objects.create(
+        ShoppingAddress.objects.create(
             order=order,
             address=data['address'],
             city=data['city'],

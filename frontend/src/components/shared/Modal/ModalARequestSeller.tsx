@@ -56,13 +56,11 @@ export default function ModalRequestSeller({
 
     return (
         <div>
-            <Button
-                onClick={handleOpen}
-                variant="outlined"
-                style={{ fontSize: "0.75rem", border: "none", marginLeft: "-20px" }}
-            >
-                ¡Se un Vendedor!
-            </Button>
+            <h2
+                className="fs-16px my-1 cursor-pointer text-green-700 mx-2"
+                onClick={handleOpen}>
+                Quiero vender
+            </h2>
             <Modal
                 open={open}
                 onClose={handleClose}

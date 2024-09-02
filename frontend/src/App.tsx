@@ -16,6 +16,7 @@ import VendedorProduct from "./pages/VendedorProduct"
 import AddProd from "./pages/AddProd"
 import { ToastContainer } from "react-toastify"
 import NotfoundPage from "./global/NotfoundPage"
+import UserProfile2 from "./pages/UserProfile2"
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                     <Route element={<PrivateRoute />} >
                         <Route path="cart" element={<ShoppingCart />} />
                         <Route path="profile" element={<UserProfile />} />
+                        <Route path="profile2" element={<UserProfile2 />} />
                         <Route path="/purchase-history" element={<ShopHistory />} />
                     </Route>
 

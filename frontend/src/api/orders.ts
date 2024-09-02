@@ -29,3 +29,8 @@ export const my_orders = async () => {
 export const create_order = async (data: Order) => {
     await authAxios.post('/orders/create/', data)
 };
+
+export const get_order_items = async (orderId: number) => {
+    const response = await authAxios.get(`/orders/${orderId}/items/`); // Ajusta la URL según tu backend
+    return response.data;
+};

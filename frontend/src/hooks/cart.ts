@@ -32,7 +32,6 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
   },
   
   addToCart: (product: Product, cantidad?: number) => {
-console.log(cantidad)
 
     if (cantidad && cantidad <= 0) {
       toast.dismiss();

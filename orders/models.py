@@ -18,7 +18,7 @@ class Orderitem(models.Model):
     price = models.CharField(max_length=250, blank=True)
 
 
-class ShippingAddress(models.Model):
+class ShoppingAddress(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True)
     address = models.CharField(max_length=250, blank=True)
     city = models.CharField(max_length=100, blank=True)

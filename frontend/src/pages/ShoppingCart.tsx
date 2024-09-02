@@ -1,58 +1,60 @@
+import React, { useState } from 'react';
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { toast } from "react-hot-toast";
 import ReactPaginate from 'react-paginate';
-import 'react-paginate/theme/basic/react-paginate.css';
 import { useNavigate } from "react-router-dom";
 import { create_order } from "../api/orders";
 import Footer from "../components/Footer";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useCartStore } from "../hooks/cart";
 import './style.css';
-import { FaTrash } from 'react-icons/fa';
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
-
+import {
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Button, Box, TableSortLabel, TablePagination, Toolbar, Typography, IconButton, Tooltip, FormControlLabel, Switch
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { alpha } from '@mui/material/styles';
+import { visuallyHidden } from '@mui/utils';
 
 const CartPage = () => {
-
     const removeFromCart = useCartStore((state) => state.removeFromCart);
     const addToCart = useCartStore((state) => state.addToCart);
     const removeAll = useCartStore((state) => state.removeAll);
-
     const cart = useCartStore((state) => state.cart);
     const total_price = useCartStore((state) => state.totalPrice);
 
     const [pagina, setPagina] = useState(1);
     const [productosPorPagina, setProductosPorPagina] = useState(10);
+    const [selected, setSelected] = useState([]); // Almacena productos seleccionados
 
     const ultimaPagina = Math.ceil(cart.length / productosPorPagina);
     const primerProducto = (pagina - 1) * productosPorPagina;
     const ultimoProducto = primerProducto + productosPorPagina;
     const cartPagina = cart.slice(primerProducto, ultimoProducto);
 
-    const [address, setAddress] = useState<string>("");
-    const [city, setCity] = useState<string>("");
-    const [postal_code, setPostal_code] = useState<string>("");
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [postal_code, setPostal_code] = useState("");
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
 
     const createOrderMut = useMutation({
         mutationFn: create_order,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["orders"] });
-            toast.success("Order created!")
-            removeAll()
-            navigate('/')
+            toast.success("Order created!");
+            removeAll();
+            navigate('/');
         },
         onError: () => {
-            toast.error("Error!")
-            navigate('/')
+            toast.error("Error!");
+            navigate('/');
         },
     });
 
-    const createOrder = (data: any, actions: any) => {
-        console.log(data)
+    const createOrder = (data, actions) => {
         return actions.order.create({
             purchase_units: [
                 {
@@ -67,8 +69,7 @@ const CartPage = () => {
         });
     };
 
-    const onApprove = (data: any, actions: any) => {
-        console.log(data)
+    const onApprove = (data, actions) => {
         return actions.order.capture(handleSubmit());
     };
 
@@ -82,6 +83,91 @@ const CartPage = () => {
         });
     };
 
+    const handleSelect = (product) => {
+        const isSelected = selected.includes(product.id);
+        const newSelected = isSelected ? selected.filter(id => id !== product.id) : [...selected, product.id];
+        setSelected(newSelected);
+    };
+
+    const handleDeleteSelected = () => {
+        selected.forEach(id => {
+            const product = cart.find(p => p.id === id);
+            if (product) {
+                removeFromCart(product);
+            }
+        });
+        setSelected([]); // Limpiar selección
+        toast.success("Productos eliminados");
+    };
+
+    const [order, setOrder] = useState<'asc' | 'desc'>('asc');
+    const [orderBy, setOrderBy] = useState<string>('name');
+    const [dense, setDense] = useState(false);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+    };
+
+    const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            const newSelected = cartPagina.map((p) => p.id);
+            setSelected(newSelected);
+            return;
+        }
+        setSelected([]);
+    };
+
+    const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+        const selectedIndex = selected.indexOf(id);
+        let newSelected: readonly number[] = [];
+
+        if (selectedIndex === -1) {
+            newSelected = newSelected.concat(selected, id);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        }
+        setSelected(newSelected);
+    };
+
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+    const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setDense(event.target.checked);
+    };
+
+    const isSelected = (id: number) => selected.indexOf(id) !== -1;
+
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - cartPagina.length) : 0;
+
+    const visibleRows = React.useMemo(
+        () => [...cartPagina].sort(getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+        [order, orderBy, page, rowsPerPage, cartPagina]
+    );
+
+    const headCells = [
+        { id: 'name', numeric: false, disablePadding: true, label: 'Producto' },
+        { id: 'price', numeric: true, disablePadding: false, label: 'Precio' },
+        { id: 'quantity', numeric: true, disablePadding: false, label: 'Cantidad' },
+        { id: 'total', numeric: true, disablePadding: false, label: 'Total' }
+    ];
 
     return (
         <>
@@ -107,132 +193,171 @@ const CartPage = () => {
                                         type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Ciudad" />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 cursor-default">Codigo Postal</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900 cursor-default">Código Postal</label>
                                     <input
                                         onChange={(e) => setPostal_code(e.target.value)}
                                         value={postal_code}
-                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Codigo Postal" />
+                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Código Postal" />
                                 </div>
                                 <div className="botonDePaypal">
                                     <PayPalScriptProvider
                                         options={{
-                                            clientId: "AcvM04ycLuatoHGj4mz_xumwdLrJbM1g3n_Vy-fCiVmFD9DULLcxSnKZ_kil0RIgU490rEk9okpAxicZ",
-                                            currency: "USD"
+                                            clientId: "AcvM04ycLuatoHGj4mz_xumwdLrJbM4flLzuIGMooLrRkSKk-7wX2ywqG7B1q7RrN1_DPei6_6F-DmhY"
                                         }}
                                     >
                                         <PayPalButtons
-                                            createOrder={(data, actions) => createOrder(data, actions)}
-                                            onApprove={(data, actions) => onApprove(data, actions)}
-                                            style={{ layout: "horizontal" }}
+                                            createOrder={createOrder}
+                                            onApprove={onApprove}
                                         />
                                     </PayPalScriptProvider>
                                 </div>
                             </form>
                         </div>
-                        <div className="card-bordered bg-white  shadow-md sm:rounded-lg overflow-hidden">
-                            <div className="relative contenedorSobreTabla mt-5 overflow-hidden bg-white  sm:rounded-lg">
-                                <div className="flex flex-col px-4 box-titlesCart lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
-                                    <div className="flex flex-col box-titlesCart items-center w-full space-y-4">
-                                        <h4 className="fs-22px font-bold text-gray-900">Tu carrito de compras</h4>
-                                        <h6 className="fs-16px text-gray-900">Aqui tu lista de deseos</h6>
-                                        <div className="flex flex-row justify-between w-full">
-                                            <h5>
-                                                <span className="fs-18px font-bold">
-                                                    Productos en tu carrito: {cart.length}
-                                                </span>
-                                            </h5>
-                                            <h5>
-                                                <span className="fs-18px font-bold">
-                                                    Total: $ {total_price === null ? " 0" : ` ${total_price.toFixed(2)}`}
-                                                </span>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="overflow-x-auto tablaCart">
-                                    <table className="w-full text-sm text-left text-gray-500">
-                                        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-                                            <tr><th scope="col" className="px-1 py-3 text-center w-10"></th>
-                                                <th scope="col" className="px-4 py-3 text-center">Foto</th>
-                                                <th scope="col" className="px-4 py-3 text-center">Producto</th>
-                                                <th scope="col" className="px-4 py-3 text-center">Categoria</th>
-                                                <th scope="col" className="px-4 py-3 text-center">Cantidad</th>
-                                                <th scope="col" className="px-4 py-3 text-center">Precio</th>
-                                                <th scope="col" className="px-4 py-3 text-center">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {cartPagina.map((product) => (
-                                                <tr key={product.id} className="border-b cursor-pointer hover:bg-gray-100" >
-                                                    <td className="px-4 py-2 text-center">
-                                                        <button onClick={() => useCartStore.getState().removeProduct(product)} className="inline-flex items-center p-1 w-10 text-sm font-medium text-gray-500 focus:outline-none hover:text-gray-700" type="button">
-                                                            <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </td>
-                                                    <td scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap text-center">
-                                                        <img src={product.first_image} alt={product.name} className="mx-auto h-12 rounded-full border-1 border-green-500" />
-                                                    </td>
-                                                    <td className="px-4 py-2 text-start">
-                                                        <span className=" fs-16px font-medium px-2 py-0.5 rounded">
-                                                            {product.name}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-4 py-2 text-center">
-                                                        <span className=" fs-16px font-medium px-2 py-0.5 rounded">
-                                                            {product.category}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
-                                                        <div className="flex items-center  text-center space-x-3">
-                                                            <button onClick={() => removeFromCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
-                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 12H6"></path></svg>
-                                                            </button>
-                                                            <span className="fs-16px font-medium">{product.quantity}</span>
-                                                            <button onClick={() => addToCart(product)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
-                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                    <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
-                                                        <span className="fs-16px font-medium">
-                                                            $ {product.price}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
-                                                        <span className="fs-16px font-medium">
-                                                            $ {product.price * product.quantity}
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <ReactPaginate
-                                    pageCount={ultimaPagina}
-                                    onPageChange={(pagina) => setPagina(pagina.selected + 1)}
-                                    containerClassName="paginacion"
-                                    pageClassName="pagina"
-                                    pageLinkClassName="pagina-link"
-                                    activeClassName="pagina-activa"
-                                    previousClassName="pagina-anterior"
-                                    previousLinkClassName="pagina-anterior-link"
-                                    nextClassName="pagina-siguiente"
-                                    nextLinkClassName="pagina-siguiente-link"
-                                    previousLabel="Anterior"
-                                    nextLabel="Siguiente"
+                        <div className="card-bordered bg-white relative shadow-md sm:rounded-lg overflow-hidden p-8">
+                            <h4 className="fs-22px font-bold text-center text-gray-900 mb-2">Tu carrito</h4>
+                            <h6 className="fs-16px text-gray-900 text-center mb-2">Estos son los productos en tu carrito</h6>
+                            <div>
+                                <TableContainer component={Paper}>
+                                    <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        indeterminate={selected.length > 0 && selected.length < cartPagina.length}
+                                                        checked={cartPagina.length > 0 && selected.length === cartPagina.length}
+                                                        onChange={handleSelectAllClick}
+                                                        inputProps={{
+                                                            'aria-label': 'select all desserts',
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                                {headCells.map((headCell) => (
+                                                    <TableCell
+                                                        key={headCell.id}
+                                                        align={headCell.numeric ? 'right' : 'left'}
+                                                        padding={headCell.disablePadding ? 'none' : 'normal'}
+                                                        sortDirection={orderBy === headCell.id ? order : false}
+                                                    >
+                                                        <TableSortLabel
+                                                            active={orderBy === headCell.id}
+                                                            direction={orderBy === headCell.id ? order : 'asc'}
+                                                            onClick={(event) => handleRequestSort(event, headCell.id)}
+                                                        >
+                                                            {headCell.label}
+                                                            {orderBy === headCell.id ? (
+                                                                <Box component="span" sx={visuallyHidden}>
+                                                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                                                </Box>
+                                                            ) : null}
+                                                        </TableSortLabel>
+                                                    </TableCell>
+                                                ))}
+                                                <TableCell>Acciones</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {visibleRows.map((row, index) => {
+                                                const isItemSelected = isSelected(row.id);
+                                                const labelId = `enhanced-table-checkbox-${index}`;
+                                                return (
+                                                    <TableRow
+                                                        hover
+                                                        role="checkbox"
+                                                        aria-checked={isItemSelected}
+                                                        tabIndex={-1}
+                                                        key={row.id}
+                                                        selected={isItemSelected}
+                                                    >
+                                                        <TableCell padding="checkbox">
+                                                            <Checkbox
+                                                                checked={isItemSelected}
+                                                                onChange={(event) => handleClick(event, row.id)}
+                                                                inputProps={{
+                                                                    'aria-labelledby': labelId,
+                                                                }}
+                                                            />
+                                                        </TableCell>
+                                                        <TableCell component="th" id={labelId} scope="row" padding="none">
+                                                            {row.name}
+                                                        </TableCell>
+                                                        <TableCell align="right">$ {row.price}</TableCell>
+                                                        <TableCell align="right">{row.quantity}</TableCell>
+                                                        <TableCell align="right">$ {(row.price * row.quantity).toFixed(2)}</TableCell>
+                                                        <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
+                                                            <div className="flex items-center  text-center space-x-3">
+                                                                <button onClick={() => removeFromCart(row)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 12H6"></path></svg>
+                                                                </button>
+                                                                <span className="fs-16px font-medium">{row.quantity}</span>
+                                                                <button onClick={() => addToCart(row)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </TableRow>
+                                                );
+                                            })}
+                                            {emptyRows > 0 && (
+                                                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                                                    <TableCell colSpan={6} />
+                                                </TableRow>
+                                            )}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25]}
+                                    component="div"
+                                    count={cart.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
                                 />
                             </div>
+                            <Button
+                                onClick={handleDeleteSelected}
+                                color="error"
+                                variant="contained"
+                                startIcon={<DeleteIcon />}
+                            >
+                                Eliminar seleccionados
+                            </Button>
                         </div>
                     </div>
                 </div>
             </section>
-            <AsideFilter />
             <Footer />
         </>
     );
 };
 
 export default CartPage;
+
+// Implementación de funciones adicionales necesarias para la tabla
+interface Data {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    total: number;
+}
+
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+    if (b[orderBy] < a[orderBy]) {
+        return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+        return 1;
+    }
+    return 0;
+}
+
+function getComparator<Key extends keyof any>(
+    order: 'asc' | 'desc',
+    orderBy: Key,
+): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
+    return order === 'desc'
+        ? (a, b) => descendingComparator(a, b, orderBy)
+        : (a, b) => -descendingComparator(a, b, orderBy);
+}

@@ -67,13 +67,11 @@ export default function ModalEditProfile({
 
   return (
     <div>
-      <Button
-        onClick={handleOpen}
-        style={{ fontSize: '0.85rem' }}
-      >
+      <h2
+        className="fs-16px my-1 cursor-pointer text-green-700 mx-2"
+        onClick={handleOpen}>
         Editar
-      </Button>
-
+      </h2>
       <Modal
         open={open}
         onClose={handleClose}
@@ -140,8 +138,8 @@ export default function ModalEditProfile({
                   <label
                     htmlFor="dropzone-file"
                     className={`flex flex-col items-center justify-center w-full h-64 
-                    border-2 border-gray-600 border-dashed rounded-lg 
-                                        cursor-pointer bg-gray-40`}
+                      border-2 border-gray-600 border-dashed rounded-lg 
+                                          cursor-pointer bg-gray-40`}
                   >
                     <svg
                       aria-hidden="true"

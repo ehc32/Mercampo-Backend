@@ -3,8 +3,8 @@ import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp, FaYoutube } from 'react-
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-[#39A900] py-4">
-      <div className="container mx-auto px-4">
+    <footer className="bg-white  shadow  text-[#39A900] py-4">
+      <div className="container  mx-auto px-4">
         <div className="text-center">
           <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="text-sm block mb-2">
             Servicios Tecnologicos - Regional Huila
