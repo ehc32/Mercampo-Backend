@@ -4,7 +4,8 @@ import { Fragment } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
-
+import LoginIcon from '@mui/icons-material/Login';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ST_Icon from './assets/ST/ST_Icon';
 import AsideToggle from './shared/tooltip/TooltipAside';
 import BasicTooltip from './shared/tooltip/TooltipOpenCart';
@@ -94,10 +95,6 @@ const Header: React.FC<HeaderProps> = () => {
               </div>
 
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
-
-
-
                 {isAuth ? (
                   <>
                     <div className='nav_items_block'>
@@ -176,22 +173,38 @@ const Header: React.FC<HeaderProps> = () => {
                   <>
                     {
                       location.pathname != "/login" && (
-                        <Link
-                          to={'/login'}
-                          className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
-                        >
-                          Iniciar sesión
-                        </Link>
+                        window.innerWidth > 900 ? (
+
+                          <Link
+                            to={'/login'}
+                            className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+                          >
+                            Iniciar sesión
+                          </Link>
+                        ) : (
+                          <Link
+                            to={'/login'}>
+                            <LoginIcon style={{ fontSize: '24px' }} />
+                          </Link>
+                        )
                       )
                     }
                     {
                       location.pathname != "/register" && (
-                        <Link
-                          to={'/register'}
-                          className='text-green-600 hover:bg-green-600 hover:text-white font-bold py-2 px-4 rounded border border-green-600'
-                        >
-                          Registrar cuenta
-                        </Link>
+                        window.innerWidth > 900 ? (
+                          <Link
+                            to={'/register'}
+                            className='text-green-600 hover:bg-green-600 hover:text-white font-bold py-2 px-4 rounded border border-green-600'
+                          >
+                            Registrar cuenta
+                          </Link>
+
+                        ) : (
+                          <Link
+                            to={'/register'}>
+                            <PersonAddIcon style={{ fontSize: '24px' }} />
+                          </Link>
+                        )
                       )
                     }
                   </>

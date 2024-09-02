@@ -1,321 +1,312 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import jwt_decode from "jwt-decode";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import { my_orders } from "../api/orders";
-import { edit_user, get_solo_user } from "../api/users";
-import Loader from "../components/Loader";
-import { useAuthStore } from "../hooks/auth";
-import { Token } from "../Interfaces";
-import ShopHistory from "./ShopHistory";
-import ModalEditProfile from "../components/shared/Modal/ModalEditUser";
-import VendedorProduct from "./VendedorProduct";
-import ModalRequestSeller from "../components/shared/Modal/ModalARequestSeller";
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
+import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import jwt_decode from 'jwt-decode';
+import { toast } from 'react-hot-toast';
+import Input from '@mui/material/Input';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Modal from '@mui/material/Modal';
+import { get_solo_user, edit_user } from '../api/users';
+import { get_order_items } from '../api/orders';
+import Loader from '../components/Loader';
+import { useAuthStore } from '../hooks/auth';
+import { Token } from '../Interfaces';
+import ModalEditProfile from '../components/shared/Modal/ModalEditUser';
+import ModalRequestSeller from '../components/shared/Modal/ModalARequestSeller';
 
-const UserProfile = () => {
-  const [show, setShow] = useState<string>("purchase-history");
-  const [stateName, setStateName] = useState<string>("");
-  const [stateLast, setStateLast] = useState<string>("");
-  const [image, setImage] = useState<File | null>(null);
-  const [filePreview, setFilePreview] = useState<string>("");
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [search] = useState<string>("");
+export default function UserProfile2() {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [tabValue, setTabValue] = useState('compras');
+    const [stateName, setStateName] = useState('');
+    const [stateLast, setStateLast] = useState('');
+    const [image, setImage] = useState<File | null>(null);
+    const [filePreview, setFilePreview] = useState<string>('');
+    const [show, setShow] = useState(true);
+    const [openModal, setOpenModal] = useState(false); // Estado para controlar la visibilidad del modal
+    const [orderItems, setOrderItems] = useState([]); // Estado para almacenar los productos de la orden seleccionada
 
-  const token: string = useAuthStore.getState().access;
-  const tokenDecoded: Token = jwt_decode(token);
-  const id = tokenDecoded.user_id;
+    const token: string = useAuthStore.getState().access;
+    const tokenDecoded: Token = jwt_decode(token);
+    const id = tokenDecoded.user_id;
 
-  const { data: user } = useQuery({
-    queryKey: ["users", id],
-    queryFn: () => get_solo_user(id),
-  });
+    const queryClient = useQueryClient();
 
-  useEffect(() => {
-    if (user) {
-      setStateName(user.name);
-      setImage(user.avatar);
-    }
-  }, [user]);
-
-  const queryClient = useQueryClient();
-
-  const editProfileMut = useMutation({
-    mutationFn: edit_user,
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ["users"] });
-      toast.success("Profile updated!");
-      setShow(true);
-    },
-    onError: () => {
-      toast.error("Error, u not added nothing!");
-      setShow(true);
-    },
-  });
-
-  const { isError, isLoading } = useQuery({
-    queryKey: ["orders"],
-    queryFn: my_orders,
-  });
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    editProfileMut.mutate({
-      name: stateName,
-      avatar: image,
-      email: user.email,
-      role: "",
-      phone: "",
+    // Consultar usuario actual
+    const { data: user, isLoading: isUserLoading, isError: isUserError } = useQuery({
+        queryKey: ['users', id],
+        queryFn: () => get_solo_user(id),
     });
-  };
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    if (file) {
-      setImage(file);
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFilePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+    const editProfileMut = useMutation({
+        mutationFn: edit_user,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['users'] });
+            toast.success('Profile updated!');
+        },
+        onError: () => {
+            toast.error('Error, u not added nothing!');
+        },
+    });
 
-  const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    setIsHovered(true);
-  };
+    useEffect(() => {
+        if (user) {
+            setStateName(user.name);
+            setImage(user.avatar);
+        }
+    }, [user]);
 
-  const handleDragLeave = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    setIsHovered(false);
-  };
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files && event.target.files[0];
+        if (file) {
+            setImage(file);
+            const reader = new FileReader();
+            reader.onload = () => {
+                setFilePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
-  const removeImage = () => {
-    setImage(null);
-    setIsHovered(false);
-  };
+    const removeImage = () => {
+        setImage(null);
+        setFilePreview('');
+    };
 
-  if (user === undefined) return <p>No user here!</p>;
+    const handleTabChange = (event, newValue) => {
+        setTabValue(newValue);
+    };
 
-  if (isError) return toast.error("Error!");
-  if (isLoading) return <Loader />;
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        editProfileMut.mutate({
+            name: stateName,
+            avatar: image,
+            email: user.email,
+            role: '',
+            phone: '',
+        });
+    };
 
-  function setSearch(_value: string) {
-    throw new Error("Function not implemented.");
-  }
+    const handleOrderClick = (orderId) => {
+        // Llamar a la API para obtener los productos de la orden específica
+        get_order_items(orderId)
+            .then((items) => {
+                setOrderItems(items); // Actualizar los productos de la orden
+                setOpenModal(true); // Mostrar el modal
+            })
+            .catch((error) => {
+                toast.error('Error fetching order items');
+                console.error(error);
+            });
+    };
 
-  return (
-    <>
-      <div className="flex justify-between flex-col mt-24 mx-auto lg:flex-row gap-6 w-11/12  px-4">
-        <div className="flex justify-between w-full flex flex-wrap   ">
-          <div className="  h-40  mb-8 lg:mb-0 dark:bg-gray-800 dark:border-gray-700 border rounded-lg " style={{ boxShadow: '0px 0px 5px rgba(0, 128, 0, 0.5)', border: 'none' }}>
-            {show ? (
-              <>
-                {/* Contenedor de la información principal */}
-                <div className="flex flex-col items-start w-full h-40 justify-between w-min-350px" >
-                  <div className="flex items-center justify-around w-full  p-2 rounded-lg pl-10">
-                    {user && user.avatar !== undefined && (
-                      <div className="flex flex-col ">
-                        <img
-                          className="w-24 h-24 rounded-full shadow"
-                          src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
-                          alt="User image"
+    const handleCloseModal = () => {
+        setOpenModal(false); // Cerrar el modal
+        setOrderItems([]); // Limpiar los productos de la orden
+    };
+
+    if (isUserLoading) return <Loader />;
+    if (isUserError) return <p>Error loading data.</p>;
+
+    const profileData = {
+        fullName: user.name,
+        phone: user.phone || 'Sin registrar',
+        email: user.email,
+        avatar: `${import.meta.env.VITE_BACKEND_URL}${user.avatar}`,
+    };
+
+    const tablesData = {
+        projects: [
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+        ],
+        tasks: [
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+        ],
+    };
+
+    const filterData = (data, term) => {
+        return data.filter((item) =>
+            Object.values(item).some((value) =>
+                value.toString().toLowerCase().includes(term.toLowerCase())
+            )
+        );
+    };
+
+    return (
+        <Box sx={{ maxWidth: 'lg', mx: 'auto', p: 6, mt: '5em' }}>
+            <Card sx={{ my: "2em" }} className='flex flex-row justify-between align-center'>
+                <CardContent>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Avatar
+                            src={profileData.avatar}
+                            alt={profileData.fullName}
+                            sx={{ width: 100, height: 100 }}
                         />
-                      </div>
-                    )}
-                    <div className="flex flex-col w-6/12">
-                      <span className="text-lg font-medium text-gray-900 dark:text-white">
-                        {user.name}
-                      </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">
-                        {user.email}
-                      </span>
-                      <span className="text-sm text-gray-700 font-italic opacity-75 dark:text-gray-400 mt-1.5">
-                        {user.role == "admin" ? "Administrador" : user.role == "seller" ? "Vendedor" : "Cliente"}
-                      </span>
-                      <span className="text-sm text-gray-700 font-italic opacity-75 dark:text-gray-400 mt-1.5">
-                        {user.phone}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex flex-row w-full justify-between align-middle relative bottom-4 right-3 p-1 ml-4 text-lg">
+                        <Box sx={{ ml: 4 }}>
+                            <Typography variant="h5">{profileData.fullName}</Typography>
+                            <Typography variant="body2">{profileData.phone}</Typography>
+                            <Typography variant="body2">{profileData.email}</Typography>
+                        </Box>
+                    </Box>
+                </CardContent>
+                <div className='text-end w-30'>
                     <ModalEditProfile
-                      stateName={stateName}
-                      setStateName={setStateName}
-                      stateLast={stateLast}
-                      setStateLast={setStateLast}
-                      image={image}
-                      handleFileChange={handleFileChange}
-                      removeImage={removeImage}
-                      setShow={() => {}}
-                      handleSubmit={() => {}}
+                        stateName={stateName}
+                        setStateName={setStateName}
+                        stateLast={stateLast}
+                        setStateLast={setStateLast}
+                        image={image}
+                        handleFileChange={handleFileChange}
+                        removeImage={removeImage}
+                        setShow={setShow}
+                        handleSubmit={handleSubmit}
                     />
-                    <ModalRequestSeller userId={""} requestSellerStatus={function (): void {
-                      throw new Error("Function not implemented.");
-                    }}
-
-
-                    />
-                  </div>
+                    <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
                 </div>
-              </>
-            ) : (
-              <div className="p-11">
-                <form onSubmit={handleSubmit}>
-                  <div className="p-3">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      value={stateName}
-                      onChange={(e) => setStateName(e.target.value)}
-                      className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Nombre"
-                    />
-                  </div>
+            </Card>
+            <div className='flex flex-row justify-between py-4'>
+                <Input
+                    type="search"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    sx={{ width: '50%', padding: '.1em' }}
+                />
 
-                  <div className="p-3">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                      Apellido
-                    </label>
-                    <input
-                      type="text"
-                      value={stateLast}
-                      onChange={(e) => setStateLast(e.target.value)}
-                      className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Apellido"
-                    />
-                  </div>
-
-                  <div className="sm:col-span-2 p-2">
-                    <div className="flex items-center justify-center w-full">
-                      {image === null ? (
-                        <label
-                          htmlFor="dropzone-file"
-                          className={`flex flex-col items-center justify-center w-full h-64 
-                          border-2 border-gray-600 border-dashed rounded-lg 
-                          cursor-pointer bg-gray-40 ${
-                            isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-                          }`}
-                          onDragEnter={handleDragEnter}
-                          onDragLeave={handleDragLeave}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="w-10 h-10 mb-3 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1117 8h1a3 3 0 010 6h-1m-4 4v-4m0 0H9m4 0h2"
-                            ></path>
-                          </svg>
-                          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold">Click para cargar</span>{" "}
-                            o arrastra y suelta
-                          </p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                            SVG, PNG, JPG or GIF (MAX. 800x400px)
-                          </p>
-                          <input
-                            id="dropzone-file"
-                            ref={inputRef}
-                            onChange={handleFileChange}
-                            type="file"
-                            className="hidden"
-                          />
-                        </label>
-                      ) : (
-                        <div className="flex flex-col items-center">
-                          <img
-                            src={filePreview}
-                            alt="Preview"
-                            className="h-32 w-32 object-cover rounded-full mb-2"
-                          />
-                          <button
-                            onClick={removeImage}
-                            type="button"
-                            className="w-full text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                          >
-                            Quitar Imagen
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="p-2">
-                    <button
-                      type="submit"
-                      className="w-full text-white bg-[#39A900] hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
-                    >
-                      Guardar cambios
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-          </div>
-          {/* aqui es la otra columna */}
-          <div className="w-full lg:w-2/3  ">
-            <div className="bg-white dark:bg-gray-800 relative  h-40  shadow-md sm:rounded-lg overflow-hidden" style={{ boxShadow: '0px 0px 5px rgba(0, 128, 0, 0.5)', border: 'none' }}>
-              <div className="flex flex-col h-full md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                <div className="w-full md:w-1/2">
-                  <form className="flex items-center">
-                    <label htmlFor="simple-search" className="sr-only">
-                      Buscar
-                    </label>
-                    <div className="relative w-full">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <path
-                          fillRule="evenodd"
-                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                          clipRule="evenodd"
-                        />
-                      </div>
-                      <input
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        type="text"
-                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Buscar"
-                      />
-                    </div>
-                  </form>
-                </div>
-                <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                  <button
-                    onClick={() => setShow("purchase-history")}
-                    type="button"
-                    className="flex items-center justify-center text-white  bg-[#39A900] hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
-                  >
-                    Historial de Compras
-                  </button>
-                  <button
-                    onClick={() => setShow("vendedor-order")}
-                    type="button"
-                    className="flex items-center justify-center text-white  bg-[#39A900] hover:bg-lime-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800"
-                  >
-                    Órdenes del Vendedor
-                  </button>
-                </div>
-              </div>
+                <Box>
+                    <Tabs value={tabValue} onChange={handleTabChange}>
+                        <Tab label="Compras" value="compras" />
+                        <Tab label="Ordenes" value="orders" />
+                    </Tabs>
+                </Box>
             </div>
-          </div>
-        </div>
-      </div>
-      {show === "purchase-history" && <ShopHistory search={search} />}
-      {show === "vendedor-order" && <VendedorProduct search={search} />}
 
-      <AsideFilter />
-    </>);
-};
-export default UserProfile;
+            {tabValue === 'compras' && (
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Usuario</TableCell>
+                            <TableCell>Fecha de entrega</TableCell>
+                            <TableCell>Fecha de creación</TableCell>
+                            <TableCell>Precio total</TableCell>
+                            <TableCell>Acciones</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {filterData(tablesData.projects, searchTerm).map((project) => (
+                            <TableRow key={project.id}>
+                                <TableCell>{project.id}</TableCell>
+                                <TableCell>{project.name}</TableCell>
+                                <TableCell>{project.dueDate}</TableCell>
+                                <TableCell>{project.date_creation}</TableCell>
+                                <TableCell>{project.date_creation}</TableCell>
+                                <TableCell>{project.total_price}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            )}
+
+            {tabValue === 'orders' && (
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Usuario</TableCell>
+                            <TableCell>Fecha de entrega</TableCell>
+                            <TableCell>Fecha de creación</TableCell>
+                            <TableCell>Precio total</TableCell>
+                            <TableCell>Acciones</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {filterData(tablesData.tasks, searchTerm).map((task) => (
+                            <TableRow key={task.id} onClick={() => handleOrderClick(task.id)}>
+                                <TableCell>{task.id}</TableCell>
+                                <TableCell>{task.name}</TableCell>
+                                <TableCell>{task.dueDate}</TableCell>
+                                <TableCell>{task.date_creation}</TableCell>
+                                <TableCell>{task.date_creation}</TableCell>
+                                <TableCell>{task.total_price}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+
+            )}
+
+            {/* Modal para mostrar los productos de la orden */}
+            <Modal
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Box sx={{ width: 400, p: 4, bgcolor: 'white', margin: 'auto', marginTop: '5em' }}>
+                    <Typography id="modal-title" variant="h6" component="h2">
+                        Productos de la Orden
+                    </Typography>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Nombre del Producto</TableCell>
+                                <TableCell>Cantidad</TableCell>
+                                <TableCell>Precio</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {orderItems.map((item) => (
+                                <TableRow key={item.id}>
+                                    <TableCell>{item.productName}</TableCell>
+                                    <TableCell>{item.quantity}</TableCell>
+                                    <TableCell>{item.price}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <button onClick={handleCloseModal}>Cerrar</button>
+                </Box>
+            </Modal>
+
+        </Box>
+    );
+}

@@ -139,7 +139,7 @@ const AsideFilter = ({
 
 
 
-                    <Box sx={{ p: 2 }}>
+                    <Box sx={{ p: 2, maxWidth: "350px" }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Typography variant="h6" gutterBottom>
                                 Búsqueda de productos

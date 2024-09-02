@@ -19,22 +19,24 @@ class PublishStatus(Enum):
     SOLICITANDO = "solicitando"
     CLIENTE = "cliente"
 
-
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("Debes tener un correo electrónico")
 
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        # Asegúrate de que el role se establezca si no se pasa en extra_fields
+        role = extra_fields.pop("role", Role.CLIENT.value)
+        user = self.model(email=email, role=role, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
     def create_user(self, email=None, password=None, role=None, **extra_fields):
-        extra_fields.setdefault("role", role)
-        return self._create_user(email, password, **extra_fields)
+        if role is None:
+            role = Role.CLIENT.value
+        return self._create_user(email, password, role=role, **extra_fields)
 
     def create_superuser(self, email=None, password=None, **extra_fields):
         extra_fields.setdefault("role", Role.ADMIN.value)

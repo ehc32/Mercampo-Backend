@@ -21,6 +21,7 @@ const CartPage = () => {
     const removeFromCart = useCartStore((state) => state.removeFromCart);
     const addToCart = useCartStore((state) => state.addToCart);
     const removeAll = useCartStore((state) => state.removeAll);
+    const removeProduct = useCartStore((state) => state.removeProduct);
     const cart = useCartStore((state) => state.cart);
     const total_price = useCartStore((state) => state.totalPrice);
 
@@ -93,7 +94,7 @@ const CartPage = () => {
         selected.forEach(id => {
             const product = cart.find(p => p.id === id);
             if (product) {
-                removeFromCart(product);
+                removeProduct(product);
             }
         });
         setSelected([]); // Limpiar selección
@@ -174,7 +175,7 @@ const CartPage = () => {
             <section className="dark:bg-gray-900 p-3 sm:p-5 mt-20">
                 <div className="px-4 lg:px-12">
                     <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
-                        <div className="card-bordered bg-white relative shadow-md sm:rounded-lg overflow-hidden p-8">
+                        <div className="card-bordered bg-white relative flex flex-col justify-around mb-2 shadow-md sm:rounded-lg overflow-hidden p-8">
                             <h4 className="fs-22px font-bold text-center text-gray-900 mb-2">Formulario de pago</h4>
                             <h6 className="fs-16px text-gray-900 text-center mb-2">¿Terminaste? ¡Haz tu pedido!</h6>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
@@ -212,13 +213,27 @@ const CartPage = () => {
                                     </PayPalScriptProvider>
                                 </div>
                             </form>
+                            <img src="/public/targeta.png" alt="" />
                         </div>
-                        <div className="card-bordered bg-white relative shadow-md sm:rounded-lg overflow-hidden p-8">
-                            <h4 className="fs-22px font-bold text-center text-gray-900 mb-2">Tu carrito</h4>
-                            <h6 className="fs-16px text-gray-900 text-center mb-2">Estos son los productos en tu carrito</h6>
-                            <div>
+                        <div className="card-bordered  mb-2 bg-white relative shadow-md sm:rounded-lg overflow-hidden p-8">
+                            <h4 className="fs-22px font-bold text-center text-gray-900 my-4">Tu carrito</h4>
+                            <h6 className="fs-16px text-gray-900 text-center my-4">Estos son los productos en tu carrito</h6>
+
+                            <div className='div-class'>
                                 <TableContainer component={Paper}>
-                                    <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
+                                    {
+                                        selected.length > 0 && (
+                                            <div className='p-2 bg-gray-100 rounded-md flex items-center whitespace-nowrap justify-around deleteselecteds'>
+                                                <DeleteIcon
+                                                    onClick={handleDeleteSelected}
+                                                    className='text-red-500 cursor-pointer'
+                                                />
+                                                {selected.length} seleccionado{selected.length !== 1 ? "s" : ""}
+                                            </div>
+                                        )
+                                    }
+
+                                    <Table sx={{ minWidth: 750, overflowY: "auto" }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
                                         <TableHead>
                                             <TableRow>
                                                 <TableCell padding="checkbox">
@@ -234,7 +249,7 @@ const CartPage = () => {
                                                 {headCells.map((headCell) => (
                                                     <TableCell
                                                         key={headCell.id}
-                                                        align={headCell.numeric ? 'right' : 'left'}
+                                                        align='center'
                                                         padding={headCell.disablePadding ? 'none' : 'normal'}
                                                         sortDirection={orderBy === headCell.id ? order : false}
                                                     >
@@ -252,7 +267,7 @@ const CartPage = () => {
                                                         </TableSortLabel>
                                                     </TableCell>
                                                 ))}
-                                                <TableCell>Acciones</TableCell>
+                                                <TableCell align='center' width={"100px"}>Acciones</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -277,14 +292,14 @@ const CartPage = () => {
                                                                 }}
                                                             />
                                                         </TableCell>
-                                                        <TableCell component="th" id={labelId} scope="row" padding="none">
+                                                        <TableCell align="center" component="th" id={labelId} scope="row" padding="none">
                                                             {row.name}
                                                         </TableCell>
-                                                        <TableCell align="right">$ {row.price}</TableCell>
-                                                        <TableCell align="right">{row.quantity}</TableCell>
-                                                        <TableCell align="right">$ {(row.price * row.quantity).toFixed(2)}</TableCell>
-                                                        <td className="px-4 py-2 text-center font-medium text-gray-900 whitespace-nowrap">
-                                                            <div className="flex items-center  text-center space-x-3">
+                                                        <TableCell align="center">$ {row.price}</TableCell>
+                                                        <TableCell align="center">{row.quantity}</TableCell>
+                                                        <TableCell align="center">$ {(row.price * row.quantity).toFixed(2)}</TableCell>
+                                                        <td className="px-4 py-2 flex font-medium text-gray-900 whitespace-nowrap">
+                                                            <div className="flex  w-full space-x-3">
                                                                 <button onClick={() => removeFromCart(row)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
                                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 12H6"></path></svg>
                                                                 </button>
@@ -315,14 +330,10 @@ const CartPage = () => {
                                     onRowsPerPageChange={handleChangeRowsPerPage}
                                 />
                             </div>
-                            <Button
-                                onClick={handleDeleteSelected}
-                                color="error"
-                                variant="contained"
-                                startIcon={<DeleteIcon />}
+                            <div
+
                             >
-                                Eliminar seleccionados
-                            </Button>
+                            </div>
                         </div>
                     </div>
                 </div>

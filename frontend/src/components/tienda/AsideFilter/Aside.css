@@ -3,6 +3,7 @@
     left: 0;
     top: 0;
     height: 100vh; 
+    max-width: 300px !important;
     background-color: #fff !important;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -137,7 +138,6 @@ ul {
 .nav-responsive {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .nav-responsive .item-res {
