@@ -1,3 +1,11 @@
 .coments-section {
-    height: 60vh;
+    height: 80vh;
+}
+.ratingContainer > span,
+.ratingContainer .MuiBox-root > span {
+    width: 5em !important;
+}
+
+.ratingContainer {
+    overflow-y: auto;
 }

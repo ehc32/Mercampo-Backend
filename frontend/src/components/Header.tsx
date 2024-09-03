@@ -1,47 +1,63 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import jwt_decode from "jwt-decode";
-import { Fragment } from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { Fragment, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
+import jwt_decode from 'jwt-decode';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ST_Icon from './assets/ST/ST_Icon';
 import AsideToggle from './shared/tooltip/TooltipAside';
 import BasicTooltip from './shared/tooltip/TooltipOpenCart';
 import './style.css';
+import { Token } from '../Interfaces';
+import { toast } from 'react-toastify';
 
-interface HeaderProps {
-}
+interface HeaderProps { }
 
 const Header: React.FC<HeaderProps> = () => {
-
-  const token: string = useAuthStore.getState().access;
+  const [roleLocal, setRoleLocal] = useState("");
   const cart = useCartStore(state => state.cart);
-  const { isAuth, role } = useAuthStore();
+  const { isAuth } = useAuthStore();
   const location = useLocation();
+  const navigate = useNavigate();
 
+  let avatar: string = '';
 
-  let is_admin: boolean = false;
-  let is_seller: boolean = false;
-  let user_id: number;
-  let avatar: string;
+  useEffect(() => {
+    const token: string | null = useAuthStore.getState().access;
 
-  if (isAuth) {
-    const tokenDecoded: Token = jwt_decode(token);
-    is_admin = role == 'admin';
-    is_seller = role == 'seller';
-    user_id = tokenDecoded.user_id;
-    avatar = String(tokenDecoded.avatar);
-  }
+    if (token) {
+      try {
+        const tokenDecoded: Token = jwt_decode(token);
+        const userRole = tokenDecoded.role;
+        setRoleLocal(userRole);
+      } catch (error) {
+        console.error("Error al decodificar el token:", error);
+      }
+    }
+  }, []);
 
   function logOutFun() {
     useAuthStore.getState().logout();
-    window.location.href = '/login';
+    navigate('/login');
   }
 
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
+  }
+
+  useEffect(() => {
+    if (!isAuth || (roleLocal !== "admin" && roleLocal !== "seller")) {
+      if (location.pathname === "/admin" || location.pathname === "/addprod") {
+        navigate('/');
+        toast.info("No tienes permisos de acceso a esta ruta.");
+      }
+    }
+  }, [isAuth, roleLocal, location.pathname, navigate]);
+
+  if (!isAuth && (location.pathname === "/admin" || location.pathname === "/addprod")) {
+    return null;
   }
 
   return (
@@ -91,8 +107,15 @@ const Header: React.FC<HeaderProps> = () => {
                     </div>
                   </div>
                 </div>
-                
-              <h1 className='titulo-while-auth text-black  subnav-1 justify-center align-center'>Mercampo</h1>
+                {
+                  location.pathname == "/login" &&
+                  <h1 className='titulo-while-auth font-bold text-black  subnav-1 justify-center align-center'>Mercampo</h1>
+                }
+                {
+                  location.pathname == "/register" &&
+                  <h1 className='titulo-while-auth font-bold text-black  subnav-1 justify-center align-center'>Mercampo</h1>
+                }
+
               </div>
 
 
@@ -137,26 +160,60 @@ const Header: React.FC<HeaderProps> = () => {
                             )}
                           </Menu.Item>
 
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/addprod"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                              >
-                                Nuevo producto
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/admin"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                              >
-                                Administrar
-                              </Link>
-                            )}
-                          </Menu.Item>
+                          {
+                            roleLocal == "admin" &&
+                            <Menu.Item>
+                              {({ active }) => (
+
+                                <Link
+                                  to="/addprod"
+                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                >
+                                  Nuevo producto
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          }
+                          {
+                            roleLocal == "admin" &&
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/admin"
+                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                >
+                                  Administrar
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          }
+                          {
+                            roleLocal == "seller" &&
+                            <Menu.Item>
+                              {({ active }) => (
+
+                                <Link
+                                  to="/addprod"
+                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                >
+                                  Nuevo producto
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          }
+                          {
+                            roleLocal == "seller" &&
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/admin"
+                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                >
+                                  Administrar
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          }
                           <Menu.Item>
                             {({ active }) => (
                               <span

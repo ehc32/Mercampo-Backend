@@ -4,21 +4,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
-from . models import Category, Product
-from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer, ProductImagesSerializer
+from . models import Category, Product, Reviews
+from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer, ProductImagesSerializer, ReviewCreateSerializer
 from backend.pagination import CustomPagination
-
-
-@api_view(['POST'])
-def create_review(request, pk):
-    serializer = ReviewSerializer(data=request.data)
-    product = Product.objects.get(pk=pk)
-    if serializer.is_valid():
-        serializer.save(user=request.user, product=product)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['POST'])
 def create_product(request):
@@ -32,13 +20,13 @@ def create_product(request):
             s = name + category
             slug = slugify(s)
             
-            # Generar un slug único
             unique_slug = slug
             num = 1
+            
             while Product.objects.filter(slug=unique_slug).exists():
                 unique_slug = f"{slug}-{num}"
                 num += 1
-            # Guardar el producto con el slug único
+                
             product_serializer.save(user=request.user, slug=unique_slug)
             return Response(status=status.HTTP_201_CREATED)
         else:
@@ -159,7 +147,6 @@ def FilterProductsView(request):
             if start_date and end_date:
                 products = products.filter(created__range=[start_date, end_date])
         elif time_range == 'todos':
-            # No se aplica ningún filtro de fecha
             pass
 
     search_item = request.GET.get('searchItem')
@@ -212,3 +199,27 @@ def delete_product(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def ReviewCreateView(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"detail": "Product not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    existing_review = Reviews.objects.filter(product=product, user=request.user).first()
+    if existing_review:
+        return Response({"detail": "You have already reviewed this product."}, status=status.HTTP_400_BAD_REQUEST)
+    
+    data = request.data
+    data['product'] = product.id
+    data['user'] = request.user.id
+    serializer = ReviewSerializer(data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

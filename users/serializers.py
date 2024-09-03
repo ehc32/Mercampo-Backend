@@ -40,10 +40,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
+        token['userId'] = user.id
         token['email'] = user.email
         token['name'] = user.name
         token['avatar'] = user.avatar.url
         token['phone'] = user.phone
+        token['role'] = user.role
         token['can_publish'] = user.can_publish
 
         return token

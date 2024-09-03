@@ -72,3 +72,17 @@ class ProductImagesSerializer(serializers.Serializer): # brings the imgs from th
                 image_type = imghdr.what(None, image_data) or 'jpg'
                 images_data.append(f'data:image/{image_type};base64,{encoded_image.replace("dataimage/jpegbase64", "")}')
         return images_data
+    
+    class ReviewCreateSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Reviews
+            fields = ['product', 'user', 'rating', 'comment']
+
+        def create(self, validated_data):
+            review = Reviews.objects.create(**validated_data)
+            # Actualizar el número de reseñas y la calificación promedio en el modelo Product
+            product = validated_data['product']
+            product.num_reviews = Reviews.objects.filter(product=product).count()
+            product.rating = Reviews.objects.filter(product=product).aggregate(models.Avg('rating'))['rating__avg']
+            product.save()
+            return review

@@ -122,6 +122,7 @@ export default function UserProfile2() {
         fullName: user.name,
         phone: user.phone || 'Sin registrar',
         email: user.email,
+        role: user.role,
         avatar: `${import.meta.env.VITE_BACKEND_URL}${user.avatar}`,
     };
 
@@ -130,35 +131,35 @@ export default function UserProfile2() {
             { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
             { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
             { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 4, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 5, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 6, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 7, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 8, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 9, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 10, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 11, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 12, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 13, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 14, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 15, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
         ],
         tasks: [
             { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
             { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
             { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
-            { id: 1, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
-            { id: 2, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
-            { id: 3, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 4, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 5, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 6, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 7, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 8, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 9, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 10, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 11, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 12, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
+            { id: 13, name: 'Website Redesign', status: 'In Progress', dueDate: '2023-12-31', total_price: '2000' },
+            { id: 14, name: 'Mobile App Development', status: 'Planning', dueDate: '2024-03-15', total_price: '5000' },
+            { id: 15, name: 'Database Migration', status: 'Completed', dueDate: '2023-11-30', total_price: '4000' },
         ],
     };
 
@@ -184,6 +185,7 @@ export default function UserProfile2() {
                             <Typography variant="h5">{profileData.fullName}</Typography>
                             <Typography variant="body2">{profileData.phone}</Typography>
                             <Typography variant="body2">{profileData.email}</Typography>
+                            <Typography variant="body2">{profileData.role == "client" ? "Cliente" : profileData.role == "admin" ? "Administrador" : "Vendedor"}</Typography>
                         </Box>
                     </Box>
                 </CardContent>

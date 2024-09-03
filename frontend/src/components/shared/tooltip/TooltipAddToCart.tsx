@@ -15,7 +15,7 @@ export default function BasicTooltip({ producto }) {
 
     return (
         <Tooltip title="Añadir al carrito">
-            <IconButton onClick={() => addCart(producto)}>
+            <IconButton className='focus:outline-none' onClick={() => addCart(producto)}>
                 <ShoppingCartIcon style={{ color: "#39A900" }} />
             </IconButton>
         </Tooltip>

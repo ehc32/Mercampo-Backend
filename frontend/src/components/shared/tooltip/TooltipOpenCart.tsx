@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 export default function BasicTooltip() {
 
     return (
-        <Tooltip title="Abrir carrito de compras">
+        <Tooltip title="Abrir carrito de compras" >
             <Link to="/cart">
-                <IconButton>
+                <IconButton className='focus:outline-none'>
                     <ShoppingCartIcon style={{ color: "#39A900", height: "30px", width: "30px" }} />
                 </IconButton>
             </Link>

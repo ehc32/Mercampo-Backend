@@ -1,5 +1,6 @@
 .swiper {
     margin: 0 auto 1em;
+    height: 60vh !important;
     padding-top: 1em;
     border-radius: 3.5px;
 }

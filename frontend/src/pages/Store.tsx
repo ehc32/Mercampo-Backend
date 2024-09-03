@@ -110,7 +110,7 @@ const Store = () => {
                     endDate={endDate}
                 />
                 <Content productos={productos} loading={loading} dataLenght={dataLenght} page={page} setPage={setPage} />
-                <AsideToggle />
+
             </main>
         </section>
     );

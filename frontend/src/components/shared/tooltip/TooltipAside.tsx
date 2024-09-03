@@ -13,7 +13,7 @@ export default function AsideToggle() {
     const icon = abierto ? <CloseIcon className="block fs-18px" aria-hidden="true" /> : <MenuIcon className="block fs-18px" aria-hidden="true" />;
 
     return (
-        <Tooltip title={abierto ? "Cerrar" : "Abrir"} className='w-16 h-16 relative top-1'>
+        <Tooltip title={abierto ? "Cerrar" : "Abrir"} className='w-16 h-16 relative top-1 focus:outline-none'>
             <IconButton onClick={toggleAbierto}>
                 {icon}
             </IconButton>

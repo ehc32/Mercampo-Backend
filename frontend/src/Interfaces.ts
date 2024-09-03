@@ -6,7 +6,7 @@ export interface Product {
     slug?: string;
     description: string;
     price: number;
-    rating?: number;    
+    rating?: number;
     count_in_stock: number;
     category: string;
     image: File | null;
@@ -15,6 +15,7 @@ export interface Product {
     unit?: string;
     map_locate?: string;
     locate?: string;
+
 }
 
 export interface Order {
@@ -41,5 +42,7 @@ export interface Token {
     is_staff: boolean;
     email: string;
     name: string;
+    phone: string;
+    role: string;
     avatar: File | null;
 };

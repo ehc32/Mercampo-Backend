@@ -14,8 +14,8 @@ urlpatterns = [
     path('get_product_images/<int:product_id>/', views.get_product_images), # funcional - trae un producto y sus datos
     path('post/', views.create_product), # funcional - crea un producto
     path('edit/<int:pk>/', views.edit_product),
-    path('delete/<int:pk>/', views.delete_product),
+    path('delete/<int:pk>/', views.delete_product), # funcional - borra el producto
     path('cate/<str:category>/', views.get_prod_by_cate), # funcional - trae productos por categoria
     path('caterandom/<str:category>/', views.get_prod_by_caterandom), # funcional - trae productos por categoria
-    path('review/<int:pk>/', views.create_review),
+    path('opinion/send/<int:pk>/', views.ReviewCreateView),
 ]

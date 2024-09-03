@@ -6,17 +6,13 @@ import LoginPage from "./pages/Login"
 import DetallesProd from "./pages/ProductDetail"
 import RegisterPage from "./pages/Register"
 import Store from "./pages/Store"
-import Aprove from "./components/AprovSellerUser"
 import AdminPage from "./pages/AdminPage"
 import Home from "./pages/Home"
-import ShopHistory from "./pages/ShopHistory"
 import ShoppingCart from "./pages/ShoppingCart"
 import UserProfile from "./pages/UserProfile"
-import VendedorProduct from "./pages/VendedorProduct"
 import AddProd from "./pages/AddProd"
 import { ToastContainer } from "react-toastify"
 import NotfoundPage from "./global/NotfoundPage"
-import UserProfile2 from "./pages/UserProfile"
 
 
 function App() {
@@ -25,7 +21,7 @@ function App() {
         <BrowserRouter>
             <ToastContainer />
             <Routes>
-                    <Route path="/" element={<Layout />} >
+                <Route path="/" element={<Layout />} >
                     <Route index element={<Home />} />
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
@@ -33,8 +29,6 @@ function App() {
                     <Route index element={<Home />} /> {/* vista principal */}
                     <Route path="product/:slug" element={<DetallesProd />} />
                     <Route path="store" element={<Store />} />     {/* Vista para ingresar productos - solo con permisos de venta */}
-                    <Route path="vendedor-order" element={<VendedorProduct />} />  {/* Vista para ingresar productos - solo con permisos de venta */}
-                    <Route path="aprov-seller" element={<Aprove />} />
                     <Route path="addprod" element={<AddProd />} />
 
 
@@ -43,7 +37,6 @@ function App() {
                     <Route element={<PrivateRoute />} >
                         <Route path="cart" element={<ShoppingCart />} />
                         <Route path="profile" element={<UserProfile />} />
-                        <Route path="/purchase-history" element={<ShopHistory />} />
                     </Route>
 
                     <Route path="admin" element={<AdminPrivateRoute />} >

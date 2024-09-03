@@ -120,3 +120,8 @@ export const get_all_products_paginated_to_shop = async (page: number | string) 
     const reponse = await axi.get(`/products/?page=${page}&page_size=20`)
     return reponse.data
 }
+
+export const send_review = async (data: object, productId: number) => {
+    const response = await axi.post(`/opinion/send/${productId}/`, data)
+    return response.data
+}

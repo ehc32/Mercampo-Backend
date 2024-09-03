@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react';
 
 interface locationStatus {
     address: string;
-    darkMode: boolean;
 }
 
-const Map: React.FC<locationStatus> = ({ address, darkMode }) => {
+const Map: React.FC<locationStatus> = ({ address }) => {
 
     const { isLoaded, loadError } = useJsApiLoader({
         id: 'google-maps-script',
@@ -41,8 +40,8 @@ const Map: React.FC<locationStatus> = ({ address, darkMode }) => {
 
     return (
         <section className="sectionMap">
-            <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Localización</h2>
-            <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Encuentra lo que te gusta de manera eficiente</h4>
+            <h2 className='titulo-sala-compra-light'>Localización</h2>
+            <h4 className='sub-titulo-sala-compra-light'>Encuentra lo que te gusta de manera eficiente</h4>
 
             <GoogleMap
                 mapContainerStyle={{ width: '100%', height: '400px' }}
