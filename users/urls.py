@@ -11,5 +11,5 @@ urlpatterns = [
     path('delete/<int:pk>/', views.delete_user),
     path('edit/<int:id>/', views.edit_profile),
     path('get/solo/<int:pk>/', views.get_solo_user),
-    path('/sell/', views.get_request_seller),
+    path('sell/request/', views.get_request_seller),
 ]

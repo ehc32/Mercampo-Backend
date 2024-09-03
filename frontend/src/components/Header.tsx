@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = () => {
         <>
           <div className="px-4 py-1 w-full">
             <div className="relative flex h-16 items-center justify-evenly">
-              <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
+              <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start subnav-1">
                 <div className="flex">
                   {
                     location.pathname == "/store" && (
@@ -91,11 +91,12 @@ const Header: React.FC<HeaderProps> = () => {
                     </div>
                   </div>
                 </div>
+                
+              <h1 className='titulo-while-auth text-black  subnav-1 justify-center align-center'>Mercampo</h1>
               </div>
 
-              <h1 className='fs-22px text-black'>Mercampo</h1>
 
-              <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
                 {isAuth ? (
                   <>
                     <div className='nav_items_block'>

@@ -3,6 +3,8 @@
     max-height: 80vh;
 } */
 
+
+
 .nav_items_block {
     height: 100%;
     align-items: center;
@@ -32,4 +34,12 @@
     .toggle-openaside {
         display: none;
     }
+}
+
+.subnav-1 {
+    width: 40%!important;
+}
+
+.titulo-while-auth {
+    font-size: 2.6em;
 }
