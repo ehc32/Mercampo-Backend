@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
 from . models import Category, Product, Reviews
-from . serializers import ProductCreateSerializer, ProductReadSerializer, ReviewSerializer, ProductImagesSerializer, ReviewCreateSerializer
+from . serializers import ProductCreateSerializer, ProductReadSerializer, ProductImagesSerializer, ReviewCreateSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
 
 @api_view(['POST'])
@@ -204,7 +204,6 @@ def delete_product(request, pk):
 
 @api_view(['POST'])
 def ReviewCreateView(request, pk):
-    print("entro :v")
     try:
         product = Product.objects.get(pk=pk)
     except Product.DoesNotExist:
@@ -213,14 +212,28 @@ def ReviewCreateView(request, pk):
     existing_review = Reviews.objects.filter(product=product, user=request.user).first()
     if existing_review:
         return Response({"detail": "Ya opinaste sobre el producto."}, status=status.HTTP_400_BAD_REQUEST)
-    
+
     data = request.data.copy() if isinstance(request.data, QueryDict) else request.data
     data['product'] = product.id
-    data['user'] = data['user']
-    serializer = ReviewSerializer(data=data)
+    data['user'] = request.user.id  # Se asegura de que el usuario actual sea el que hace la reseña
+
+    serializer = ReviewCreateSerializer(data=data)      
 
     if serializer.is_valid():
-        serializer.save()
+        serializer.save()  # Aquí se guarda la reseña y se actualiza el rating del producto
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def ReviewShowAllFromProduct(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"detail": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+    # Ordenar las reseñas de forma aleatoria
+    reviews = Reviews.objects.filter(product=product).order_by('?')
+    
+    serializer = ReviewSerializer(reviews, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

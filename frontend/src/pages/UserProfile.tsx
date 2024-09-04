@@ -1,28 +1,30 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import jwt_decode from 'jwt-decode';
-import { toast } from 'react-hot-toast';
-import Input from '@mui/material/Input';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import Input from '@mui/material/Input';
+import Modal from '@mui/material/Modal';
+import Tab from '@mui/material/Tab';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Modal from '@mui/material/Modal';
-import { get_solo_user, edit_user } from '../api/users';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import jwt_decode from 'jwt-decode';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { get_order_items } from '../api/orders';
+import { edit_user, get_solo_user } from '../api/users';
 import Loader from '../components/Loader';
+import ModalRequestSeller from '../components/shared/Modal/ModalARequestSeller';
+import ModalEditProfile from '../components/shared/Modal/ModalEditUser';
+import AsideFilter from '../components/tienda/AsideFilter/AsideFilter';
 import { useAuthStore } from '../hooks/auth';
 import { Token } from '../Interfaces';
-import ModalEditProfile from '../components/shared/Modal/ModalEditUser';
-import ModalRequestSeller from '../components/shared/Modal/ModalARequestSeller';
+import Footer from '../components/Footer';
 
 export default function UserProfile2() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -32,8 +34,8 @@ export default function UserProfile2() {
     const [image, setImage] = useState<File | null>(null);
     const [filePreview, setFilePreview] = useState<string>('');
     const [show, setShow] = useState(true);
-    const [openModal, setOpenModal] = useState(false); // Estado para controlar la visibilidad del modal
-    const [orderItems, setOrderItems] = useState([]); // Estado para almacenar los productos de la orden seleccionada
+    const [openModal, setOpenModal] = useState(false);
+    const [orderItems, setOrderItems] = useState([]);
 
     const token: string = useAuthStore.getState().access;
     const tokenDecoded: Token = jwt_decode(token);
@@ -116,7 +118,7 @@ export default function UserProfile2() {
     };
 
     if (isUserLoading) return <Loader />;
-    if (isUserError) return <p>Error loading data.</p>;
+    if (isUserError) return <p>Error al cargar datos.</p>;
 
     const profileData = {
         fullName: user.name,
@@ -172,143 +174,156 @@ export default function UserProfile2() {
     };
 
     return (
-        <Box sx={{ maxWidth: 'lg', mx: 'auto', p: 6, mt: '5em' }}>
-            <Card sx={{ my: "2em" }} className='flex flex-row justify-between align-center'>
-                <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Avatar
-                            src={profileData.avatar}
-                            alt={profileData.fullName}
-                            sx={{ width: 100, height: 100 }}
-                        />
-                        <Box sx={{ ml: 4 }}>
-                            <Typography variant="h5">{profileData.fullName}</Typography>
-                            <Typography variant="body2">{profileData.phone}</Typography>
-                            <Typography variant="body2">{profileData.email}</Typography>
-                            <Typography variant="body2">{profileData.role == "client" ? "Cliente" : profileData.role == "admin" ? "Administrador" : "Vendedor"}</Typography>
+        <>
+            <AsideFilter />
+            <Box sx={{ maxWidth: 'lg', mx: 'auto', p: 6, mt: '5em' }}>
+                <h2 className='titulo-sala-compra-light'>Perfil del usuario</h2>
+
+                <Card sx={{ my: "2em" }} className='flex flex-row justify-between align-center'>
+                    <CardContent>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Avatar
+                                src={profileData.avatar}
+                                alt={profileData.fullName}
+                                sx={{ width: 100, height: 100 }}
+                            />
+                            <Box sx={{ ml: 4 }}>
+                                <Typography variant="h5">{profileData.fullName}</Typography>
+                                <Typography variant="body2">{profileData.phone}</Typography>
+                                <Typography variant="body2">{profileData.email}</Typography>
+                                <Typography variant="body2">{profileData.role == "client" ? "Cliente" : profileData.role == "admin" ? "Administrador" : "Vendedor"}</Typography>
+                            </Box>
                         </Box>
-                    </Box>
-                </CardContent>
-                <div className='text-end w-30'>
-                    <ModalEditProfile
-                        stateName={stateName}
-                        setStateName={setStateName}
-                        stateLast={stateLast}
-                        setStateLast={setStateLast}
-                        image={image}
-                        handleFileChange={handleFileChange}
-                        removeImage={removeImage}
-                        setShow={setShow}
-                        handleSubmit={handleSubmit}
-                    />
-                    <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
+                    </CardContent>
+                    <div className='text-end w-30'>
+                        <ModalEditProfile
+                            stateName={stateName}
+                            setStateName={setStateName}
+                            stateLast={stateLast}
+                            setStateLast={setStateLast}
+                            image={image}
+                            handleFileChange={handleFileChange}
+                            removeImage={removeImage}
+                            setShow={setShow}
+                            handleSubmit={handleSubmit}
+                        />
+                        <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
+                    </div>
+                </Card>
+                <div>
+                    <h2 className='titulo-sala-compra-light'>Registro de compraventa</h2>
+                    <h4 className='sub-titulo-sala-compra-light'>
+                        Visualiza las ordenes de productos que has realizado {profileData.role == "seller" && <p> o ventas que has logrado</p>
+                        }
+                        {
+                            profileData.role == "admin" && <p> o ventas que has logrado</p>
+                        }
+                    </h4>
                 </div>
-            </Card>
-            <div className='flex flex-row justify-between py-4'>
-                <Input
-                    type="search"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    sx={{ width: '50%', padding: '.1em' }}
-                />
+                <div className='flex flex-row justify-between py-4'>
 
-                <Box>
-                    <Tabs value={tabValue} onChange={handleTabChange}>
-                        <Tab label="Compras" value="compras" />
-                        <Tab label="Ordenes" value="orders" />
-                    </Tabs>
-                </Box>
-            </div>
+                    <Input
+                        type="search"
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        sx={{ width: '50%', padding: '.1em' }}
+                    />
 
-            {tabValue === 'compras' && (
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Id</TableCell>
-                            <TableCell>Usuario</TableCell>
-                            <TableCell>Fecha de entrega</TableCell>
-                            <TableCell>Fecha de creación</TableCell>
-                            <TableCell>Precio total</TableCell>
-                            <TableCell>Acciones</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {filterData(tablesData.projects, searchTerm).map((project) => (
-                            <TableRow key={project.id}>
-                                <TableCell>{project.id}</TableCell>
-                                <TableCell>{project.name}</TableCell>
-                                <TableCell>{project.dueDate}</TableCell>
-                                <TableCell>{project.date_creation}</TableCell>
-                                <TableCell>{project.date_creation}</TableCell>
-                                <TableCell>{project.total_price}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            )}
+                    <Box>
+                        <Tabs value={tabValue} onChange={handleTabChange}>
+                            <Tab label="Compras" value="compras" className='focus:outline-none' />
+                            <Tab label="Ordenes" value="orders" className='focus:outline-none' />
+                        </Tabs>
+                    </Box>
+                </div>
 
-            {tabValue === 'orders' && (
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Id</TableCell>
-                            <TableCell>Usuario</TableCell>
-                            <TableCell>Fecha de entrega</TableCell>
-                            <TableCell>Fecha de creación</TableCell>
-                            <TableCell>Precio total</TableCell>
-                            <TableCell>Acciones</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {filterData(tablesData.tasks, searchTerm).map((task) => (
-                            <TableRow key={task.id} onClick={() => handleOrderClick(task.id)}>
-                                <TableCell>{task.id}</TableCell>
-                                <TableCell>{task.name}</TableCell>
-                                <TableCell>{task.dueDate}</TableCell>
-                                <TableCell>{task.date_creation}</TableCell>
-                                <TableCell>{task.date_creation}</TableCell>
-                                <TableCell>{task.total_price}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-
-            )}
-
-            {/* Modal para mostrar los productos de la orden */}
-            <Modal
-                open={openModal}
-                onClose={handleCloseModal}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-            >
-                <Box sx={{ width: 400, p: 4, bgcolor: 'white', margin: 'auto', marginTop: '5em' }}>
-                    <Typography id="modal-title" variant="h6" component="h2">
-                        Productos de la Orden
-                    </Typography>
+                {tabValue === 'compras' && (
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Nombre del Producto</TableCell>
-                                <TableCell>Cantidad</TableCell>
-                                <TableCell>Precio</TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Id</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Usuario</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Fecha de entrega</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Fecha de creación</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Precio total</p></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {orderItems.map((item) => (
-                                <TableRow key={item.id}>
-                                    <TableCell>{item.productName}</TableCell>
-                                    <TableCell>{item.quantity}</TableCell>
-                                    <TableCell>{item.price}</TableCell>
+                            {filterData(tablesData.projects, searchTerm).map((project) => (
+                                <TableRow key={project.id}>
+                                    <TableCell>{project.id}</TableCell>
+                                    <TableCell>{project.name}</TableCell>
+                                    <TableCell>{project.dueDate}</TableCell>
+                                    <TableCell>{project.dueDate}</TableCell>
+                                    <TableCell>$ {project.total_price}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
-                    <button onClick={handleCloseModal}>Cerrar</button>
-                </Box>
-            </Modal>
+                )}
 
-        </Box>
+                {tabValue === 'orders' && (
+                    <Table>
+                        <TableHead>
+                        <TableRow>
+                                <TableCell><p className='fs-16px font-bold'>Id</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Usuario</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Fecha de entrega</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Fecha de creación</p></TableCell>
+                                <TableCell><p className='fs-16px font-bold'>Precio total</p></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {filterData(tablesData.tasks, searchTerm).map((task) => (
+                                <TableRow key={task.id} onClick={() => handleOrderClick(task.id)}>
+                                    <TableCell>{task.id}</TableCell>
+                                    <TableCell>{task.name}</TableCell>
+                                    <TableCell>{task.dueDate}</TableCell>
+                                    <TableCell>{task.dueDate}</TableCell>
+                                    <TableCell>$ {task.total_price}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+
+                )}
+
+                {/* Modal para mostrar los productos de la orden */}
+                <Modal
+                    open={openModal}
+                    onClose={handleCloseModal}
+                    aria-labelledby="modal-title"
+                    aria-describedby="modal-description"
+                >
+                    <Box sx={{ width: 400, p: 4, bgcolor: 'white', margin: 'auto', marginTop: '5em' }}>
+                        <Typography id="modal-title" variant="h6" component="h2">
+                            Productos de la Orden
+                        </Typography>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Nombre del Producto</TableCell>
+                                    <TableCell>Cantidad</TableCell>
+                                    <TableCell>Precio</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {orderItems.map((item) => (
+                                    <TableRow key={item.id}>
+                                        <TableCell>{item.productName}</TableCell>
+                                        <TableCell>{item.quantity}</TableCell>
+                                        <TableCell>{item.price}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                        <button onClick={handleCloseModal}>Cerrar</button>
+                    </Box>
+                </Modal>
+
+            </Box>
+            <Footer />
+        </>
     );
 }

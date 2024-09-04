@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
 from rest_framework_simplejwt.views import TokenRefreshView
+
+from . import views
 
 urlpatterns = [
     path('search/', views.search),
@@ -11,5 +12,9 @@ urlpatterns = [
     path('delete/<int:pk>/', views.delete_user),
     path('edit/<int:id>/', views.edit_profile),
     path('get/solo/<int:pk>/', views.get_solo_user),
-    path('sell/request/', views.get_request_seller),
+    path('sell/bring_request/', views.get_request_seller),
+    path('sell/delete_request/<int:pk>/', views.delete_request),
+    path('sell/approve_request/<int:pk>/', views.approve_request),
+    path('sell/send_request/<int:pk>/', views.request_seller),
+
 ]

@@ -1,6 +1,11 @@
 .coments-section {
-    height: 80vh;
+    height: 40vh !important;
 }
+
+.coments-section2 {
+    height: 60vh !important;
+}
+
 .ratingContainer > span,
 .ratingContainer .MuiBox-root > span {
     width: 5em !important;
@@ -8,4 +13,7 @@
 
 .ratingContainer {
     overflow-y: auto;
+}
+.texto {
+    font-size: 24px;
 }

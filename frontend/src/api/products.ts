@@ -9,7 +9,6 @@ export const cate_api = async (category: string) => {
 
 export const cate_api_random = async (category: string) => {
     const response = await authAxios.get(`/products/caterandom/${category}/`)
-    console.log(response.data)
     return response.data
 };
 
@@ -123,4 +122,9 @@ export const send_review = async (data: { userId: number, rating: number, opinio
     formData.append("rating", data.rating.toString());
     formData.append("comment", data.opinion);
     await authAxios.post(`/products/opinion/send/${productId}/`, formData);
+};
+
+export const bring_reviews = async (productId: number) => {
+    const response = await authAxios.get(`/products/opinion/bring/${productId}/`);
+    return response
 };

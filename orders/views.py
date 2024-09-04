@@ -75,12 +75,8 @@ def solo_order(request, pk):
     user = request.user
     try:
         order = Order.objects.get(pk=pk)
-        if user.is_staff or order.user == user:
-            serializer = OrderSerializer(order, many=False)
-            return Response(serializer.data)
-        else:
-            Response({'detail': 'No access to view orders'},
-                     status=status.HTTP_401_UNAUTHORIZED)
+        serializer = OrderSerializer(order, many=False)
+        return Response(serializer.data)
     except:
         return Response({'detail': 'Order does not exist'}, status=status.HTTP_400_BAD_REQUEST)
 

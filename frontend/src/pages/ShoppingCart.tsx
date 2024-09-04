@@ -172,6 +172,7 @@ const CartPage = () => {
 
     return (
         <>
+
             <section className="dark:bg-gray-900 p-3 sm:p-5 mt-20">
                 <div className="px-4 lg:px-12">
                     <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
@@ -338,6 +339,7 @@ const CartPage = () => {
                     </div>
                 </div>
             </section>
+            <AsideFilter />
             <Footer />
         </>
     );

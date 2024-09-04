@@ -37,29 +37,16 @@ export default function ModalRequestSeller({
     const handleClose = () => setOpen(false);
 
     const handleConfirmOpen = () => {
-        setConfirmOpen(true);
+        sendRequest()
         setOpen(false);
     };
 
-    const handleConfirmClose = () => {
-        onRequestSubmit(userId);
-        setConfirmOpen(false);
-        toast.info("En espera de aprobación.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-    };
-
-    const sendRequest = async (idUser: number) => {
+    const sendRequest = async () => {
         try {
-            const response = await sendRequestSeller(idUser)
+            await sendRequestSeller(userId)
+            toast.success("Se ha enviado la solicitud, espera a que te aprueben")
         } catch (e) {
-            toast.warning("Se ha enviado la solicitud, espera a que te aprueben")
+            toast.warning("Ya has solicitado ser vendedor, ten paciencia en lo que aceptan tu solicitud")
         }
     }
 
@@ -73,14 +60,12 @@ export default function ModalRequestSeller({
             <Modal
                 open={open}
                 onClose={handleClose}
+                className="border-none focus:outline-none outline-none  active:outline-none"
                 aria-labelledby="request-seller-modal-title"
                 aria-describedby="request-seller-modal-description"
             >
                 <Box sx={{ ...style, width: 400 }}>
-                    <h2 id="request-seller-modal-title" className="form-title">
-                        Solicitud de ser Vendedor
-                    </h2>
-                    <p id="request-seller-modal-description" style={{ marginBottom: '20px' }}>
+                    <p style={{ marginBottom: '20px', fontSize: "22px", textAlign: "center" }}>
                         ¿Quieres ser vendedor?
                     </p>
                     <div className="flex flex-row gap-5">
@@ -90,7 +75,7 @@ export default function ModalRequestSeller({
                             startIcon={<AiOutlineCheck />}
                             onClick={handleConfirmOpen}
                         >
-                            Sí, quiero ser vendedor
+                            Si
                         </Button>
                         <Button
                             variant="outlined"
@@ -99,31 +84,6 @@ export default function ModalRequestSeller({
                             startIcon={<AiOutlineClose />}
                         >
                             Cancelar
-                        </Button>
-                    </div>
-                </Box>
-            </Modal>
-            <Modal
-                open={confirmOpen}
-                onClose={() => setConfirmOpen(false)}
-                aria-labelledby="confirm-modal-title"
-                aria-describedby="confirm-modal-description"
-            >
-                <Box sx={{ ...style, width: 300, height: 200 }}>
-                    <div className="flex flex-col justify-between h-full">
-                        <h2 id="confirm-modal-title" className="form-title">
-                            Solicitud Enviada
-                        </h2>
-                        <p id="confirm-modal-description" className="fs-18px">
-                            Su solicitud ha sido enviada. Por favor, espere la aprobación.
-                        </p>
-                        <Button
-                            variant="contained"
-                            fullWidth
-                            onClick={handleConfirmClose}
-                            startIcon={<AiOutlineCheck />}
-                        >
-                            Entendido
                         </Button>
                     </div>
                 </Box>

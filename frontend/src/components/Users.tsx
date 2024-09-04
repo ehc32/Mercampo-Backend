@@ -21,11 +21,11 @@ const Users = ({ results }: Props) => {
     queryFn: get_users,
   });
 
+  const fetchUsers = async () => {
+    const response = await get_users();
+    return response;
+  };
   useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await get_users();
-      return response;
-    };
     fetchUsers().then((data) => {
       queryClient.setQueryData(["users"], data);
     });
@@ -50,6 +50,9 @@ const Users = ({ results }: Props) => {
     try {
       await delete_user(id);
       toast.success('Usuario eliminado con éxito!');
+      fetchUsers().then((data) => {
+        queryClient.setQueryData(["users"], data);
+      });
     } catch (e: any) {
       toast.error('Error al eliminar el usuario: ');
     }
@@ -60,10 +63,10 @@ const Users = ({ results }: Props) => {
 
   return (
     <div className="overflow-x-auto">
-      <h2 className="text-xl font-semibold mb-5 mt-5 text-center text-black ">
-          Lista de Usuarios
-        </h2>
-        <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-50 border-top">
+      <h2 className="text-xl font-semibold  my-3 text-center text-black ">
+        Lista de Usuarios
+      </h2>
+      <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-50 border-top">
         <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 bg-slate-100">
           <tr>
             <th scope="col" className="px-4 py-3">
@@ -72,9 +75,7 @@ const Users = ({ results }: Props) => {
             <th scope="col" className="px-4 py-3">
               Nombre
             </th>
-            <th scope="col" className="px-4 py-3">
-              Apellido
-            </th>
+
             <th scope="col" className="px-4 py-3">
               Correo Electronico
             </th>

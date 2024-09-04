@@ -2,21 +2,8 @@ import base64
 import imghdr
 from django.core.files.base import ContentFile
 from rest_framework import serializers
-from .models import Product, ProductImage, Reviews
+from .models import Product, ProductImage, Reviews, User
 from django.db import models
-
-class ReviewSerializer(serializers.ModelSerializer):
-    avatar = serializers.SerializerMethodField()
-    user = serializers.ReadOnlyField(source='user.email')
-
-    class Meta:
-        model = Reviews
-        fields = "__all__"
-
-    def get_avatar(self, obj):
-        if obj.user.avatar:
-            return obj.user.avatar.url
-        return None
 
 class ProductReadSerializer(serializers.ModelSerializer):
     first_image = serializers.SerializerMethodField()
@@ -81,13 +68,30 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         review = Reviews.objects.create(**validated_data)
-        # Actualizar el número de reseñas y la calificación promedio en el modelo Product
+
         product = validated_data['product']
-        product.num_reviews = Reviews.objects.filter(product=product).count()
-        reviews = Reviews.objects.filter(product=product)
-        if reviews:
-            product.rating = reviews.aggregate(models.Avg('rating'))['rating__avg']
+
+        latest_reviews = Reviews.objects.filter(product=product).order_by('-created')[:20]
+
+        if latest_reviews.exists():
+            product.rating = latest_reviews.aggregate(models.Avg('rating'))['rating__avg']
         else:
             product.rating = None
+
+        product.num_reviews = Reviews.objects.filter(product=product).count()
+
         product.save()
+
         return review
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'avatar']  # Ajusta los campos según tu modelo de usuario
+
+class ReviewSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)  # Incluir el serializer del usuario
+
+    class Meta:
+        model = Reviews
+        fields = ['product', 'user', 'rating', 'comment', 'created']
