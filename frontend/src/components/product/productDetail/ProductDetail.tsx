@@ -16,6 +16,7 @@ interface ProductProps {
     darkMode: boolean;
     setCategory: any;
     fetchProductos: any;
+    setProductId: any;
 }
 interface User {
     name: string;

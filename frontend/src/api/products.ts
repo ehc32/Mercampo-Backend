@@ -2,10 +2,6 @@ import { Product } from "../Interfaces";
 import { authAxios, axi } from "./useAxios";
 
 
-export const create_review = async (description: string, rating: number, productId: number) => {
-    await authAxios.post(`/products/review/${productId}/`, { description, rating })
-};
-
 export const cate_api = async (category: string) => {
     const response = await authAxios.get(`/products/cate/${category}/`)
     return response.data.data.map((item) => item);
@@ -121,7 +117,10 @@ export const get_all_products_paginated_to_shop = async (page: number | string) 
     return reponse.data
 }
 
-export const send_review = async (data: object, productId: number) => {
-    const response = await axi.post(`/opinion/send/${productId}/`, data)
-    return response.data
-}
+export const send_review = async (data: { userId: number, rating: number, opinion: string }, productId: number) => {
+    const formData = new FormData();
+    formData.append("user", data.userId.toString());
+    formData.append("rating", data.rating.toString());
+    formData.append("comment", data.opinion);
+    await authAxios.post(`/products/opinion/send/${productId}/`, formData);
+};

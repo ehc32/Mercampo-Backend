@@ -3,6 +3,7 @@ import imghdr
 from django.core.files.base import ContentFile
 from rest_framework import serializers
 from .models import Product, ProductImage, Reviews
+from django.db import models
 
 class ReviewSerializer(serializers.ModelSerializer):
     avatar = serializers.SerializerMethodField()
@@ -73,16 +74,20 @@ class ProductImagesSerializer(serializers.Serializer): # brings the imgs from th
                 images_data.append(f'data:image/{image_type};base64,{encoded_image.replace("dataimage/jpegbase64", "")}')
         return images_data
     
-    class ReviewCreateSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Reviews
-            fields = ['product', 'user', 'rating', 'comment']
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reviews
+        fields = ['product', 'user', 'rating', 'comment']
 
-        def create(self, validated_data):
-            review = Reviews.objects.create(**validated_data)
-            # Actualizar el número de reseñas y la calificación promedio en el modelo Product
-            product = validated_data['product']
-            product.num_reviews = Reviews.objects.filter(product=product).count()
-            product.rating = Reviews.objects.filter(product=product).aggregate(models.Avg('rating'))['rating__avg']
-            product.save()
-            return review
+    def create(self, validated_data):
+        review = Reviews.objects.create(**validated_data)
+        # Actualizar el número de reseñas y la calificación promedio en el modelo Product
+        product = validated_data['product']
+        product.num_reviews = Reviews.objects.filter(product=product).count()
+        reviews = Reviews.objects.filter(product=product)
+        if reviews:
+            product.rating = reviews.aggregate(models.Avg('rating'))['rating__avg']
+        else:
+            product.rating = None
+        product.save()
+        return review

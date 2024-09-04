@@ -38,4 +38,4 @@ class Reviews(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     comment = models.TextField(blank=True) 
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)   

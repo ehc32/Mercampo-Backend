@@ -50,7 +50,7 @@ const Comments = ({productId}) => {
     // Simulación de obtención de datos del token
     const getUserDataFromToken = () => {
         // Supongamos que tienes una función que devuelve el token decodificado
-        const token = { id: '1', avatar: '/path/to/user-avatar.jpg' }; // Esto debería venir de la autenticación real
+        const token = { id: '6', avatar: '/path/to/user-avatar.jpg' }; // Esto debería venir de la autenticación real
         return token;
     };
 
@@ -59,7 +59,6 @@ const Comments = ({productId}) => {
 
         const data = {
             userId: id,
-            userAvatar: avatar,
             rating: rating,
             opinion: opinion,
         };

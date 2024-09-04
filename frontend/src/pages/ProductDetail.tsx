@@ -10,6 +10,7 @@ const DetallesProd = () => {
   const [category, setCategory] = useState<string>("");
   const [loader, setLoader] = useState<boolean>(false);
   const [productos, setProductos] = useState([]);
+  const [productId, setProductId] = useState(0)
 
   const fetchProductos = async () => {
     try {
@@ -29,8 +30,8 @@ const DetallesProd = () => {
 
   return (
     <main className='mt-24'>
-      <ProductDetail setCategory={setCategory} fetchProductos={fetchProductos} />
-      <Comments />
+      <ProductDetail setCategory={setCategory} fetchProductos={fetchProductos} setProductId={setProductId} />
+      <Comments productId={productId} />
       <SwiperProducts datos={productos} height='50vh' width='100%' loader={loader} />
       <Footer />
       <AsideFilter />
