@@ -1,5 +1,6 @@
 import datetime
 from rest_framework.response import Response
+from django.http import QueryDict
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
@@ -191,7 +192,6 @@ def edit_product(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
 def delete_product(request, pk):
     product = Product.objects.get(pk=pk)
     if request.user.role == "admin":
@@ -201,21 +201,22 @@ def delete_product(request, pk):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
+
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def ReviewCreateView(request, pk):
+    print("entro :v")
     try:
         product = Product.objects.get(pk=pk)
     except Product.DoesNotExist:
-        return Response({"detail": "Product not found."}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"detail": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
     existing_review = Reviews.objects.filter(product=product, user=request.user).first()
     if existing_review:
-        return Response({"detail": "You have already reviewed this product."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"detail": "Ya opinaste sobre el producto."}, status=status.HTTP_400_BAD_REQUEST)
     
-    data = request.data
+    data = request.data.copy() if isinstance(request.data, QueryDict) else request.data
     data['product'] = product.id
-    data['user'] = request.user.id
+    data['user'] = data['user']
     serializer = ReviewSerializer(data=data)
 
     if serializer.is_valid():
