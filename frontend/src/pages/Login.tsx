@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginRequest } from "../api/users";
 import { useAuthStore } from "../hooks/auth";
 import Footer from "../components/Footer";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -45,6 +46,8 @@ const LoginPage = () => {
 
   return (
     <>
+    
+    <AsideFilter />
       <div className="flex flex-col justify-center items-center fondo-login  min-h-screen">
         <div className="w-96 bg-slate-300 bg-opacity-20 backdrop-filter  backdrop-blur-md rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:bg-opacity-20 dark:backdrop-blur-md dark:border-gray-700 flex flex-row">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">

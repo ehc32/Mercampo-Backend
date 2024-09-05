@@ -1,6 +1,6 @@
 const ST_Icon = () => {
     return (
-        <div className="h-full m-2 row" style={{ pointerEvents: 'none' }}>
+        <div className="h-full m-2 row whitespace-nowrap" style={{ pointerEvents: 'none' }}>
             <img
                 className="h-10 w-auto lg:block mx-1 relative top-1"
                 src="/public/lo.ico"

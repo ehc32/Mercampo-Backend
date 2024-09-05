@@ -24,3 +24,6 @@ main {
 .sub-titulo-sala-compra-dark, .titulo-sala-compra-dark {
     color: #fff;
 }
+.contenidoTienda .swiper-slide img  {
+    width: 90% !important;
+}

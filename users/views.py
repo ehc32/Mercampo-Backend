@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .models import User, Seller
+from .models import PublishStatus, Role, User, Seller
 from .serializers import (
     RegisterUserSerializer,
     MyTokenObtainPairSerializer,
@@ -14,22 +14,17 @@ from .serializers import (
 )
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def get_solo_user(request, pk):
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    if request.user == user or request.user.role == "admin":
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-    else:
-        return Response({'detail': 'No tienes permiso para acceder a este recurso.'}, status=status.HTTP_403_FORBIDDEN)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
 
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
 def edit_profile(request, email):
     try:
         user = User.objects.get(email=email)
@@ -50,7 +45,6 @@ def edit_profile(request, email):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def search(request):
     query = request.query_params.get('query', '')
     users = User.objects.filter(email__icontains=query)
@@ -59,7 +53,6 @@ def search(request):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
 def delete_user(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -74,7 +67,6 @@ def delete_user(request, pk):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def get_users(request):
     users = User.objects.exclude(email='admin@admin.com')
     serializer = UserSerializer(users, many=True)
@@ -93,26 +85,58 @@ def register(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def request_seller(request):
-    if request.user.can_publish == "cliente":
-        serializer = SellerRequestSerializer(data={'user': request.user.id})
+def request_seller(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+    print(user.can_publish)
+    if user.can_publish == "cliente":
+        serializer = SellerRequestSerializer(data={'user': user.id})
         if serializer.is_valid():
-            serializer.save(user=request.user)
-            request.user.can_publish = "solicitando"
-            request.user.save()
+            serializer.save(user=user)
+            user.can_publish = "solicitando"
+            user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({'detail': 'Ya tienes una solicitud pendiente o eres vendedor.'}, status=status.HTTP_400_BAD_REQUEST)
 
-class LoginView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
-    
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def get_request_seller(request):
     sellers = Seller.objects.all()
     serializer = SellerRequestSerializer(sellers, many=True)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def delete_request(request, pk):
+    try:
+        seller_request = Seller.objects.get(pk=pk)
+        seller_request.delete()
+        return Response({'detail': 'Solicitud eliminada exitosamente.'}, status=status.HTTP_204_NO_CONTENT)
+    except Seller.DoesNotExist:
+        return Response({'detail': 'Solicitud no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+def approve_request(request, pk):
+    try:
+        seller_request = Seller.objects.get(pk=pk)
+        user = seller_request.user
+        
+        if user.role == Role.CLIENT.value and user.can_publish == PublishStatus.SOLICITANDO.value:
+            user.role = Role.SELLER.value
+            user.can_publish = PublishStatus.VENDIENDO.value
+            user.save()
+            return Response({'detail': 'Solicitud aprobada y usuario actualizado a vendedor.'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'El usuario no es un cliente solicitante.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    except Seller.DoesNotExist:
+        return Response({'detail': 'Solicitud no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class LoginView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+    

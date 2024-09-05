@@ -53,3 +53,7 @@
     color: #fff !important;
     background-color: transparent;
 }
+
+.product-rating > span {
+    width: 5em;
+}

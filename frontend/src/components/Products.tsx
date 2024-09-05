@@ -22,20 +22,20 @@ const Products = ({ results }: Props) => {
     const [idLocal, setIdLocal] = React.useState(0);
     const queryClient = useQueryClient();
 
-    useEffect(() => {
-        const fetchProductos = async (page: number) => {
-            try {
-                console.log("trayendo productos de la pagina: " + page)
-                const productosAPI = await get_all_products_paginated(page);
-                setProductos(productosAPI.data);
-                setDataLenght(productosAPI.meta.count)
+    const fetchProductos = async (page: number) => {
+        try {
+            console.log("trayendo productos de la pagina: " + page)
+            const productosAPI = await get_all_products_paginated(page);
+            setProductos(productosAPI.data);
+            setDataLenght(productosAPI.meta.count)
 
-            } catch (error) {
-                console.error(error)
-            } finally {
-                setLoading(false);
-            }
-        };
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
 
         fetchProductos(page);
 
@@ -55,6 +55,7 @@ const Products = ({ results }: Props) => {
             await delete_product(id);
             toast.success('Producto eliminado con éxito!');
             queryClient.invalidateQueries(["products"]);
+            fetchProductos(page);
         } catch (e: any) {
             toast.error('Error al eliminar el producto');
         }
@@ -62,14 +63,14 @@ const Products = ({ results }: Props) => {
 
     return (
         <div className="overflow-x-auto scroll-tablas">
-            <h2 className="text-xl font-semibold mb-5 mt-5 text-center text-black ">
-          Lista de Productos
-        </h2>
+            <h2 className="text-xl font-semibold  my-3 text-center text-black ">
+                Lista de Productos
+            </h2>
             <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 bg-slate-50 border-top">
                 <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 bg-slate-100">
                     <tr>
                         <th scope="col" className="px-4 py-3">
-                            ID producto
+                            Id producto
                         </th>
                         <th scope="col" className="px-4 py-3">
                             Nombre

@@ -23,9 +23,7 @@ class Product(models.Model):
                                 null=True, blank=True)
     unit = models.CharField(max_length=100, blank=True)
     num_reviews = models.IntegerField(default=0)
-    rating = models.DecimalField(max_digits=10,
-                                 decimal_places=2,
-                                 null=True, blank=True)
+    rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) # user who's offer the product
     created = models.DateTimeField(auto_now_add=True) # when was created
 

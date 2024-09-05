@@ -47,12 +47,12 @@ const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos
           <div className="container-fluid">
             <div className="nk-content-body">
               <div className="nk-block">
-                <div className={darkMode ? "card2" : "card card-bordered"}>
+                <div className="card card-bordered">
                   <div className="card-inner">
                     <div className="row pb-5">
-                      <div className="col-lg-12">
-                        <h2 className={darkMode ? 'titulo-sala-compra-dark' : 'titulo-sala-compra-light'}>Productos similares</h2>
-                        <h4 className={darkMode ? 'sub-titulo-sala-compra-dark' : 'sub-titulo-sala-compra-light'}>Variedad de productos de la misma categoria</h4>
+                      <div className="col-lg-12 swiper-detail">
+                        <h2 className='titulo-sala-compra-light'>Productos similares</h2>
+                        <h4 className='sub-titulo-sala-compra-light'>Variedad de productos de la misma categoria</h4>
 
                         {
                           loader ? (

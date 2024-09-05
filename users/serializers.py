@@ -15,8 +15,15 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+    
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'email', 'phone']
 
 class SellerRequestSerializer(serializers.ModelSerializer):
+    user = UserDetailSerializer()  # Nota: Aquí 'user' debería estar en fields
+
     class Meta:
         model = Seller
         fields = ['user', 'date_requested']

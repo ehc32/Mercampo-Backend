@@ -43,7 +43,21 @@ export const loginRequest = async (email: string, password: string) => {
     return response;
 };
 
-export const sendRequestSeller = async (idUser: number) => {
-    const response = await axi.post(`/users/sell/${idUser}`)
+export const sendRequestSeller = async (idUser: number | string) => {
+    await axi.post(`/users/sell/send_request/${idUser}/`)
+};
+
+export const bringRequestSeller = async () => {
+    const response = await axi.get(`/users/sell/bring_request/`)
     return response;
 };
+
+export const approveRequestSeller = async (idUser: number | string) => {
+    await axi.post(`/users/sell/approve_request/${idUser}/`);
+};
+
+export const deleteRequestSeller = async (idUser: number | string) => {
+    await axi.delete(`/users/sell/delete_request/${idUser}/`);
+};
+
+
