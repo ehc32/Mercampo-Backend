@@ -103,7 +103,7 @@ const ProductDetail: React.FC<ProductProps> = ({ setCategory, fetchProductos, se
                                             <div className="row pb-5">
                                                 <div className="col-lg-6">
                                                     <div className="product-gallery mr-xl-1 mr-xxl-5 p-4">
-                                                        <h4 className='titleProductoPreview'>Visualización del producto</h4>
+                                                        <h4 className='titleProductoPreview text-black font-bold'>Visualización del producto</h4>
                                                         <MySwiper width={"100%"} height={"40vh"} datos={imagesData} isUpSwiper={false} />
                                                     </div>
                                                 </div>
@@ -111,14 +111,14 @@ const ProductDetail: React.FC<ProductProps> = ({ setCategory, fetchProductos, se
                                                     <div className="product-info mt-5 mr-xxl-5 h-96 flex justify-between flex-col">
                                                         <div>
                                                             <div className='flex flex-col justify-between text-start'>
-                                                                <h2 className="fs-22px fw-bold mb-1 color-light">
+                                                                <h2 className="fs-22px  mb-1 color-light text-black font-weight-bolder">
                                                                     {loading ? (
                                                                         <Skeleton />
                                                                     ) : (
                                                                         producto?.name
                                                                     )}
                                                                 </h2>
-                                                                <h4 className="fs-20x fw-bold product-price text-primary w-40  text-start pb-2">
+                                                                <h4 className="fs-20x  product-price text-primary w-40 font-bold text-start pb-2">
                                                                     {loading ? (
                                                                         <Skeleton style={{ width: '100px', height: '100px' }} />
                                                                     ) : (
@@ -133,10 +133,10 @@ const ProductDetail: React.FC<ProductProps> = ({ setCategory, fetchProductos, se
                                                                     precision={0.5}
                                                                     readOnly
                                                                 />
-                                                                <div className="amount color-light">({producto?.num_reviews} Opiniones)</div>
+                                                                <div className=" pl-2 text-black">({producto?.num_reviews} Opiniones)</div>
                                                             </div>
                                                         </div>
-                                                        <div className="product-excrept text-soft h-32">
+                                                        <div className="product-excrept text-black h-32">
                                                             <p className="lead">{producto?.description}</p>
                                                         </div>
                                                         <div>
@@ -144,35 +144,36 @@ const ProductDetail: React.FC<ProductProps> = ({ setCategory, fetchProductos, se
                                                             <div className="product-meta">
                                                                 <ul className="d-flex g-3 gx-5">
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Cantidad en stock</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.count_in_stock}</div>
+                                                                        <div className="fs-14px font-bold text-black">Cantidad en stock</div>
+                                                                        <div className="fs-16px  text-black">{producto?.count_in_stock}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Unidad de medida</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.unit}</div>
+                                                                        <div className="fs-14px font-bold text-black">Unidad de medida</div>
+                                                                        <div className="fs-16px  text-black">{producto?.unit}</div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div className="fs-14px font-bold text-black">Categoría</div>
+                                                                        <div className="fs-16px  text-black">{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="product-meta">
                                                                 <ul className="d-flex g-3 gx-5">
+                                                                    
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Categoría</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.category.charAt(0).toUpperCase() + producto?.category.slice(1).toLowerCase()}</div>
+                                                                        <div className="fs-14px font-bold text-black">Ciudad</div>
+                                                                        <div className="fs-16px  text-black">{producto?.locate}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Ciudad</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.locate}</div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div className="fs-14px text-muted">Fecha de publicación</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{formatearFecha(producto?.created)}</div>
+                                                                        <div className="fs-14px font-bold text-black">Fecha de publicación</div>
+                                                                        <div className="fs-16px  text-black">{formatearFecha(producto?.created)}</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="product-meta">
                                                                 <div className='productCatn'>
-                                                                    <div className="fs-14px text-muted">Selecciona una cantidad</div>
-                                                                    <div className="fs-16px fw-bold text-secondary total">
+                                                                    <div className="fs-14px font-bold text-black">Selecciona una cantidad</div>
+                                                                    <div className="fs-16px  text-black total">
                                                                         {`$ ${cantidad * (producto?.price || 0)}`}
                                                                     </div>
 
@@ -235,24 +236,24 @@ const ProductDetail: React.FC<ProductProps> = ({ setCategory, fetchProductos, se
                                                             <div className="product-meta">
                                                                 <ul className="d-flex justify-start w-full gap-8 flex-wrap">
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Nombre</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{usuario?.name}</div>
+                                                                        <div className="fs-14px font-bold text-black">Nombre</div>
+                                                                        <div className="fs-16px  text-black">{usuario?.name}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Teléfono</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{usuario?.phone ? "null" : "Sin definir"}</div>
+                                                                        <div className="fs-14px font-bold text-black">Teléfono</div>
+                                                                        <div className="fs-16px  text-black">{usuario?.phone ? "null" : "Sin definir"}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Correo electronico</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{usuario?.email}</div>
+                                                                        <div className="fs-14px font-bold text-black">Correo electronico</div>
+                                                                        <div className="fs-16px  text-black">{usuario?.email}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Fecha en que se unió</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{formatearFecha(usuario?.date_joined)}</div>
+                                                                        <div className="fs-14px font-bold text-black">Fecha en que se unió</div>
+                                                                        <div className="fs-16px  text-black">{formatearFecha(usuario?.date_joined)}</div>
                                                                     </li>
                                                                     <li>
-                                                                        <div className="fs-14px text-muted">Localización ingresada ( mapa )</div>
-                                                                        <div className="fs-16px fw-bold text-secondary">{producto?.map_locate?.slice(0, 40)}</div>
+                                                                        <div className="fs-14px font-bold text-black">Localización ingresada ( mapa )</div>
+                                                                        <div className="fs-16px  text-black">{producto?.map_locate?.slice(0, 40)}</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>

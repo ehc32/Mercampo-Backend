@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import ReactPaginate from 'react-paginate';
 import { useNavigate } from "react-router-dom";
 import { create_order } from "../api/orders";
 import Footer from "../components/Footer";
@@ -10,11 +9,19 @@ import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useCartStore } from "../hooks/cart";
 import './style.css';
 import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Button, Box, TableSortLabel, TablePagination, Toolbar, Typography, IconButton, Tooltip, FormControlLabel, Switch
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Checkbox,
+    Box,
+    TableSortLabel,
+    TablePagination
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import { alpha } from '@mui/material/styles';
 import { visuallyHidden } from '@mui/utils';
 
 const CartPage = () => {
@@ -56,11 +63,28 @@ const CartPage = () => {
     });
 
     const createOrder = (data, actions) => {
+        const translateCOPtoUSD = () => {
+            const cop = data.total_price;
+            const usd = cop / 4000;
+            return usd;
+            const apiKey = 'AXazhAGnbnyGlBxeRjGl8uIgVkF7dmrqz6iJYHd6Ea5XDZY9uXoyjK6xzMpt2BrryR8FHM4Un5l89KDD';
+            const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+            
+            fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                const usdToCop = data.conversion_rates.COP;
+                console.log(`1 USD = ${usdToCop} COP`);
+              })
+              .catch(error => console.error('Error:', error));
+            
+
+        }
         return actions.order.create({
             purchase_units: [
                 {
                     amount: {
-                        value: total_price
+                        value: translateCOPtoUSD() // aqui definimos el valor a pagar
                     },
                 },
             ],
@@ -204,7 +228,7 @@ const CartPage = () => {
                                 <div className="botonDePaypal">
                                     <PayPalScriptProvider
                                         options={{
-                                            clientId: "AcvM04ycLuatoHGj4mz_xumwdLrJbM4flLzuIGMooLrRkSKk-7wX2ywqG7B1q7RrN1_DPei6_6F-DmhY"
+                                            clientId: "AXazhAGnbnyGlBxeRjGl8uIgVkF7dmrqz6iJYHd6Ea5XDZY9uXoyjK6xzMpt2BrryR8FHM4Un5l89KDD"
                                         }}
                                     >
                                         <PayPalButtons

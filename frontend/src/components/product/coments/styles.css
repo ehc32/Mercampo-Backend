@@ -1,9 +1,16 @@
 .coments-section {
-    height: 40vh !important;
+    height: 30vh !important;
+    padding-top: 3em !important;
 }
 
 .coments-section2 {
+    height: 50vh !important;
+    padding-top: 3em !important;
+}
+
+.coments-section3 {
     height: 60vh !important;
+    padding-top: 3em !important;
 }
 
 .ratingContainer > span,

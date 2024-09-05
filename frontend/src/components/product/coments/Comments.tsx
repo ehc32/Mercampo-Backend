@@ -77,7 +77,7 @@ const Comments = ({ productId }) => {
                         <div className="container-fluid">
                             <div className="nk-content-body">
                                 <div className="nk-block">
-                                    <div className={commentsData.length > 0 ? "card py-3 coments-section2 card-bordered" : "card py-3 coments-section card-bordered"}>
+                                    <div className={commentsData.length > 0 ? "card py-3 coments-section2 card-bordered" :  commentsData.length > 1 ? "card py-3 coments-section card-bordered" : "card py-3 coments-section3 card-bordered"}>
                                         <h2 className='titulo-sala-compra-light'>Centro de opiniones</h2>
                                         <h4 className='sub-titulo-sala-compra-light'>
                                             Conocer lo que opina la gente del producto quizá te pueda ayudar a tomar una buena decisión
