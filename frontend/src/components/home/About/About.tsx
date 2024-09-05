@@ -1,8 +1,10 @@
 
 export default function Component() {
     return (
-        <div className="flex justify-center py-10 bg-gray-50">
-            <div className="max-w-6xl w-full">
+        <div className="flex justify-center py-10 bg-gray-50 ">
+            <div className="max-w-6xl w-full" style={{
+  boxShadow: "-2px 0 6px rgba(57, 169, 0, 0.5), 2px 0 6px rgba(57, 169, 0, 0.5)",
+}}>
                 {/* Sección de la Corporación */}
                 <section className="w-full bg-[url('/public/campesino.jpeg')] bg-cover bg-center py-32 relative">
                     <div className="w-full px-4 md:px-6"> {/* Ancho completo */}
@@ -127,7 +129,7 @@ export default function Component() {
                                 Creemos el Programa de Aceleración de Líderes, dirigido a gerentes y directores de todos los países donde operamos.
                             </p>
                         </div>
-                        <img src="/public/campesino.jpeg" alt="Imagen relacionada" className="rounded-lg shadow-lg mb-6" />
+                        <img src="/public/1.jpg" alt="Imagen relacionada" className="rounded-lg shadow-lg mb-6" />
                         <img src="/public/campesino.jpeg" alt="Imagen relacionada" className="rounded-lg shadow-lg" />
                     </div>
                 </div>

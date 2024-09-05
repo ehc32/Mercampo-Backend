@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { get_all_products } from '../api/products';
+import { get_all_products } from "../api/products";
 import Footer from "../components/Footer";
 import About from "../components/home/About/About";
 import Hero from "../components/home/Hero";
@@ -12,86 +12,74 @@ import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 
 export default function Tienda() {
+  const [productosRandom, setProductosRandom] = useState([]);
 
-    const [productosRandom, setProductosRandom] = useState([]);
+  const people = [
+    {
+      name: "Nicolás Cerquera Nieva",
+      photo: "/public/Nicolas.jpeg",
+      role: "Tecnologo en ADSO",
+    },
+    {
+      name: "Yan Carlos Cerquera",
+      photo: "/public/carlos.jpeg",
+      role: "Ingeniero Electronico",
+    },
+    {
+      name: "Edgar Eduardo Olarte",
+      photo: "/public/eduar.jpeg",
+      role: "Ingeniero de Sistemas",
+    },
+    {
+      name: "Juan Nicolás Escobar",
+      photo: "/public/escobar.jpeg",
+      role: "Tecnologo en ADSO",
+    },
+  ];
 
-    const people = [
-        {
-            name: "Nicolás Cerquera Nieva",
-            photo: "/public/fondoa.jpg",
-            role: "Desarrollador de software y diseñador gráfico",
-        },
-        {
-            name: "Nicolás Cerquera Nieva",
-            photo: "/public/fondoa.jpg",
-            role: "Desarrollador de software y diseñador gráfico",
-        },
-        {
-            name: "Nicolás Cerquera Nieva",
-            photo: "/public/fondoa.jpg",
-            role: "Desarrollador de software y diseñador gráfico",
-        },
-        {
-            name: "Nicolás Cerquera Nieva",
-            photo: "/public/fondoa.jpg",
-            role: "Desarrollador de software y diseñador gráfico",
-        },
-    ]
+  const fetchProductos = async () => {
+    try {
+      const productos = await get_all_products();
+      setProductosRandom(productos);
+    } catch (error) {
+      console.error("Error al obtener los productos: ", error);
+    }
+  };
 
+  useEffect(() => {
+    void fetchProductos();
+  }, []);
 
+  const carrouselData = [
+    { foto: "/public/1.jpg" },
+    { foto: "/public/2.jpg" },
+    { foto: "/public/4.jpg" },
+    { foto: "/public/fondoa.jpeg" },
+  ];
 
-    const fetchProductos = async () => {
-        try {
-            const productos = await get_all_products();
-            setProductosRandom(productos);
-
-        } catch (error) {
-            console.error('Error al obtener los productos: ', error);
-        }
-    };
-
-    const fetchNewProductos = async () => {
-        try {
-            const productos = await get_all_products();
-            setProductosRandom(productos);
-
-        } catch (error) {
-            console.error('Error al obtener los productos: ', error);
-        }
-    };
-
-    useEffect(() => {
-        void fetchProductos();
-        void fetchNewProductos();
-    }, []);
-
-    const carrouselData = [
-        {
-            foto: '/public/campesena.jpg'
-        },
-        {
-            foto: '/public/campesena1.jpg'
-        },
-        {
-            foto: '/public/campesena4.jpg'
-        },
-        {
-            foto: '/public/campesena2.jpeg'
-        },
-
-    ]
-
-    return (
-        <React.Fragment>
-            <AsideFilter />
-            <Hero />
-            <SwiperNewProducts width="100%" height="55vh" loader={true} datos={productosRandom} />
-            <RandomProducts productos={productosRandom} />
-            <About />
-            <Swiper width="60%" height="40vh" datos={carrouselData} isUpSwiper={false} />
-            <Participants people={people} />
-            <Whatsapp />
-            <Footer />
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <div className="home-container">
+        <AsideFilter />
+        <Hero />
+        <SwiperNewProducts
+          width="100%"
+          height="55vh"
+          loader={true}
+          datos={productosRandom}
+        />
+        <RandomProducts productos={productosRandom} />
+        <About />
+        <Swiper
+          width="60%"
+          height="40vh"
+          datos={carrouselData}
+          isUpSwiper={false}
+        />
+        <Participants people={people} />
+        <Whatsapp />
+        <Footer />
+      </div>
+    </React.Fragment>
+  );
 }

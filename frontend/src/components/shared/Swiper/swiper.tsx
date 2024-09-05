@@ -3,7 +3,7 @@ import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './styles.css';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 
 interface SwiperPropsP {
   width: string;
@@ -24,7 +24,7 @@ const MySwiper: React.FC<SwiperPropsP> = ({ width, height, datos, isUpSwiper }) 
       navigation={true}
       modules={[Navigation]}
       className="mySwiper"
-      style={{ width, height }}
+      style={{ width, height, }}
       loop={true}
       autoplay={{
         delay: 2000, // Tiempo de retardo entre cada diapositiva (en ms)
