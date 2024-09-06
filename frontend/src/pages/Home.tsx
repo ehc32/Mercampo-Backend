@@ -71,7 +71,7 @@ export default function Tienda() {
         <RandomProducts productos={productosRandom} />
         <About />
         <Swiper
-          width="60%"
+          width="85%"
           height="40vh"
           datos={carrouselData}
           isUpSwiper={false}
