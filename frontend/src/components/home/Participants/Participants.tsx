@@ -15,7 +15,8 @@ const Participants: React.FC<ParticipantsProps> = ({ people }) => {
         <div className='mb-20'>
             <h2 className='titulo-sala-compra-light'>Participantes del proyecto</h2>
             <h4 className="sub-titulo-sala-compra-light text-center mb-4">
-                En servicios tecnológicos, nos enorgullece contar con un equipo de trabajo excepcional, comprometido con la excelencia y dedicado a brindar la mejor experiencia a nuestros clientes.
+                En servicios tecnológicos, nos enorgullece contar con un equipo de trabajo excepcional
+                ,<br/> comprometido con la excelencia y dedicado a brindar la mejor experiencia a nuestros clientes.
             </h4>
             <div className='flex flex-row flex-wrap text-center justify-around'>
                 {
