@@ -9,10 +9,10 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
 
   return (
     <section
-      className="w-full h-[65vh] bg-cover bg-center flex flex-col justify-center items-center relative"
+      className="w-full  h-[70vh] bg-center flex flex-col justify-center items-center relative"
       style={{
         backgroundImage: "url('/public/campesino.jpeg')",
-        animation: "expandImage 1.5s ease-in-out forwards",
+        animation: "expandImage .8s ease-in-out forwards",
       }}
     >
       <div className="container mx-auto px-6 lg:px-12 text-left">

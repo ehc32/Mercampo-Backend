@@ -138,7 +138,7 @@ const Products = ({ results }: Props) => {
         ) : (
           <tbody>
             <tr>
-              <td colSpan={7} className="px-2 py-2 text-center">No se encontraron órdenes</td>
+              <td colSpan={7} className="px-2 py-2 text-center">No se encontraron productos</td>
             </tr>
           </tbody>
         )}

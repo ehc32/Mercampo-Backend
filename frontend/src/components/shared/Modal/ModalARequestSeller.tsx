@@ -75,6 +75,9 @@ export default function ModalRequestSeller({
                             fullWidth
                             startIcon={<AiOutlineCheck />}
                             onClick={handleConfirmOpen}
+                            sx={{
+                                backgroundColor: "#39A900"
+                            }}
                         >
                             Si
                         </Button>
@@ -83,6 +86,10 @@ export default function ModalRequestSeller({
                             fullWidth
                             onClick={handleClose}
                             startIcon={<AiOutlineClose />}
+                            sx={{
+                                color: "#39A900",
+                                borderColor: "#39A900"
+                            }}
                         >
                             Cancelar
                         </Button>

@@ -60,7 +60,7 @@ const Orders = ({ results }: Props) => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <h2 className="text-xl font-semibold  my-3 text-center text-black ">
-        Lista de ordenes
+        Lista de órdenes
       </h2>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
