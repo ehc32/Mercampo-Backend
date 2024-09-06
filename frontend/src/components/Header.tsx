@@ -107,14 +107,9 @@ const Header: React.FC<HeaderProps> = () => {
                     </div>
                   </div>
                 </div>
-                {
-                  location.pathname == "/login" &&
-                  <h1 className='titulo-while-auth font-bold text-black  subnav-1 justify-center align-center'>Mercampo</h1>
-                }
-                {
-                  location.pathname == "/register" &&
-                  <h1 className='titulo-while-auth font-bold text-black  subnav-1 justify-center align-center'>Mercampo</h1>
-                }
+
+                <h1 className='titulo-while-auth font-bold text-black  subnav-1 justify-center align-center'>Mercampo</h1>
+
 
               </div>
 

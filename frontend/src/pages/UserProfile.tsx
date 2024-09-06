@@ -25,6 +25,7 @@ import AsideFilter from '../components/tienda/AsideFilter/AsideFilter';
 import { useAuthStore } from '../hooks/auth';
 import { Token } from '../Interfaces';
 import Footer from '../components/Footer';
+import ModalSellerConfig from '../components/shared/Modal/ModalConfigSeller';
 
 export default function UserProfile2() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -41,24 +42,17 @@ export default function UserProfile2() {
     const tokenDecoded: Token = jwt_decode(token);
     const id = tokenDecoded.user_id;
 
-    const queryClient = useQueryClient();
-
     // Consultar usuario actual
     const { data: user, isLoading: isUserLoading, isError: isUserError } = useQuery({
         queryKey: ['users', id],
         queryFn: () => get_solo_user(id),
     });
 
-    const editProfileMut = useMutation({
-        mutationFn: edit_user,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['users'] });
-            toast.success('Profile updated!');
-        },
-        onError: () => {
-            toast.error('Error, u not added nothing!');
-        },
-    });
+    const editProfileMut = async () => {
+
+        toast.success('Perfil actualizado');
+
+    };
 
     useEffect(() => {
         if (user) {
@@ -100,11 +94,10 @@ export default function UserProfile2() {
     };
 
     const handleOrderClick = (orderId) => {
-        // Llamar a la API para obtener los productos de la orden específica
         get_order_items(orderId)
             .then((items) => {
-                setOrderItems(items); // Actualizar los productos de la orden
-                setOpenModal(true); // Mostrar el modal
+                setOrderItems(items)
+                setOpenModal(true)
             })
             .catch((error) => {
                 toast.error('Error fetching order items');
@@ -113,8 +106,8 @@ export default function UserProfile2() {
     };
 
     const handleCloseModal = () => {
-        setOpenModal(false); // Cerrar el modal
-        setOrderItems([]); // Limpiar los productos de la orden
+        setOpenModal(false)
+        setOrderItems([])
     };
 
     if (isUserLoading) return <Loader />;
@@ -196,6 +189,7 @@ export default function UserProfile2() {
                         </Box>
                     </CardContent>
                     <div className='text-end w-30'>
+
                         <ModalEditProfile
                             stateName={stateName}
                             setStateName={setStateName}
@@ -207,7 +201,20 @@ export default function UserProfile2() {
                             setShow={setShow}
                             handleSubmit={handleSubmit}
                         />
-                        <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
+                        {
+                            profileData.role == "client" &&
+                            <ModalRequestSeller userId={id} />
+                        }
+
+                        {
+                            profileData.role == "admin" &&
+                            <ModalSellerConfig userId={id} />
+                        }
+
+                        {
+                            profileData.role == "seller" &&
+                            <ModalSellerConfig userId={id} />
+                        }
                     </div>
                 </Card>
                 <div>
@@ -231,9 +238,20 @@ export default function UserProfile2() {
                     />
 
                     <Box>
-                        <Tabs value={tabValue} onChange={handleTabChange}>
-                            <Tab label="Compras" value="compras" className='focus:outline-none' />
-                            <Tab label="Ordenes" value="orders" className='focus:outline-none' />
+                        <Tabs
+                            value={tabValue}
+                            onChange={handleTabChange}
+                            sx={{
+                                mb: 3,
+                                '& .Mui-selected': { color: '#39A900' },
+                                '& .MuiTabs-indicator': { backgroundColor: '#39A900' },
+                            }}>
+                            <Tab label="Compras" value="compras" className='focus:outline-none' sx={{
+                                '&.Mui-selected': { color: '#39A900' },
+                            }} />
+                            <Tab label="Ordenes" value="orders" className='focus:outline-none' sx={{
+                                '&.Mui-selected': { color: '#39A900' },
+                            }} />
                         </Tabs>
                     </Box>
                 </div>
@@ -266,7 +284,7 @@ export default function UserProfile2() {
                 {tabValue === 'orders' && (
                     <Table>
                         <TableHead>
-                        <TableRow>
+                            <TableRow>
                                 <TableCell><p className='fs-16px font-bold'>Id</p></TableCell>
                                 <TableCell><p className='fs-16px font-bold'>Usuario</p></TableCell>
                                 <TableCell><p className='fs-16px font-bold'>Fecha de entrega</p></TableCell>

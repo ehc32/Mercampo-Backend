@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { create_order } from "../api/orders";
 import Footer from "../components/Footer";
@@ -9,20 +8,14 @@ import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useCartStore } from "../hooks/cart";
 import './style.css';
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
-    Checkbox,
-    Box,
-    TableSortLabel,
-    TablePagination
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Box, TableSortLabel, TablePagination
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
+import { toast } from 'react-toastify';
+
+
+
 
 const CartPage = () => {
     const removeFromCart = useCartStore((state) => state.removeFromCart);
@@ -48,6 +41,14 @@ const CartPage = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
+
+    // paypal 
+
+
+
+    // end paypal functions
+
+
     const createOrderMut = useMutation({
         mutationFn: create_order,
         onSuccess: () => {
@@ -64,27 +65,15 @@ const CartPage = () => {
 
     const createOrder = (data, actions) => {
         const translateCOPtoUSD = () => {
-            const cop = data.total_price;
-            const usd = cop / 4000;
-            return usd;
-            const apiKey = 'AXazhAGnbnyGlBxeRjGl8uIgVkF7dmrqz6iJYHd6Ea5XDZY9uXoyjK6xzMpt2BrryR8FHM4Un5l89KDD';
-            const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
-            
-            fetch(url)
-              .then(response => response.json())
-              .then(data => {
-                const usdToCop = data.conversion_rates.COP;
-                console.log(`1 USD = ${usdToCop} COP`);
-              })
-              .catch(error => console.error('Error:', error));
-            
-
+            const cop = total_price;
+            const usd = cop / 70000;
+            return usd.toFixed(2);
         }
         return actions.order.create({
             purchase_units: [
                 {
                     amount: {
-                        value: translateCOPtoUSD() // aqui definimos el valor a pagar
+                        value: translateCOPtoUSD()
                     },
                 },
             ],
@@ -95,17 +84,30 @@ const CartPage = () => {
     };
 
     const onApprove = (data, actions) => {
-        return actions.order.capture(handleSubmit());
+        return actions.order.capture().then(function(details) {
+            handleSubmit(); // Enviar datos de la orden a tu backend
+            toast.success("Pago completado. Gracias, " + details.payer.name.given_name);
+        }).catch((error) => {
+            toast.error("Error al capturar el pago");
+            console.error("Error en la captura de pago:", error);
+        });
     };
+    
 
     const handleSubmit = () => {
-        createOrderMut.mutate({
-            order_items: cart,
-            total_price: total_price,
-            address: address,
-            city: city,
-            postal_code: postal_code,
-        });
+        try {
+            const formData = new FormData();
+            formData.append("order_items", JSON.stringify(cart));
+            formData.append("total_price", total_price.toString());
+            formData.append("address", address);
+            formData.append("city", city);
+            formData.append("postal_code", postal_code);
+
+            create_order(formData);
+            toast.success("Se ha realizado correctamente su compra, espere a que llegue su pedido 😊")
+        } catch (error) {
+            toast.warning("Ha ocurrido un error al registrar su compra")
+        }
     };
 
     const handleSelect = (product) => {

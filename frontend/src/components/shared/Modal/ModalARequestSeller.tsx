@@ -23,12 +23,10 @@ const style = {
 
 interface ModalRequestSellerProps {
     userId: number | string;
-    onRequestSubmit: (userId: number | string) => void;
 }
 
 export default function ModalRequestSeller({
     userId,
-    onRequestSubmit,
 }: ModalRequestSellerProps) {
     const [open, setOpen] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);

@@ -1,11 +1,10 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 from rest_framework import status
-from .models import PublishStatus, Role, User, Seller
+from .models import Role, User, Seller
 from .serializers import (
+    PayPalConfigSerializer,
     RegisterUserSerializer,
     MyTokenObtainPairSerializer,
     UserSerializer,
@@ -76,13 +75,13 @@ def get_users(request):
 @api_view(['POST'])
 def register(request):
     data = request.data
+    print(data)
     serializer = RegisterUserSerializer(data=data)
     if serializer.is_valid():
-        user = serializer.save(password=make_password(data['password']))
+        user = serializer.save(password=data['password'])
         return Response(UserSerializer(user).data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['POST'])
 def request_seller(request, pk):
@@ -90,18 +89,17 @@ def request_seller(request, pk):
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
         return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
-    print(user.can_publish)
-    if user.can_publish == "cliente":
-        serializer = SellerRequestSerializer(data={'user': user.id})
-        if serializer.is_valid():
-            serializer.save(user=user)
-            user.can_publish = "solicitando"
-            user.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    else:
-        return Response({'detail': 'Ya tienes una solicitud pendiente o eres vendedor.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Verificar si ya existe una solicitud de vendedor
+    if Seller.objects.filter(user=user).exists():
+        return Response({'detail': 'El usuario ya ha solicitado ser vendedor.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Crear la solicitud de vendedor
+    seller = Seller(user=user)
+    seller.save()
+
+    serializer = SellerRequestSerializer(seller)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
 def get_request_seller(request):
@@ -118,23 +116,38 @@ def delete_request(request, pk):
     except Seller.DoesNotExist:
         return Response({'detail': 'Solicitud no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
 
-
 @api_view(['POST'])
 def approve_request(request, pk):
     try:
         seller_request = Seller.objects.get(pk=pk)
         user = seller_request.user
         
-        if user.role == Role.CLIENT.value and user.can_publish == PublishStatus.SOLICITANDO.value:
+        if user.role == Role.CLIENT.value and not user.can_publish:
             user.role = Role.SELLER.value
-            user.can_publish = PublishStatus.VENDIENDO.value
+            user.can_publish = True  
             user.save()
+            seller_request.delete()
             return Response({'detail': 'Solicitud aprobada y usuario actualizado a vendedor.'}, status=status.HTTP_200_OK)
         else:
-            return Response({'detail': 'El usuario no es un cliente solicitante.'}, status=status.HTTP_400_BAD_REQUEST)
-    
+            return Response({'detail': 'El usuario no es un cliente solicitante o ya tiene permisos de publicación.'}, status=status.HTTP_400_BAD_REQUEST)
+        
     except Seller.DoesNotExist:
         return Response({'detail': 'Solicitud no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+def request_seller_paypal_config(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = PayPalConfigSerializer(data=request.data, context={'user': user})
+    
+    if serializer.is_valid():
+        serializer.save(user=user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(TokenObtainPairView):
