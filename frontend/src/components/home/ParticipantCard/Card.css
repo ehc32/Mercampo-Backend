@@ -1,28 +1,29 @@
-.card-people img {
+.card-people {
+    width: 400px;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .card-people img {
     border-radius: 7px;
     margin: 1em;
     margin-top: auto;
     width: 80%;
     height: 200px;
     object-fit: cover;
-}
-
-.card-people h4 {
+  }
+  
+  .card-people h4 {
     font-size: 18px;
-}
-
-.card-people p {
+  }
+  
+  .card-people p {
     font-size: 16px;
-}
-
-.card-people {
-    width: 400px;
-    flex-wrap: wrap;
-    align-items: center;
-    position: relative;
-}
-
-.popup {
+  }
+  
+  .popup {
     position: absolute;
     top: -10px;
     left: 110%;
@@ -33,48 +34,56 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 100;
     border-radius: 8px;
-    transition: left 0.3s ease;
-}
-
-.popup.right-boundary {
-    left: auto; /* Si la imagen está muy cerca del borde derecho, ajustamos la posición */
-    right: 110%;
-}
-
-.popup h3 {
+    transition: all 0.3s ease;
+  }
+  
+  .popup h3 {
     font-size: 16px;
     margin-bottom: 0.5em;
-}
-
-.popup p {
-    font-size: 14px;
-}
-
-.social-icons {
+  }
+  
+  .social-icons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 1em 0;
     font-size: 24px;
-}
-
-.social-icons i {
-    margin: 0 10px;
-}
-
-.post-images {
-    display: flex;
-    gap: 10px;
-}
-
-.post-preview {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-top: 1em;
-}
-
-/* Añadimos una regla para manejar la posición del popup si está muy cerca del borde derecho */
-.card-people:hover .popup {
-    left: auto;
-    right: 110%;
-}
+  }
+  
+  .social-icons i {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .social-icons i:hover {
+    color: #007bff;
+  }
+  
+  /* Dark mode styles */
+  .card-people.dark-mode {
+    background-color: #333;
+    color: white;
+  }
+  
+  .card-people.dark-mode .popup {
+    background-color: #444;
+    color: white;
+    border-color: #555;
+  }
+  
+  .card-people.dark-mode .social-icons i:hover {
+    color: #66b0ff;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .card-people {
+      width: 100%;
+    }
+  
+    .popup {
+      left: 0;
+      right: 0;
+      top: 100%;
+      width: 100%;
+    }
+  }

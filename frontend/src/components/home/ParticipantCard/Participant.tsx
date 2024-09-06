@@ -6,7 +6,7 @@ interface Person {
     name: string;
     photo: string;
     role: string;
-    postImages: string[]; // Añadir un array de imágenes adicionales
+   
 }
 
 interface CarrouselLast12Props {
