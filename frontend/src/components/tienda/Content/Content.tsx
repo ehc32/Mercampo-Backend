@@ -22,10 +22,10 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
 
     const carrouselData = [
         {
-            foto: '/public/d.png'
+            foto: '/public/5.jpeg'
         },
         {
-            foto: '/head.jpg',
+            foto: '/public/4.jpg',
         },
     ];
 

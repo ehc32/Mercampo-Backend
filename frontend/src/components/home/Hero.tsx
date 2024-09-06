@@ -6,12 +6,6 @@ interface CarrouselLast12Props {
 }
 
 const Hero: React.FC<CarrouselLast12Props> = () => {
-  const handleScroll = () => {
-    const swiperElement = document.getElementById("swiperNewProducts");
-    if (swiperElement) {
-      swiperElement.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section
@@ -36,25 +30,6 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
           </Link>
         </div>
       </div>
-      <button
-        onClick={handleScroll}
-        className="absolute bottom-4 transform translate-y-1/2 text-white p-2 bg-transparent border-none hover:text-red-600"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="w-10 h-10"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
       <style>
         {`
     @keyframes expandImage {

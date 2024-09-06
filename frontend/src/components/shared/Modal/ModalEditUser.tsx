@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
+import { FaEdit } from "react-icons/fa";
 
 const style = {
   position: "absolute",
@@ -67,11 +67,14 @@ export default function ModalEditProfile({
 
   return (
     <div>
-      <h2
-        className="fs-16px my-1 cursor-pointer text-green-700 mx-2"
-        onClick={handleOpen}>
-        Editar
-      </h2>
+     <h2
+      className="fs-16px my-1 cursor-pointer text-green-700 mx-2 inline-flex items-center"
+      onClick={handleOpen}
+    >
+      <FaEdit className="mr-1" />
+      Editar
+    </h2>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -89,7 +92,9 @@ export default function ModalEditProfile({
           </h2>
           <form onSubmit={handleFormSubmit}>
             <div className="px-3 py-1">
-              <InputLabel id="name-label" className="mb-2">Nombre</InputLabel>
+              <InputLabel id="name-label" className="mb-2">
+                Nombre
+              </InputLabel>
               <TextField
                 label="nombre-usario"
                 fullWidth
@@ -100,36 +105,42 @@ export default function ModalEditProfile({
               />
             </div>
             <div className="px-3 py-1">
-              <InputLabel id="last-label" className="mb-2">Correo</InputLabel>
+              <InputLabel id="last-label" className="mb-2">
+                Correo
+              </InputLabel>
               <TextField
-                label="apellido-usuario"
+                label="Correo-electronico"
                 fullWidth
                 value={stateLast}
                 onChange={(e) => setStateLast(e.target.value)}
                 error={lastError}
-                helperText={lastError ? "Por favor ingresa un apellido" : ""}
+                helperText={lastError ? "Por favor ingrese su correo" : ""}
               />
             </div>
             <div className="px-3 py-1">
-              <InputLabel id="last-label" className="mb-2">Contraseña</InputLabel>
+              <InputLabel id="last-label" className="mb-2">
+                Contraseña
+              </InputLabel>
               <TextField
-                label="apellido-usuario"
+                label="Contraseña"
                 fullWidth
                 value={stateLast}
                 onChange={(e) => setStateLast(e.target.value)}
                 error={lastError}
-                helperText={lastError ? "Por favor ingresa un apellido" : ""}
+                helperText={lastError ? "Por favor ingresa tu contraseña" : ""}
               />
             </div>
             <div className="px-3 py-1">
-              <InputLabel id="last-label" className="mb-2">Contraseña</InputLabel>
+              <InputLabel id="last-label" className="mb-2">
+                Confirmar contraseña
+              </InputLabel>
               <TextField
-                label="apellido-usuario"
+                label="Corfirmar-contraseña"
                 fullWidth
                 value={stateLast}
                 onChange={(e) => setStateLast(e.target.value)}
                 error={lastError}
-                helperText={lastError ? "Por favor ingresa un apellido" : ""}
+                helperText={lastError ? "Por favor confirma tu contraseña" : ""}
               />
             </div>
             <div className="sm:col-span-2 p-2">

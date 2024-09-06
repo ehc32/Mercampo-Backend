@@ -6,6 +6,7 @@ import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { sendRequestSeller } from './../../../api/users'
+import { FaTag } from "react-icons/fa";
 
 const style = {
     position: "absolute",
@@ -52,11 +53,13 @@ export default function ModalRequestSeller({
 
     return (
         <div>
-            <h2
-                className="fs-16px my-1 cursor-pointer text-green-700 mx-2"
-                onClick={handleOpen}>
-                Quiero vender
-            </h2>
+             <h2
+      className="fs-16px my-1 cursor-pointer text-green-700 mx-2 inline-flex items-center"
+      onClick={handleOpen}
+    >
+      <FaTag className="mr-1" />
+      Quiero vender
+    </h2>
             <Modal
                 open={open}
                 onClose={handleClose}
