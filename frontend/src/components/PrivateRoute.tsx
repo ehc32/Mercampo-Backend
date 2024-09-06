@@ -11,16 +11,10 @@ export const PrivateRoute = () => {
 export const AdminPrivateRoute = () => {
     const { isAuth } = useAuthStore();
 
-    // La decodificación del token se puede mantener si es necesario para otros usos
     const token: string = useAuthStore.getState().access;
-    if (token) {
-        try {
-            // Puedes realizar acciones adicionales con tokenDecoded si es necesario
-        } catch (error) {
-            console.error("Error decoding token:", error);
-        }
+    if (!token) {
+        console.error("Error decoding token");
     }
-
     return (
         isAuth ? <Outlet /> : <Navigate to='/login' />
     );

@@ -7,18 +7,14 @@ class ShippingSerializer(serializers.ModelSerializer):
         model = ShoppingAddress
         fields = '__all__'
 
-
 class OrderItemSerializer(serializers.ModelSerializer):
-
     product = serializers.ReadOnlyField(source='product.name')
 
     class Meta:
         model = Orderitem
         fields = '__all__'
 
-
 class OrderSerializer(serializers.ModelSerializer):
-
     user = serializers.ReadOnlyField(source='user.email')
     order_items = serializers.SerializerMethodField(read_only=True)
     shipping_address = serializers.SerializerMethodField(read_only=True)
@@ -34,8 +30,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_shipping_address(self, obj):
         try:
-            address = ShoppingAddress(
-                obj.ShoppingAddress, many=False).data
-        except:
-            address = False
-        return address
+            address = ShoppingAddress.objects.get(order=obj)
+            serializer = ShippingSerializer(address)
+            return serializer.data
+        except ShoppingAddress.DoesNotExist:
+            return None

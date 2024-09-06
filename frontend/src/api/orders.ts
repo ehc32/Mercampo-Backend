@@ -1,4 +1,3 @@
-import { Order } from "../Interfaces";
 import { authAxios } from "./useAxios";
 
 
@@ -26,11 +25,11 @@ export const my_orders = async () => {
    return response.data
 };
 
-export const create_order = async (data: Order) => {
-    await authAxios.post('/orders/create/', data)
+export const create_order = async (data: FormData) => {
+    await authAxios.post('/orders/create/', data);
 };
 
 export const get_order_items = async (orderId: number) => {
-    const response = await authAxios.get(`/orders/${orderId}/items/`); // Ajusta la URL según tu backend
+    const response = await authAxios.get(`/orders/${orderId}/items/`);
     return response.data;
 };

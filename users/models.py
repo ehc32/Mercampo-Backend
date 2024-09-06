@@ -13,12 +13,6 @@ class Role(Enum):
     CLIENT = "client"
     SELLER = "seller"
 
-
-class PublishStatus(Enum):
-    VENDIENDO = "vendiendo"
-    SOLICITANDO = "solicitando"
-    CLIENTE = "cliente"
-
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
@@ -54,11 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=20, null=True, blank=True, default=None)
     avatar = models.ImageField(default="avatar.png")
     is_active = models.BooleanField(default=True, null=True)
-    can_publish = models.CharField(
-        max_length=20,
-        choices=[(status.value, status.value) for status in PublishStatus],
-        default=PublishStatus.CLIENTE.value,
-    )
+    can_publish = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
     role = models.CharField(
         max_length=10,
@@ -78,3 +68,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     date_requested = models.DateTimeField(default=timezone.now)
+
+class PayPalConfig(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)  # Relación 1:1 con el usuario
+    app_name = models.CharField(max_length=255)
+    client_id = models.CharField(max_length=255)
+    secret_key = models.CharField(max_length=255)
+    date_configured = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"PayPal Config for {self.user.name}"
+    

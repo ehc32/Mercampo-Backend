@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import User, Seller
+from .models import PayPalConfig, User, Seller
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["email", "name", "password"]
+        fields = ["email", "name", "phone", "password"]
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
@@ -22,7 +22,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'email', 'phone']
 
 class SellerRequestSerializer(serializers.ModelSerializer):
-    user = UserDetailSerializer()  # Nota: Aquí 'user' debería estar en fields
+    user = UserDetailSerializer()
 
     class Meta:
         model = Seller
@@ -30,17 +30,18 @@ class SellerRequestSerializer(serializers.ModelSerializer):
         read_only_fields = ['date_requested']
 
     def create(self, validated_data):
-        user = validated_data['user']
-        # Check if the user is already a seller
+        user_data = validated_data.pop('user')
+        user = User.objects.get(pk=user_data['id'])
+
         if Seller.objects.filter(user=user).exists():
             raise serializers.ValidationError("El usuario ya ha solicitado ser vendedor.")
-        # Change the can_publish status to 'solicitando'
+        
         user.can_publish = 'solicitando'
         user.save()
 
-        # Create the Seller instance
         seller = Seller.objects.create(user=user)
         return seller
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -70,3 +71,12 @@ class EditUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+class PayPalConfigSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PayPalConfig
+        fields = ['app_name', 'client_id', 'secret_key']
+
+    def create(self, validated_data):
+        user = self.context['request'].user 
+        paypal_config = PayPalConfig.objects.create(user=user, **validated_data)
+        return paypal_config

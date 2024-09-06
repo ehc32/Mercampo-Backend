@@ -16,5 +16,5 @@ urlpatterns = [
     path('sell/delete_request/<int:pk>/', views.delete_request),
     path('sell/approve_request/<int:pk>/', views.approve_request),
     path('sell/send_request/<int:pk>/', views.request_seller),
-
+    path('sell/paypalsel/<int:pk>/', views.request_seller_paypal_config),
 ]

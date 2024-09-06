@@ -49,50 +49,37 @@ const AdminPage = () => {
     <>
       <section style={{ minHeight: '80vh' }} className="dark:bg-gray-900 mt-24">
         <Container maxWidth="lg" sx={{ mb: 10 }}>
+          <div className="mb-4">
+            <h4 className='card-name-light'>Gestión administrativa</h4>
+            <h6 className='card-subname-light'>Gestiona productos, ordenes e incluso usuarios</h6>
+          </div>
           <Card sx={{ p: 4, bgcolor: 'white', darkMode: { bgcolor: 'gray.800' }, boxShadow: 3, borderRadius: 2 }}>
-            <Box sx={{ mb: 3 }}>
-              <TextField
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                variant="outlined"
-                placeholder="Buscar"
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <Box sx={{ ml: 1 }}>
-                      
-                    </Box>
-                  ),
-                }}
-                sx={{
-                  bgcolor: 'white',
-                  borderColor: '#39A900',
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#39A900',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#39A900',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#39A900',
-                    },
-                  },
-                }}
-              />
-            </Box>
+            
             <Tabs
               value={selectedTab}
               onChange={(e, newValue) => setSelectedTab(newValue)}
               indicatorColor="primary"
               textColor="primary"
-              sx={{ mb: 3 }}
+              sx={{
+                mb: 3,
+                '& .Mui-selected': { color: '#39A900' },
+                '& .MuiTabs-indicator': { backgroundColor: '#39A900' },
+              }}
             >
-              <Tab className="focus:outline-none" label="Solicitudes Vendedor" />
-              <Tab className="focus:outline-none" label="Productos" />
-              <Tab className="focus:outline-none" label="Ordenes" />
-              <Tab className="focus:outline-none" label="Usuarios" />
+              <Tab className="focus:outline-none" sx={{
+                '&.Mui-selected': { color: '#39A900' },
+              }} label="Solicitudes Vendedor" />
+              <Tab className="focus:outline-none" sx={{
+                '&.Mui-selected': { color: '#39A900' },
+              }} label="Productos" />
+              <Tab className="focus:outline-none" sx={{
+                '&.Mui-selected': { color: '#39A900' },
+              }} label="Ordenes" />
+              <Tab className="focus:outline-none" sx={{
+                '&.Mui-selected': { color: '#39A900' },
+              }} label="Usuarios" />
             </Tabs>
+
 
             <Box>
               {selectedTab === 0 && <Aprove results={data} />}
