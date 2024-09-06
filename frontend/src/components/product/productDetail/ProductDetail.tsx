@@ -241,7 +241,7 @@ const ProductDetail: React.FC<ProductProps> = ({ setCategory, fetchProductos, se
                                                                     </li>
                                                                     <li>
                                                                         <div className="fs-14px font-bold text-black">Teléfono</div>
-                                                                        <div className="fs-16px  text-black">{usuario?.phone ? "null" : "Sin definir"}</div>
+                                                                        <div className="fs-16px  text-black">{usuario?.phone ? usuario?.phone : "Sin definir"}</div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="fs-14px font-bold text-black">Correo electronico</div>

@@ -1,7 +1,7 @@
 
 export default function Component() {
     return (
-        <div className="flex justify-center py-10 bg-gray-50 ">
+        <div className="flex justify-center w-full py-10 bg-gray-50 ">
             <div className="max-w-6xl w-full" style={{
   boxShadow: "-2px 0 6px rgba(57, 169, 0, 0.5), 2px 0 6px rgba(57, 169, 0, 0.5)",
 }}>
