@@ -9,12 +9,10 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
 
   return (
     <section
-      className="w-full  h-[70vh] bg-center flex flex-col justify-center items-center relative"
+      className="w-full  h-[80vh] bg-center flex flex-col justify-center items-center relative bg-no-repeat bg-cover"
       style={{
-        backgroundImage: "url('/public/campesino.jpeg')",
-        animation: "expandImage .8s ease-in-out forwards",
-      }}
-    >
+        backgroundImage: "url('/public/cacaosena.jpg')"
+      }}>
       <div className="container mx-auto px-6 lg:px-12 text-left">
         <div className="max-w-lg">
           <h1 className="text-white text-5xl lg:text-6xl font-bold leading-tight mb-6">

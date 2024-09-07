@@ -1,6 +1,6 @@
 const ST_Icon = () => {
     return (
-        <div className="h-full m-2 row whitespace-nowrap" style={{ pointerEvents: 'none' }}>
+        <div className="h-full min-w-52 m-2 flex row  whitespace-nowrap" style={{ pointerEvents: 'none' }}>
             <img
                 className="h-10 w-auto lg:block mx-1 relative top-1"
                 src="/public/lo.ico"
@@ -11,7 +11,7 @@ const ST_Icon = () => {
                 src="/public/line.png"
                 alt="Logo"
             />
-            <p className="hover-class fs-16px font-bold text-black">
+            <p className="hover-class fs-16px font-bold text-white">
                 Servicios <br />
                 Tecnológicos
             </p>

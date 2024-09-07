@@ -19,7 +19,6 @@ class CustomUserManager(UserManager):
             raise ValueError("Debes tener un correo electrónico")
 
         email = self.normalize_email(email)
-        # Asegúrate de que el role se establezca si no se pasa en extra_fields
         role = extra_fields.pop("role", Role.CLIENT.value)
         user = self.model(email=email, role=role, **extra_fields)
         user.set_password(password)

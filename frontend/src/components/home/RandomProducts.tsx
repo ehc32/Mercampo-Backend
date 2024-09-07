@@ -15,18 +15,18 @@ interface CarrouselLast12Props {
     darkMode: boolean;
 }
 
-const RandomProducts: React.FC<CarrouselLast12Props> = ({ productos, darkMode }) => {
+const RandomProducts: React.FC<CarrouselLast12Props> = ({ productos }) => {
     return (
-        <>
-            <h4 className={darkMode ? 'card-name-dark' : 'card-name-light'}>Descubre lo mejor</h4>
-            <h6 className={darkMode ? 'card-subname-dark' : 'card-subname-light'}>Explora nuestra selección de productos de alta calidad</h6>
-            <div className={darkMode ? 'product-container-dark' : 'product-container-light'}>
+
+        <div className="containerRandom">
+            <h4 className={'card-name-light'}>Descubre lo mejor</h4>
+            <h6 className={'card-subname-light'}>Explora nuestra selección de productos de alta calidad</h6>
+            <div className={'product-container-light'}>
                 {productos.map((producto, index) => (
                     <Card key={index} producto={producto} />
                 ))}
-
             </div>
-        </>
+        </div>
     );
 };
 

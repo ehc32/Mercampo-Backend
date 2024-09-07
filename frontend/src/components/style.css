@@ -41,5 +41,9 @@
 }
 
 .titulo-while-auth {
-    font-size: 3em;
+    font-size: 2em;
+}
+
+.force_text_green {
+    color: #39A900 !important;
 }

@@ -62,7 +62,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: start;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .cardFooter {
@@ -326,3 +326,8 @@
     width: 150px;
     margin: 0 auto;
 } */
+
+.containerRandom {
+    width: 92%;
+    margin: auto;
+}

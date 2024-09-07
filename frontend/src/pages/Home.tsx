@@ -18,34 +18,22 @@ export default function Tienda() {
     {
       name: "Nicolás Cerquera Nieva",
       photo: "/public/Nicolas.jpeg",
-      role: "Tecnologo en ADSO",
-      instagram: 'https://instagram.com/johndoe',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      role: "Tecnologo en ADSO"
     },
     {
       name: "Yan Carlos Cerquera",
       photo: "/public/carlos.jpeg",
-      role: "Ingeniero Electronico",
-      instagram: 'https://instagram.com/johndoe',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      role: "Ingeniero Electronico"
     },
     {
       name: "Edgar Eduardo Olarte",
       photo: "/public/eduar.jpeg",
-      role: "Ingeniero de Sistemas",
-      instagram: 'https://instagram.com/johndoe',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      role: "Ingeniero de Sistemas"
     },
     {
       name: "Juan Nicolás Escobar",
       photo: "/public/escobar.jpeg",
-      role: "Tecnologo en ADSO",
-      instagram: 'https://instagram.com/johndoe',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      role: "Tecnologo en ADSO"
     },
   ];
 
@@ -82,12 +70,6 @@ export default function Tienda() {
         />
         <RandomProducts productos={productosRandom} />
         <About />
-        <Swiper
-          width="85%"
-          height="40vh"
-          datos={carrouselData}
-          isUpSwiper={false}
-        />
         <Participants people={people} />
         <Whatsapp />
         <Footer />

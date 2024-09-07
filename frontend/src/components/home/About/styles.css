@@ -43,3 +43,8 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.contenedorabout {
+    width: 90% !important;
+    margin: auto;
+}

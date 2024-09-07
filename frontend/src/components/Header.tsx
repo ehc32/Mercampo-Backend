@@ -60,8 +60,10 @@ const Header: React.FC<HeaderProps> = () => {
     return null;
   }
 
+  const isWideScreen = window.innerWidth > 900;
+
   return (
-    <Disclosure as="nav" className=" shadow fixed top-0 w-full bg-white z-50">
+    <Disclosure as="nav" className=" shadow fixed top-0 w-full bg-[#2A2A2A] z-50">
       {() => (
         <>
           <div className="px-4 py-1 w-full">
@@ -88,7 +90,7 @@ const Header: React.FC<HeaderProps> = () => {
                           <>
                             <Link
                               to={'/'}
-                              className='text-black font-bold  px-2 rounded-lg fs-18px item_navbar'
+                              className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
 
                             >
                               Inicio
@@ -96,37 +98,32 @@ const Header: React.FC<HeaderProps> = () => {
 
                             <Link
                               to={'/store'}
-                              className='text-black font-bold px-2 rounded-lg fs-18px item_navbar'
+                              className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
                             >
                               Tienda
                             </Link>
                           </>
-
                         )
                       }
                     </div>
                   </div>
                 </div>
-
-                <h1 className='titulo-while-auth font-bold text-black  subnav-1 justify-center align-center'>Mercampo</h1>
-
-
+                <h1 className='titulo-while-auth font-bold text-white  subnav-1 justify-center align-center'>Mercampo</h1>
               </div>
-
-
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
                 {isAuth ? (
                   <>
                     <div className='nav_items_block'>
                       <div className='nav_items_block flex flex-row justify-between'>
                         <BasicTooltip />
-                        <span className="text-slate-900 mx-1 fs-18px">{cart.length}</span>
+                        <span className="mx-1 fs-18px text-white">{cart.length}</span>
                       </div>
                     </div>
                     <Menu as="div" className="relative ml-1">
 
                       <div>
-                        <Menu.Button className="flex rounded-full text-sm focus:outline-none border-2 border-green-600">                        <span className="sr-only">Menú de usuario</span>
+                        <Menu.Button className="flex rounded-full text-sm focus:outline-none border-2 border-green-600">
+                          <span className="sr-only">Menú de usuario</span>
                           <img
                             className="h-8 w-8 rounded-full"
                             src={`${import.meta.env.VITE_BACKEND_URL}${avatar}`}
@@ -143,12 +140,12 @@ const Header: React.FC<HeaderProps> = () => {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-[#2A2A2A] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }) => (
                               <Link
                                 to="/profile"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2                              text-sm text-gray-700')}
+                                className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2                              text-sm text-white')}
                               >
                                 Perfil
                               </Link>
@@ -162,7 +159,7 @@ const Header: React.FC<HeaderProps> = () => {
 
                                 <Link
                                   to="/addprod"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm whitespace-nowrap text-white')}
                                 >
                                   Nuevo producto
                                 </Link>
@@ -175,7 +172,7 @@ const Header: React.FC<HeaderProps> = () => {
                               {({ active }) => (
                                 <Link
                                   to="/admin"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm whitespace-nowrap text-white')}
                                 >
                                   Administrar
                                 </Link>
@@ -189,7 +186,7 @@ const Header: React.FC<HeaderProps> = () => {
 
                                 <Link
                                   to="/addprod"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
                                 >
                                   Nuevo producto
                                 </Link>
@@ -202,7 +199,7 @@ const Header: React.FC<HeaderProps> = () => {
                               {({ active }) => (
                                 <Link
                                   to="/admin"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
                                 >
                                   Administrar
                                 </Link>
@@ -213,7 +210,7 @@ const Header: React.FC<HeaderProps> = () => {
                             {({ active }) => (
                               <span
                                 onClick={logOutFun}
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                                className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white cursor-pointer')}
                               >
                                 Cerrar sesión
                               </span>
@@ -225,45 +222,26 @@ const Header: React.FC<HeaderProps> = () => {
                   </>
                 ) : (
                   <>
-                    {
-                      location.pathname != "/login" && (
-                        window.innerWidth > 900 ? (
+                    {isWideScreen && location.pathname !== "/login" && (
+                      <Link
+                        to={'/login'}
+                        className='bg-green-600 hover:bg-green-700 text-white whitespace-nowrap font-bold py-2 px-4 rounded'
+                      >
+                        Iniciar sesión
+                      </Link>
+                    )}
 
-                          <Link
-                            to={'/login'}
-                            className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
-                          >
-                            Iniciar sesión
-                          </Link>
-                        ) : (
-                          <Link
-                            to={'/login'}>
-                            <LoginIcon style={{ fontSize: '24px' }} />
-                          </Link>
-                        )
-                      )
-                    }
-                    {
-                      location.pathname != "/register" && (
-                        window.innerWidth > 900 ? (
-                          <Link
-                            to={'/register'}
-                            className='text-green-600 hover:bg-green-600 hover:text-white font-bold py-2 px-4 rounded border border-green-600'
-                          >
-                            Registrar cuenta
-                          </Link>
-
-                        ) : (
-                          <Link
-                            to={'/register'}>
-                            <PersonAddIcon style={{ fontSize: '24px' }} />
-                          </Link>
-                        )
-                      )
-                    }
+                    {isWideScreen && location.pathname !== "/register" && (
+                      <Link
+                        to={'/register'}
+                        className='text-white hover:bg-green-600 hover:text-white whitespace-nowrap font-bold py-2 px-4 rounded border border-green-600'
+                      >
+                        Registrar cuenta
+                      </Link>
+                    )}
                   </>
                 )
-                }
+              }
               </div>
             </div>
           </div>

@@ -1,10 +1,9 @@
 // Actualizado AsideToggle.js para usar el contexto
-import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDrawer } from '../../../context/DrawerProvider'; // Importa el hook del contexto
+import { useDrawer } from '../../../context/DrawerProvider'; // Importa el hook del contexto    
 
 // Componente de toggle para mostrar u ocultar el menú lateral
 export default function AsideToggle() {
