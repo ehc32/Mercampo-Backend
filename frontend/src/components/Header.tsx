@@ -4,8 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../hooks/auth";
 import { useCartStore } from "../hooks/cart";
 import jwt_decode from 'jwt-decode';
-import LoginIcon from '@mui/icons-material/Login';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ST_Icon from './assets/ST/ST_Icon';
 import AsideToggle from './shared/tooltip/TooltipAside';
 import BasicTooltip from './shared/tooltip/TooltipOpenCart';
@@ -47,6 +45,7 @@ const Header: React.FC<HeaderProps> = () => {
     return classes.filter(Boolean).join(' ');
   }
 
+  // Redirigir si el usuario no tiene permisos
   useEffect(() => {
     if (!isAuth || (roleLocal !== "admin" && roleLocal !== "seller")) {
       if (location.pathname === "/admin" || location.pathname === "/addprod") {
@@ -56,6 +55,7 @@ const Header: React.FC<HeaderProps> = () => {
     }
   }, [isAuth, roleLocal, location.pathname, navigate]);
 
+  // Si el usuario no está autenticado y está en rutas prohibidas
   if (!isAuth && (location.pathname === "/admin" || location.pathname === "/addprod")) {
     return null;
   }
@@ -120,14 +120,13 @@ const Header: React.FC<HeaderProps> = () => {
                       </div>
                     </div>
                     <Menu as="div" className="relative ml-1">
-
                       <div>
                         <Menu.Button className="flex rounded-full text-sm focus:outline-none border-2 border-green-600">
                           <span className="sr-only">Menú de usuario</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={`${import.meta.env.VITE_BACKEND_URL}${avatar}`}
-                            alt=""
+                            src={avatar ? `${import.meta.env.VITE_BACKEND_URL}${avatar}` : '/default-avatar.png'}
+                            alt="Avatar"
                           />
                         </Menu.Button>
                       </div>
@@ -145,67 +144,53 @@ const Header: React.FC<HeaderProps> = () => {
                             {({ active }) => (
                               <Link
                                 to="/profile"
-                                className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2                              text-sm text-white')}
+                                className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
                               >
                                 Perfil
                               </Link>
                             )}
                           </Menu.Item>
 
-                          {
-                            roleLocal == "admin" &&
-                            <Menu.Item>
-                              {({ active }) => (
+                          {roleLocal === "admin" && (
+                            <>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="/addprod"
+                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                  >
+                                    Nuevo producto
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="/admin"
+                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                  >
+                                    Administrar
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            </>
+                          )}
 
-                                <Link
-                                  to="/addprod"
-                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm whitespace-nowrap text-white')}
-                                >
-                                  Nuevo producto
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          }
-                          {
-                            roleLocal == "admin" &&
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="/admin"
-                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm whitespace-nowrap text-white')}
-                                >
-                                  Administrar
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          }
-                          {
-                            roleLocal == "seller" &&
-                            <Menu.Item>
-                              {({ active }) => (
+                          {roleLocal === "seller" && (
+                            <>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="/addprod"
+                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                  >
+                                    Nuevo producto
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            </>
+                          )}
 
-                                <Link
-                                  to="/addprod"
-                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                                >
-                                  Nuevo producto
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          }
-                          {
-                            roleLocal == "seller" &&
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="/admin"
-                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                                >
-                                  Administrar
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          }
                           <Menu.Item>
                             {({ active }) => (
                               <span
@@ -240,15 +225,13 @@ const Header: React.FC<HeaderProps> = () => {
                       </Link>
                     )}
                   </>
-                )
-              }
+                )}
               </div>
             </div>
           </div>
         </>
-      )
-      }
-    </Disclosure >
+      )}
+    </Disclosure>
   );
 };
 

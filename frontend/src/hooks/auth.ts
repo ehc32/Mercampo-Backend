@@ -5,7 +5,7 @@ type State = {
     access: string;
     refresh: string;
     isAuth: boolean;
-    role: string; 
+    role: string;
 }
 
 type Actions = {
@@ -24,13 +24,19 @@ export const useAuthStore = create(
                 set(() => ({
                     access,
                     refresh,
-                    isAuth: !!access && !!refresh,
+                    isAuth: !!access && !!refresh,  // Verifica si ambos tokens existen
                     role,  // Establece el rol del usuario
                 })),
-            logout: () => set(() => ({ access: '', refresh: '', isAuth: false, role: '' })), 
+            logout: () => set(() => ({ 
+                access: '', 
+                refresh: '', 
+                isAuth: false, 
+                role: ''  // Restablece todos los valores a sus estados iniciales
+            })), 
         }),
         {
-            name: "auth"
+            name: "auth",  // Nombre de la clave para el almacenamiento persistente
+            getStorage: () => localStorage,  // Puedes ajustar esto para usar sessionStorage u otro almacenamiento si lo prefieres
         }
     )
 );

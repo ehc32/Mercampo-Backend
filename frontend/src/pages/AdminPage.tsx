@@ -1,15 +1,14 @@
+import { Box, Card, Container, Tab, Tabs } from '@mui/material';
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { search_order } from "../api/orders";
 import { search_prod } from "../api/products";
 import { search_users } from "../api/users";
-import Footer from '../components/Footer';
+import Aprove from "../components/AprovSellerUser";
 import Orders from "../components/Orders";
 import Products from "../components/Products";
-import Users from "../components/Users";
-import Aprove from "../components/AprovSellerUser";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
-import { Container, Card, Tabs, Tab, Box, TextField } from '@mui/material';
+import Users from "../components/Users";
 
 const AdminPage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -54,7 +53,7 @@ const AdminPage = () => {
             <h6 className='card-subname-light'>Gestiona productos, ordenes e incluso usuarios</h6>
           </div>
           <Card sx={{ p: 4, bgcolor: 'white', darkMode: { bgcolor: 'gray.800' }, boxShadow: 3, borderRadius: 2 }}>
-            
+
             <Tabs
               value={selectedTab}
               onChange={(e, newValue) => setSelectedTab(newValue)}
@@ -92,7 +91,7 @@ const AdminPage = () => {
 
         <AsideFilter />
       </section>
-      <Footer />
+
     </>
   );
 };

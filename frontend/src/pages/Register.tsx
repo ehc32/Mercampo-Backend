@@ -1,12 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Link, Navigate, useNavigate } from "react-router-dom";
 import { registerRequest } from "../api/users";
+import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useAuthStore } from "../hooks/auth";
 import "./style.css";
-import Footer from "../components/Footer";
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -156,7 +155,7 @@ const RegisterPage = () => {
             </div>
           </div>
         </div>
-        <Footer />
+
       </div>
 
       <AsideFilter />

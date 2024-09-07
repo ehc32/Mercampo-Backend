@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { get_all_products } from "../api/products";
-import Footer from "../components/Footer";
 import About from "../components/home/About/About";
 import Hero from "../components/home/Hero";
 import Participants from "../components/home/Participants/Participants";
 import RandomProducts from "../components/home/RandomProducts";
-import Swiper from "../components/shared/Swiper/swiper";
 import SwiperNewProducts from "../components/shared/SwiperNewsProducts/swiperNewsProducts";
 import Whatsapp from "../components/shared/WhatsappButton/Whatsapp";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
@@ -72,7 +70,7 @@ export default function Tienda() {
         <About />
         <Participants people={people} />
         <Whatsapp />
-        <Footer />
+
       </div>
     </React.Fragment>
   );

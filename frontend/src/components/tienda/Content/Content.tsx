@@ -77,7 +77,7 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
                     )
                 }
             </div>
-            <Footer />
+            
         </section>
     );
 };

@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import ImageInput from "../components/assets/imageInput/ImageInput";
-import 'react-toastify/dist/ReactToastify.css';
-import BasicTooltip from "../components/shared/tooltip/TooltipHelp";
-import { post_product } from "../api/products";
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import ScaleIcon from '@mui/icons-material/Scale';
 import WaterIcon from '@mui/icons-material/Water';
-import Footer from "../components/Footer";
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { post_product } from "../api/products";
+import ImageInput from "../components/assets/imageInput/ImageInput";
+import BasicTooltip from "../components/shared/tooltip/TooltipHelp";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 
 const AddProd = () => {
@@ -247,7 +246,7 @@ const AddProd = () => {
         </div>
       </div>
       <AsideFilter />
-      <Footer />
+
     </>
   );
 }

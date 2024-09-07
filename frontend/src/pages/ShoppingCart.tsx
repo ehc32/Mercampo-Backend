@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import {
+    Box,
+    Checkbox,
+    Paper,
+    Table, TableBody, TableCell, TableContainer, TableHead,
+    TablePagination,
+    TableRow,
+    TableSortLabel
+} from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { create_order } from "../api/orders";
-import Footer from "../components/Footer";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useCartStore } from "../hooks/cart";
 import './style.css';
-import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Box, TableSortLabel, TablePagination
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { visuallyHidden } from '@mui/utils';
-import { toast } from 'react-toastify';
 
 
 
@@ -84,7 +89,7 @@ const CartPage = () => {
     };
 
     const onApprove = (data, actions) => {
-        return actions.order.capture().then(function(details) {
+        return actions.order.capture().then(function (details) {
             handleSubmit(); // Enviar datos de la orden a tu backend
             toast.success("Pago completado. Gracias, " + details.payer.name.given_name);
         }).catch((error) => {
@@ -92,7 +97,7 @@ const CartPage = () => {
             console.error("Error en la captura de pago:", error);
         });
     };
-    
+
 
     const handleSubmit = () => {
         try {
@@ -366,7 +371,7 @@ const CartPage = () => {
                 </div>
             </section>
             <AsideFilter />
-            <Footer />
+
         </>
     );
 };

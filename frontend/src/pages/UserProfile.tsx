@@ -1,3 +1,5 @@
+import SearchIcon from '@mui/icons-material/Search'; // Asegúrate de importar el icono
+import { IconButton } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -18,15 +20,11 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { get_order_items, get_orders } from "../api/orders";
 import { edit_user, get_solo_user } from "../api/users";
-import Loader from "../components/Loader";
 import ModalRequestSeller from "../components/shared/Modal/ModalARequestSeller";
 import ModalEditProfile from "../components/shared/Modal/ModalEditUser";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useAuthStore } from "../hooks/auth";
 import { Token } from "../Interfaces";
-import Footer from "../components/Footer";
-import { IconButton } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search'; // Asegúrate de importar el icono
 
 export default function UserProfile2() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -359,7 +357,7 @@ export default function UserProfile2() {
                 </Box>
             </Modal>
 
-            <Footer />
+
         </>
     );
 }
