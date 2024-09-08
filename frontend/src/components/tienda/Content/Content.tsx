@@ -31,7 +31,7 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
 
     return (
         <section className="contenidoTienda">
-            <Swiper width="92%" height="300px" datos={carrouselData} isUpSwiper={true} />
+            {/* <Swiper width="92%" height="300px" datos={carrouselData} isUpSwiper={true} /> */}
             {/* aqui las cards de productos*/}
 
             <div>
@@ -40,7 +40,7 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
 
                 {
                     loading ? (
-                        <div className="flex justify-center align-center h-100px">
+                        <div className="flex justify-center align-center">
                             <Loader />
                         </div>
                     ) : (
@@ -48,7 +48,7 @@ const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, pag
 
                             <>
                                 <div className='product-container-light'>
-                                    <div className="h-min-500px flex flex-wrap">
+                                    <div className="flex flex-wrap intern">
                                         {
                                             productos?.length > 0 && productos.map((producto, index) => {
                                                 return (

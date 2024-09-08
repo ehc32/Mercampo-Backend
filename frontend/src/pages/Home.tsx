@@ -13,11 +13,7 @@ export default function Tienda() {
   const [productosRandom, setProductosRandom] = useState([]);
 
   const people = [
-    {
-      name: "Nicolás Cerquera Nieva",
-      photo: "/public/Nicolas.jpeg",
-      role: "Tecnologo en ADSO"
-    },
+    
     {
       name: "Yan Carlos Cerquera",
       photo: "/public/carlos.jpeg",
@@ -29,10 +25,16 @@ export default function Tienda() {
       role: "Ingeniero de Sistemas"
     },
     {
+      name: "Nicolás Cerquera Nieva",
+      photo: "/public/Nicolas.jpeg",
+      role: "Tecnólogo en ADSO"
+    },
+    {
       name: "Juan Nicolás Escobar",
       photo: "/public/escobar.jpeg",
-      role: "Tecnologo en ADSO"
+      role: "Tecnólogo en ADSO"
     },
+
   ];
 
   const fetchProductos = async () => {

@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import './Accordion.css'
+import './Accordion.css';
 
 interface AccordionProps {
     titulo: string;
@@ -11,20 +11,19 @@ interface AccordionProps {
     darkMode: boolean;
 }
 
-const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido, darkMode }) => {
-    const className = darkMode ? 'dark-mode-accordion' : 'light-mode-accordion';
+const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido }) => {
 
     return (
-        <Accordion className={className}>
+        <Accordion className={'light-mode-accordion boderacor'}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1-content"
                 id="panel1-header"
-                className={className}
+                className={'light-mode-accordion titleacor'}
             >
                 {titulo}
             </AccordionSummary>
-            <AccordionDetails className={className}>
+            <AccordionDetails className={'light-mode-accordion'}>
                 {contenido}
             </AccordionDetails>
         </Accordion>

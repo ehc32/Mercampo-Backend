@@ -3,6 +3,7 @@ import WaterIcon from '@mui/icons-material/Water';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import OtherIcon from '@mui/icons-material/Category';
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -86,8 +87,10 @@ const AddProd = () => {
 
   return (
     <>
-      <div className="flex h-screen my-20 dark:bg-gray-900">
-        <div className="w-4/6  flex m-auto   dark:bg-gray-800 rounded-xl  shadow-lg overflow-hidden">
+      <div className="flex my-20">
+
+        <div className="w-4/6 flex m-auto dark:bg-gray-800 rounded-xl shadow-lg">
+
           <div className="w-full p-10 card-bordered">
             <div className="flex justify-between items-center mb-8">
               <h1 className="text-3xl font-normal text-gray-800 dark:text-white">
@@ -127,6 +130,9 @@ const AddProd = () => {
                       </MenuItem>
                       <MenuItem value="GRANOS">
                         <WaterIcon fontSize="small" /> Grano
+                      </MenuItem>
+                      <MenuItem value="OTROS">
+                        <OtherIcon fontSize="small" /> Otros
                       </MenuItem>
                     </Select>
                   </FormControl>

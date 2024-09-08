@@ -1,11 +1,12 @@
-.dark-mode-accordion {
-    border-radius: 5px;
+.light-mode-accordion {
     margin: 1em 0;
+}
+
+.boderacor {
+    border: #39A900 solid .5px;
     border-radius: 3px;
 }
 
-.light-mode-accordion {
-    border-radius: 5px;
-    margin: 1em 0;
-    border-radius: 3px;
+.titleacor {
+    font-weight: bold;
 }

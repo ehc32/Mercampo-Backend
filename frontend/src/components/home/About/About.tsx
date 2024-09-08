@@ -1,4 +1,5 @@
-import './styles.css'
+import './styles.css';
+import AccordionSet from './../../shared/Accordion/Accordion';
 
 export default function Component() {
     return (
@@ -20,64 +21,51 @@ export default function Component() {
                     </div>
                 </section>
 
-                {/* Contenido principal con misión, visión, valores y otros */}
                 <div className="w-full flex flex-col lg:flex-row justify-between mt-10 space-y-6 lg:space-y-0 lg:space-x-4">
-                    {/* Sección izquierda para misión, visión y valores */}
+
+                <div className="w-full lg:w-[48%] bg-white p-6 rounded-lg shadow-lg">
+                        <div className="mb-6">
+                            <h3 className="text-lg font-bold mb-2 text-center" style={{ color: '#39A900' }}>
+                                Bienvenidos a [Nombre de tu plataforma]
+                            </h3>
+                            <p className="text-gray-700 text-base text-justify">
+                                En [Nombre de tu plataforma], nos comprometemos a crear un espacio seguro y transparente donde los productores locales pueden vender sus productos directamente a los consumidores, sin intermediarios. Nuestra misión es apoyar el desarrollo económico de las comunidades rurales y urbanas, promoviendo el comercio justo y sostenible.
+                            </p>
+                        </div>
+                        <div className="mb-6">
+                            <h3 className="text-lg font-bold mb-2 text-center" style={{ color: '#39A900' }}>
+                                ¿Qué hace que nuestra plataforma sea diferente?
+                            </h3>
+                            <p className="text-gray-700 text-base text-justify">
+                                Sin intermediarios: En [Nombre de tu plataforma], los productores pueden vender sus productos directamente a los consumidores, sin tener que pagar comisiones o tarifas a intermediarios. Pagos seguros: Nuestra plataforma cuenta con integración PayPal, lo que garantiza que las transacciones sean seguras y confiables. Acceso a nuevos mercados: Nuestra plataforma conecta a los productores con un amplio mercado de consumidores, lo que les permite expandir su negocio y aumentar sus ventas.
+                            </p>
+                        </div>
+                       
+                    </div>
                     <div className="w-full lg:w-[48%] bg-white p-6 rounded-lg shadow-lg">
                         <h1 className="text-3xl font-bold mb-4 text-center" style={{ color: '#39A900' }}>
-                            MISIÓN, VISIÓN Y VALORES CLAROS
+                            Preguntas Frecuentes
                         </h1>
-                        <p className="text-gray-700 text-base mb-3 text-justify">
-                            Nuestra misión, visión y valores representan la esencia de nuestra plataforma. Guían nuestra conducta, expresan nuestra integridad y reflejan el respeto por la dignidad humana, todo orientado al cumplimiento de nuestra estrategia sostenible.
-                        </p>
-                        <div className="mb-6">
-                            <h2 className="text-2xl font-bold mb-2 text-center" style={{ color: '#39A900' }}>
-                                Misión
-                            </h2>
-                            <p className="text-gray-700 text-base text-justify">
-                                Satisfacer con excelencia a los consumidores de nuestras bebidas.
-                            </p>
-                        </div>
-                        <div className="mb-6">
-                            <h2 className="text-2xl font-bold mb-2 text-center" style={{ color: '#39A900' }}>
-                                Visión
-                            </h2>
-                            <p className="text-gray-700 text-base text-justify">
-                                Ser el mejor líder total de bebidas, que genere valor económico, social y ambiental sostenible gestionando modelos de negocio innovadores y ganadores, con los mejores colaboradores en el mundo.
-                            </p>
-                        </div>
-                        <div>
-                            <h2 className="text-2xl font-bold mb-4 text-center" style={{ color: '#39A900' }}>
-                                Valores
-                            </h2>
-                            <p className="text-gray-700 text-base mb-4 text-justify">
-                                Son la clave para guiar nuestra conducta día con día. Expresan quiénes somos y en qué creemos, además de subrayar nuestra integridad.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Línea divisoria */}
-                    <div className="hidden lg:block w-0.5 bg-gray-300"></div>
-
-                    {/* Sección derecha para imágenes y contenido adicional */}
-                    <div className="w-full lg:w-[48%] bg-gray-100 p-6 rounded-lg shadow-lg">
-                        <div className="mb-6">
-                            <h3 className="text-lg font-bold mb-2 text-center" style={{ color: '#69C83B' }}>
-                                Primero la gente
-                            </h3>
-                            <p className="text-gray-700 text-base text-justify">
-                                Nuestra gente y el trabajo conjunto son los activos más valiosos de la compañía.
-                            </p>
-                        </div>
-                        <div className="mb-6">
-                            <h3 className="text-lg font-bold mb-2 text-center" style={{ color: '#69C83B' }}>
-                                Programa de Aceleración de Líderes
-                            </h3>
-                            <p className="text-gray-700 text-base text-justify">
-                                Creemos el Programa de Aceleración de Líderes, dirigido a gerentes y directores de todos los países donde operamos.
-                            </p>
-                        </div>
-                        <img src="/public/1.jpg" alt="Imagen relacionada" className="rounded-lg shadow-lg mb-6 w-full h-auto object-cover" />
+                        <AccordionSet
+                            titulo="¿Qué es [Nombre de tu plataforma]?"
+                            contenido="Somos una plataforma de mercadeo libre que conecta a productores y consumidores, sin intermediarios. Nuestra misión es apoyar el desarrollo económico de las comunidades rurales y urbanas, promoviendo el comercio justo y sostenible."
+                            darkMode={false}
+                        />
+                        <AccordionSet
+                            titulo="¿Cómo funciona la plataforma?"
+                            contenido="Nuestra plataforma permite a los productores vender sus productos directamente a los consumidores, sin intermediarios. Los pagos se realizan de manera segura a través de PayPal."
+                            darkMode={false}
+                        />
+                        <AccordionSet
+                            titulo="¿Qué beneficios ofrece a los productores?"
+                            contenido="Ofrecemos acceso a nuevos mercados, pagos seguros y la oportunidad de vender sus productos a un precio justo."
+                            darkMode={false}
+                        />
+                                                <AccordionSet
+                            titulo="¿Cómo puedo unirme a la plataforma?"
+                            contenido="Para unirte a nuestra plataforma, solo debes registrarte con tus datos en la sección de 'Registro' y comenzar a utilizar nuestras herramientas."
+                            darkMode={false}
+                        />
                     </div>
                 </div>
             </div>

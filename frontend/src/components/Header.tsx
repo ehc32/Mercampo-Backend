@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = () => {
       {() => (
         <>
           <div className="px-4 py-1 w-full">
-            <div className="relative flex h-16 items-center justify-evenly">
+            <div className="relative flex h-12 items-center justify-evenly">
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start subnav-1">
                 <div className="flex">
                   {
