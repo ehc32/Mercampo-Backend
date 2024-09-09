@@ -7,13 +7,14 @@ import RandomProducts from "../components/home/RandomProducts";
 import SwiperNewProducts from "../components/shared/SwiperNewsProducts/swiperNewsProducts";
 import Whatsapp from "../components/shared/WhatsappButton/Whatsapp";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
+import PaypalIntro from "../components/home/paypalInfo";
 
 
 export default function Tienda() {
   const [productosRandom, setProductosRandom] = useState([]);
 
   const people = [
-    
+
     {
       name: "Yan Carlos Cerquera",
       photo: "/public/carlos.jpeg",
@@ -62,13 +63,9 @@ export default function Tienda() {
       <div className="home-container">
         <AsideFilter />
         <Hero />
-        <SwiperNewProducts
-          width="100%"
-          height="55vh"
-          loader={true}
-          datos={productosRandom}
-        />
+      
         <RandomProducts productos={productosRandom} />
+        <PaypalIntro />
         <About />
         <Participants people={people} />
         <Whatsapp />

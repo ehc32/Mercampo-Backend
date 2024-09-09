@@ -11,17 +11,20 @@ import { post_product } from "../api/products";
 import ImageInput from "../components/assets/imageInput/ImageInput";
 import BasicTooltip from "../components/shared/tooltip/TooltipHelp";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
+import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
+import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 
 const AddProd = () => {
   const [images, setImages] = useState<string[]>([]);
   const [nombre, setNombre] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [categoria, setCategoria] = useState("OTROS");
   const [descripcion, setDescripcion] = useState("");
   const [ubicacion, setUbicacion] = useState("");
   const [ubicacionDescriptiva, setUbicacionDescriptiva] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [precio, setPrecio] = useState("");
-  const [unidad, setUnidad] = useState("");
+  const [unidad, setUnidad] = useState("Kg");
+  const [tiempoL, setTiempoL] = useState(0);
   const ciudades = ["Neiva"];
 
   interface Product {
@@ -34,6 +37,7 @@ const AddProd = () => {
     map_locate: string,
     locate: string,
     unit: string,
+    tiempoL: number
   }
 
   const manejarSubmit = async (e: React.FormEvent) => {
@@ -48,6 +52,7 @@ const AddProd = () => {
       !cantidad ||
       !precio ||
       !unidad ||
+      !tiempoL ||
       !ubicacionDescriptiva
     ) {
       toast.error("Por favor, complete todos los campos");
@@ -60,10 +65,11 @@ const AddProd = () => {
       description: descripcion,
       count_in_stock: parseInt(cantidad),
       price: parseInt(precio),
-      image: images, // Asigna el arreglo de imágenes
+      image: images,
       map_locate: ubicacionDescriptiva,
       locate: ubicacion,
       unit: unidad,
+      tiempoL: tiempoL,
     };
 
     try {
@@ -79,6 +85,7 @@ const AddProd = () => {
       setPrecio("");
       setUnidad("");
       setUbicacionDescriptiva("");
+      setTiempoL(0);
       setImages([]);
     } catch (error) {
       toast.error("Error al agregar el producto");
@@ -123,16 +130,19 @@ const AddProd = () => {
                     >
                       <MenuItem selected hidden>Selecciona una unidad</MenuItem>
                       <MenuItem value="VERDURAS">
-                        <ScaleIcon fontSize="small" /> Verduras
+                        Verduras
                       </MenuItem>
                       <MenuItem value="FRUTAS">
-                        <WaterIcon fontSize="small" /> Frutas
+                        Frutas
                       </MenuItem>
                       <MenuItem value="GRANOS">
-                        <WaterIcon fontSize="small" /> Grano
+                        Grano
+                      </MenuItem>
+                      <MenuItem value="UNIDAD">
+                        Unidad
                       </MenuItem>
                       <MenuItem value="OTROS">
-                        <OtherIcon fontSize="small" /> Otros
+                        Otros
                       </MenuItem>
                     </Select>
                   </FormControl>
@@ -189,11 +199,25 @@ const AddProd = () => {
                     >
                       <MenuItem selected hidden>Selecciona una unidad</MenuItem>
                       <MenuItem value="Kg">
-                        <ScaleIcon fontSize="small" /> Kilos
+                        Kilos
                       </MenuItem>
                       <MenuItem value="L">
-                        <WaterIcon fontSize="small" /> Litros
+                        Litros
                       </MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="flex-1">
+                  <h6 className="text-gray-800  m-1 dark:text-white">Tiempo de publicación</h6>
+                  <FormControl fullWidth sx={{ mb: 2 }}>
+                    <Select
+                      value={tiempoL}
+                      onChange={(e) => setTiempoL(e.target.value)}
+                    >
+                      <MenuItem selected hidden>Selecciona un tiempo limite</MenuItem>
+                      <MenuItem value="0"> 1 semanas </MenuItem>
+                      <MenuItem value="1"> 2 semanas </MenuItem>
+                      <MenuItem value="2"> 3 semanas </MenuItem>
                     </Select>
                   </FormControl>
                 </div>

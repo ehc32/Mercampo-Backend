@@ -14,18 +14,17 @@ export default function Component() {
                         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl" style={{ color: '#39A900' }}>
                             Nuestra Plataforma de Comercio para Campesinos
                         </h1>
-                        <p className="text-xl md:text-2xl text-white">
+                        <p className="text-lg md:text-xl text-white">
                             Somos una plataforma dedicada a conectar a los campesinos con los mercados, brindando soluciones innovadoras para mejorar su producción y comercialización.
                         </p>
                     </div>
                     <div className="absolute top-0 right-0 w-1/2 md:w-1/3 lg:w-1/4">
-                        <img src="/public/campesena.png" alt="Imagen de campesinos trabajando" className="w-72 h-20 object-cover rounded-lg shadow-lg" />
+                        <img src="/public/campesena.png" alt="Imagen de campesinos trabajando" className="w-40 h-40 md:w-72 md:h-72 object-cover rounded-lg shadow-lg" />
                     </div>
                 </div>
             </section>
 
             <div className="w-full flex flex-col lg:flex-row justify-between mt-10 space-y-6 lg:space-y-0 lg:space-x-4">
-
                 <div className="w-full lg:w-[48%] bg-white p-6 rounded-lg shadow-lg">
                     <div className="mb-6">
                         <h3 className="text-24 font-bold mb-2 text-center" style={{ color: '#39A900', fontSize: '24px' }}>
@@ -63,8 +62,8 @@ export default function Component() {
                             </li>
                         </ul>
                     </div>
-
                 </div>
+
                 <div className="w-full lg:w-[48%] bg-white p-6 rounded-lg shadow-lg">
                     <h1 className="text-24 font-bold mb-4 text-center" style={{ color: '#39A900', fontSize: '24px' }}>
                         Preguntas Frecuentes

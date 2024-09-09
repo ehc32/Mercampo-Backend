@@ -362,9 +362,7 @@ const CartPage = () => {
                                     onRowsPerPageChange={handleChangeRowsPerPage}
                                 />
                             </div>
-                            <div
-
-                            >
+                            <div>
                             </div>
                         </div>
                     </div>

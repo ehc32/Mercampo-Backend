@@ -9,32 +9,48 @@ from . models import Category, Product, Reviews
 from . serializers import ProductCreateSerializer, ProductReadSerializer, ProductImagesSerializer, ReviewCreateSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
 
+from datetime import timedelta, datetime
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from django.utils.text import slugify
 @api_view(['POST'])
 def create_product(request):
     print("llega hasta aqui")
-    if request.user.role == 'client' or 'admin':
-        print("Entra")
+    if request.user.role == 'seller' or request.user.role == 'admin':
         product_serializer = ProductCreateSerializer(data=request.data)
+        
         if product_serializer.is_valid():
             name = product_serializer.validated_data['name']
             category = product_serializer.validated_data['category']
+            tiempoL_value = product_serializer.validated_data.get('tiempoL', None)
+
+            if tiempoL_value is None:
+                weeks_to_add = 1
+            elif tiempoL_value == 1:
+                weeks_to_add = 2
+            else:
+                weeks_to_add = 0
+
+            fecha_limite = datetime.now() + timedelta(weeks=weeks_to_add)
+
             s = name + category
             slug = slugify(s)
-            
+
             unique_slug = slug
             num = 1
-            
+
             while Product.objects.filter(slug=unique_slug).exists():
                 unique_slug = f"{slug}-{num}"
                 num += 1
-                
-            product_serializer.save(user=request.user, slug=unique_slug)
+
+            product_serializer.save(user=request.user, slug=unique_slug, fecha_limite=fecha_limite)
             return Response(status=status.HTTP_201_CREATED)
         else:
+            print(product_serializer.errors)
             return Response(product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({'detail': 'No autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
-    
     
 @api_view(['GET'])
 def get_prod_by_cate(request, category):
@@ -172,7 +188,6 @@ def get_product(request, slug):
     products = Product.objects.get(slug=slug)
     serializer = ProductReadSerializer(products, many=False)
     return Response(serializer.data)
-
 
 @api_view(['PUT'])
 def edit_product(request, pk):
