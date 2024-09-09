@@ -13,7 +13,7 @@ interface ParticipantsProps {
 
 const Participants: React.FC<ParticipantsProps> = ({ people }) => {
     return (
-        <div className='participants-container mb-20'>
+        <div className='participants-container my-10 '>
             <div className='flex flex-col'>
 
                 <h2 className='titulo-sala-compra-light'>Participantes del proyecto</h2>
