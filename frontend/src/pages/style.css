@@ -91,6 +91,25 @@
     }
 }
 
+@media (max-width: 800px) {
+    .divisor {
+        flex-direction: column;
+    }
+
+    .padre-divisor {
+        padding: 0 !important;
+    }
+
+    .divisor div:first-child {
+        width: 100% !important;
+    }
+
+    .divisor div:last-child {
+        width: 100% !important;
+    }
+}
+
+
 .inputForm {
     width: 100% !important;
 }
@@ -156,4 +175,17 @@
 
 .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
     box-shadow: none !important;
+}
+
+.card-tite {
+    width: 100% !important;
+}
+
+@media (max-width: 800px) {
+    .divisor div:last-child {
+        overflow-x: hidden;
+    }
+    .css-pdct74-MuiTablePagination-selectLabel {
+        display: none;
+    }
 }

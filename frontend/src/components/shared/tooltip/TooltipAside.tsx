@@ -13,7 +13,7 @@ export default function AsideToggle() {
 
     return (
         <Tooltip title={abierto ? "Cerrar" : "Abrir"} className='w-16 h-16 relative top-1 focus:outline-none'>
-            <IconButton onClick={toggleAbierto}>
+            <IconButton onClick={toggleAbierto} className='text-white'>
                 {icon}
             </IconButton>
         </Tooltip>

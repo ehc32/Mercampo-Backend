@@ -32,7 +32,7 @@ const CartPage = () => {
 
     const [pagina, setPagina] = useState(1);
     const [productosPorPagina, setProductosPorPagina] = useState(10);
-    const [selected, setSelected] = useState([]); // Almacena productos seleccionados
+    const [selected, setSelected] = useState([]);
 
     const ultimaPagina = Math.ceil(cart.length / productosPorPagina);
     const primerProducto = (pagina - 1) * productosPorPagina;
@@ -204,35 +204,46 @@ const CartPage = () => {
     return (
         <>
 
-            <section className="dark:bg-gray-900 p-3 sm:p-5 mt-20">
-                <div className="px-4 lg:px-12">
+            <section className="dark:bg-gray-900 p-3 sm:p-5 mt-10">
+                <div className="px-4 padre-divisor lg:px-12">
                     <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
-                        <div className="card-bordered bg-white relative flex flex-col justify-around mb-2 shadow-md sm:rounded-lg overflow-hidden p-8">
-                            <h4 className="fs-22px font-bold text-center text-gray-900 mb-2">Formulario de pago</h4>
-                            <h6 className="fs-16px text-gray-900 text-center mb-2">¿Terminaste? ¡Haz tu pedido!</h6>
+                        <div className="card-bordered bg-white relative flex flex-col justify-start mb-2 shadow-md sm:rounded-lg overflow-hidden p-8">
+                            <div className='card-tite mb-5'>
+                                <h4 className="text-2xl font-bold text-center text-gray-900 mb-2">Formulario de pago</h4>
+                                <h6 className="text-lg text-gray-900 text-center mb-4">¿Terminaste? ¡Haz tu pedido!</h6>
+                            </div>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                                 <div className="inputForm">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 cursor-default">Dirección</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Dirección</label>
                                     <input
                                         onChange={(e) => setAddress(e.target.value)}
                                         value={address}
-                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Dirección" />
+                                        type="text"
+                                        className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
+                                        placeholder="Dirección"
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 cursor-default">Ciudad</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Ciudad</label>
                                     <input
                                         onChange={(e) => setCity(e.target.value)}
                                         value={city}
-                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Ciudad" />
+                                        type="text"
+                                        className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
+                                        placeholder="Ciudad"
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 cursor-default">Código Postal</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Código Postal</label>
                                     <input
                                         onChange={(e) => setPostal_code(e.target.value)}
                                         value={postal_code}
-                                        type="text" className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5" placeholder="Código Postal" />
+                                        type="text"
+                                        className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
+                                        placeholder="Código Postal"
+                                    />
                                 </div>
-                                <div className="botonDePaypal">
+                                <div className="botonDePaypal mt-4">
                                     <PayPalScriptProvider
                                         options={{
                                             clientId: "AXazhAGnbnyGlBxeRjGl8uIgVkF7dmrqz6iJYHd6Ea5XDZY9uXoyjK6xzMpt2BrryR8FHM4Un5l89KDD"
@@ -245,9 +256,9 @@ const CartPage = () => {
                                     </PayPalScriptProvider>
                                 </div>
                             </form>
-                            <img src="/public/targeta.png" alt="" />
                         </div>
-                        <div className="card-bordered  mb-2 bg-white relative shadow-md sm:rounded-lg overflow-hidden p-8">
+
+                        <div className="card-bordered  mb-2 bg-white relative shadow-md sm:rounded-lg overflow-hidden p-2">
                             <h4 className="fs-22px font-bold text-center text-gray-900 my-4">Tu carrito</h4>
                             <h6 className="fs-16px text-gray-900 text-center my-4">Estos son los productos en tu carrito</h6>
 
@@ -360,7 +371,12 @@ const CartPage = () => {
                                     page={page}
                                     onPageChange={handleChangePage}
                                     onRowsPerPageChange={handleChangeRowsPerPage}
+                                    labelRowsPerPage="Filas por página"
+                                    labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
+                                    nextPageButtonText="Página siguiente"
+                                    backPageButtonText="Página anterior"
                                 />
+
                             </div>
                             <div>
                             </div>
