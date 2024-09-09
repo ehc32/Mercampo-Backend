@@ -340,11 +340,6 @@
     margin: auto;
 }
 
-@media(max-width: 1400px) {
-    .containerRandom {
-        width: 100% !important;
-    }
-}
 
 .participants-container {
     display: flex;
@@ -359,4 +354,15 @@
 .participant-card {
     width: calc(33.33% - 20px);
     margin-bottom: 20px;
+}
+
+@media(max-width: 1400px) {
+    .containerRandom {
+        width: 100% !important;
+    }
+}
+@media(min-width: 1400px) {
+    .participants-container {
+        width: 85% !important;
+    }
 }

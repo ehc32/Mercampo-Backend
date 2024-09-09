@@ -24,7 +24,6 @@ const AsideFilter = ({
     bringDataFilter,
     deleteDataFilter,
     setTime,
-    setSearchItem,
     setCategories,
     setStartDate,
     setPrice,
@@ -46,25 +45,9 @@ const AsideFilter = ({
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     };
 
-    const buscarTextfield = (e) => {
-        setSearchItem(e);
-        bringDataFilter();
-    };
+  
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setSearchItem(value);
-
-        if (timer) {
-            clearTimeout(timer);
-        }
-
-        const newTimer = setTimeout(() => {
-            buscarTextfield(value);
-        }, 1000);
-
-        setTimer(newTimer);
-    };
+   
 
     const precioOptions = [
         { label: 'Menos de 50 mil pesos', value: 1 },
@@ -141,7 +124,7 @@ const AsideFilter = ({
 
 
                     <Box sx={{ p: 2, maxWidth: "350px" }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Typography variant="h6" gutterBottom>
                                 Búsqueda de productos
                             </Typography>
@@ -149,20 +132,7 @@ const AsideFilter = ({
                         <Typography variant="body2" gutterBottom>
                             Ingrese un término de búsqueda para encontrar productos relacionados.
                         </Typography>
-                        <form
-                            action=""
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                            }}
-                        >
-                            <TextField
-                                fullWidth
-                                id="search"
-                                label="Buscar ..."
-                                value={searchItem}
-                                onChange={handleChange}
-                            />
-                        </form>
+                         */}
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                 <Typography variant="h6" gutterBottom>

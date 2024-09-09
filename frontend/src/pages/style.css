@@ -1,7 +1,7 @@
 .mainTienda {
     display: flex;
     flex-direction: row;
-    margin-top: 5%;
+    margin-top: 2%;
     justify-content: space-evenly;
 }
 

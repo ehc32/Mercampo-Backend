@@ -123,7 +123,10 @@ export default function UserProfile() {
                             }}  className="focus:outline-none"/>
                             {user?.role !== "client" && <Tab label="Ventas" value="ventas" sx={{
                                 '&.Mui-selected': { color: '#39A900' },
-                            }}  className="focus:outline-none"/>}
+                            }}  className="focus:outline-none"/> }
+                            {user?.role !== "client" && <Tab label="Mis productos" value="productos" sx={{
+                                '&.Mui-selected': { color: '#39A900' },
+                            }}  className="focus:outline-none"/> }
                         </Tabs>
                     </div>
 

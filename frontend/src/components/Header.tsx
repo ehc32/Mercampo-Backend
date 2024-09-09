@@ -80,9 +80,18 @@ const Header: React.FC<HeaderProps> = () => {
                       <AsideToggle />
                     )
                   }
-                  <Link to={'/'} className='flex flex-row'>
-                    <ST_Icon />
-                  </Link>
+                  {
+                    isWideScreen &&
+
+                    <Link to={'/'} className='flex flex-row'>
+                      <ST_Icon />
+                    </Link>
+
+                  }
+                  {
+                    !isWideScreen &&
+                    <h1 className='titulo-while-auth font-bold text-white ml-14 subnav-1 justify-center align-center'>Mercampo</h1>
+                  }
                   <div className="sm:ml-6 sm:block">
                     <div className="flex space-x-1 nav_items_block">
                       {
@@ -108,7 +117,10 @@ const Header: React.FC<HeaderProps> = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className='titulo-while-auth font-bold text-white ml-24 subnav-1 justify-center align-center'>Mercampo</h1>
+                {
+                  isWideScreen &&
+                  <h1 className='titulo-while-auth font-bold text-white ml-24 subnav-1 justify-center align-center'>Mercampo</h1>
+                }
               </div>
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
                 {isAuth ? (
