@@ -11,14 +11,14 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
     <section
       className="w-full  h-[55vh] bg-center flex flex-col justify-center items-center relative bg-no-repeat bg-cover"
       style={{
-        backgroundImage: "url('/public/campo2.webp')"
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),  url('/public/awa.jpg')`
       }}>
       <div className="container mx-auto px-6 lg:px-12 text-left">
         <div className="max-w-lg">
           <h1 className="text-white text-5xl lg:text-6xl font-bold leading-tight mb-6">
             Descubre las mejores ofertas
           </h1>
-          <p className="text-white text-lg lg:text-xl mb-8">
+          <p className="text-white text-lg lg:text-xl mb-8 font-bold">
             En nuestra tienda online encontrarás los productos que necesitas
           </p>
           <Link to="/store">

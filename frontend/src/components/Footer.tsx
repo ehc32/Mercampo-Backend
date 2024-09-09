@@ -26,7 +26,7 @@ const Footer = () => {
             <a href="https://www.linkedin.com/school/servicio-nacional-de-aprendizaje-sena-/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900">
               <FaLinkedin size={20} />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-800">
+            <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-800">
               <FaWhatsapp size={20} />
             </a>
           </div>

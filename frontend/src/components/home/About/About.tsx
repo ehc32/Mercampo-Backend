@@ -7,7 +7,7 @@ export default function Component() {
 
     return (
         <div className="contenedorabout p-4 " style={{ fontFamily: 'Nunito, sans-serif' }}>
-            <section className="w-full h-96 bg-[url('/public/campo5.webp')] bg-cover bg-center py-32 relative rounded-lg my-10">
+            <section className="w-full h-96 py-32 relative rounded-lg my-10 bg-cover" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/public/kkkk.jpeg')` }}>
                 <div className="w-full px-2 md:px-6">
                     <div className="max-w-3xl space-y-4 text-start text-primary-foreground">
                         {/* Mantén este bloque sin cambios */}
