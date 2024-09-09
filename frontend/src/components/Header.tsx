@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className='titulo-while-auth font-bold text-white  subnav-1 justify-center align-center'>Mercampo</h1>
+                <h1 className='titulo-while-auth font-bold text-white ml-24 subnav-1 justify-center align-center'>Mercampo</h1>
               </div>
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
                 {isAuth ? (

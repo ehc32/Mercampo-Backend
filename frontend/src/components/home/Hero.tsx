@@ -22,7 +22,7 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
             En nuestra tienda online encontrarás los productos que necesitas
           </p>
           <Link to="/store">
-            <button className="bg-[#39A900] hover:bg-green hover:blur-sm text-white text-lg font-bold py-3 px-6 rounded-full">
+            <button className="bg-[#39A900] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 px-6 rounded-full">
               ¡Compra ahora!
             </button>
           </Link>
