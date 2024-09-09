@@ -19,31 +19,42 @@ const style = {
   transition: "all 0.5s ease-in-out",
 };
 
-interface Props {
-  setShow: (value: boolean) => void;
-  stateName: string;
-  setStateName: (value: string) => void;
-  stateLast: string;
-  setStateLast: (value: string) => void;
-  image: any;
-  handleFileChange: (event: any) => void;
-  removeImage: () => void;
-  handleSubmit: () => void;
-}
-
 export default function ModalEditProfile({
   stateName,
   setStateName,
-  stateLast,
-  setStateLast,
-  image,
-  handleFileChange,
-  removeImage,
+  stateEmail,
+  setStateEmail,
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
   handleSubmit,
-}: Props) {
+  initialImage, // Imagen inicial que ya tiene el usuario (por ejemplo, el avatar actual)
+}) {
   const [open, setOpen] = React.useState(false);
   const [nameError, setNameError] = React.useState(false);
-  const [lastError, setLastError] = React.useState(false);
+  const [emailError, setEmailError] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = React.useState(false);
+  
+  // Estado para manejar la imagen
+  const [image, setImage] = React.useState<any>(initialImage || null);
+
+  // Función para manejar la carga de archivos (solo PNG, JPEG o JPG)
+  const handleFileChange = (event: any) => {
+    const file = event.target.files[0];
+    if (file && (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg")) {
+      const imageUrl = URL.createObjectURL(file);
+      setImage(imageUrl); // Previsualiza la imagen
+    } else {
+      alert("Solo se permiten archivos PNG, JPEG o JPG."); // Mensaje de error si el archivo no es válido
+    }
+  };
+
+  // Función para eliminar la imagen cargada
+  const removeImage = () => {
+    setImage(null); // Elimina la previsualización
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -57,8 +68,12 @@ export default function ModalEditProfile({
     event.preventDefault();
     if (!stateName) {
       setNameError(true);
-    } else if (!stateLast) {
-      setLastError(true);
+    } else if (!stateEmail) {
+      setEmailError(true);
+    } else if (!password) {
+      setPasswordError(true);
+    } else if (password !== confirmPassword) {
+      setConfirmPasswordError(true);
     } else {
       handleSubmit();
       setOpen(false);
@@ -67,13 +82,13 @@ export default function ModalEditProfile({
 
   return (
     <div>
-     <h2
-      className="fs-16px my-1 cursor-pointer text-green-700 mx-2 inline-flex items-center"
-      onClick={handleOpen}
-    >
-      <FaEdit className="mr-1" />
-      Editar
-    </h2>
+      <h2
+        className="fs-16px my-1 cursor-pointer text-green-700 mx-2 inline-flex items-center"
+        onClick={handleOpen}
+      >
+        <FaEdit className="mr-1" />
+        Editar
+      </h2>
 
       <Modal
         open={open}
@@ -91,12 +106,13 @@ export default function ModalEditProfile({
             Editar perfil
           </h2>
           <form onSubmit={handleFormSubmit}>
+            {/* Nombre */}
             <div className="px-3 py-1">
               <InputLabel id="name-label" className="mb-2">
                 Nombre
               </InputLabel>
               <TextField
-                label="nombre-usario"
+                label="Nombre"
                 fullWidth
                 value={stateName}
                 onChange={(e) => setStateName(e.target.value)}
@@ -104,53 +120,63 @@ export default function ModalEditProfile({
                 helperText={nameError ? "Por favor ingresa un nombre" : ""}
               />
             </div>
+
+            {/* Correo */}
             <div className="px-3 py-1">
-              <InputLabel id="last-label" className="mb-2">
+              <InputLabel id="email-label" className="mb-2">
                 Correo
               </InputLabel>
               <TextField
-                label="Correo-electronico"
+                label="Correo"
                 fullWidth
-                value={stateLast}
-                onChange={(e) => setStateLast(e.target.value)}
-                error={lastError}
-                helperText={lastError ? "Por favor ingrese su correo" : ""}
+                value={stateEmail}
+                onChange={(e) => setStateEmail(e.target.value)}
+                error={emailError}
+                helperText={emailError ? "Por favor ingresa un correo válido" : ""}
               />
             </div>
+
+            {/* Contraseña */}
             <div className="px-3 py-1">
-              <InputLabel id="last-label" className="mb-2">
+              <InputLabel id="password-label" className="mb-2">
                 Contraseña
               </InputLabel>
               <TextField
+                type="password"
                 label="Contraseña"
                 fullWidth
-                value={stateLast}
-                onChange={(e) => setStateLast(e.target.value)}
-                error={lastError}
-                helperText={lastError ? "Por favor ingresa tu contraseña" : ""}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={passwordError}
+                helperText={passwordError ? "Por favor ingresa tu contraseña" : ""}
               />
             </div>
+
+            {/* Confirmar Contraseña */}
             <div className="px-3 py-1">
-              <InputLabel id="last-label" className="mb-2">
-                Confirmar contraseña
+              <InputLabel id="confirm-password-label" className="mb-2">
+                Confirmar Contraseña
               </InputLabel>
               <TextField
-                label="Corfirmar-contraseña"
+                type="password"
+                label="Confirmar Contraseña"
                 fullWidth
-                value={stateLast}
-                onChange={(e) => setStateLast(e.target.value)}
-                error={lastError}
-                helperText={lastError ? "Por favor confirma tu contraseña" : ""}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                error={confirmPasswordError}
+                helperText={
+                  confirmPasswordError ? "Las contraseñas no coinciden" : ""
+                }
               />
             </div>
+
+            {/* Imagen */}
             <div className="sm:col-span-2 p-2">
               <div className="flex items-center justify-center w-full">
                 {image === null ? (
                   <label
                     htmlFor="dropzone-file"
-                    className={`flex flex-col items-center justify-center w-full h-64 
-                      border-2 border-gray-600 border-dashed rounded-lg 
-                                          cursor-pointer bg-gray-40`}
+                    className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-40"
                   >
                     <svg
                       aria-hidden="true"
@@ -168,17 +194,13 @@ export default function ModalEditProfile({
                       ></path>
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">
-                        Toca para actualizar
-                      </span>{" "}
-                      o arraste y sueltalo aca
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                      <span className="font-semibold">Toca para actualizar</span>{" "}
+                      o arrastra y suelta aquí
                     </p>
                     <input
                       id="dropzone-file"
                       type="file"
+                      accept="image/png, image/jpeg, image/jpg" // Restricción de tipos
                       onChange={handleFileChange}
                       className="hidden"
                     />
@@ -190,22 +212,23 @@ export default function ModalEditProfile({
                       alt="Preview"
                       className="h-32 w-32 object-cover rounded-full mb-2"
                     />
-
                     <button
                       onClick={removeImage}
                       type="button"
                       className="w-full text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                     >
-                      Quitar Imagen
+                      Eliminar Imagen
                     </button>
                   </div>
                 )}
               </div>
             </div>
+
+            {/* Botón de guardar */}
             <div className="p-2">
               <button
                 type="submit"
-                className="w-full text-white bg-[#39A900] hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
+                className="w-full text-white bg-[#39A900] hover:bg-[#335622] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
               >
                 Guardar cambios
               </button>
@@ -213,9 +236,6 @@ export default function ModalEditProfile({
           </form>
         </Box>
       </Modal>
-      {open && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50" />
-      )}
     </div>
   );
 }

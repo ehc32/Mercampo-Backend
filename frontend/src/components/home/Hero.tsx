@@ -11,7 +11,7 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
     <section
       className="w-full  h-[80vh] bg-center flex flex-col justify-center items-center relative bg-no-repeat bg-cover"
       style={{
-        backgroundImage: "url('/public/cacaosena.jpg')"
+        backgroundImage: "url('/public/campo2.webp')"
       }}>
       <div className="container mx-auto px-6 lg:px-12 text-left">
         <div className="max-w-lg">

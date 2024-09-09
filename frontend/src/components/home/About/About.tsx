@@ -6,10 +6,11 @@ export default function Component() {
     const [activeIndex, setActiveIndex] = useState(null);
 
     return (
-        <div className="contenedorabout p-4 ">
+        <div className="contenedorabout p-4 " style={{ fontFamily: 'Nunito, sans-serif' }}>
             <section className="w-full h-96 bg-[url('/public/campesino.jpeg')] bg-cover bg-center py-32 relative rounded-lg">
                 <div className="w-full px-2 md:px-6">
                     <div className="max-w-3xl space-y-4 text-start text-primary-foreground">
+                        {/* Mantén este bloque sin cambios */}
                         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl" style={{ color: '#39A900' }}>
                             Nuestra Plataforma de Comercio para Campesinos
                         </h1>
@@ -27,48 +28,48 @@ export default function Component() {
 
                 <div className="w-full lg:w-[48%] bg-white p-6 rounded-lg shadow-lg">
                     <div className="mb-6">
-                        <h3 className="fs-16px font-bold mb-2 text-center" style={{ color: '#39A900' }}>
+                        <h3 className="text-24 font-bold mb-2 text-center" style={{ color: '#39A900', fontSize: '24px' }}>
                             Bienvenidos a mercampo
                         </h3>
-                        <p className="text-16 text-black text-justify">
+                        <p className="text-16 text-black text-justify" style={{ fontSize: '16px' }}>
                             En mercampo, nos comprometemos a crear un espacio seguro y transparente donde los productores locales pueden vender sus productos directamente a los consumidores, sin intermediarios. Nuestra misión es apoyar el desarrollo económico de las comunidades rurales y urbanas, promoviendo el comercio justo y sostenible.
                         </p>
                     </div>
                     <div className="mb-6">
-                        <h3 className="fs-16px font-bold mb-2 text-center" style={{ color: '#39A900' }}>
+                        <h3 className="text-24 font-bold mb-2 text-center" style={{ color: '#39A900', fontSize: '24px' }}>
                             ¿Qué hace que nuestra plataforma sea diferente?
                         </h3>
                         <ul className="listas-beneficios">
                             <li>
                                 <div className="flex flex-row align-center">
-                                    <p className="fs-14px font-bold text-black">Sin intermediarios</p>
+                                    <p className="text-16 font-bold text-black" style={{ fontSize: '16px' }}>Sin intermediarios</p>
                                     <span className="ml-1">🚫</span>
                                 </div>
-                                <p className="fs-14px text-black">En mercampo, los productores pueden vender sus productos directamente a los consumidores, sin tener que pagar comisiones o tarifas a intermediarios.</p>
+                                <p className="text-16 text-black" style={{ fontSize: '16px' }}>En mercampo, los productores pueden vender sus productos directamente a los consumidores, sin tener que pagar comisiones o tarifas a intermediarios.</p>
                             </li>
                             <li>
                                 <div className="flex flex-row align-center">
-                                    <p className="fs-14px font-bold text-black">Pagos seguros</p>
+                                    <p className="text-16 font-bold text-black" style={{ fontSize: '16px' }}>Pagos seguros</p>
                                     <span className="ml-1">🔒</span>
                                 </div>
-                                <p className="fs-14px text-black">Nuestra plataforma cuenta con integración PayPal, lo que garantiza que las transacciones sean seguras y confiables.</p>
+                                <p className="text-16 text-black" style={{ fontSize: '16px' }}>Nuestra plataforma cuenta con integración PayPal, lo que garantiza que las transacciones sean seguras y confiables.</p>
                             </li>
                             <li>
                                 <div className="flex flex-row align-center">
-                                    <p className="fs-14px font-bold text-black">Acceso a nuevos mercados</p>
+                                    <p className="text-16 font-bold text-black" style={{ fontSize: '16px' }}>Acceso a nuevos mercados</p>
                                     <span className=" ml-2">🌐</span>
                                 </div>
-                                <p className="fs-14px text-black">Nuestra plataforma conecta a los productores con un amplio mercado de consumidores, lo que les permite expandir su negocio y aumentar sus ventas.</p>
+                                <p className="text-16 text-black" style={{ fontSize: '16px' }}>Nuestra plataforma conecta a los productores con un amplio mercado de consumidores, lo que les permite expandir su negocio y aumentar sus ventas.</p>
                             </li>
                         </ul>
                     </div>
 
                 </div>
                 <div className="w-full lg:w-[48%] bg-white p-6 rounded-lg shadow-lg">
-                    <h1 className="fs-16px font-bold mb-4 text-center" style={{ color: '#39A900' }}>
+                    <h1 className="text-24 font-bold mb-4 text-center" style={{ color: '#39A900', fontSize: '24px' }}>
                         Preguntas Frecuentes
                     </h1>
-                    <h2 className="text-16 text-black mb-4 text-center">
+                    <h2 className="text-16 text-black mb-4 text-center" style={{ fontSize: '16px' }}>
                         Aquí encontrarás respuestas a las preguntas más comunes sobre nuestra plataforma
                     </h2>
                     <AccordionSet
