@@ -135,19 +135,24 @@ def approve_request(request, pk):
         return Response({'detail': 'Solicitud no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
 
 
+
 @api_view(['POST'])
 def request_seller_paypal_config(request, pk):
-    try:
+    try:    
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
         return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = PayPalConfigSerializer(data=request.data, context={'user': user})
-    
+    # El usuario autenticado se obtiene del contexto de la solicitud
+    serializer = PayPalConfigSerializer(data=request.data, context={'request': request})
+    print(serializer)
     if serializer.is_valid():
-        serializer.save(user=user)
+        serializer.save()  # El serializador se encargará de asignar el usuario
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        # Imprimir errores de validación para depuración
+        print("Errores de validación:", serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(TokenObtainPairView):

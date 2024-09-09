@@ -30,7 +30,7 @@ interface ModalSellerConfigProps {
 }
 
 export default function ModalSellerConfig({
-    userId,
+    id,
 }: ModalSellerConfigProps) {
     const [openModal, setOpenModal] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
@@ -57,7 +57,7 @@ export default function ModalSellerConfig({
             formData.append("app_name", appName);
             formData.append("client_id", clientId);
             formData.append("secret_key", secretKey);
-            await sendRequestSellerPayPalConfig(userId, formData);
+            await sendRequestSellerPayPalConfig(id, formData);
             toast.success("Configuracion completada");
         } catch (e) {
             toast.warning(
@@ -65,12 +65,12 @@ export default function ModalSellerConfig({
             );
         }
     };
-    
+
 
     return (
         <div>
             <h2
-                className="fs-16px my-1 cursor-pointer text-green-700 mx-2"
+                className="bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded  row align-center w-56 justify-center"
                 onClick={handleOpen}
             >
                 Configuración de PayPal

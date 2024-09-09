@@ -26,6 +26,11 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
               ¡Compra ahora!
             </button>
           </Link>
+          <Link to="/store">
+            <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 px-6 rounded-full">
+              Vender ahora!
+            </button>
+          </Link>
         </div>
       </div>
       <style>

@@ -252,3 +252,11 @@ def ReviewShowAllFromProduct(request, pk):
     
     serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_products_by_user(request, user_id):
+    products = Product.objects.filter(user_id=user_id)
+    paginator = CustomPagination()
+    paginated_products = paginator.paginate_queryset(products, request)
+    serializer = ProductReadSerializer(paginated_products, many=True)
+    return paginator.get_paginated_response(serializer.data)

@@ -102,6 +102,11 @@ export const get_all_products = async () => {
     return response.data
 };
 
+export const get_all_products_by_user = async (id: number) => {
+    const response = await axi.get(`/products/user_products/${id}/`)
+    return response.data
+};
+
 export const get_all_images_product = async (id: number | string) => {
     const response = await axi.get(`/products/get_product_images/${id}/`)
     return response.data

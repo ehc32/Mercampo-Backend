@@ -4,9 +4,9 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { registerRequest } from "../api/users";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
-import { useAuthStore } from "../hooks/auth";
 import { Button, Typography } from "@mui/material";
 import "./style.css";
+import { useAuthStore } from "../hooks/auth";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -31,14 +31,36 @@ const RegisterPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Validación de datos
+    if (!email || !name || !phone || !password || !re_password) {
+      toast.warning("Todos los campos son obligatorios");
+      return;
+    }
+
     if (password !== re_password) {
       toast.warning("Las contraseñas deben coincidir");
-    } else {
-      registerMutation.mutate();
+      return;
     }
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      toast.warning("El correo electrónico no es válido");
+      return;
+    }
+
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/.test(password)) {
+      toast.warning("La contraseña debe tener al menos 6 caracteres y contener letras y números");
+      return;
+    }
+
+    if (!name || !/\s/.test(name)) {
+      toast.warning("El nombre debe contener al menos dos palabras");
+      return;
+    }
+
+    registerMutation.mutate();
   };
 
-  if (registerMutation.isLoading) return <p>Cargando...</p>;
   if (isAuth) return <Navigate to="/" />;
 
   return (
