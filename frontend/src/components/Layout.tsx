@@ -12,7 +12,7 @@ const Layout = () => {
     <div>
       <Toaster />
       <Header estadoAside={estadoAside} setEstadoAside={setEstadoAside} />
-      <div className="pt-5 bg-white dark:bg-gray-900">
+      <div className="pt-14 bg-white dark:bg-gray-900">
         <Outlet />
       </div>
       <Footer />

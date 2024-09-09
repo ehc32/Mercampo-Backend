@@ -113,7 +113,7 @@ const LoginPage = () => {
                     <IconButton
                       onClick={handleTogglePasswordVisibility}
                       edge="end"
-                      className="focus:outline-none"
+                      className="focus:outline-none relative top-6"
                     >
                       {showPassword ? (
                         <VisibilityOff style={{ color: "#39A900" }} />

@@ -9,6 +9,7 @@ import { useAuthStore } from '../hooks/auth';
 import ModalEditProfile from '../components/shared/Modal/ModalEditUser';
 import ModalRequestSeller from '../components/shared/Modal/ModalARequestSeller';
 import ModalSellerConfig from '../components/shared/Modal/ModalConfigSeller';
+import ProfileTables from '../components/profile/profileTables';
 
 export default function UserProfile() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -56,30 +57,30 @@ export default function UserProfile() {
     }
 
     return (
-        <Box sx={{ maxWidth: "lg", mx: "auto", p: 6, mt: "5em" }}>
+        <Box sx={{ maxWidth: "lg", mx: "auto", p: 6, mt: ".1em" }}>
             <Card className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent>
                     <Typography variant="h4" className="titulo-sala-compra-light text-2xl font-semibold text-gray-800 mb-6">
                         Perfil del usuario
                     </Typography>
-                    <div className="flex justify-between items-center">
+                    {/* <div className="flex justify-between items-center p-4 bg-white rounded-lg ">
                         <div className="flex items-center space-x-6">
                             <Avatar
                                 src={user?.avatar ? `${import.meta.env.VITE_BACKEND_URL}${user.avatar}` : '/placeholder.svg?height=100&width=100'}
                                 alt={user?.name || 'User Avatar'}
                                 sx={{ width: 100, height: 100 }}
-                                className="border-4 border-gray-200"
+                                className="border-4 border-gray-300 rounded-full"
                             />
                             <div>
-                                <Typography variant="h5" className="text-xl font-bold text-gray-800">{user?.name || 'N/A'}</Typography>
-                                <Typography variant="body2" className="text-gray-600">{user?.phone || "Sin registrar"}</Typography>
-                                <Typography variant="body2" className="text-gray-600">{user?.email || 'N/A'}</Typography>
-                                <Typography variant="body2" className="text-gray-600">
+                                <Typography variant="h5" className="text-xl font-bold text-gray-900">{user?.name || 'Usuario'}</Typography>
+                                <Typography variant="body2" className="text-gray-700">{user?.phone || "Teléfono no registrado"}</Typography>
+                                <Typography variant="body2" className="text-gray-700">{user?.email || 'Correo no registrado'}</Typography>
+                                <Typography variant="body2" className={`text-gray-700 ${user?.role === "admin" && 'font-bold text-green-600'}`}>
                                     {user?.role === "client" ? "Cliente" : user?.role === "seller" ? "Vendedor" : "Administrador"}
                                 </Typography>
                             </div>
                         </div>
-                        <div className="text-end w-30 p-4">
+                        <div className="flex flex-col items-end space-y-2">
                             <ModalEditProfile user={user} editProfileMutation={editProfileMutation} />
                             {user?.role !== "seller" && user?.role !== "admin" && (
                                 <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
@@ -88,6 +89,9 @@ export default function UserProfile() {
                                 <ModalSellerConfig />
                             )}
                         </div>
+                    </div> */}
+                    <div>
+                        <ProfileTables user={user} id={id}/>
                     </div>
                 </CardContent>
             </Card>
@@ -120,13 +124,13 @@ export default function UserProfile() {
                         >
                             <Tab label="Compras" value="compras" sx={{
                                 '&.Mui-selected': { color: '#39A900' },
-                            }}  className="focus:outline-none"/>
+                            }} className="focus:outline-none" />
                             {user?.role !== "client" && <Tab label="Ventas" value="ventas" sx={{
                                 '&.Mui-selected': { color: '#39A900' },
-                            }}  className="focus:outline-none"/> }
+                            }} className="focus:outline-none" />}
                             {user?.role !== "client" && <Tab label="Mis productos" value="productos" sx={{
                                 '&.Mui-selected': { color: '#39A900' },
-                            }}  className="focus:outline-none"/> }
+                            }} className="focus:outline-none" />}
                         </Tabs>
                     </div>
 
@@ -169,7 +173,7 @@ export default function UserProfile() {
                     position: 'absolute',
                     top: '50%',
                     left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    transhtmlForm: 'translate(-50%, -50%)',
                     width: 400,
                     bgcolor: 'background.paper',
                     boxShadow: 24,
