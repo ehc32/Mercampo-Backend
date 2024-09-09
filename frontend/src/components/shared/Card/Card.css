@@ -171,4 +171,8 @@
     .product-container-dark {
         flex-direction: row;
     }
+    .footerInfo div {
+        align-items: start;
+        
+    }
 }

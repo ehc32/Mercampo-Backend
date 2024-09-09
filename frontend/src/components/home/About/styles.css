@@ -54,20 +54,30 @@
     margin: auto;
 }
 
+@media (min-width: 1400px) {
+    .contenedorabout {
+        width: 80% !important;
+    }
+}
+
 /* Estilos Responsivos */
 @media (min-width: 768px) {
-    .headAbout, .headAboutDark {
+
+    .headAbout,
+    .headAboutDark {
         flex-direction: row;
         justify-content: space-evenly;
         text-align: left;
     }
 
-    .headAbout p, .headAboutDark p {
+    .headAbout p,
+    .headAboutDark p {
         width: 50%;
         height: 300px;
     }
 
-    .headAbout img, .headAboutDark img {
+    .headAbout img,
+    .headAboutDark img {
         height: 320px;
         width: 320px;
     }

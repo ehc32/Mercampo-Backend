@@ -45,6 +45,7 @@ const Store = () => {
 
             const response = await filter_request(locate, price, categories, time, startDate, endDate, searchItem, page);
 
+            toast.dismiss();
             toast.success("Filtros aplicados con éxito!");
             setDataLenght(response.data.meta.count)
             setProductos(response.data.data)
@@ -61,6 +62,7 @@ const Store = () => {
     const deleteDataFilter = () => {
         try {
             fetchProductos(page)
+            toast.dismiss();
             toast.info(("Filtros restablecidos"));
         } catch (error) {
 
@@ -96,7 +98,6 @@ const Store = () => {
                     deleteDataFilter={deleteDataFilter}
                     setTime={setTime}
                     setLocate={setLocate}
-                    setSearchItem={setSearchItem}
                     setCategories={setCategories}
                     setStartDate={setStartDate}
                     setPrice={setPrice}
@@ -109,7 +110,18 @@ const Store = () => {
                     startDate={startDate}
                     endDate={endDate}
                 />
-                <Content productos={productos} loading={loading} dataLenght={dataLenght} page={page} setPage={setPage} />
+
+                <Content
+                    productos={productos}
+                    loading={loading}
+                    dataLenght={dataLenght}
+                    page={page}
+                    setPage={setPage}
+                    searchItem={searchItem}
+                    bringDataFilter={bringDataFilter}
+                    setSearchItem={setSearchItem} 
+                    deleteDataFilter={deleteDataFilter}
+                    />
 
             </main>
         </section>

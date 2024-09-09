@@ -80,9 +80,18 @@ const Header: React.FC<HeaderProps> = () => {
                       <AsideToggle />
                     )
                   }
-                  <Link to={'/'} className='flex flex-row'>
-                    <ST_Icon />
-                  </Link>
+                  {
+                    isWideScreen &&
+
+                    <Link to={'/'} className='flex flex-row'>
+                      <ST_Icon />
+                    </Link>
+
+                  }
+                  {
+                    !isWideScreen &&
+                    <h1 className='titulo-while-auth font-bold text-white ml-14 subnav-1 justify-center align-center'>Mercampo</h1>
+                  }
                   <div className="sm:ml-6 sm:block">
                     <div className="flex space-x-1 nav_items_block">
                       {

@@ -1,11 +1,14 @@
 import Pagination from '@mui/material/Pagination';
-import React, { useEffect, useState } from "react";
-import Footer from "../../Footer";
-import Card from "../../shared/Card/Cards";
-import Swiper from "../../shared/Swiper/swiper";
+import React, { useEffect, useState } from 'react';
+import Footer from '../../Footer';
+import Card from '../../shared/Card/Cards';
 import Loader from './../../shared/Loaders/Loader';
 import './Content.css';
 import NotfoundPage from '../../../global/NotfoundPage';
+import TuneIcon from '@mui/icons-material/Tune';
+import { useDrawer } from '../../../context/DrawerProvider';
+import { Button, TextField } from '@mui/material';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 
 interface ContenidoProps {
     productos: any[];
@@ -13,72 +16,132 @@ interface ContenidoProps {
     dataLenght: number;
     page: number;
     setPage: (page: number) => void;
+    searchItem: string;
+    setSearchItem: (search: string) => void;
+    bringDataFilter: () => void;
+    deleteDataFilter: () => void;
 }
 
-const Content: React.FC<ContenidoProps> = ({ productos, loading, dataLenght, page, setPage }) => {
+const Content: React.FC<ContenidoProps> = ({
+    productos,
+    loading,
+    dataLenght,
+    page,
+    setPage,
+    searchItem,
+    setSearchItem,
+    bringDataFilter,
+    deleteDataFilter
+}) => {
+    const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
     };
 
-    const carrouselData = [
-        {
-            foto: '/public/5.jpeg'
-        },
-        {
-            foto: '/public/4.jpg',
-        },
-    ];
+    const buscarTextfield = (e: string) => {
+        setSearchItem(e);
+        bringDataFilter();
+    };
+
+    const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchItem(value);
+
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        const newTimer = setTimeout(() => {
+            buscarTextfield(value);
+        }, 1000);
+
+        setTimer(newTimer);
+    };
+
+    const { abierto, toggleAbierto } = useDrawer();
 
     return (
         <section className="contenidoTienda">
             {/* <Swiper width="92%" height="300px" datos={carrouselData} isUpSwiper={true} /> */}
-            {/* aqui las cards de productos*/}
+            {/* aquí las cards de productos */}
 
             <div>
-                <h2 className='titulo-sala-compra-light'>Una gran variedad de productos</h2>
-                <h4 className='sub-titulo-sala-compra-light'>Encuentra productos de alta calidad a los mejores precios</h4>
+                <div className='flex flex-col '>
+                    <div className='w-20'></div>
+                    <div>
+                        <h2 className='titulo-sala-compra-light'>Una gran variedad de productos</h2>
+                        <h4 className='sub-titulo-sala-compra-light'>Encuentra productos de alta calidad a los mejores precios</h4>
+                    </div>
+                    <div className='flex flex-col sm:flex-row items-center justify-center gap-4 my-4 '>
+                        <Button
+                            variant="contained"
+                            className='flex align-center'
+                            color="error"
+                            onClick={deleteDataFilter}
+                        >
+                            <DeleteSweepIcon />
+                            <p>Borrar filtros</p>
+                        </Button>
+                        <div
+                            onClick={toggleAbierto}
+                            className='flex items-center gap-2 cursor-pointer'
+                        >
+                            <TuneIcon />
+                            <span>Filtrar productos</span>
+                        </div>
+                        <form
+                            action=""
+                            onSubmit={(e) => e.preventDefault()}
+                            className='flex-1 max-w-lg'
+                        >
+                            <TextField
+                                fullWidth
+                                id="search"
+                                label="Buscar ..."
+                                value={searchItem}
+                                onChange={handleChange2}
+                            />
+                        </form>
+                    </div>
+                </div>
 
                 {
                     loading ? (
-                        <div className="flex justify-center align-center">
+                        <div className="flex justify-center items-center">
                             <Loader />
                         </div>
                     ) : (
                         dataLenght > 0 ? (
-
                             <>
                                 <div className='product-container-light'>
                                     <div className="flex flex-wrap intern">
                                         {
-                                            productos?.length > 0 && productos.map((producto, index) => {
-                                                return (
-                                                    <Card key={index} producto={producto} />
-                                                )
-                                            })
+                                            productos.length > 0 && productos.map((producto, index) => (
+                                                <Card key={index} producto={producto} />
+                                            ))
                                         }
                                     </div>
-                                    <div className="w-95 flex align-center justify-center h-min-100px">
+                                    <div className="w-95 flex items-center justify-center h-min-100px">
                                         <Pagination
                                             count={Math.ceil(dataLenght / 20)}
                                             page={page}
                                             showFirstButton
                                             showLastButton
-                                            onChange={(event, value) => setPage(value)}
+                                            onChange={handleChange}
                                             className="flex flex-row w-full justify-center my-6"
                                         />
                                     </div>
                                 </div>
                             </>
                         ) : (
-                            <>
-                                <NotfoundPage boton={true} />
-                            </>
+                            <NotfoundPage boton={true} />
                         )
                     )
                 }
             </div>
-            
         </section>
     );
 };
+
 export default Content;
