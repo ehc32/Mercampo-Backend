@@ -1,6 +1,5 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Card.css';
-import { useState } from 'react';
 
 interface Person {
     name: string;

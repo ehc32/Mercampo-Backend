@@ -50,7 +50,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
                     </div>
                 </Link>
                 <div className='infoContent'>
-                    <div>
+                    <div className='head-card'>
                         <h4 className='headInfo-light'>
                             {producto.name?.length > 20 ? `${producto.name?.slice(0, 20)}...` : producto.name}
                         </h4>
@@ -59,7 +59,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
                         </h4>
                     </div>
                     <p className='headInfo'>
-                        {producto.description?.length > 100 ? `${producto.description?.slice(0, 100)}...` : producto.description}
+                        {producto.description?.length > 100 ? `${producto.description?.slice(0, 70)}...` : producto.description}
                     </p>
                     <div className='footerInfo'>
                         <div>

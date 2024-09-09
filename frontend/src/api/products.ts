@@ -55,6 +55,7 @@ export const post_product = async (data: Product) => {
     formData.append("unit", data.unit);
     formData.append("map_locate", data.map_locate);
     formData.append("locate", data.locate);
+    formData.append("tiempoL", data.tiempoL);
     if (data.image) {
         formData.append("images ", data.image);
     }

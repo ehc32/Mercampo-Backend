@@ -1,9 +1,12 @@
 import base64
 import imghdr
+
 from django.core.files.base import ContentFile
-from rest_framework import serializers
-from .models import Product, ProductImage, Reviews, User
 from django.db import models
+from rest_framework import serializers
+
+from .models import Product, ProductImage, Reviews, User
+
 
 class ProductReadSerializer(serializers.ModelSerializer):
     first_image = serializers.SerializerMethodField()
@@ -88,7 +91,7 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'name', 'avatar']  # Ajusta los campos según tu modelo de usuario
+        fields = ['id', 'name', 'avatar']
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)  # Incluir el serializer del usuario

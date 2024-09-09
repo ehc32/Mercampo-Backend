@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDrawer } from '../../../context/DrawerProvider'; // Importa el hook del contexto
 import ListAsideNav from '../ListAsideNav/ListAsideNav';
+import './Aside.css'
 
 const AsideFilter = ({
     bringDataFilter,
@@ -118,8 +119,8 @@ const AsideFilter = ({
 
     return (
         <Drawer
-            open={abierto} // Usa el estado del contexto para determinar si el Drawer está abierto
-            onClose={toggleAbierto} // Usa la función del contexto para alternar el Drawer
+            open={abierto}
+            onClose={toggleAbierto}
             sx={{
                 width: 300,
                 flexShrink: 0,

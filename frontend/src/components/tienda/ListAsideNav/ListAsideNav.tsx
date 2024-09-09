@@ -10,7 +10,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import StoreIcon from '@mui/icons-material/Store';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ST_Icon from '../../assets/ST/ST_Icon';
+import ST_Icon from '../../assets/ST-light/ST_Icon';
 import { Link } from 'react-router-dom';
 
 export default function ListAsideNav() {

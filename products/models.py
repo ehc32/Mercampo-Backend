@@ -8,6 +8,7 @@ class Category(Enum):
     VERDURAS = 'Verduras'
     GRANOS = 'Granos'
     ABARROTES = 'Abarrotes'
+    UNIDAD = 'Unidad'
     OTROS = 'Otros'
 
 class Product(models.Model):
@@ -24,15 +25,16 @@ class Product(models.Model):
     rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
-    fecha_eliminacion = models.DateTimeField(null=True, blank=True)  # Agregar campo de fecha de eliminación
+    tiempoL = models.IntegerField(default=0)
+    fecha_limite = models.DateTimeField(null=True, blank=True)
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)  # Cambiado a 'product'
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     image = models.ImageField(default='placeholder.png')
 
 class Reviews(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    comment = models.TextField(blank=True) 
-    created = models.DateTimeField(auto_now_add=True)   
+    comment = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
