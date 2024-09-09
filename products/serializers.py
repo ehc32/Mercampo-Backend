@@ -37,14 +37,15 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 
         for i, image in enumerate(images):
             image_data = base64.b64decode(image)
-            image_type = imghdr.what(None, image_data)  # Detecta el tipo de imagen
+            image_type = imghdr.what(None, image_data)
             if image_type is None:
-                image_type = 'jpg'  # Usa jpg como formato por defecto si no se puede detectar
-            image_name = f'image_{i}.{image_type}'  # Usa la extensión adecuada
+                image_type = 'jpg'
+            image_name = f'image_{i}.{image_type}'
             image_file = ContentFile(image_data, name=image_name)
             ProductImage.objects.create(product=product, image=image_file)
 
         return product
+
     
     
 class ProductImagesSerializer(serializers.Serializer): # brings the imgs from that product

@@ -67,7 +67,7 @@ const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos
                               pagination={{
                                 clickable: true,
                               }}
-                              style={{ width, height }}
+                              style={{ width, height, paddingLeft: "5%", paddingRight: "5%"  }}
                               modules={[Pagination, Autoplay]}
                               className="mySwiper cursor-grab active:cursor-grabbing hover:cursor-grab"
                               breakpoints={{
@@ -83,11 +83,11 @@ const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos
                                   slidesPerView: 2,
                                   spaceBetween: 15,
                                 },
-                                1074: {
+                                1000: {
                                   slidesPerView: 3,
                                   spaceBetween: 20,
                                 },
-                                1280: {
+                                1380: {
                                   slidesPerView: 4,
                                   spaceBetween: 25,
                                 },

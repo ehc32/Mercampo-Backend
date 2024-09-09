@@ -31,7 +31,7 @@ const DetallesProd = () => {
     <main className='mt-24'>
       <ProductDetail setCategory={setCategory} fetchProductos={fetchProductos} setProductId={setProductId} />
       <Comments productId={productId} />
-      <SwiperProducts datos={productos} height='50vh' width='100%' loader={loader} />
+      <SwiperProducts datos={productos} height='70vh' width='100%' loader={loader} />
 
       <AsideFilter />
     </main>

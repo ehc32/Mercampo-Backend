@@ -345,3 +345,15 @@
         width: 100% !important;
     }
 }
+
+.participants-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.participant-card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+}

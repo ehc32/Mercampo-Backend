@@ -1,17 +1,7 @@
 import React from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-
+import ImageGallery from "react-image-gallery";
+import 'react-image-gallery/styles/css/image-gallery.css';
 import "./styles.css";
-
-// Import required modules
-import { Pagination, Autoplay } from "swiper/modules";
-import Card from "../Card/Cards";
-import Loader from "../Loaders/Loader";
 
 interface Producto {
   nombre?: string;
@@ -35,63 +25,55 @@ interface SwiperPropsP {
   datos: Producto[];
 }
 
-const SwiperNewProducts: React.FC<SwiperPropsP> = ({
-  width,
-  height,
-  datos,
-  loader,
-}) => {
-  return (
-    <div className="nk-main main-detail-product">
-      <div className="nk-block">
-        <div className="card card-bordered">
-          <div className="card-inner">
-            <div className="row">
-              <div className="col-lg-12">
-                <h2 className="titulo-sala-compra-light">
-                  Nuevos productos agregados
-                </h2>
-                <h4 className="sub-titulo-sala-compra-light">
-                  ¿Algo que pueda interesarte?
-                </h4>
-
-                {loader ? (
-                  <Swiper
-                    slidesPerView={5}
-                    spaceBetween={10}
-                    loop={true}
-                    autoplay={{
-                      delay: 2000,
-                      disableOnInteraction: false,
-                    }}
-                    pagination={{ clickable: true }}
-                    style={{ width, height }}
-                    modules={[Pagination, Autoplay]}
-                    className="mySwiper cursor-grab active:cursor-grabbing hover:cursor-grab"
-                    breakpoints={{
-                      0: { slidesPerView: 1, spaceBetween: 10 },
-                      720: { slidesPerView: 1, spaceBetween: 10 },
-                      810: { slidesPerView: 2, spaceBetween: 15 },
-                      1074: { slidesPerView: 3, spaceBetween: 20 },
-                      1280: { slidesPerView: 4, spaceBetween: 25 },
-                      1600: { slidesPerView: 5, spaceBetween: 30 },
-                    }}
-                  >
-                    {datos.map((item, index) => (
-                      <SwiperSlide key={index}>
-                        <Card producto={item} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                ) : (
-                  <Loader />
-                )}
-              </div>
-            </div>
-          </div>
+const SwiperNewProducts: React.FC<SwiperPropsP> = ({ datos }) => {
+  const images = datos.map(product => ({
+    original: product.first_image || "https://via.placeholder.com/1000x600",
+    thumbnail: product.first_image || "https://via.placeholder.com/250x150",
+    description: (
+      <div className="product-details">
+        <h3>{product.name}</h3>
+        <p>$ {product.price}</p>
+        <p>{product.locate}</p>
+      </div>
+    )
+  }));
+  const renderItem = (item: any) => (
+    <div className="custom-image-container">
+      <img
+        src={item.original}
+        alt={item.description}
+        style={{ width: "100%", height: "auto", objectFit: "cover" }}
+      />
+      <div className="custom-image-description">
+        <h3>{item.description.props.children[0].props.children}</h3>
+        <div>
+          <p>{item.description.props.children[1].props.children}</p>
+          <span>{item.description.props.children[2].props.children}</span>
         </div>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      <div className="flex flex-col mb-12">
+        <h4 className={'card-name-light'}>Descubre lo mejor</h4>
+        <h6 className={'card-subname-light'}>Explora nuestra selección de productos de alta calidad</h6>
+      </div>
+      <div style={{ width: "85vw", margin: "auto", objectFit: "contain" }}>
+        <ImageGallery
+          items={images}
+          showPlayButton={false}
+          showThumbnail={true}
+          showNav={false}
+          showFullscreenButton={false}
+          autoPlay={true}
+          showBullets={true}
+          slideInterval={2000}
+          renderItem={renderItem}
+        />
+      </div>
+    </>
   );
 };
 

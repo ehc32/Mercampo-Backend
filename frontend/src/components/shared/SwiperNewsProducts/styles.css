@@ -1,32 +1,74 @@
-.swiper {
-    margin: 0 auto 1em;
-    padding-top: 1em;
-    border-radius: 3.5px;
+.custom-image-container {
+  position: relative;
+  width: 100%;
+
 }
 
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.image-gallery-swipe {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+.image-gallery-thumbnail-image {
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.contenedorSwiper {
-    position: absolute;
-    left: 10%;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 1em;
-    border-radius: 2.5px;
-    height: 20%;
-    width: 20%;
+.custom-image-description {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  color: white;
+  text-align: right;
+  border-radius: 5px;
+  max-width: 50%;
+  height: 40%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-image-description span,
+.custom-image-description div {
+  margin: 1em 0;
+}
+
+
+.custom-image-description span {
+  font-size: 18px;
+}
+
+.custom-image-description p {
+  font-size: 20px;
+  margin-bottom: .3em;
+}
+
+
+.custom-image-description h3 {
+  font-size: 2em;
+  color: #39A900;
+  position: absolute;
+  top: 0;
+  font-weight: bold;
+}
+
+.custom-image-description div {
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+  width: 80%;
+  position: absolute;
+  bottom: 0;
+}
+
+.custom-image-container img {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain !important;
 }

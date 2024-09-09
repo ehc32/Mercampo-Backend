@@ -15,17 +15,16 @@ class Product(models.Model):
     name = models.CharField(max_length=100, blank=True)
     category = models.CharField(max_length=100, choices=[(tag.name, tag.value) for tag in Category])
     description = models.CharField(max_length=350, blank=True, null=False)
-    map_locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # location google maps
-    locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False) # this is the place where's product offer
-    count_in_stock = models.IntegerField(default=0) # how many units
-    price = models.DecimalField(max_digits=10,
-                                decimal_places=2,
-                                null=True, blank=True)
+    map_locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False)
+    locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False)
+    count_in_stock = models.IntegerField(default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     unit = models.CharField(max_length=100, blank=True)
     num_reviews = models.IntegerField(default=0)
     rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) # user who's offer the product
-    created = models.DateTimeField(auto_now_add=True) # when was created
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    fecha_eliminacion = models.DateTimeField(null=True, blank=True)  # Agregar campo de fecha de eliminación
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)  # Cambiado a 'product'

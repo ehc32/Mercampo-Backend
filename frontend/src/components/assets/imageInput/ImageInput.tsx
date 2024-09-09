@@ -18,8 +18,8 @@ const ImageInput = ({ setImages, images }: ImageInputProps) => {
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    canvas.width = 400; // Ancho deseado
-                    canvas.height = 500; // Alto deseado
+                    canvas.width = 500; // Ancho deseado
+                    canvas.height = 300; // Alto deseado
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                     const base64 = canvas.toDataURL('image/jpeg', 0.5); // Calidad 50%
                     setImages((prevImages) => [...prevImages, base64]);
