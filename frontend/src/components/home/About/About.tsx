@@ -12,10 +12,10 @@ export default function Component() {
                     <div className="max-w-3xl space-y-4 text-start text-primary-foreground">
                         {/* Mantén este bloque sin cambios */}
                         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl" style={{ color: '#39A900' }}>
-                            Nuestra Plataforma de Comercio para Campesinos
+                            Nuestra Plataforma de Comercio
                         </h1>
                         <p className="text-lg md:text-xl text-white">
-                            Somos una plataforma dedicada a conectar a los campesinos con los mercados, brindando soluciones innovadoras para mejorar su producción y comercialización.
+                            Somos una plataforma dedicada a conectar a productores y consumidores, a travez de soluciones innovadoras para mejorar su producción y comercialización.
                         </p>
                     </div>
                     <div className="absolute top-0 right-0 w-1/2 md:w-1/3 lg:w-1/4">
