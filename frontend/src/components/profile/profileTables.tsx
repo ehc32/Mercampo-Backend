@@ -87,7 +87,7 @@ function ProfileTables({ user, id }) {
                         <div className="flex justify-between items-center">
                             <Typography variant="body2" className="text-gray-700 font-semibold">Secret Key:</Typography>
                             <Typography variant="body2" className="text-gray-900">
-                                {showSecretKey ? paypal?.secret_key || 'No disponible' : '******'}
+                                {showSecretKey ? paypal?.secret_key || 'No disponible' : '***********'}
                             </Typography>
                             <Button onClick={toggleSecretKeyVisibility}>
                                 {showSecretKey ? 'Ocultar' : 'Mostrar'}
@@ -98,7 +98,9 @@ function ProfileTables({ user, id }) {
                             <Typography variant="body2" className="text-gray-900">{paypal?.app_name || 'No disponible'}</Typography>
                         </div>
                     </div>
+
                     <Typography variant="h6" gutterBottom>Pasos para configurar PayPal</Typography>
+
                     <ul>
                         <li>
                             <Typography variant="body2" color="text-black">

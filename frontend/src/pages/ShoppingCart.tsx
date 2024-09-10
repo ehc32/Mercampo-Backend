@@ -11,7 +11,7 @@ import {
 import { visuallyHidden } from '@mui/utils';
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { create_order } from "../api/orders";
@@ -31,7 +31,7 @@ const CartPage = () => {
     const total_price = useCartStore((state) => state.totalPrice);
 
     const [pagina, setPagina] = useState(1);
-    const [productosPorPagina, setProductosPorPagina] = useState(10);
+    const [productosPorPagina, setProductosPorPagina] = useState(8);
     const [selected, setSelected] = useState([]);
 
     const ultimaPagina = Math.ceil(cart.length / productosPorPagina);
@@ -42,6 +42,8 @@ const CartPage = () => {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [postal_code, setPostal_code] = useState("");
+
+    const [lenghtProd, setLenghtProd] = useState<number>(0);
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -136,7 +138,7 @@ const CartPage = () => {
     const [orderBy, setOrderBy] = useState<string>('name');
     const [dense, setDense] = useState(false);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(7);
 
     const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -197,12 +199,17 @@ const CartPage = () => {
         { id: 'total', numeric: true, disablePadding: false, label: 'Total' }
     ];
 
+    useEffect(() => {
+        const cartLengh = cart.length
+        setLenghtProd(cartLengh)
+    }, [])
+
     return (
         <>
 
             <section className="dark:bg-gray-900 p-3 sm:p-5 mt-10">
                 <div className="px-4 padre-divisor lg:px-12">
-                    <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
+                    <div className="divisor gap-6">
                         <div className="card-bordered bg-white relative flex flex-col justify-start mb-2 shadow-md sm:rounded-lg overflow-hidden p-8">
                             <div className='card-tite mb-5'>
                                 <h4 className="text-2xl  text-center text-black font-bold mb-2">Formulario de pago</h4>
@@ -257,7 +264,11 @@ const CartPage = () => {
                         <div className="card-bordered  mb-2 bg-white relative shadow-md sm:rounded-lg overflow-hidden p-2">
                             <h4 className="fs-22px font-bold text-center text-black  my-4">Tu carrito</h4>
                             <h6 className="fs-16px text-black f text-center my-4">Estos son los productos en tu carrito</h6>
+                            <div className='flex flex-row justify-between mx-2 my-6'>
 
+                                <h3 className='fs-16px font-semibold text-black'>Total a pagar: $ {total_price}</h3>
+                                <h3 className='fs-16px font-semibold text-black'>{lenghtProd} productos en carrito</h3>
+                            </div>
                             <div className='div-class'>
                                 <TableContainer component={Paper}>
                                     {
@@ -272,7 +283,7 @@ const CartPage = () => {
                                         )
                                     }
 
-                                    <Table sx={{ minWidth: 750, overflowY: "auto" }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
+                                    <Table sx={{ minWidth: 750, overflowY: "none", paddingBottom: "2em" }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
                                         <TableHead>
                                             <TableRow>
                                                 <TableCell padding="checkbox">
@@ -307,10 +318,10 @@ const CartPage = () => {
                                                         </TableSortLabel>
                                                     </TableCell>
                                                 ))}
-                                                <TableCell align='center' className='font-bold' width={"100px"}>Acciones</TableCell>
+                                                <TableCell align='center' className='font-bold' width={"100px"}><p className='acciones-force'>Acciones</p></TableCell>
                                             </TableRow>
                                         </TableHead>
-                                        <TableBody>
+                                        <TableBody sx={{ overflowY: "auto" }}>
                                             {visibleRows.map((row, index) => {
                                                 const isItemSelected = isSelected(row.id);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
@@ -335,9 +346,11 @@ const CartPage = () => {
                                                         <TableCell align="center" component="th" id={labelId} scope="row" padding="none">
                                                             {row.name}
                                                         </TableCell>
-                                                        <TableCell align="center">$ {row.price}</TableCell>
+                                                        <TableCell align="center">
+                                                            $ {Number(row.price).toFixed(0)}
+                                                        </TableCell>
                                                         <TableCell align="center">{row.quantity}</TableCell>
-                                                        <TableCell align="center">$ {(row.price * row.quantity).toFixed(2)}</TableCell>
+                                                        <TableCell align="center">$ {(row.price * row.quantity).toFixed(0)}</TableCell>
                                                         <td className="px-4 py-2 flex  text-black font-bold whitespace-nowrap">
                                                             <div className="flex  w-full space-x-3">
                                                                 <button onClick={() => removeFromCart(row)} className="inline-flex items-center p-1 text-sm  text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
@@ -354,14 +367,14 @@ const CartPage = () => {
                                             })}
                                             {emptyRows > 0 && (
                                                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                                                    <TableCell colSpan={6} />
+                                                    <TableCell colSpan={8} />
                                                 </TableRow>
                                             )}
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
                                 <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25]}
+                                    rowsPerPageOptions={[8]}
                                     component="div"
                                     count={cart.length}
                                     rowsPerPage={rowsPerPage}
@@ -370,8 +383,6 @@ const CartPage = () => {
                                     onRowsPerPageChange={handleChangeRowsPerPage}
                                     labelRowsPerPage="Filas por página"
                                     labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
-                                    nextPageButtonText="Página siguiente"
-                                    backPageButtonText="Página anterior"
                                 />
 
                             </div>
@@ -381,7 +392,7 @@ const CartPage = () => {
                     </div>
                 </div>
             </section>
-            
+
 
         </>
     );
