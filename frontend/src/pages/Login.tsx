@@ -63,7 +63,6 @@ const LoginPage = () => {
     },
   });
 
-  if (loginMutation.isLoading) return <p>Cargando...</p>;
   if (isAuth) return <Navigate to="/" />;
 
   return (

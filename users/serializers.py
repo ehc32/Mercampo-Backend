@@ -71,12 +71,13 @@ class EditUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
 class PayPalConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = PayPalConfig
-        fields = ['app_name', 'client_id', 'secret_key']
+        fields = ['user','app_name', 'client_id', 'secret_key']
 
     def create(self, validated_data):
-        user = self.context['request'].user 
+        user = self.context['request'].user  # Obtén el usuario del contexto
         paypal_config = PayPalConfig.objects.create(user=user, **validated_data)
         return paypal_config

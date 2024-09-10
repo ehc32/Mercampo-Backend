@@ -51,13 +51,13 @@ export default function ModalRequestSeller({
 
     return (
         <div>
-             <h2
-      className="fs-16px my-1 cursor-pointer text-green-700 mx-2 inline-flex items-center"
-      onClick={handleOpen}
-    >
-      <FaTag className="mr-1" />
-      Quiero vender
-    </h2>
+            <h2
+                className="bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded   row align-center w-56 justify-center"
+                onClick={handleOpen}
+            >
+                <FaTag className="mr-1" />
+                Quiero vender
+            </h2>
             <Modal
                 open={open}
                 onClose={handleClose}

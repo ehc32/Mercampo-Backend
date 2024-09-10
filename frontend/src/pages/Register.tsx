@@ -47,6 +47,13 @@ const RegisterPage = () => {
   // Validación y manejo del formulario al enviarlo
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Validación de datos
+    if (!email || !name || !phone || !password || !re_password) {
+      toast.warning("Todos los campos son obligatorios");
+      return;
+    }
+
     if (password !== re_password) {
       toast.warning("Las contraseñas deben coincidir");
     } else if (!isSeller && !isCustomer) {
@@ -54,6 +61,23 @@ const RegisterPage = () => {
     } else {
       registerMutation.mutate();
     }
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      toast.warning("El correo electrónico no es válido");
+      return;
+    }
+
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/.test(password)) {
+      toast.warning("La contraseña debe tener al menos 6 caracteres y contener letras y números");
+      return;
+    }
+
+    if (!name || !/\s/.test(name)) {
+      toast.warning("El nombre debe contener al menos dos palabras");
+      return;
+    }
+
+    registerMutation.mutate();
   };
 
   // Manejadores para los cambios de los roles (vendedor y cliente)

@@ -94,40 +94,35 @@ const Header: React.FC<HeaderProps> = () => {
                   }
                   <div className="sm:ml-6 sm:block">
                     <div className="flex space-x-1 nav_items_block">
-                      {
-                        isAuth && (
-                          <>
-                            <Link
-                              to={'/'}
-                              className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
 
-                            >
-                              Inicio
-                            </Link>
+                      <Link
+                        to={'/'}
+                        className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
 
-                            <Link
-                              to={'/store'}
-                              className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
-                            >
-                              Tienda
-                            </Link>
-                          </>
-                        )
-                      }
+                      >
+                        Inicio
+                      </Link>
+
+                      <Link
+                        to={'/store'}
+                        className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
+                      >
+                        Tienda
+                      </Link>
+
                     </div>
                   </div>
                 </div>
                 <h1 className='titulo-while-auth font-bold text-white md:ml-24  subnav-1 justify-center align-center'>Mercampo</h1>
               </div>
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
+
+                <div className='nav_items_block flex flex-row justify-between'>
+                  <BasicTooltip />
+                  <span className="mx-1 fs-18px text-white">{cart.length}</span>
+                </div>
                 {isAuth ? (
                   <>
-                    <div className='nav_items_block'>
-                      <div className='nav_items_block flex flex-row justify-between'>
-                        <BasicTooltip />
-                        <span className="mx-1 fs-18px text-white">{cart.length}</span>
-                      </div>
-                    </div>
                     <Menu as="div" className="relative ml-1">
                       <div>
                         <Menu.Button className="flex rounded-full text-sm focus:outline-none border-2 border-green-600">
