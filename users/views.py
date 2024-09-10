@@ -80,27 +80,30 @@ def register(request):
     serializer = RegisterUserSerializer(data=data)
     if serializer.is_valid():
         user = serializer.save(password=data['password'])
+        
         return Response(UserSerializer(user).data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
-def request_seller(request, pk):
-    try:
-        user = User.objects.get(pk=pk)
-    except User.DoesNotExist:
-        return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+def register(request):
+    data = request.data
+    print(data)
+    
+    serializer = RegisterUserSerializer(data=data)
+    
+    if serializer.is_valid():
+        user = serializer.save(password=data['password'])
+        
+        if data.get('wantBeSeller', False):
+            if not Seller.objects.filter(user=user).exists():
+                seller = Seller(user=user)
+                seller.save()
 
-    # Verificar si ya existe una solicitud de vendedor
-    if Seller.objects.filter(user=user).exists():
-        return Response({'detail': 'El usuario ya ha solicitado ser vendedor.'}, status=status.HTTP_400_BAD_REQUEST)
-
-    # Crear la solicitud de vendedor
-    seller = Seller(user=user)
-    seller.save()
-
-    serializer = SellerRequestSerializer(seller)
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+    
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def get_request_seller(request):

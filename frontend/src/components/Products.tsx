@@ -109,7 +109,7 @@ const Products = ({ results }: Props) => {
             <th scope="col" className="px-2 py-2 text-center">Nombre</th>
             <th scope="col" className="px-2 py-2 text-center">Categoria</th>
             {/* <th scope="col" className="px-2 py-2 text-center">Descripción</th> */}
-            <th scope="col" className="px-2 py-2 text-center">Localización en el mapa</th>
+            <th scope="col" className="px-2 py-2 text-center">Localización</th>
             <th scope="col" className="px-2 py-2 text-center">Precio</th>
             <th scope="col" className="px-2 py-2 text-center">Unidad</th>
             <th scope="col" className="px-2 py-2 text-center">Opiniones</th>
@@ -125,7 +125,7 @@ const Products = ({ results }: Props) => {
                 <td className="px-2 py-2 whitespace-nowrap">{o.name}</td>
                 <td className="px-2 py-2 whitespace-nowrap">{o.category}</td>
                 {/* <td className="px-2 py-2">{o.description}</td> */}
-                <td className="px-2 py-2 whitespace-nowrap">{o.map_locate}</td>
+                <td className="px-2 py-2 whitespace-nowrap">{o.map_locate.slice(0,20)}</td>
                 <td className="px-2 py-2 whitespace-nowrap">$ {o.price}</td>
                 <td className="px-2 py-2 text-center whitespace-nowrap">{o.unit}</td>
                 <td className="px-2 py-2 text-center whitespace-nowrap">{o.num_reviews}</td>
@@ -133,10 +133,10 @@ const Products = ({ results }: Props) => {
                 <td className="px-2 py-2 whitespace-nowrap">{formatearFecha(o.created)}</td>
                 <td className="px-2  py-1 text-center">
                   <IconButton className='focus:outline-none' onClick={() => handleOpenModal(o.user)}>
-                    <SearchIcon />
+                    <SearchIcon className='text-blue-600'/>
                   </IconButton>
                   <IconButton className='focus:outline-none' onClick={() => deleteProduct(o.id)}>
-                    <DeleteIcon />
+                    <DeleteIcon className='text-red-600'/>
                   </IconButton>
                 </td>
               </tr>

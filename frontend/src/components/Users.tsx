@@ -146,7 +146,7 @@ const Users = ({ results }: any) => {
             <th scope="col" className="px-2 py-1 text-center">Correo</th>
             <th scope="col" className="px-2 py-1 text-center">Teléfono</th>
             <th scope="col" className="px-2 py-1 text-center">Rol</th>
-            <th scope="col" className="px-2 py-1 text-center">P. Publicación</th>
+            <th scope="col" className="px-2 py-1 text-center">P. Publicar</th>
             <th scope="col" className="px-2 py-1 text-center">Fecha de creación</th>
             <th scope="col" className="px-2 py-1 text-center">Opciones</th>
           </tr>
@@ -158,7 +158,7 @@ const Users = ({ results }: any) => {
                 <td className="px-2 py-1 ">{o.name}</td>
                 <td className="px-2 py-1 ">{o.email}</td>
                 <td className="px-2 py-1 ">{o.phone}</td>
-                <td className="px-2 py-1 text-center">{o.role === "seller" ? "Vendedor" : o.role}</td>
+                <td className="px-2 py-1 text-center">{o.role === "seller" ? "Vendedor" : o.role == "admin" ? "Administrador" : "Cliente"}</td>
                 <td className="px-2 py-1 text-center">{o.can_publish ? "Puede" : "No puede"}</td>
                 <td className="px-2 py-1 text-center">{formatDate(o.date_joined)}</td>
                 <td className="px-2 py-1 text-center">
