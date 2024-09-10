@@ -2,7 +2,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from .models import Role, User, Seller
+from .models import PayPalConfig, Role, User, Seller
+
 from .serializers import (
     PayPalConfigSerializer,
     RegisterUserSerializer,
@@ -136,19 +137,27 @@ def approve_request(request, pk):
 
 @api_view(['POST'])
 def request_seller_paypal_config(request, pk):
-    try:    
+    try:
         user = User.objects.get(pk=pk)
-        serializer = PayPalConfigSerializer(data=request.data, context={'request': request})
-        print(serializer)
+        serializer = PayPalConfigSerializer(data=request.data, context={'request': request, 'user': user})
         if serializer.is_valid():
             serializer.save()  # El serializador se encargará de asignar el usuario
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print("Errores de validación:", serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     except User.DoesNotExist:
         return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def get_seller_paypal_config_done(request, pk):
+    try:
+        paypal_config = PayPalConfig.objects.get(user_id=pk)
+        serializer = PayPalConfigSerializer(paypal_config)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except PayPalConfig.DoesNotExist:
+        return Response({'detail': 'Configuración de PayPal no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class LoginView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

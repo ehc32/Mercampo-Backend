@@ -65,3 +65,8 @@ export const deleteRequestSeller = async (idUser: number | string) => {
 export const sendRequestSellerPayPalConfig = async (idUser: number | string, formData: FormData) => {
     await axi.post(`/users/sell/paypalsel/${idUser}/`, formData);
 };
+
+export const get_paypal_user = async (id: number) => {
+    const response = await axi.get(`/users/paypalconfig/${id}/`);
+    return response;
+};

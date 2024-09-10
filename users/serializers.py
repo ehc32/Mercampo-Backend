@@ -1,6 +1,7 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from .models import PayPalConfig, User, Seller
+from django.contrib.auth.models import AnonymousUser
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -78,9 +79,12 @@ class EditUserSerializer(serializers.ModelSerializer):
 class PayPalConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = PayPalConfig
-        fields = ['user','app_name', 'client_id', 'secret_key']
+        fields = ['app_name', 'client_id', 'secret_key']  # No incluir 'user'
 
     def create(self, validated_data):
-        user = self.context['request'].user  # Obtén el usuario del contexto
-        paypal_config = PayPalConfig.objects.create(user=user, **validated_data)
-        return paypal_config
+        user = self.context.get('user')  # Obtén el usuario del contexto
+        if user:
+            paypal_config = PayPalConfig.objects.create(user=user, **validated_data)
+            return paypal_config
+        else:
+            raise serializers.ValidationError("Usuario no proporcionado en el contexto.")
