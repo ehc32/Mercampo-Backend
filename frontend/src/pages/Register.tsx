@@ -111,7 +111,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      <AsideFilter />
+      
       <div className="flex flex-col justify-center items-center fondo-login min-h-screen">
         <div className="w-96 bg-slate-300 bg-opacity-20 backdrop-filter backdrop-blur-md my-2 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:bg-opacity-20 dark:backdrop-blur-md dark:border-gray-700 flex flex-row">
           <div className="p-6 space-y-3 sm:p-8 w-full">

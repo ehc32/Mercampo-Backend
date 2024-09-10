@@ -59,7 +59,7 @@ export default function Tienda() {
   return (
     <React.Fragment>
       <div className="home-container">
-        <AsideFilter />
+      
         <Hero />
       
         <RandomProducts productos={productosRandom} />

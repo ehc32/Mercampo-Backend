@@ -296,8 +296,6 @@ const AddProd = () => {
           </div>
         </div>
       </div>
-      <AsideFilter />
-
     </>
   );
 }

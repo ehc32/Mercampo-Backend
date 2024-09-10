@@ -6,16 +6,15 @@ import ModalSellerConfig from '../shared/Modal/ModalConfigSeller'; // Asegúrate
 
 function ProfileTables({ user, id }) {
     const [tabValue, setTabValue] = useState(0);
+    const [paypal, SetPaypal] = useState({
+        "clientId": "Sin configurar",
+        "secretKey": "Sin clave secreta",
+        "appName": "Nombre de app sin configurar"
+    });
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
-
-    const paypal = {
-        "clientId": "your-client-id-here",
-        "secretKey": "your-secret-key-here",
-        "appName": "Your App Name"
-    }
 
 
     return (
@@ -30,85 +29,98 @@ function ProfileTables({ user, id }) {
 
             {/* Información Tab */}
             <TabPanel value={tabValue} index={0}>
-                <Paper elevation={1} sx={{ p: 3 }}>
-                    <Typography variant="h6" gutterBottom>Información personal</Typography>
-                    <Typography variant="body2" color="textSecondary" gutterBottom>
-                        En Mercampo cuidamos tu información.
-                    </Typography>
+                <Typography variant="h6" gutterBottom>Información personal</Typography>
+                <Typography variant="body2" color="text-black" gutterBottom>
+                    En Mercampo cuidamos tu información.
+                </Typography>
 
-                    <div className="flex justify-between items-center p-4 bg-white rounded-lg">
-                        <div className="flex items-center space-x-6">
-                            <Avatar
-                                src={user?.avatar ? `${import.meta.env.VITE_BACKEND_URL}${user.avatar}` : '/placeholder.svg?height=100&width=100'}
-                                alt={user?.name || 'User Avatar'}
-                                sx={{ width: 100, height: 100 }}
-                                className="border-4 border-gray-300 rounded-full"
-                            />
-                            <div>
-                                <Typography variant="h5" className="text-xl font-bold text-gray-900">
-                                    {user?.name || 'Usuario'}
-                                </Typography>
-                                <Typography variant="body2" className="text-gray-700">
-                                    {user?.phone || "Teléfono no registrado"}
-                                </Typography>
-                                <Typography variant="body2" className="text-gray-700">
-                                    {user?.email || 'Correo no registrado'}
-                                </Typography>
-                                <Typography variant="body2" className={`text-gray-700 ${user?.role === "admin" && 'font-bold text-green-600'}`}>
-                                    {user?.role === "client" ? "Cliente" : user?.role === "seller" ? "Vendedor" : "Administrador"}
-                                </Typography>
-                            </div>
+                <div className="flex justify-between items-center p-4 bg-white rounded-lg">
+                    <div className="flex items-center space-x-6">
+                        <Avatar
+                            src={user?.avatar ? `${import.meta.env.VITE_BACKEND_URL}${user.avatar}` : '/placeholder.svg?height=100&width=100'}
+                            alt={user?.name || 'User Avatar'}
+                            sx={{ width: 100, height: 100 }}
+                            className="border-4 border-gray-300 rounded-full"
+                        />
+                        <div>
+                            <Typography variant="h5" className="text-xl font-bold text-gray-900">
+                                {user?.name || 'Usuario'}
+                            </Typography>
+                            <Typography variant="body2" className="text-gray-700">
+                                {user?.phone || "Teléfono no registrado"}
+                            </Typography>
+                            <Typography variant="body2" className="text-gray-700">
+                                {user?.email || 'Correo no registrado'}
+                            </Typography>
+                            <Typography variant="body2" className={`text-gray-700 ${user?.role === "admin" && 'font-bold text-green-600'}`}>
+                                {user?.role === "client" ? "Cliente" : user?.role === "seller" ? "Vendedor" : "Administrador"}
+                            </Typography>
                         </div>
                     </div>
-                </Paper>
+                </div>
             </TabPanel>
 
             <TabPanel value={tabValue} index={1}>
-                <Paper elevation={1} sx={{ p: 3 }}>
-                    <Typography variant="h6" gutterBottom>Información de PayPal</Typography>
-                    <Typography variant="body2" color="textSecondary" gutterBottom>
-                        A continuación, encontrarás la información relevante de tu cuenta de PayPal. Asegúrate de verificar que todos los datos sean correctos para recibir tus pagos de manera efectiva.
-                    </Typography>
+                <Typography variant="h6" gutterBottom>Información de PayPal</Typography>
+                <Typography variant="body2" color="text-black" gutterBottom>
+                    A continuación, encontrarás la información relevante de tu cuenta de PayPal. Asegúrate de verificar que todos los datos sean correctos para recibir tus pagos de manera efectiva.
+                </Typography>
 
-                    <div className="p-4 bg-white rounded-lg">
-                        <div className="flex flex-col space-y-4">
-                            <div className="flex justify-between items-center">
-                                <Typography variant="body2" className="text-gray-700 font-semibold">Client ID:</Typography>
-                                <Typography variant="body2" className="text-gray-900">{paypal.clientId || 'No disponible'}</Typography>
-                            </div>
-                            <div className="flex justify-between items-center">
-                                <Typography variant="body2" className="text-gray-700 font-semibold">Secret Key:</Typography>
-                                <Typography variant="body2" className="text-gray-900">{paypal.secretKey ? '******' : 'No disponible'}</Typography>
-                            </div>
-                            <div className="flex justify-between items-center">
-                                <Typography variant="body2" className="text-gray-700 font-semibold">App Name:</Typography>
-                                <Typography variant="body2" className="text-gray-900">{paypal.appName || 'No disponible'}</Typography>
-                            </div>
+                <div className="p-4 bg-white rounded-lg">
+                    <div className="flex flex-col space-y-4">
+                        <div className="flex justify-between items-center">
+                            <Typography variant="body2" className="text-gray-700 font-semibold">Client ID:</Typography>
+                            <Typography variant="body2" className="text-gray-900">{paypal.clientId || 'No disponible'}</Typography>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <Typography variant="body2" className="text-gray-700 font-semibold">Secret Key:</Typography>
+                            <Typography variant="body2" className="text-gray-900">{paypal.secretKey ? '******' : 'No disponible'}</Typography>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <Typography variant="body2" className="text-gray-700 font-semibold">App Name:</Typography>
+                            <Typography variant="body2" className="text-gray-900">{paypal.appName || 'No disponible'}</Typography>
                         </div>
                     </div>
-                </Paper>
+                </div>
+
+                <Typography variant="h6" gutterBottom>Pasos para configurar PayPal</Typography>
+                <ul>
+                    <li>
+                        <Typography variant="body2" color="text-black">
+                            <strong>Paso 1:</strong> Crear una cuenta en PayPal. Ve a <a href="https://www.paypal.com" target="_blank" rel="noopener noreferrer">PayPal</a> y crea una cuenta de negocios.
+                        </Typography>
+                    </li>
+                    <li>
+                        <Typography variant="body2" color="text-black">
+                            <strong>Paso 2:</strong> Ingresa a <a href="https://developer.paypal.com/dashboard/applications/sandbox" target="_blank" rel="noopener noreferrer">PayPal for Developers</a>, crea una aplicación y obtén las credenciales (Client ID y Secret Key).
+                        </Typography>
+                    </li>
+                    <li>
+                        <Typography variant="body2" color="text-black">
+                            <strong>Paso 3:</strong> Ingresar las credenciales en los campos correspondientes de nuestra plataforma para habilitar los pagos.
+                        </Typography>
+                    </li>
+                </ul>
             </TabPanel>
 
 
             {/* Configuración Tab */}
             <TabPanel value={tabValue} index={2}>
-                <Paper elevation={1} sx={{ p: 3 }}>
-                    <Typography variant="h6" gutterBottom>Configuración</Typography>
-                    <Typography variant="body2" color="textSecondary" gutterBottom>
-                        Gestiona tu perfil y configuración de vendedor aquí.
-                    </Typography>
+                <Typography variant="h6" gutterBottom>Configuración</Typography>
+                <Typography variant="body2" color="text-black" gutterBottom>
+                    Gestiona tu perfil y configuración de vendedor aquí.
+                </Typography>
 
-                    {/* Modales de configuración */}
-                    <div className="flex flex-row align-center items-start">
-                        <ModalEditProfile user={user} />
-                        {user?.role !== "seller" && user?.role !== "admin" && (
-                            <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
-                        )}
-                        {(user?.role === "seller" || user?.role === "admin") && (
-                            <ModalSellerConfig id={id} />
-                        )}
-                    </div>
-                </Paper>
+                {/* Modales de configuración */}
+                <div className="flex flex-row align-center items-start">
+                    <ModalEditProfile id={id} />
+                    {user?.role !== "seller" && user?.role !== "admin" && (
+                        <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
+                    )}
+                    {(user?.role === "seller" || user?.role === "admin") && (
+                        <ModalSellerConfig id={id} />
+                    )}
+                </div>
             </TabPanel>
         </Box>
     );

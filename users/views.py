@@ -22,11 +22,10 @@ def get_solo_user(request, pk):
     serializer = UserSerializer(user)
     return Response(serializer.data)
 
-
 @api_view(['PUT'])
-def edit_profile(request, email):
+def edit_profile(request, id):
     try:
-        user = User.objects.get(email=email)
+        user = User.objects.get(id=id)  # Cambiar de email a id
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -41,6 +40,7 @@ def edit_profile(request, email):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({'detail': 'No tienes permiso para editar este perfil.'}, status=status.HTTP_403_FORBIDDEN)
+
 
 
 @api_view(['GET'])
@@ -134,26 +134,21 @@ def approve_request(request, pk):
     except Seller.DoesNotExist:
         return Response({'detail': 'Solicitud no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
 
-
-
 @api_view(['POST'])
 def request_seller_paypal_config(request, pk):
     try:    
         user = User.objects.get(pk=pk)
+        serializer = PayPalConfigSerializer(data=request.data, context={'request': request})
+        print(serializer)
+        if serializer.is_valid():
+            serializer.save()  # El serializador se encargará de asignar el usuario
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print("Errores de validación:", serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     except User.DoesNotExist:
         return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
-
-    # El usuario autenticado se obtiene del contexto de la solicitud
-    serializer = PayPalConfigSerializer(data=request.data, context={'request': request})
-    print(serializer)
-    if serializer.is_valid():
-        serializer.save()  # El serializador se encargará de asignar el usuario
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-        # Imprimir errores de validación para depuración
-        print("Errores de validación:", serializer.errors)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class LoginView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

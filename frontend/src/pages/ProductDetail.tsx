@@ -33,7 +33,7 @@ const DetallesProd = () => {
       <Comments productId={productId} />
       <SwiperProducts datos={productos} height='70vh' width='100%' loader={loader} />
 
-      <AsideFilter />
+      
     </main>
   );
 };

@@ -89,7 +89,7 @@ const AdminPage = () => {
           </Card>
         </Container>
 
-        <AsideFilter />
+ 
       </section>
 
     </>

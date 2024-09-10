@@ -15,10 +15,11 @@ import {
     Typography
 } from '@mui/material';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDrawer } from '../../../context/DrawerProvider'; // Importa el hook del contexto
 import ListAsideNav from '../ListAsideNav/ListAsideNav';
 import './Aside.css'
+import { useAuthStore } from '../../../hooks/auth';
 
 const AsideFilter = ({
     bringDataFilter,
@@ -45,9 +46,10 @@ const AsideFilter = ({
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     };
 
-  
-
-   
+    function logOutFun() {
+        useAuthStore.getState().logout();
+        navigate('/login');
+    }
 
     const precioOptions = [
         { label: 'Menos de 50 mil pesos', value: 1 },
