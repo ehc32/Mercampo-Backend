@@ -296,6 +296,7 @@ const CartPage = () => {
                                                             active={orderBy === headCell.id}
                                                             direction={orderBy === headCell.id ? order : 'asc'}
                                                             onClick={(event) => handleRequestSort(event, headCell.id)}
+                                                            className='font-bold'
                                                         >
                                                             {headCell.label}
                                                             {orderBy === headCell.id ? (
@@ -306,7 +307,7 @@ const CartPage = () => {
                                                         </TableSortLabel>
                                                     </TableCell>
                                                 ))}
-                                                <TableCell align='center' width={"100px"}>Acciones</TableCell>
+                                                <TableCell align='center' className='font-bold' width={"100px"}>Acciones</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
