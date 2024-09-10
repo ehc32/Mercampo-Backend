@@ -98,12 +98,30 @@ function ProfileTables({ user, id }) {
                             <Typography variant="body2" className="text-gray-900">{paypal?.app_name || 'No disponible'}</Typography>
                         </div>
                     </div>
+                    <Typography variant="h6" gutterBottom>Pasos para configurar PayPal</Typography>
+                    <ul>
+                        <li>
+                            <Typography variant="body2" color="text-black">
+                                <strong>Paso 1:</strong> Crear una cuenta en PayPal. Ve a <a href="https://www.paypal.com" target="_blank" rel="noopener noreferrer">PayPal</a> y crea una cuenta de negocios.
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant="body2" color="text-black">
+                                <strong>Paso 2:</strong> Ingresa a <a href="https://developer.paypal.com/dashboard/applications/sandbox" target="_blank" rel="noopener noreferrer">PayPal for Developers</a>, crea una aplicación y obtén las credenciales (Client ID y Secret Key).
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant="body2" color="text-black">
+                                <strong>Paso 3:</strong> Ingresar las credenciales en los campos correspondientes de nuestra plataforma para habilitar los pagos.
+                            </Typography>
+                        </li>
+                    </ul>
                 </div>
             </TabPanel>
 
 
             {/* Configuración Tab */}
-            <TabPanel value={tabValue} index={2}>
+            <TabPanel value={tabValue} index={2} >
                 <Typography variant="h6" gutterBottom>Configuración</Typography>
                 <Typography variant="body2" color="text-black" gutterBottom>
                     Gestiona tu perfil y configuración de vendedor aquí.
@@ -119,8 +137,8 @@ function ProfileTables({ user, id }) {
                         <ModalSellerConfig id={id} />
                     )}
                 </div>
-            </TabPanel>
-        </Box>
+            </ TabPanel>
+        </Box >
     );
 }
 
