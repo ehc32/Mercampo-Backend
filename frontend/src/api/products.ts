@@ -125,6 +125,8 @@ export const get_all_products_paginated_to_shop = async (page: number | string) 
     return response.data;
 };
 
+
+
 export const send_review = async (data: { userId: number, rating: number, opinion: string }, productId: number) => {
     const formData = new FormData();
     formData.append("user", data.userId.toString());
