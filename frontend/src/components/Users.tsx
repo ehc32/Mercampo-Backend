@@ -5,15 +5,15 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { FaEdit } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import Pagination from '@mui/material/Pagination';
-import toast from 'react-hot-toast';
-import { delete_user, edit_user, get_users } from "../api/users";
-import SearchIcon from '@mui/icons-material/Search';
+import {toast} from 'react-toastify';
+import { changePermission, delete_user, edit_user, get_users } from "../api/users";
 import { IconButton as MUIIconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import PublicIcon from '@mui/icons-material/Public';
+import PublicOffIcon from '@mui/icons-material/PublicOff';
 
 // Styles for Modal
 const style = {
@@ -47,19 +47,6 @@ const Users = ({ results }: any) => {
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [image, setImage] = useState<any>(null);
 
-  const handleFileChange = (event: any) => {
-    const file = event.target.files[0];
-    if (file && (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg")) {
-      setImage(file); // Save the file for submission
-    } else {
-      alert("Only PNG, JPEG, or JPG files are allowed.");
-    }
-  };
-
-  const removeImage = () => {
-    setImage(null);
-  };
-
   const handleModalOpen = (user: any) => {
     setIdLocal(user.id);
     setStateName(user.name);
@@ -72,6 +59,17 @@ const Users = ({ results }: any) => {
     setModalOpen(false);
     setImage(null);
   };
+
+  const handleChangePublicsPermision = async (id: number) => {
+    try {
+      await changePermission(id)
+      toast.success("El permiso del usuario hay cambiado")
+      fetchUsers()
+    } catch (error) {
+      toast.warning("El usuario no es vendedor ni administrador")
+    }
+
+  }
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -99,7 +97,7 @@ const Users = ({ results }: any) => {
       toast.success("Data updated successfully");
       handleModalClose();
     } catch (error) {
-      toast.error("An error occurred while updating the data");
+      toast.warning("An error occurred while updating the data");
     }
   };
 
@@ -161,12 +159,24 @@ const Users = ({ results }: any) => {
                 <td className="px-2 py-1 text-center">{o.role === "seller" ? "Vendedor" : o.role == "admin" ? "Administrador" : "Cliente"}</td>
                 <td className="px-2 py-1 text-center">{o.can_publish ? "Puede" : "No puede"}</td>
                 <td className="px-2 py-1 text-center">{formatDate(o.date_joined)}</td>
-                <td className="px-2 py-1 text-center">
+                <td className="px-2 py-1 text-center whitespace-nowrap">
+                  {
+                    !o.can_publish ? (
+
+                      <MUIIconButton className="focus:outline-none" onClick={() => handleChangePublicsPermision(o.id)}>
+                        <PublicOffIcon className="text-yellow-600" />
+                      </MUIIconButton>
+                    ) : (
+                      <MUIIconButton className="focus:outline-none" onClick={() => handleChangePublicsPermision(o.id)}>
+                        <PublicIcon className="text-green-600" />
+                      </MUIIconButton>
+                    )
+                  }
                   <MUIIconButton className="focus:outline-none" onClick={() => handleModalOpen(o)}>
-                    <DriveFileRenameOutlineIcon className="text-blue-600 mx-1" />
+                    <DriveFileRenameOutlineIcon className="text-blue-600" />
                   </MUIIconButton>
                   <MUIIconButton className="focus:outline-none" onClick={() => handleDelete(o.id)}>
-                    <DeleteIcon className="text-red-600 mx-1" />
+                    <DeleteIcon className="text-red-600" />
                   </MUIIconButton>
                 </td>
               </tr>
@@ -264,26 +274,6 @@ const Users = ({ results }: any) => {
                   )
                 }}
               />
-            </div>
-            <div className="mb-2">
-              <input
-                accept="image/*"
-                id="image-input"
-                type="file"
-                onChange={handleFileChange}
-                style={{ display: "none" }}
-              />
-              <label htmlFor="image-input">
-                <IconButton color="primary" component="span">
-                  Subir imagen
-                </IconButton>
-              </label>
-              {image && <p>{image.name}</p>}
-              {image && (
-                <IconButton color="secondary" onClick={removeImage}>
-                  Eliminar imagen
-                </IconButton>
-              )}
             </div>
             <div className="flex justify-end">
               <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Guardar</button>

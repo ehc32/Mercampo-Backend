@@ -58,6 +58,10 @@ export const approveRequestSeller = async (idUser: number | string) => {
     await axi.post(`/users/sell/approve_request/${idUser}/`);
 };
 
+export const changePermission = async (idUser: number | string) => {
+    await axi.post(`/users/sell/changePermision/${idUser}/`);
+};
+
 export const deleteRequestSeller = async (idUser: number | string) => {
     await axi.delete(`/users/sell/delete_request/${idUser}/`);
 };
@@ -70,3 +74,4 @@ export const get_paypal_user = async (id: number) => {
     const response = await axi.get(`/users/paypalconfig/${id}/`);
     return response;
 };
+

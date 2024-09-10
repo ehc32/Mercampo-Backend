@@ -18,4 +18,6 @@ urlpatterns = [
     path('sell/send_request/<int:pk>/', views.get_request_seller),
     path('sell/paypalsel/<int:pk>/', views.request_seller_paypal_config),
     path('paypalconfig/<int:pk>/', views.get_seller_paypal_config_done),
+    path('sell/changePermision/<int:idUser>/', views.change_can_publish),
+
 ]

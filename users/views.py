@@ -8,6 +8,7 @@ from .serializers import (
     PayPalConfigSerializer,
     RegisterUserSerializer,
     MyTokenObtainPairSerializer,
+    UserCanPublishSerializer,
     UserSerializer,
     EditUserSerializer,
     SellerRequestSerializer
@@ -23,6 +24,9 @@ def get_solo_user(request, pk):
     serializer = UserSerializer(user)
     return Response(serializer.data)
 
+class LoginView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+    
 @api_view(['PUT'])
 def edit_profile(request, id):
     try:
@@ -162,6 +166,24 @@ def get_seller_paypal_config_done(request, pk):
         return Response({'detail': 'Configuración de PayPal no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
 
 
-class LoginView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
+
+@api_view(['POST'])
+def change_can_publish(request, idUser):
+    try:
+        user = User.objects.get(pk=idUser)
+        
+        if user.role == 'seller' or user.role == 'admin':
+            serializer = UserCanPublishSerializer(user, data=request.data, partial=True)
+            
+            if serializer.is_valid():
+                serializer.save()
+                return Response({'detail': f'Estado de publicación actualizado: {user.can_publish}'}, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif user.role == 'client':
+            return Response({'detail': 'Los vendedores no pueden cambiar el estado de publicación.'}, status=status.HTTP_403_FORBIDDEN)
+        else:
+            return Response({'detail': 'Rol de usuario no permitido para esta acción.'}, status=status.HTTP_400_BAD_REQUEST)
     
+    except User.DoesNotExist:
+        return Response({'detail': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)

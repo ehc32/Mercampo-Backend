@@ -88,3 +88,14 @@ class PayPalConfigSerializer(serializers.ModelSerializer):
             return paypal_config
         else:
             raise serializers.ValidationError("Usuario no proporcionado en el contexto.")
+
+class UserCanPublishSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['can_publish']
+
+    def update(self, instance, validated_data):
+        # Cambiar el estado de can_publish de True a False o viceversa
+        instance.can_publish = not instance.can_publish
+        instance.save()
+        return instance
