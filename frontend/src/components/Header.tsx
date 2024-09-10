@@ -129,7 +129,7 @@ const Header: React.FC<HeaderProps> = () => {
                           <span className="sr-only">Menú de usuario</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={avatar ? `${import.meta.env.VITE_BACKEND_URL}${avatar}` : '/default-avatar.png'}
+                            src={avatar ? `${import.meta.env.VITE_BACKEND_URL}${avatar}` : '/avatar.png'}
                             alt="Avatar"
                           />
                         </Menu.Button>

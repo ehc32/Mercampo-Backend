@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import Pagination from '@mui/material/Pagination';
 import {
@@ -23,7 +23,7 @@ import { Search } from 'lucide-react';
 import { get_solo_user, edit_user } from '../api/users';
 import { get_orders, get_order_items } from '../api/orders';
 import { useAuthStore } from '../hooks/auth';
-import { get_all_products_by_user } from '../api/products';
+import { get_all_products_by_user, get_products_in_sells_by_user } from '../api/products';
 import ProfileTables from '../components/profile/profileTables';
 
 const UserProfile = () => {
@@ -32,15 +32,16 @@ const UserProfile = () => {
   const [tabValue, setTabValue] = useState("compras");
   const [myProducts, setMyProducts] = useState([]);
   const [dataLenght, setDataLenght] = useState(0);
+  const [myProductsSells, setMyProductsSells] = useState([]);
+  const [dataLenght2, setDataLenght2] = useState(0);
   const [orders, setOrders] = useState([]);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedOrderProducts, setSelectedOrderProducts] = useState([]);
 
-  const queryClient = useQueryClient();
   const { access: token } = useAuthStore();
   const id = token ? JSON.parse(atob(token.split(".")[1])).user_id : null;
 
-  const { data: user, isLoading: isUserLoading } = useQuery(
+  const { data: user, isLoading, isError } = useQuery(
     ["users", id],
     () => get_solo_user(id),
     {
@@ -48,11 +49,25 @@ const UserProfile = () => {
     }
   );
 
+  function formatearFecha(fechaISO: any) {
+    const fecha = new Date(fechaISO);
+    const dia = fecha.getDate().toString().padStart(2, '0'); // Asegura dos dígitos
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Suma 1 y asegura dos dígitos
+    const year = fecha.getFullYear();
+    return `${dia}-${mes}-${year}`;
+  }
 
   const get_my_products = async (id: number) => {
     const response = await get_all_products_by_user(id);
     setMyProducts(response.data);
     setDataLenght(response.meta.count);
+  };
+
+  const get_sells_by_user2 = async (id: number) => {
+    const response = await get_products_in_sells_by_user(id);
+    setMyProductsSells(response.data);
+    setDataLenght2(response.meta.count);
+    console.log(response.data)
   };
 
   const handleOpenOrderModal = async (orderId: number) => {
@@ -70,6 +85,12 @@ const UserProfile = () => {
       get_my_products(id);
     }
   }, [id]);
+
+  useEffect(() => {
+    if (user && (user.role === "seller" || user.role === "admin")) {
+      get_sells_by_user2(id);
+    }
+  }, [user, id]);
 
   return (
     <Box sx={{ maxWidth: "lg", mx: "auto", p: 6, mt: ".1em" }}>
@@ -107,10 +128,11 @@ const UserProfile = () => {
               textColor="primary"
               indicatorColor="primary"
               sx={{ '.MuiTabs-indicator': { backgroundColor: '#39A900' } }}
+
             >
-              <Tab label="Compras" value="compras" sx={{ '&.Mui-selected': { color: '#39A900' } }} />
-              {user?.role !== "client" && <Tab label="Ventas" value="ventas" sx={{ '&.Mui-selected': { color: '#39A900' } }} />}
-              {user?.role !== "client" && <Tab label="Mis productos" value="productos" sx={{ '&.Mui-selected': { color: '#39A900' } }} />}
+              <Tab label="Compras" value="compras" sx={{ '&.Mui-selected': { color: '#39A900' } }} className='focus:outline-none' />
+              {user?.role !== "client" && <Tab label="Ventas" value="ventas" sx={{ '&.Mui-selected': { color: '#39A900' } }} className='focus:outline-none' />}
+              {user?.role !== "client" && <Tab label="Mis productos" value="productos" sx={{ '&.Mui-selected': { color: '#39A900' } }} className='focus:outline-none' />}
             </Tabs>
           </div>
 
@@ -145,20 +167,48 @@ const UserProfile = () => {
             )}
 
             {tabValue === "ventas" && (
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Usuario</TableCell>
-                    <TableCell>Precio total</TableCell>
-                    <TableCell>Dirección de venta</TableCell>
-                    <TableCell>Fecha de venta</TableCell>
-                    <TableCell>Productos</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* Aquí deberías agregar los datos de ventas */}
-                </TableBody>
-              </Table>
+              <>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Usuario</TableCell>
+                      <TableCell>Precio total</TableCell>
+                      <TableCell>Dirección de venta</TableCell>
+                      <TableCell>Fecha de venta</TableCell>
+                      <TableCell>Productos</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dataLenght2 > 0 ? (
+                      myProductsSells.map((product) => (
+                        <TableRow key={product.id}>
+                          <TableCell>{product.name}</TableCell>
+                          <TableCell>${product.price}</TableCell>
+                          <TableCell>{product.description}</TableCell>
+                          <TableCell>{formatearFecha(product.created)}</TableCell>
+                          <TableCell>{product.count_in_sells}</TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={5} align="center">
+                          <Typography variant="body2" color="textSecondary">
+                            No hay información disponible
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+                <div>
+                  <Pagination
+                    count={Math.ceil(dataLenght2 / 10)}
+                    page={page}
+                    onChange={(event, value) => setPage(value)}
+                    className="flex flex-row w-full justify-center my-6"
+                  />
+                </div>
+              </>
             )}
 
             {tabValue === "productos" && (<>
@@ -168,8 +218,12 @@ const UserProfile = () => {
                   <TableRow>
                     <TableCell>Nombre</TableCell>
                     <TableCell>Descripción</TableCell>
+                    <TableCell>Calificación</TableCell>
                     <TableCell>Precio</TableCell>
-                    <TableCell>Stock</TableCell>
+                    <TableCell>Cantidad restante</TableCell>
+                    <TableCell>Vendidos</TableCell>
+                    <TableCell>F. Creación</TableCell>
+                    <TableCell>F. Vencimiento</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -177,8 +231,12 @@ const UserProfile = () => {
                     <TableRow key={product.id}>
                       <TableCell>{product.name}</TableCell>
                       <TableCell>{product.description}</TableCell>
+                      <TableCell>{product.rating}</TableCell>
                       <TableCell>${product.price}</TableCell>
                       <TableCell>{product.count_in_stock}</TableCell>
+                      <TableCell>{product.count_in_sells}</TableCell>
+                      <TableCell className='w-32'>{formatearFecha(product.created)}</TableCell>
+                      <TableCell className='w-32'>{formatearFecha(product.fecha_limite)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

@@ -19,6 +19,7 @@ class Product(models.Model):
     map_locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False)
     locate = models.CharField(max_length=100, default='desconocido', blank=False, null=False)
     count_in_stock = models.IntegerField(default=0)
+    count_in_sells = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     unit = models.CharField(max_length=100, blank=True)
     num_reviews = models.IntegerField(default=0)

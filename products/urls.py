@@ -20,5 +20,6 @@ urlpatterns = [
     path('opinion/send/<int:pk>/', views.ReviewCreateView), # funcional - guarda una reseña
     path('opinion/bring/<int:pk>/', views.ReviewShowAllFromProduct), # funcional - trae todas las reseñas
     path('user_products/<int:user_id>/', views.get_products_by_user),
-
+    path('user_products/in_sells/<int:user_id>/', views.get_products_sells_by_user),  # productos que han tenido vendidos
+    path('product/<int:product_id>/reduce-stock/', views.reduce_product_stock),  # reducir stock de producto
 ]

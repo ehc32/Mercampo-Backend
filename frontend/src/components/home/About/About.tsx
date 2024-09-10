@@ -10,12 +10,11 @@ export default function Component() {
             <section className="w-full h-96 py-32 relative rounded-lg my-10 bg-cover" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/public/kkkk.jpeg')` }}>
                 <div className="w-full px-2 md:px-6">
                     <div className="max-w-3xl space-y-4 text-start text-primary-foreground">
-                        {/* Mantén este bloque sin cambios */}
-                        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl" style={{ color: '#39A900' }}>
-                            Nuestra Plataforma de Comercio para Campesinos
+                        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl" style={{ color: '#fff' }}>
+                            Nuestra Plataforma de Comercio
                         </h1>
                         <p className="text-lg md:text-xl text-white">
-                            Somos una plataforma dedicada a conectar a los campesinos con los mercados, brindando soluciones innovadoras para mejorar su producción y comercialización.
+                            Somos una plataforma dedicada a conectar a productores y consumidores a través de soluciones innovadoras para mejorar la comercialización.
                         </p>
                     </div>
                     <div className="absolute top-0 right-0 w-1/2 md:w-1/3 lg:w-1/4">
@@ -78,19 +77,19 @@ export default function Component() {
                         onClick={() => setActiveIndex(activeIndex === 0 ? null : 0)}
                     />
                     <AccordionSet
-                        titulo="¿Cómo funciona la plataforma?"
+                        titulo="¿Cómo funciona?"
                         contenido="Nuestra plataforma permite a los productores vender sus productos directamente a los consumidores, sin intermediarios. Los pagos se realizan de manera segura a través de PayPal."
                         isOpen={activeIndex === 1}
                         onClick={() => setActiveIndex(activeIndex === 1 ? null : 1)}
                     />
                     <AccordionSet
-                        titulo="¿Qué beneficios ofrece a los productores?"
+                        titulo="¿Qué beneficios ofrece?"
                         contenido="Ofrecemos acceso a nuevos mercados, pagos seguros y la oportunidad de vender sus productos a un precio justo."
                         isOpen={activeIndex === 2}
                         onClick={() => setActiveIndex(activeIndex === 2 ? null : 2)}
                     />
                     <AccordionSet
-                        titulo="¿Cómo puedo unirme a la plataforma?"
+                        titulo="¿Cómo puedo unirme?"
                         contenido="Para unirte a nuestra plataforma, solo debes registrarte con tus datos en la sección de 'Registro' y comenzar a utilizar nuestras herramientas."
                         isOpen={activeIndex === 3}
                         onClick={() => setActiveIndex(activeIndex === 3 ? null : 3)}

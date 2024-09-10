@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import "./Style.css";
+import { useAuthStore } from "../../hooks/auth";
 
 interface CarrouselLast12Props {
   darkMode: boolean;
 }
 
 const Hero: React.FC<CarrouselLast12Props> = () => {
+
+
+  const { isAuth } = useAuthStore();
 
   return (
     <section
@@ -22,31 +26,28 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
             En nuestra tienda online encontrarás los productos que necesitas
           </p>
           <Link to="/store">
-            <button className="bg-[#39A900] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 px-6 rounded-full">
+            <button className="mr-2 bg-[#39A900] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 px-6 rounded-full">
               ¡Compra ahora!
             </button>
           </Link>
-          <Link to="/store">
-            <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 px-6 rounded-full">
-              Vender ahora!
-            </button>
-          </Link>
+          {
+            isAuth ? (
+
+              <Link to={'/store'}>
+                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg font-bold py-3 px-6 rounded-full">
+                  Vender ahora!
+                </button>
+              </Link>
+            ) : (
+              <Link to={'/login'}>
+                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg font-bold py-3 px-6 rounded-full">
+                  Vender ahora!
+                </button>
+              </Link>
+            )
+          }
         </div>
       </div>
-      <style>
-        {`
-    @keyframes expandImage {
-      0% {
-        background-size: 90% 90%;
-        transform: scale(0.9);
-      }
-      100% {
-        background-size: 100% 100%;
-        transform: scale(1);
-      }
-    }
-  `}
-      </style>
     </section>
   );
 };

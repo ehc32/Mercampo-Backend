@@ -26,21 +26,21 @@ function App() {
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
                     <Route path="product/:slug" element={<DetallesProd />} />
+                    <Route path="store" element={<Store />} />
                     
-                    {/* Rutas protegidas para vendedores y admins */}
+                    {/* Rutas protegidas para vendedores y admins */}s
                     <Route element={<PrivateRoute allowedRoles={['seller', 'admin']} />} >
-                        <Route path="store" element={<Store />} />
                         <Route path="addprod" element={<AddProd />} />
                     </Route>
 
                     {/* Rutas protegidas para clientes autenticados */}
-                    <Route element={<PrivateRoute  allowedRoles={['client', 'seller', 'admin']} />} >
+                    <Route element={<PrivateRoute allowedRoles={['client', 'seller', 'admin']} />} >
                         <Route path="cart" element={<ShoppingCart />} />
                         <Route path="profile" element={<UserProfile />} />
                     </Route>
 
                     {/* Ruta solo para admins */}
-                    <Route element={<AdminPrivateRoute allowedRoles={['admin']}  />} >
+                    <Route element={<AdminPrivateRoute allowedRoles={['admin']} />} >
                         <Route path="admin" element={<AdminPage />} />
                     </Route>
 

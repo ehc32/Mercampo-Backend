@@ -49,6 +49,7 @@ export const sendRequestSeller = async (idUser: number | string) => {
 
 export const bringRequestSeller = async () => {
     const response = await axi.get(`/users/sell/bring_request/`)
+    console.log(response)
     return response;
 };
 

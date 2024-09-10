@@ -1,48 +1,46 @@
 import { Product } from "../Interfaces";
 import { authAxios, axi } from "./useAxios";
 
-
 export const cate_api = async (category: string) => {
-    const response = await authAxios.get(`/products/cate/${category}/`)
+    const response = await authAxios.get(`/products/cate/${category}/`);
     return response.data.data.map((item) => item);
 };
 
 export const cate_api_random = async (category: string) => {
-    const response = await authAxios.get(`/products/caterandom/${category}/`)
-    return response.data
+    const response = await authAxios.get(`/products/caterandom/${category}/`);
+    return response.data;
 };
 
-
 export const search_prod = async (query: string) => {
-    const response = await authAxios.get(`/products/search/?query=${query}`)
+    const response = await authAxios.get(`/products/search/?query=${query}`);
     return response.data;
 };
 
 export const get_solo = async (slug: string) => {
-    const response = await authAxios.get(`/products/get/${slug}/`)
-    return response.data
+    const response = await authAxios.get(`/products/get/${slug}/`);
+    return response.data;
 };
 
 export const get_solo_prod = async (id: number) => {
-    const response = await authAxios.get(`/products/get/admin/${id}/`)
-    return response.data
+    const response = await authAxios.get(`/products/get/admin/${id}/`);
+    return response.data;
 };
 
 export const edit_product = async (data: Product) => {
     const formData = new FormData();
-    formData.append("name", data.name)
-    formData.append("description", data.description)
-    formData.append("count_in_stock", data.count_in_stock.toString())
-    formData.append("category", data.category)
-    formData.append("price", data.price.toString())
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("count_in_stock", data.count_in_stock.toString());
+    formData.append("category", data.category);
+    formData.append("price", data.price.toString());
     if (data.image) {
-        formData.append("image", data.image)
+        formData.append("image", data.image);
     }
-    await authAxios.put(`/products/edit/${data.id}/`, formData)
+    await authAxios.put(`/products/edit/${data.id}/`, formData);
 };
 
 export const delete_product = async (id: number) => {
-    await authAxios.delete(`/products/delete/${id}/`)
+    await authAxios.delete(`/products/delete/${id}/`);
 };
 
 export const post_product = async (data: Product) => {
@@ -55,9 +53,9 @@ export const post_product = async (data: Product) => {
     formData.append("unit", data.unit);
     formData.append("map_locate", data.map_locate);
     formData.append("locate", data.locate);
-    formData.append("tiempoL", data.tiempoL);
+    formData.append("tiempoL", data.tiempoL.toString());
     if (data.image) {
-        formData.append("images ", data.image);
+        formData.append("images", data.image);
     }
     await authAxios.post("/products/post/", formData);
 };
@@ -93,34 +91,39 @@ export const filter_request = async (locate, price, categories, time, startDate,
 };
 
 export const get_products = async ({ pageParam = 1 }) => {
-    const response = await axi.get(`/products/?page=${pageParam}&pages=20`)
-    return response.data
+    const response = await axi.get(`/products/?page=${pageParam}&pages=20`);
+    return response.data;
 };
 
 export const get_all_products = async () => {
-    const response = await axi.get(`/products/getRandom/random_products/`)
-    return response.data
+    const response = await axi.get(`/products/getRandom/random_products/`);
+    return response.data;
 };
 
 export const get_all_products_by_user = async (id: number) => {
-    const response = await axi.get(`/products/user_products/${id}/`)
-    return response.data
+    const response = await axi.get(`/products/user_products/${id}/`);
+    return response.data;
+};
+
+export const get_products_in_sells_by_user = async (userId: number) => {
+    const response = await axi.get(`/products/user_products/in_sells/${userId}/`);
+    return response.data;
 };
 
 export const get_all_images_product = async (id: number | string) => {
-    const response = await axi.get(`/products/get_product_images/${id}/`)
-    return response.data
+    const response = await axi.get(`/products/get_product_images/${id}/`);
+    return response.data;
 };
 
 export const get_all_products_paginated = async (page: number | string) => {
-    const reponse = await axi.get(`/products/?page=${page}&page_size=10`)
-    return reponse.data
-}
+    const response = await axi.get(`/products/?page=${page}&page_size=10`);
+    return response.data;
+};
 
 export const get_all_products_paginated_to_shop = async (page: number | string) => {
-    const reponse = await axi.get(`/products/?page=${page}&page_size=20`)
-    return reponse.data
-}
+    const response = await axi.get(`/products/?page=${page}&page_size=20`);
+    return response.data;
+};
 
 export const send_review = async (data: { userId: number, rating: number, opinion: string }, productId: number) => {
     const formData = new FormData();
@@ -132,5 +135,10 @@ export const send_review = async (data: { userId: number, rating: number, opinio
 
 export const bring_reviews = async (productId: number) => {
     const response = await authAxios.get(`/products/opinion/bring/${productId}/`);
-    return response
+    return response;
+};
+
+export const reduce_product_stock = async (productId: number, quantity: number) => {
+    const response = await authAxios.patch(`/products/product/${productId}/reduce-stock/`, { quantity });
+    return response.data;
 };

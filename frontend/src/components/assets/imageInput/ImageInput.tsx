@@ -71,10 +71,11 @@ const ImageInput = ({ setImages, images }: ImageInputProps) => {
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                backgroundColor: '#39A900'
+                                backgroundColor: 'transparent',
+                                border: '1px solid #39A900', // Define el borde completo
                             }}
                         >
-                            <AddPhotoAlternateIcon />
+                            <AddPhotoAlternateIcon className='text-[#30A900]' />
                             <input
                                 type="file"
                                 accept="image/*"
@@ -82,6 +83,7 @@ const ImageInput = ({ setImages, images }: ImageInputProps) => {
                                 hidden
                             />
                         </Button>
+
                     </Grid>
                 )}
             </Grid>

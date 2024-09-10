@@ -4,8 +4,6 @@ import About from "../components/home/About/About";
 import Hero from "../components/home/Hero";
 import Participants from "../components/home/Participants/Participants";
 import RandomProducts from "../components/home/RandomProducts";
-import SwiperNewProducts from "../components/shared/SwiperNewsProducts/swiperNewsProducts";
-import Whatsapp from "../components/shared/WhatsappButton/Whatsapp";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import PaypalIntro from "../components/home/paypalInfo";
 
@@ -68,7 +66,6 @@ export default function Tienda() {
         <PaypalIntro />
         <About />
         <Participants people={people} />
-        <Whatsapp />
 
       </div>
     </React.Fragment>

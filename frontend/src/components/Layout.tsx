@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import Whatsapp from './shared/WhatsappButton/Whatsapp';
 
 const Layout = () => {
 
@@ -15,6 +16,7 @@ const Layout = () => {
       <div className="pt-14 bg-white dark:bg-gray-900">
         <Outlet />
       </div>
+      <Whatsapp />
       <Footer />
     </div>
   )

@@ -1,9 +1,11 @@
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import toast from 'react-hot-toast';
 import { delete_user, edit_user, get_users } from "../api/users";
-import Loader from "./Loader";
-
+import SearchIcon from '@mui/icons-material/Search';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 interface Props {
   results: any;
 }
@@ -12,6 +14,18 @@ const Users = ({ results }: Props) => {
   const [idLocal, setIdLocal] = useState(0);
   const [page, setPage] = useState(1);
   const [data, setData] = useState<[]>([])
+
+
+  const handleDelete = async (id) => {
+    try {
+      await delete_user(id)
+      toast.success("Usuario eliminado con éxito")    
+      fetchUsers()
+    } catch (e) {
+      toast.error("No se puede logró eliminar este usuario")
+    }
+  }
+
 
   const fetchUsers = async () => {
     const response = await get_users();
@@ -32,17 +46,10 @@ const Users = ({ results }: Props) => {
         role: formData.get("rol")
       };
       await edit_user(userData, idLocal);
+      fetchUsers()
       toast.success('Usuario actualizado con éxito!');
     } catch (e: any) {
       toast.error('Error al actualizar el usuario');
-    }
-  };
-
-  const deleteUser = async (id: number) => {
-    try {
-
-    } catch (e: any) {
-      toast.error('Error al eliminar el usuario: ');
     }
   };
 
@@ -52,11 +59,9 @@ const Users = ({ results }: Props) => {
       "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
       "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ];
-
     const dia = fecha.getDate();
     const mes = meses[fecha.getMonth()];
     const year = fecha.getFullYear();
-
     return `${dia} de ${mes} del ${year}`;
   }
 
@@ -74,6 +79,7 @@ const Users = ({ results }: Props) => {
             <th scope="col" className="px-2  py-1 text-center">Rol</th>
             <th scope="col" className="px-2  py-1 text-center">P. Publicación</th>
             <th scope="col" className="px-2  py-1 text-center">Fecha de creación</th>
+            <th scope="col" className="px-2  py-1 text-center">Opciones</th>
           </tr>
         </thead>
         {data && data.length > 0 ? (
@@ -86,7 +92,14 @@ const Users = ({ results }: Props) => {
                 <td className="px-2  py-1 text-center">{o.role == "seller" ? "Vendedor" : o.role}</td>
                 <td className="px-2  py-1 text-center">{o.can_publish == true ? "Puede" : "No puede"}</td>
                 <td className="px-2  py-1 text-center">{formatearFecha(o.date_joined)}</td>
-
+                <td className="px-2 py-1 text-center">
+                  <IconButton className="focus:outline-none" onClick={() => handleOpenModal(o.user)}>
+                    <DriveFileRenameOutlineIcon className="text-blue-600 mx-1" />
+                  </IconButton>
+                  <IconButton className="focus:outline-none" onClick={() => handleDelete(o.id)}>
+                    <DeleteIcon className="text-red-600 mx-1" />
+                  </IconButton>
+                </td>
               </tr>
             ))}
           </tbody>

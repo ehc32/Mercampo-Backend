@@ -17,14 +17,14 @@ import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 const AddProd = () => {
   const [images, setImages] = useState<string[]>([]);
   const [nombre, setNombre] = useState("");
-  const [categoria, setCategoria] = useState("OTROS");
+  const [categoria, setCategoria] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [ubicacion, setUbicacion] = useState("");
   const [ubicacionDescriptiva, setUbicacionDescriptiva] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [precio, setPrecio] = useState("");
-  const [unidad, setUnidad] = useState("Kg");
-  const [tiempoL, setTiempoL] = useState(0);
+  const [unidad, setUnidad] = useState("");
+  const [tiempoL, setTiempoL] = useState<number>();
   const ciudades = ["Neiva"];
 
   interface Product {
@@ -94,13 +94,13 @@ const AddProd = () => {
 
   return (
     <>
-      <div className="flex my-20">
+      <div className="flex my-2">
 
         <div className="w-4/6 flex m-auto dark:bg-gray-800 rounded-xl shadow-lg">
 
           <div className="w-full p-10 card-bordered">
             <div className="flex justify-between items-center mb-8">
-              <h1 className="text-3xl font-normal text-gray-800 dark:text-white">
+              <h1 className="text-3xl text-black font-bold dark:text-white">
                 Añadir Producto
               </h1>
               <img src="/public/logoSena.png" alt="Logo-sena" className="h-16" />
@@ -109,7 +109,7 @@ const AddProd = () => {
             <form onSubmit={manejarSubmit} className="space-y-6">
               <div className="flex space-x-4 ">
                 <div className="flex-1">
-                  <h6 className="text-gray-800  m-1 dark:text-white">Nombre del Producto</h6>
+                  <h6 className="text-black font-bold  m-1 dark:text-white">Nombre del Producto</h6>
                   <input
                     type="text"
                     id="nombre"
@@ -118,15 +118,21 @@ const AddProd = () => {
                     placeholder="Ej: Tomate cherry"
                     className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:outline-none "
                     required
+
                   />
                 </div>
 
                 <div className="flex-1">
-                  <h6 className="text-gray-800  m-1 dark:text-white">Categoria</h6>
+                  <h6 className="text-black font-bold  m-1 dark:text-white">Categoria</h6>
                   <FormControl fullWidth sx={{ mb: 2 }}>
                     <Select
                       value={categoria}
                       onChange={(e) => setCategoria(e.target.value)}
+                      sx={{
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#39A900',  // Borde verde cuando el Select está activo
+                        }
+                      }}
                     >
                       <MenuItem selected hidden>Selecciona una unidad</MenuItem>
                       <MenuItem value="VERDURAS">
@@ -150,7 +156,7 @@ const AddProd = () => {
               </div>
 
 
-              <h6 className="text-gray-800  mx-1 dark:text-white">Descripción del Producto</h6>
+              <h6 className="text-black font-bold  mx-1 dark:text-white">Descripción del Producto</h6>
               <textarea
                 id="descripcion"
                 value={descripcion}
@@ -167,7 +173,7 @@ const AddProd = () => {
 
               <div className="flex space-x-4 mt-1">
                 <div className="flex-1">
-                  <h6 className="text-gray-800  m-1 dark:text-white">Precio</h6>
+                  <h6 className="text-black font-bold  m-1 dark:text-white">Precio</h6>
                   <input
                     type="number"
                     id="precio"
@@ -179,7 +185,7 @@ const AddProd = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h6 className="text-gray-800  m-1 dark:text-white">Cantidad en Stock</h6>
+                  <h6 className="text-black font-bold  m-1 dark:text-white">Cantidad en Stock</h6>
                   <input
                     type="number"
                     id="cantidad"
@@ -191,11 +197,16 @@ const AddProd = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h6 className="text-gray-800  m-1 dark:text-white">Unidad</h6>
+                  <h6 className="text-black font-bold  m-1 dark:text-white">Unidad</h6>
                   <FormControl fullWidth sx={{ mb: 2 }}>
                     <Select
                       value={unidad}
                       onChange={(e) => setUnidad(e.target.value)}
+                      sx={{
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#39A900',  // Borde verde cuando el Select está activo
+                        }
+                      }}
                     >
                       <MenuItem selected hidden>Selecciona una unidad</MenuItem>
                       <MenuItem value="Kg">
@@ -208,11 +219,16 @@ const AddProd = () => {
                   </FormControl>
                 </div>
                 <div className="flex-1">
-                  <h6 className="text-gray-800  m-1 dark:text-white">Tiempo de publicación</h6>
+                  <h6 className="text-black font-bold  m-1 dark:text-white">Tiempo de publicación</h6>
                   <FormControl fullWidth sx={{ mb: 2 }}>
                     <Select
                       value={tiempoL}
                       onChange={(e) => setTiempoL(e.target.value)}
+                      sx={{
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#39A900',  // Borde verde cuando el Select está activo
+                        }
+                      }}
                     >
                       <MenuItem selected hidden>Selecciona un tiempo limite</MenuItem>
                       <MenuItem value="0"> 1 semanas </MenuItem>
@@ -223,14 +239,19 @@ const AddProd = () => {
                 </div>
               </div>
 
-              <h6 className="fs-22px mt-3 text-gray-800 dark:text-white">Agrega una ubicación</h6>
+              <h6 className="fs-22px mt-3 text-black font-bold dark:text-white">Agrega una ubicación</h6>
               <div className="flex space-x-4 mt-2">
                 <div className="flex-1">
-                  <h6 className="text-gray-800  m-1 dark:text-white">Ubicación</h6>
+                  <h6 className="text-black font-bold  m-1 dark:text-white">Ubicación</h6>
                   <FormControl fullWidth sx={{ mb: 2 }}>
                     <Select
                       value={ubicacion}
                       onChange={(e) => setUbicacion(e.target.value)}
+                      sx={{
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#39A900',  // Borde verde cuando el Select está activo
+                        }
+                      }}
                     >
                       <MenuItem selected hidden>Selecciona una ubicación</MenuItem>
                       {ciudades.map((ciudad, index) => (
@@ -242,7 +263,7 @@ const AddProd = () => {
                   </FormControl>
                 </div>
                 <div className="flex-1">
-                  <h6 className="text-gray-800  dark:text-white flex-nowrap flex flex-row  ">
+                  <h6 className="text-black font-bold  dark:text-white flex-nowrap flex flex-row  ">
                     <p className="m-1">Ubicación descriptiva</p>
                     <BasicTooltip />
                   </h6>
@@ -258,7 +279,7 @@ const AddProd = () => {
                 </div>
               </div>
 
-              <h6 className="fs-22px pb-2 text-gray-800 dark:text-white">Agrega hasta 4 imágenes</h6>
+              <h6 className="fs-22px pb-2 text-black font-bold dark:text-white">Agrega hasta 4 imágenes</h6>
               <div className="flex flex-row justify-between">
                 <ImageInput images={images} setImages={setImages} />
 

@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import './style.css';
 import { Box, IconButton, Modal } from '@mui/material';
 import toast from 'react-hot-toast';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Props {
   results: any;
@@ -36,6 +37,7 @@ const Products = ({ results }: Props) => {
   };
 
 
+
   const handleCloseModal = () => {
     setModalOpen(false);
   };
@@ -54,6 +56,8 @@ const Products = ({ results }: Props) => {
       toast.error('Error al cargar los productos');
     }
   };
+
+
   useEffect(() => {
 
     fetchProductos(page);
@@ -128,8 +132,11 @@ const Products = ({ results }: Props) => {
                 <td className="px-2 py-2 text-center whitespace-nowrap">{o.rating}</td>
                 <td className="px-2 py-2 whitespace-nowrap">{formatearFecha(o.created)}</td>
                 <td className="px-2  py-1 text-center">
-                  <IconButton onClick={() => handleOpenModal(o.user)}>
+                  <IconButton className='focus:outline-none' onClick={() => handleOpenModal(o.user)}>
                     <SearchIcon />
+                  </IconButton>
+                  <IconButton className='focus:outline-none' onClick={() => deleteProduct(o.id)}>
+                    <DeleteIcon />
                   </IconButton>
                 </td>
               </tr>

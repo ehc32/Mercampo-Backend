@@ -46,7 +46,7 @@ const AdminPage = () => {
 
   return (
     <>
-      <section style={{ minHeight: '80vh' }} className="dark:bg-gray-900 mt-24">
+      <section style={{ minHeight: '80vh' }} className="dark:bg-gray-900">
         <Container maxWidth="lg" sx={{ mb: 10 }}>
           <div className="mb-4">
             <h4 className='card-name-light'>Gestión administrativa</h4>

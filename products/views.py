@@ -260,3 +260,31 @@ def get_products_by_user(request, user_id):
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
+
+@api_view(['GET'])
+def get_products_sells_by_user(request, user_id):
+    products = Product.objects.filter(user_id=user_id, count_in_sells__gt=0)
+    paginator = CustomPagination()
+    paginated_products = paginator.paginate_queryset(products, request)
+    serializer = ProductReadSerializer(paginated_products, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
+@api_view(['POST'])
+def reduce_product_stock(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        quantity = int(request.data.get('quantity', 0))
+        
+        if quantity <= 0:
+            return Response({"error": "La cantidad debe ser mayor a 0."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if product.count_in_stock < quantity:
+            return Response({"error": "Stock insuficiente."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        product.count_in_stock -= quantity
+        product.save()
+
+        return Response({"message": "Stock actualizado correctamente.", "count_in_stock": product.count_in_stock}, status=status.HTTP_200_OK)
+    
+    except Product.DoesNotExist:
+        return Response({"error": "Producto no encontrado."}, status=status.HTTP_404_NOT_FOUND)

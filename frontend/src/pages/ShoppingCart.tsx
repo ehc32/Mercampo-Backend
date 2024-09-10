@@ -181,10 +181,6 @@ const CartPage = () => {
         setPage(0);
     };
 
-    const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDense(event.target.checked);
-    };
-
     const isSelected = (id: number) => selected.indexOf(id) !== -1;
 
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - cartPagina.length) : 0;
@@ -209,37 +205,37 @@ const CartPage = () => {
                     <div className="divisor gap-6"> {/* Este div contiene ambas secciones */}
                         <div className="card-bordered bg-white relative flex flex-col justify-start mb-2 shadow-md sm:rounded-lg overflow-hidden p-8">
                             <div className='card-tite mb-5'>
-                                <h4 className="text-2xl font-bold text-center text-gray-900 mb-2">Formulario de pago</h4>
-                                <h6 className="text-lg text-gray-900 text-center mb-4">¿Terminaste? ¡Haz tu pedido!</h6>
+                                <h4 className="text-2xl  text-center text-black font-bold mb-2">Formulario de pago</h4>
+                                <h6 className="text-20px text-black  text-center mb-4">¿Terminaste? ¡Haz tu pedido!</h6>
                             </div>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                                 <div className="inputForm">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900">Dirección</label>
+                                    <label className="block mb-2 text-sm  text-black font-bold">Dirección</label>
                                     <input
                                         onChange={(e) => setAddress(e.target.value)}
                                         value={address}
                                         type="text"
-                                        className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
+                                        className="inputForm border border-gray-300 text-black font-bold sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
                                         placeholder="Dirección"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900">Ciudad</label>
+                                    <label className="block mb-2 text-sm  text-black font-bold">Ciudad</label>
                                     <input
                                         onChange={(e) => setCity(e.target.value)}
                                         value={city}
                                         type="text"
-                                        className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
+                                        className="inputForm border border-gray-300 text-black font-bold sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
                                         placeholder="Ciudad"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900">Código Postal</label>
+                                    <label className="block mb-2 text-sm  text-black font-bold">Código Postal</label>
                                     <input
                                         onChange={(e) => setPostal_code(e.target.value)}
                                         value={postal_code}
                                         type="text"
-                                        className="inputForm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
+                                        className="inputForm border border-gray-300 text-black font-bold sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
                                         placeholder="Código Postal"
                                     />
                                 </div>
@@ -259,8 +255,8 @@ const CartPage = () => {
                         </div>
 
                         <div className="card-bordered  mb-2 bg-white relative shadow-md sm:rounded-lg overflow-hidden p-2">
-                            <h4 className="fs-22px font-bold text-center text-gray-900 my-4">Tu carrito</h4>
-                            <h6 className="fs-16px text-gray-900 text-center my-4">Estos son los productos en tu carrito</h6>
+                            <h4 className="fs-22px font-bold text-center text-black  my-4">Tu carrito</h4>
+                            <h6 className="fs-16px text-black f text-center my-4">Estos son los productos en tu carrito</h6>
 
                             <div className='div-class'>
                                 <TableContainer component={Paper}>
@@ -341,13 +337,13 @@ const CartPage = () => {
                                                         <TableCell align="center">$ {row.price}</TableCell>
                                                         <TableCell align="center">{row.quantity}</TableCell>
                                                         <TableCell align="center">$ {(row.price * row.quantity).toFixed(2)}</TableCell>
-                                                        <td className="px-4 py-2 flex font-medium text-gray-900 whitespace-nowrap">
+                                                        <td className="px-4 py-2 flex  text-black font-bold whitespace-nowrap">
                                                             <div className="flex  w-full space-x-3">
-                                                                <button onClick={() => removeFromCart(row)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                <button onClick={() => removeFromCart(row)} className="inline-flex items-center p-1 text-sm  text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
                                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 12H6"></path></svg>
                                                                 </button>
-                                                                <span className="fs-16px font-medium">{row.quantity}</span>
-                                                                <button onClick={() => addToCart(row)} className="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
+                                                                <span className="fs-16px ">{row.quantity}</span>
+                                                                <button onClick={() => addToCart(row)} className="inline-flex items-center p-1 text-sm  text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 min-w-6" type="button">
                                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                                                                 </button>
                                                             </div>

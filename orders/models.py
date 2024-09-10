@@ -4,7 +4,9 @@ from products.models import Product
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
+    # persona que compró, no se pone la persona a la que compro porque esta esta vinculada a 1 o mas productos,
+    # y la orden puede tener mas de un vendedor
     total_price = models.CharField(max_length=250, blank=True)
     is_delivered = models.BooleanField(default=False)
     delivered_at = models.DateTimeField(auto_now_add=False, null=True, blank=True)
