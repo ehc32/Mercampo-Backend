@@ -65,9 +65,8 @@ const UserProfile = () => {
 
   const get_sells_by_user2 = async (id: number) => {
     const response = await get_products_in_sells_by_user(id);
-    setMyProductsSells(response.data);
+    setMyProductsSells(response.data);  
     setDataLenght2(response.meta.count);
-    console.log(response.data)
   };
 
   const handleOpenOrderModal = async (orderId: number) => {

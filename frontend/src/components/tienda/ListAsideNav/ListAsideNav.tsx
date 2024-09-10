@@ -11,9 +11,21 @@ import StoreIcon from '@mui/icons-material/Store';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ST_Icon from '../../assets/ST-light/ST_Icon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../../hooks/auth';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
 
-export default function ListAsideNav() {
+export default function ListAsideNav({ handleClose }) {
+
+    const navigate = useNavigate();
+    const { isAuth } = useAuthStore();
+
+    function logOutFun() {
+        useAuthStore.getState().logout();
+        navigate('/login');
+    }
+
     return (
         <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             <div className='w-full mx-4'>
@@ -51,21 +63,53 @@ export default function ListAsideNav() {
                             </ListItemButton>
                         </Link>
                     </ListItem>
+
                 </List>
             </nav>
             <Divider />
             <nav aria-label="secondary mailbox folders">
                 <List>
-                    <ListItem disablePadding>
-                        <Link to="/profile" className='w-full'>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AccountCircleIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Perfil del usuario" />
-                            </ListItemButton>
-                        </Link>
-                    </ListItem>
+
+                    {
+                        !isAuth &&
+                        <ListItem disablePadding>
+                            <Link to="/login" className='w-full'>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <LoginIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Iniciar sesión" />
+                                </ListItemButton>
+                            </Link>
+                        </ListItem>
+
+
+                    }
+                    {
+                        isAuth &&
+
+                        <>
+                            <ListItem disablePadding>
+                                <Link to="/profile" className='w-full'>
+                                    <ListItemButton>
+                                        <ListItemIcon>
+                                            <AccountCircleIcon />
+                                        </ListItemIcon>
+                                        <ListItemText primary="Perfil del usuario" />
+                                    </ListItemButton>
+                                </Link>
+                            </ListItem>
+                            <ListItem disablePadding onClick={logOutFun}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <LogoutIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Cerrar sesión" />
+                                </ListItemButton>
+                            </ListItem>
+                        </>
+
+                    }
                 </List>
             </nav>
             <Divider />

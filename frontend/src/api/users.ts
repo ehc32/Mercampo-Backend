@@ -7,12 +7,13 @@ export const get_solo_user = async (id: number) => {
 };
 
 export const edit_user = async (data: User, id: number) => {
-    console.log(data)
     const formData = new FormData();
     formData.append("name", data.name)
     formData.append("phone", data.phone)
     formData.append("email", data.email)
-    formData.append("role", data.role)
+    if (data.avatar) {
+        formData.append("image", data.avatar);
+    }
     await authAxios.put(`/users/edit/${id}/`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'

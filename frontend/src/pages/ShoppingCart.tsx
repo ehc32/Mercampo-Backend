@@ -380,7 +380,7 @@ const CartPage = () => {
                     </div>
                 </div>
             </section>
-            <AsideFilter />
+            
 
         </>
     );

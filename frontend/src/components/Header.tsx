@@ -113,124 +113,128 @@ const Header: React.FC<HeaderProps> = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className='titulo-while-auth font-bold text-white md:ml-24  subnav-1 justify-center align-center'>Mercampo</h1>
+                {
+                  isWideScreen &&
+                  <h1 className='titulo-while-auth font-bold text-white ml-14 subnav-1 justify-center align-center'>Mercampo</h1>
+                }
               </div>
-              <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
+              {isWideScreen && (
+                <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
+                  <div className="nav_items_block flex flex-row justify-between">
+                    <BasicTooltip />
+                    <span className="mx-1 fs-18px text-white">{cart.length}</span>
+                  </div>
 
-                <div className='nav_items_block flex flex-row justify-between'>
-                  <BasicTooltip />
-                  <span className="mx-1 fs-18px text-white">{cart.length}</span>
+
+                  {isAuth ? (
+                    <>
+                      <Menu as="div" className="relative ml-1">
+                        <div>
+                          <Menu.Button className="flex rounded-full text-sm focus:outline-none border-2 border-green-600">
+                            <span className="sr-only">Menú de usuario</span>
+                            <img
+                              className="h-8 w-8 rounded-full"
+                              src={avatar ? `${import.meta.env.VITE_BACKEND_URL}${avatar}` : '/avatar.png'}
+                              alt="Avatar"
+                            />
+                          </Menu.Button>
+                        </div>
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-[#2A2A2A] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/profile"
+                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                >
+                                  Perfil
+                                </Link>
+                              )}
+                            </Menu.Item>
+
+                            {roleLocal === "admin" && (
+                              <>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
+                                      to="/addprod"
+                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                    >
+                                      Nuevo producto
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
+                                      to="/admin"
+                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                    >
+                                      Administrar
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                              </>
+                            )}
+
+                            {roleLocal === "seller" && (
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="/addprod"
+                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                  >
+                                    Nuevo producto
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            )}
+
+                            <Menu.Item>
+                              {({ active }) => (
+                                <span
+                                  onClick={logOutFun}
+                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white cursor-pointer')}
+                                >
+                                  Cerrar sesión
+                                </span>
+                              )}
+                            </Menu.Item>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    </>
+                  ) : (
+                    <>
+                      {isWideScreen && location.pathname !== "/login" && (
+                        <Link
+                          to="/login"
+                          className="bg-green-600 hover:bg-green-700 text-white whitespace-nowrap font-bold py-2 px-4 rounded"
+                        >
+                          Iniciar sesión
+                        </Link>
+                      )}
+
+                      {isWideScreen && location.pathname !== "/register" && (
+                        <Link
+                          to="/register"
+                          className="text-white hover:bg-green-600 hover:text-white whitespace-nowrap font-bold py-2 px-4 rounded border border-green-600"
+                        >
+                          Registrar cuenta
+                        </Link>
+                      )}
+                    </>
+                  )}
                 </div>
-                {isAuth ? (
-                  <>
-                    <Menu as="div" className="relative ml-1">
-                      <div>
-                        <Menu.Button className="flex rounded-full text-sm focus:outline-none border-2 border-green-600">
-                          <span className="sr-only">Menú de usuario</span>
-                          <img
-                            className="h-8 w-8 rounded-full"
-                            src={avatar ? `${import.meta.env.VITE_BACKEND_URL}${avatar}` : '/avatar.png'}
-                            alt="Avatar"
-                          />
-                        </Menu.Button>
-                      </div>
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-[#2A2A2A] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/profile"
-                                className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                              >
-                                Perfil
-                              </Link>
-                            )}
-                          </Menu.Item>
-
-                          {roleLocal === "admin" && (
-                            <>
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <Link
-                                    to="/addprod"
-                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                                  >
-                                    Nuevo producto
-                                  </Link>
-                                )}
-                              </Menu.Item>
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <Link
-                                    to="/admin"
-                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                                  >
-                                    Administrar
-                                  </Link>
-                                )}
-                              </Menu.Item>
-                            </>
-                          )}
-
-                          {roleLocal === "seller" && (
-                            <>
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <Link
-                                    to="/addprod"
-                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                                  >
-                                    Nuevo producto
-                                  </Link>
-                                )}
-                              </Menu.Item>
-                            </>
-                          )}
-
-                          <Menu.Item>
-                            {({ active }) => (
-                              <span
-                                onClick={logOutFun}
-                                className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white cursor-pointer')}
-                              >
-                                Cerrar sesión
-                              </span>
-                            )}
-                          </Menu.Item>
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
-                  </>
-                ) : (
-                  <>
-                    {isWideScreen && location.pathname !== "/login" && (
-                      <Link
-                        to={'/login'}
-                        className='bg-green-600 hover:bg-green-700 text-white whitespace-nowrap font-bold py-2 px-4 rounded'
-                      >
-                        Iniciar sesión
-                      </Link>
-                    )}
-
-                    {isWideScreen && location.pathname !== "/register" && (
-                      <Link
-                        to={'/register'}
-                        className='text-white hover:bg-green-600 hover:text-white whitespace-nowrap font-bold py-2 px-4 rounded border border-green-600'
-                      >
-                        Registrar cuenta
-                      </Link>
-                    )}
-                  </>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </>

@@ -61,14 +61,17 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class EditUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["email", "name", "password"]
+        fields = ["email", "name", "phone", "avatar"] 
 
     def update(self, instance, validated_data):
         instance.email = validated_data.get('email', instance.email)
         instance.name = validated_data.get('name', instance.name)
-        password = validated_data.get('password', None)
-        if password:
-            instance.set_password(password)
+        instance.phone = validated_data.get('phone', instance.phone)
+        
+        avatar = validated_data.get('avatar', None)
+        if avatar:
+            instance.avatar = avatar
+        
         instance.save()
         return instance
 

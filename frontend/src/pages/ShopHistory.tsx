@@ -122,7 +122,7 @@ const HistorialDeCompras = () => {
         </div>
       </div>
       
-      <AsideFilter />
+      
     </div>
   );
 };
