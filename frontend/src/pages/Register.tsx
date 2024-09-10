@@ -30,11 +30,10 @@ const RegisterPage = () => {
   const [isCustomer, setIsCustomer] = useState(true); // Por defecto, es cliente
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
-
   // Mutación para el registro de usuarios
   const registerMutation = useMutation({
     mutationFn: () =>
-      registerRequest(email, name, phone, password, isSeller, isCustomer),
+      registerRequest(email, name, phone, password, isSeller), // isSeller se pasa como wantBeSeller
     onSuccess: () => {
       toast.success("Registro exitoso! Inicia sesión!");
       navigate("/login");
@@ -44,7 +43,7 @@ const RegisterPage = () => {
     },
   });
 
-  // Validación y manejo del formulario al enviarlo
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -56,10 +55,12 @@ const RegisterPage = () => {
 
     if (password !== re_password) {
       toast.warning("Las contraseñas deben coincidir");
-    } else if (!isSeller && !isCustomer) {
+      return;  // Añadir un return aquí para detener la ejecución si no coinciden las contraseñas
+    }
+
+    if (!isSeller && !isCustomer) {
       toast.warning("Debes seleccionar al menos un rol (vendedor o cliente)");
-    } else {
-      registerMutation.mutate();
+      return;
     }
 
     if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -77,8 +78,10 @@ const RegisterPage = () => {
       return;
     }
 
+    // Solo después de pasar todas las validaciones llamamos a mutate
     registerMutation.mutate();
   };
+
 
   // Manejadores para los cambios de los roles (vendedor y cliente)
   const handleSellerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,12 +109,11 @@ const RegisterPage = () => {
   };
 
   // Redirigir si ya está autenticado
-  if (registerMutation.isLoading) return <p>Cargando...</p>;
   if (isAuth) return <Navigate to="/" />;
 
   return (
     <>
-      
+
       <div className="flex flex-col justify-center items-center fondo-login min-h-screen">
         <div className="w-96 bg-slate-300 bg-opacity-20 backdrop-filter backdrop-blur-md my-2 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:bg-opacity-20 dark:backdrop-blur-md dark:border-gray-700 flex flex-row">
           <div className="p-6 space-y-3 sm:p-8 w-full">
@@ -171,7 +173,8 @@ const RegisterPage = () => {
                   inputMode="numeric"
                   placeholder="Teléfono"
                   className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-                  maxLength="10"
+                  maxLength={10}
+                  minLength={10}
                 />
               </div>
 
@@ -256,7 +259,7 @@ const RegisterPage = () => {
                     checked={isSeller}
                     onChange={handleSellerChange}
                     name="isSeller"
-                    style={{ color: "#39A900"}}
+                    style={{ color: "#39A900" }}
                   />
                 }
                 label={

@@ -35,8 +35,8 @@ export const get_users = async (page?: number) => {
     return response.data
 };
 
-export const registerRequest = async (email: string, name: string, phone: string, password: string) => {
-    await axi.post("/users/register/", { email, name, phone, password })
+export const registerRequest = async (email: string, name: string, phone: string, password: string, wantBeSeller: boolean) => {
+    await axi.post("/users/register/", { email, name, phone, password, wantBeSeller })
 };
 
 export const loginRequest = async (email: string, password: string) => {

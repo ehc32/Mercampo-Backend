@@ -189,3 +189,7 @@
         display: none;
     }
 }
+
+.acciones-force {
+    font-weight: bold;
+}

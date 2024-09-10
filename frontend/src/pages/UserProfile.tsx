@@ -114,13 +114,7 @@ const UserProfile = () => {
           </Typography>
 
           <div className="flex justify-between items-center py-4">
-            <TextField
-              type="search"
-              placeholder="Buscar..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-1/2 border-gray-300 focus:ring-[#39A900] focus:border-[#39A900]"
-            />
+           
             <Tabs
               value={tabValue}
               onChange={(_, newValue) => setTabValue(newValue)}
