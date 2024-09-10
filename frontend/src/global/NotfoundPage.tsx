@@ -7,7 +7,7 @@ const NotfoundPage = ({ boton }) => {
                 <div className="nk-wrap nk-wrap-nosidebar">
                     <div className="nk-content">
                         <div className="my-auto">
-                            <div className="text-center">
+                            <div className="text-center sm:flex-auto">
                                 <h1 className="nk-error-head">Recurso no encontrado</h1>
                                 <h3 className="nk-error-title w-full">Oops! Ha ocurrido un error al encontrar el recurso solicitado.</h3>
 

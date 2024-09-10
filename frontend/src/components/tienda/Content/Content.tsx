@@ -73,7 +73,7 @@ const Content: React.FC<ContenidoProps> = ({
                         <h2 className='titulo-sala-compra-light'>Una gran variedad de productos</h2>
                         <h4 className='sub-titulo-sala-compra-light'>Encuentra productos de alta calidad a los mejores precios</h4>
                     </div>
-                    <div className='flex flex-col sm:flex-row items-center justify-center gap-4 my-4 '>
+                    <div className='flex flex-col sm:flex-row items-center justify-center gap-4 my-14 '>
                         <Button
                             variant="contained"
                             className='flex align-center'
@@ -85,7 +85,7 @@ const Content: React.FC<ContenidoProps> = ({
                         </Button>
                         <div
                             onClick={toggleAbierto}
-                            className='flex items-center gap-2 cursor-pointer'
+                            className='flex items-center gap-2 cursor-pointer '
                         >
                             <TuneIcon />
                             <span>Filtrar productos</span>

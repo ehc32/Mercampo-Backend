@@ -206,7 +206,7 @@ const CartPage = () => {
                         <div className="card-bordered bg-white relative flex flex-col justify-start mb-2 shadow-md sm:rounded-lg overflow-hidden p-8">
                             <div className='card-tite mb-5'>
                                 <h4 className="text-2xl  text-center text-black font-bold mb-2">Formulario de pago</h4>
-                                <h6 className="text-20px text-black  text-center mb-4">¿Terminaste? ¡Haz tu pedido!</h6>
+                                <h6 className="fs-16px text-black  text-center mb-4">¿Terminaste? ¡Haz tu pedido!</h6>
                             </div>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                                 <div className="inputForm">
