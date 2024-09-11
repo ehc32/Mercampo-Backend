@@ -49,12 +49,8 @@ export default function ModalEditProfile({ id }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-<<<<<<< HEAD
   const [image, setImage] = useState<any>(null);
   const [nameError, setNameError] = useState("");
-=======
-  const [image, setImage] = useState<File | null>(null);
->>>>>>> fe7b0afa0ebc09d46a5018237f7420731eb12915
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -81,7 +77,6 @@ export default function ModalEditProfile({ id }) {
     setNameError("");
   };
 
-<<<<<<< HEAD
   const validateName = (name: string) => {
     const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     return nameRegex.test(name);
@@ -129,21 +124,6 @@ export default function ModalEditProfile({ id }) {
         } else {
           data = { email: stateEmail };
         }
-=======
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Evitar el comportamiento por defecto del formulario
-    let formData = new FormData();
-
-    switch (selectedOption) {
-      case "name":
-        formData.append("name", stateName);
-        break;
-      case "phone":
-        formData.append("phone", statePhone);
-        break;
-      case "email":
-        formData.append("email", stateEmail);
->>>>>>> fe7b0afa0ebc09d46a5018237f7420731eb12915
         break;
       case "password":
         if (password === confirmPassword) {
@@ -163,7 +143,6 @@ export default function ModalEditProfile({ id }) {
         isValid = false;
     }
 
-<<<<<<< HEAD
     if (isValid) {
       try {
         await edit_user(data, id);
@@ -172,14 +151,6 @@ export default function ModalEditProfile({ id }) {
       } catch (error) {
         toast.error("Ha ocurrido un error al actualizar sus datos");
       }
-=======
-    try {
-      await edit_user(formData, id);
-      toast.success("Datos actualizados con éxito");
-      handleClose();
-    } catch (error) {
-      toast.error("Ha ocurrido un error al actualizar sus datos");
->>>>>>> fe7b0afa0ebc09d46a5018237f7420731eb12915
     }
   };
 
