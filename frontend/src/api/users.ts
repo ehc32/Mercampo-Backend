@@ -6,21 +6,35 @@ export const get_solo_user = async (id: number) => {
     return response.data
 };
 
-export const edit_user = async (data: User, id: number) => {
+export const edit_user = async (data: Partial<User>, id: number) => {
     const formData = new FormData();
-    formData.append("name", data.name)
-    formData.append("phone", data.phone)
-    formData.append("email", data.email)
-    formData.append("role", data.role)
+    
+    if (data.name) {
+        formData.append("name", data.name);
+    }
+    if (data.phone) {
+        formData.append("phone", data.phone);
+    }
+    if (data.email) {
+        formData.append("email", data.email);
+    }
+    if (data.password) {
+        formData.append("password", data.password);
+    }
     if (data.avatar) {
         formData.append("image", data.avatar);
     }
+    if (data.role) {
+        formData.append("role", data.role);
+    }
+    
     await authAxios.put(`/users/edit/${id}/`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
-    })
+    });
 };
+
 
 export const search_users = async (query: string) => {
     const response = await authAxios.get(`/users/search/?query=${query}`)

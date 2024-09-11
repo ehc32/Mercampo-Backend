@@ -26,26 +26,27 @@ def get_solo_user(request, pk):
 
 class LoginView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-    
+
 @api_view(['PUT'])
 def edit_profile(request, id):
     try:
-        user = User.objects.get(id=id)  # Cambiar de email a id
+        user = User.objects.get(id=id)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.user.role == "admin" or request.user == user:
-        serializer = EditUserSerializer(user, data=request.data)
+        serializer = EditUserSerializer(user, data=request.data, partial=True)  # Permite actualizar parcialmente
         if serializer.is_valid():
+            # Si se envía una contraseña en la solicitud, actualízala
             if 'password' in request.data:
                 user.set_password(request.data['password'])
+
             serializer.save()
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({'detail': 'No tienes permiso para editar este perfil.'}, status=status.HTTP_403_FORBIDDEN)
-
 
 
 @api_view(['GET'])

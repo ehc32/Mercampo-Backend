@@ -33,6 +33,7 @@ export interface User {
     avatar?: File | null;
     email: string;
     phone: string;
+    password: string;
     name: string;
 };
 
