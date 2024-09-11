@@ -101,15 +101,15 @@ export default function ModalSellerConfig({
             onChange={(e) => setAppName(e.target.value)}
             margin="normal"
             sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#39A900" },
-                "&:hover fieldset": { borderColor: "#39A900" },
-                "&.Mui-focused fieldset": { borderColor: "#39A900" },
-              },
-              "& .MuiInputLabel-root": { color: "#39A900" },
-              "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
-              "& .MuiInputBase-input": { color: "#444444" },
-            }}
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "##1f211e" },
+                  "&:hover fieldset": { borderColor: "#1f211e" },
+                  "&.Mui-focused fieldset": { borderColor: "#1f211e" },
+                },
+                "& .MuiInputLabel-root": { color: "#1f211e" },
+                "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
+                "& .MuiInputBase-input": { color: "#444444" },
+              }}
           />
 
           <TextField
@@ -138,15 +138,15 @@ export default function ModalSellerConfig({
             onChange={(e) => setSecretKey(e.target.value)}
             margin="normal"
             sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#39A900" },
-                "&:hover fieldset": { borderColor: "#39A900" },
-                "&.Mui-focused fieldset": { borderColor: "#39A900" },
-              },
-              "& .MuiInputLabel-root": { color: "#39A900" },
-              "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
-              "& .MuiInputBase-input": { color: "#444444" },
-            }}
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "##1f211e" },
+                  "&:hover fieldset": { borderColor: "#1f211e" },
+                  "&.Mui-focused fieldset": { borderColor: "#1f211e" },
+                },
+                "& .MuiInputLabel-root": { color: "#1f211e" },
+                "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
+                "& .MuiInputBase-input": { color: "#444444" },
+              }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
