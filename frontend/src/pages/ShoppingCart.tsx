@@ -18,11 +18,28 @@ import { create_order } from "../api/orders";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useCartStore } from "../hooks/cart";
 import './style.css';
+import { get_paypal_user } from '../api/users';
 
 
 
 
 const CartPage = () => {
+
+    const [paypal, SetPaypal] = useState<any>();
+    const [showSecretKey, setShowSecretKey] = useState(false); // Estado para mostrar/ocultar secret key
+
+    const paypalUser = async () => {
+        try {
+            const response = await get_paypal_user(id);
+            const data = response.data;
+            SetPaypal(data);
+        } catch (e) {
+        }
+    };
+    useEffect(() => {
+        paypalUser();
+    }, []);
+
     const removeFromCart = useCartStore((state) => state.removeFromCart);
     const addToCart = useCartStore((state) => state.addToCart);
     const removeAll = useCartStore((state) => state.removeAll);
@@ -71,23 +88,28 @@ const CartPage = () => {
     });
 
     const createOrder = (data, actions) => {
-        const translateCOPtoUSD = () => {
-            const cop = total_price;
-            const usd = cop / 70000;
-            return usd.toFixed(2);
-        }
-        return actions.order.create({
-            purchase_units: [
-                {
-                    amount: {
-                        value: translateCOPtoUSD()
-                    },
-                },
-            ],
-            application_context: {
-                shipping_preference: "NO_SHIPPING"
+        if (cart.length > 0) {
+
+            const translateCOPtoUSD = () => {
+                const cop = total_price;
+                const usd = cop / 70000;
+                return usd.toFixed(2);
             }
-        });
+            return actions.order.create({
+                purchase_units: [
+                    {
+                        amount: {
+                            value: translateCOPtoUSD()
+                        },
+                    },
+                ],
+                application_context: {
+                    shipping_preference: "NO_SHIPPING"
+                }
+            });
+        } else {
+            toast.warning("No se hay objetos para comprar")
+        }
     };
 
     const onApprove = (data, actions) => {
@@ -116,13 +138,7 @@ const CartPage = () => {
             toast.warning("Ha ocurrido un error al registrar su compra")
         }
     };
-
-    const handleSelect = (product) => {
-        const isSelected = selected.includes(product.id);
-        const newSelected = isSelected ? selected.filter(id => id !== product.id) : [...selected, product.id];
-        setSelected(newSelected);
-    };
-
+    
     const handleDeleteSelected = () => {
         selected.forEach(id => {
             const product = cart.find(p => p.id === id);
@@ -249,7 +265,7 @@ const CartPage = () => {
                                 <div className="botonDePaypal overflow-auto mt-4">
                                     <PayPalScriptProvider
                                         options={{
-                                            clientId: "AXazhAGnbnyGlBxeRjGl8uIgVkF7dmrqz6iJYHd6Ea5XDZY9uXoyjK6xzMpt2BrryR8FHM4Un5l89KDD"
+                                            clientId: paypal?.client_id
                                         }}
                                     >
                                         <PayPalButtons
@@ -387,7 +403,7 @@ const CartPage = () => {
                                         labelRowsPerPage="Filas por página"
                                         labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
                                     />
-                                    
+
                                 </div>
 
                             </div>

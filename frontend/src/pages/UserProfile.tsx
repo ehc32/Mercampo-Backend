@@ -46,16 +46,14 @@ const UserProfile = () => {
 
   const {
     data: user,
-    isLoading,
-    isError,
   } = useQuery(["users", id], () => get_solo_user(id), {
     enabled: !!id,
   });
 
   function formatearFecha(fechaISO: any) {
     const fecha = new Date(fechaISO);
-    const dia = fecha.getDate().toString().padStart(2, "0"); // Asegura dos dígitos
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0"); // Suma 1 y asegura dos dígitos
+    const dia = fecha.getDate().toString().padStart(2, "0");
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
     const year = fecha.getFullYear();
     return `${dia}-${mes}-${year}`;
   }
@@ -84,6 +82,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (id) {
+      console.log(id)
       get_my_products(id);
     }
   }, [id]);

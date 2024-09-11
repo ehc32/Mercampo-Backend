@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
@@ -30,7 +30,7 @@ interface ModalSellerConfigProps {
 }
 
 export default function ModalSellerConfig({
-    id,
+    id
 }: ModalSellerConfigProps) {
     const [openModal, setOpenModal] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
@@ -66,6 +66,9 @@ export default function ModalSellerConfig({
         }
     };
 
+    useEffect(() => {
+        console.log(id)
+    }, [])
 
     return (
         <div>

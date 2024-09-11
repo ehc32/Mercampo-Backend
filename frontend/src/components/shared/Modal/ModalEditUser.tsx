@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { FaEdit } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { edit_user } from "../../../api/users";
 import toast from "react-hot-toast";
 
@@ -25,17 +25,17 @@ const style = {
 
 export default function ModalEditProfile({ id }) {
   const [open, setOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null); // Nueva variable para la selección de la opción
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [stateName, setStateName] = useState("");
   const [stateEmail, setStateEmail] = useState("");
   const [statePhone, setStatePhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<File | null>(null);
 
-  const handleFileChange = (event: any) => {
-    const file = event.target.files[0];
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file && (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg")) {
       setImage(file);
     } else {
@@ -47,35 +47,43 @@ export default function ModalEditProfile({ id }) {
     setImage(null);
   };
 
+  useEffect(() => {
+    console.log(id)
+  }, [])
+
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setSelectedOption(null);
     setOpen(false);
   };
 
-  const handleSubmit = async () => {
-    let data = {};
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Evitar el comportamiento por defecto del formulario
+    let formData = new FormData();
 
     switch (selectedOption) {
       case "name":
-        data = { name: stateName };
+        formData.append("name", stateName);
         break;
       case "phone":
-        data = { phone: statePhone };
+        formData.append("phone", statePhone);
         break;
       case "email":
-        data = { email: stateEmail };
+        formData.append("email", stateEmail);
         break;
       case "password":
         if (password === confirmPassword) {
-          data = { password };
+          formData.append("password", password);
         } else {
           toast.error("Las contraseñas no coinciden");
           return;
         }
         break;
       case "image":
-        data = { avatar: image };
+        if (image) {
+          formData.append("avatar", image);
+        }
         break;
       default:
         toast.error("Selecciona una opción válida");
@@ -83,14 +91,13 @@ export default function ModalEditProfile({ id }) {
     }
 
     try {
-      await edit_user(data, id);
+      await edit_user(formData, id);
       toast.success("Datos actualizados con éxito");
       handleClose();
     } catch (error) {
       toast.error("Ha ocurrido un error al actualizar sus datos");
     }
   };
-
 
   const renderContent = () => {
     switch (selectedOption) {
