@@ -26,6 +26,46 @@ def get_orders(request):
     return Response(serializer.data)
 
 
+# @api_view(['POST'])
+# def create_order(request):
+#     user = request.user
+#     data = request.data
+    
+#     try:
+#         orderItems = json.loads(data['order_items'])
+#     except (json.JSONDecodeError, TypeError) as e:
+#         return Response({'error': 'Invalid format for order_items'}, status=status.HTTP_400_BAD_REQUEST)
+
+#     total_price = data['total_price']
+    
+#     order = Order.objects.create(
+#         user=user,
+#         total_price=total_price
+#     )
+
+#     ShoppingAddress.objects.create(
+#         order=order,
+#         address=data['address'],
+#         city=data['city'],
+#         postal_code=data['postal_code'],
+#     )
+
+#     for i in orderItems:
+#         product = Product.objects.get(id=i['id'])
+#         item = Orderitem.objects.create(
+#             product=product,
+#             order=order,
+#             quantity=i['quantity'],
+#             price=i['price']
+#         )
+
+#         product.count_in_stock -= item.quantity
+#         product.save()
+
+#     serializer = OrderSerializer(order, many=False)
+#     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 @api_view(['POST'])
 def create_order(request):
     user = request.user
@@ -52,6 +92,7 @@ def create_order(request):
 
     for i in orderItems:
         product = Product.objects.get(id=i['id'])
+
         item = Orderitem.objects.create(
             product=product,
             order=order,
@@ -64,6 +105,7 @@ def create_order(request):
 
     serializer = OrderSerializer(order, many=False)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 @api_view(['GET'])
 def solo_order(request, pk):

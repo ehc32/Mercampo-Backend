@@ -62,7 +62,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class EditUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["email", "name", "phone", "avatar", "role"] 
+        fields = ["email", "name", "phone", "avatar", "role"]  
 
     def update(self, instance, validated_data):
         instance.email = validated_data.get('email', instance.email)
@@ -76,13 +76,14 @@ class EditUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class PayPalConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = PayPalConfig
-        fields = ['app_name', 'client_id', 'secret_key']  # No incluir 'user'
+        fields = ['app_name', 'client_id', 'secret_key']
 
     def create(self, validated_data):
-        user = self.context.get('user')  # Obtén el usuario del contexto
+        user = self.context.get('user')
         if user:
             paypal_config = PayPalConfig.objects.create(user=user, **validated_data)
             return paypal_config
@@ -95,7 +96,6 @@ class UserCanPublishSerializer(serializers.ModelSerializer):
         fields = ['can_publish']
 
     def update(self, instance, validated_data):
-        # Cambiar el estado de can_publish de True a False o viceversa
         instance.can_publish = not instance.can_publish
         instance.save()
         return instance
