@@ -27,13 +27,14 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [re_password, setRePassword] = useState("");
   const [isSeller, setIsSeller] = useState(false);
-  const [isCustomer, setIsCustomer] = useState(true); // Por defecto, es cliente
+  const [isCustomer, setIsCustomer] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
+
   // Mutación para el registro de usuarios
   const registerMutation = useMutation({
     mutationFn: () =>
-      registerRequest(email, name, phone, password, isSeller), // isSeller se pasa como wantBeSeller
+      registerRequest(email, name, phone, password, isSeller),
     onSuccess: () => {
       toast.success("Registro exitoso! Inicia sesión!");
       navigate("/login");
@@ -42,7 +43,6 @@ const RegisterPage = () => {
       toast.error("Hubo un error, intenta nuevamente");
     },
   });
-
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,7 +55,7 @@ const RegisterPage = () => {
 
     if (password !== re_password) {
       toast.warning("Las contraseñas deben coincidir");
-      return;  // Añadir un return aquí para detener la ejecución si no coinciden las contraseñas
+      return;
     }
 
     if (!isSeller && !isCustomer) {
@@ -63,8 +63,11 @@ const RegisterPage = () => {
       return;
     }
 
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      toast.warning("El correo electrónico no es válido");
+    // Validación para el correo electrónico
+    const validDomains = ['outlook.com', 'gmail.com', 'hotmail.com', 'soysena.edu.co', 'misena.edu.co', 'mail.com'];
+    const emailDomain = email.split('@')[1];
+    if (!validDomains.includes(emailDomain)) {
+      toast.warning("El correo electrónico debe ser de outlook, gmail, hotmail, soysena, misena o mail");
       return;
     }
 
@@ -73,8 +76,8 @@ const RegisterPage = () => {
       return;
     }
 
-    if (!name || !/\s/.test(name)) {
-      toast.warning("El nombre debe contener al menos dos palabras");
+    if (!name || !/^[a-zA-Z\s]+$/.test(name)) {
+      toast.warning("El nombre debe contener solo letras y espacios");
       return;
     }
 
@@ -82,20 +85,19 @@ const RegisterPage = () => {
     registerMutation.mutate();
   };
 
-
   // Manejadores para los cambios de los roles (vendedor y cliente)
   const handleSellerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsSeller(event.target.checked);
     if (event.target.checked) {
-      setIsCustomer(false); // Si se selecciona vendedor, se deselecciona cliente
-      toast.info("Tendras que esperar que un admin apruebe la solicitud de vender.");
+      setIsCustomer(false);
+      toast.info("Tendrás que esperar que un admin apruebe la solicitud de vender.");
     }
   };
 
   const handleCustomerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsCustomer(event.target.checked);
     if (event.target.checked) {
-      setIsSeller(false); // Si se selecciona cliente, se deselecciona vendedor
+      setIsSeller(false);
     }
   };
 
@@ -113,7 +115,6 @@ const RegisterPage = () => {
 
   return (
     <>
-
       <div className="flex flex-col justify-center items-center fondo-login min-h-screen">
         <div className="w-96 bg-slate-300 bg-opacity-20 backdrop-filter backdrop-blur-md my-2 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:bg-opacity-20 dark:backdrop-blur-md dark:border-gray-700 flex flex-row">
           <div className="p-6 space-y-3 sm:p-8 w-full">
@@ -150,7 +151,7 @@ const RegisterPage = () => {
                 </Typography>
                 <input
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setName(e.target.value.replace(/[^a-zA-Z\s]/g, ''))}
                   type="text"
                   placeholder="Nombre"
                   className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
