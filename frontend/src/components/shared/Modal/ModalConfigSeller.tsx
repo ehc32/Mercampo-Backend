@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
@@ -29,13 +29,15 @@ interface ModalSellerConfigProps {
   userId: number | string;
 }
 
-export default function ModalSellerConfig({ id }: ModalSellerConfigProps) {
-  const [openModal, setOpenModal] = useState(false);
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [secretKey, setSecretKey] = useState("");
-  const [appName, setAppName] = useState("");
-  const [clientId, setClientId] = useState("");
-  const [showSecretKey, setShowSecretKey] = useState(false);
+export default function ModalSellerConfig({
+    id
+}: ModalSellerConfigProps) {
+    const [openModal, setOpenModal] = useState(false);
+    const [confirmOpen, setConfirmOpen] = useState(false);
+    const [secretKey, setSecretKey] = useState("");
+    const [appName, setAppName] = useState("");
+    const [clientId, setClientId] = useState("");
+    const [showSecretKey, setShowSecretKey] = useState(false);
 
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
