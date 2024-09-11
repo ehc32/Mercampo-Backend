@@ -203,7 +203,7 @@ const AsideFilter = ({
                                     <MenuItem value="semana">Esta semana</MenuItem>
                                     <MenuItem value="mes">Este mes</MenuItem>
                                 </Select>
-                                <Button
+                                {/* <Button
                                     variant="contained"
                                     color="success"
                                     fullWidth
@@ -211,7 +211,7 @@ const AsideFilter = ({
                                     className='my-2'
                                 >
                                     Establecer fechas manualmente
-                                </Button>
+                                </Button> */}
                             </div>
                         </Box>
                         <Box sx={{ p: 2 }}>

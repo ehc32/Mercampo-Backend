@@ -1,3 +1,5 @@
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import './ST.css'
 const ST_Icon = () => {
     return (
         <div className="h-full min-w-52 m-2 flex row  whitespace-nowrap" style={{ pointerEvents: 'none' }}>
@@ -6,11 +8,7 @@ const ST_Icon = () => {
                 src="/public/lo.ico"
                 alt="Logo"
             />
-            <img
-                className="h-10 w-6 lg:block mx-0 mr-1 relative top-1" // Reduce el ancho y el margen
-                src="/public/line.png"
-                alt="Logo"
-            />
+            <HorizontalRuleIcon className='rotaricon' />
             <p className="hover-class fs-16px font-bold text-white">
                 Servicios <br />
                 Tecnológicos

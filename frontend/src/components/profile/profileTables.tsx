@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from "react";
 import {
   AppBar,
-  Tabs,
-  Tab,
-  Typography,
-  Box,
-  Paper,
   Avatar,
+  Box,
   Button,
+  Tab,
+  Tabs,
+  Typography
 } from "@mui/material";
-import ModalEditProfile from "../shared/Modal/ModalEditUser";
+import { useEffect, useState } from "react";
+import { get_paypal_user } from "../../api/users";
 import ModalRequestSeller from "../shared/Modal/ModalARequestSeller";
 import ModalSellerConfig from "../shared/Modal/ModalConfigSeller"; // Asegúrate de que esta ruta esté correcta
-import { get_paypal_user } from "../../api/users";
+import ModalEditProfile from "../shared/Modal/ModalEditUser";
+
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import HandymanIcon from '@mui/icons-material/Handyman';
+
+import './style.css';
 
 function ProfileTables({ user, id }) {
   const [tabValue, setTabValue] = useState(0);
@@ -40,47 +45,89 @@ function ProfileTables({ user, id }) {
     setShowSecretKey((prevState) => !prevState); // Cambiar visibilidad
   };
 
+
+  const isWideScreen = window.innerWidth > 900;
+
   return (
     <Box sx={{ width: "100%", mt: 4 }}>
       <AppBar position="static" color="default" elevation={0}>
-        <Tabs
-          value={tabValue}
-          onChange={handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
-        >
-          <Tab
-            label="Información personal"
-            sx={{ "&.Mui-selected": { color: "#39A900" } }}
-            className="focus:outline-none"
-          />
-          <Tab
-            label="Información de PayPal"
-            sx={{ "&.Mui-selected": { color: "#39A900" } }}
-            className="focus:outline-none"
-          />
-          <Tab
-            label="Configuración"
-            sx={{ "&.Mui-selected": { color: "#39A900" } }}
-            className="focus:outline-none"
-          />
-        </Tabs>
-      </AppBar>
+        {
+          isWideScreen ? (
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="fullWidth"
+              sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
+            >
 
-      <TabPanel value={tabValue} index={0}>
+              <Tab
+                label="Información personal"
+                sx={{ "&.Mui-selected": { color: "#39A900" } }}
+                className="focus:outline-none"
+              />
+
+              {user?.role !== "client" &&
+                <Tab
+                  label="Información de PayPal"
+                  sx={{ "&.Mui-selected": { color: "#39A900" } }}
+                  className="focus:outline-none"
+                />
+              }
+              <Tab
+                label="Configuración"
+                sx={{ "&.Mui-selected": { color: "#39A900" } }}
+                className="focus:outline-none"
+              />
+
+            </Tabs>
+          ) : (
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="fullWidth"
+              sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
+            >
+
+              <Tab
+                icon={<AccountBoxIcon />}
+                sx={{ "&.Mui-selected": { color: "#39A900" } }}
+                className="focus:outline-none"
+              />
+              {user?.role !== "client" && (
+                <Tab
+                  icon={<AccountBalanceIcon />}
+                  sx={{ "&.Mui-selected": { color: "#39A900" } }}
+                  className="focus:outline-none"
+                />
+              )}
+              <Tab
+                icon={<HandymanIcon />}
+                sx={{ "&.Mui-selected": { color: "#39A900" } }}
+                className="focus:outline-none"
+              />
+
+            </Tabs>
+          )
+        }
+
+      </AppBar>
+      < TabPanel value={tabValue} index={0} >
         {/*  portada uwu */}
-        <div
+        < div
           className="relative bg-cover bg-center h-56 md:h-64"
           style={{
             backgroundImage: `url('/public/fondopan.png')`, // Cambia esto a la URL de tu imagen de portada
-          }}
+          }
+          }
         >
           {/* Sombra sobre la portada para mejorar la legibilidad */}
-          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end items-center pb-6">
+          < div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end items-center pb-6" >
             {/* Avatar del usuario con fondo blanco */}
-            <div className="relative rounded-full bg-white p-1">
+            < div className="relative rounded-full bg-white p-1" >
               <Avatar
                 src={
                   user?.avatar
@@ -91,20 +138,20 @@ function ProfileTables({ user, id }) {
                 sx={{ width: 100, height: 100 }}
                 className="rounded-full"
               />
-            </div>
+            </div >
 
             {/* Nombre del usuario */}
-            <Typography
+            < Typography
               variant="h5"
               className="text-white text-2xl font-bold mt-2"
             >
               {user?.name || "Usuario"}
-            </Typography>
-          </div>
-        </div>
+            </Typography >
+          </div >
+        </div >
 
         {/* Información personal */}
-        <div className="bg-white p-6 rounded-lg shadow-lg mt-[-50px] mx-auto max-w-3xl relative z-10">
+        < div className="bg-white p-6 rounded-lg shadow-lg mt-[-50px] mx-auto max-w-3xl relative z-10 " >
           <Typography variant="h6" gutterBottom>
             Información personal
           </Typography>
@@ -112,39 +159,36 @@ function ProfileTables({ user, id }) {
             En Mercampo cuidamos tu información.
           </Typography>
 
-          {/* Información en fila */}
-          <div className="flex justify-between items-center space-x-6">
-            {/* Nombre */}
-            <div className="text-center lg:text-left">
+          <div className="flex items-center justify-between columna-info w-full">
+            <div className="text-center">
               <Typography
                 variant="h6"
-                className="text-xl font-bold text-gray-900"
+                className="text-xl font-bold text-gray-900 w-full"
               >
                 {user?.name || "Usuario"}
               </Typography>
             </div>
 
             {/* Teléfono */}
-            <div className="text-center lg:text-left">
-              <Typography variant="body2" className="text-gray-700">
+            <div className="text-center ">
+              <Typography variant="body2" className="text-black w-full">
                 {user?.phone || "Teléfono no registrado"}
               </Typography>
             </div>
 
             {/* Correo electrónico */}
-            <div className="text-center lg:text-left">
-              <Typography variant="body2" className="text-gray-700">
+            <div className="text-center ">
+              <Typography variant="body2" className="text-black w-full">
                 {user?.email || "Correo no registrado"}
               </Typography>
             </div>
 
             {/* Rol del usuario */}
-            <div className="text-center lg:text-left">
+            <div className="text-center ">
               <Typography
                 variant="body2"
-                className={`text-gray-700 ${
-                  user?.role === "admin" ? "font-bold text-green-600" : ""
-                }`}
+                className={`text-black ${user?.role === "admin" ? "font-bold text-green-600" : ""
+                  }`}
               >
                 {user?.role === "client"
                   ? "Cliente"
@@ -154,8 +198,8 @@ function ProfileTables({ user, id }) {
               </Typography>
             </div>
           </div>
-        </div>
-      </TabPanel>
+        </div >
+      </TabPanel >
 
       <TabPanel value={tabValue} index={1}>
         <Typography variant="h6" gutterBottom>
@@ -166,7 +210,7 @@ function ProfileTables({ user, id }) {
             <div className="flex justify-between items-center">
               <Typography
                 variant="body2"
-                className="text-gray-700 font-semibold"
+                className="text-black font-semibold"
               >
                 Client ID:
               </Typography>
@@ -177,7 +221,7 @@ function ProfileTables({ user, id }) {
             <div className="flex justify-between items-center">
               <Typography
                 variant="body2"
-                className="text-gray-700 font-semibold"
+                className="text-black font-semibold"
               >
                 Secret Key:
               </Typography>
@@ -189,6 +233,7 @@ function ProfileTables({ user, id }) {
               <Button
                 onClick={toggleSecretKeyVisibility}
                 style={{ color: "#39a900" }}
+                className="focus:outline-none"
               >
                 {showSecretKey ? "Ocultar" : "Mostrar"}
               </Button>
@@ -196,7 +241,7 @@ function ProfileTables({ user, id }) {
             <div className="flex justify-between items-center">
               <Typography
                 variant="body2"
-                className="text-gray-700 font-semibold"
+                className="text-black font-semibold"
               >
                 App Name:
               </Typography>
@@ -267,14 +312,14 @@ function ProfileTables({ user, id }) {
         <div className="flex flex-row align-center items-start">
           <ModalEditProfile id={id} />
           {user?.role !== "seller" && user?.role !== "admin" && (
-            <ModalRequestSeller userId={id} requestSellerStatus={() => {}} />
+            <ModalRequestSeller userId={id} requestSellerStatus={() => { }} />
           )}
           {(user?.role === "seller" || user?.role === "admin") && (
             <ModalSellerConfig id={id} />
           )}
         </div>
       </TabPanel>
-    </Box>
+    </Box >
   );
 }
 

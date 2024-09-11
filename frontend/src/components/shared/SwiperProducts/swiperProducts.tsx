@@ -87,14 +87,9 @@ const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos
                                   slidesPerView: 3,
                                   spaceBetween: 20,
                                 },
-                                1380: {
+                                1480: {
                                   slidesPerView: 4,
                                   spaceBetween: 25,
-                                },
-                                1600: {
-
-                                  slidesPerView: 5,
-                                  spaceBetween: 30,
                                 }
                               }}
                             >

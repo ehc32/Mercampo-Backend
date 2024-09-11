@@ -18,9 +18,26 @@ const ImageInput = ({ setImages, images }: ImageInputProps) => {
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    canvas.width = 500; // Ancho deseado
-                    canvas.height = 300; // Alto deseado
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // Dimensiones de recorte
+                    const targetWidth = 500;
+                    const targetHeight = 300;
+
+                    // Ajusta el canvas al tamaño de recorte
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
+
+                    // Establece el fondo blanco
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Calcula las coordenadas para recortar la imagen
+                    const scale = Math.min(targetWidth / img.width, targetHeight / img.height);
+                    const x = (targetWidth / 2) - (scale * img.width / 2);
+                    const y = (targetHeight / 2) - (scale * img.height / 2);
+
+                    ctx.drawImage(img, x, y, scale * img.width, scale * img.height);
+
                     const base64 = canvas.toDataURL('image/jpeg', 0.5); // Calidad 50%
                     setImages((prevImages) => [...prevImages, base64]);
                 };
@@ -65,17 +82,20 @@ const ImageInput = ({ setImages, images }: ImageInputProps) => {
                             variant="contained"
                             component="label"
                             style={{
-                                width: '100px',
+                                width: '150px',
                                 height: '100px',
-                                borderRadius: '10px',
+                                borderRadius: '2px',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 backgroundColor: 'transparent',
-                                border: '1px solid #39A900', // Define el borde completo
+                                border: '1px  dashed #39A900',
                             }}
                         >
-                            <AddPhotoAlternateIcon className='text-[#30A900]' />
+                            <div className='flex flex-col align-center'>
+                                <AddPhotoAlternateIcon className='text-[#30A900]' />
+                                <span className='text-[#30A900] fs-12px'>Cargar imagen</span> {/* Texto añadido */}
+                            </div>
                             <input
                                 type="file"
                                 accept="image/*"
@@ -83,7 +103,6 @@ const ImageInput = ({ setImages, images }: ImageInputProps) => {
                                 hidden
                             />
                         </Button>
-
                     </Grid>
                 )}
             </Grid>

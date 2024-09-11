@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -15,8 +15,30 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../hooks/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import jwt_decode from 'jwt-decode';
+import { Token } from '../../../Interfaces';
 
 export default function ListAsideNav({ handleClose }) {
+
+
+    useEffect(() => {
+        const token: string | null = useAuthStore.getState().access;
+
+        if (token) {
+            try {
+                const tokenDecoded: Token = jwt_decode(token);
+                const userRole = tokenDecoded.role;
+                setRoleLocal(userRole);
+            } catch (error) {
+                console.error("Error al decodificar el token:", error);
+            }
+        }
+    }, []);
+
+
+    const [roleLocal, setRoleLocal] = useState("");
 
     const navigate = useNavigate();
     const { isAuth } = useAuthStore();
@@ -89,6 +111,35 @@ export default function ListAsideNav({ handleClose }) {
                         isAuth &&
 
                         <>
+                            {
+                                roleLocal == "admin" ? (
+                                    <>
+                                        <ListItem disablePadding>
+                                            <Link to="/admin" className='w-full'>
+                                                <ListItemButton>
+                                                    <ListItemIcon>
+                                                        <AdminPanelSettingsIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary="Administrador" />
+                                                </ListItemButton>
+                                            </Link>
+                                        </ListItem>
+                                        <ListItem disablePadding>
+                                            <Link to="/addprod" className='w-full'>
+                                                <ListItemButton>
+                                                    <ListItemIcon>
+                                                        <AddToPhotosIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary="Agregar producto" />
+                                                </ListItemButton>
+                                            </Link>
+                                        </ListItem>
+                                    </>
+                                ) : (
+                                    <>
+                                    </>
+                                )
+                            }
                             <ListItem disablePadding>
                                 <Link to="/profile" className='w-full'>
                                     <ListItemButton>

@@ -219,7 +219,7 @@ const AddProd = () => {
                   </FormControl>
                 </div>
                 <div className="flex-1">
-                  <h6 className="text-black font-bold  m-1 dark:text-white">Tiempo de publicación</h6>
+                  <h6 className="text-black font-bold m-1 dark:text-white">Tiempo de publicación</h6>
                   <FormControl fullWidth sx={{ mb: 2 }}>
                     <Select
                       value={tiempoL}

@@ -26,7 +26,7 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
             En nuestra tienda online encontrarás los productos que necesitas
           </p>
           <Link to="/store">
-            <button className="mr-2 bg-[#39A900] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 px-6 rounded-full">
+            <button className="mr-2 bg-[#39A900] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 m-1 px-6 rounded-full">
               ¡Compra ahora!
             </button>
           </Link>
@@ -34,13 +34,13 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
             isAuth ? (
 
               <Link to={'/store'}>
-                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg font-bold py-3 px-6 rounded-full">
+                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg m-1 font-bold py-3 px-6 rounded-full">
                   Vender ahora!
                 </button>
               </Link>
             ) : (
               <Link to={'/login'}>
-                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg font-bold py-3 px-6 rounded-full">
+                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg m-1 font-bold py-3 px-6 rounded-full">
                   Vender ahora!
                 </button>
               </Link>
