@@ -23,9 +23,26 @@ const style = {
   transition: "all 0.3s ease-in-out",
 };
 
+const inputStyle = {
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#39A900',
+    },
+    '&:hover fieldset': {
+      borderColor: '#39A900',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#39A900',
+    },
+  },
+  '& .MuiInputLabel-root': {
+    color: '#39A900',
+  },
+};
+
 export default function ModalEditProfile({ id }) {
   const [open, setOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null); // Nueva variable para la selección de la opción
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [stateName, setStateName] = useState("");
   const [stateEmail, setStateEmail] = useState("");
   const [statePhone, setStatePhone] = useState("");
@@ -33,13 +50,14 @@ export default function ModalEditProfile({ id }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [image, setImage] = useState<any>(null);
+  const [nameError, setNameError] = useState("");
 
-  const handleFileChange = (event: any) => {
-    const file = event.target.files[0];
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file && (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg")) {
       setImage(file);
     } else {
-      alert("Solo se permiten archivos PNG, JPEG o JPG.");
+      toast.error("Solo se permiten archivos PNG, JPEG o JPG.");
     }
   };
 
@@ -51,27 +69,63 @@ export default function ModalEditProfile({ id }) {
   const handleClose = () => {
     setSelectedOption(null);
     setOpen(false);
+    setNameError("");
   };
 
-  const handleSubmit = async () => {
+  const validateName = (name: string) => {
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    return nameRegex.test(name);
+  };
+  
+  const validateEmail = (email: string) => /^[^\s@]+@(gmail\.com|outlook\.com|hotmail\.com|soysena\.edu\.co|misena\.edu\.co)$/.test(email);
+  const validatePhone = (phone: string) => /^\d+$/.test(phone);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = e.target.value;
+    setStateName(newName);
+    if (newName && !validateName(newName)) {
+      setNameError("El nombre solo puede contener letras y espacios");
+    } else {
+      setNameError("");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     let data = {};
+    let isValid = true;
 
     switch (selectedOption) {
       case "name":
-        data = { name: stateName };
+        if (!validateName(stateName)) {
+          setNameError("El nombre solo puede contener letras y espacios");
+          isValid = false;
+        } else {
+          data = { name: stateName };
+        }
         break;
       case "phone":
-        data = { phone: statePhone };
+        if (!validatePhone(statePhone)) {
+          toast.error("El teléfono solo puede contener números positivos");
+          isValid = false;
+        } else {
+          data = { phone: statePhone };
+        }
         break;
       case "email":
-        data = { email: stateEmail };
+        if (!validateEmail(stateEmail)) {
+          toast.error("Correo electrónico no válido. Use gmail.com, outlook.com, hotmail.com, soysena.edu.co o misena.edu.co");
+          isValid = false;
+        } else {
+          data = { email: stateEmail };
+        }
         break;
       case "password":
         if (password === confirmPassword) {
           data = { password };
         } else {
           toast.error("Las contraseñas no coinciden");
-          return;
+          isValid = false;
         }
         break;
       case "image":
@@ -79,18 +133,19 @@ export default function ModalEditProfile({ id }) {
         break;
       default:
         toast.error("Selecciona una opción válida");
-        return;
+        isValid = false;
     }
 
-    try {
-      await edit_user(data, id);
-      toast.success("Datos actualizados con éxito");
-      handleClose();
-    } catch (error) {
-      toast.error("Ha ocurrido un error al actualizar sus datos");
+    if (isValid) {
+      try {
+        await edit_user(data, id);
+        toast.success("Datos actualizados con éxito");
+        handleClose();
+      } catch (error) {
+        toast.error("Ha ocurrido un error al actualizar sus datos");
+      }
     }
   };
-
 
   const renderContent = () => {
     switch (selectedOption) {
@@ -103,7 +158,10 @@ export default function ModalEditProfile({ id }) {
               fullWidth
               size="small"
               value={stateName}
-              onChange={(e) => setStateName(e.target.value)}
+              onChange={handleNameChange}
+              sx={inputStyle}
+              error={!!nameError}
+              helperText={nameError}
             />
           </div>
         );
@@ -117,6 +175,9 @@ export default function ModalEditProfile({ id }) {
               size="small"
               value={statePhone}
               onChange={(e) => setStatePhone(e.target.value)}
+              sx={inputStyle}
+              type="number"
+              inputProps={{ min: 0 }}
             />
           </div>
         );
@@ -130,6 +191,7 @@ export default function ModalEditProfile({ id }) {
               size="small"
               value={stateEmail}
               onChange={(e) => setStateEmail(e.target.value)}
+              sx={inputStyle}
             />
           </div>
         );
@@ -145,6 +207,7 @@ export default function ModalEditProfile({ id }) {
                 size="small"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                sx={inputStyle}
                 InputProps={{
                   endAdornment: (
                     <IconButton onClick={() => setShowPassword(!showPassword)}>
@@ -163,6 +226,7 @@ export default function ModalEditProfile({ id }) {
                 size="small"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                sx={inputStyle}
               />
             </div>
           </>

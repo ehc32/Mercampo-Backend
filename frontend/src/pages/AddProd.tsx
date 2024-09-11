@@ -186,6 +186,7 @@ const AddProd = () => {
                     <MenuItem value="" disabled>Selecciona una unidad</MenuItem>
                     <MenuItem value="Kg">Kilos</MenuItem>
                     <MenuItem value="L">Litros</MenuItem>
+                    <MenuItem value="L">Libras</MenuItem>
                   </Select>
                 </FormControl>
               </div>
