@@ -117,11 +117,10 @@ const RegisterPage = () => {
       <div className="flex flex-col justify-center items-center fondo-login min-h-screen">
         <div className="w-96 bg-slate-300 bg-opacity-20 backdrop-filter backdrop-blur-md my-2 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:bg-opacity-20 dark:backdrop-blur-md dark:border-gray-700 flex flex-row">
           <div className="p-6 space-y-3 sm:p-8 w-full">
-            <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-100">
+            <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-black md:text-2xl dark:text-gray-100">
               Crear nueva cuenta
             </h1>
             <form className="space-y-3" onSubmit={handleSubmit}>
-              {/* Campo de Correo Electrónico */}
               <div>
                 <Typography
                   variant="subtitle2"
@@ -135,11 +134,9 @@ const RegisterPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder="correo@email.com"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
                 />
               </div>
-
-              {/* Campo de Nombre */}
               <div>
                 <Typography
                   variant="subtitle2"
@@ -153,11 +150,9 @@ const RegisterPage = () => {
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   placeholder="Nombre"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
                 />
               </div>
-
-              {/* Campo de Teléfono */}
               <div>
                 <Typography
                   variant="subtitle2"
@@ -172,13 +167,11 @@ const RegisterPage = () => {
                   type="tel"
                   inputMode="numeric"
                   placeholder="Teléfono"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
                   maxLength={10}
                   minLength={10}
                 />
               </div>
-
-              {/* Campo de Contraseña */}
               <div>
                 <Typography
                   variant="subtitle2"
@@ -193,7 +186,7 @@ const RegisterPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     type={showPassword ? "text" : "password"}
                     placeholder="Contraseña"
-                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
                   />
                   <InputAdornment
                     position="end"
@@ -215,7 +208,6 @@ const RegisterPage = () => {
                 </div>
               </div>
 
-              {/* Campo de Repetir Contraseña */}
               <div>
                 <Typography
                   variant="subtitle2"
@@ -230,7 +222,7 @@ const RegisterPage = () => {
                     onChange={(e) => setRePassword(e.target.value)}
                     type={showRePassword ? "text" : "password"}
                     placeholder="Repite la contraseña"
-                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
                   />
                   <InputAdornment
                     position="end"
@@ -252,7 +244,6 @@ const RegisterPage = () => {
                 </div>
               </div>
 
-              {/* Checkbox para Ser Vendedor */}
               <FormControlLabel
                 control={
                   <Checkbox
@@ -269,7 +260,6 @@ const RegisterPage = () => {
                 }
               />
 
-              {/* Botón de Registro */}
               <Button
                 type="submit"
                 fullWidth

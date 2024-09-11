@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'users',
     'products',
     'orders',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -185,3 +186,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+# automatizar procesos, se va a usar en este caso para eliminar productos cada cierto tiempo
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Requiere que Redis esté instalado
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json' 

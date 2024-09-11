@@ -63,7 +63,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
                     </p>
                     <div className='footerInfo'>
                         <div>
-                            <h6>$ {producto.price}</h6>
+                            <h6>$ {Number(producto.price).toFixed(0)}</h6>
                             <span>{producto.locate?.slice(0, 15)}, {formatearFecha(producto.created)}</span>
                         </div>
                         <BasicTooltip producto={producto} />

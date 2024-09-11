@@ -246,7 +246,7 @@ const CartPage = () => {
                                         placeholder="Código Postal"
                                     />
                                 </div>
-                                <div className="botonDePaypal mt-4">
+                                <div className="botonDePaypal overflow-auto mt-4">
                                     <PayPalScriptProvider
                                         options={{
                                             clientId: "AXazhAGnbnyGlBxeRjGl8uIgVkF7dmrqz6iJYHd6Ea5XDZY9uXoyjK6xzMpt2BrryR8FHM4Un5l89KDD"
@@ -266,8 +266,8 @@ const CartPage = () => {
                             <h6 className="fs-16px text-black f text-center my-4">Estos son los productos en tu carrito</h6>
                             <div className='flex flex-row justify-between mx-2 my-6'>
 
-                                <h3 className='fs-16px font-semibold text-black'>Total a pagar: $ {total_price}</h3>
-                                <h3 className='fs-16px font-semibold text-black'>{lenghtProd} productos en carrito</h3>
+                                <h3 className='font-semibold text-black fs-18px'><span>Total a pagar:</span> <span className='text-[#39A900] ml-2 font-bold'>$ {total_price}</span></h3>
+                                <h3 className='fs-16px font-semibold text-black'>{lenghtProd} producto{lenghtProd == 1 ? "" : "s"}</h3>
                             </div>
                             <div className='div-class'>
                                 <TableContainer component={Paper}>
@@ -373,17 +373,22 @@ const CartPage = () => {
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
-                                <TablePagination
-                                    rowsPerPageOptions={[8]}
-                                    component="div"
-                                    count={cart.length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    onPageChange={handleChangePage}
-                                    onRowsPerPageChange={handleChangeRowsPerPage}
-                                    labelRowsPerPage="Filas por página"
-                                    labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
-                                />
+                                <div className=' w-12/12 text-center mx-auto'>
+
+                                    <TablePagination
+                                        rowsPerPageOptions={[8]}
+                                        component="div"
+                                        count={cart.length}
+                                        className='mx-auto'
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onPageChange={handleChangePage}
+                                        onRowsPerPageChange={handleChangeRowsPerPage}
+                                        labelRowsPerPage="Filas por página"
+                                        labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
+                                    />
+                                    
+                                </div>
 
                             </div>
                             <div>

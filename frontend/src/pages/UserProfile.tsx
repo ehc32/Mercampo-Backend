@@ -94,8 +94,11 @@ const UserProfile = () => {
     }
   }, [user, id]);
 
+
+  const isWideScreen = window.innerWidth > 900;
+
   return (
-    <Box sx={{ maxWidth: "lg", mx: "auto", p: 6, mt: ".1em" }}>
+    <Box sx={{ maxWidth: "lg", mx: "auto", p: isWideScreen ? 6 : 1, mt: ".1em" }}>
       <Card className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
         <CardContent>
           <Typography
@@ -218,7 +221,7 @@ const UserProfile = () => {
                         <TableRow key={product.id}>
                           <TableCell>{product.name}</TableCell>
                           <TableCell>${product.price}</TableCell>
-                          <TableCell>{product.description}</TableCell>
+                          <TableCell>{product.description.slice(0, 20)}...</TableCell>
                           <TableCell>
                             {formatearFecha(product.created)}
                           </TableCell>
@@ -252,7 +255,7 @@ const UserProfile = () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell  className="font-bold ">Nombre</TableCell>
+                      <TableCell className="font-bold ">Nombre</TableCell>
                       <TableCell>Descripción</TableCell>
                       <TableCell>Calificación</TableCell>
                       <TableCell>Precio</TableCell>
@@ -266,7 +269,7 @@ const UserProfile = () => {
                     {myProducts.map((product) => (
                       <TableRow key={product.id}>
                         <TableCell>{product.name}</TableCell>
-                        <TableCell>{product.description}</TableCell>
+                        <TableCell>{product.description.slice(0, 20)}...</TableCell>
                         <TableCell>{product.rating}</TableCell>
                         <TableCell>${product.price}</TableCell>
                         <TableCell>{product.count_in_stock}</TableCell>

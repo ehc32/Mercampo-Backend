@@ -28,7 +28,7 @@ const DetallesProd = () => {
   }, [category]);
 
   return (
-    <main className='mt-24'>
+    <main className='my-2'>
       <ProductDetail setCategory={setCategory} fetchProductos={fetchProductos} setProductId={setProductId} />
       <Comments productId={productId} />
       <SwiperProducts datos={productos} height='70vh' width='100%' loader={loader} />

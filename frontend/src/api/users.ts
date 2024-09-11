@@ -11,6 +11,7 @@ export const edit_user = async (data: User, id: number) => {
     formData.append("name", data.name)
     formData.append("phone", data.phone)
     formData.append("email", data.email)
+    formData.append("role", data.role)
     if (data.avatar) {
         formData.append("image", data.avatar);
     }
@@ -50,7 +51,6 @@ export const sendRequestSeller = async (idUser: number | string) => {
 
 export const bringRequestSeller = async () => {
     const response = await axi.get(`/users/sell/bring_request/`)
-    console.log(response)
     return response;
 };
 

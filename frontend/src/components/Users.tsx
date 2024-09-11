@@ -7,9 +7,9 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import React, { useState, useEffect } from "react";
 import Pagination from '@mui/material/Pagination';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { changePermission, delete_user, edit_user, get_users } from "../api/users";
-import { IconButton as MUIIconButton } from '@mui/material';
+import { FormControl, MenuItem, IconButton as MUIIconButton, Select } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import PublicIcon from '@mui/icons-material/Public';
@@ -34,9 +34,11 @@ const Users = ({ results }: any) => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState<any[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false); // Added state for confirmation modal
   const [stateName, setStateName] = useState("");
   const [stateEmail, setStateEmail] = useState("");
   const [statePhone, setStatePhone] = useState("");
+  const [roleNew, setRoleNew] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -46,6 +48,9 @@ const Users = ({ results }: any) => {
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [image, setImage] = useState<any>(null);
+
+  // Confirmation modal handling
+  const [userToDelete, setUserToDelete] = useState<number | null>(null); // ID of the user to delete
 
   const handleModalOpen = (user: any) => {
     setIdLocal(user.id);
@@ -60,16 +65,25 @@ const Users = ({ results }: any) => {
     setImage(null);
   };
 
+  const handleOpenConfirmationModal = (id: number) => {
+    setUserToDelete(id);
+    setConfirmationModalOpen(true);
+  };
+
+  const handleCloseConfirmationModal = () => {
+    setConfirmationModalOpen(false);
+    setUserToDelete(null);
+  };
+
   const handleChangePublicsPermision = async (id: number) => {
     try {
-      await changePermission(id)
-      toast.success("El permiso del usuario hay cambiado")
-      fetchUsers()
+      await changePermission(id);
+      toast.success("El permiso del usuario ha cambiado");
+      fetchUsers();
     } catch (error) {
-      toast.warning("El usuario no es vendedor ni administrador")
+      toast.warning("El usuario no es vendedor ni administrador");
     }
-
-  }
+  };
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -91,23 +105,31 @@ const Users = ({ results }: any) => {
       phone: statePhone,
       password: password,
       image: image,
+      role: roleNew,
     };
     try {
       await edit_user(data, idLocal);
-      toast.success("Data updated successfully");
+      toast.success("Datos actualizados correctamente");
       handleModalClose();
     } catch (error) {
-      toast.warning("An error occurred while updating the data");
+      toast.warning("Ocurrió un error al actualizar los datos");
     }
   };
 
   const handleDelete = async (id: number) => {
     try {
       await delete_user(id);
-      toast.success("User deleted successfully");
+      toast.success("Usuario eliminado correctamente");
       fetchUsers();
     } catch (e) {
-      toast.error("Unable to delete this user");
+      toast.error("No se pudo eliminar este usuario");
+    }
+  };
+
+  const handleConfirmDelete = () => {
+    if (userToDelete) {
+      handleDelete(userToDelete);
+      handleCloseConfirmationModal();
     }
   };
 
@@ -144,8 +166,8 @@ const Users = ({ results }: any) => {
             <th scope="col" className="px-2 py-1 text-center">Correo</th>
             <th scope="col" className="px-2 py-1 text-center">Teléfono</th>
             <th scope="col" className="px-2 py-1 text-center">Rol</th>
-            <th scope="col" className="px-2 py-1 text-center">P. Publicar</th>
-            <th scope="col" className="px-2 py-1 text-center">Fecha de creación</th>
+            <th scope="col" className="px-2 py-1 text-center">Publicar</th>
+            <th scope="col" className="px-2 py-1 text-center">Fecha de registro</th>
             <th scope="col" className="px-2 py-1 text-center">Opciones</th>
           </tr>
         </thead>
@@ -162,7 +184,6 @@ const Users = ({ results }: any) => {
                 <td className="px-2 py-1 text-center whitespace-nowrap">
                   {
                     !o.can_publish ? (
-
                       <MUIIconButton className="focus:outline-none" onClick={() => handleChangePublicsPermision(o.id)}>
                         <PublicOffIcon className="text-yellow-600" />
                       </MUIIconButton>
@@ -175,7 +196,7 @@ const Users = ({ results }: any) => {
                   <MUIIconButton className="focus:outline-none" onClick={() => handleModalOpen(o)}>
                     <DriveFileRenameOutlineIcon className="text-blue-600" />
                   </MUIIconButton>
-                  <MUIIconButton className="focus:outline-none" onClick={() => handleDelete(o.id)}>
+                  <MUIIconButton className="focus:outline-none" onClick={() => handleOpenConfirmationModal(o.id)}>
                     <DeleteIcon className="text-red-600" />
                   </MUIIconButton>
                 </td>
@@ -185,101 +206,134 @@ const Users = ({ results }: any) => {
         ) : (
           <tbody>
             <tr>
-              <td colSpan={7} className="px-6 py-1 text-center">No se encontraron usuarios</td>
+              <td colSpan={7} className="px-6 py-1 text-center">No hay usuarios registrados</td>
             </tr>
           </tbody>
         )}
       </table>
-      <div>
-        <Pagination count={Math.ceil(data.length / 10)} page={page} onChange={(event, value) => setPage(value)} className="flex flex-row w-full justify-center" />
-      </div>
 
-      {/* ModalEditProfile */}
-      <Modal open={modalOpen} onClose={handleModalClose} aria-labelledby="modal-title" aria-describedby="modal-description">
+      {/* Pagination */}
+      <Box className="flex justify-center my-3">
+        <Pagination count={Math.ceil(results / 10)} page={page} onChange={(event, value) => setPage(value)} />
+      </Box>
+
+      {/* Modal */}
+      <Modal
+        open={modalOpen}
+        onClose={handleModalClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
         <Box sx={style}>
-          <h2 id="modal-title" className="text-lg font-semibold mb-2">Editar perfil</h2>
+          <h2 className="text-lg font-semibold mb-2">Editar Usuario</h2>
           <form onSubmit={handleFormSubmit}>
-            <div className="mb-2">
-              <InputLabel id="name-label">Nombre</InputLabel>
-              <TextField
-                label="Nombre"
-                fullWidth
-                size="small"
-                value={stateName}
-                onChange={(e) => setStateName(e.target.value)}
-                error={nameError}
-                helperText={nameError ? "Por favor ingresa un nombre" : ""}
-              />
-            </div>
-            <div className="mb-2">
-              <InputLabel id="phone-label">Teléfono</InputLabel>
-              <TextField
-                label="Teléfono"
-                fullWidth
-                size="small"
-                value={statePhone}
-                onChange={(e) => setStatePhone(e.target.value)}
-                error={phoneError}
-                helperText={phoneError ? "Por favor ingresa un teléfono" : ""}
-              />
-            </div>
-            <div className="mb-2">
-              <InputLabel id="email-label">Correo</InputLabel>
-              <TextField
-                label="Correo"
-                fullWidth
-                size="small"
-                value={stateEmail}
-                onChange={(e) => setStateEmail(e.target.value)}
-                error={emailError}
-                helperText={emailError ? "Por favor ingresa un correo electrónico" : ""}
-              />
-            </div>
-            <div className="mb-2">
-              <InputLabel id="password-label">Contraseña</InputLabel>
-              <TextField
-                type={showPassword ? "text" : "password"}
-                label="Contraseña"
-                fullWidth
-                size="small"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                error={passwordError}
-                helperText={passwordError ? "Por favor ingresa una contraseña" : ""}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  )
-                }}
-              />
-            </div>
-            <div className="mb-2">
-              <InputLabel id="confirm-password-label">Confirmar contraseña</InputLabel>
-              <TextField
-                type={showPassword ? "text" : "password"}
-                label="Confirmar contraseña"
-                fullWidth
-                size="small"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                error={confirmPasswordError}
-                helperText={confirmPasswordError ? "Las contraseñas no coinciden" : ""}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  )
-                }}
-              />
-            </div>
-            <div className="flex justify-end">
-              <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Guardar</button>
-              <button type="button" className="px-4 py-2 ml-2 bg-gray-400 text-white rounded" onClick={handleModalClose}>Cancelar</button>
+            <TextField
+              label="Nombre"
+              fullWidth
+              value={stateName}
+              onChange={(e) => setStateName(e.target.value)}
+              error={nameError}
+              helperText={nameError ? "Este campo es obligatorio" : ""}
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Correo"
+              fullWidth
+              value={stateEmail}
+              onChange={(e) => setStateEmail(e.target.value)}
+              error={emailError}
+              helperText={emailError ? "Este campo es obligatorio" : ""}
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Teléfono"
+              fullWidth
+              value={statePhone}
+              onChange={(e) => setStatePhone(e.target.value)}
+              error={phoneError}
+              helperText={phoneError ? "Este campo es obligatorio" : ""}
+              sx={{ mb: 2 }}
+            />
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel>Rol</InputLabel>
+              <Select
+                value={roleNew}
+                onChange={(e) => setRoleNew(e.target.value)}
+              >
+                <MenuItem value="client">Cliente</MenuItem>
+                <MenuItem value="seller">Vendedor</MenuItem>
+                <MenuItem value="admin">Administrador</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              label="Contraseña"
+              type={showPassword ? "text" : "password"}
+              fullWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={passwordError}
+              helperText={passwordError ? "La contraseña es obligatoria" : ""}
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Confirmar Contraseña"
+              type={showPassword ? "text" : "password"}
+              fullWidth
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              error={confirmPasswordError}
+              helperText={confirmPasswordError ? "Las contraseñas no coinciden" : ""}
+              sx={{ mb: 2 }}
+            />
+            <IconButton
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-20 right-4"
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+            <div className="flex justify-end mt-3">
+              <button
+                type="submit"
+                className="px-4 py-2 text-white bg-blue-600 rounded"
+              >
+                Guardar
+              </button>
+              <button
+                type="button"
+                onClick={handleModalClose}
+                className="px-4 py-2 text-white bg-red-600 rounded ml-2"
+              >
+                Cancelar
+              </button>
             </div>
           </form>
+        </Box>
+      </Modal>
+
+      {/* Confirmation Modal */}
+      <Modal
+        open={confirmationModalOpen}
+        onClose={handleCloseConfirmationModal}
+        aria-labelledby="confirmation-modal-title"
+        aria-describedby="confirmation-modal-description"
+      >
+        <Box sx={style}>
+          <h2 className="text-lg font-semibold mb-2">Confirmación de Eliminación</h2>
+          <p>¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.</p>
+          <div className="flex justify-end mt-3">
+            <button
+              onClick={handleConfirmDelete}
+              className="px-4 py-2 text-white bg-red-600 rounded"
+            >
+              Eliminar
+            </button>
+            <button
+              onClick={handleCloseConfirmationModal}
+              className="px-4 py-2 text-white bg-gray-600 rounded ml-2"
+            >
+              Cancelar
+            </button>
+          </div>
         </Box>
       </Modal>
     </div>

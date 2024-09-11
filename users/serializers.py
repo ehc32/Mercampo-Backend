@@ -62,7 +62,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class EditUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["email", "name", "phone", "avatar"] 
+        fields = ["email", "name", "phone", "avatar", "role"] 
 
     def update(self, instance, validated_data):
         instance.email = validated_data.get('email', instance.email)

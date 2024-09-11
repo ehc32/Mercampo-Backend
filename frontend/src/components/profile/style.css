@@ -1,0 +1,17 @@
+@media (max-width: 850px) {
+    .columna-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .columna-info div {
+
+        width: 100% !important;
+    }
+    
+    .css-19kzrtu {
+        padding:  1em 0 !important;
+    }
+
+}

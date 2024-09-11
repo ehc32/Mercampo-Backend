@@ -21,8 +21,6 @@ const AprovSellerUser = ({ results }: Props) => {
       const data = response.data;
       setData(data);
       setDataLenght(data.length);
-      console.log(typeof data);
-      console.log(data.length);
     } catch (error) {
       toast.error('Error al obtener usuarios');
     }

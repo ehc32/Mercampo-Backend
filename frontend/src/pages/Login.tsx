@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthStore } from "../hooks/auth";
 
 const LoginPage = () => {
@@ -44,34 +43,14 @@ const LoginPage = () => {
     loginMutation.mutate();
   };
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#39A900",
-      },
-    },
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            borderRadius: '8px',
-            textTransform: 'none',
-            padding: '10px',
-          },
-        },
-      },
-    },
-  });
-
   if (isAuth) return <Navigate to="/" />;
 
   return (
-    <ThemeProvider theme={theme}>
     
       <div className="flex flex-col justify-center items-center fondo-login min-h-screen">
-        <div className="w-96 bg-slate-300 bg-opacity-20 backdrop-filter backdrop-blur-md rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:bg-opacity-20 dark:backdrop-blur-md dark:border-gray-700 flex flex-row">
+        <div className="w-96 bg-slate-300 bg-opacity-20 backdrop-filter backdrop-blur-md rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:bg-opacity-20 dark:backdrop-blur-md  flex flex-row">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">
-            <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-100">
+            <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-black md:text-2xl dark:text-gray-100">
               Inicia sesión
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
@@ -79,7 +58,7 @@ const LoginPage = () => {
                 <Typography
                   variant="subtitle1"
                   component="div"
-                  className="font-bold text-black dark:text-gray-200 mb-1"
+                  className="font-bold text-black mb-1"
                 >
                   Correo electrónico
                 </Typography>
@@ -88,7 +67,7 @@ const LoginPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder="correo@email.com"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
                 />
               </div>
 
@@ -96,7 +75,7 @@ const LoginPage = () => {
                 <Typography
                   variant="subtitle1"
                   component="div"
-                  className="font-bold text-black dark:text-gray-200 mb-1"
+                  className="font-bold text-black mb-1"
                 >
                   Contraseña
                 </Typography>
@@ -106,7 +85,7 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     type={showPassword ? "text" : "password"}
                     placeholder="Contraseña"
-                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
                   />
                   <InputAdornment position="end" className="absolute inset-y-0 right-0 flex items-center pr-3">
                     <IconButton
@@ -149,7 +128,6 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-    </ThemeProvider>
   );
 };
 

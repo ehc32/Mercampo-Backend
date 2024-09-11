@@ -61,6 +61,9 @@ const Content: React.FC<ContenidoProps> = ({
 
     const { abierto, toggleAbierto } = useDrawer();
 
+
+    const isWideScreen = window.innerWidth > 900;
+
     return (
         <section className="contenidoTienda">
             {/* <Swiper width="92%" height="300px" datos={carrouselData} isUpSwiper={true} /> */}
@@ -73,7 +76,7 @@ const Content: React.FC<ContenidoProps> = ({
                         <h2 className='titulo-sala-compra-light'>Una gran variedad de productos</h2>
                         <h4 className='sub-titulo-sala-compra-light'>Encuentra productos de alta calidad a los mejores precios</h4>
                     </div>
-                    <div className='flex flex-col sm:flex-row items-center justify-center gap-4 my-14 '>
+                    <div className={ isWideScreen ? 'flex flex-col sm:flex-row items-center justify-center gap-4 my-14' : 'flex flex-row mx-2 sm:flex-row items-center justify-center gap-2 my-8'}>
                         <Button
                             variant="contained"
                             className='flex align-center'
@@ -81,27 +84,43 @@ const Content: React.FC<ContenidoProps> = ({
                             onClick={deleteDataFilter}
                         >
                             <DeleteSweepIcon />
-                            <p>Borrar filtros</p>
+                            {
+                                isWideScreen &&
+                                <p>Borrar filtros</p>
+                            }
                         </Button>
                         <div
                             onClick={toggleAbierto}
                             className='flex items-center gap-2 cursor-pointer '
                         >
                             <TuneIcon />
-                            <span>Filtrar productos</span>
+                            {
+                                isWideScreen &&
+                                <span>Filtrar productos</span>
+                            }
                         </div>
                         <form
                             action=""
                             onSubmit={(e) => e.preventDefault()}
-                            className='flex-1 max-w-lg'
-                        >
+                            className='flex-1 max-w-lg'>
                             <TextField
                                 fullWidth
                                 id="search"
-                                label="Buscar ..."
+                                label="Buscar..."
                                 value={searchItem}
                                 onChange={handleChange2}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: '#39A900',
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#39A900',
+                                    },
+                                }}
                             />
+
                         </form>
                     </div>
                 </div>
