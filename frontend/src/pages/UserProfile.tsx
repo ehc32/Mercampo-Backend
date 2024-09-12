@@ -270,7 +270,7 @@ const UserProfile = () => {
                         <TableCell>{product.name}</TableCell>
                         <TableCell>{product.description.slice(0, 20)}...</TableCell>
                         <TableCell>{product.rating}</TableCell>
-                        <TableCell>${product.price}</TableCell>
+                        <TableCell>${Number(product.price).toLocaleString()}</TableCell>
                         <TableCell>{product.count_in_stock}</TableCell>
                         <TableCell>{product.count_in_sells}</TableCell>
                         <TableCell className="w-32">

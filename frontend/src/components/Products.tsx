@@ -8,6 +8,8 @@ import './style.css';
 import { Box, Button, IconButton, Modal, Typography } from '@mui/material';
 import toast from 'react-hot-toast';
 import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 
 interface Props {
   results: any;
@@ -99,7 +101,7 @@ const Products = ({ results }: Props) => {
             <th scope="col" className="px-2 py-2 text-center">Opiniones</th>
             <th scope="col" className="px-2 py-2 text-center">Calificación</th>
             <th scope="col" className="px-2 py-2 text-center">Fecha de creación</th>
-            <th scope="col" className="px-2 py-2 text-center">Publicado por</th>
+            <th scope="col" className="px-2 py-2 text-center">Publicado</th>
           </tr>
         </thead>
         {data && data.length > 0 ? (
@@ -109,14 +111,14 @@ const Products = ({ results }: Props) => {
                 <td className="px-2 py-2 whitespace-nowrap">{o.name}</td>
                 <td className="px-2 py-2 whitespace-nowrap">{o.category}</td>
                 <td className="px-2 py-2 whitespace-nowrap">{o.map_locate.slice(0, 20)}</td>
-                <td className="px-2 py-2 whitespace-nowrap">$ {o.price}</td>
+                <td className="px-2 py-2 whitespace-nowrap">$ {Number(o.price).toLocaleString()}</td>
                 <td className="px-2 py-2 text-center whitespace-nowrap">{o.unit}</td>
                 <td className="px-2 py-2 text-center whitespace-nowrap">{o.num_reviews}</td>
                 <td className="px-2 py-2 text-center whitespace-nowrap">{o.rating ? o.rating : "Sin comentarios"}</td>
                 <td className="px-2 py-2 whitespace-nowrap">{formatearFecha(o.created)}</td>
                 <td className="px-2 py-1 text-center">
                   <IconButton className='focus:outline-none' onClick={() => handleOpenModal(o.user)}>
-                    <SearchIcon className='text-blue-600' />
+                  <VisibilityIcon className='text-[#39A900]' />
                   </IconButton>
                   <IconButton className='focus:outline-none' onClick={() => handleOpen(o.id)}>
                     <DeleteIcon className='text-red-600' />
@@ -173,13 +175,19 @@ const Products = ({ results }: Props) => {
               Confirmar
             </Button>
             <Button
-              variant="contained"
-              color="primary"
-              onClick={handleClose} // Cerrar modal
-              sx={{ marginLeft: 1 }}
-            >
-              Cancelar
-            </Button>
+  variant="contained"
+  onClick={handleClose} // Cerrar modal
+  sx={{
+    marginLeft: 1,
+    backgroundColor: '#808080', // Color gris medio
+    color: 'white', // Color de texto blanco
+    '&:hover': {
+      backgroundColor: '#454545' // Color gris oscuro en hover
+    }
+  }}
+>
+  Cancelar
+</Button>
           </Box>
         </Box>
       </Modal>

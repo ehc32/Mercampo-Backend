@@ -2,7 +2,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
   Checkbox,
-  Pagination,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -24,6 +24,7 @@ import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useCartStore } from "../hooks/cart";
 import "./style.css";
 import { get_paypal_user } from "../api/users";
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 
 const CartPage = () => {
   const [paypal, SetPaypal] = useState<any>();
@@ -307,7 +308,7 @@ const CartPage = () => {
                 <h3 className="font-semibold text-black fs-18px">
                   <span>Total a pagar:</span>{" "}
                   <span className="text-[#39A900] ml-2 font-bold">
-                    $ {total_price.toLocaleString("es-ES")}
+                    $ {total_price.toLocaleString()}
                   </span>
                 </h3>
                 <h3 className="fs-16px font-semibold text-black">
@@ -427,11 +428,11 @@ const CartPage = () => {
                               {row.name}
                             </TableCell>
                             <TableCell align="center">
-                              $ {Number(row.price).toFixed(0)}
+                              $ {Number(row.price).toLocaleString()}
                             </TableCell>
                             <TableCell align="center">{row.quantity}</TableCell>
                             <TableCell align="center">
-                              $ {(row.price * row.quantity).toFixed(0)}
+                              $ {(row.price * row.quantity).toLocaleString(0)}
                             </TableCell>
                             <td className="px-4 py-2 flex  text-black font-bold whitespace-nowrap">
                               <div className="flex  w-full space-x-3">
@@ -492,16 +493,40 @@ const CartPage = () => {
                   </Table>
                 </TableContainer>
                 <div className=" w-12/12 text-center mx-auto">
-                  <div className="w-12/12 text-center mx-auto">
-                    <Pagination
-                      count={Math.ceil(cart.length / rowsPerPage)} // Calcula el total de páginas basado en cart.length
-                      page={page} // Página actual
-                      showFirstButton // Muestra el botón "Primero"
-                      showLastButton // Muestra el botón "Último"
-                      onChange={handleChangePage} // Manejador para cambiar de página
-                      className="flex flex-row w-full justify-center my-6" // Estilos de Tailwind
-                    />
-                  </div>
+                  <TablePagination
+                    rowsPerPageOptions={[20]}
+                    component="div"
+                    count={cart.length}
+                    className="mx-auto"
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    labelRowsPerPage="Filas por página"
+                    labelDisplayedRows={() => ""} // Eliminamos el texto de las filas mostradas
+                    ActionsComponent={() => (
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <IconButton
+                          onClick={(event) => handleChangePage(event, page - 1)}
+                          disabled={page === 0}
+                          aria-label="Página anterior"
+                        >
+                          <KeyboardArrowLeft />
+                        </IconButton>
+                        <span style={{ margin: "0 10px" }}>{page + 1}</span>{" "}
+                        {/* Número de página centrado */}
+                        <IconButton
+                          onClick={(event) => handleChangePage(event, page + 1)}
+                          disabled={
+                            page >= Math.ceil(cart.length / rowsPerPage) - 1
+                          }
+                          aria-label="Página siguiente"
+                        >
+                          <KeyboardArrowRight />
+                        </IconButton>
+                      </div>
+                    )}
+                  />
                 </div>
               </div>
               <div></div>
