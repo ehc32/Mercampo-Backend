@@ -267,7 +267,16 @@ function ProfileTables({ user, id }) {
         </TabPanel>
       )}
 
-      <TabPanel value={tabValue} index={2}>
+      {user?.role !== "client" ? (
+        <TabPanel value={tabValue} index={2}>
+          <div className='flex flex-row '>
+            <ModalEditProfile user={user} id={id} />
+            {user?.role === "seller" && <ModalSellerConfig id={id} />}
+            {user?.role === "admin" && <ModalSellerConfig id={id} />}
+            {user?.role === "client" && <ModalRequestSeller userId={id} />}
+          </div>
+        </TabPanel>
+      ) : (<TabPanel value={tabValue} index={1}>
         <div className='flex flex-row '>
           <ModalEditProfile user={user} id={id} />
           {user?.role === "seller" && <ModalSellerConfig id={id} />}
@@ -275,6 +284,8 @@ function ProfileTables({ user, id }) {
           {user?.role === "client" && <ModalRequestSeller userId={id} />}
         </div>
       </TabPanel>
+      )
+      }
     </Box>
   );
 }
@@ -283,6 +294,8 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
+
+
     <div
       role="tabpanel"
       hidden={value !== index}

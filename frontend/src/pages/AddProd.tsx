@@ -167,9 +167,6 @@ const AddProd = () => {
                   required
                 />
               </div>
-            </div>
-
-            <div className="flex flex-col md:flex-row md:space-x-4">
               <div className="flex-1 mb-4 md:mb-0">
                 <h6 className="text-black font-bold m-1 dark:text-white">Unidad</h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
