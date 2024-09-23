@@ -23,6 +23,9 @@ interface CarrouselLast12Props {
 }
 
 const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
+    const formatPrice = (price: number) => {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
 
 
     function formatearFecha(fechaISO) {
@@ -63,7 +66,7 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
                     </p>
                     <div className='footerInfo'>
                         <div>
-                            <h6>$ {Number(producto.price).toFixed(0)}</h6>
+                        <h6>$ {formatPrice(Number(producto.price))}</h6>
                             <span>{producto.locate?.slice(0, 15)}, {formatearFecha(producto.created)}</span>
                         </div>
                         <BasicTooltip producto={producto} />

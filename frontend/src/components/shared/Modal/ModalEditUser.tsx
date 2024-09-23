@@ -24,37 +24,42 @@ const style = {
 };
 
 const inputStyle = {
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#39A900',
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#39A900",
     },
-    '&:hover fieldset': {
-      borderColor: '#39A900',
+    "&:hover fieldset": {
+      borderColor: "#39A900",
     },
-    '&.Mui-focused fieldset': {
-      borderColor: '#39A900',
+    "&.Mui-focused fieldset": {
+      borderColor: "#39A900",
     },
   },
-  '& .MuiInputLabel-root': {
-    color: '#39A900',
+  "& .MuiInputLabel-root": {
+    color: "#39A900",
   },
 };
 
 export default function ModalEditProfile({ id }) {
   const [open, setOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [stateName, setStateName] = useState("");
   const [stateEmail, setStateEmail] = useState("");
   const [statePhone, setStatePhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState(null);
   const [nameError, setNameError] = useState("");
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event) => {
     const file = event.target.files?.[0];
-    if (file && (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg")) {
+    if (
+      file &&
+      (file.type === "image/png" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/jpg")
+    ) {
       setImage(file);
     } else {
       toast.error("Solo se permiten archivos PNG, JPEG o JPG.");
@@ -66,9 +71,8 @@ export default function ModalEditProfile({ id }) {
   };
 
   useEffect(() => {
-    console.log(id)
-  }, [])
-
+    console.log(id);
+  }, []);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -77,15 +81,18 @@ export default function ModalEditProfile({ id }) {
     setNameError("");
   };
 
-  const validateName = (name: string) => {
+  const validateName = (name) => {
     const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     return nameRegex.test(name);
   };
-  
-  const validateEmail = (email: string) => /^[^\s@]+@(gmail\.com|outlook\.com|hotmail\.com|soysena\.edu\.co|misena\.edu\.co)$/.test(email);
-  const validatePhone = (phone: string) => /^\d+$/.test(phone);
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const validateEmail = (email) =>
+    /^[^\s@]+@(gmail\.com|outlook\.com|hotmail\.com|soysena\.edu\.co|misena\.edu\.co)$/.test(
+      email
+    );
+  const validatePhone = (phone) => /^\d+$/.test(phone);
+
+  const handleNameChange = (e) => {
     const newName = e.target.value;
     setStateName(newName);
     if (newName && !validateName(newName)) {
@@ -95,13 +102,30 @@ export default function ModalEditProfile({ id }) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const getSelectedOptionTitle = (option) => {
+    switch (option) {
+      case "nombre":
+        return "Nombre";
+      case "telefono":
+        return "Teléfono";
+      case "correo":
+        return "Correo";
+      case "contrasena":
+        return "Contraseña";
+      case "foto":
+        return "Foto";
+      default:
+        return "";
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let data = {};
     let isValid = true;
 
     switch (selectedOption) {
-      case "name":
+      case "nombre":
         if (!validateName(stateName)) {
           setNameError("El nombre solo puede contener letras y espacios");
           isValid = false;
@@ -109,7 +133,7 @@ export default function ModalEditProfile({ id }) {
           data = { name: stateName };
         }
         break;
-      case "phone":
+      case "telefono":
         if (!validatePhone(statePhone)) {
           toast.error("El teléfono solo puede contener números positivos");
           isValid = false;
@@ -117,25 +141,29 @@ export default function ModalEditProfile({ id }) {
           data = { phone: statePhone };
         }
         break;
-      case "email":
+      case "correo":
         if (!validateEmail(stateEmail)) {
-          toast.error("Correo electrónico no válido. Use gmail.com, outlook.com, hotmail.com, soysena.edu.co o misena.edu.co");
+          toast.error(
+            "Correo electrónico no válido. Use gmail.com, outlook.com, hotmail.com, soysena.edu.co o misena.edu.co"
+          );
           isValid = false;
         } else {
           data = { email: stateEmail };
         }
         break;
-      case "password":
+      case "contrasena":
         if (password === confirmPassword) {
-          formData.append("password", password);
+          data = { password: password };
         } else {
           toast.error("Las contraseñas no coinciden");
           isValid = false;
         }
         break;
-      case "image":
+      case "foto":
         if (image) {
+          const formData = new FormData();
           formData.append("avatar", image);
+          data = formData;
         }
         break;
       default:
@@ -156,7 +184,7 @@ export default function ModalEditProfile({ id }) {
 
   const renderContent = () => {
     switch (selectedOption) {
-      case "name":
+      case "nombre":
         return (
           <div className="mb-2">
             <InputLabel id="name-label">Nombre</InputLabel>
@@ -172,7 +200,7 @@ export default function ModalEditProfile({ id }) {
             />
           </div>
         );
-      case "phone":
+      case "telefono":
         return (
           <div className="mb-2">
             <InputLabel id="phone-label">Teléfono</InputLabel>
@@ -188,7 +216,7 @@ export default function ModalEditProfile({ id }) {
             />
           </div>
         );
-      case "email":
+      case "correo":
         return (
           <div className="mb-2">
             <InputLabel id="email-label">Correo</InputLabel>
@@ -202,7 +230,7 @@ export default function ModalEditProfile({ id }) {
             />
           </div>
         );
-      case "password":
+      case "contrasena":
         return (
           <>
             <div className="mb-2">
@@ -225,7 +253,9 @@ export default function ModalEditProfile({ id }) {
               />
             </div>
             <div className="mb-2">
-              <InputLabel id="confirm-password-label">Confirmar Contraseña</InputLabel>
+              <InputLabel id="confirm-password-label">
+                Confirmar Contraseña
+              </InputLabel>
               <TextField
                 type={showPassword ? "text" : "password"}
                 label="Confirmar Contraseña"
@@ -238,18 +268,39 @@ export default function ModalEditProfile({ id }) {
             </div>
           </>
         );
-      case "image":
+      case "foto":
         return (
           <div className="mb-2 flex flex-col items-center">
             {image === null ? (
-              <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100">
-                <p className="text-sm text-gray-500">Toca para actualizar o arrastra y suelta aquí</p>
-                <input id="dropzone-file" type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleFileChange} className="hidden" />
+              <label
+                htmlFor="dropzone-file"
+                className="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100"
+              >
+                <p className="text-sm text-gray-500">
+                  Toca para actualizar o arrastra y suelta aquí
+                </p>
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  accept="image/png, image/jpeg, image/jpg"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
               </label>
             ) : (
               <div className="flex flex-col items-center">
-                <img src={URL.createObjectURL(image)} alt="Preview" className="h-24 w-24 object-cover rounded-full mb-2" />
-                <button onClick={removeImage} type="button" className="mt-2 text-white bg-red-600 hover:bg-red-800 py-1 px-3 rounded">Eliminar Imagen</button>
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt="Vista previa"
+                  className="h-24 w-24 object-cover rounded-full mb-2"
+                />
+                <button
+                  onClick={removeImage}
+                  type="button"
+                  className="mt-2 text-white bg-red-600 hover:bg-red-800 py-1 px-3 rounded"
+                >
+                  Eliminar Imagen
+                </button>
               </div>
             )}
           </div>
@@ -261,30 +312,82 @@ export default function ModalEditProfile({ id }) {
 
   return (
     <div>
-      <h2 className="bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded row align-center w-56 justify-center" onClick={handleOpen}>
+      <h2
+        className="bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded row align-center w-56 justify-center"
+        onClick={handleOpen}
+      >
         <FaEdit className="mr-2 fs-16px" />
         Editar
       </h2>
 
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-title" aria-describedby="modal-description">
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
         <Box sx={style}>
           {!selectedOption ? (
             <>
-              <h2 id="modal-title" className="text-lg font-semibold mb-2">Selecciona qué quieres editar</h2>
+              <h2 id="modal-title" className="text-lg font-semibold mb-2">
+                Selecciona qué quieres editar
+              </h2>
               <div className="flex flex-col space-y-2">
-                <button className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2" onClick={() => setSelectedOption("name")}>Editar Nombre</button>
-                <button className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2" onClick={() => setSelectedOption("phone")}>Editar Teléfono</button>
-                <button className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2" onClick={() => setSelectedOption("email")}>Editar Correo</button>
-                <button className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2" onClick={() => setSelectedOption("password")}>Editar Contraseña</button>
-                <button className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2" onClick={() => setSelectedOption("image")}>Editar Foto</button>
+                <button
+                  className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2"
+                  onClick={() => setSelectedOption("nombre")}
+                >
+                  Editar Nombre
+                </button>
+                <button
+                  className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2"
+                  onClick={() => setSelectedOption("telefono")}
+                >
+                  Editar Teléfono
+                </button>
+                <button
+                  className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2"
+                  onClick={() => setSelectedOption("correo")}
+                >
+                  Editar Correo
+                </button>
+                <button
+                  className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2"
+                  onClick={() => setSelectedOption("contrasena")}
+                >
+                  Editar Contraseña
+                </button>
+                <button
+                  className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2"
+                  onClick={() => setSelectedOption("foto")}
+                >
+                  Editar Foto
+                </button>
               </div>
             </>
           ) : (
             <form onSubmit={handleSubmit}>
-              <h2 id="modal-title" className="text-lg font-semibold mb-2">Editar {selectedOption}</h2>
+              <h2
+                id="modal-title"
+                className="text-lg font-semibold mb-2 text-center"
+              >
+                Editar {getSelectedOptionTitle(selectedOption)}
+              </h2>
               {renderContent()}
-              <div className="flex justify-center mt-4">
-                <button type="submit" className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2">Guardar cambios</button>
+              <div className="flex justify-center space-x-4 mt-4">
+                <button
+                  type="submit"
+                  className="text-white bg-[#39A900] hover:bg-[#335622] rounded-lg text-sm px-4 py-2"
+                >
+                  Guardar 
+                </button>
+                <button
+                  type="button"
+                  className="text-white bg-red-600 hover:bg-red-800 rounded-lg text-sm px-4 py-2"
+                  onClick={handleClose}
+                >
+                  Cancelar
+                </button>
               </div>
             </form>
           )}
