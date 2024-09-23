@@ -122,8 +122,32 @@
     min-height: 75vh !important;
     width: 100%;
 }
+@media (min-width: 1600px) {
+    .fondo-login {
+        max-height: 90vh !important;
+    }
+}
 
-
+@media (min-width: 1800px) {
+    .fondo-login {
+        max-height: 90vh !important;
+    }
+}
+@media (max-width: 2000px) {
+    .fondo-login {
+        max-height: 90vh !important;
+    }
+}
+@media (max-width: 2200px) {
+    .fondo-login {
+        max-height: 90vh !important;
+    }
+}
+@media (max-width: 2400px) {
+    .fondo-login {
+        max-height: 90vh !important;
+    }
+}
 /* paginate */
 
 .paginacion {
