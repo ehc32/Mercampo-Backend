@@ -76,7 +76,8 @@ const Content: React.FC<ContenidoProps> = ({
                         <h2 className='titulo-sala-compra-light'>Una gran variedad de productos</h2>
                         <h4 className='sub-titulo-sala-compra-light'>Encuentra productos de alta calidad a los mejores precios</h4>
                     </div>
-                    <div className={ isWideScreen ? 'flex flex-col sm:flex-row items-center justify-center gap-4 my-14' : 'flex flex-row mx-2 sm:flex-row items-center justify-center gap-2 my-8'}>
+                    <p className='mt-4'>Busca de manera dinamica los productos que mas se adecuen a lo que nesesitas, para ello se han dispuesto filtros en donde especificar un poco más lo que buscas.</p>
+                    <div className={ isWideScreen ? 'flex flex-col sm:flex-row items-center justify-center gap-4 my-10' : 'flex flex-row mx-2 sm:flex-row items-center justify-center gap-2 my-8'}>
                         <Button
                             variant="contained"
                             className='flex align-center'
@@ -106,7 +107,7 @@ const Content: React.FC<ContenidoProps> = ({
                             <TextField
                                 fullWidth
                                 id="search"
-                                label="Buscar..."
+                                label="Buscar producto  ..."
                                 value={searchItem}
                                 onChange={handleChange2}
                                 sx={{

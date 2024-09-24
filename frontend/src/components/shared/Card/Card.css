@@ -71,13 +71,19 @@
     padding: .5em 0;
 }
 
-.product-container-light,
-.product-container-dark {
+.product-container-light {
     width: 100%;
-    padding: 20px;
+    padding: 0px 20px !important;
     display: flex;
     flex-direction: column;
     align-items: start;
+}
+
+@media (max-width: 850px) {
+    .product-container-light {
+            padding-top: 40px !important;
+
+    }
 }
 
 .product-container-light img,

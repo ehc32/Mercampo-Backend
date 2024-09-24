@@ -21,6 +21,7 @@ import ListAsideNav from '../ListAsideNav/ListAsideNav';
 import './Aside.css'
 import { useAuthStore } from '../../../hooks/auth';
 
+const ciudades = ["todos", "Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
 const AsideFilter = ({
     bringDataFilter,
     deleteDataFilter,
@@ -137,7 +138,7 @@ const AsideFilter = ({
                          */}
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography variant="h6" gutterBottom>
+                                <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
                                     Categoría
                                 </Typography>
                             </Box>
@@ -154,16 +155,27 @@ const AsideFilter = ({
                                                 name={categoria}
                                                 value={categoria}
                                                 onChange={handleCategoryChange}
+                                                sx={{
+                                                    color: '#39a900', // Color por defecto del checkbox
+                                                    '&.Mui-checked': {
+                                                        color: '#39a900', // Color cuando está seleccionado
+                                                    },
+                                                    '&:hover': {
+                                                        backgroundColor: 'rgba(51, 154, 144, 0.08)' // Color en hover
+                                                    }
+                                                }}
                                             />
                                         }
                                         label={capitalizeFirstLetter(categoria)}
                                     />
                                 ))}
                             </FormGroup>
+
+
                         </Box>
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography variant="h6" gutterBottom>
+                                <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
                                     Precio máximo
                                 </Typography>
                             </Box>
@@ -183,7 +195,7 @@ const AsideFilter = ({
                         </Box>
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography variant="h6" gutterBottom>
+                                <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
                                     Rango de fechas
                                 </Typography>
                             </Box>
@@ -196,6 +208,17 @@ const AsideFilter = ({
                                     value={time || 'todos'}
                                     style={{ height: "4em", width: "100%" }}
                                     onChange={handleTimeRangeChange}
+                                    sx={{
+                                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: '#39a900',  // Cambia el borde cuando el Select está enfocado o abierto
+                                        },
+                                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: '#39a900',  // Cambia el borde cuando el Select está en hover
+                                        },
+                                        '&.Mui-focused .MuiSelect-icon': {
+                                            color: '#39a900', // Cambia el color del ícono (flecha) cuando el Select está abierto
+                                        }
+                                    }}
                                 >
                                     <MenuItem value="todos">Todos</MenuItem>
                                     <MenuItem value="hoy">Publicados hoy</MenuItem>
@@ -203,6 +226,7 @@ const AsideFilter = ({
                                     <MenuItem value="semana">Esta semana</MenuItem>
                                     <MenuItem value="mes">Este mes</MenuItem>
                                 </Select>
+
                                 {/* <Button
                                     variant="contained"
                                     color="success"
@@ -216,7 +240,7 @@ const AsideFilter = ({
                         </Box>
                         <Box sx={{ p: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography variant="h6" gutterBottom>
+                                <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
                                     Ubicación
                                 </Typography>
                             </Box>
@@ -228,13 +252,23 @@ const AsideFilter = ({
                                 value={locate || 'todos'}
                                 style={{ height: "4em", width: "100%" }}
                                 onChange={handleLocationChange}
+                                sx={{
+                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: '#39a900',  // Cambia el borde del Select cuando está enfocado
+                                    },
+                                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: '#39a900',  // Cambia el borde en hover
+                                    }
+                                }}
                             >
-                                <MenuItem value="todos">Todos los lugares</MenuItem>
-                                <MenuItem value="bogota">Bogotá</MenuItem>
-                                <MenuItem value="medellin">Medellín</MenuItem>
-                                <MenuItem value="cali">Cali</MenuItem>
-                                <MenuItem value="Neiva">Neiva</MenuItem>
+                                {ciudades.map((ciudad, index) => (
+                                    <MenuItem key={index} value={ciudad}>
+                                        {ciudad}
+                                    </MenuItem>
+                                ))}
                             </Select>
+
+
                         </Box>
 
                         <Modal

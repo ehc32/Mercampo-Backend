@@ -19,7 +19,8 @@ const AddProd = () => {
   const [precio, setPrecio] = useState("");
   const [unidad, setUnidad] = useState("");
   const [tiempoL, setTiempoL] = useState<number>();
-  const ciudades = ["Neiva"];
+  const ciudades = ["Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
+
 
   interface Product {
     name: string,
