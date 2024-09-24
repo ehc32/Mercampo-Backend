@@ -79,7 +79,7 @@ const AddProd = () => {
       <div className="w-full md:w-4/6 flex m-auto dark:bg-gray-800 rounded-xl shadow-lg">
         <div className="w-full p-4 md:p-10 card-bordered">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-2xl md:text-3xl text-black font-bold dark:text-white">
+            <h1 className="text-2xl md:text-3xl text-black font-bold ">
               Añadir Producto
             </h1>
             <img src="/public/logoSena.png" alt="Logo-sena" className="h-12 md:h-16" />
@@ -88,20 +88,22 @@ const AddProd = () => {
           <form onSubmit={manejarSubmit} className="space-y-4 md:space-y-6">
             <div className="flex flex-col md:flex-row md:space-x-4">
               <div className="flex-1 mb-4 md:mb-0">
-                <h6 className="text-black font-bold m-1 dark:text-white">Nombre del Producto</h6>
+                <h6 className="text-black font-bold m-1 ">Nombre del Producto
+                  <BasicTooltip titlet={"Pon el nombre de tu producto"} /></h6>
                 <input
                   type="text"
                   id="nombre"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-Z\s]/g, ''))}
                   placeholder="Ej: Tomate cherry"
-                  className="w-full p-3 border dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black focus:outline-none"
+                  className="w-full p-3 border border-gray-300 rounded-md bg-white  text-black focus:outline-none"
                   required
                 />
               </div>
 
               <div className="flex-1">
-                <h6 className="text-black font-bold m-1 dark:text-white">Categoria</h6>
+                <h6 className="text-black font-bold m-1 ">Categoria
+                  <BasicTooltip titlet={"Selecciona la categoria que más se adecúe al tipo de producto que desea ofertar"} /></h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
                   <Select
                     value={categoria}
@@ -125,7 +127,8 @@ const AddProd = () => {
               </div>
             </div>
 
-            <h6 className="text-black font-bold mx-1 dark:text-white">Descripción del Producto</h6>
+            <h6 className="text-black font-bold mx-1 ">Descripción del Producto
+              <BasicTooltip titlet={"Has una breve introducción de tu producto, el maximo de caractéres es de 350"} /></h6>
             <textarea
               id="descripcion"
               value={descripcion}
@@ -135,40 +138,46 @@ const AddProd = () => {
                 }
               }}
               placeholder="Ej: Tomate cherry de alta calidad"
-              className="resize-none w-full p-3 mt-2 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black"
+              className="resize-none w-full p-3 mt-2 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
               rows={4}
               required
             />
 
             <div className="flex flex-col md:flex-row md:space-x-4">
               <div className="flex-1 mb-4 md:mb-0">
-                <h6 className="text-black font-bold m-1 dark:text-white">Precio</h6>
+                <h6 className="text-black font-bold m-1 ">Precio unitario
+                  <BasicTooltip titlet={"El precio de cada producto será redondeado, es decir que no tendra decimales"} />
+                </h6>
                 <input
                   type="number"
                   id="precio"
                   value={precio}
                   onChange={(e) => setPrecio(Math.max(0, Number(e.target.value)).toString())}
                   placeholder="Ej: 5000"
-                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black"
+                  className="w-full p-3 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
                   min="0"
                   required
                 />
               </div>
               <div className="flex-1 mb-4 md:mb-0">
-                <h6 className="text-black font-bold m-1 dark:text-white">Cantidad en Stock</h6>
+                <h6 className="text-black font-bold m-1 ">Cantidad en Stock
+                  <BasicTooltip titlet={"Pon una cantidad de productos que realmente puedan ser vendidos en el tiempo limite"} />
+                </h6>
                 <input
                   type="number"
                   id="cantidad"
                   value={cantidad}
                   onChange={(e) => setCantidad(Math.max(0, Number(e.target.value)).toString())}
                   placeholder="Ej: 100"
-                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black"
+                  className="w-full p-3 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
                   min="0"
                   required
                 />
               </div>
               <div className="flex-1 mb-4 md:mb-0">
-                <h6 className="text-black font-bold m-1 dark:text-white">Unidad</h6>
+                <h6 className="text-black font-bold m-1 ">Unidad
+                  <BasicTooltip titlet={"Seleccione una unidad de medida según al producto que desea ofertar"} />
+                </h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
                   <Select
                     value={unidad}
@@ -183,12 +192,12 @@ const AddProd = () => {
                     <MenuItem value="" disabled>Selecciona una unidad</MenuItem>
                     <MenuItem value="Kg">Kilos</MenuItem>
                     <MenuItem value="L">Litros</MenuItem>
-                    <MenuItem value="L">Libras</MenuItem>
                   </Select>
                 </FormControl>
               </div>
               <div className="flex-1">
-                <h6 className="text-black font-bold m-1 dark:text-white">Tiempo de publicación</h6>
+                <h6 className="text-black font-bold m-1 ">Tiempo de publicación
+                  <BasicTooltip titlet={"Se debe tomar en cuenta que el producto puede caducar o dañarse, tome en cuenta el tipo de producto a la hora de seleccionar un tiempo limite."} /></h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
                   <Select
                     value={tiempoL}
@@ -201,7 +210,7 @@ const AddProd = () => {
                     }}
                   >
                     <MenuItem value="" disabled>Selecciona un tiempo limite</MenuItem>
-                    <MenuItem value={0}>1 semana</MenuItem>
+                    {/* <MenuItem value={0}>1 semana</MenuItem> */}
                     <MenuItem value={1}>2 semanas</MenuItem>
                     <MenuItem value={2}>3 semanas</MenuItem>
                   </Select>
@@ -209,10 +218,11 @@ const AddProd = () => {
               </div>
             </div>
 
-            <h6 className="fs-22px mt-3 text-black font-bold dark:text-white">Agrega una ubicación</h6>
+            <h6 className="fs-22px mt-3 text-black font-bold ">Agrega una ubicación</h6>
             <div className="flex flex-col md:flex-row md:space-x-4">
               <div className="flex-1 mb-4 md:mb-0">
-                <h6 className="text-black font-bold m-1 dark:text-white">Ubicación</h6>
+                <h6 className="text-black font-bold m-1 ">Ubicación
+                  <BasicTooltip titlet={"Menciona el país, ciudad, barrio o direccion del producto"} /></h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
                   <Select
                     value={ubicacion}
@@ -234,9 +244,9 @@ const AddProd = () => {
                 </FormControl>
               </div>
               <div className="flex-1">
-                <h6 className="text-black font-bold dark:text-white flex flex-row items-center">
-                  <span className="m-1">Ubicación descriptiva</span>
-                  <BasicTooltip />
+                <h6 className="text-black font-bold  flex m-1 flex-row items-center">
+                  Ubicación descriptiva
+                  <BasicTooltip titlet={"Menciona el país, ciudad, barrio o direccion del producto"} />
                 </h6>
                 <input
                   type="text"
@@ -244,13 +254,13 @@ const AddProd = () => {
                   value={ubicacionDescriptiva}
                   onChange={(e) => setUbicacionDescriptiva(e.target.value)}
                   placeholder="Ej: Dirección exacta"
-                  className="w-full p-3 border focus:outline-none dark:border-gray-600 border-gray-300 rounded-md dark:bg-gray-700 bg-white dark:text-white text-black"
+                  className="w-full p-3 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
                   required
                 />
               </div>
             </div>
 
-            <h6 className="fs-22px pb-2 text-black font-bold dark:text-white">Agrega hasta 4 imágenes</h6>
+            <h6 className="fs-22px pb-2 text-black font-bold ">Agrega hasta 4 imágenes</h6>
             <div className="flex flex-col md:flex-row justify-between items-center">
               <ImageInput images={images} setImages={setImages} />
               <button

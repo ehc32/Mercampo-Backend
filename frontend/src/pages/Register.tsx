@@ -1,9 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { registerRequest } from "../api/users";
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useAuthStore } from "../hooks/auth";
 import {
   Button,
@@ -12,13 +11,35 @@ import {
   FormControlLabel,
   IconButton,
   InputAdornment,
+  Box,
+  Modal,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import "./style.css";
+import ConsentModal from "../components/consentForm";
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+};
+
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { isAuth } = useAuthStore();
+  const [open, setOpen] = useState(false);
+  const [accepted, setAccepted] = useState(false);
+
+
+  const [open2, setOpen2] = React.useState(false);
+  const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
 
   // Estados de los campos del formulario
   const [email, setEmail] = useState("");
@@ -44,8 +65,14 @@ const RegisterPage = () => {
     },
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (vender: boolean) => {
+
+    setIsSeller(vender)
+
+    if (!accepted) {
+      toast.warning("Debe aceptar nuestros terminos y condiciones.")
+      return
+    }
 
     // Validación de datos
     if (!email || !name || !phone || !password || !re_password) {
@@ -85,22 +112,6 @@ const RegisterPage = () => {
     registerMutation.mutate();
   };
 
-  // Manejadores para los cambios de los roles (vendedor y cliente)
-  const handleSellerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsSeller(event.target.checked);
-    if (event.target.checked) {
-      setIsCustomer(false);
-      toast.info("Tendrás que esperar que un admin apruebe la solicitud de vender.");
-    }
-  };
-
-  const handleCustomerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsCustomer(event.target.checked);
-    if (event.target.checked) {
-      setIsSeller(false);
-    }
-  };
-
   // Manejadores para la visibilidad de las contraseñas
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -109,6 +120,15 @@ const RegisterPage = () => {
   const handleToggleRePasswordVisibility = () => {
     setShowRePassword(!showRePassword);
   };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   // Redirigir si ya está autenticado
   if (isAuth) return <Navigate to="/" />;
@@ -121,7 +141,7 @@ const RegisterPage = () => {
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-black md:text-2xl dark:text-gray-100">
               Crear nueva cuenta
             </h1>
-            <form className="space-y-3" onSubmit={handleSubmit}>
+            <form className="space-y-3">
               <div>
                 <Typography
                   variant="subtitle2"
@@ -245,7 +265,7 @@ const RegisterPage = () => {
                 </div>
               </div>
 
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={
                   <Checkbox
                     checked={isSeller}
@@ -259,12 +279,49 @@ const RegisterPage = () => {
                     ¡Quiero vender!
                   </Typography>
                 }
-              />
+              /> */}
+              <Button onClick={handleOpen2} className="custom-button mt-4">
+                Registrarse
+              </Button>
+              <Typography className="tyc flex flex-row cursor-pointer" onClick={handleClickOpen}>
+                Al registrarte, aceptas nuestros términos y Condiciones
+              </Typography>
+              <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
+            </form>
+          </div>
+        </div>
+        <Modal
+          open={open2}
+          onClose={handleClose2}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style} className="text-center">
+            <Typography id="modal-modal-title" variant="h6" component="h2" >
+              ¿Desea vender en nuestra plataforma?
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Al solicitar vender tendrá que esperar que un administrador apruebe su solicitud.
+            </Typography>
+
+            <Typography id="modal-modal-description" className="flex flex-row gap-1 h-12" sx={{ mt: 2 }}>
 
               <Button
-                type="submit"
+                type="button"
+                onClick={()=> handleSubmit(false)}
                 fullWidth
-                variant="contained"
+                style={{
+                  backgroundColor: "#39A900",
+                  color: "white",
+                }}
+                className="hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800"
+              >
+                No
+              </Button>
+              <Button
+                type="button"
+                onClick={()=> handleSubmit(true)}
+                fullWidth
                 style={{
                   backgroundColor: "#39A900",
                   color: "white",
@@ -273,9 +330,9 @@ const RegisterPage = () => {
               >
                 Registrarse
               </Button>
-            </form>
-          </div>
-        </div>
+            </Typography>
+          </Box>
+        </Modal>
       </div>
     </>
   );
