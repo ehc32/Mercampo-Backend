@@ -19,7 +19,8 @@ const AddProd = () => {
   const [precio, setPrecio] = useState("");
   const [unidad, setUnidad] = useState("");
   const [tiempoL, setTiempoL] = useState<number>();
-  const ciudades = ["Neiva"];
+  const ciudades = ["Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
+
 
   interface Product {
     name: string,
@@ -183,7 +184,7 @@ const AddProd = () => {
                     <MenuItem value="" disabled>Selecciona una unidad</MenuItem>
                     <MenuItem value="Kg">Kilos</MenuItem>
                     <MenuItem value="L">Litros</MenuItem>
-                    <MenuItem value="L">Libras</MenuItem>
+                    <MenuItem value="U">Unidades</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -201,7 +202,7 @@ const AddProd = () => {
                     }}
                   >
                     <MenuItem value="" disabled>Selecciona un tiempo limite</MenuItem>
-                    <MenuItem value={0}>1 semana</MenuItem>
+                    {/* <MenuItem value={0}>1 semana</MenuItem> */}
                     <MenuItem value={1}>2 semanas</MenuItem>
                     <MenuItem value={2}>3 semanas</MenuItem>
                   </Select>
