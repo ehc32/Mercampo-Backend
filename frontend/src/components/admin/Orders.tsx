@@ -4,11 +4,9 @@ import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { get_order_items, get_orders } from '../api/orders'; // Asegúrate de que tienes esta función
+import { get_order_items, get_orders } from '../../api/orders'; // Asegúrate de que tienes esta función
 
-interface Props {
-  results: any;
-}
+
 
 const Orders = ({ results }: Props) => {
   const [data, setData] = useState<any[]>([]);

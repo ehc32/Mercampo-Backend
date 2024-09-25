@@ -3,7 +3,6 @@ import { cate_api_random } from '../api/products';
 import Comments from '../components/product/coments/Comments';
 import ProductDetail from '../components/product/productDetail/ProductDetail';
 import SwiperProducts from '../components/shared/SwiperProducts/swiperProducts';
-import AsideFilter from '../components/tienda/AsideFilter/AsideFilter';
 
 const DetallesProd = () => {
   const [category, setCategory] = useState<string>("");
@@ -32,8 +31,7 @@ const DetallesProd = () => {
       <ProductDetail setCategory={setCategory} fetchProductos={fetchProductos} setProductId={setProductId} />
       <Comments productId={productId} />
       <SwiperProducts datos={productos} height='70vh' width='100%' loader={loader} />
-
-      
+            
     </main>
   );
 };

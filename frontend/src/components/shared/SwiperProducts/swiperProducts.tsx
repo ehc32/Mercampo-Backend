@@ -13,30 +13,8 @@ import { Pagination,Autoplay } from 'swiper/modules';
 import Card from '../Card/Cards';
 import Loader from './../../shared/Loaders/Loader';
 
-interface Producto {
-  nombre?: string;
-  foto?: string;
-  price?: number;
-  description?: string;
-  locate?: string;
-  categoria?: string;
-  fecha?: string;
-  first_image?: string;
-  slug?: string;
-  name?: string;
-  category?: string;
-}
 
-interface SwiperPropsP {
-  width: string;
-  height: string;
-  darkMode: boolean;
-  isUpSwiper?: boolean;
-  loader: boolean;
-  datos: Producto[];
-}
-
-const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, darkMode, datos, loader }) => {
+const SwiperProducts: React.FC<SwiperPropsP> = ({ width, height, datos, loader }) => {
   return (
 
 

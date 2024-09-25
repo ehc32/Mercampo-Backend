@@ -156,6 +156,10 @@
     justify-content: start !important;
 }
 
+.category {
+    color: #39A900;
+}
+
 .head-card {
     display: flex;
     flex-direction: row;

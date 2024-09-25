@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { post_product } from "../api/products";
+import { bring_prome, post_product } from "../api/products";
 import ImageInput from "../components/assets/imageInput/ImageInput";
 import BasicTooltip from "../components/shared/tooltip/TooltipHelp";
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import './../global/style.css'
 
 const AddProd = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -21,20 +22,6 @@ const AddProd = () => {
   const [tiempoL, setTiempoL] = useState<number>();
   const ciudades = ["Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
 
-
-  interface Product {
-    name: string,
-    category: string,
-    description: string,
-    count_in_stock: number,
-    price: number,
-    image: string[],
-    map_locate: string,
-    locate: string,
-    unit: string,
-    tiempoL: number
-  }
-
   const manejarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -43,12 +30,42 @@ const AddProd = () => {
       return;
     }
 
+    let promedio = 0;
+    let take_prom = false;
+
+    try {
+      const data = await bring_prome(nombre); // Traer el precio promedio del producto
+      promedio = data.data.average_price;
+      take_prom = true
+    } catch (error) {
+      take_prom = false
+      // toast.warn("No hay productos como este para comparar precios, pon el más óptimo.");
+    }
+
+    if (isNaN(promedio)) {
+      toast.error("El precio promedio no es un número válido");
+      return;
+    }
+    if (take_prom) {
+
+      let min_price = Math.round(promedio * 0.9); // -10%
+      let max_price = Math.round(promedio * 1.1); // +10%
+
+      const inputPrice = Number(precio);
+      if (inputPrice < min_price || inputPrice > max_price) {
+        toast.warning(`El precio debe estar entre ${min_price} y ${max_price}.`);
+        return;
+      }
+    }
+
+    let price = parseInt(precio).toFixed(0);
+
     const product: Product = {
       name: nombre,
       category: categoria,
       description: descripcion,
       count_in_stock: parseInt(cantidad),
-      price: parseInt(precio),
+      price: Number(price),
       image: images,
       map_locate: ubicacionDescriptiva,
       locate: ubicacion,
@@ -59,7 +76,8 @@ const AddProd = () => {
     try {
       await post_product(product);
       toast.success("Producto agregado exitosamente");
-      // Reset fields
+
+      // Reiniciar los campos del formulario
       setNombre("");
       setCategoria("");
       setDescripcion("");
@@ -75,9 +93,10 @@ const AddProd = () => {
     }
   };
 
+
   return (
-    <div className="flex my-2">
-      <div className="w-full md:w-4/6 flex m-auto dark:bg-gray-800 rounded-xl shadow-lg">
+    <div className="flex">
+      <div className="w-full flex m-auto dark:bg-gray-800 rounded-xl shadow-lg card-addprod">
         <div className="w-full p-4 md:p-10 card-bordered">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-2xl md:text-3xl text-black font-bold ">
@@ -88,16 +107,16 @@ const AddProd = () => {
 
           <form onSubmit={manejarSubmit} className="space-y-4 md:space-y-6">
             <div className="flex flex-col md:flex-row md:space-x-4">
-              <div className="flex-1 mb-4 md:mb-0">
+              <div className="flex-1   md:mb-0">
                 <h6 className="text-black font-bold m-1 ">Nombre del Producto
                   <BasicTooltip titlet={"Pon el nombre de tu producto"} /></h6>
                 <input
                   type="text"
                   id="nombre"
                   value={nombre}
-                  onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-Z\s]/g, ''))}
+                  onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-ZñÑ\s]/g, ''))}
                   placeholder="Ej: Tomate cherry"
-                  className="w-full p-3 border border-gray-300 rounded-md bg-white  text-black focus:outline-none"
+                  className="w-full p-3    bg-white  text-black focus:outline-none border_form"
                   required
                 />
               </div>
@@ -128,7 +147,7 @@ const AddProd = () => {
               </div>
             </div>
 
-            <h6 className="text-black font-bold mx-1 ">Descripción del Producto
+            <h6 className="text-black font-bold mx-1 mt-1 ">Descripción del Producto
               <BasicTooltip titlet={"Has una breve introducción de tu producto, el maximo de caractéres es de 350"} /></h6>
             <textarea
               id="descripcion"
@@ -139,13 +158,12 @@ const AddProd = () => {
                 }
               }}
               placeholder="Ej: Tomate cherry de alta calidad"
-              className="resize-none w-full p-3 mt-2 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
+              className="resize-none w-full p-3 mt-2  focus:outline-none   bg-white  text-blac border_form"
               rows={4}
               required
             />
-
-            <div className="flex flex-col md:flex-row md:space-x-4">
-              <div className="flex-1 mb-4 md:mb-0">
+            <div className="flex flex-col md:flex-row md:space-x-4 mt-0">
+              <div className="flex-1   md:mb-0">
                 <h6 className="text-black font-bold m-1 ">Precio unitario
                   <BasicTooltip titlet={"El precio de cada producto será redondeado, es decir que no tendra decimales"} />
                 </h6>
@@ -155,12 +173,12 @@ const AddProd = () => {
                   value={precio}
                   onChange={(e) => setPrecio(Math.max(0, Number(e.target.value)).toString())}
                   placeholder="Ej: 5000"
-                  className="w-full p-3 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
+                  className="w-full p-3  focus:outline-none border-gray-500  bg-white  text-black border_form"
                   min="0"
                   required
                 />
               </div>
-              <div className="flex-1 mb-4 md:mb-0">
+              <div className="flex-1   md:mb-0">
                 <h6 className="text-black font-bold m-1 ">Cantidad en Stock
                   <BasicTooltip titlet={"Pon una cantidad de productos que realmente puedan ser vendidos en el tiempo limite"} />
                 </h6>
@@ -170,12 +188,12 @@ const AddProd = () => {
                   value={cantidad}
                   onChange={(e) => setCantidad(Math.max(0, Number(e.target.value)).toString())}
                   placeholder="Ej: 100"
-                  className="w-full p-3 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
+                  className="w-full p-3  focus:outline-none   bg-white  text-black border_form"
                   min="0"
                   required
                 />
               </div>
-              <div className="flex-1 mb-4 md:mb-0">
+              <div className="flex-1   md:mb-0">
                 <h6 className="text-black font-bold m-1 ">Unidad
                   <BasicTooltip titlet={"Seleccione una unidad de medida según al producto que desea ofertar"} />
                 </h6>
@@ -183,6 +201,7 @@ const AddProd = () => {
                   <Select
                     value={unidad}
                     onChange={(e) => setUnidad(e.target.value)}
+                    displayEmpty
                     required
                     sx={{
                       '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
@@ -197,12 +216,13 @@ const AddProd = () => {
                 </FormControl>
               </div>
               <div className="flex-1">
-                <h6 className="text-black font-bold m-1 ">Tiempo de publicación
+                <h6 className="text-black font-bold m-1">Tiempo de publicación
                   <BasicTooltip titlet={"Se debe tomar en cuenta que el producto puede caducar o dañarse, tome en cuenta el tipo de producto a la hora de seleccionar un tiempo limite."} /></h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
                   <Select
                     value={tiempoL}
                     onChange={(e) => setTiempoL(e.target.value)}
+                    displayEmpty
                     required
                     sx={{
                       '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
@@ -219,15 +239,16 @@ const AddProd = () => {
               </div>
             </div>
 
-            <h6 className="fs-22px mt-3 text-black font-bold ">Agrega una ubicación</h6>
-            <div className="flex flex-col md:flex-row md:space-x-4">
-              <div className="flex-1 mb-4 md:mb-0">
+            <h6 className="fs-22px mt-1 text-black font-bold ">Agrega una ubicación</h6>
+            <div className="flex flex-col md:flex-row md:space-x-4 mt-1">
+              <div className="flex-1   md:mb-0">
                 <h6 className="text-black font-bold m-1 ">Ubicación
                   <BasicTooltip titlet={"Menciona el país, ciudad, barrio o direccion del producto"} /></h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
                   <Select
                     value={ubicacion}
                     onChange={(e) => setUbicacion(e.target.value)}
+                    displayEmpty
                     required
                     sx={{
                       '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
@@ -255,18 +276,19 @@ const AddProd = () => {
                   value={ubicacionDescriptiva}
                   onChange={(e) => setUbicacionDescriptiva(e.target.value)}
                   placeholder="Ej: Dirección exacta"
-                  className="w-full p-3 border focus:outline-none border-gray-300 rounded-md bg-white  text-black"
+                  className="w-full p-3 focus:outline-none   bg-white  text-black border_form"
                   required
                 />
               </div>
+
             </div>
 
-            <h6 className="fs-22px pb-2 text-black font-bold ">Agrega hasta 4 imágenes</h6>
-            <div className="flex flex-col md:flex-row justify-between items-center">
+            <h6 className="fs-22px pb-2 text-black font-bold  mt-1 ">Agrega hasta 4 imágenes</h6>
+            <div className="flex flex-col md:flex-row justify-between items-center  mt-1">
               <ImageInput images={images} setImages={setImages} />
               <button
                 type="submit"
-                className="px-8 py-2 mt-4 md:mt-0 bg-[#39A900] hover:bg-[#2f6d30] text-white rounded-md"
+                className="px-8 py-2 mt-4 md:mt-0 bg-[#39A900] hover:bg-[#2f6d30] text-white "
               >
                 Añadir Producto
               </button>

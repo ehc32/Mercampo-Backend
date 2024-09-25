@@ -15,14 +15,25 @@ import { get_paypal_user } from '../../api/users';
 import ModalRequestSeller from '../shared/Modal/ModalARequestSeller';
 import ModalSellerConfig from '../shared/Modal/ModalConfigSeller';
 import ModalEditProfile from '../shared/Modal/ModalEditUser';
-
 import './style.css';
+import ConsentModal from '../shared/Modal/consentForm';
+import './../../global/style.css';
+import { FaBookOpen } from 'react-icons/fa';
 
 function ProfileTables({ user, id }) {
   const [tabValue, setTabValue] = useState(0);
   const [paypal, SetPaypal] = useState<any>();
   const [showSecretKey, setShowSecretKey] = useState(false);
 
+  const [open, setOpen] = useState(false);
+  const [accepted, setAccepted] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const paypalUser = async () => {
     try {
       const response = await get_paypal_user(id);
@@ -269,19 +280,27 @@ function ProfileTables({ user, id }) {
 
       {user?.role !== "client" ? (
         <TabPanel value={tabValue} index={2}>
-          <div className='flex flex-row '>
+          <div className='flex flex-row align-center justify-between w-12/12'>
             <ModalEditProfile user={user} id={id} />
             {user?.role === "seller" && <ModalSellerConfig id={id} />}
             {user?.role === "admin" && <ModalSellerConfig id={id} />}
             {user?.role === "client" && <ModalRequestSeller userId={id} />}
+            <Typography className=" tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-2 rounded " onClick={handleClickOpen}>
+              <FaBookOpen className="fs-20px mr-1" />Política de seguridad, terminos y condiciones
+            </Typography>
+            <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
           </div>
         </TabPanel>
       ) : (<TabPanel value={tabValue} index={1}>
-        <div className='flex flex-row '>
+        <div className='flex flex-row align-center justify-between w-12/12'>
           <ModalEditProfile user={user} id={id} />
           {user?.role === "seller" && <ModalSellerConfig id={id} />}
           {user?.role === "admin" && <ModalSellerConfig id={id} />}
           {user?.role === "client" && <ModalRequestSeller userId={id} />}
+          <Typography className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
+            <FaBookOpen className="fs-20px mr-1" />Política de seguridad, terminos y condiciones
+          </Typography>
+          <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
         </div>
       </TabPanel>
       )

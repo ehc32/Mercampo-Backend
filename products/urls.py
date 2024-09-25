@@ -12,6 +12,8 @@ urlpatterns = [
     path('get/admin/<int:id>/', views.get_product_admin), # funcional - trae un producto productos como administrador
     path('get/<slug:slug>/', views.get_product), # funcional - trae un producto y sus datos
     path('get_product_images/<int:product_id>/', views.get_product_images), # funcional - trae un producto y sus datos
+    path('getRandomByOffer/random_products/', views.get_random_products_by_offer),  # trae productos aleatorios con fecha límite cercana
+    path('getTopSelling/top_selling_products/', views.get_top_selling_products), 
     path('post/', views.create_product), # funcional - crea un producto
     path('edit/<int:pk>/', views.edit_product),
     path('delete/<int:pk>/', views.delete_product), # funcional - borra el producto
@@ -22,4 +24,7 @@ urlpatterns = [
     path('user_products/<int:user_id>/', views.get_products_by_user),
     path('user_products/in_sells/<int:user_id>/', views.get_products_sells_by_user),  # productos que han tenido vendidos
     path('product/<int:product_id>/reduce-stock/', views.reduce_product_stock),  # reducir stock de producto
+    path('news/', views.news_products),  # news products
+    path('get/equals/<str:search>/', views.search_products_similar),  # Búsqueda por nombre exacto
+    path('<int:product_id>/update-status/', views.update_status),  # Búsqueda por nombre exacto
 ]

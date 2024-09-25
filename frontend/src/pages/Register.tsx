@@ -7,16 +7,15 @@ import { useAuthStore } from "../hooks/auth";
 import {
   Button,
   Typography,
-  Checkbox,
-  FormControlLabel,
   IconButton,
   InputAdornment,
   Box,
   Modal,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import "./style.css";
-import ConsentModal from "../components/consentForm";
+import './../global/style.css';
+import ConsentModal from "../components/shared/Modal/consentForm";
+import BasicTooltip from "../components/shared/tooltip/TooltipHelp";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -48,7 +47,6 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [re_password, setRePassword] = useState("");
   const [isSeller, setIsSeller] = useState(false);
-  const [isCustomer, setIsCustomer] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
 
@@ -69,28 +67,18 @@ const RegisterPage = () => {
 
     setIsSeller(vender)
 
-    if (!accepted) {
-      toast.warning("Debe aceptar nuestros terminos y condiciones.")
-      return
-    }
-
     // Validación de datos
     if (!email || !name || !phone || !password || !re_password) {
       toast.warning("Todos los campos son obligatorios");
       return;
     }
-
-    if (password !== re_password) {
-      toast.warning("Las contraseñas deben coincidir");
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email) || email.includes(' ')) {
+      toast.warning("El correo electrónico debe ser válido y no contener espacios");
       return;
     }
 
-    if (!isSeller && !isCustomer) {
-      toast.warning("Debes seleccionar al menos un rol (vendedor o cliente)");
-      return;
-    }
-
-    // Validación para el correo electrónico
+    // Verificación de dominios válidos
     const validDomains = ['outlook.com', 'gmail.com', 'hotmail.com', 'soysena.edu.co', 'misena.edu.co', 'mail.com'];
     const emailDomain = email.split('@')[1];
     if (!validDomains.includes(emailDomain)) {
@@ -98,17 +86,31 @@ const RegisterPage = () => {
       return;
     }
 
-    if (!/^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/.test(password)) {
-      toast.warning("La contraseña debe tener al menos 6 caracteres y contener letras y números");
+    // Verificación de coincidencia de contraseñas
+    if (password !== re_password) {
+      toast.warning("Las contraseñas deben coincidir");
       return;
     }
 
-    if (!name || !/^[a-zA-Z\s]+$/.test(name)) {
-      toast.warning("El nombre debe contener solo letras y espacios");
+    // Validación de contraseña (mínimo 6 caracteres, al menos una letra y un número, sin espacios)
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?!.*\s).{6,}$/;
+    if (!passwordRegex.test(password)) {
+      toast.warning("La contraseña debe tener al menos 6 caracteres, contener letras y números, y no debe incluir espacios");
       return;
     }
 
-    // Solo después de pasar todas las validaciones llamamos a mutate
+
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phone || !phoneRegex.test(phone)) {
+      toast.warning("El número de teléfono debe tener 10 dígitos y contener solo números");
+      return;
+    }
+
+    if (!accepted) {
+      toast.warning("Debe aceptar nuestros terminos y condiciones.")
+      return
+    }
+
     registerMutation.mutate();
   };
 
@@ -149,13 +151,14 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Correo electrónico
+                  <BasicTooltip titlet={"Correo electronico de preferencia que sea existente con caracteres validos ( letras, numeros, puntos o guiones )"} />
                 </Typography>
                 <input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder="correo@email.com"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black  focus:outline-none"
                 />
               </div>
               <div>
@@ -165,13 +168,14 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Nombre
+                  <BasicTooltip titlet={"Nombre y apellidos"} />
                 </Typography>
                 <input
                   value={name}
-                  onChange={(e) => setName(e.target.value.replace(/[^a-zA-Z\s]/g, ''))}
+                  onChange={(e) => setName(e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, ''))}
                   type="text"
                   placeholder="Nombre"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black  focus:outline-none"
                 />
               </div>
               <div>
@@ -181,6 +185,7 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Teléfono
+                  <BasicTooltip titlet={"Número de teléfono al que te podran contactar"} />
                 </Typography>
                 <input
                   value={phone}
@@ -188,7 +193,7 @@ const RegisterPage = () => {
                   type="tel"
                   inputMode="numeric"
                   placeholder="Teléfono"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black  focus:outline-none"
                   maxLength={10}
                   minLength={10}
                 />
@@ -200,6 +205,7 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Contraseña
+                  <BasicTooltip titlet={"Que sea facil de recordar y tenga al menos una mayuscula, minuscula, numeros y simbolos ($ ! @ _ -)"} />
                 </Typography>
                 <div className="relative">
                   <input
@@ -207,7 +213,9 @@ const RegisterPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     type={showPassword ? "text" : "password"}
                     placeholder="Contraseña"
-                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
+                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black  focus:outline-none"
+                    maxLength={35}
+                    minLength={10}
                   />
                   <InputAdornment
                     position="end"
@@ -236,6 +244,7 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Repite la contraseña
+                  <BasicTooltip titlet={"Confirma que la contraseña sea la que deseas escribiendola nuevamente."} />
                 </Typography>
                 <div className="relative">
                   <input
@@ -243,7 +252,9 @@ const RegisterPage = () => {
                     onChange={(e) => setRePassword(e.target.value)}
                     type={showRePassword ? "text" : "password"}
                     placeholder="Repite la contraseña"
-                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
+                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black  focus:outline-none"
+                    maxLength={35}
+                    minLength={10}
                   />
                   <InputAdornment
                     position="end"
@@ -308,19 +319,19 @@ const RegisterPage = () => {
 
               <Button
                 type="button"
-                onClick={()=> handleSubmit(false)}
+                onClick={() => handleSubmit(false)}
                 fullWidth
                 style={{
                   backgroundColor: "#39A900",
                   color: "white",
                 }}
-                className="hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800"
+                className="hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 btn-seller"
               >
-                No
+                No, soy cliente
               </Button>
               <Button
                 type="button"
-                onClick={()=> handleSubmit(true)}
+                onClick={() => handleSubmit(true)}
                 fullWidth
                 style={{
                   backgroundColor: "#39A900",
@@ -328,7 +339,7 @@ const RegisterPage = () => {
                 }}
                 className="hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800"
               >
-                Registrarse
+                Vender
               </Button>
             </Typography>
           </Box>

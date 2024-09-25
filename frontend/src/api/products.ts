@@ -125,8 +125,6 @@ export const get_all_products_paginated_to_shop = async (page: number | string) 
     return response.data;
 };
 
-
-
 export const send_review = async (data: { userId: number, rating: number, opinion: string }, productId: number) => {
     const formData = new FormData();
     formData.append("user", data.userId.toString());
@@ -140,7 +138,21 @@ export const bring_reviews = async (productId: number) => {
     return response;
 };
 
+export const bring_prome = async (searchParam: string) => {
+    const response = await authAxios.get(`products/get/equals/${searchParam}/`);
+    return response;
+};
+
 export const reduce_product_stock = async (productId: number, quantity: number) => {
     const response = await authAxios.patch(`/products/product/${productId}/reduce-stock/`, { quantity });
     return response.data;
 };
+
+export const bring_new_products = async (page: number | string) => {
+    const response = await axi.get(`/products/news/?page=${page}&page_size=20`);
+    return response.data;
+};
+
+export const approveRequestSeller = async (id: number | string) => {
+    await axi.put(`/products/${id}/update-status/`)
+}

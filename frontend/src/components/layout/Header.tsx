@@ -1,40 +1,44 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
+import jwt_decode from 'jwt-decode';
 import { Fragment, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../hooks/auth";
-import { useCartStore } from "../hooks/cart";
-import jwt_decode from 'jwt-decode';
-import ST_Icon from './assets/ST/ST_Icon';
-import AsideToggle from './shared/tooltip/TooltipAside';
-import BasicTooltip from './shared/tooltip/TooltipOpenCart';
-import './style.css';
-import { Token } from '../Interfaces';
 import { toast } from 'react-toastify';
+import { useAuthStore } from "../../hooks/auth";
+import { useCartStore } from "../../hooks/cart";
+import { Token } from '../../Interfaces';
+import ST_Icon from '../assets/ST/ST_Icon';
+import AsideToggle from '../shared/tooltip/TooltipAside';
+import BasicTooltip from '../shared/tooltip/TooltipOpenCart';
+import './../../global/style.css';
 
-interface HeaderProps { }
-
-const Header: React.FC<HeaderProps> = () => {
+const Header = () => {
   const [roleLocal, setRoleLocal] = useState("");
   const cart = useCartStore(state => state.cart);
-  const { isAuth } = useAuthStore();
+  const { isAuth, access } = useAuthStore();
   const location = useLocation();
   const navigate = useNavigate();
 
   let avatar: string = '';
 
   useEffect(() => {
-    const token: string | null = useAuthStore.getState().access;
-
-    if (token) {
-      try {
-        const tokenDecoded: Token = jwt_decode(token);
-        const userRole = tokenDecoded.role;
-        setRoleLocal(userRole);
-      } catch (error) {
-        console.error("Error al decodificar el token:", error);
+    const setRoleFromToken = () => {
+      const token: string | null = access;
+      if (token) {
+        try {
+          const tokenDecoded: Token = jwt_decode(token);
+          const userRole = tokenDecoded.role;
+          setRoleLocal(userRole);
+        } catch (error) {
+          console.error("Error al decodificar el token:", error);
+        }
+      } else {
+        setRoleLocal("");
       }
-    }
-  }, []);
+    };
+
+    setRoleFromToken();
+
+  }, [access]);
 
   function logOutFun() {
     useAuthStore.getState().logout();
@@ -45,7 +49,6 @@ const Header: React.FC<HeaderProps> = () => {
     return classes.filter(Boolean).join(' ');
   }
 
-  // Redirigir si el usuario no tiene permisos
   useEffect(() => {
     if (!isAuth || (roleLocal !== "admin" && roleLocal !== "seller")) {
       if (location.pathname === "/admin" || location.pathname === "/addprod") {
@@ -55,7 +58,6 @@ const Header: React.FC<HeaderProps> = () => {
     }
   }, [isAuth, roleLocal, location.pathname, navigate]);
 
-  // Si el usuario no está autenticado y está en rutas prohibidas
   if (!isAuth && (location.pathname === "/admin" || location.pathname === "/addprod")) {
     return null;
   }
@@ -71,7 +73,7 @@ const Header: React.FC<HeaderProps> = () => {
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start subnav-1">
                 <div className="flex">
                   {
-                    location.pathname == "/store" && (
+                    location.pathname === "/store" && (
                       <AsideToggle />
                     )
                   }
@@ -98,7 +100,6 @@ const Header: React.FC<HeaderProps> = () => {
                       <Link
                         to={'/'}
                         className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
-
                       >
                         Inicio
                       </Link>
@@ -124,7 +125,6 @@ const Header: React.FC<HeaderProps> = () => {
                     <BasicTooltip />
                     <span className="mx-1 fs-18px text-white">{cart.length}</span>
                   </div>
-
 
                   {isAuth ? (
                     <>
@@ -165,6 +165,16 @@ const Header: React.FC<HeaderProps> = () => {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
+                                      to="/enterprise"
+                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                    >
+                                      Emprender
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
                                       to="/addprod"
                                       className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
                                     >
@@ -186,16 +196,28 @@ const Header: React.FC<HeaderProps> = () => {
                             )}
 
                             {roleLocal === "seller" && (
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <Link
-                                    to="/addprod"
-                                    className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                                  >
-                                    Nuevo producto
-                                  </Link>
-                                )}
-                              </Menu.Item>
+                              <>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
+                                      to="/enterprise"
+                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                    >
+                                      Emprender
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
+                                      to="/addprod"
+                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                    >
+                                      Nuevo producto
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                              </>
                             )}
 
                             <Menu.Item>

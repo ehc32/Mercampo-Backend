@@ -37,16 +37,14 @@ const UserProfile = () => {
   const [dataLenght, setDataLenght] = useState(0);
   const [myProductsSells, setMyProductsSells] = useState([]);
   const [dataLenght2, setDataLenght2] = useState(0);
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedOrderProducts, setSelectedOrderProducts] = useState([]);
 
   const { access: token } = useAuthStore();
   const id = token ? JSON.parse(atob(token.split(".")[1])).user_id : null;
 
-  const {
-    data: user,
-  } = useQuery(["users", id], () => get_solo_user(id), {
+  const { data: user } = useQuery<User>(["users", id], () => get_solo_user(id), {
     enabled: !!id,
   });
 
@@ -216,9 +214,9 @@ const UserProfile = () => {
                   </TableHead>
                   <TableBody>
                     {dataLenght2 > 0 ? (
-                      myProductsSells.map((product) => (
+                      myProductsSells.map((product: MyOrder) => (
                         <TableRow key={product.id}>
-                          <TableCell>{product.name}</TableCell>
+                          <TableCell>{product.name.slice(0, 10)}</TableCell>
                           <TableCell>${product.price}</TableCell>
                           <TableCell>{product.description.slice(0, 20)}...</TableCell>
                           <TableCell>
@@ -265,9 +263,9 @@ const UserProfile = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {myProducts.map((product) => (
+                    {myProducts.map((product: MyOrder) => (
                       <TableRow key={product.id}>
-                        <TableCell>{product.name}</TableCell>
+                        <TableCell>{product.name.slice(0, 12)}...</TableCell>
                         <TableCell>{product.description.slice(0, 20)}...</TableCell>
                         <TableCell>{product.rating}</TableCell>
                         <TableCell>${Number(product.price).toLocaleString()}</TableCell>
@@ -327,7 +325,7 @@ const UserProfile = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {selectedOrderProducts.map((product) => (
+              {selectedOrderProducts.map((product: MyOrder) => (
                 <TableRow key={product.id}>
                   <TableCell>{product.id}</TableCell>
                   <TableCell>{product.name}</TableCell>

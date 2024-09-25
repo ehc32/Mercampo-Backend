@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { get_all_images_product, get_solo } from "./../../../api/products";
 import "./../../../global/dashlite.css";
 import "./styles.css";
-import { Product } from "../../../Interfaces";
+import StarIcon from '@mui/icons-material/Star';
 
 interface ProductProps {
   setCategory: any;
@@ -21,8 +21,10 @@ interface ProductProps {
 interface User {
   name: string;
   phone?: string;
-  email: string;
-  date_joined: string;
+  rating?: number;
+  email?: string;
+  date_joined?: string;
+  num_reviews?: number
 }
 
 interface Producto {
@@ -156,7 +158,7 @@ const ProductDetail: React.FC<ProductProps> = ({
                                   readOnly
                                 />
                                 <div className=" pl-2 text-black">
-                                  ({producto?.num_reviews} Opiniones)
+                                  ({producto?.num_reviews != null ? producto?.num_reviews : 0} Opiniones)
                                 </div>
                               </div>
                             </div>
@@ -332,6 +334,20 @@ const ProductDetail: React.FC<ProductProps> = ({
                                     <div className="fs-16px  text-black">
                                       {producto?.map_locate?.slice(0, 40)}
                                     </div>
+                                  </li>
+                                  <li>
+                                    <div className="fs-14px font-bold text-black">
+                                      Calificación del usuario
+                                      ({usuario?.num_reviews != null ? usuario?.num_reviews : 0} Opiniones)
+                                    </div>
+                                    <Rating
+                                      name="read-only"
+                                      value={usuario?.rating}
+                                      readOnly
+                                      precision={0.5}
+                                      emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                      sx={{ marginBottom: 1, width: "5em" }}
+                                    />
                                   </li>
                                 </ul>
                               </div>

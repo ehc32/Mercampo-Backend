@@ -2,18 +2,6 @@ import React from 'react';
 import Card from '../shared/Card/Cards';
 import './Style.css';
 
-interface Producto {
-    nombre?: string;
-    foto?: string;
-    price?: number;
-    description?: string;
-    locate?: string;
-}
-
-interface CarrouselLast12Props {
-    productos: Producto[];
-    darkMode: boolean;
-}
 
 const RandomProducts: React.FC<CarrouselLast12Props> = ({ productos }) => {
     return (

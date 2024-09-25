@@ -1,19 +1,19 @@
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import React, { useState, useEffect } from "react";
-import Pagination from '@mui/material/Pagination';
-import { toast } from 'react-toastify';
-import { changePermission, delete_user, edit_user, get_users } from "../api/users";
-import { FormControl, MenuItem, IconButton as MUIIconButton, Select } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import PublicIcon from '@mui/icons-material/Public';
 import PublicOffIcon from '@mui/icons-material/PublicOff';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FormControl, MenuItem, IconButton as MUIIconButton, Select } from '@mui/material';
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import Modal from "@mui/material/Modal";
+import Pagination from '@mui/material/Pagination';
+import TextField from "@mui/material/TextField";
+import React, { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
+import { changePermission, delete_user, edit_user, get_users } from "../../api/users";
 
 // Styles for Modal
 const style = {
@@ -32,6 +32,7 @@ const style = {
 const Users = ({ results }: any) => {
   const [idLocal, setIdLocal] = useState<number | null>(null);
   const [page, setPage] = useState(1);
+  const [dataLenght, setDataLenght] = useState(0);
   const [data, setData] = useState<any[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false); // Added state for confirmation modal
@@ -214,7 +215,12 @@ const Users = ({ results }: any) => {
 
       {/* Pagination */}
       <Box className="flex justify-center my-3">
-        <Pagination count={Math.ceil(results / 10)} page={page} onChange={(event, value) => setPage(value)} />
+      <Pagination
+          count={Math.ceil(dataLenght / 10)}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+          className="flex flex-row w-full justify-center my-6"
+        />
       </Box>
 
       {/* Modal */}

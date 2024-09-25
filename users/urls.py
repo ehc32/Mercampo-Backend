@@ -15,7 +15,7 @@ urlpatterns = [
     path('sell/bring_request/', views.get_request_seller),
     path('sell/delete_request/<int:pk>/', views.delete_request),
     path('sell/approve_request/<int:pk>/', views.approve_request),
-    path('sell/send_request/<int:pk>/', views.get_request_seller),
+    path('sell/send_request/<int:user_id>/', views.register_seller),
     path('sell/paypalsel/<int:pk>/', views.request_seller_paypal_config),
     path('paypalconfig/<int:pk>/', views.get_seller_paypal_config_done),
     path('sell/changePermision/<int:idUser>/', views.change_can_publish),

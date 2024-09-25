@@ -5,14 +5,6 @@ import 'swiper/css/navigation';
 import './styles.css';
 import { Navigation } from 'swiper/modules';
 
-interface SwiperPropsP {
-  width: string;
-  height: string;
-  isUpSwiper?: boolean;
-  datos: {
-    foto: string;
-  }[];
-}
 
 const MySwiper: React.FC<SwiperPropsP> = ({ width, height, datos, isUpSwiper }) => {
   if (!datos) {

@@ -8,13 +8,11 @@ import './Accordion.css';
 interface AccordionProps {
     titulo: string;
     contenido: string;
-    darkMode: boolean;
-    index: any;
     isOpen: any;
     onClick: any;
 }
 
-const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido, index, isOpen, onClick }) => {
+const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido, isOpen, onClick }) => {
     return (
         <Accordion className={'light-mode-accordion boderacor'}>
             <AccordionSummary
@@ -22,7 +20,7 @@ const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido, index, isOp
                 aria-controls="panel1-content"
                 id="panel1-header"
                 className={'light-mode-accordion titleacor'}
-                onClick={() => onClick(index)}
+                onClick={() => onClick()}
             >
                 {titulo}
             </AccordionSummary>

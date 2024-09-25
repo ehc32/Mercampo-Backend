@@ -25,12 +25,6 @@ const style = {
     pb: 3,
 };
 
-interface propsModal {
-    idLocal: number | string;
-    updateUser: (id: number | string) => void;
-}
-
-
 export default function ModalUsers({ idLocal, updateUser }: propsModal) {
     const [open, setOpen] = React.useState(false);
     const [confirmOpen, setConfirmOpen] = React.useState(false);

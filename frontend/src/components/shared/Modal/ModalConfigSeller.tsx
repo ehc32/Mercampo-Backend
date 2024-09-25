@@ -10,6 +10,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { sendRequestSellerPayPalConfig } from "../../../api/users";
+import { FaPaypal } from "react-icons/fa";
 
 const style = {
   position: "absolute" as "absolute",
@@ -25,19 +26,17 @@ const style = {
   pb: 3,
 };
 
-interface ModalSellerConfigProps {
-  userId: number | string;
-}
+
 
 export default function ModalSellerConfig({
-    id
+  id
 }: ModalSellerConfigProps) {
-    const [openModal, setOpenModal] = useState(false);
-    const [confirmOpen, setConfirmOpen] = useState(false);
-    const [secretKey, setSecretKey] = useState("");
-    const [appName, setAppName] = useState("");
-    const [clientId, setClientId] = useState("");
-    const [showSecretKey, setShowSecretKey] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [secretKey, setSecretKey] = useState("");
+  const [appName, setAppName] = useState("");
+  const [clientId, setClientId] = useState("");
+  const [showSecretKey, setShowSecretKey] = useState(false);
 
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
@@ -69,8 +68,7 @@ export default function ModalSellerConfig({
       <h2
         className="bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded row align-center w-56 justify-center"
         onClick={handleOpen}
-        style={{ fontWeight: "bold"}}
-      >
+      ><FaPaypal className="fs-20px mr-1"/>
         Configuración de PayPal
       </h2>
 
@@ -101,15 +99,15 @@ export default function ModalSellerConfig({
             onChange={(e) => setAppName(e.target.value)}
             margin="normal"
             sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "##1f211e" },
-                  "&:hover fieldset": { borderColor: "#1f211e" },
-                  "&.Mui-focused fieldset": { borderColor: "#1f211e" },
-                },
-                "& .MuiInputLabel-root": { color: "#1f211e" },
-                "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
-                "& .MuiInputBase-input": { color: "#444444" },
-              }}
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "##1f211e" },
+                "&:hover fieldset": { borderColor: "#1f211e" },
+                "&.Mui-focused fieldset": { borderColor: "#1f211e" },
+              },
+              "& .MuiInputLabel-root": { color: "#1f211e" },
+              "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
+              "& .MuiInputBase-input": { color: "#444444" },
+            }}
           />
 
           <TextField
@@ -138,15 +136,15 @@ export default function ModalSellerConfig({
             onChange={(e) => setSecretKey(e.target.value)}
             margin="normal"
             sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "##1f211e" },
-                  "&:hover fieldset": { borderColor: "#1f211e" },
-                  "&.Mui-focused fieldset": { borderColor: "#1f211e" },
-                },
-                "& .MuiInputLabel-root": { color: "#1f211e" },
-                "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
-                "& .MuiInputBase-input": { color: "#444444" },
-              }}
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "##1f211e" },
+                "&:hover fieldset": { borderColor: "#1f211e" },
+                "&.Mui-focused fieldset": { borderColor: "#1f211e" },
+              },
+              "& .MuiInputLabel-root": { color: "#1f211e" },
+              "& .MuiInputLabel-root.Mui-focused": { color: "#39A900" },
+              "& .MuiInputBase-input": { color: "#444444" },
+            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">

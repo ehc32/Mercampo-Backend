@@ -1,5 +1,7 @@
 from enum import Enum
+
 from django.db import models
+
 from users.models import User
 
 
@@ -28,6 +30,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     tiempoL = models.IntegerField(default=0)
     fecha_limite = models.DateTimeField(null=True, blank=True)
+    status = models.BooleanField(default=False)
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)

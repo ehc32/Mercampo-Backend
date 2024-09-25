@@ -1,4 +1,6 @@
-import datetime
+from django.utils import timezone
+from datetime import timedelta, datetime
+
 from rest_framework.response import Response
 from django.http import QueryDict
 from rest_framework.decorators import api_view, permission_classes
@@ -8,15 +10,14 @@ from rest_framework import status
 from . models import Category, Product, Reviews
 from . serializers import ProductCreateSerializer, ProductReadSerializer, ProductImagesSerializer, ReviewCreateSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
-
-from datetime import timedelta, datetime
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.utils.text import slugify
+
+
 @api_view(['POST'])
 def create_product(request):
-    print("llega hasta aqui")
     if request.user.role == 'seller' or request.user.role == 'admin':
         product_serializer = ProductCreateSerializer(data=request.data)
         
@@ -60,6 +61,24 @@ def get_prod_by_cate(request, category):
     serializer = ProductReadSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
 
+#traer precios de productos similares y promediar
+@api_view(['GET'])
+def search_products_similar(request, search):
+    products = Product.objects.filter(name__icontains=search)
+    if not products.exists():
+        return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+    prices = products.values_list('price', flat=True)
+    average_price = sum(prices) / len(prices) if prices else 0
+    return Response({'average_price': average_price}, status=status.HTTP_200_OK) #retornamos el promedio, aqui podemos traer mas datos que se requieran, de momento solo prom
+
+@api_view(['GET'])
+def news_products(request):
+    products = Product.objects.filter(status=False)
+    paginator = CustomPagination()
+    paginated_products = paginator.paginate_queryset(products, request)
+    serializer = ProductReadSerializer(paginated_products, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
 @api_view(['GET'])
 def get_prod_by_caterandom(request, category):
     products = Product.objects.filter(category=category).order_by('?')[:12]
@@ -82,6 +101,18 @@ def search(request):
     serializer = ProductReadSerializer(product, many=True)
     return Response({'products': serializer.data})
 
+
+@api_view(['PUT'])
+def update_status(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        product.status = True
+        product.save()
+        return Response({'message': 'El estado del producto se ha actualizado correctamente.'}, status=status.HTTP_200_OK)
+    except Product.DoesNotExist:
+        return Response({'error': 'Producto no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def get_products_by_locate(request):
@@ -118,10 +149,9 @@ def get_last_12_products(request):
     serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
-
 @api_view(['GET'])
 def get_products(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(status=True)
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductReadSerializer(paginated_products, many=True)
@@ -129,14 +159,13 @@ def get_products(request):
 
 @api_view(['GET'])
 def FilterProductsView(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(status=True)  # Filtra solo los productos activos
 
     locate = request.GET.get('locate')
     if locate:
         products = products.filter(locate=locate)
 
     categories = request.GET.get('categories')
-    
     if categories:
         category_names = categories.split(',')
         products = products.filter(category__in=category_names)
@@ -175,7 +204,6 @@ def FilterProductsView(request):
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
 
-
 @api_view(['GET'])
 def get_product_admin(request, id):
     products = Product.objects.get(id=id)
@@ -187,6 +215,23 @@ def get_product_admin(request, id):
 def get_product(request, slug):
     products = Product.objects.get(slug=slug)
     serializer = ProductReadSerializer(products, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_random_products_by_offer(request):
+    today = timezone.now() 
+    four_days_later = today + timedelta(days=4)    
+    products = Product.objects.filter(
+        fecha_limite__range=[today, four_days_later]
+    ).order_by('?')[:15]    
+    serializer = ProductReadSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_top_selling_products(request):
+    products = Product.objects.all().order_by('-count_in_sells')[:15]
+    serializer = ProductReadSerializer(products, many=True)
     return Response(serializer.data)
 
 @api_view(['PUT'])
@@ -215,6 +260,10 @@ def delete_product(request, pk):
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+
+#
+# Reviews
+#
 
 
 @api_view(['POST'])
@@ -253,6 +302,14 @@ def ReviewShowAllFromProduct(request, pk):
     serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+#
+# Reviews ends
+#
+#
+# user's product
+#
+
 @api_view(['GET'])
 def get_products_by_user(request, user_id):
     products = Product.objects.filter(user_id=user_id)
@@ -268,6 +325,14 @@ def get_products_sells_by_user(request, user_id):
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductReadSerializer(paginated_products, many=True)
     return paginator.get_paginated_response(serializer.data)
+
+
+#
+#  user's product ends
+#
+#
+# sells
+#
 
 @api_view(['POST'])
 def reduce_product_stock(request, product_id):

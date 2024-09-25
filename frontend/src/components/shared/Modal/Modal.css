@@ -3,3 +3,8 @@
     text-align: center;
     margin: 0 0 .8em 0;
 }
+
+.label-consent {
+    margin: 0px !important;
+    margin-left: 1em !important;
+}

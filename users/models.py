@@ -13,6 +13,7 @@ class Role(Enum):
     CLIENT = "client"
     SELLER = "seller"
 
+
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
@@ -40,20 +41,47 @@ def validate_role(value):
     if value not in [tag.value for tag in Role]:
         raise ValueError("Rol no válido")
 
+class Enterprise(models.Model):
+    owner_user = models.OneToOneField(
+        'User', 
+        on_delete=models.CASCADE, 
+        primary_key=True, 
+        related_name='enterprise_owner'  # Cambia el nombre del accesor inverso
+    )
+    name = models.CharField(max_length=255)
+    date_registered = models.DateTimeField(default=timezone.now)
+    address = models.CharField(max_length=255)
+    link_enterprise = models.CharField(max_length=255, null=True, blank=True)  # Asegúrate de establecer otros parámetros necesarios
+    avatar = models.ImageField(default="avatar.png")
+    is_active = models.BooleanField(default=True, null=True)
+
+    def __str__(self):
+        return f"Empresa: {self.name}"
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=150)
     phone = models.CharField(max_length=20, null=True, blank=True, default=None)
-    avatar = models.ImageField(default="avatar.png")
-    is_active = models.BooleanField(default=True, null=True)
-    can_publish = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(default=timezone.now)
     role = models.CharField(
         max_length=10,
         choices=[(tag.name, tag.value) for tag in Role],
         default=Role.CLIENT.value,
     )
+    can_publish = models.BooleanField(default=False)
+    num_reviews = models.IntegerField(default=0)
+    rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=True, null=True)
+    accepted_politicy = models.BooleanField(default=True, null=True)
+    enterprise = models.OneToOneField(
+        Enterprise, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name='user_enterprise'  # Cambia el nombre del accesor inverso
+    )
+    avatar = models.ImageField(default="avatar.png")
 
     objects = CustomUserManager()
 
@@ -63,13 +91,32 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         ordering = ["-date_joined"]
 
-
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     date_requested = models.DateTimeField(default=timezone.now)
+class Reviews_User(models.Model):
+    user_target = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        related_name='target_reviews'  # Nombre para acceder a las reseñas que recibe
+    )
+    user_wrote = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        related_name='written_reviews'  # Nombre para acceder a las reseñas que ha escrito
+    )
+    rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    comment = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.user_wrote.name} for {self.user_target.name}"
+
 
 class PayPalConfig(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)  # Relación 1:1 con el usuario
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     app_name = models.CharField(max_length=255)
     client_id = models.CharField(max_length=255)
     secret_key = models.CharField(max_length=255)
@@ -77,4 +124,3 @@ class PayPalConfig(models.Model):
 
     def __str__(self):
         return f"PayPal Config for {self.user.name}"
-    

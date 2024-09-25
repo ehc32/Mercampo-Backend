@@ -4,7 +4,6 @@ import About from "../components/home/About/About";
 import Hero from "../components/home/Hero";
 import Participants from "../components/home/Participants/Participants";
 import RandomProducts from "../components/home/RandomProducts";
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import PaypalIntro from "../components/home/paypalInfo";
 
 
@@ -47,26 +46,16 @@ export default function Tienda() {
 
   useEffect(() => {
     void fetchProductos();
-  }, []);
-
-  const carrouselData = [
-    { foto: "/public/1.jpg" },
-    { foto: "/public/2.jpg" },
-    { foto: "/public/4.jpg" },
-    { foto: "/public/fondoa.jpeg" },
-  ];
+  }, [])
 
   return (
     <React.Fragment>
       <div className="home-container">
-      
         <Hero />
-      
         <RandomProducts productos={productosRandom} />
         <PaypalIntro />
         <About />
         <Participants people={people} />
-
       </div>
     </React.Fragment>
   );

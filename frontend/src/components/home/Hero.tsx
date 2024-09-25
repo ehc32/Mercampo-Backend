@@ -1,15 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Style.css";
 import { useAuthStore } from "../../hooks/auth";
-
-interface CarrouselLast12Props {
-  darkMode: boolean;
-}
-
-const Hero: React.FC<CarrouselLast12Props> = () => {
+import jwt_decode from 'jwt-decode';
+import { useEffect, useState } from "react";
+import { Token } from '../../Interfaces';
+import { toast } from "react-toastify";
 
 
-  const { isAuth } = useAuthStore();
+const Hero = () => {
+
+  const [roleLocal, setRoleLocal] = useState()
+  const { isAuth, access } = useAuthStore();
+  const location = useLocation();
+  const navigate = useNavigate(); ("");
+
+  useEffect(() => {
+    const setRoleFromToken = () => {
+      const token: string | null = access;
+      if (token) {
+        try {
+          const tokenDecoded: Token = jwt_decode(token);
+          const userRole = tokenDecoded.role;
+          setRoleLocal(userRole);
+        } catch (error) {
+          console.error("Error al decodificar el token:", error);
+        }
+      } else {
+        setRoleLocal("");
+      }
+    };
+
+    setRoleFromToken();
+
+  }, [access]);
 
   return (
     <section
@@ -26,21 +49,31 @@ const Hero: React.FC<CarrouselLast12Props> = () => {
             En nuestra tienda online encontrarás los productos que necesitas
           </p>
           <Link to="/store">
-            <button className="mr-2 bg-[#39A900] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 m-1 px-6 rounded-full">
+            <button className="mr-2 bg-[#39A900] hover:bg-green hover:bg-lime-700 text-white text-lg font-bold py-3 m-1 px-6 rounded-full focus:outline-none">
               ¡Compra ahora!
             </button>
           </Link>
           {
             isAuth ? (
 
-              <Link to={'/store'}>
-                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg m-1 font-bold py-3 px-6 rounded-full">
-                  Vender ahora!
-                </button>
-              </Link>
+              roleLocal === "seller" || roleLocal === "admin" ? (
+
+                <Link to={'/addprod'}>
+                  <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg m-1 font-bold py-3 px-6 rounded-full focus:outline-none">
+                    Vender ahora!
+                  </button>
+                </Link>
+              ) : (
+                <Link to={'/profile'} onClick={() => toast.success('No eres vendedor pero puedes solicitar serlo en la configuración')}>
+
+                  <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg m-1 font-bold py-3 px-6 rounded-full focus:outline-none">
+                    Vender ahora!
+                  </button>
+                </Link>
+              )
             ) : (
               <Link to={'/login'}>
-                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg m-1 font-bold py-3 px-6 rounded-full">
+                <button className="bg-[#fff] hover:bg-green hover:bg-lime-700 hover:text-white text-[#39A900] text-lg m-1 font-bold py-3 px-6 rounded-full focus:outline-none">
                   Vender ahora!
                 </button>
               </Link>

@@ -16142,8 +16142,25 @@ a:hover .btn-trigger:before {
 
 .card-bordered {
   border: 1px solid #39A900;
+  border-radius: 5px !important;
+}
+.card-addprod {
+  margin: 2em auto !important;
+  width: 70% !important;
+  min-width: 950px !important;
 }
 
+@media (max-width: 1050px) {
+  .card-bordered {
+    border: none;
+    margin:0;
+  }
+  .card-addprod {
+    width: 100% !important;
+    margin: 0 !important;
+  min-width: 0 !important;
+  }
+}
 
 .card-bordered.is-dark {
   border-color: #07523d;

@@ -1,22 +1,16 @@
 import { useEffect, useState } from "react";
 import { get_all_products_paginated_to_shop, filter_request } from '../api/products';
 import Content from "../components/tienda/Content/Content";
-import { motion, AnimatePresence } from 'framer-motion';
-import './style.css';
+import './../global/style.css';
 import { toast } from "react-toastify";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
-import AsideToggle from '../components/shared/tooltip/TooltipAside';
 
 const Store = () => {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [dataLenght, setDataLenght] = useState(0);
     const [page, setPage] = useState<number>(1)
-
-    const [filtrado, toggleFiltrado] = useState<boolean>(false); // revisar si se está filtrado
-
-    // FILTROS
-
+    const [filtrado, toggleFiltrado] = useState<boolean>(false);
     const [locate, setLocate] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [categories, setCategories] = useState<string[]>([]);
@@ -58,12 +52,26 @@ const Store = () => {
         }
     };
 
+
+
+
     // delete filtros
     const deleteDataFilter = () => {
         try {
             fetchProductos(page)
             toast.dismiss();
             toast.info(("Filtros restablecidos"));
+        } catch (error) {
+
+        }
+    }
+
+    // order changed
+    const changeOrder = () => {
+        try {
+            setProductos(prevProductos => [...prevProductos].reverse());
+            toast.dismiss();
+            toast.info(("Orden cambiado"));
         } catch (error) {
 
         }
@@ -84,8 +92,6 @@ const Store = () => {
     };
 
     useEffect(() => {
-
-
         fetchProductos(page);
 
     }, [page])
@@ -119,9 +125,10 @@ const Store = () => {
                     setPage={setPage}
                     searchItem={searchItem}
                     bringDataFilter={bringDataFilter}
-                    setSearchItem={setSearchItem} 
+                    setSearchItem={setSearchItem}
                     deleteDataFilter={deleteDataFilter}
-                    />
+                    changeOrder={changeOrder}
+                />
 
             </main>
         </section>

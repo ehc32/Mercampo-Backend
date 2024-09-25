@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginRequest } from "../api/users";
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import {
   IconButton,
   InputAdornment,
@@ -67,7 +66,7 @@ const LoginPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder="correo@email.com"
-                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
+                  className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black  focus:outline-none"
                 />
               </div>
 
@@ -85,7 +84,7 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     type={showPassword ? "text" : "password"}
                     placeholder="Contraseña"
-                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black"
+                    className="w-full p-2 border border-gray-300 rounded-lg bg-white text-black  focus:outline-none"
                   />
                   <InputAdornment position="end" className="absolute inset-y-0 right-0 flex items-center pr-3">
                     <IconButton

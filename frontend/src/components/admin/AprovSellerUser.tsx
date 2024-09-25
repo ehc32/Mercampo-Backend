@@ -1,14 +1,11 @@
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { bringRequestSeller, deleteRequestSeller, approveRequestSeller } from "../api/users";
+import { approveRequestSeller, bringRequestSeller, deleteRequestSeller } from "../../api/users";
 
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
-interface Props {
-  results: any;
-}
 
 const AprovSellerUser = ({ results }: Props) => {
   const [page, setPage] = React.useState(1);
@@ -25,7 +22,7 @@ const AprovSellerUser = ({ results }: Props) => {
       toast.error('Error al obtener usuarios');
     }
   };
-  
+
 
   useEffect(() => {
     fetchUsers();
@@ -93,7 +90,7 @@ const AprovSellerUser = ({ results }: Props) => {
                 <td className="px-2 py-2 whitespace-nowrap">{o.user.email}</td>
                 <td className="px-2 py-2 text-center">{o.user.phone == null ? "Sin definido" : o.user.phone}</td>
                 <td className="px-2 py-2 whitespace-nowrap text-center">{formatearFecha(o.date_requested)}</td>
-                <td className="px-2 py-2 text-center whitespace-nowrap justify-center gap">
+                <td className="px-2 py-2 text-center whitespace-nowrap justify-center gap align-center">
                   <div onClick={() => acceptUser(o.user.id, o.user.name)}>
                     <CheckIcon className='text-green-500 mx-1 cursor-pointer' />
                   </div>

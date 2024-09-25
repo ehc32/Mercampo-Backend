@@ -20,15 +20,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { create_order } from "../api/orders";
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import { useCartStore } from "../hooks/cart";
-import "./style.css";
+import './../global/style.css';
 import { get_paypal_user } from "../api/users";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 
 const CartPage = () => {
   const [paypal, SetPaypal] = useState<any>();
   const [showSecretKey, setShowSecretKey] = useState(false); // Estado para mostrar/ocultar secret key
+  const [id, SetPayPalUserId] = useState<any>();
 
   const paypalUser = async () => {
     try {

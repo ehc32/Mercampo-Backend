@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 import { send_review, bring_reviews } from "./../../../api/products";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
-import NotfoundPage from "../../../global/NotfoundPage";
 
 const Comments = ({ productId }) => {
   const [commentsData, setCommentsData] = useState([]);
@@ -43,7 +42,9 @@ const Comments = ({ productId }) => {
   const bring_all_coments_product = async () => {
     try {
       const response = await bring_reviews(productId);
-      setCommentsData(response.data);
+      const data = response.data
+      setCommentsData(data);
+      console.log(response.data);
     } catch (e) {
       console.error(e);
     }

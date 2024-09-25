@@ -226,9 +226,19 @@
 
 .tyc {
     font-size: 14px !important;
-    text-align: start;
+    text-align: center;
+    font-weight: 700;
     color: #000 !important;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    cursor: pointer;
 }
+
+.tyc:hover {
+    color: #39A900 !important; /* Cambia el color al hacer hover, si lo prefieres */
+    text-decoration: underline;
+}
+
+
 
 
 .ok-button,
@@ -276,4 +286,68 @@
 
 .dark .custom-button:hover {
     background-color: #39B900 !important;
+}
+
+/* .scroll-tablas {
+    overflow-y: scroll;
+    max-height: 80vh;
+} */
+
+.nav_items_block {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1.7em;
+}
+
+.nav_items_block .item_navbar {
+    height: 100%;
+}
+
+@media (max-width: 850px) {
+    .nav_items_block {
+        display: none !important;
+    }
+
+    .toggle-openaside {
+        display: block;
+    }
+}
+
+@media (min-width: 850px) {
+    .nav_items_block {
+        display: block !important;
+    }
+
+    .toggle-openaside {
+        display: none;
+    }
+}
+
+.subnav-1 {
+    width: 40% !important;
+}
+
+.titulo-while-auth {
+    font-size: 2em;
+}
+
+.force_text_green {
+    color: #39A900 !important;
+}
+
+.border_form {
+    border: 1px solid #bbb !important;
+    border-radius: 3px !important;
+}
+
+.btn-seller {
+    border: 1px solid #39A900 !important;
+    color: #39A900 !important;
+    background-color: #fff !important;
+}
+
+.tyc2 {
+    font-size: 14px !important;
+    font-weight: bold;
 }

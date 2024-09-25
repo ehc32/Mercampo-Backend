@@ -28,3 +28,41 @@
 .contenidoTienda .swiper-slide img {
     width: 90% !important;
 }
+
+.boton_header {
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.boton_header:focus {
+    outline: none;
+}
+
+@media (max-width: 750px) {
+
+    .ajuste-wrap {
+        flex-direction: column;
+    }
+
+    .product-container-light {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.locationcss {
+    position: absolute;
+    right: 1em;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap: .4em;
+    align-items: center;
+}
+
+.locationcss .icon {
+    color: #f00000;
+}

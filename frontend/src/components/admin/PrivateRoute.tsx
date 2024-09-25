@@ -1,6 +1,6 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuthStore } from "../hooks/auth";
 import jwt_decode from 'jwt-decode';
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuthStore } from "../../hooks/auth";
 
 export const PrivateRoute = () => {
     const { isAuth } = useAuthStore();

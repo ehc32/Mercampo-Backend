@@ -316,7 +316,7 @@ export default function ModalEditProfile({ id }) {
         className="bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded row align-center w-56 justify-center"
         onClick={handleOpen}
       >
-        <FaEdit className="mr-2 fs-16px" />
+        <FaEdit  className="fs-20px mr-1" />
         Editar
       </h2>
 

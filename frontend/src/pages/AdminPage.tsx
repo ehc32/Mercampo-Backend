@@ -4,11 +4,11 @@ import { useState } from "react";
 import { search_order } from "../api/orders";
 import { search_prod } from "../api/products";
 import { search_users } from "../api/users";
-import Aprove from "../components/AprovSellerUser";
-import Orders from "../components/Orders";
-import Products from "../components/Products";
-import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
-import Users from "../components/Users";
+import Aprove from "../components/admin/AprovSellerUser";
+import AproveProd from "../components/admin/AprovSellerUserProduct";
+import Orders from "../components/admin/Orders";
+import Products from "../components/admin/Products";
+import Users from "../components/admin/Users";
 
 const AdminPage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -47,49 +47,49 @@ const AdminPage = () => {
   return (
     <>
       <section style={{ minHeight: '80vh' }} className="dark:bg-gray-900">
-        <Container maxWidth="lg" sx={{ mb: 10 }}>
-          <div className="mb-4">
-            <h4 className='card-name-light'>Gestión administrativa</h4>
-            <h6 className='card-subname-light'>Gestiona productos, ordenes e incluso usuarios</h6>
-          </div>
-          <Card sx={{ p: 4, bgcolor: 'white', darkMode: { bgcolor: 'gray.800' }, boxShadow: 3, borderRadius: 2 }}>
 
-            <Tabs
-              value={selectedTab}
-              onChange={(e, newValue) => setSelectedTab(newValue)}
-              indicatorColor="primary"
-              textColor="primary"
-              sx={{
-                mb: 3,
-                '& .Mui-selected': { color: '#39A900' },
-                '& .MuiTabs-indicator': { backgroundColor: '#39A900' },
-              }}
-            >
-              <Tab className="focus:outline-none" sx={{
-                '&.Mui-selected': { color: '#39A900' },
-              }} label="Solicitudes Vendedor" />
-              <Tab className="focus:outline-none" sx={{
-                '&.Mui-selected': { color: '#39A900' },
-              }} label="Productos" />
-              <Tab className="focus:outline-none" sx={{
-                '&.Mui-selected': { color: '#39A900' },
-              }} label="Ordenes" />
-              <Tab className="focus:outline-none" sx={{
-                '&.Mui-selected': { color: '#39A900' },
-              }} label="Usuarios" />
-            </Tabs>
+        <div className="mb-4">
+          <h4 className='card-name-light'>Gestión administrativa</h4>
+          <h6 className='card-subname-light'>Gestiona productos, ordenes e incluso usuarios</h6>
+        </div>
+        <Card sx={{ p: 4 }}>
 
+          <Tabs
+            value={selectedTab}
+            onChange={(e, newValue) => setSelectedTab(newValue)}
+            indicatorColor="primary"
+            textColor="primary"
+            sx={{
+              mb: 3,
+              '& .Mui-selected': { color: '#39A900' },
+              '& .MuiTabs-indicator': { backgroundColor: '#39A900' },
+            }}
+          >
+            <Tab className="focus:outline-none" sx={{
+              '&.Mui-selected': { color: '#39A900' },
+            }} label="Productos" />
+            <Tab className="focus:outline-none" sx={{
+              '&.Mui-selected': { color: '#39A900' },
+            }} label="Ordenes" />
+            <Tab className="focus:outline-none" sx={{
+              '&.Mui-selected': { color: '#39A900' },
+            }} label="Usuarios" />
+            <Tab className="focus:outline-none" sx={{
+              '&.Mui-selected': { color: '#39A900' },
+            }} label="Solicitudes Vendedor" />
+            <Tab className="focus:outline-none" sx={{
+              '&.Mui-selected': { color: '#39A900' },
+            }} label="Nuevos productos" />
+          </Tabs>
 
-            <Box>
-              {selectedTab === 0 && <Aprove results={data} />}
-              {selectedTab === 1 && <Products results={data} />}
-              {selectedTab === 2 && <Orders results={orders} />}
-              {selectedTab === 3 && <Users results={users} />}
-            </Box>
-          </Card>
-        </Container>
-
- 
+          <Box>
+            {selectedTab === 0 && <Products results={data} />}
+            {selectedTab === 1 && <Orders results={orders} />}
+            {selectedTab === 2 && <Users results={users} />}
+            {selectedTab === 3 && <Aprove results={data} />}
+            {selectedTab === 4 && <AproveProd results={data} />}
+          </Box>
+        </Card>
       </section>
 
     </>
