@@ -21,7 +21,7 @@ import ListAsideNav from '../ListAsideNav/ListAsideNav';
 import './Aside.css'
 import { useAuthStore } from '../../../hooks/auth';
 
-const ciudades = ["todos", "Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
+const ciudades = ["Todos", "Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
 const AsideFilter = ({
     bringDataFilter,
     deleteDataFilter,
@@ -249,7 +249,7 @@ const AsideFilter = ({
                             </Typography>
                             <Select
                                 id="location"
-                                value={locate || 'todos'}
+                                value={locate || 'Todos'}
                                 style={{ height: "4em", width: "100%" }}
                                 onChange={handleLocationChange}
                                 sx={{

@@ -18,6 +18,7 @@ import ModalEditProfile from '../shared/Modal/ModalEditUser';
 import './style.css';
 import ConsentModal from '../shared/Modal/consentForm';
 import './../../global/style.css';
+import { FaRegBuilding } from "react-icons/fa";
 import { FaBookOpen } from 'react-icons/fa';
 
 function ProfileTables({ user, id }) {
@@ -282,11 +283,20 @@ function ProfileTables({ user, id }) {
         <TabPanel value={tabValue} index={2}>
           <div className='flex flex-row align-center justify-between w-12/12'>
             <ModalEditProfile user={user} id={id} />
-            {user?.role === "seller" && <ModalSellerConfig id={id} />}
-            {user?.role === "admin" && <ModalSellerConfig id={id} />}
+            {user?.role === "seller" && <>
+              <ModalSellerConfig id={id} />
+              <Typography className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
+                <FaRegBuilding  className="fs-20px mr-1" />¿Tienes una empresa?
+              </Typography>
+            </>}
+            {user?.role === "admin" && <>
+              <ModalSellerConfig id={id} />
+              <Typography className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
+                <FaRegBuilding  className="fs-20px mr-1" />¿Tienes una empresa?
+              </Typography></>}
             {user?.role === "client" && <ModalRequestSeller userId={id} />}
-            <Typography className=" tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-2 rounded " onClick={handleClickOpen}>
-              <FaBookOpen className="fs-20px mr-1" />Política de seguridad, terminos y condiciones
+            <Typography className=" tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
+              <FaBookOpen className="fs-20px mr-1" />Terminos y condiciones
             </Typography>
             <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
           </div>
@@ -294,11 +304,16 @@ function ProfileTables({ user, id }) {
       ) : (<TabPanel value={tabValue} index={1}>
         <div className='flex flex-row align-center justify-between w-12/12'>
           <ModalEditProfile user={user} id={id} />
-          {user?.role === "seller" && <ModalSellerConfig id={id} />}
-          {user?.role === "admin" && <ModalSellerConfig id={id} />}
+          {user?.role === "seller" && <><ModalSellerConfig id={id} /> <Typography className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
+            <FaRegBuilding  className="fs-20px mr-1" />¿Tienes una empresa?
+          </Typography>
+          </>}
+          {user?.role === "admin" && <> <ModalSellerConfig id={id} /> <Typography className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
+            <FaRegBuilding  className="fs-20px mr-1" />¿Tienes una empresa?
+          </Typography></>}
           {user?.role === "client" && <ModalRequestSeller userId={id} />}
           <Typography className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
-            <FaBookOpen className="fs-20px mr-1" />Política de seguridad, terminos y condiciones
+            <FaBookOpen className="fs-20px mr-1" />Terminos y condiciones
           </Typography>
           <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
         </div>

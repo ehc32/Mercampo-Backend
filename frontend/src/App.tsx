@@ -13,6 +13,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import Store from "./pages/Store";
 import UserProfile from "./pages/UserProfile";
 import Enterprise from "./pages/Enterprise";
+import EnterpriseShop from "./pages/EnterpriseShop";
 
 
 function App() {
@@ -25,11 +26,12 @@ function App() {
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
                     <Route path="store" element={<Store />} />
+                    <Route path="myEnterprise" element={<Enterprise />} />
 
                     {/* Rutas protegidas para vendedores y admins */}
                     <Route element={<PrivateRoute allowedRoles={['seller', 'admin']} />} >
                         <Route path="addprod" element={<AddProd />} />
-                        <Route path="enterprise" element={<Enterprise />} />
+                        <Route path="enterpriseShop" element={<EnterpriseShop />} />
                     </Route>
 
                     {/* Rutas protegidas para clientes autenticados */}

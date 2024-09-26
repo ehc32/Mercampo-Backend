@@ -1,0 +1,21 @@
+.cardbody2 {
+    height: 35vh;
+    width: 45%;
+    min-width: 550px;
+    background-color: #fff;
+    margin: 1em auto;
+    box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, .1);
+    border-radius: 7px;
+    transition: all .5s ease-in;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardbody:hover {
+    outline: #39A900 solid 1px;
+    box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, .2); 
+}
+
+.cardBodyLight {
+    margin: 1em !important;
+}

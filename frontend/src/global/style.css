@@ -348,6 +348,7 @@
 }
 
 .tyc2 {
+    min-width: 15em;
     font-size: 14px !important;
     font-weight: bold;
 }

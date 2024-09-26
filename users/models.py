@@ -46,18 +46,29 @@ class Enterprise(models.Model):
         'User', 
         on_delete=models.CASCADE, 
         primary_key=True, 
-        related_name='enterprise_owner'  # Cambia el nombre del accesor inverso
+        related_name='enterprise_owner'
     )
     name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20, null=True, blank=True, default=None)
+    rut = models.TextField(help_text="Imagen del RUT en formato base64", default="img in base 64")
+    tipo_productos = models.CharField(
+        max_length=255, 
+        help_text="Lista de tipos de productos separados por comas",
+        default="Varios"
+    )
+    facebook = models.URLField(max_length=255, null=True, blank=True)
+    instagram = models.URLField(max_length=255, null=True, blank=True)
+    whatsapp = models.CharField(max_length=20, null=True, blank=True)
     date_registered = models.DateTimeField(default=timezone.now)
     address = models.CharField(max_length=255)
-    link_enterprise = models.CharField(max_length=255, null=True, blank=True)  # Asegúrate de establecer otros parámetros necesarios
-    avatar = models.ImageField(default="avatar.png")
+    products_length = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    link_enterprise = models.URLField(max_length=255, null=True, blank=True)
+    avatar = models.TextField(help_text="Imagen del avatar en formato base64", default="img in base 64")
     is_active = models.BooleanField(default=True, null=True)
 
     def __str__(self):
         return f"Empresa: {self.name}"
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=100, unique=True)
@@ -67,7 +78,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=10,
         choices=[(tag.name, tag.value) for tag in Role],
         default=Role.CLIENT.value,
-    )
+    )   
     can_publish = models.BooleanField(default=False)
     num_reviews = models.IntegerField(default=0)
     rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
@@ -79,10 +90,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         on_delete=models.SET_NULL, 
         null=True, 
         blank=True, 
-        related_name='user_enterprise'  # Cambia el nombre del accesor inverso
+        related_name='user_enterprise'
     )
-    avatar = models.ImageField(default="avatar.png")
-
+    avatar = models.TextField(help_text="Imagen del avatar en formato base64", default="img in base 64")
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"

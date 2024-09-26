@@ -162,7 +162,7 @@ def FilterProductsView(request):
     products = Product.objects.filter(status=True)  # Filtra solo los productos activos
 
     locate = request.GET.get('locate')
-    if locate:
+    if locate and locate != 'Todos':
         products = products.filter(locate=locate)
 
     categories = request.GET.get('categories')
@@ -193,7 +193,7 @@ def FilterProductsView(request):
             if start_date and end_date:
                 products = products.filter(created__range=[start_date, end_date])
         elif time_range == 'todos':
-            pass
+            pass  # No se aplica ningún filtro de tiempo
 
     search_item = request.GET.get('searchItem')
     if search_item:

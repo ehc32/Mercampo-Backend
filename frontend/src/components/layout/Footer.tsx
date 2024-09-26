@@ -3,7 +3,7 @@ import './../../global/style.css';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2A2A2A] shadow py-9">
+    <footer className="bg-[#2A2A2A] shadow py-9 z-0">
       <div className="container  mx-auto px-4">
         <div className="text-center">
           <a href="https://industriaempresayservicios.blogspot.com/p/servicios-tecnologicos.html" target="_blank" rel="noopener noreferrer" className="text-sm block text-[#39A900] font-semibold">

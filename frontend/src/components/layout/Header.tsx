@@ -110,7 +110,12 @@ const Header = () => {
                       >
                         Tienda
                       </Link>
-
+                      <Link
+                        to={'/enterpriseShop'}
+                        className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
+                      >
+                        Emprendimientos
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -165,10 +170,10 @@ const Header = () => {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
-                                      to="/enterprise"
+                                      to="/myEnterprise"
                                       className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
                                     >
-                                      Emprender
+                                      Mi emprendimiento
                                     </Link>
                                   )}
                                 </Menu.Item>

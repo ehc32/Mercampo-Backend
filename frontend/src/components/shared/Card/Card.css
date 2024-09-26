@@ -1,14 +1,17 @@
 .cardbody {
     height: 27em;
-    width: 100%;
-    max-width: 320px;
+    max-width: 350px;
     background-color: #fff;
-    margin: 1em auto;
+    margin: 1em auto !important;
     box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, .1);
     border-radius: 7px;
     transition: all .5s ease-in;
     display: flex;
     flex-direction: column;
+}
+
+.cardBodyLight {
+    margin: 1em !important;
 }
 
 .cardbody:hover {
@@ -102,7 +105,7 @@
 }
 
 .footerInfo h6 {
-    font-size: 16px;
+    font-size: 18px;
     color: #39A900;
     font-weight: bold;
 }

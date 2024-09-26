@@ -13,9 +13,25 @@ interface Product {
   created?: number;
   slug?: string; // Este campo se debe agregar aquí para que sea parte del producto
 }
+interface Empresa {
+  first_image?: string;
+  name?: string;
+  category?: string;
+  description?: string;
+  count_in_stock?: number;
+  price?: number;
+  image?: string[]; // Es mejor que esto sea "images" para reflejar que es un arreglo
+  map_locate?: string;
+  locate?: string;
+  unit?: string;
+  tiempoL?: number;
+  created?: number;
+  slug?: string; // Este campo se debe agregar aquí para que sea parte del producto
+}
 
 interface CarrouselLast12Props {
   producto?: Product; // Cambiado a un solo producto en lugar de un array
+  empresa?: Empresa; // Cambiado a un solo producto en lugar de un array
 }
 
 interface SwiperPropsP {
@@ -81,6 +97,7 @@ interface User {
 
 interface ContenidoProps {
   productos: any[];
+  emprendimiento: any[];
   loading: boolean;
   dataLenght: number;
   page: number;

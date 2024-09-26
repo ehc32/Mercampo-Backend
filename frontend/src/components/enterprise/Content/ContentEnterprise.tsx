@@ -6,14 +6,13 @@ import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { useDrawer } from '../../../context/DrawerProvider';
 import NotfoundPage from '../../../global/NotfoundPage';
-import Card from '../../shared/Card/Cards';
-import Loader from './../../shared/Loaders/Loader';
+import Card from '../Card/Cards';
+import Loader from '../../shared/Loaders/Loader';
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import './Content.css';
 
 const Content: React.FC<ContenidoProps> = ({
-    productos,
+    emprendimiento,
     loading,
     dataLenght,
     page,
@@ -94,7 +93,7 @@ const Content: React.FC<ContenidoProps> = ({
         }, 1000);
         setTimer(newTimer);
     };
-
+    
     const { abierto, toggleAbierto } = useDrawer();
     const isWideScreen = window.innerWidth > 900;
 
@@ -108,8 +107,8 @@ const Content: React.FC<ContenidoProps> = ({
             <div>
                 <div className='flex flex-col '>
                     <div>
-                        <h2 className='titulo-sala-compra-light'>Una gran variedad de productos</h2>
-                        <h4 className='sub-titulo-sala-compra-light'>Encuentra productos de alta calidad a los mejores precios</h4>
+                        <h2 className='titulo-sala-compra-light'>Una gran variedad de emprendimientos</h2>
+                        <h4 className='sub-titulo-sala-compra-light'>Descubre emprendimientos con alto potencial</h4>
                     </div>
                     <p className='mt-4'>Busca de manera dinámica los productos que más se adecuen a lo que necesitas, para ello se han dispuesto filtros en donde especificar un poco más lo que buscas.</p>
                     <div className='flex align-center justify-evenly flex-wrap ajuste-wrap'>
@@ -131,7 +130,7 @@ const Content: React.FC<ContenidoProps> = ({
                             <TextField
                                 fullWidth
                                 id="search"
-                                label="Buscar producto  ..."
+                                label="Buscar emprendimiento  ..."
                                 value={searchItem}
                                 onChange={handleChange2}
                                 sx={{
@@ -159,9 +158,10 @@ const Content: React.FC<ContenidoProps> = ({
                             <>
                                 <div className='product-container-light'>
                                     <div className="flex flex-wrap intern">
-                                        {productos.length > 0 && productos.map((producto, index) => (
-                                            <Card key={index} producto={producto} />
-                                        ))}
+                                        {/* {emprendimiento.length > 0 && emprendimiento.map((emp, index) => (
+                                            <Card key={index} producto={emp} />
+                                            ))} */}
+                                        <Card />
                                     </div>
                                     <div className="w-95 flex items-center justify-center h-min-100px">
                                         <Pagination
