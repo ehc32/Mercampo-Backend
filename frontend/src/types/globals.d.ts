@@ -5,13 +5,13 @@ interface Product {
   description?: string;
   count_in_stock?: number;
   price?: number;
-  image?: string[]; // Es mejor que esto sea "images" para reflejar que es un arreglo
+  image?: string[];
   map_locate?: string;
   locate?: string;
   unit?: string;
   tiempoL?: number;
   created?: number;
-  slug?: string; // Este campo se debe agregar aquí para que sea parte del producto
+  slug?: string;
 }
 interface Empresa {
   first_image?: string;
@@ -20,18 +20,18 @@ interface Empresa {
   description?: string;
   count_in_stock?: number;
   price?: number;
-  image?: string[]; // Es mejor que esto sea "images" para reflejar que es un arreglo
+  image?: string[];
   map_locate?: string;
   locate?: string;
   unit?: string;
   tiempoL?: number;
   created?: number;
-  slug?: string; // Este campo se debe agregar aquí para que sea parte del producto
+  slug?: string;
 }
 
 interface CarrouselLast12Props {
-  producto?: Product; // Cambiado a un solo producto en lugar de un array
-  empresa?: Empresa; // Cambiado a un solo producto en lugar de un array
+  producto?: Product;
+  empresa?: Empresa;
 }
 
 interface SwiperPropsP {
@@ -39,7 +39,7 @@ interface SwiperPropsP {
   height?: string;
   isUpSwiper?: boolean;
   loader?: boolean;
-  datos?: Product[]; // Utiliza "Product" para reflejar que son productos
+  datos?: Product[];
 }
 
 interface Props {

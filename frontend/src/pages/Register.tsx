@@ -151,7 +151,6 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Correo electrónico
-                  <BasicTooltip titlet={"Correo electronico de preferencia que sea existente con caracteres validos ( letras, numeros, puntos o guiones )"} />
                 </Typography>
                 <input
                   value={email}
@@ -168,7 +167,6 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Nombre
-                  <BasicTooltip titlet={"Nombre y apellidos"} />
                 </Typography>
                 <input
                   value={name}
@@ -185,7 +183,6 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Teléfono
-                  <BasicTooltip titlet={"Número de teléfono al que te podran contactar"} />
                 </Typography>
                 <input
                   value={phone}
@@ -205,7 +202,6 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Contraseña
-                  <BasicTooltip titlet={"Que sea facil de recordar y tenga al menos una mayuscula, minuscula, numeros y simbolos ($ ! @ _ -)"} />
                 </Typography>
                 <div className="relative">
                   <input
@@ -244,7 +240,6 @@ const RegisterPage = () => {
                   className="font-bold text-black dark:text-gray-200 mb-1"
                 >
                   Repite la contraseña
-                  <BasicTooltip titlet={"Confirma que la contraseña sea la que deseas escribiendola nuevamente."} />
                 </Typography>
                 <div className="relative">
                   <input

@@ -1,296 +1,310 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { bring_prome, post_product } from "../api/products";
 import ImageInput from "../components/assets/imageInput/ImageInput";
-import BasicTooltip from "../components/shared/tooltip/TooltipHelp";
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import './../global/style.css'
+import ProductList from "../components/enterprise/productList";
+import jwt_decode from 'jwt-decode';
+import './../global/style.css';
+import { sendEnterpriseRequest } from "../api/users";
+import { useAuthStore } from "../hooks/auth";
+import { Token } from "../Interfaces";
+import { useNavigate } from "react-router-dom";
 
-const AddProd = () => {
-  const [images, setImages] = useState<string[]>([]);
-  const [nombre, setNombre] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [ubicacion, setUbicacion] = useState("");
-  const [ubicacionDescriptiva, setUbicacionDescriptiva] = useState("");
-  const [cantidad, setCantidad] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [unidad, setUnidad] = useState("");
-  const [tiempoL, setTiempoL] = useState<number>();
-  const ciudades = ["Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
+const AddEnterprise = () => {
+  const [nombreEmpresa, setNombreEmpresa] = useState("");
+  const [telefonoEmpresa, setTelefonoEmpresa] = useState("");
+  const [productos, setProductos] = useState<string[]>([]);
+  const [facebook, setFacebook] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [direccionEmpresa, setDireccionEmpresa] = useState("");
+  const [descripcionEmpresa, setDescripcionEmpresa] = useState("");
+  const [linkEmpresa, setLinkEmpresa] = useState("");
+  const [avatarEmpresa, setAvatarEmpresa] = useState([]);
+  const [rutEmpresa, setRutEmpresa] = useState<string[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+
+  const validateField = (type, value) => {
+    const validations = {
+      phone: (value) => /^\d{10}$/.test(value),
+      url: (value) => /^(https?:\/\/)?([\w.-]+)+(:\d+)?(\/[\w._~:/?#[\]@!$&'()*+,;=]*)?$/.test(value),
+      name: (value) => /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/.test(value),
+    };
+
+    return validations[type](value);
+  };
+
+
+  const { access } = useAuthStore();
+
+  useEffect(() => {
+    const setRoleFromToken = () => {
+      const token: string | null = access;
+      if (token) {
+        try {
+          const tokenDecoded: Token = jwt_decode(token);
+          const userId = tokenDecoded.userId;
+          setUserId(userId.toString())
+        } catch (error) {
+          console.error("Error al decodificar el token:", error);
+        }
+      } else {
+        setUserId("");
+      }
+    };
+
+    setRoleFromToken();
+
+  }, [access]);
+
 
   const manejarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!nombre || !categoria || !descripcion || !ubicacion || !cantidad || !precio || !unidad || !tiempoL || !ubicacionDescriptiva) {
-      toast.error("Por favor, complete todos los campos");
+    // Validar campos obligatorios
+    if (!nombreEmpresa || !telefonoEmpresa || !direccionEmpresa || !descripcionEmpresa) {
+      toast.error("Por favor, complete todos los campos obligatorios");
       return;
     }
 
-    let promedio = 0;
-    let take_prom = false;
-
-    try {
-      const data = await bring_prome(nombre); // Traer el precio promedio del producto
-      promedio = data.data.average_price;
-      take_prom = true
-    } catch (error) {
-      take_prom = false
-      // toast.warn("No hay productos como este para comparar precios, pon el más óptimo.");
-    }
-
-    if (isNaN(promedio)) {
-      toast.error("El precio promedio no es un número válido");
+    if (productos.length === 0) {
+      toast.warning("Debe incluir mínimo un tipo de producto a vender.");
       return;
     }
-    if (take_prom) {
 
-      let min_price = Math.round(promedio * 0.9); // -10%
-      let max_price = Math.round(promedio * 1.1); // +10%
-
-      const inputPrice = Number(precio);
-      if (inputPrice < min_price || inputPrice > max_price) {
-        toast.warning(`El precio debe estar entre ${min_price} y ${max_price}.`);
-        return;
-      }
+    // Validar campos específicos
+    if (!validateField("phone", telefonoEmpresa)) {
+      toast.warning("El teléfono debe tener exactamente 10 números.");
+      return;
     }
 
-    let price = parseInt(precio).toFixed(0);
+    if (facebook && !validateField("url", facebook)) {
+      toast.warning("Ingrese una URL válida para Facebook.");
+      return;
+    }
 
-    const product: Product = {
-      name: nombre,
-      category: categoria,
-      description: descripcion,
-      count_in_stock: parseInt(cantidad),
-      price: Number(price),
-      image: images,
-      map_locate: ubicacionDescriptiva,
-      locate: ubicacion,
-      unit: unidad,
-      tiempoL: tiempoL,
-    };
+    if (instagram && !validateField("url", instagram)) {
+      toast.warning("Ingrese una URL válida para Instagram.");
+      return;
+    }
+
+    if (whatsapp && !validateField("phone", whatsapp)) {
+      toast.warning("El número de WhatsApp debe tener exactamente 10 números.");
+      return;
+    }
+
+    if (!validateField("name", nombreEmpresa)) {
+      toast.warning("El nombre de la empresa solo puede contener letras y espacios.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Crear FormData
+    const formData = new FormData();
+    formData.append('name', nombreEmpresa);
+    formData.append('phone', telefonoEmpresa);
+    formData.append('tipo_productos', productos.join(',')); // Concatenar productos
+    formData.append('facebook', facebook || '');
+    formData.append('instagram', instagram || '');
+    formData.append('whatsapp', whatsapp || '');
+    formData.append('address', direccionEmpresa);
+    formData.append('description', descripcionEmpresa);
+    formData.append('link_enterprise', linkEmpresa || '');
+
+    // Adjuntar avatar y rut (asegúrate de que solo pase el valor base64)
+    formData.append('avatar', avatarEmpresa[0]); // Tomar el primer elemento
+    formData.append('rut', rutEmpresa[0]); // Tomar el primer elemento
 
     try {
-      await post_product(product);
-      toast.success("Producto agregado exitosamente");
+      await sendEnterpriseRequest(userId, formData);
+      toast.success("Solicitud enviada exitosamente");
 
-      // Reiniciar los campos del formulario
-      setNombre("");
-      setCategoria("");
-      setDescripcion("");
-      setUbicacion("");
-      setCantidad("");
-      setPrecio("");
-      setUnidad("");
-      setUbicacionDescriptiva("");
-      setTiempoL(0);
-      setImages([]);
-    } catch (error) {
-      toast.error("Error al agregar el producto");
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate('/profile');
+      }, 2000);
+
+      setFacebook("");
+      setInstagram("");
+      setLinkEmpresa("");
+      setTelefonoEmpresa("");
+      setNombreEmpresa("");
+      setWhatsapp("");
+      setDescripcionEmpresa("");
+      setDireccionEmpresa("");
+
+    } catch (warning) {
+      toast.warning("Este usuario ya pertenece a una empresa.");
+      setIsLoading(false);
     }
   };
-
 
   return (
     <div className="flex">
       <div className="w-full flex m-auto dark:bg-gray-800 rounded-xl shadow-lg card-addprod">
         <div className="w-full p-4 md:p-10 card-bordered">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-2xl md:text-3xl text-black font-bold ">
-              Añadir Producto
-            </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl md:text-3xl text-black font-bold">Crear mi empresa</h1>
             <img src="/public/logoSena.png" alt="Logo-sena" className="h-12 md:h-16" />
           </div>
-
-          <form onSubmit={manejarSubmit} className="space-y-4 md:space-y-6">
+          <p className="my-2 text-black fs-16px">Para crear su empresa debe tener en cuenta que debe estar instituida o al menos enviar un comprobante de que su empresa realmente existe para poder ser tomada en cuenta, de otra manera se rechazará su solicitud de crear empresa.</p>
+          <form onSubmit={manejarSubmit} className="space-y-2 md:space-y-6">
+            <h2 className="text-xl font-bold text-black">Información de la Empresa</h2>
             <div className="flex flex-col md:flex-row md:space-x-4">
-              <div className="flex-1   md:mb-0">
-                <h6 className="text-black font-bold m-1 ">Nombre del Producto
-                  <BasicTooltip titlet={"Pon el nombre de tu producto"} /></h6>
+              <div className="flex-1">
+                <h6 className="text-black font-bold m-1 fs-16px">Nombre de la Empresa</h6>
                 <input
                   type="text"
-                  id="nombre"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-ZñÑ\s]/g, ''))}
-                  placeholder="Ej: Tomate cherry"
-                  className="w-full p-3    bg-white  text-black focus:outline-none border_form"
+                  value={nombreEmpresa}
+                  onChange={(e) => setNombreEmpresa(e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, ''))}
+                  placeholder="Nombre de la empresa"
+                  className="w-full p-3 bg-white text-black border_form focus:outline-none"
                   required
                 />
               </div>
-
               <div className="flex-1">
-                <h6 className="text-black font-bold m-1 ">Categoria
-                  <BasicTooltip titlet={"Selecciona la categoria que más se adecúe al tipo de producto que desea ofertar"} /></h6>
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                  <Select
-                    value={categoria}
-                    onChange={(e) => setCategoria(e.target.value)}
-                    required
-                    displayEmpty
-                    sx={{
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#39A900',
-                      }
-                    }}
-                  >
-                    <MenuItem value="" disabled>Selecciona una categoría</MenuItem>
-                    <MenuItem value="VERDURAS">Verduras</MenuItem>
-                    <MenuItem value="FRUTAS">Frutas</MenuItem>
-                    <MenuItem value="GRANOS">Grano</MenuItem>
-                    <MenuItem value="UNIDAD">Unidad</MenuItem>
-                    <MenuItem value="OTROS">Otros</MenuItem>
-                  </Select>
-                </FormControl>
+                <h6 className="text-black font-bold m-1 fs-16px">Teléfono</h6>
+                <input
+                  type="text"
+                  value={telefonoEmpresa}
+                  onChange={(e) => setTelefonoEmpresa(e.target.value.replace(/\D/g, ""))}
+                  maxLength={10}
+                  minLength={10}
+                  inputMode="numeric"
+                  placeholder="Teléfono de la empresa"
+                  className="w-full p-3 bg-white text-black border_form focus:outline-none"
+                  required
+                />
               </div>
             </div>
 
-            <h6 className="text-black font-bold mx-1 mt-1 ">Descripción del Producto
-              <BasicTooltip titlet={"Has una breve introducción de tu producto, el maximo de caractéres es de 350"} /></h6>
-            <textarea
-              id="descripcion"
-              value={descripcion}
-              onChange={(e) => {
-                if (e.target.value.length <= 350) {
-                  setDescripcion(e.target.value);
-                }
-              }}
-              placeholder="Ej: Tomate cherry de alta calidad"
-              className="resize-none w-full p-3 mt-2  focus:outline-none   bg-white  text-blac border_form"
-              rows={4}
-              required
+            <ProductList
+              productos={productos}
+              setProductos={setProductos}
+              setSelectedProduct={setSelectedProduct}
+              selectedProduct={selectedProduct}
             />
-            <div className="flex flex-col md:flex-row md:space-x-4 mt-0">
-              <div className="flex-1   md:mb-0">
-                <h6 className="text-black font-bold m-1 ">Precio unitario
-                  <BasicTooltip titlet={"El precio de cada producto será redondeado, es decir que no tendra decimales"} />
-                </h6>
-                <input
-                  type="number"
-                  id="precio"
-                  value={precio}
-                  onChange={(e) => setPrecio(Math.max(0, Number(e.target.value)).toString())}
-                  placeholder="Ej: 5000"
-                  className="w-full p-3  focus:outline-none border-gray-500  bg-white  text-black border_form"
-                  min="0"
-                  required
-                />
-              </div>
-              <div className="flex-1   md:mb-0">
-                <h6 className="text-black font-bold m-1 ">Cantidad en Stock
-                  <BasicTooltip titlet={"Pon una cantidad de productos que realmente puedan ser vendidos en el tiempo limite"} />
-                </h6>
-                <input
-                  type="number"
-                  id="cantidad"
-                  value={cantidad}
-                  onChange={(e) => setCantidad(Math.max(0, Number(e.target.value)).toString())}
-                  placeholder="Ej: 100"
-                  className="w-full p-3  focus:outline-none   bg-white  text-black border_form"
-                  min="0"
-                  required
-                />
-              </div>
-              <div className="flex-1   md:mb-0">
-                <h6 className="text-black font-bold m-1 ">Unidad
-                  <BasicTooltip titlet={"Seleccione una unidad de medida según al producto que desea ofertar"} />
-                </h6>
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                  <Select
-                    value={unidad}
-                    onChange={(e) => setUnidad(e.target.value)}
-                    displayEmpty
-                    required
-                    sx={{
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#39A900',
-                      }
-                    }}
-                  >
-                    <MenuItem value="" disabled>Selecciona una unidad</MenuItem>
-                    <MenuItem value="Kg">Kilos</MenuItem>
-                    <MenuItem value="L">Litros</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              <div className="flex-1">
-                <h6 className="text-black font-bold m-1">Tiempo de publicación
-                  <BasicTooltip titlet={"Se debe tomar en cuenta que el producto puede caducar o dañarse, tome en cuenta el tipo de producto a la hora de seleccionar un tiempo limite."} /></h6>
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                  <Select
-                    value={tiempoL}
-                    onChange={(e) => setTiempoL(e.target.value)}
-                    displayEmpty
-                    required
-                    sx={{
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#39A900',
-                      }
-                    }}
-                  >
-                    <MenuItem value="" disabled>Selecciona un tiempo limite</MenuItem>
-                    {/* <MenuItem value={0}>1 semana</MenuItem> */}
-                    <MenuItem value={1}>2 semanas</MenuItem>
-                    <MenuItem value={2}>3 semanas</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </div>
+            <div className="flex flex-row justify-between  mt-1">
 
-            <h6 className="fs-22px mt-1 text-black font-bold ">Agrega una ubicación</h6>
-            <div className="flex flex-col md:flex-row md:space-x-4 mt-1">
-              <div className="flex-1   md:mb-0">
-                <h6 className="text-black font-bold m-1 ">Ubicación
-                  <BasicTooltip titlet={"Menciona el país, ciudad, barrio o direccion del producto"} /></h6>
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                  <Select
-                    value={ubicacion}
-                    onChange={(e) => setUbicacion(e.target.value)}
-                    displayEmpty
-                    required
-                    sx={{
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#39A900',
-                      }
-                    }}
-                  >
-                    <MenuItem value="" disabled>Selecciona una ubicación</MenuItem>
-                    {ciudades.map((ciudad, index) => (
-                      <MenuItem key={index} value={ciudad}>
-                        {ciudad}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </div>
               <div className="flex-1">
-                <h6 className="text-black font-bold  flex m-1 flex-row items-center">
-                  Ubicación descriptiva
-                  <BasicTooltip titlet={"Menciona el país, ciudad, barrio o direccion del producto"} />
-                </h6>
+                <h6 className="text-black font-bold m-1 fs-16px">Dirección</h6>
                 <input
                   type="text"
-                  id="ubicacion-descriptiva"
-                  value={ubicacionDescriptiva}
-                  onChange={(e) => setUbicacionDescriptiva(e.target.value)}
-                  placeholder="Ej: Dirección exacta"
-                  className="w-full p-3 focus:outline-none   bg-white  text-black border_form"
+                  value={direccionEmpresa}
+                  onChange={(e) => setDireccionEmpresa(e.target.value)}
+                  placeholder="Dirección de la empresa"
+                  className="w-full p-3 bg-white text-black border_form focus:outline-none"
                   required
                 />
               </div>
 
             </div>
+            <div className="flex flex-col mt-1">
+              <h6 className="text-black font-bold m-1 fs-16px">Descripción de la Empresa</h6>
+              <textarea
+                value={descripcionEmpresa}
+                onChange={(e) => setDescripcionEmpresa(e.target.value)}
+                placeholder="Descripción de la empresa"
+                maxLength={350}
+                minLength={30}
+                className="w-full p-3 bg-white text-black border_form resize-none focus:outline-none"
+                rows={4}
+                required
+              />
+            </div>
 
-            <h6 className="fs-22px pb-2 text-black font-bold  mt-1 ">Agrega hasta 4 imágenes</h6>
-            <div className="flex flex-col md:flex-row justify-between items-center  mt-1">
-              <ImageInput images={images} setImages={setImages} />
+            <div className="footer-add-enterprice  mt-1">
+              <div>
+                <div className="flex flex-col">
+                  <h6 className="text-black font-bold m-1 fs-16px">Adjuntar RUT (Registro Único Tributario)</h6>
+                  <ImageInput
+                    images={rutEmpresa}
+                    setImages={setRutEmpresa}
+                    img_lenght={1}
+                    rut={true}
+                  />
+                </div>
+                <div className="mt-6 flex flex-col">
+                  <h6 className="text-black font-bold m-1 fs-16px">Logo de la empresa</h6>
+                  <ImageInput images={avatarEmpresa} setImages={setAvatarEmpresa} img_lenght={1} />
+                </div>
+              </div>
+              <div className="flex social-container">
+                <h6 className="text-black font-bold mt-4 fs-16px">Redes Sociales</h6>
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    value={linkEmpresa}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setLinkEmpresa(value);
+                      if (value && !validateField("url", value)) {
+                        toast.error("Ingrese una URL válida.");
+                      }
+                    }}
+                    placeholder="Link a la empresa"
+                    className="w-full p-3 bg-white text-black border_form focus:outline-none"
+                  />
+                </div>
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    value={facebook}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFacebook(value);
+                      if (value && !validateField("url", value)) {
+                        toast.error("Ingrese una URL válida para Facebook.");
+                      }
+                    }}
+                    placeholder="Facebook (opcional)"
+                    className="w-full p-3 bg-white text-black border_form focus:outline-none"
+                  />
+                </div>
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    value={instagram}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setInstagram(value);
+                      if (value && !validateField("url", value)) {
+                        toast.error("Ingrese una URL válida para Instagram.");
+                      }
+                    }}
+                    placeholder="Instagram (opcional)"
+                    className="w-full p-3 bg-white text-black border_form focus:outline-none"
+                  />
+                </div>
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    value={whatsapp}
+                    onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ""))}
+                    maxLength={10}
+                    minLength={10}
+                    inputMode="numeric"
+                    placeholder="WhatsApp (opcional)"
+                    className="w-full p-3 bg-white text-black border_form focus:outline-none"
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div className="w-full text-center">
               <button
                 type="submit"
-                className="px-8 py-2 mt-4 md:mt-0 bg-[#39A900] hover:bg-[#2f6d30] text-white "
+                disabled={isLoading}
+                className="p-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full md:w-6/12"
               >
-                Añadir Producto
+                {isLoading ? "Cargando..." : "Crear Empresa"}
               </button>
             </div>
           </form>
@@ -298,6 +312,6 @@ const AddProd = () => {
       </div>
     </div>
   );
-}
+};
 
-export default AddProd;
+export default AddEnterprise;

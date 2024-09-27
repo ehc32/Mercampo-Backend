@@ -89,3 +89,15 @@ export const get_paypal_user = async (id: number) => {
     return response;
 };
 
+export const sendEnterpriseRequest = async (idUser: number | string, formData: FormData) => {
+    await axi.post(`/users/create-enterprise/${idUser}/`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+};
+
+export const get_enterprices = async (page: number | string) => {
+    const response = await axi.get(`users/get-enterprises/?page=${page}`);
+    return response;
+};

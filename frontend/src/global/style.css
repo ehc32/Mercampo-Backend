@@ -352,3 +352,25 @@
     font-size: 14px !important;
     font-weight: bold;
 }
+
+.footer-add-enterprice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.social-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.social-container input {
+    width: 30vw;
+}
+
+@media (max-width: 950px) {
+    .footer-add-enterprice {
+        flex-direction: column;
+    }
+}

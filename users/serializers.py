@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import PayPalConfig, User, Seller
+from .models import Enterprise, PayPalConfig, User, Seller
 from django.contrib.auth.models import AnonymousUser
 
 class UserSerializer(serializers.ModelSerializer):
@@ -54,6 +54,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['name'] = user.name
         token['avatar'] = user.avatar
         token['phone'] = user.phone
+        token['phone'] = user.phone
         token['role'] = user.role
         token['can_publish'] = user.can_publish
 
@@ -99,3 +100,37 @@ class UserCanPublishSerializer(serializers.ModelSerializer):
         instance.can_publish = not instance.can_publish
         instance.save()
         return instance
+
+
+class EnterpriseSerializer(serializers.ModelSerializer):
+    owner_user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+
+    class Meta:
+        model = Enterprise
+        fields = [
+            'owner_user', 'name', 'phone', 'rut', 'tipo_productos', 'facebook',
+            'instagram', 'whatsapp', 'address', 'products_length', 'description',
+            'link_enterprise', 'avatar', 'is_active'
+        ]
+
+    def create(self, validated_data):
+        owner_user = validated_data.pop('owner_user')
+
+        avatar = validated_data.get('avatar', [None])
+        rut = validated_data.get('rut', [None])
+        
+        tipo_productos = validated_data.get('tipo_productos', [])
+        if isinstance(tipo_productos, list):
+            tipo_productos = ', '.join(tipo_productos)
+
+        validated_data['avatar'] = avatar
+        validated_data['rut'] = rut
+        validated_data['tipo_productos'] = tipo_productos
+        
+        # Validaciones opcionales
+        if Enterprise.objects.filter(owner_user=owner_user).exists():
+            raise serializers.ValidationError("Este usuario ya tiene una empresa registrada.")
+
+        # Crear la empresa
+        enterprise = Enterprise.objects.create(owner_user=owner_user, **validated_data)
+        return enterprise

@@ -20,7 +20,34 @@ const AddProd = () => {
   const [precio, setPrecio] = useState("");
   const [unidad, setUnidad] = useState("");
   const [tiempoL, setTiempoL] = useState<number>();
-  const ciudades = ["Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo"];
+  const ciudades = ["Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo", "Santa María"];
+  const [typingTimeout, setTypingTimeout] = useState(null);
+
+  const handlePriceChange = (e: any) => {
+    const inputValue = Math.max(0, Number(e.target.value));
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    const newTimeout = setTimeout(() => {
+      let roundedPrice = inputValue;
+      let remainder = roundedPrice % 100;
+
+      if (remainder < 25) {
+        roundedPrice = roundedPrice - remainder;
+      } else if (remainder >= 25 && remainder < 75) {
+        roundedPrice = roundedPrice - remainder + 50;
+      } else {
+        roundedPrice = roundedPrice + (100 - remainder);
+      }
+
+      setPrecio(roundedPrice.toString());
+    }, 1500);
+
+    setTypingTimeout(newTimeout);
+    setPrecio(inputValue.toString());
+  };
 
   const manejarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,13 +79,26 @@ const AddProd = () => {
       let max_price = Math.round(promedio * 1.1); // +10%
 
       const inputPrice = Number(precio);
-      if (inputPrice < min_price || inputPrice > max_price) {
-        toast.warning(`El precio debe estar entre ${min_price} y ${max_price}.`);
+      if (inputPrice < min_price) {
+        toast.warning(`El precio es muy bajo, el minimo para este producto es de $ ${min_price}.`);
+        return;
+      }
+      if (inputPrice > max_price) {
+        toast.warning(`El precio es muy caro, el maximo para este producto es de $ ${max_price}.`);
         return;
       }
     }
+    let price = parseInt(precio);
+    let remainder = price % 100;
 
-    let price = parseInt(precio).toFixed(0);
+    if (remainder < 25) {
+      price = price - remainder;
+    } else if (remainder >= 25 && remainder < 75) {
+      price = price - remainder + 50;
+    } else {
+      price = price - remainder + 100;
+    }
+
 
     const product: Product = {
       name: nombre,
@@ -163,21 +203,27 @@ const AddProd = () => {
               required
             />
             <div className="flex flex-col md:flex-row md:space-x-4 mt-0">
-              <div className="flex-1   md:mb-0">
-                <h6 className="text-black font-bold m-1 ">Precio unitario
-                  <BasicTooltip titlet={"El precio de cada producto será redondeado, es decir que no tendra decimales"} />
+              <div className="flex-1 md:mb-0">
+                <h6 className="text-black font-bold m-1">Precio unitario
+                  <BasicTooltip titlet={"El precio de cada producto será redondeado, es decir que no tendrá decimales"} />
                 </h6>
-                <input
-                  type="number"
-                  id="precio"
-                  value={precio}
-                  onChange={(e) => setPrecio(Math.max(0, Number(e.target.value)).toString())}
-                  placeholder="Ej: 5000"
-                  className="w-full p-3  focus:outline-none border-gray-500  bg-white  text-black border_form"
-                  min="0"
-                  required
-                />
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-black font-bold">
+                    $
+                  </span>
+                  <input
+                    type="number"
+                    id="precio"
+                    value={precio}
+                    onChange={handlePriceChange}
+                    placeholder="Ej: 5000"
+                    className="w-full pl-10 p-3 focus:outline-none border-gray-500 bg-white text-black border_form text-end"
+                    min="0"
+                    required
+                  />
+                </div>
               </div>
+
               <div className="flex-1   md:mb-0">
                 <h6 className="text-black font-bold m-1 ">Cantidad en Stock
                   <BasicTooltip titlet={"Pon una cantidad de productos que realmente puedan ser vendidos en el tiempo limite"} />
@@ -285,7 +331,7 @@ const AddProd = () => {
 
             <h6 className="fs-22px pb-2 text-black font-bold  mt-1 ">Agrega hasta 4 imágenes</h6>
             <div className="flex flex-col md:flex-row justify-between items-center  mt-1">
-              <ImageInput images={images} setImages={setImages} />
+              <ImageInput images={images} setImages={setImages} img_lenght={4} rut={false} />
               <button
                 type="submit"
                 className="px-8 py-2 mt-4 md:mt-0 bg-[#39A900] hover:bg-[#2f6d30] text-white "

@@ -4,6 +4,7 @@ import Layout from "./components/layout/Layout";
 import { ToastContainer } from "react-toastify";
 import NotfoundPage from "./global/NotfoundPage";
 import AddProd from "./pages/AddProd";
+import AddEnterprise from "./pages/AddEnterprise";
 import AdminPage from "./pages/AdminPage";
 import Home from "./pages/Home";
 import LoginPage from "./pages/Login";
@@ -26,16 +27,17 @@ function App() {
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
                     <Route path="store" element={<Store />} />
-                    <Route path="myEnterprise" element={<Enterprise />} />
+                    <Route path="enterpriseShop" element={<EnterpriseShop />} />
 
                     {/* Rutas protegidas para vendedores y admins */}
                     <Route element={<PrivateRoute allowedRoles={['seller', 'admin']} />} >
                         <Route path="addprod" element={<AddProd />} />
-                        <Route path="enterpriseShop" element={<EnterpriseShop />} />
+                        <Route path="create-enterprise" element={<AddEnterprise />} />
                     </Route>
 
                     {/* Rutas protegidas para clientes autenticados */}
                     <Route element={<PrivateRoute allowedRoles={['client', 'seller', 'admin']} />} >
+                        <Route path="myEnterprise" element={<Enterprise />} />
                         <Route path="product/:slug" element={<DetallesProd />} />
                         <Route path="cart" element={<ShoppingCart />} />
                         <Route path="profile" element={<UserProfile />} />

@@ -12,7 +12,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import './Content.css';
 
 const Content: React.FC<ContenidoProps> = ({
-    emprendimiento,
+    empresa,
     loading,
     dataLenght,
     page,
@@ -93,7 +93,7 @@ const Content: React.FC<ContenidoProps> = ({
         }, 1000);
         setTimer(newTimer);
     };
-    
+
     const { abierto, toggleAbierto } = useDrawer();
     const isWideScreen = window.innerWidth > 900;
 
@@ -161,7 +161,9 @@ const Content: React.FC<ContenidoProps> = ({
                                         {/* {emprendimiento.length > 0 && emprendimiento.map((emp, index) => (
                                             <Card key={index} producto={emp} />
                                             ))} */}
-                                        <Card />
+                                        {empresa.length > 0 && empresa.map((emp, index) => (
+                                            <Card empresa={empresa}/>
+                                        ))}
                                     </div>
                                     <div className="w-95 flex items-center justify-center h-min-100px">
                                         <Pagination

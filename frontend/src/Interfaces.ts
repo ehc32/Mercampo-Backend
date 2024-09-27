@@ -39,9 +39,11 @@ export interface User {
 
 export interface Token {
     user_id: number;
+    userId: number;
     exp: number;
     is_staff: boolean;
     email: string;
+    enterprise: any;
     name: string;
     phone: string;
     role: string;

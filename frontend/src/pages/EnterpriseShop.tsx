@@ -4,6 +4,7 @@ import './../global/style.css';
 import { toast } from "react-toastify";
 import AsideFilter from "../components/tienda/AsideFilter/AsideFilter";
 import Content from "../components/enterprise/Content/ContentEnterprise";
+import { get_enterprices } from "../api/users";
 
 const Store = () => {
     const [productos, setProductos] = useState([]);
@@ -81,9 +82,11 @@ const Store = () => {
 
     const fetchProductos = async (page: number) => {
         try {
-            const productosAPI = await get_all_products_paginated_to_shop(page);
-            setProductos(productosAPI.data);
-            setDataLenght(productosAPI.meta.count)
+            const productosAPI = await get_enterprices(page);
+            const data = productosAPI.data.data
+            setProductos(data);
+            setDataLenght(productosAPI.data.meta.count);
+            console.log(productos)
         } catch (error) {
             console.error(error)
         } finally {
@@ -93,7 +96,6 @@ const Store = () => {
 
     useEffect(() => {
         fetchProductos(page);
-
     }, [page])
 
     return (

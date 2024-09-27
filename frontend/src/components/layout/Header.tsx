@@ -27,7 +27,9 @@ const Header = () => {
         try {
           const tokenDecoded: Token = jwt_decode(token);
           const userRole = tokenDecoded.role;
+          const userEnterprise = tokenDecoded.enterprise;
           setRoleLocal(userRole);
+          console.log(userEnterprise)
         } catch (error) {
           console.error("Error al decodificar el token:", error);
         }
@@ -205,7 +207,7 @@ const Header = () => {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
-                                      to="/enterprise"
+                                      to="/myEnterprise"
                                       className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
                                     >
                                       Emprender

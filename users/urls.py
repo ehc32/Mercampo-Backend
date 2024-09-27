@@ -12,6 +12,7 @@ urlpatterns = [
     path('delete/<int:pk>/', views.delete_user),
     path('edit/<int:id>/', views.edit_profile),
     path('get/solo/<int:pk>/', views.get_solo_user),
+    # seller
     path('sell/bring_request/', views.get_request_seller),
     path('sell/delete_request/<int:pk>/', views.delete_request),
     path('sell/approve_request/<int:pk>/', views.approve_request),
@@ -19,5 +20,8 @@ urlpatterns = [
     path('sell/paypalsel/<int:pk>/', views.request_seller_paypal_config),
     path('paypalconfig/<int:pk>/', views.get_seller_paypal_config_done),
     path('sell/changePermision/<int:idUser>/', views.change_can_publish),
-
+    #Enterprise
+    path('create-enterprise/<int:idUser>/', views.create_enterprise),
+    path('get-enterprises/', views.get_enterprises),
 ]
+

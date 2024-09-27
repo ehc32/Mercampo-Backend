@@ -2,9 +2,12 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from .models import PayPalConfig, Role, User, Seller
+
+from backend.pagination import CustomPagination
+from .models import PayPalConfig, Role, User, Seller, Enterprise
 
 from .serializers import (
+    EnterpriseSerializer,
     PayPalConfigSerializer,
     RegisterUserSerializer,
     MyTokenObtainPairSerializer,
@@ -183,3 +186,33 @@ def change_can_publish(request, idUser):
     
     except User.DoesNotExist:
         return Response({'detail': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+def create_enterprise(request, idUser):
+    try:
+        user = User.objects.get(pk=idUser)
+
+        enterprise_data = request.data.copy()
+        enterprise_data['owner_user'] = user.id
+
+        serializer = EnterpriseSerializer(data=enterprise_data)
+        
+        if serializer.is_valid():
+            enterprise = serializer.save()
+            user.enterprise = enterprise
+            user.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    except User.DoesNotExist:
+        return Response({'detail': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['GET'])
+def get_enterprises(request):
+    enterprises = Enterprise.objects.all()
+    paginator = CustomPagination()  
+    result_page = paginator.paginate_queryset(enterprises, request)  
+    serializer = EnterpriseSerializer(result_page, many=True)  
+    return paginator.get_paginated_response(serializer.data) 

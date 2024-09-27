@@ -56,14 +56,14 @@ class Enterprise(models.Model):
         help_text="Lista de tipos de productos separados por comas",
         default="Varios"
     )
-    facebook = models.URLField(max_length=255, null=True, blank=True)
-    instagram = models.URLField(max_length=255, null=True, blank=True)
+    facebook = models.CharField(max_length=255, null=True, blank=True)
+    instagram = models.CharField(max_length=255, null=True, blank=True)
     whatsapp = models.CharField(max_length=20, null=True, blank=True)
+    link_enterprise = models.CharField(max_length=255, null=True, blank=True)
     date_registered = models.DateTimeField(default=timezone.now)
     address = models.CharField(max_length=255)
-    products_length = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    link_enterprise = models.URLField(max_length=255, null=True, blank=True)
+    products_length = models.CharField(max_length=255, default=0)
+    description = models.CharField(max_length=255, default="Description in blank")
     avatar = models.TextField(help_text="Imagen del avatar en formato base64", default="img in base 64")
     is_active = models.BooleanField(default=True, null=True)
 
