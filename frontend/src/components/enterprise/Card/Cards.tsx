@@ -7,15 +7,15 @@ const EmpresaCard = (empresa) => {
         <>
             <div className="cardbody2 cardBodyLight p-2 px-5 flex flex-row items-center bg-white shadow-lg rounded-lg mb-4">
                 <img
-                    src="https://via.placeholder.com/100"
+                    src="https://via.placeholder.com/150"
                     alt="Foto de la empresa"
                     className="object-cover w-24 h-24 rounded-full"
                 />
                 <div className="ml-4 flex flex-col justify-center">
-                    <h2 className="text-xl font-bold text-black">{empresa.name}</h2>
+                    <h2 className="text-xl font-bold text-black">Hola</h2>
                     <p className="text-gray-600 mt-1">Neiva, Colombia</p>
                     <p className="text-justify text-gray-600 mt-2">
-                        {empresa.description}
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto nostrum molestias porro quae quia voluptates, nesciunt at. Ratione minima at beatae nostrum laudantium, eaque incidunt quisquam, quia deleniti, quidem dolor!
                     </p>
                     <div className='flex justify-between align-center my-2'>
                         <div className="flex space-x-4 mx-1">
