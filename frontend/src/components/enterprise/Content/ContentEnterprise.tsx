@@ -101,14 +101,15 @@ const Content: React.FC<ContenidoProps> = ({
         <section className="contenidoTienda">
             <div className='locationcss'>
                 <FaMapMarkerAlt className='icon' />
-                <h3>{municipio || 'Cargando...'}</h3>
+                {/* Solo mostrar el municipio si es pantalla grande */}
+                {isWideScreen && <h3>{municipio || 'Cargando...'}</h3>}
             </div>
 
             <div>
-                <div className='flex flex-col '>
+                <div className='flex flex-col'>
                     <div>
-                        <h2 className='titulo-sala-compra-light'>Una gran variedad de emprendimientos</h2>
-                        <h4 className='sub-titulo-sala-compra-light'>Descubre emprendimientos con alto potencial</h4>
+                        <h2 className='titulo-sala-compra-light text-2xl sm:text-3xl'>Una gran variedad de emprendimientos</h2>
+                        <h4 className='sub-titulo-sala-compra-light text-lg sm:text-xl'>Descubre emprendimientos con alto potencial</h4>
                     </div>
                     <p className='mt-4'>Busca de manera dinámica los productos que más se adecuen a lo que necesitas, para ello se han dispuesto filtros en donde especificar un poco más lo que buscas.</p>
                     <div className='flex align-center justify-evenly flex-wrap ajuste-wrap'>
@@ -158,12 +159,9 @@ const Content: React.FC<ContenidoProps> = ({
                             <>
                                 <div className='product-container-light'>
                                     <div className="flex flex-wrap intern">
-                                        {/* {emprendimiento.length > 0 && emprendimiento.map((emp, index) => (
-                                            <Card key={index} producto={emp} />
-                                            ))} */}
                                         {empresa.length > 0 && empresa.map((emp, index) => (
-                                            <Card key={index} empresa={emp}/>
-                                        ))}
+                                            <Card key={index} empresa={emp} />
+w                                        ))}
                                     </div>
                                     <div className="w-95 flex items-center justify-center h-min-100px">
                                         <Pagination
