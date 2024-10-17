@@ -55,7 +55,7 @@ export default function Tienda() {
         <RandomProducts productos={productosRandom} />
         <PaypalIntro />
         <About />
-        <Participants people={people} />
+        {/* <Participants people={people} /> */}
       </div>
     </React.Fragment>
   );

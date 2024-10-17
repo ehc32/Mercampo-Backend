@@ -169,7 +169,7 @@ const Header = () => {
 
                             {roleLocal === "admin" && (
                               <>
-                                <Menu.Item>
+                                {/* <Menu.Item>
                                   {({ active }) => (
                                     <Link
                                       to="/myEnterprise"
@@ -178,7 +178,7 @@ const Header = () => {
                                       Mi emprendimiento
                                     </Link>
                                   )}
-                                </Menu.Item>
+                                </Menu.Item> */}
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link

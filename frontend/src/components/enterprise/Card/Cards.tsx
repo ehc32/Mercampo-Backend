@@ -2,22 +2,25 @@ import { FaFacebookF, FaWhatsapp, FaInstagram, FaGlobe } from 'react-icons/fa';
 import { Tooltip } from '@mui/material';
 import './Card.css'
 
-const EmpresaCard = (empresa) => {
+const EmpresaCard = (emp) => {
+
+    const empresa = emp.empresa;
+
     return (
         <>
-            <div className="cardbody2 cardBodyLight p-2 px-5 flex flex-row items-center bg-white shadow-lg rounded-lg mb-4">
+            <div className="cardbody2 cardBodyLight p-2 px-5 flex flex-row items-center bg-white shadow rounded-lg mb-4">
                 <img
-                    src="https://via.placeholder.com/100"
+                    src={empresa.avatar}
                     alt="Foto de la empresa"
-                    className="object-cover w-24 h-24 rounded-full"
+                    className="object-cover img-emp"
                 />
                 <div className="ml-4 flex flex-col justify-center">
-                    <h2 className="text-xl font-bold text-black">{empresa.name}</h2>
+                    <h2 className="text-2xl font-bold text-black">{empresa.name ? empresa.name : "Nombre"}</h2>
                     <p className="text-gray-600 mt-1">Neiva, Colombia</p>
-                    <p className="text-justify text-gray-600 mt-2">
+                    <p className="text-justify text-gray-600 mt-2 descrip">
                         {empresa.description}
                     </p>
-                    <div className='flex justify-between align-center my-2'>
+                    <div className='flex justify-between align-center my-2'>    
                         <div className="flex space-x-4 mx-1">
                             <Tooltip title="Facebook" arrow>
                                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">

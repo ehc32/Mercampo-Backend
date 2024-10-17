@@ -162,7 +162,7 @@ const Content: React.FC<ContenidoProps> = ({
                                             <Card key={index} producto={emp} />
                                             ))} */}
                                         {empresa.length > 0 && empresa.map((emp, index) => (
-                                            <Card empresa={empresa}/>
+                                            <Card key={index} empresa={emp}/>
                                         ))}
                                     </div>
                                     <div className="w-95 flex items-center justify-center h-min-100px">

@@ -52,7 +52,7 @@ const OfferEnterprise = () => {
                     <p>Categoría</p>
                     <p>$ Precio</p>
                 </div>
-                <div className='flex flex-row-reverse align-end'>
+                <div className='flex flex-col align-end'>
                     <div className='flex flex-col footers2'>
                         <Rating
                             name="read-only"
@@ -62,7 +62,7 @@ const OfferEnterprise = () => {
                             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                             sx={{ marginBottom: 1 }}
                         />
-                        <button className='bg-[#39A900] borde fs-18px p-1 text-white m-1 flex flex-row '><ShoppingCartIcon className='mx-1' /><p>Agregar al carrito</p></button>
+                        {/* <button className='bg-[#39A900] borde fs-18px p-1 text-white m-1 flex flex-row '><ShoppingCartIcon className='mx-1' /><p>Agregar al carrito</p></button> */}
                     </div>
                     <div>
                         <button className='bg-[#fff] borde2 text-[#39A900] fs-18px p-1 m-1 font-semibold'>Detalles</button>

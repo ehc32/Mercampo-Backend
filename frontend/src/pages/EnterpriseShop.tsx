@@ -86,7 +86,6 @@ const Store = () => {
             const data = productosAPI.data.data
             setProductos(data);
             setDataLenght(productosAPI.data.meta.count);
-            console.log(productos)
         } catch (error) {
             console.error(error)
         } finally {

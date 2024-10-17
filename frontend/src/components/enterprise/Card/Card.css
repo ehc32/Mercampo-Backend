@@ -19,3 +19,22 @@
 .cardBodyLight {
     margin: 1em !important;
 }
+
+.img-emp {
+    width: 250px !important;
+    height: 250px !important;
+    max-height: 250px !important;
+    min-height: 250px !important;
+    border: #39A900 .5px solid;
+    border-radius: 50%;
+}
+
+@media  (max-width: 1350px) {
+    .img-emp {
+        width: 150px !important;
+        height: 150px !important;
+        max-height: 150px !important;
+        min-height: 150px !important;
+    }
+    
+}
