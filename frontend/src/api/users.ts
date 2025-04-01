@@ -85,7 +85,7 @@ export const sendRequestSellerPayPalConfig = async (idUser: number | string, for
 };
 
 export const get_paypal_user = async (id: number) => {
-    const response = await axi.get(`/users/paypalconfig/${id}/`);
+    const response = await axi.get(`/users/paypalconfig/3/`);
     return response;
 };
 
