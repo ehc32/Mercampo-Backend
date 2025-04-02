@@ -1,159 +1,147 @@
-import React, { useEffect, useState } from 'react';
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Button,
-  Tab,
-  Tabs,
-  Typography
-} from '@mui/material';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import HandymanIcon from '@mui/icons-material/Handyman';
-import PaymentIcon from '@mui/icons-material/Payment';
-import { get_paypal_user } from '../../api/users';
-import ModalRequestSeller from '../shared/Modal/ModalARequestSeller';
-import ModalSellerConfig from '../shared/Modal/ModalConfigSeller';
-import ModalEditProfile from '../shared/Modal/ModalEditUser';
-import ModalMercadoPagoConfig from '../shared/Modal/ModalMercadoPagoConfig';
-import './style.css';
-import ConsentModal from '../shared/Modal/consentForm';
-import './../../global/style.css';
-import { FaRegBuilding } from "react-icons/fa";
-import { FaBookOpen } from 'react-icons/fa';
-import ModalCreateEnterprise from '../shared/Modal/ModalCreateEnterprise';
-import { get_mercadopago_config } from '../../api/mercadopago';
+"use client"
+
+import { useEffect, useState } from "react"
+import { AppBar, Avatar, Box, Button, Tab, Tabs, Typography } from "@mui/material"
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance"
+import AccountBoxIcon from "@mui/icons-material/AccountBox"
+import HandymanIcon from "@mui/icons-material/Handyman"
+import PaymentIcon from "@mui/icons-material/Payment"
+import { get_paypal_user } from "../../api/users"
+import ModalRequestSeller from "../shared/Modal/ModalARequestSeller"
+import ModalSellerConfig from "../shared/Modal/ModalConfigSeller"
+import ModalEditProfile from "../shared/Modal/ModalEditUser"
+import ModalMercadoPagoConfig from "../shared/Modal/ModalMercadoPagoConfig"
+import "./style.css"
+import ConsentModal from "../shared/Modal/consentForm"
+import "./../../global/style.css"
+import { FaBookOpen } from "react-icons/fa"
+import ModalCreateEnterprise from "../shared/Modal/ModalCreateEnterprise"
+import { get_mercadopago_config } from "../../api/mercadopago"
 
 function ProfileTables({ user, id }) {
-  const [tabValue, setTabValue] = useState(0);
-  const [paypal, SetPaypal] = useState<any>();
-  const [mercadoPago, setMercadoPago] = useState<any>();
-  const [showSecretKey, setShowSecretKey] = useState(false);
-  const [showAccessToken, setShowAccessToken] = useState(false);
+  const [tabValue, setTabValue] = useState(0)
+  const [paypal, SetPaypal] = useState<any>()
+  const [mercadoPago, setMercadoPago] = useState<any>()
+  const [showSecretKey, setShowSecretKey] = useState(false)
+  const [showAccessToken, setShowAccessToken] = useState(false)
 
-  const [open, setOpen] = useState(false);
-  const [accepted, setAccepted] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [accepted, setAccepted] = useState(false)
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const paypalUser = async () => {
     try {
-      const response = await get_paypal_user(id);
-      const data = response.data;
-      SetPaypal(data);
+      const response = await get_paypal_user(id)
+      const data = response.data
+      SetPaypal(data)
     } catch (e) {
-      console.error(e);
+      console.error(e)
     }
-  };
+  }
 
   const fetchMercadoPagoConfig = async () => {
     try {
-      const data = await get_mercadopago_config();
-      setMercadoPago(data);
+      const data = await get_mercadopago_config(id)
+      setMercadoPago(data)
     } catch (e) {
-      console.error('Error al obtener configuración de Mercado Pago:', e);
+      console.error("Error al obtener configuración de Mercado Pago:", e)
+      setMercadoPago(null) // Maneja el caso de error
     }
-  };
+  }
 
   useEffect(() => {
-    paypalUser();
-    fetchMercadoPagoConfig();
-  }, [id]);
+    paypalUser()
+    fetchMercadoPagoConfig()
+  }, [id])
 
   const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
+    setTabValue(newValue)
+  }
 
   const toggleSecretKeyVisibility = () => {
-    setShowSecretKey((prevState) => !prevState);
-  };
+    setShowSecretKey((prevState) => !prevState)
+  }
 
   const toggleAccessTokenVisibility = () => {
-    setShowAccessToken((prevState) => !prevState);
-  };
+    setShowAccessToken((prevState) => !prevState)
+  }
 
-  const isWideScreen = window.innerWidth > 900;
+  const isWideScreen = window.innerWidth > 900
 
   return (
     <Box sx={{ width: "100%", mt: 4 }}>
       <AppBar position="static" color="default" elevation={0}>
-        {
-          isWideScreen ? (
-            <Tabs
-              value={tabValue}
-              onChange={handleTabChange}
-              indicatorColor="primary"
-              textColor="primary"
-              variant="fullWidth"
-              sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
-            >
+        {isWideScreen ? (
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+            sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
+          >
+            <Tab
+              label="Información personal"
+              sx={{ "&.Mui-selected": { color: "#39A900" } }}
+              className="focus:outline-none"
+            />
+            {user?.role !== "client" && (
               <Tab
-                label="Información personal"
+                label="Información de PayPal"
                 sx={{ "&.Mui-selected": { color: "#39A900" } }}
                 className="focus:outline-none"
               />
-              {user?.role !== "client" &&
-                <Tab
-                  label="Información de PayPal"
-                  sx={{ "&.Mui-selected": { color: "#39A900" } }}
-                  className="focus:outline-none"
-                />
-              }
-              {user?.role !== "client" &&
-                <Tab
-                  label="Información de Mercado Pago"
-                  sx={{ "&.Mui-selected": { color: "#39A900" } }}
-                  className="focus:outline-none"
-                />
-              }
+            )}
+            {user?.role !== "client" && (
               <Tab
-                label="Configuración"
+                label="Información de Mercado Pago"
                 sx={{ "&.Mui-selected": { color: "#39A900" } }}
                 className="focus:outline-none"
               />
-            </Tabs>
-          ) : (
-            <Tabs
-              value={tabValue}
-              onChange={handleTabChange}
-              indicatorColor="primary"
-              textColor="primary"
-              variant="fullWidth"
-              sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
-            >
+            )}
+            <Tab label="Configuración" sx={{ "&.Mui-selected": { color: "#39A900" } }} className="focus:outline-none" />
+          </Tabs>
+        ) : (
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+            sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
+          >
+            <Tab
+              icon={<AccountBoxIcon />}
+              sx={{ "&.Mui-selected": { color: "#39A900" } }}
+              className="focus:outline-none"
+            />
+            {user?.role !== "client" && (
               <Tab
-                icon={<AccountBoxIcon />}
+                icon={<AccountBalanceIcon />}
                 sx={{ "&.Mui-selected": { color: "#39A900" } }}
                 className="focus:outline-none"
               />
-              {user?.role !== "client" && (
-                <Tab
-                  icon={<AccountBalanceIcon />}
-                  sx={{ "&.Mui-selected": { color: "#39A900" } }}
-                  className="focus:outline-none"
-                />
-              )}
-              {user?.role !== "client" && (
-                <Tab
-                  icon={<PaymentIcon />}
-                  sx={{ "&.Mui-selected": { color: "#39A900" } }}
-                  className="focus:outline-none"
-                />
-              )}
+            )}
+            {user?.role !== "client" && (
               <Tab
-                icon={<HandymanIcon />}
+                icon={<PaymentIcon />}
                 sx={{ "&.Mui-selected": { color: "#39A900" } }}
                 className="focus:outline-none"
               />
-            </Tabs>
-          )
-        }
+            )}
+            <Tab
+              icon={<HandymanIcon />}
+              sx={{ "&.Mui-selected": { color: "#39A900" } }}
+              className="focus:outline-none"
+            />
+          </Tabs>
+        )}
       </AppBar>
       <TabPanel value={tabValue} index={0}>
         <div
@@ -175,10 +163,7 @@ function ProfileTables({ user, id }) {
                 className="rounded-full"
               />
             </div>
-            <Typography
-              variant="h5"
-              className="text-white text-2xl font-bold mt-2"
-            >
+            <Typography variant="h5" className="text-white text-2xl font-bold mt-2">
               {user?.name || "Usuario"}
             </Typography>
           </div>
@@ -192,10 +177,7 @@ function ProfileTables({ user, id }) {
           </Typography>
           <div className="flex items-center justify-between columna-info w-full">
             <div className="text-center">
-              <Typography
-                variant="h6"
-                className="text-xl font-bold text-gray-900 w-full"
-              >
+              <Typography variant="h6" className="text-xl font-bold text-gray-900 w-full">
                 {user?.name || "Usuario"}
               </Typography>
             </div>
@@ -214,11 +196,7 @@ function ProfileTables({ user, id }) {
                 variant="body2"
                 className={`text-black ${user?.role === "admin" ? "font-bold text-green-600" : ""}`}
               >
-                {user?.role === "client"
-                  ? "Cliente"
-                  : user?.role === "seller"
-                    ? "Vendedor"
-                    : "Administrador"}
+                {user?.role === "client" ? "Cliente" : user?.role === "seller" ? "Vendedor" : "Administrador"}
               </Typography>
             </div>
           </div>
@@ -245,15 +223,9 @@ function ProfileTables({ user, id }) {
                   Secret Key:
                 </Typography>
                 <Typography variant="body2" className="text-gray-900">
-                  {showSecretKey
-                    ? paypal?.secret_key || "No disponible"
-                    : "******"}
+                  {showSecretKey ? paypal?.secret_key || "No disponible" : "******"}
                 </Typography>
-                <Button
-                  onClick={toggleSecretKeyVisibility}
-                  style={{ color: "#39a900" }}
-                  className="focus:outline-none"
-                >
+                <Button onClick={toggleSecretKeyVisibility} style={{ color: "#39a900" }} className="focus:outline-none">
                   {showSecretKey ? "Ocultar" : "Mostrar"}
                 </Button>
               </div>
@@ -298,15 +270,14 @@ function ProfileTables({ user, id }) {
                   >
                     PayPal for Developers
                   </a>
-                  , crea una aplicación y obtén las credenciales (Client ID y
-                  Secret Key).
+                  , crea una aplicación y obtén las credenciales (Client ID y Secret Key).
                 </Typography>
               </li>
               <li className="flex items-start">
                 <span className="text-green-600 mr-2">✔️</span>
                 <Typography variant="body2" color="text-black">
-                  <strong>Paso 3:</strong> Introduce el Client ID y Secret Key
-                  en el panel de configuración de PayPal en tu perfil.
+                  <strong>Paso 3:</strong> Introduce el Client ID y Secret Key en el panel de configuración de PayPal en
+                  tu perfil.
                 </Typography>
               </li>
             </ul>
@@ -334,7 +305,11 @@ function ProfileTables({ user, id }) {
                   Access Token:
                 </Typography>
                 <Typography variant="body2" className="text-gray-900">
-                  {mercadoPago?.has_access_token ? (showAccessToken ? "••••••••••••••••••••••••••••••••" : "••••••••••••••") : "No disponible"}
+                  {mercadoPago?.access_token
+                    ? showAccessToken
+                      ? "••••••••••••••••••••••••••••••••"
+                      : "••••••••••••••"
+                    : "No disponible"}
                 </Typography>
                 {mercadoPago?.has_access_token && (
                   <Button
@@ -351,122 +326,85 @@ function ProfileTables({ user, id }) {
                   Fecha de configuración:
                 </Typography>
                 <Typography variant="body2" className="text-gray-900">
-                  {mercadoPago?.date_configured 
-                    ? new Date(mercadoPago.date_configured).toLocaleDateString() 
-                    : "No configurado"}
+                  {mercadoPago?.created_at ? new Date(mercadoPago.created_at).toLocaleDateString() : "No configurado"}
                 </Typography>
               </div>
             </div>
-            
-            <div className="mt-6 flex justify-center">
-            <ModalMercadoPagoConfig userId={id} /> {/* Asegúrate de pasar el id como userId */}
-            </div>
-            
+
             <hr className="my-4 mb-4 border-gray-200" />
-            <Typography variant="h6" gutterBottom className="mt-6">
-              Pasos para configurar Mercado Pago
-            </Typography>
-            <ul className="list-none space-y-4">
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <Typography variant="body2" color="text-black">
-                  <strong>Paso 1:</strong> Crear una cuenta en Mercado Pago. Ve a{" "}
-                  <a
-                    href="https://www.mercadopago.com.co"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#009ee3] underline"
-                  >
-                    Mercado Pago
-                  </a>{" "}
-                  y crea una cuenta.
-                </Typography>
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <Typography variant="body2" color="text-black">
-                  <strong>Paso 2:</strong> Ingresa a{" "}
-                  <a
-                    href="https://www.mercadopago.com.co/developers/panel"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#009ee3] underline"
-                  >
-                    Panel de Desarrolladores
-                  </a>
-                  , crea una aplicación y obtén las credenciales (Public Key y
-                  Access Token).
-                </Typography>
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <Typography variant="body2" color="text-black">
-                  <strong>Paso 3:</strong> Introduce la Public Key y el Access Token
-                  en el panel de configuración de Mercado Pago en tu perfil.
-                </Typography>
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <Typography variant="body2" color="text-black">
-                  <strong>Paso 4:</strong> Configura la URL de notificación en tu panel de Mercado Pago para recibir actualizaciones de pagos.
-                </Typography>
-              </li>
-            </ul>
           </div>
         </TabPanel>
       )}
 
       {user?.role !== "client" ? (
         <TabPanel value={tabValue} index={3}>
-          <div className='flex flex-row align-center justify-between w-12/12'>
+          <div className="horizontal-buttons-container">
             <ModalEditProfile user={user} id={id} />
-            {user?.role === "seller" && <>
-              <ModalSellerConfig id={id} />
-              <ModalCreateEnterprise />
-            </>}
-            {user?.role === "admin" && <>
-              <ModalSellerConfig id={id} />
-              <ModalCreateEnterprise /></>}
+            {user?.role === "seller" && (
+              <>
+                <ModalSellerConfig id={id} />
+                <ModalCreateEnterprise />
+                <ModalMercadoPagoConfig userId={id} />
+              </>
+            )}
+            {user?.role === "admin" && (
+              <>
+                <ModalSellerConfig id={id} />
+                <ModalCreateEnterprise />
+              </>
+            )}
             {user?.role === "client" && <ModalRequestSeller userId={id} />}
-            <Typography className=" tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
-              <FaBookOpen className="fs-20px mr-1" />Terminos y condiciones
+            <Typography
+              className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 p-3 rounded items-center justify-center"
+              onClick={handleClickOpen}
+            >
+              <FaBookOpen className="mr-2" />
+              <span className="whitespace-nowrap">Terminos y condiciones</span>
             </Typography>
             <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
           </div>
         </TabPanel>
-      ) : (<TabPanel value={tabValue} index={1}>
-        <div className='flex flex-row align-center justify-between w-12/12'>
-          <ModalEditProfile user={user} id={id} />
-          {user?.role === "seller" && <><ModalSellerConfig id={id} />
-          </>}
-          {user?.role === "admin" && <> <ModalSellerConfig id={id} /><ModalCreateEnterprise /></>}
-          {user?.role === "client" && <ModalRequestSeller userId={id} />}
-          <Typography className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded " onClick={handleClickOpen}>
-            <FaBookOpen className="fs-20px mr-1" />Terminos y condiciones
-          </Typography>
-          <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
-        </div>
-      </TabPanel>
-      )
-      }
+      ) : (
+        <TabPanel value={tabValue} index={1}>
+          <div className="horizontal-buttons-container">
+            <ModalEditProfile user={user} id={id} />
+            {user?.role === "seller" && (
+              <>
+                <ModalSellerConfig id={id} />
+              </>
+            )}
+            {user?.role === "admin" && (
+              <>
+                <ModalSellerConfig id={id} />
+                <ModalCreateEnterprise />
+              </>
+            )}
+            {user?.role === "client" && <ModalRequestSeller userId={id} />}
+            <Typography
+              className="tyc2 flex flex-row cursor-pointer bg-green-700 text-white border border-green-700 hover:bg-green-800 p-3 rounded items-center justify-center"
+              onClick={handleClickOpen}
+            >
+              <FaBookOpen className="mr-2" />
+              <span className="whitespace-nowrap">Terminos y condiciones</span>
+            </Typography>
+            <ConsentModal open={open} handleClose={handleClose} accepted={accepted} setAccepted={setAccepted} />
+          </div>
+        </TabPanel>
+      )}
     </Box>
-  );
+  )
 }
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    >
+    <div role="tabpanel" hidden={value !== index} id={`tabpanel-${index}`} aria-labelledby={`tab-${index}`} {...other}>
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
-  );
+  )
 }
 
-export default ProfileTables;
+export default ProfileTables
+
+  

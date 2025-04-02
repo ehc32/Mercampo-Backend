@@ -1,5 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
+import { toast } from "react-toastify";
 
 interface Product {
   id: number
@@ -36,11 +37,22 @@ export const useCartStore = create<CartState>()(
         if (cart.length > 0 && !cartItem) {
           const firstVendorId = cart[0].user
           if (product.user !== firstVendorId) {
-            alert("Solo puedes añadir productos del mismo vendedor en cada orden")
+            // Improved toast message with better formatting and explanation
+            toast.error(
+              "Por el momento, solo puedes comprar productos de un mismo vendedor en cada orden. Estamos trabajando para mejorar esta experiencia pronto 😊.",
+              {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+              }
+            );
             return
           }
         }
-
+       
         const price = Number(product.price) 
 
         if (cartItem) {
