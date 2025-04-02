@@ -1,88 +1,99 @@
 import { FaFacebookF, FaWhatsapp, FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import Map from './Map';
-import './style.css'
-const AsideEnterprise = () => {
+import './style.css';
+
+interface AsideEnterpriseProps {
+    enterpriseData: any;
+}
+
+const AsideEnterprise = ({ enterpriseData }: AsideEnterpriseProps) => {
     return (
-        <aside className="container-aside">
-            {/* Imagen de fondo */}
-            <div className="relative">
-
-                {/* Imagen principal de la empresa */}
-                <img
-                    src="./../../../public/logoSena.png"
-                    alt="Logo de la empresa"
-                    className="w-32 h-32 rounded-full borde shadow-lg bg-white object-cover m-auto"
-                />
-            </div>
-
-            {/* Información de la empresa */}
-            <div className="mt-2 text-center">
-                <h2 className="text-xl font-bold text-white">Nombre de la Empresa</h2>
-                <p className="text-gray-50">Lider: Maria del Pilar </p>
-                <p className="text-gray-50 justify-text mt-1 p-2">Café Brisa Andina es una empresa dedicada a la producción y comercialización de café 100% orgánico cultivado en las montañas de los Andes. Con más de 20 años de experiencia, llevamos a cada taza el sabor auténtico de nuestras tierras, cuidando cada proceso para ofrecer una experiencia única y sostenible.</p>
-            </div>
-            <div className="text-white px-2">
-                <h3 className="text-lg font-semibold mb-1">Tipo de productos</h3>
-                <div className="mt-2 flex flex-col space-y-1 items-start">
-                    <div className="flex items-center space-x-2">
-                        <FaEnvelope className="text-xl" />
-                        <span>Cafe</span>
+        <aside className="enterprise-sidebar">
+            <div className="sidebar-content">
+                {/* Encabezado con logo */}
+                <div className="enterprise-header">
+                    <div className="enterprise-logo-container">
+                        <img
+                            src={enterpriseData?.enterprise.avatar || "./../../../public/logoSena.png"}
+                            alt="Logo de la empresa"
+                            className="enterprise-logo"
+                        />
                     </div>
-                </div>
-            </div>
-            <div className=" text-white p-2">
-                <h3 className="text-lg font-semibold mb-2">Contacto</h3>
-
-                {/* Redes Sociales */}
-                <div className="flex flex-row  items-center justify-between align-center">
-                    <a
-                        href="https://facebook.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 hover:text-blue-600 transition"
-                    >
-                        <FaFacebookF className="text-2xl" />
-                        <span className='rd-span'>Facebook</span>
-                    </a>
-                    <a
-                        href="https://instagram.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 hover:text-pink-500 transition"
-                    >
-                        <FaInstagram className="text-2xl" />
-                        <span className='rd-span'>Instagram</span>
-                    </a>
-                    <a
-                        href="https://wa.me/1234567890"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 hover:text-green-500 transition"
-                    >
-                        <FaWhatsapp className="text-2xl" />
-                        <span className='rd-span'>WhatsApp</span>
-                    </a>
+                    <h2 className="enterprise-name">{enterpriseData?.enterprise.name || "Nombre de la Empresa"}</h2>
+                    <p className="enterprise-leader">Líder: {enterpriseData?.owner.name || "Maria del Pilar"}</p>
                 </div>
 
-                {/* Información de contacto adicional */}
-                <div className="mt-3 flex flex-col space-y-4 items-start">
-                    <div className="flex items-center space-x-2">
-                        <FaEnvelope className="text-xl" />
-                        <span>ncerquera5@soy.sena.edu.co</span>
-                    </div>
-                    <a className="flex items-center space-x-2"
-                        href="https://wa.me/1234567890"
-                        target="_blank">
-                        <FaPhoneAlt className="text-xl" />
-                        <span>+57 3132316909</span>
-                    </a>
-                    <div className="flex items-center space-x-2">
-                        <FaMapMarkerAlt className="text-xl" />
-                        <span>Neiva, Huila</span>
+                {/* Descripción */}
+                <div className="enterprise-description">
+                    <p>{enterpriseData?.enterprise.description || "Café Brisa Andina es una empresa dedicada a la producción y comercialización de café 100% orgánico..."}</p>
+                </div>
+                
+                {/* Tipo de productos */}
+                <div className="enterprise-section">
+                    <h3 className="section-title">Tipo de productos</h3>
+                    <div className="product-type">
+                        <FaEnvelope className="section-icon" />
+                        <span>{enterpriseData?.enterprise.tipo_productos || "Café"}</span>
                     </div>
                 </div>
-                <div className='py-3'>
-                    <Map address='neiva' />
+                
+                {/* Contacto */}
+                <div className="enterprise-contact">
+                    <h3 className="section-title">Contacto</h3>
+
+                    <div className="social-links">
+                        <a
+                            href={enterpriseData?.enterprise.facebook || "https://facebook.com"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-link facebook"
+                        >
+                            <FaFacebookF className="social-icon" />
+                            <span>Facebook</span>
+                        </a>
+                        <a
+                            href={enterpriseData?.enterprise.instagram || "https://instagram.com"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-link instagram"
+                        >
+                            <FaInstagram className="social-icon" />
+                            <span>Instagram</span>
+                        </a>
+                        <a
+                            href={enterpriseData?.enterprise.whatsapp || "https://wa.me/1234567890"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-link whatsapp"
+                        >
+                            <FaWhatsapp className="social-icon" />
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+
+                    <div className="contact-info">
+                        <div className="contact-item">
+                            <FaEnvelope className="contact-icon" />
+                            <span>{enterpriseData?.owner.email || "ncerquera5@soy.sena.edu.co"}</span>
+                        </div>
+                        <a 
+                            className="contact-item" 
+                            href={enterpriseData?.enterprise.whatsapp || "https://wa.me/1234567890"}
+                            target="_blank"
+                        >
+                            <FaPhoneAlt className="contact-icon" />
+                            <span>{enterpriseData?.enterprise.phone || "+57 3132316909"}</span>
+                        </a>
+                        <div className="contact-item">
+                            <FaMapMarkerAlt className="contact-icon" />
+                            <span>{enterpriseData?.enterprise.address || "Neiva, Huila"}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Mapa */}
+                <div className="enterprise-map">
+                    <Map address={enterpriseData?.enterprise.address || 'neiva'} />
                 </div>
             </div>
         </aside>

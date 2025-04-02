@@ -15,13 +15,13 @@ import Store from "./pages/Store";
 import UserProfile from "./pages/UserProfile";
 import Enterprise from "./pages/Enterprise";
 import EnterpriseShop from "./pages/EnterpriseShop";
+import Blogs from "./pages/Blogs";
 import PasswordResetPage from "./pages/password-reset-page";
 import PasswordResetVerifyPage from "./pages/password-reset-verify";
 import Checkout from "./pages/asdas";
 import PaymentSuccess from "./pages/paymet/success";
 import PaymentPending from "./pages/paymet/pending";
 import PaymentFailure from "./pages/paymet/failure";
-
 
 function App() {
     return (
@@ -50,7 +50,8 @@ function App() {
 
                     {/* Rutas protegidas para clientes autenticados */}
                     <Route element={<PrivateRoute allowedRoles={['client', 'seller', 'admin']} />} >
-                        <Route path="myEnterprise" element={<Enterprise />} />
+                        <Route path="blogs" element={<Blogs />} />
+                        <Route path="myEnterprise/:id" element={<Enterprise />} />
                         <Route path="product/:slug" element={<DetallesProd />} />
                         <Route path="cart" element={<ShoppingCart />} />
                         <Route path="profile" element={<UserProfile />} />

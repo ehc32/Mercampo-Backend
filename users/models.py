@@ -131,8 +131,7 @@ class PayPalConfig(models.Model):
 
     def __str__(self):
         return f"PayPal Config for {self.user.name}"
-
-
+    
 class MercadoPagoConfig(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     access_token = models.CharField(max_length=255)
@@ -157,3 +156,72 @@ class PasswordReset(models.Model):
 
     def __str__(self):
         return f"PasswordReset for {self.user.email} - Code: {self.code}"
+    
+class EnterprisePost(models.Model):
+    enterprise = models.ForeignKey(
+        Enterprise, 
+        on_delete=models.CASCADE,
+        related_name='posts'
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='enterprise_posts'
+    )
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    images = models.TextField(
+        help_text="Imágenes en formato base64 separadas por comas", 
+        blank=True, 
+        null=True
+    )
+    rating = models.DecimalField(
+        max_digits=3, 
+        decimal_places=2, 
+        default=0,
+        help_text="Calificación de 0 a 5"
+    )
+    redirect_link = models.URLField(
+        max_length=255, 
+        blank=True, 
+        null=True,
+        help_text="Link al que redirige el post"
+    )
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Post: {self.title} - {self.enterprise.name}"
+
+class PostComment(models.Model):
+    post = models.ForeignKey(
+        EnterprisePost,
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='post_comments'
+    )
+    comment = models.TextField()
+    rating = models.DecimalField(
+        max_digits=3, 
+        decimal_places=2, 
+        null=True,
+        blank=True,
+        help_text="Calificación de 0 a 5"
+    )
+    created_at = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['created_at']
+    
+    def __str__(self):
+        return f"Comment by {self.user.name if self.user else 'Anonymous'} on {self.post.title}"

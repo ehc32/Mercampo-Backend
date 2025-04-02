@@ -1,53 +1,68 @@
+// Card.jsx (componente hijo)
 import { FaFacebookF, FaWhatsapp, FaInstagram, FaGlobe } from 'react-icons/fa';
 import { Tooltip } from '@mui/material';
-import './Card.css'
+import { useNavigate } from 'react-router-dom'; 
+import './Card.css';
 
 const EmpresaCard = (emp) => {
-
     const empresa = emp.empresa;
+    const navigate = useNavigate(); 
+
+    const handleConocerMas = () => {
+        navigate(`/myEnterprise/${empresa.owner_user}`);
+    };
 
     return (
-        <>
-            <div className="cardbody2 cardBodyLight p-2 px-5 flex flex-row items-center bg-white shadow rounded-lg mb-4">
+        <div className="empresa-card">
+            <div className="card-image-container">
                 <img
-                    src="https://via.placeholder.com/150"
-                    alt="Foto de la empresa"
-                    className="object-cover img-emp"
+                    src={empresa.avatar || "https://via.placeholder.com/150"}
+                    alt={`Logo de ${empresa.name}`}
+                    className="card-image"
                 />
-                <div className="ml-4 flex flex-col justify-center">
-                    <h2 className="text-xl font-bold text-black">Hola</h2>
-                    <p className="text-gray-600 mt-1">Neiva, Colombia</p>
-                    <p className="text-justify text-gray-600 mt-2">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto nostrum molestias porro quae quia voluptates, nesciunt at. Ratione minima at beatae nostrum laudantium, eaque incidunt quisquam, quia deleniti, quidem dolor!
-                    </p>
-                    <div className='flex justify-between align-center my-2'>    
-                        <div className="flex space-x-4 mx-1">
-                            <Tooltip title="Facebook" arrow>
-                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                                    <FaFacebookF className="text-2xl text-blue-600 hover:text-blue-800 transition" />
-                                </a>
-                            </Tooltip>
-                            <Tooltip title="WhatsApp" arrow>
-                                <a href={`https://wa.me/${empresa.whatsapp}`} target="_blank" rel="noopener noreferrer">
-                                    <FaWhatsapp className="text-2xl text-green-500 hover:text-green-600 transition" />
-                                </a>
-                            </Tooltip>
-                            <Tooltip title="Instagram" arrow>
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                                    <FaInstagram className="text-2xl text-pink-500 hover:text-pink-600 transition" />
-                                </a>
-                            </Tooltip>
-                            <Tooltip title="Página Web" arrow>
-                                <a href="https://cafebrisandina.com" target="_blank" rel="noopener noreferrer">
-                                    <FaGlobe className="text-2xl text-gray-500 hover:text-gray-700 transition" />
-                                </a>
-                            </Tooltip>
-                        </div>
-                        <button className="text-[#fff] font-bold bg-[#39A900] p-1 rounded-md 1s ease-linear hover:bg-[#34A000]">Conocer más</button>
+            </div>
+            <div className="card-content">
+                <div className="card-header">
+                    <h2 className="card-title">{empresa.name}</h2>
+                    <p className="card-address">{empresa.address}</p>
+                </div>
+                <div className="card-description-container">
+                    <p className="card-description">
+                        {empresa.description}
+                    </p>  
+                </div>
+                <div className="card-footer">
+                    <div className="social-icons">
+                        <Tooltip title="Facebook" arrow>
+                            <a href={empresa.facebook} target="_blank" rel="noopener noreferrer" className="social-icon">
+                                <FaFacebookF className="facebook-icon" />
+                            </a>
+                        </Tooltip>
+                        <Tooltip title="WhatsApp" arrow>
+                            <a href={`https://wa.me/${empresa.whatsapp}`} target="_blank" rel="noopener noreferrer" className="social-icon">
+                                <FaWhatsapp className="whatsapp-icon" />
+                            </a>
+                        </Tooltip>
+                        <Tooltip title="Instagram" arrow>
+                            <a href={empresa.instagram} target="_blank" rel="noopener noreferrer" className="social-icon">
+                                <FaInstagram className="instagram-icon" />
+                            </a>
+                        </Tooltip>
+                        <Tooltip title="Página Web" arrow>
+                            <a href={empresa.link_enterprise} target="_blank" rel="noopener noreferrer" className="social-icon">
+                                <FaGlobe className="website-icon" />
+                            </a>
+                        </Tooltip>
                     </div>
+                    <button 
+                        onClick={handleConocerMas}
+                        className="know-more-btn"
+                    >
+                        Conocer más
+                    </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
