@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .content h2 {
+            color: #333;
+        }
+        .content p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://www.sena.edu.co/es-co/campesena/PublishingImages/banner2-webPUNTO1-CS.jpg" alt="Encabezado">
+        </div>
+        <div class="content">
+            <h2>¡Gracias por tu compra, {{ user.first_name }}!</h2>
+            <p>Tu pedido ha sido confirmado y está en proceso. Te enviaremos una actualización cuando esté listo para el envío.</p>
+            <p>Número de pedido: <strong>{{ order.id }}</strong></p>
+            <p>Si tienes alguna duda, no dudes en contactarnos.</p>
+        </div>
+        <div class="footer">
+            <p>© 2025 Tu Empresa. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>

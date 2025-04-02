@@ -1,10 +1,14 @@
+import random
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from django.core.mail import send_mail
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
 
 from backend.pagination import CustomPagination
-from .models import PayPalConfig, Role, User, Seller, Enterprise
+from .models import PayPalConfig, Role, User, Seller, Enterprise , PasswordReset , MercadoPagoConfig
 
 from .serializers import (
     EnterpriseSerializer,
@@ -14,7 +18,8 @@ from .serializers import (
     UserCanPublishSerializer,
     UserSerializer,
     EditUserSerializer,
-    SellerRequestSerializer
+    SellerRequestSerializer,
+     PasswordResetRequestSerializer, PasswordResetVerifySerializer , MercadoPagoConfigSerializer
 )
 
 @api_view(['GET'])
@@ -163,7 +168,35 @@ def get_seller_paypal_config_done(request, pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
     except PayPalConfig.DoesNotExist:
         return Response({'detail': 'Configuración de PayPal no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
-
+@api_view(['POST'])
+def request_seller_mercado_pago_config(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+        
+        # Verifica si ya existe configuración para este usuario
+        existing_config = MercadoPagoConfig.objects.filter(user=user).first()
+        
+        if existing_config:
+            serializer = MercadoPagoConfigSerializer(existing_config, data=request.data, partial=True)
+        else:
+            serializer = MercadoPagoConfigSerializer(data=request.data)
+            
+        if serializer.is_valid():
+            serializer.save(user=user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    except User.DoesNotExist:
+        return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['GET'])
+def get_seller_mercado_pago_config(request, pk):
+    try:
+        mercado_pago_config = MercadoPagoConfig.objects.get(user_id=pk)
+        serializer = MercadoPagoConfigSerializer(mercado_pago_config)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except MercadoPagoConfig.DoesNotExist:
+        return Response({'detail': 'Configuración de MercadoPago no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['POST'])
@@ -216,3 +249,69 @@ def get_enterprises(request):
     result_page = paginator.paginate_queryset(enterprises, request)  
     serializer = EnterpriseSerializer(result_page, many=True)  
     return paginator.get_paginated_response(serializer.data) 
+
+
+
+@api_view(['POST'])
+def password_reset_request(request):
+    serializer = PasswordResetRequestSerializer(data=request.data)
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({'detail': 'No se encontró una cuenta asociada a este correo.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        code = f"{random.randint(1000, 9999)}"
+        
+        PasswordReset.objects.create(user=user, code=code)
+        
+        html_message = render_to_string("emails/password_reset.html", {"code": code})
+        plain_message = strip_tags(html_message)  # Para clientes sin soporte HTML
+        
+        # Enviar correo
+        send_mail(
+            "Recuperación de contraseña",
+            plain_message,
+            "noreply@tudominio.com",
+            [email],
+            html_message=html_message,
+            fail_silently=False,
+        )
+        
+        return Response({'detail': 'Hemos enviado un código de verificación a tu correo. Revisa tu bandeja de entrada o spam.'}, status=status.HTTP_200_OK)
+    
+    return Response({'detail': 'Por favor, proporciona un correo válido.'}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def password_reset_verify(request):
+    serializer = PasswordResetVerifySerializer(data=request.data)
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        code = serializer.validated_data['code']
+        new_password = serializer.validated_data['new_password']
+        
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Buscar el código más reciente para el usuario
+        try:
+            reset_entry = PasswordReset.objects.filter(user=user, code=code).latest('created_at')
+        except PasswordReset.DoesNotExist:
+            return Response({'detail': 'Código inválido.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Verificar si el código ha expirado
+        if reset_entry.is_expired():
+            return Response({'detail': 'El código ha expirado.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Actualizar la contraseña
+        user.set_password(new_password)
+        user.save()
+        
+        # Eliminar todas las entradas de recuperación para este usuario (opcional)
+        PasswordReset.objects.filter(user=user).delete()
+        
+        return Response({'detail': 'Contraseña actualizada correctamente.'}, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

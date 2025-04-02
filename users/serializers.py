@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import Enterprise, PayPalConfig, User, Seller
+from .models import Enterprise, PayPalConfig, User, Seller , MercadoPagoConfig
 from django.contrib.auth.models import AnonymousUser
 
 class UserSerializer(serializers.ModelSerializer):
@@ -90,6 +90,21 @@ class PayPalConfigSerializer(serializers.ModelSerializer):
             return paypal_config
         else:
             raise serializers.ValidationError("Usuario no proporcionado en el contexto.")
+        
+        
+class MercadoPagoConfigSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MercadoPagoConfig
+        fields = [ 'user', 'public_key', 'access_token', 'refresh_token' , 'created_at', 'updated_at']
+
+    def create(self, validated_data):
+        user = self.context.get('user')
+        if user:
+            mercado_pago_config = MercadoPagoConfig.objects.create(user=user, **validated_data)
+            return mercado_pago_config
+        else:
+            raise serializers.ValidationError("Usuario no proporcionado en el contexto.")
+
 
 class UserCanPublishSerializer(serializers.ModelSerializer):
     class Meta:
@@ -103,6 +118,7 @@ class UserCanPublishSerializer(serializers.ModelSerializer):
 
 
 class EnterpriseSerializer(serializers.ModelSerializer):
+
     owner_user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
@@ -134,3 +150,13 @@ class EnterpriseSerializer(serializers.ModelSerializer):
         # Crear la empresa
         enterprise = Enterprise.objects.create(owner_user=owner_user, **validated_data)
         return enterprise
+    
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+class PasswordResetVerifySerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    code = serializers.CharField(max_length=4)
+    new_password = serializers.CharField(write_only=True)

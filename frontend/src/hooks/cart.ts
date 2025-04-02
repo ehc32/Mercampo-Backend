@@ -41,7 +41,7 @@ export const useCartStore = create<CartState>()(
           }
         }
 
-        const price = Number(product.price) // Asegurar que es número
+        const price = Number(product.price) 
 
         if (cartItem) {
           const updatedCart = cart.map((item) =>
@@ -51,13 +51,13 @@ export const useCartStore = create<CartState>()(
           set({
             cart: updatedCart,
             totalItems: get().totalItems + 1,
-            totalPrice: parseFloat((get().totalPrice + price).toFixed(2)) // Formatear a 2 decimales
+            totalPrice: parseFloat((get().totalPrice + price).toFixed(2)) 
           })
         } else {
           set({
             cart: [...cart, { ...product, quantity: 1 }],
             totalItems: get().totalItems + 1,
-            totalPrice: parseFloat((get().totalPrice + price).toFixed(2)) // Formatear a 2 decimales
+            totalPrice: parseFloat((get().totalPrice + price).toFixed(2)) 
           })
         }
       },
@@ -65,7 +65,7 @@ export const useCartStore = create<CartState>()(
       removeFromCart: (product: Product) => {
         const { cart } = get()
         const cartItem = cart.find((item) => item.id === product.id)
-        const price = Number(product.price) // Asegurar que es número
+        const price = Number(product.price) 
 
         if (cartItem) {
           if (cartItem.quantity > 1) {
@@ -93,7 +93,7 @@ export const useCartStore = create<CartState>()(
         const cartItem = cart.find((item) => item.id === product.id)
 
         if (cartItem) {
-          const price = Number(cartItem.price) // Asegurar que es número
+          const price = Number(cartItem.price) 
           const updatedCart = cart.filter((item) => item.id !== product.id)
           set({
             cart: updatedCart,
