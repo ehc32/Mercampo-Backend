@@ -1,9 +1,9 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
-
 from . import views
 
 urlpatterns = [
+    # Autenticación y usuarios
     path('search/', views.search),
     path('register/', views.register),
     path('login/', views.LoginView.as_view()),
@@ -12,7 +12,8 @@ urlpatterns = [
     path('delete/<int:pk>/', views.delete_user),
     path('edit/<int:id>/', views.edit_profile),
     path('get/solo/<int:pk>/', views.get_solo_user),
-    # seller
+    
+    # Seller (Vendedores)
     path('sell/bring_request/', views.get_request_seller),
     path('sell/delete_request/<int:pk>/', views.delete_request),
     path('sell/approve_request/<int:pk>/', views.approve_request),
@@ -20,8 +21,18 @@ urlpatterns = [
     path('sell/paypalsel/<int:pk>/', views.request_seller_paypal_config),
     path('paypalconfig/<int:pk>/', views.get_seller_paypal_config_done),
     path('sell/changePermision/<int:idUser>/', views.change_can_publish),
-    #Enterprise
+    
+    # Enterprise (Empresas)
     path('create-enterprise/<int:idUser>/', views.create_enterprise),
     path('get-enterprises/', views.get_enterprises),
+    path('get-enterprise-by-user/<int:user_id>/', views.get_enterprise_by_user),
+    
+    # Posts y Comentarios (Nuevas URLs)
+    path('posts/create/', views.create_post),
+    path('posts/<int:post_id>/comments/create/', views.create_comment),
+    path('enterprises/<int:owner_user_id>/posts/', views.get_posts_with_comments, name='enterprise-posts'),
+    path('posts/all/', views.get_all_posts_with_comments, name='all-posts'),
+    path('posts/<int:post_id>/', views.update_or_delete_post, name='update-delete-post'),
+    path('posts/<int:post_id>/', views.get_single_post),
+    path('comments/<int:comment_id>/', views.update_or_delete_comment, name='update-delete-comment'),
 ]
-

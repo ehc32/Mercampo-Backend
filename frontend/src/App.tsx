@@ -15,6 +15,7 @@ import Store from "./pages/Store";
 import UserProfile from "./pages/UserProfile";
 import Enterprise from "./pages/Enterprise";
 import EnterpriseShop from "./pages/EnterpriseShop";
+import Blogs from "./pages/Blogs";
 
 
 function App() {
@@ -37,7 +38,8 @@ function App() {
 
                     {/* Rutas protegidas para clientes autenticados */}
                     <Route element={<PrivateRoute allowedRoles={['client', 'seller', 'admin']} />} >
-                        <Route path="myEnterprise" element={<Enterprise />} />
+                        <Route path="blogs" element={<Blogs />} />
+                        <Route path="myEnterprise/:id" element={<Enterprise />} />
                         <Route path="product/:slug" element={<DetallesProd />} />
                         <Route path="cart" element={<ShoppingCart />} />
                         <Route path="profile" element={<UserProfile />} />

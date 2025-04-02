@@ -118,6 +118,12 @@ const Header = () => {
                       >
                         Emprendimientos
                       </Link>
+                      <Link
+                        to={'/blogs'}
+                        className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
+                      >
+                        Blogs
+                      </Link>
                     </div>
                   </div>
                 </div>

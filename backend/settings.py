@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'django_celery_beat',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -192,3 +193,6 @@ REST_FRAMEWORK = {
 CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Requiere que Redis esté instalado
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json' 
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB

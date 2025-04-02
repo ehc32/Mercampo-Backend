@@ -3,10 +3,13 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 
+from django.db.models import Avg
 from backend.pagination import CustomPagination
-from .models import PayPalConfig, Role, User, Seller, Enterprise
+from .models import PayPalConfig, Role, User, Seller, Enterprise, EnterprisePost, PostComment
 
 from .serializers import (
+    PostCommentSerializer,
+    EnterprisePostSerializer,
     EnterpriseSerializer,
     PayPalConfigSerializer,
     RegisterUserSerializer,
@@ -216,3 +219,294 @@ def get_enterprises(request):
     result_page = paginator.paginate_queryset(enterprises, request)  
     serializer = EnterpriseSerializer(result_page, many=True)  
     return paginator.get_paginated_response(serializer.data) 
+
+@api_view(['GET'])
+def get_enterprise_by_user(request, user_id):
+    try:
+        enterprise = Enterprise.objects.select_related('owner_user').get(owner_user_id=user_id)
+        
+        enterprise_serializer = EnterpriseSerializer(enterprise)
+        user_serializer = UserSerializer(enterprise.owner_user)
+        
+        response_data = {
+            'enterprise': enterprise_serializer.data,
+            'owner': user_serializer.data
+        }
+        
+        return Response(response_data)
+    except Enterprise.DoesNotExist:
+        return Response(
+            {"detail": "No se encontró empresa para este usuario"}, 
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+@api_view(['POST'])
+def create_post(request):
+    try:
+        # Verificar que el usuario tenga empresa
+        enterprise = Enterprise.objects.get(owner_user=request.user)
+        
+        # Copiar datos y asignar relaciones
+        data = request.data.copy()
+        data['enterprise'] = enterprise.owner_user_id
+        data['owner'] = request.user.id
+        
+        # Convertir imágenes a formato correcto si vienen como objeto
+        if 'images' in data:
+            if isinstance(data['images'], dict):
+                # Si viene como objeto (ej: {"0": "img1", "1": "img2"})
+                data['images'] = list(data['images'].values())
+            elif isinstance(data['images'], str):
+                # Si viene como string, convertir a lista de un elemento
+                data['images'] = [data['images']] if data['images'] else []
+            # Si ya es lista, no hacer nada
+            
+            # Filtrar imágenes vacías
+            data['images'] = [img for img in data['images'] if img and img.strip()]
+        
+        # Validar que haya al menos una imagen o un redirect_link
+        if not data.get('images') and not data.get('redirect_link'):
+            return Response(
+                {"detail": "Debe proporcionar al menos una imagen o un enlace de redirección"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        serializer = EnterprisePostSerializer(data=data)
+        
+        if serializer.is_valid():
+            post = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    except Enterprise.DoesNotExist:
+        return Response(
+            {"detail": "El usuario no tiene una empresa registrada"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    except Exception as e:
+        return Response(
+            {"detail": f"Error inesperado: {str(e)}"},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+@api_view(['POST'])
+def create_comment(request, post_id):
+    """
+    Crea un comentario en un post
+    Requiere:
+    - comment (string)
+    - rating (float opcional entre 0-5)
+    """
+    try:
+        post = EnterprisePost.objects.get(pk=post_id)
+    except EnterprisePost.DoesNotExist:
+        return Response(
+            {"detail": "Post no encontrado"}, 
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    data = request.data.copy()
+    data['post'] = post.id
+    data['user'] = request.user.id  # Asigna automáticamente el usuario logueado
+    
+    serializer = PostCommentSerializer(data=data)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_posts_with_comments(request, owner_user_id):
+    try:
+        enterprise = Enterprise.objects.get(owner_user_id=owner_user_id)
+    except Enterprise.DoesNotExist:
+        return Response(
+            {"detail": "Empresa no encontrada"}, 
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    posts = EnterprisePost.objects.filter(
+        enterprise=enterprise, 
+    ).order_by('-created_at')
+    
+    paginator = CustomPagination()
+    paginated_posts = paginator.paginate_queryset(posts, request)
+    
+    posts_data = []
+    for post in paginated_posts:
+        post_serializer = EnterprisePostSerializer(post)
+        
+        comments = PostComment.objects.filter(
+            post=post, 
+            is_active=True
+        ).order_by('created_at')
+        comments_serializer = PostCommentSerializer(comments, many=True)
+        
+        posts_data.append({
+            **post_serializer.data,
+            'comments': comments_serializer.data
+        })
+    
+    return paginator.get_paginated_response(posts_data)
+
+
+@api_view(['GET'])
+def get_all_posts_with_comments(request):
+    # Obtener todos los posts ordenados por fecha descendente
+    posts = EnterprisePost.objects.all().order_by('-created_at')
+    
+    # Configurar la paginación
+    paginator = CustomPagination()
+    paginated_posts = paginator.paginate_queryset(posts, request)
+    
+    posts_data = []
+    for post in paginated_posts:
+        # Serializar el post
+        post_serializer = EnterprisePostSerializer(post)
+        
+        # Obtener todos los comentarios activos para este post
+        comments = PostComment.objects.filter(
+            post=post, 
+            is_active=True
+        ).order_by('created_at')
+        comments_serializer = PostCommentSerializer(comments, many=True)
+        
+        # Agregar los datos del post con sus comentarios
+        posts_data.append({
+            **post_serializer.data,
+            'comments': comments_serializer.data
+        })
+    
+    return paginator.get_paginated_response(posts_data)
+
+@api_view(['GET'])
+def get_single_post(request, post_id):
+    try:
+        post = EnterprisePost.objects.get(pk=post_id, is_active=True)
+    except EnterprisePost.DoesNotExist:
+        return Response(
+            {"detail": "Post no encontrado"}, 
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    post_serializer = EnterprisePostSerializer(post)
+    
+    comments = PostComment.objects.filter(
+        post=post, 
+        is_active=True
+    ).order_by('created_at')
+    
+    paginator = CustomPagination()
+    paginated_comments = paginator.paginate_queryset(comments, request)
+    comments_serializer = PostCommentSerializer(paginated_comments, many=True)
+    
+    response_data = {
+        **post_serializer.data,
+        'comments': paginator.get_paginated_response(comments_serializer.data).data
+    }
+    
+    return Response(response_data)
+
+@api_view(['PATCH', 'DELETE'])
+def update_or_delete_post(request, post_id):
+    try:
+        post = EnterprisePost.objects.get(pk=post_id)
+    except EnterprisePost.DoesNotExist:
+        return Response(
+            {"detail": "Post no encontrado"}, 
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    # Verificar que el usuario es el dueño del post o admin
+    if request.user != post.owner and request.user.role != 'admin':
+        return Response(
+            {"detail": "No tienes permiso para realizar esta acción"},
+            status=status.HTTP_403_FORBIDDEN
+        )
+    
+    if request.method == 'PATCH':
+        data = request.data.copy()
+        
+        # Convertir imágenes a lista si vienen como string
+        if 'images' in data and isinstance(data['images'], str):
+            data['images'] = [data['images']] if data['images'] else []
+        
+        serializer = EnterprisePostSerializer(
+            post, 
+            data=data, 
+            partial=True
+        )
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        post.delete()
+        return Response(
+            {"detail": "Post eliminado correctamente"},
+            status=status.HTTP_204_NO_CONTENT
+        )
+        
+@api_view(['PATCH', 'DELETE'])
+def update_or_delete_comment(request, comment_id):
+    """
+    Vista para actualizar o eliminar un comentario.
+    - PATCH: Actualiza el comentario y/o rating
+    - DELETE: Elimina el comentario (marca como inactivo)
+    """
+    try:
+        comment = PostComment.objects.get(pk=comment_id)
+    except PostComment.DoesNotExist:
+        return Response(
+            {"detail": "Comentario no encontrado"}, 
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    # Verificar que el usuario es el autor del comentario o admin
+    if request.user != comment.user and request.user.role != 'admin':
+        return Response(
+            {"detail": "No tienes permiso para modificar este comentario"},
+            status=status.HTTP_403_FORBIDDEN
+        )
+    
+    if request.method == 'PATCH':
+        serializer = PostCommentSerializer(
+            comment, 
+            data=request.data, 
+            partial=True
+        )
+        
+        if serializer.is_valid():
+            updated_comment = serializer.save()
+            
+            # Actualizar rating promedio del post si se modificó el rating
+            if 'rating' in request.data:
+                post = comment.post
+                comments = post.comments.filter(rating__isnull=False, is_active=True)
+                avg_rating = comments.aggregate(Avg('rating'))['rating__avg']
+                post.rating = avg_rating or 0
+                post.save()
+            
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        # Marcar como inactivo en lugar de borrar físicamente
+        comment.is_active = False
+        comment.save()
+        
+        # Recalcular el rating promedio del post
+        post = comment.post
+        comments = post.comments.filter(rating__isnull=False, is_active=True)
+        avg_rating = comments.aggregate(Avg('rating'))['rating__avg']
+        post.rating = avg_rating or 0
+        post.save()
+        
+        return Response(
+            {"detail": "Comentario eliminado correctamente"},
+            status=status.HTTP_204_NO_CONTENT
+        )

@@ -1,6 +1,8 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import Enterprise, PayPalConfig, User, Seller
+
+from django.db.models import Avg
+from .models import Enterprise, PayPalConfig, User, Seller, EnterprisePost, PostComment
 from django.contrib.auth.models import AnonymousUser
 
 class UserSerializer(serializers.ModelSerializer):
@@ -134,3 +136,80 @@ class EnterpriseSerializer(serializers.ModelSerializer):
         # Crear la empresa
         enterprise = Enterprise.objects.create(owner_user=owner_user, **validated_data)
         return enterprise
+    
+class EnterprisePostSerializer(serializers.ModelSerializer):
+    images = serializers.ListField(
+        child=serializers.CharField(allow_blank=True),
+        write_only=True,
+        required=False,
+        allow_empty=True
+    )
+    
+    class Meta:
+        model = EnterprisePost
+        fields = '__all__'
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        if instance.images:
+            representation['images'] = [
+                f"data:image/jpeg;base64,{img}" if not img.startswith('data:image') else img
+                for img in instance.images.split(',')
+            ]
+        else:
+            representation['images'] = []
+        return representation
+    
+    def validate_images(self, value):
+        # Filtrar imágenes vacías o nulas
+        return [img for img in value if img and img.strip()]
+    
+    def create(self, validated_data):
+        images = validated_data.pop('images', [])
+        if images:
+            validated_data['images'] = ','.join(images)
+        return super().create(validated_data)
+    
+    def update(self, instance, validated_data):
+        if 'images' in validated_data:
+            images = validated_data.pop('images', [])
+            validated_data['images'] = ','.join(images) if images else ''
+        
+        # Continúa con la actualización normal
+        return super().update(instance, validated_data)
+
+class PostCommentSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=serializers.CurrentUserDefault()
+    )
+    
+    class Meta:
+        model = PostComment
+        fields = [
+            'id', 'post', 'user', 'comment', 'rating',
+            'created_at', 'is_active'
+        ]
+        read_only_fields = ['id', 'created_at', 'user']
+
+    def validate_rating(self, value):
+        """Valida que el rating esté entre 0 y 5"""
+        if value is not None and (value < 0 or value > 5):
+            raise serializers.ValidationError("El rating debe estar entre 0 y 5")
+        return value
+
+    def create(self, validated_data):
+        """
+        Crea el comentario y actualiza el rating promedio del post.
+        """
+        comment = PostComment.objects.create(**validated_data)
+        
+        # Actualizar rating promedio del post si se proporcionó un rating
+        if comment.rating is not None:
+            post = comment.post
+            comments = post.comments.filter(rating__isnull=False)
+            avg_rating = comments.aggregate(Avg('rating'))['rating__avg']
+            post.rating = avg_rating or 0
+            post.save()
+            
+        return comment

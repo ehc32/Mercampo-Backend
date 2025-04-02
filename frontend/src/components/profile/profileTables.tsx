@@ -130,12 +130,12 @@ function ProfileTables({ user, id }) {
             backgroundImage: `url('/public/fondopan.png')`,
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end items-center pb-6">
-            <div className="relative rounded-full bg-white p-1">
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end items-center pb-14">
+            <div className="relative rounded-full bg-white p-2">
               <Avatar
                 src={
                   user?.avatar
-                    ? `${import.meta.env.VITE_BACKEND_URL}${user.avatar}`
+                    ? `${user.avatar}`
                     : "/placeholder.svg?height=100&width=100"
                 }
                 alt={user?.name || "User Avatar"}

@@ -7,6 +7,7 @@ export const get_solo_user = async (id: number) => {
 };
 
 export const edit_user = async (data: Partial<User>, id: number) => {
+    console.log(data)
     const formData = new FormData();
     
     if (data.name) {
@@ -22,11 +23,12 @@ export const edit_user = async (data: Partial<User>, id: number) => {
         formData.append("password", data.password);
     }
     if (data.avatar) {
-        formData.append("image", data.avatar);
+        formData.append("avatar", data.avatar);
     }
     if (data.role) {
         formData.append("role", data.role);
     }
+    console.log(formData)
     
     await authAxios.put(`/users/edit/${id}/`, formData, {
         headers: {
@@ -101,3 +103,91 @@ export const get_enterprices = async (page: number | string) => {
     const response = await axi.get(`users/get-enterprises/?page=${page}`);
     return response;
 };
+
+export const getEnterpriseByUser = async (userId: number | string) => {
+    const response = await axi.get(`users/get-enterprise-by-user/${userId}`);
+    return response; 
+};
+
+export const create_post = async (data: {
+    enterprise: number;
+    title: string;
+    description: string;
+    images?: string[]; // Ahora con prefijo data:image
+    redirect_link?: string;
+}) => {
+    const response = await authAxios.post("/users/posts/create/", data);
+    return response.data;
+};
+
+export const update_post = async (post_id: number, data: any) => {
+    const postData = {
+      ...data,
+      ...(data.images !== undefined && { images: data.images })
+    };
+  
+    const response = await authAxios.patch(
+      `/users/posts/${post_id}/`,
+      postData
+    );
+    return response.data;
+  };
+  
+  export const delete_post = async (post_id: number) => {
+    await authAxios.delete(`/users/posts/${post_id}/`);
+  };
+
+export const create_comment = async (post_id: number, data: {
+    comment: string;
+    rating?: number;
+}) => {
+    const response = await authAxios.post(
+        `/users/posts/${post_id}/comments/create/`, 
+        data
+    );
+    return response.data;
+};
+
+export const get_enterprise_posts = async (enterprise_id: number, page?: number) => {
+    const url = `/users/enterprises/${enterprise_id}/posts/`;
+    const params = page ? { page } : {};
+    const response = await authAxios.get(url, { params });
+    return response.data;
+};
+
+export const get_all_enterprise_posts = async (page?: number) => {
+    const url = `/users/posts/all/`;
+    const params = page ? { page } : {};
+    const response = await authAxios.get(url, { params });
+    return response.data;
+};
+
+export const get_single_post = async (post_id: number) => {
+    const response = await authAxios.get(`/users/posts/${post_id}/`);
+    return response.data;
+};
+
+// Funciones adicionales útiles
+export const get_user_posts = async (user_id: number) => {
+    const response = await authAxios.get(`/users/posts/user/${user_id}/`);
+    return response.data;
+};
+
+export const edit_comment = async (
+    comment_id: number, 
+    data: {
+      comment?: string;
+      rating?: number;
+    }
+  ) => {
+    const response = await authAxios.patch(
+      `/users/comments/${comment_id}/`, 
+      data
+    );
+    return response.data;
+  };
+  
+  // Eliminar un comentario (marcar como inactivo)
+  export const delete_comment = async (comment_id: number) => {
+    await authAxios.delete(`/users/comments/${comment_id}/`);
+  };

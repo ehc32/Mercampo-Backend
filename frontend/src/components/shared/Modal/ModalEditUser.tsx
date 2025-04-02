@@ -54,16 +54,61 @@ export default function ModalEditProfile({ id }) {
 
   const handleFileChange = (event) => {
     const file = event.target.files?.[0];
-    if (
-      file &&
-      (file.type === "image/png" ||
-        file.type === "image/jpeg" ||
-        file.type === "image/jpg")
-    ) {
-      setImage(file);
-    } else {
+    
+    if (!file) return;
+    
+    // Validar tipo de archivo
+    const validTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (!validTypes.includes(file.type)) {
       toast.error("Solo se permiten archivos PNG, JPEG o JPG.");
+      return;
     }
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Tamaño máximo para la imagen
+        const maxWidth = 800;
+        const maxHeight = 800;
+
+        let width = img.width;
+        let height = img.height;
+
+        // Redimensionar manteniendo aspect ratio
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Dibujar imagen redimensionada
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convertir a base64 con compresión (0.8 es el nivel de calidad)
+        const optimizedImage = canvas.toDataURL("image/webp", 0.8);
+        
+        // Guardar la imagen optimizada
+        setImage(optimizedImage);
+      };
+
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const removeImage = () => {
@@ -161,9 +206,7 @@ export default function ModalEditProfile({ id }) {
         break;
       case "foto":
         if (image) {
-          const formData = new FormData();
-          formData.append("avatar", image);
-          data = formData;
+          data = { avatar: image};
         }
         break;
       default:
@@ -290,7 +333,7 @@ export default function ModalEditProfile({ id }) {
             ) : (
               <div className="flex flex-col items-center">
                 <img
-                  src={URL.createObjectURL(image)}
+                  src={image}
                   alt="Vista previa"
                   className="h-24 w-24 object-cover rounded-full mb-2"
                 />
@@ -316,7 +359,7 @@ export default function ModalEditProfile({ id }) {
         className="bg-green-700 text-white border border-green-700 hover:bg-green-800 mx-2 my-1 p-3 rounded row align-center w-56 justify-center"
         onClick={handleOpen}
       >
-        <FaEdit  className="fs-20px mr-1" />
+        <FaEdit className="fs-20px mr-1" />
         Editar
       </h2>
 
