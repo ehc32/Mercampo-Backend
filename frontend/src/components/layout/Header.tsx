@@ -21,6 +21,7 @@ const Header = () => {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
   const cart = useCartStore((state) => state.cart)
+  const [userId, setUserId] = useState<number | null>(null)
   const { isAuth, access, id } = useAuthStore()
   const location = useLocation()
   const navigate = useNavigate()
@@ -28,25 +29,31 @@ const Header = () => {
   const avatar = ""
 
   useEffect(() => {
-    const setRoleFromToken = () => {
+    const setRoleAndUserIdFromToken = () => {
       const token: string | null = access
       if (token) {
         try {
           const tokenDecoded: Token = jwt_decode(token)
           const userRole = tokenDecoded.role
           const userEnterprise = tokenDecoded.enterprise
+          const userIdFromToken = tokenDecoded.user_id
+          
           setRoleLocal(userRole)
+          setUserId(userIdFromToken) 
           console.log(userEnterprise)
         } catch (error) {
           console.error("Error al decodificar el token:", error)
         }
       } else {
         setRoleLocal("")
+        setUserId(null)
       }
     }
 
-    setRoleFromToken()
+    setRoleAndUserIdFromToken()
   }, [access])
+
+  const currentUserId = id || userId
 
   // Cargar notificaciones
   const fetchNotifications = async () => {
@@ -338,11 +345,18 @@ const Header = () => {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
-                                      to="/myEnterprise"
-                                      className={classNames(
-                                        active ? "bg-[#3A3A3A]" : "",
-                                        "block px-4 py-2 text-sm text-white",
-                                      )}
+                                    to={currentUserId ? `/myEnterprise/${currentUserId}` : '#'}
+                                    className={classNames(
+                                      active ? "bg-[#3A3A3A]" : "",
+                                      "block px-4 py-2 text-sm text-white",
+                                      !currentUserId ? "opacity-50 cursor-not-allowed" : ""
+                                    )}
+                                    onClick={e => {
+                                      if (!currentUserId) {
+                                        e.preventDefault()
+                                        toast.error("No se pudo identificar tu usuario")
+                                      }
+                                    }}
                                     >
                                       Emprender
                                     </Link>

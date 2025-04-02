@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import AsideEnterprise from "../components/enterprise/asideEnterprise";
 import ContentEnterprise from "../components/enterprise/content";
 import { getEnterpriseByUser } from '../api/users';
+import { toast } from 'react-toastify';
 
 const Enterprise = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [enterpriseData, setEnterpriseData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -13,7 +15,7 @@ const Enterprise = () => {
   useEffect(() => {
     const fetchEnterpriseData = async () => {
       if (!id) {
-        setError('No user ID provided');
+        setError('No se proporcionó ID de usuario');
         setIsLoading(false);
         return;
       }
@@ -21,10 +23,16 @@ const Enterprise = () => {
       try {
         setIsLoading(true);
         const response = await getEnterpriseByUser(id);
-        setEnterpriseData(response.data);
+        
+        if (!response.data || !response.data.enterprise) {
+          setError('No hay datos de empresa');
+        } else {
+          setEnterpriseData(response.data);
+        }
+        
         setIsLoading(false);
       } catch (err) {
-        setError('Failed to fetch enterprise data');
+        setError('Error al cargar los datos de la empresa');
         setIsLoading(false);
         console.error(err);
       }
@@ -33,12 +41,70 @@ const Enterprise = () => {
     fetchEnterpriseData();
   }, [id]);
 
+  const handleRegisterEnterprise = () => {
+    navigate('/create-enterprise'); // Ajusta esta ruta según tu aplicación
+    toast.info('Redirigiendo al registro de empresa');
+  };
+
   if (isLoading) {
-    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>Loading...</div>;
+    return (
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        height: '100vh',
+        backgroundColor: '#f5f5f5'
+      }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+    );
   }
 
-  if (error) {
-    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>Error: {error}</div>;
+  if (error || !enterpriseData?.enterprise) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        height: '100vh',
+        backgroundColor: '#f5f5f5',
+        padding: '20px',
+        textAlign: 'center'
+      }}>
+        <h3 style={{ marginBottom: '20px', color: '#333' }}>
+          {error === 'No hay datos de empresa' ? error : 'No se encontró empresa registrada'}
+        </h3>
+        
+        <p style={{ 
+          marginBottom: '30px', 
+          color: '#666',
+          maxWidth: '500px'
+        }}>
+          Parece que aún no has registrado una empresa. ¿Te gustaría crear una ahora?
+        </p>
+        
+        <button
+          onClick={handleRegisterEnterprise}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '16px',
+            transition: 'background-color 0.3s'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#45a049'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#4CAF50'}
+        >
+          Registrar Mi Empresa
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -47,16 +113,16 @@ const Enterprise = () => {
       flexDirection: 'row', 
       height: '100vh', 
       overflow: 'hidden',
-      width: '100vw', // Ocupa todo el ancho de la ventana
-      margin: 0, // Elimina márgenes por defecto
-      padding: 0 // Elimina paddings por defecto
+      width: '100vw',
+      margin: 0,
+      padding: 0
     }}>
       {/* Aside - Ocupa solo el espacio necesario */}
       <div style={{ 
-        width: 'auto', // Ancho fijo para el aside
-        minWidth: '400px', // Evita que se encoja
+        width: 'auto',
+        minWidth: '400px',
         height: '100%',
-        overflowY: 'auto' // Scroll si el contenido es muy largo
+        overflowY: 'auto'
       }}>
         <AsideEnterprise enterpriseData={enterpriseData} />
       </div>
@@ -65,7 +131,7 @@ const Enterprise = () => {
       <div style={{ 
         flex: 1, 
         overflowY: 'auto',
-        minWidth: 0 // Permite que el contenido se ajuste
+        minWidth: 0
       }}>
         <ContentEnterprise enterpriseId={enterpriseData.enterprise.owner_user} />
       </div>

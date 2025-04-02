@@ -6,7 +6,8 @@ from rest_framework import status
 from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
-
+from django.db.models import Q
+from django.db.models import Count
 from django.db.models import Avg
 from backend.pagination import CustomPagination
 from .models import PayPalConfig, Role, User, Seller, Enterprise, EnterprisePost, PostComment, PasswordReset , MercadoPagoConfig
@@ -247,11 +248,27 @@ def create_enterprise(request, idUser):
     
 @api_view(['GET'])
 def get_enterprises(request):
+    search_query = request.query_params.get('search', None)
+    
+    # Filtro corregido para incluir NULL como activo
     enterprises = Enterprise.objects.all()
+    
+    if search_query:
+        enterprises = enterprises.filter(
+            Q(name__icontains=search_query) |
+            Q(description__icontains=search_query) |
+            Q(tipo_productos__icontains=search_query) |
+            Q(address__icontains=search_query)
+        )
+    
     paginator = CustomPagination()  
     result_page = paginator.paginate_queryset(enterprises, request)  
-    serializer = EnterpriseSerializer(result_page, many=True)  
-    return paginator.get_paginated_response(serializer.data) 
+    serializer = EnterpriseSerializer(result_page, many=True)
+    
+    response = paginator.get_paginated_response(serializer.data)
+    response.data['total_enterprises'] = enterprises.count()
+    
+    return response
 
 @api_view(['POST'])
 def password_reset_request(request):
@@ -448,11 +465,46 @@ def get_posts_with_comments(request, owner_user_id):
     
     return paginator.get_paginated_response(posts_data)
 
-
 @api_view(['GET'])
 def get_all_posts_with_comments(request):
-    # Obtener todos los posts ordenados por fecha descendente
-    posts = EnterprisePost.objects.all().order_by('-created_at')
+    # Obtener parámetros de consulta
+    order_by_date = request.query_params.get('order_by_date', 'desc')  # 'asc' o 'desc'
+    order_by_comments = request.query_params.get('order_by_comments', None)  # 'asc' o 'desc'
+    search_query = request.query_params.get('search', None)
+    
+    # Obtener todos los posts activos
+    posts = EnterprisePost.objects.filter(is_active=True)
+    
+    # Aplicar filtro de búsqueda si existe
+    if search_query:
+        posts = posts.filter(
+            Q(title__icontains=search_query) | 
+            Q(description__icontains=search_query)  # Cambiado de content a description
+        )
+    
+    # Anotar con el conteo de comentarios activos para todos los posts
+    posts = posts.annotate(
+        active_comment_count=Count(
+            'comments', 
+            filter=Q(comments__is_active=True)
+        )
+    )
+    
+    # Aplicar ordenamiento por fecha
+    if order_by_date.lower() == 'asc':
+        posts = posts.order_by('created_at')
+    else:  # Por defecto orden descendente
+        posts = posts.order_by('-created_at')
+    
+    # Aplicar ordenamiento por cantidad de comentarios si se solicita
+    if order_by_comments:
+        if order_by_comments.lower() == 'asc':
+            posts = posts.order_by('active_comment_count')
+        else:
+            posts = posts.order_by('-active_comment_count')
+    
+    # Contar el total de posts antes de la paginación
+    total_posts = posts.count()
     
     # Configurar la paginación
     paginator = CustomPagination()
@@ -464,19 +516,23 @@ def get_all_posts_with_comments(request):
         post_serializer = EnterprisePostSerializer(post)
         
         # Obtener todos los comentarios activos para este post
-        comments = PostComment.objects.filter(
-            post=post, 
-            is_active=True
-        ).order_by('created_at')
+        comments = post.comments.filter(is_active=True).order_by('created_at')
         comments_serializer = PostCommentSerializer(comments, many=True)
         
         # Agregar los datos del post con sus comentarios
         posts_data.append({
             **post_serializer.data,
-            'comments': comments_serializer.data
+            'comments': comments_serializer.data,
+            'comment_count': post.active_comment_count  # Usamos la anotación ya calculada
         })
     
-    return paginator.get_paginated_response(posts_data)
+    # Obtener la respuesta paginada
+    response = paginator.get_paginated_response(posts_data)
+    
+    # Agregar el contador total al response
+    response.data['total_posts'] = total_posts
+    
+    return response
 
 @api_view(['GET'])
 def get_single_post(request, post_id):

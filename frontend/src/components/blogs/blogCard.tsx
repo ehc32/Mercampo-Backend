@@ -417,114 +417,107 @@ const BlogCard = ({ post }: { post: any }) => {
 
                 {showComments && (
                     <div className="comments-content">
-                        <div className="comments-list-container" style={{ 
-                            minHeight: '200px',
-                            maxHeight: '300px',
-                            overflowY: 'auto'
-                        }}>
-                        {comments.length > 0 ? (
-                            <div className="comments-list">
-                                {comments.map(comment => (
-                                    <div key={comment.id} className="comment-item">
-                                        <div className="comment-user">
-                                            {comment.user_details?.avatar ? (
-                                                <img 
-                                                    src={comment.user_details.avatar} 
-                                                    className="comment-avatar"
-                                                    alt="Avatar"
-                                                />
-                                            ) : (
-                                                <div className="comment-default-avatar">
-                                                    <User size={14} />
-                                                </div>
-                                            )}
-                                            <div className="comment-details">
-                                                <div className="comment-header">
-                                                    <span className="comment-author">
-                                                        {comment.user_details?.name || 'Anónimo'}
-                                                    </span>
-                                                    <span className="comment-date">
-                                                        {tiempoTranscurrido(comment.created_at)}
-                                                    </span>
-                                                </div>
-                                                {editingCommentId === comment.id ? (
-                                                    <div className="edit-comment-form ratingContainer">
-                                                        <Rating
-                                                            value={editedCommentRating}
-                                                            onChange={(e, val) => setEditedCommentRating(val)}
-                                                            precision={0.5}
-                                                            size="small"
-                                                        />
-                                                        <textarea
-                                                            value={editedCommentText}
-                                                            onChange={(e) => setEditedCommentText(e.target.value)}
-                                                            rows={2}
-                                                        />
-                                                        <div className="edit-comment-actions">
-                                                            <button 
-                                                                onClick={handleCancelEditComment}
-                                                                className="cancel-edit-btn"
-                                                            >
-                                                                Cancelar
-                                                            </button>
-                                                            <button 
-                                                                onClick={() => handleSaveEditedComment(comment.id)}
-                                                                className="save-edit-btn"
-                                                            >
-                                                                Guardar
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                        <div className="comments-list-container">
+                            {comments.length > 0 ? (
+                                <div className="comments-list">
+                                    {comments.map(comment => (
+                                        <div key={comment.id} className="comment-item">
+                                            <div className="comment-user">
+                                                {comment.user_details?.avatar ? (
+                                                    <img 
+                                                        src={comment.user_details.avatar} 
+                                                        className="comment-avatar"
+                                                        alt="Avatar"
+                                                    />
                                                 ) : (
-                                                    <div className="comment-content ratingContainer">
-                                                        <Rating
-                                                            value={typeof comment.rating === 'string' ? parseFloat(comment.rating) : comment.rating || 0}
-                                                            readOnly
-                                                            precision={0.5}
-                                                            size="small"
-                                                        />
-                                                        <p className="comment-text">{comment.comment}</p>
-                                                        {currentUserId === comment.user && (
-                                                            <div className="comment-actions">
-                                                                <button 
-                                                                    onClick={() => handleEditComment(comment)}
-                                                                    className="edit-comment-btn"
-                                                                >
-                                                                    Editar
-                                                                </button>
-                                                                <button 
-                                                                    onClick={() => handleDeleteComment(comment.id)}
-                                                                    className="delete-comment-btn"
-                                                                >
-                                                                    Eliminar
-                                                                </button>
-                                                            </div>
-                                                        )}
+                                                    <div className="comment-default-avatar">
+                                                        <User size={14} />
                                                     </div>
                                                 )}
+                                                <div className="comment-details">
+                                                    <div className="comment-header">
+                                                        <span className="comment-author">
+                                                            {comment.user_details?.name || 'Anónimo'}
+                                                        </span>
+                                                        <span className="comment-date">
+                                                            {tiempoTranscurrido(comment.created_at)}
+                                                        </span>
+                                                    </div>
+                                                    {editingCommentId === comment.id ? (
+                                                        <div className="edit-comment-form">
+                                                            <textarea
+                                                                value={editedCommentText}
+                                                                onChange={(e) => setEditedCommentText(e.target.value)}
+                                                                rows={2}
+                                                            />
+                                                            <div className="edit-rating-container ratingContainer">
+                                                                <Typography component="legend" className="rating-label">
+                                                                    Calificación
+                                                                </Typography>
+                                                                <Rating
+                                                                    value={editedCommentRating}
+                                                                    onChange={(e, val) => setEditedCommentRating(val)}
+                                                                    precision={0.5}
+                                                                    size="small"
+                                                                />
+                                                            </div>
+                                                            <div className="edit-comment-actions">
+                                                                <button 
+                                                                    onClick={handleCancelEditComment}
+                                                                    className="cancel-edit-btn"
+                                                                >
+                                                                    Cancelar
+                                                                </button>
+                                                                <button 
+                                                                    onClick={() => handleSaveEditedComment(comment.id)}
+                                                                    className="save-edit-btn"
+                                                                >
+                                                                    Guardar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="comment-content">
+                                                            <p className="comment-text">{comment.comment}</p>
+                                                            <div className="comment-rating-container ratingContainer">
+                                                                <Rating
+                                                                    value={typeof comment.rating === 'string' ? parseFloat(comment.rating) : comment.rating || 0}
+                                                                    readOnly
+                                                                    precision={0.5}
+                                                                    size="small"
+                                                                />
+                                                            </div>
+                                                            {currentUserId === comment.user && (
+                                                                <div className="comment-actions">
+                                                                    <button 
+                                                                        onClick={() => handleEditComment(comment)}
+                                                                        className="edit-comment-btn"
+                                                                    >
+                                                                        Editar
+                                                                    </button>
+                                                                    <button 
+                                                                        onClick={() => handleDeleteComment(comment.id)}
+                                                                        className="delete-comment-btn"
+                                                                    >
+                                                                        Eliminar
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="no-comments">
-                                No hay comentarios aún
-                            </div>
-                        )}
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="no-comments">
+                                    No hay comentarios aún
+                                </div>
+                            )}
                         </div>
 
                         <div className="add-comment">
-                            <div className="comment-rating-input ratingContainer">
-                                <Typography component="legend" className="rating-label">
-                                    Calificación
-                                </Typography>
-                                <Rating
-                                    value={commentRating}
-                                    onChange={(e, val) => setCommentRating(val)}
-                                    precision={1}
-                                />
-                            </div>
                             <div className="comment-input-container">
                                 <input
                                     type="text"
@@ -539,6 +532,16 @@ const BlogCard = ({ post }: { post: any }) => {
                                 >
                                     Enviar
                                 </button>
+                            </div>
+                            <div className="comment-rating-input ratingContainer">
+                                <Typography component="legend" className="rating-label">
+                                    Calificación
+                                </Typography>
+                                <Rating
+                                    value={commentRating}
+                                    onChange={(e, val) => setCommentRating(val)}
+                                    precision={1}
+                                />
                             </div>
                         </div>
                     </div>

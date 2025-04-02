@@ -3897,3 +3897,627 @@ WARNING 2025-04-01 17:08:21,668 log Not Found: /users/mercado-pago/config/done/u
 WARNING 2025-04-01 17:08:30,602 log Not Found: /users/mercado-pago/config/done/undefined/
 WARNING 2025-04-01 17:08:30,621 log Not Found: /users/mercado-pago/config/done/undefined/
 INFO 2025-04-02 08:11:56,111 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 09:16:39,536 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 09:18:00,087 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:18:00,098 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:18:00,559 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:18:00,563 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:18:39,652 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:18:39,688 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:18:39,804 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:18:39,839 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:19:54,071 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:19:54,082 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:19:54,111 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:19:54,125 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:21:54,130 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:21:54,252 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:21:54,248 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:21:54,368 log Not Found: /users/mercado-pago/config/done/undefined/
+ERROR 2025-04-02 09:28:02,369 log Internal Server Error: /products/get/equals/Kilo de arroz/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\products\views.py", line 69, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+                                                                                                      ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'. Did you mean: 'HTTP_200_OK'?
+WARNING 2025-04-02 09:28:27,931 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 09:28:27,955 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 09:28:28,127 log Not Found: /products/caterandom//
+WARNING 2025-04-02 09:29:24,144 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:29:24,168 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:29:24,191 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 09:29:24,192 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 09:29:55,498 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:29:55,584 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:29:55,620 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:29:55,631 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:30:04,585 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 09:53:15,928 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 09:53:15,932 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 09:53:15,933 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 09:53:15,953 log Not Found: /users/paypalconfig/3/
+INFO 2025-04-02 11:18:56,886 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 11:19:09,082 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 11:29:03,478 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 468, in get_all_posts_with_comments
+    posts = posts.filter(
+            ^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1393, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'content' into field. Choices are: comments, created_at, description, enterprise, enterprise_id, id, images, is_active, owner, owner_id, rating, redirect_link, title, updated_at
+ERROR 2025-04-02 11:29:27,111 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 481, in get_all_posts_with_comments
+    posts = posts.annotate(comment_count=Count('postcomment'))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1590, in annotate
+    return self._annotate(args, kwargs, select=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1638, in _annotate
+    clone.query.add_annotation(
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1122, in add_annotation
+    annotation = annotation.resolve_expression(self, allow_joins=True, reuse=None)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 942, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 822, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1965, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1812, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'postcomment' into field. Choices are: comments, created_at, description, enterprise, enterprise_id, id, images, is_active, owner, owner_id, rating, redirect_link, title, updated_at
+ERROR 2025-04-02 11:29:43,467 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 481, in get_all_posts_with_comments
+    posts = posts.annotate(comment_count=Count('postcomment'))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1590, in annotate
+    return self._annotate(args, kwargs, select=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1638, in _annotate
+    clone.query.add_annotation(
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1122, in add_annotation
+    annotation = annotation.resolve_expression(self, allow_joins=True, reuse=None)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 942, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 822, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1965, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1812, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'postcomment' into field. Choices are: comments, created_at, description, enterprise, enterprise_id, id, images, is_active, owner, owner_id, rating, redirect_link, title, updated_at
+ERROR 2025-04-02 11:32:04,552 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 468, in get_all_posts_with_comments
+    posts = posts.filter(
+            ^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1393, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'content' into field. Choices are: comments, created_at, description, enterprise, enterprise_id, id, images, is_active, owner, owner_id, rating, redirect_link, title, updated_at
+ERROR 2025-04-02 11:32:32,527 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 481, in get_all_posts_with_comments
+    posts = posts.annotate(comment_count=Count('postcomment'))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1590, in annotate
+    return self._annotate(args, kwargs, select=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1638, in _annotate
+    clone.query.add_annotation(
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1122, in add_annotation
+    annotation = annotation.resolve_expression(self, allow_joins=True, reuse=None)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 942, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 822, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1965, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1812, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'postcomment' into field. Choices are: comments, created_at, description, enterprise, enterprise_id, id, images, is_active, owner, owner_id, rating, redirect_link, title, updated_at
+ERROR 2025-04-02 11:34:53,780 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 481, in get_all_posts_with_comments
+    posts = posts.annotate(comment_count=Count('postcomment'))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1590, in annotate
+    return self._annotate(args, kwargs, select=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\query.py", line 1638, in _annotate
+    clone.query.add_annotation(
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1122, in add_annotation
+    annotation = annotation.resolve_expression(self, allow_joins=True, reuse=None)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 942, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\expressions.py", line 822, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1965, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1812, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'postcomment' into field. Choices are: comments, created_at, description, enterprise, enterprise_id, id, images, is_active, owner, owner_id, rating, redirect_link, title, updated_at
+INFO 2025-04-02 11:37:07,272 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 11:37:10,105 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 11:44:56,772 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 11:44:59,411 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 11:45:03,237 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 470, in get_all_posts_with_comments
+    active_comment_count=Count(
+                         ^^^^^
+NameError: name 'Count' is not defined. Did you mean: 'round'?
+ERROR 2025-04-02 11:45:14,226 log Internal Server Error: /users/posts/all/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 470, in get_all_posts_with_comments
+    active_comment_count=Count(
+                         ^^^^^
+NameError: name 'Count' is not defined. Did you mean: 'round'?
+INFO 2025-04-02 11:45:41,030 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 11:45:42,631 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 11:54:34,557 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 11:54:36,685 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 14:07:54,920 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 14:08:00,453 log Unauthorized: /orders/notifications/
+INFO 2025-04-02 14:15:24,046 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 14:20:30,387 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 14:20:33,490 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 14:20:41,901 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 14:20:45,503 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 14:20:59,867 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 14:21:02,903 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 14:21:33,120 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 14:21:35,269 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 14:22:01,518 log Internal Server Error: /users/get-enterprises/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 262, in get_enterprises
+    print(f"Query ejecutada: {str(enterprises.query)}")
+                                  ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'enterprises' where it is not associated with a value
+ERROR 2025-04-02 14:22:01,571 log Internal Server Error: /users/get-enterprises/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py", line 262, in get_enterprises
+    print(f"Query ejecutada: {str(enterprises.query)}")
+                                  ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'enterprises' where it is not associated with a value
+INFO 2025-04-02 14:22:35,379 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 14:22:37,396 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 14:24:56,200 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-04-02 14:24:59,591 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 14:44:19,229 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:44:19,282 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:44:19,341 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:44:19,344 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:44:55,162 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:44:55,182 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:44:55,183 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:44:55,205 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:45:21,847 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:45:21,866 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:45:21,903 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:45:21,964 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:51:20,335 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:51:20,345 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:51:20,388 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 14:51:20,405 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 14:56:51,808 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 14:56:51,811 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:03:03,819 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:03:03,838 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:03:03,865 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:03:03,868 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:04:57,964 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:04:57,967 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:05:17,686 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:05:17,691 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:05:28,889 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:05:28,896 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:06:04,847 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:06:04,849 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:06:08,235 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:06:08,241 log Not Found: /users/get-enterprise-by-user/null
+WARNING 2025-04-02 15:06:11,545 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:06:11,579 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:13:08,734 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:08,738 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:12,541 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:12,544 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:15,204 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:15,207 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:18,129 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:13:18,153 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:13:18,171 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:13:18,294 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:13:19,255 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:19,259 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:13:20,354 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:13:20,357 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:13:20,358 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:13:20,402 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:15:44,308 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:15:44,312 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:15:44,392 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 15:15:44,423 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:15:47,266 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:15:47,270 log Not Found: /users/get-enterprise-by-user/undefined
+WARNING 2025-04-02 15:25:38,470 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:25:42,042 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:25:42,062 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:26:02,694 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:26:02,730 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:27:48,100 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:27:48,112 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:36:12,670 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:36:12,671 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:37:01,510 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:37:01,583 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:37:07,092 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:37:07,134 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-02 15:46:21,558 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 15:46:21,559 log Not Found: /users/paypalconfig/3/

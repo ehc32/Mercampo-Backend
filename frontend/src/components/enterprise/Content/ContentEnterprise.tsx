@@ -7,7 +7,6 @@ import { Button, TextField } from "@mui/material"
 import Pagination from "@mui/material/Pagination"
 import type React from "react"
 import { useEffect, useState } from "react"
-import { useDrawer } from "../../../context/DrawerProvider"
 import NotfoundPage from "../../../global/NotfoundPage"
 import Card from "../Card/Cards"
 import Loader from "../../shared/Loaders/Loader"
@@ -23,7 +22,6 @@ interface ContenidoProps {
   setPage: (page: number) => void
   searchItem: string
   setSearchItem: (search: string) => void
-  bringDataFilter: () => void
   deleteDataFilter: () => void
   changeOrder: () => void
 }
@@ -36,7 +34,6 @@ const Content: React.FC<ContenidoProps> = ({
   setPage,
   searchItem,
   setSearchItem,
-  bringDataFilter,
   deleteDataFilter,
   changeOrder,
 }) => {
@@ -95,36 +92,21 @@ const Content: React.FC<ContenidoProps> = ({
     setPage(value)
   }
 
-  const buscarTextfield = (e: string) => {
-    setSearchItem(e)
-    bringDataFilter()
-  }
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchItem(value); // Esto llama a la función del padre
+  };
 
-  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setSearchItem(value)
-    // Timer para búsqueda
-    if (timer) {
-      clearTimeout(timer)
-    }
-    const newTimer = setTimeout(() => {
-      buscarTextfield(value)
-    }, 1000)
-    setTimer(newTimer)
-  }
-
-  const { abierto, toggleAbierto } = useDrawer()
   const isWideScreen = window.innerWidth > 900
 
   return (
     <section className="contenidoTienda">
       <div className="locationcss">
         <FaMapMarkerAlt className="icon" />
-        {/* Solo mostrar el municipio si es pantalla grande */}
         {isWideScreen && <h3>{municipio || "Cargando..."}</h3>}
       </div>
 
-      <div>
+      <div className="content-wrapper">
         <div className="flex flex-col">
           <div>
             <h2 className="titulo-sala-compra-light text-2xl sm:text-3xl">Una gran variedad de emprendimientos</h2>
@@ -157,15 +139,6 @@ const Content: React.FC<ContenidoProps> = ({
                 <DeleteSweepIcon />
                 {isWideScreen && <p>Borrar filtros</p>}
               </Button>
-              <Button
-                variant="contained"
-                color="success"
-                className="flex align-center boton_header"
-                onClick={toggleAbierto}
-              >
-                <TuneIcon />
-                {isWideScreen && <p>Filtrar productos</p>}
-              </Button>
             </div>
             <form action="" onSubmit={(e) => e.preventDefault()} className="flex-1 max-w-lg">
               <TextField
@@ -173,7 +146,7 @@ const Content: React.FC<ContenidoProps> = ({
                 id="search"
                 label="Buscar emprendimiento  ..."
                 value={searchItem}
-                onChange={handleChange2}
+                onChange={handleSearchChange}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
@@ -190,34 +163,34 @@ const Content: React.FC<ContenidoProps> = ({
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center">
-            <Loader />
-          </div>
-        ) : dataLenght > 0 ? (
-          <>
-            <div className="product-container-light">
-              <div className="flex flex-wrap intern">
-                {empresa.length > 0 && empresa.map((emp: any, index: number) => <Card key={index} empresa={emp} />)}
-              </div>
-              <div className="w-95 flex items-center justify-center h-min-100px">
-                <Pagination
-                  count={Math.ceil(dataLenght / 20)}
-                  page={page}
-                  showFirstButton
-                  showLastButton
-                  onChange={handleChange}
-                  className="flex flex-row w-full justify-center my-6"
-                />
-              </div>
-            </div>
-          </>
-        ) : (
-          <NotfoundPage boton={true} />
-        )}
+  <div className="flex justify-center items-center">
+    <Loader />
+  </div>
+) : dataLenght > 0 ? (
+  <>
+    <div className="cards-container">
+      {empresa.length > 0 && empresa.map((emp: any, index: number) => (
+        <div key={index} className="card-wrapper">
+          <Card empresa={emp} />
+        </div>
+      ))}
+    </div>
+    <div className="pagination-container">
+      <Pagination
+        count={Math.ceil(dataLenght / 20)}
+        page={page}
+        showFirstButton
+        showLastButton
+        onChange={handleChange}
+      />
+    </div>
+  </>
+) : (
+  <NotfoundPage boton={true} />
+)}
       </div>
     </section>
   )
 }
 
 export default Content
-

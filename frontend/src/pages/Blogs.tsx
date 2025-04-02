@@ -25,6 +25,7 @@ const Blogs = () => {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalPosts, setTotalPosts] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('recent');
 
@@ -32,41 +33,28 @@ const Blogs = () => {
     const loadPosts = async () => {
       try {
         setLoadingPosts(true);
-        const response = await get_all_enterprise_posts(currentPage);
+        
+        // Mapear los valores de ordenamiento a los que espera la API
+        const orderByDate = sortBy === 'oldest' ? 'asc' : 'desc';
+        const orderByComments = sortBy === 'popular' ? 'desc' : undefined;
+        
+        const response = await get_all_enterprise_posts(
+          currentPage, 
+          {
+            orderByDate,
+            orderByComments,
+            searchQuery: searchQuery || undefined
+          }
+        );
         
         const postsData = response.data || [];
-        const totalItems = response.meta?.count || 0;
+        const totalItems = response.total_posts || 0;
         const itemsPerPage = 20;
         const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);
 
-        // Simular filtrado y ordenamiento en el frontend
-        let processedPosts = [...postsData];
-        
-        // Filtrar por búsqueda
-        if (searchQuery) {
-          processedPosts = processedPosts.filter(post => 
-            post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-            post.content.toLowerCase().includes(searchQuery.toLowerCase())
-          );
-        }
-        
-        // Ordenar
-        switch (sortBy) {
-          case 'popular':
-            processedPosts.sort((a, b) => b.views - a.views);
-            break;
-          case 'recent':
-            processedPosts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-            break;
-          case 'oldest':
-            processedPosts.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-            break;
-          default:
-            break;
-        }
-
-        setPosts(processedPosts);
+        setPosts(postsData);
         setTotalPages(calculatedTotalPages);
+        setTotalPosts(totalItems);
       } catch (error) {
         console.error('Error loading posts:', error);
         toast.error('Error al cargar las publicaciones');
@@ -75,7 +63,12 @@ const Blogs = () => {
       }
     };
 
-    loadPosts();
+    // Agregar un pequeño delay para evitar múltiples llamadas al API mientras se escribe
+    const timer = setTimeout(() => {
+      loadPosts();
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [currentPage, searchQuery, sortBy]);
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
@@ -88,7 +81,7 @@ const Blogs = () => {
       <Box sx={{ 
         textAlign: 'center', 
         mb: 6,
-        backgroundColor: 'grey.800', // Fondo gris oscuro
+        backgroundColor: 'grey.800',
         color: 'white',
         py: 8,
         px: 2,
@@ -99,7 +92,7 @@ const Blogs = () => {
           fontWeight: 700, 
           mb: 2,
           fontSize: { xs: '2rem', md: '3rem' },
-          color: 'white' // Texto blanco
+          color: 'white'
         }}>
           Nuestro Blog
         </Typography>
@@ -107,7 +100,7 @@ const Blogs = () => {
           maxWidth: '700px', 
           mx: 'auto',
           fontSize: { xs: '1rem', md: '1.25rem' },
-          color: 'white' // Texto blanco
+          color: 'white'
         }}>
           Descubre artículos, noticias y consejos para hacer crecer tu negocio
         </Typography>
@@ -149,7 +142,10 @@ const Blogs = () => {
             select
             label="Ordenar por"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            onChange={(e) => {
+              setSortBy(e.target.value);
+              setCurrentPage(1); // Resetear a la primera página al cambiar el orden
+            }}
             size="small"
             sx={{ minWidth: 180, borderRadius: 2 }}
           >
@@ -160,7 +156,7 @@ const Blogs = () => {
             </MenuItem>
             <MenuItem value="popular">
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <TrendingUpIcon fontSize="small" /> Más populares
+                <TrendingUpIcon fontSize="small" /> Más comentados
               </Box>
             </MenuItem>
             <MenuItem value="oldest">
@@ -180,7 +176,11 @@ const Blogs = () => {
         alignItems: 'center',
         gap: 1
       }}>
-        <FilterListIcon /> Artículos recientes
+        <FilterListIcon /> 
+        {sortBy === 'recent' && 'Artículos recientes'}
+        {sortBy === 'popular' && 'Artículos más comentados'}
+        {sortBy === 'oldest' && 'Artículos más antiguos'}
+        {searchQuery && ` (${totalPosts} resultados)`}
       </Typography>
 
       {loadingPosts ? (
@@ -199,7 +199,6 @@ const Blogs = () => {
           <Grid container spacing={4}>
             {posts.map((post) => (
               <Grid item xs={12} sm={6} md={4} key={post.id} sx={{ display: 'flex' }}>
-                {/* Contenedor flexible para que todas las tarjetas tengan misma altura */}
                 <Box sx={{ 
                   width: '100%',
                   display: 'flex',

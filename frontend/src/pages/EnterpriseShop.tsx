@@ -20,6 +20,14 @@ const Store = () => {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
 
+    const [enterprises, setEnterprises] = useState<any[]>([]);
+    const [dataLength, setDataLength] = useState<number>(0);
+    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [filtersApplied, setFiltersApplied] = useState<boolean>(false);
+    const [locationFilter, setLocationFilter] = useState<string>("");
+    const [priceFilter, setPriceFilter] = useState<string>("");
+    const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
+
     // REQUEST TO SERVER
 
     const bringDataFilter = async () => {
@@ -53,56 +61,68 @@ const Store = () => {
         }
     };
 
-
-
-
-    // delete filtros
-    const deleteDataFilter = () => {
-        try {
-            fetchProductos(page)
-            toast.dismiss();
-            toast.info(("Filtros restablecidos"));
-        } catch (error) {
-
-        }
-    }
-
-    // order changed
-    const changeOrder = () => {
-        try {
-            setProductos(prevProductos => [...prevProductos].reverse());
-            toast.dismiss();
-            toast.info(("Orden cambiado"));
-        } catch (error) {
-
-        }
-    }
-
     // END FILTROS
 
-    const fetchProductos = async (page: number) => {
+    const fetchEnterprises = async (page: number, search: string = "") => {
         try {
-            const productosAPI = await get_enterprices(page);
-            const data = productosAPI.data.data
-            setProductos(data);
-            setDataLenght(productosAPI.data.meta.count);
+            setLoading(true);
+            const response = await get_enterprices(page, {
+                searchQuery: search || undefined,
+            });
+            
+            setEnterprises(response.data || []);
+            setDataLength(response.total_enterprises || 0);
+            
+            // Marcar si hay filtros aplicados
+            setFiltersApplied(!!search || locationFilter !== "" || priceFilter !== "" || categoryFilters.length > 0);
+            
         } catch (error) {
-            console.error(error)
+            console.error("Error fetching enterprises:", error);
+            toast.error("Error al cargar empresas");
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchProductos(page);
-    }, [page])
+        const timer = setTimeout(() => {
+            fetchEnterprises(page, searchQuery);
+        }, 500); // Debounce de 500ms
+
+        return () => clearTimeout(timer);
+    }, [page, searchQuery, locationFilter, priceFilter, categoryFilters]);
+
+    // Manejador de búsqueda
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+        setPage(1); // Resetear a la primera página al buscar
+    };
+
+    // Función para resetear todos los filtros
+    const resetAllFilters = () => {
+        setSearchQuery("");
+        setLocationFilter("");
+        setPriceFilter("");
+        setCategoryFilters([]);
+        setPage(1);
+        setFiltersApplied(false);
+    };
+
+    // Función para aplicar filtros adicionales
+    const applyAdditionalFilters = () => {
+        // Aquí puedes agregar lógica para otros filtros si es necesario
+        setPage(1); // Resetear a la primera página al aplicar filtros
+        fetchEnterprises(1, searchQuery);
+        toast.success("Filtros aplicados correctamente");
+    };
+
 
     return (
         <section>
             <main className="mainTienda">
                 <AsideFilter
                     bringDataFilter={bringDataFilter}
-                    deleteDataFilter={deleteDataFilter}
+                    deleteDataFilter={resetAllFilters}
                     setTime={setTime}
                     setLocate={setLocate}
                     setCategories={setCategories}
@@ -119,16 +139,19 @@ const Store = () => {
                 />
 
                 <Content
-                    empresa={productos}
+                    empresa={enterprises}
                     loading={loading}
-                    dataLenght={dataLenght}
+                    dataLenght={dataLength}
                     page={page}
                     setPage={setPage}
-                    searchItem={searchItem}
-                    bringDataFilter={bringDataFilter}
-                    setSearchItem={setSearchItem}
-                    deleteDataFilter={deleteDataFilter}
-                    changeOrder={changeOrder}
+                    searchItem={searchQuery}
+                    setSearchItem={handleSearch}
+                    deleteDataFilter={resetAllFilters}
+                    changeOrder={() => {
+                        // Opcional: implementar ordenamiento si es necesario
+                        setEnterprises([...enterprises].reverse());
+                        toast.info("Orden cambiado");
+                    }}
                 />
 
             </main>

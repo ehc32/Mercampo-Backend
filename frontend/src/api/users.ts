@@ -99,10 +99,21 @@ export const sendEnterpriseRequest = async (idUser: number | string, formData: F
     });
 };
 
-export const get_enterprices = async (page: number | string) => {
-    const response = await axi.get(`users/get-enterprises/?page=${page}`);
-    return response;
-};
+export const get_enterprices = async (
+    page: number,
+    filters?: {
+      searchQuery?: string;
+    }
+  ) => {
+    const params: any = { page };
+    
+    if (filters?.searchQuery) {
+      params.search = filters.searchQuery;
+    }
+  
+    const response = await authAxios.get(`users/get-enterprises/`, { params });
+    return response.data;
+  };
 
 export const getEnterpriseByUser = async (userId: number | string) => {
     const response = await axi.get(`users/get-enterprise-by-user/${userId}`);
@@ -113,7 +124,7 @@ export const create_post = async (data: {
     enterprise: number;
     title: string;
     description: string;
-    images?: string[]; // Ahora con prefijo data:image
+    images?: string[]; 
     redirect_link?: string;
 }) => {
     const response = await authAxios.post("/users/posts/create/", data);
@@ -155,9 +166,26 @@ export const get_enterprise_posts = async (enterprise_id: number, page?: number)
     return response.data;
 };
 
-export const get_all_enterprise_posts = async (page?: number) => {
+export const get_all_enterprise_posts = async (
+    page?: number,
+    filters?: {
+        orderByDate?: 'asc' | 'desc',
+        orderByComments?: 'asc' | 'desc',
+        searchQuery?: string
+    }
+) => {
     const url = `/users/posts/all/`;
-    const params = page ? { page } : {};
+    
+    // Construir objeto de parámetros
+    const params: any = {};
+    
+    if (page) params.page = page;
+    if (filters) {
+        if (filters.orderByDate) params.order_by_date = filters.orderByDate;
+        if (filters.orderByComments) params.order_by_comments = filters.orderByComments;
+        if (filters.searchQuery) params.search = filters.searchQuery;
+    }
+    
     const response = await authAxios.get(url, { params });
     return response.data;
 };

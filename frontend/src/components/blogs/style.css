@@ -176,7 +176,7 @@
 .post-description-container {
     position: relative;
     margin-bottom: 16px;
-    min-height: 150px; /* Altura fija */
+    min-height: 150px;
 }
 
 .description-content {
@@ -207,7 +207,6 @@
 .read-more-btn:hover {
     text-decoration: underline;
 }
-
 
 .post-footer {
     display: flex;
@@ -282,6 +281,9 @@
     border-radius: 8px;
     background: white;
     margin-bottom: 16px;
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .comments-list {
@@ -292,38 +294,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px; /* Misma altura que cuando hay comentarios */
+    height: 200px;
     color: #888;
     font-size: 14px;
-}
-
-.comments-list {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 8px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Scrollbar personalizada */
-.comments-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.comments-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
-}
-
-.comments-list::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
-}
-
-.comments-list::-webkit-scrollbar-thumb:hover {
-    background: #aaa;
 }
 
 .comment-item {
@@ -331,6 +304,7 @@
     border-radius: 8px;
     padding: 12px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 12px;
 }
 
 .comment-user {
@@ -385,9 +359,13 @@
 .comment-text {
     font-size: 14px;
     color: #444;
-    margin: 8px 0 0 0;
+    margin: 8px 0;
     line-height: 1.4;
     white-space: pre-line;
+}
+
+.comment-rating-container {
+    margin: 8px 0;
 }
 
 .comment-actions {
@@ -440,6 +418,13 @@
     width: 100%;
 }
 
+.edit-rating-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 8px 0;
+}
+
 .edit-comment-actions {
     display: flex;
     justify-content: flex-end;
@@ -474,22 +459,20 @@
     background-color: #2d8600;
 }
 
-.no-comments {
-    text-align: center;
-    padding: 16px;
-    color: #888;
-    font-size: 14px;
-    background-color: white;
-    border-radius: 8px;
-}
-
 /* Formulario para añadir comentarios */
 .add-comment {
     margin-top: 16px;
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #eee;
 }
 
 .comment-rating-input {
-    margin-bottom: 12px;
+    margin-top: 12px;
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
 }
 
 .rating-label {
@@ -497,6 +480,7 @@
     color: #444;
     margin-bottom: 6px;
     display: block;
+    font-weight: 500;
 }
 
 .comment-input-container {
@@ -526,13 +510,6 @@
 
 .submit-comment-btn:hover {
     background-color: #2d8600;
-}
-
-/* Estilos para el rating */
-.ratingContainer {
-    display: flex;
-    align-items: center;
-    gap: 4px;
 }
 
 /* Toast personalizados */

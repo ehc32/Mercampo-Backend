@@ -120,7 +120,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'orders',
     'django_celery_beat',
-    'corsheaders',
     'drf_yasg',
 ]
 
@@ -174,7 +173,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': 'localhost',
-        'PORT': '5433',
+        'PORT': '5432',
     }
 }
 
