@@ -5,13 +5,12 @@ import Hero from "../components/home/Hero";
 import Participants from "../components/home/Participants/Participants";
 import RandomProducts from "../components/home/RandomProducts";
 import PaypalIntro from "../components/home/paypalInfo";
-
+import MercadoPagoIntro from "../components/home/mercado-pago-intro";
 
 export default function Tienda() {
   const [productosRandom, setProductosRandom] = useState([]);
 
   const people = [
-
     {
       name: "Yan Carlos Cerquera",
       photo: "/public/carlos.jpeg",
@@ -32,7 +31,6 @@ export default function Tienda() {
       photo: "/public/escobar.jpeg",
       role: "Tecnólogo en ADSO"
     },
-
   ];
 
   const fetchProductos = async () => {
@@ -46,14 +44,17 @@ export default function Tienda() {
 
   useEffect(() => {
     void fetchProductos();
-  }, [])
+  }, []);
 
   return (
     <React.Fragment>
       <div className="home-container">
         <Hero />
         <RandomProducts productos={productosRandom} />
-        <PaypalIntro />
+        <div className="payment-intros">
+          <PaypalIntro />
+          <MercadoPagoIntro />
+        </div>
         <About />
         {/* <Participants people={people} /> */}
       </div>

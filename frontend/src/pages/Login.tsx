@@ -114,15 +114,20 @@ const LoginPage = () => {
               >
                 Ingresar
               </Button>
-              <p className="text-sm font-light text-black dark:text-gray-300">
+             <div className="space-y-2 text-center">
+              <p className="text-sm text-black dark:text-gray-300">
                 ¿No tienes cuenta?{" "}
-                <Link
-                  to={"/register"}
-                  className="font-medium text-white hover:underline dark:text-lime-400"
-                >
+                <Link to="/register" className="font-medium text-white hover:underline dark:text-lime-400">
                   Regístrate
                 </Link>
               </p>
+              <p className="text-sm text-black dark:text-gray-300">
+                <Link to="/password-reset" className="font-medium text-white hover:underline dark:text-lime-400">
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </p>
+            </div>
+              
             </form>
           </div>
         </div>

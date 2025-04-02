@@ -1,119 +1,118 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { Product } from "../Interfaces";
-import { toast } from "react-toastify";
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
-interface State {
-  cart: Product[];
-  totalPrice: number;
+interface Product {
+  id: number
+  name: string
+  price: number
+  image?: string
+  quantity: number
+  user: number // ID del vendedor
+  user_name?: string // Nombre del vendedor
 }
 
-interface Actions {
-  addToCart: (Item: Product, cantidad?: number) => void;
-  removeFromCart: (Item: Product) => void;
-  removeProduct: (product: Product) => void;
-  removeAll: () => void;
+interface CartState {
+  cart: Product[]
+  totalItems: number
+  totalPrice: number
+  addToCart: (product: Product) => void
+  removeFromCart: (product: Product) => void
+  removeProduct: (product: Product) => void
+  removeAll: () => void
 }
 
-const initialState: State = {
-  cart: [],
-  totalPrice: 0,
-};
-
-export const useCartStore = create(
-  persist<State & Actions>(
+export const useCartStore = create<CartState>()(
+  persist(
     (set, get) => ({
-      cart: initialState.cart,
-      totalPrice: initialState.totalPrice,
+      cart: [],
+      totalItems: 0,
+      totalPrice: 0,
 
-      removeAll: () => {
-        set({
-          cart: [],
-          totalPrice: 0,
-        });
-      },
+      addToCart: (product: Product) => {
+        const { cart } = get()
+        const cartItem = cart.find((item) => item.id === product.id)
 
-      addToCart: (product: Product, cantidad?: number) => {
-        if (!product.price || product.price <= 0) {
-          toast.error("El producto no tiene un precio válido");
-          return;
+        // Verificar si ya hay productos de otro vendedor
+        if (cart.length > 0 && !cartItem) {
+          const firstVendorId = cart[0].user
+          if (product.user !== firstVendorId) {
+            alert("Solo puedes añadir productos del mismo vendedor en cada orden")
+            return
+          }
         }
 
-        if (cantidad && cantidad <= 0) {
-          toast.dismiss();
-          toast.error("La cantidad debe ser un número mayor que 0");
-          return;
-        }
-
-        const cart = get().cart;
-        const cartItem = cart.find((item) => item.id === product.id);
+        const price = Number(product.price) 
 
         if (cartItem) {
           const updatedCart = cart.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: (item.quantity as number) + (cantidad || 1) }
-              : item
-          );
-          set((state) => ({
-            cart: updatedCart,
-            totalPrice: Math.max(
-              state.totalPrice + Number(product.price) * (cantidad || 1),
-              0
-            ),
-          }));
-        } else {
-          const updatedCart = [...cart, { ...product, quantity: cantidad || 1 }];
+            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          )
 
-          set((state) => ({
+          set({
             cart: updatedCart,
-            totalPrice: Math.max(
-              state.totalPrice + Number(product.price) * (cantidad || 1),
-              0
-            ),
-          }));
+            totalItems: get().totalItems + 1,
+            totalPrice: parseFloat((get().totalPrice + price).toFixed(2)) 
+          })
+        } else {
+          set({
+            cart: [...cart, { ...product, quantity: 1 }],
+            totalItems: get().totalItems + 1,
+            totalPrice: parseFloat((get().totalPrice + price).toFixed(2)) 
+          })
         }
       },
 
       removeFromCart: (product: Product) => {
-        const cart = get().cart;
-        const cartItem = cart.find((item) => item.id === product.id);
+        const { cart } = get()
+        const cartItem = cart.find((item) => item.id === product.id)
+        const price = Number(product.price) 
 
-        if (cartItem && cartItem.quantity && cartItem.quantity > 1) {
-          const updatedCart = cart.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: (item.quantity as number) - 1 }
-              : item
-          );
-          set((state) => ({
-            cart: updatedCart,
-            totalPrice: Math.max(state.totalPrice - Number(product.price), 0),
-          }));
-        } else if (cartItem && cartItem.quantity === 1) {
-          toast.dismiss();
-          toast.warning(
-            "Cuidado, no puedes restar más la cantidad de este producto."
-          );
-        } else {
-          const totalPrice =
-            get().totalPrice - Number(product.price) * (product.quantity || 1);
-          set((state) => ({
-            cart: state.cart.filter((item) => item.id !== product.id),
-            totalPrice: Math.max(totalPrice, 0),
-          }));
+        if (cartItem) {
+          if (cartItem.quantity > 1) {
+            const updatedCart = cart.map((item) =>
+              item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+            )
+            set({
+              cart: updatedCart,
+              totalItems: get().totalItems - 1,
+              totalPrice: parseFloat((get().totalPrice - price).toFixed(2))
+            })
+          } else {
+            const updatedCart = cart.filter((item) => item.id !== product.id)
+            set({
+              cart: updatedCart,
+              totalItems: get().totalItems - 1,
+              totalPrice: parseFloat((get().totalPrice - price).toFixed(2))
+            })
+          }
         }
       },
 
       removeProduct: (product: Product) => {
-        const totalPrice =
-          get().totalPrice - Number(product.price) * (product.quantity || 1);
-        set((state) => ({
-          cart: state.cart.filter((item) => item.id !== product.id),
-          totalPrice: Math.max(totalPrice, 0),
-        }));
+        const { cart } = get()
+        const cartItem = cart.find((item) => item.id === product.id)
+
+        if (cartItem) {
+          const price = Number(cartItem.price) 
+          const updatedCart = cart.filter((item) => item.id !== product.id)
+          set({
+            cart: updatedCart,
+            totalItems: get().totalItems - cartItem.quantity,
+            totalPrice: parseFloat((get().totalPrice - (price * cartItem.quantity)).toFixed(2))
+          })
+        }
+      },
+
+      removeAll: () => {
+        set({
+          cart: [],
+          totalItems: 0,
+          totalPrice: 0,
+        })
       },
     }),
     {
       name: "cart-storage",
-    }
+    },
   )
-);
+)

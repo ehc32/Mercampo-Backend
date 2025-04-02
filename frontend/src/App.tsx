@@ -16,7 +16,12 @@ import UserProfile from "./pages/UserProfile";
 import Enterprise from "./pages/Enterprise";
 import EnterpriseShop from "./pages/EnterpriseShop";
 import Blogs from "./pages/Blogs";
-
+import PasswordResetPage from "./pages/password-reset-page";
+import PasswordResetVerifyPage from "./pages/password-reset-verify";
+import Checkout from "./pages/asdas";
+import PaymentSuccess from "./pages/paymet/success";
+import PaymentPending from "./pages/paymet/pending";
+import PaymentFailure from "./pages/paymet/failure";
 
 function App() {
     return (
@@ -26,9 +31,16 @@ function App() {
                 <Route path="/" element={<Layout />} >
                     <Route index element={<Home />} />
                     <Route path="login" element={<LoginPage />} />
-                    <Route path="register" element={<RegisterPage />} />
+                    <Route path="/password-reset" element={<PasswordResetPage />} />
+                    <Route path="/password-reset-verify" element={<PasswordResetVerifyPage />} />                    
+                                        <Route path="register" element={<RegisterPage />} />
                     <Route path="store" element={<Store />} />
                     <Route path="enterpriseShop" element={<EnterpriseShop />} />
+                    <Route path="test" element={< Checkout />} />
+
+                    <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/pending" element={<PaymentPending />} />
+        <Route path="/payment/failure" element={<PaymentFailure />} />
 
                     {/* Rutas protegidas para vendedores y admins */}
                     <Route element={<PrivateRoute allowedRoles={['seller', 'admin']} />} >

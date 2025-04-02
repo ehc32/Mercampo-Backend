@@ -1,30 +1,28 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
     UserManager
 )
 from enum import Enum
-
+import datetime
 
 class Role(Enum):
     ADMIN = "admin"
     CLIENT = "client"
     SELLER = "seller"
 
-
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("Debes tener un correo electrónico")
-
         email = self.normalize_email(email)
         role = extra_fields.pop("role", Role.CLIENT.value)
         user = self.model(email=email, role=role, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
-
         return user
 
     def create_user(self, email=None, password=None, role=None, **extra_fields):
@@ -35,7 +33,6 @@ class CustomUserManager(UserManager):
     def create_superuser(self, email=None, password=None, **extra_fields):
         extra_fields.setdefault("role", Role.ADMIN.value)
         return self.create_user(email, password, **extra_fields)
-
 
 def validate_role(value):
     if value not in [tag.value for tag in Role]:
@@ -104,18 +101,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     date_requested = models.DateTimeField(default=timezone.now)
+
 class Reviews_User(models.Model):
     user_target = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, 
         null=True, 
-        related_name='target_reviews'  # Nombre para acceder a las reseñas que recibe
+        related_name='target_reviews'
     )
     user_wrote = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, 
         null=True, 
-        related_name='written_reviews'  # Nombre para acceder a las reseñas que ha escrito
+        related_name='written_reviews'
     )
     rating = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     comment = models.TextField(blank=True)
@@ -123,7 +121,6 @@ class Reviews_User(models.Model):
 
     def __str__(self):
         return f"Review by {self.user_wrote.name} for {self.user_target.name}"
-
 
 class PayPalConfig(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -134,6 +131,32 @@ class PayPalConfig(models.Model):
 
     def __str__(self):
         return f"PayPal Config for {self.user.name}"
+    
+class MercadoPagoConfig(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    access_token = models.CharField(max_length=255)
+    public_key = models.CharField(max_length=255)
+    refresh_token = models.CharField(max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return f"MercadoPago Config for {self.user.name}"
+
+# --- Nuevo Modelo para Recuperación de Contraseña ---
+class PasswordReset(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    code = models.CharField(max_length=4)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def is_expired(self):
+        # El código expira en 10 minutos
+        expiration_time = self.created_at + datetime.timedelta(minutes=10)
+        return expiration_time < timezone.now()
+
+    def __str__(self):
+        return f"PasswordReset for {self.user.email} - Code: {self.code}"
     
 class EnterprisePost(models.Model):
     enterprise = models.ForeignKey(

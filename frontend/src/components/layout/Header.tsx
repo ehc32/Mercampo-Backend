@@ -1,70 +1,196 @@
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import jwt_decode from 'jwt-decode';
-import { Fragment, useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
-import { useAuthStore } from "../../hooks/auth";
-import { useCartStore } from "../../hooks/cart";
-import { Token } from '../../Interfaces';
-import ST_Icon from '../assets/ST/ST_Icon';
-import AsideToggle from '../shared/tooltip/TooltipAside';
-import BasicTooltip from '../shared/tooltip/TooltipOpenCart';
-import './../../global/style.css';
+"use client"
+
+import { Disclosure, Menu, Transition } from "@headlessui/react"
+import jwt_decode from "jwt-decode"
+import { Fragment, useEffect, useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { useAuthStore } from "../../hooks/auth"
+import { useCartStore } from "../../hooks/cart"
+import type { Token } from "../../Interfaces"
+import ST_Icon from "../assets/ST/ST_Icon"
+import AsideToggle from "../shared/tooltip/TooltipAside"
+import BasicTooltip from "../shared/tooltip/TooltipOpenCart"
+import "./../../global/style.css"
+import { getNotifications, markNotificationAsRead, type Notification } from "../../api/notifications"
+import NotificationBadge from "../NotificationBadge"
+// Importar el componente NotificationBadge
 
 const Header = () => {
-  const [roleLocal, setRoleLocal] = useState("");
-  const cart = useCartStore(state => state.cart);
-  const { isAuth, access } = useAuthStore();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [roleLocal, setRoleLocal] = useState("")
+  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [showNotifications, setShowNotifications] = useState(false)
+  const cart = useCartStore((state) => state.cart)
+  const { isAuth, access, id } = useAuthStore()
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  let avatar: string = '';
+  const avatar = ""
 
   useEffect(() => {
     const setRoleFromToken = () => {
-      const token: string | null = access;
+      const token: string | null = access
       if (token) {
         try {
-          const tokenDecoded: Token = jwt_decode(token);
-          const userRole = tokenDecoded.role;
-          const userEnterprise = tokenDecoded.enterprise;
-          setRoleLocal(userRole);
+          const tokenDecoded: Token = jwt_decode(token)
+          const userRole = tokenDecoded.role
+          const userEnterprise = tokenDecoded.enterprise
+          setRoleLocal(userRole)
           console.log(userEnterprise)
         } catch (error) {
-          console.error("Error al decodificar el token:", error);
+          console.error("Error al decodificar el token:", error)
         }
       } else {
-        setRoleLocal("");
+        setRoleLocal("")
       }
-    };
+    }
 
-    setRoleFromToken();
+    setRoleFromToken()
+  }, [access])
 
-  }, [access]);
+  // Cargar notificaciones
+  const fetchNotifications = async () => {
+    if (isAuth && (roleLocal === "seller" || roleLocal === "admin")) {
+      try {
+        const data = await getNotifications()
+
+        // Ordenar notificaciones: no leídas primero, luego por fecha (más recientes primero)
+        const sortedNotifications = [...data].sort((a, b) => {
+          // Primero ordenar por estado de lectura
+          if (a.is_read !== b.is_read) {
+            return a.is_read ? 1 : -1
+          }
+          // Luego ordenar por fecha (más recientes primero)
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        })
+
+        // Limitar a máximo 20 notificaciones para evitar sobrecarga
+        const limitedNotifications = sortedNotifications.slice(0, 20)
+
+        setNotifications(limitedNotifications)
+      } catch (error) {
+        console.error("Error al cargar notificaciones:", error)
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchNotifications()
+
+    // Configurar un intervalo para actualizar las notificaciones cada 30 segundos
+    const intervalId = setInterval(fetchNotifications, 30000)
+
+    return () => clearInterval(intervalId)
+  }, [isAuth, roleLocal])
+
+  // Mejorar la función handleMarkAsRead para actualizar correctamente el estado
+  const handleMarkAsRead = async (notificationId: number) => {
+    try {
+      await markNotificationAsRead(notificationId)
+
+      // Actualizar el estado local inmediatamente
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) =>
+          notification.id === notificationId ? { ...notification, is_read: true } : notification,
+        ),
+      )
+    } catch (error) {
+      console.error("Error al marcar notificación como leída:", error)
+    }
+  }
+
+  // Mejorar la función handleNotificationClick para mejor navegación
+  const handleNotificationClick = (notification: Notification) => {
+    // Marcar como leída
+    handleMarkAsRead(notification.id)
+
+    // Navegar a la orden si existe
+    if (notification.order_id) {
+      // Guardar el ID de la orden para resaltarla en la página de perfil
+      localStorage.setItem("highlightedOrderId", notification.order_id.toString())
+
+      // Cambiar a la pestaña de ventas
+      localStorage.setItem("profileTab", "ventas")
+
+      // Navegar a la página de perfil
+      navigate(`/profile`)
+      toast.info("Navegando a la orden confirmada")
+    }
+
+    setShowNotifications(false)
+  }
+
+  // Añadir una función para marcar todas las notificaciones como leídas
+  const handleMarkAllAsRead = async () => {
+    try {
+      const unreadNotifications = notifications.filter((notification) => !notification.is_read)
+
+      // Si no hay notificaciones sin leer, no hacer nada
+      if (unreadNotifications.length === 0) {
+        return
+      }
+
+      // Mostrar indicador de carga
+      toast.info("Marcando todas las notificaciones como leídas...")
+
+      // Marcar cada notificación como leída
+      for (const notification of unreadNotifications) {
+        await markNotificationAsRead(notification.id)
+      }
+
+      // Actualizar el estado local
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) => ({ ...notification, is_read: true })),
+      )
+
+      toast.success("Todas las notificaciones han sido marcadas como leídas")
+    } catch (error) {
+      console.error("Error al marcar todas las notificaciones como leídas:", error)
+      toast.error("Error al marcar las notificaciones como leídas")
+    }
+  }
+
+  const unreadCount = notifications.filter((notification) => !notification.is_read).length
 
   function logOutFun() {
-    useAuthStore.getState().logout();
-    navigate('/login');
+    useAuthStore.getState().logout()
+    navigate("/login")
   }
 
   function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ');
+    return classes.filter(Boolean).join(" ")
   }
 
   useEffect(() => {
     if (!isAuth || (roleLocal !== "admin" && roleLocal !== "seller")) {
       if (location.pathname === "/admin" || location.pathname === "/addprod") {
-        navigate('/');
-        toast.info("No tienes permisos de acceso a esta ruta.");
+        navigate("/")
+        toast.info("No tienes permisos de acceso a esta ruta.")
       }
     }
-  }, [isAuth, roleLocal, location.pathname, navigate]);
+  }, [isAuth, roleLocal, location.pathname, navigate])
 
   if (!isAuth && (location.pathname === "/admin" || location.pathname === "/addprod")) {
-    return null;
+    return null
   }
 
-  const isWideScreen = window.innerWidth > 900;
+  const isWideScreen = window.innerWidth > 900
+
+  // Formatear fecha para notificaciones
+  const formatNotificationDate = (dateString: string) => {
+    const date = new Date(dateString)
+    const now = new Date()
+    const diffMs = now.getTime() - date.getTime()
+    const diffMins = Math.floor(diffMs / 60000)
+    const diffHours = Math.floor(diffMins / 60)
+    const diffDays = Math.floor(diffHours / 24)
+
+    if (diffMins < 1) return "Ahora mismo"
+    if (diffMins < 60) return `Hace ${diffMins} minutos`
+    if (diffHours < 24) return `Hace ${diffHours} horas`
+    if (diffDays === 1) return "Ayer"
+    return `Hace ${diffDays} días`
+  }
 
   return (
     <Disclosure as="nav" className=" shadow fixed top-0 w-full bg-[#2A2A2A] z-50">
@@ -74,47 +200,36 @@ const Header = () => {
             <div className="relative flex h-12 items-center justify-evenly">
               <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start subnav-1">
                 <div className="flex">
-                  {
-                    location.pathname === "/store" && (
-                      <AsideToggle />
-                    )
-                  }
-                  {
-                    location.pathname !== "/store" && window.innerWidth < 900 && (
-                      <AsideToggle />
-                    )
-                  }
-                  {
-                    isWideScreen &&
-
-                    <Link to={'/'} className='flex flex-row'>
+                  {location.pathname === "/store" && <AsideToggle />}
+                  {location.pathname !== "/store" && window.innerWidth < 900 && <AsideToggle />}
+                  {isWideScreen && (
+                    <Link to={"/"} className="flex flex-row">
                       <ST_Icon />
                     </Link>
-
-                  }
-                  {
-                    !isWideScreen &&
-                    <h1 className='titulo-while-auth font-bold text-white ml-14 subnav-1 justify-center align-center'>Mercampo</h1>
-                  }
+                  )}
+                  {!isWideScreen && (
+                    <h1 className="titulo-while-auth font-bold text-white ml-14 subnav-1 justify-center align-center">
+                      Mercampo
+                    </h1>
+                  )}
                   <div className="sm:ml-6 sm:block">
                     <div className="flex space-x-1 nav_items_block">
-
                       <Link
-                        to={'/'}
-                        className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
+                        to={"/"}
+                        className="text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar"
                       >
                         Inicio
                       </Link>
 
                       <Link
-                        to={'/store'}
-                        className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
+                        to={"/store"}
+                        className="text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar"
                       >
                         Tienda
                       </Link>
                       <Link
-                        to={'/enterpriseShop'}
-                        className='text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar'
+                        to={"/enterpriseShop"}
+                        className="text-white font-bold hover:text-green-500 px-2 rounded-lg fs-18px item_navbar"
                       >
                         Emprendimientos
                       </Link>
@@ -124,13 +239,19 @@ const Header = () => {
                       >
                         Blogs
                       </Link>
+                      <a>
+                      <NotificationBadge userId={id} userRole={roleLocal} />
+
+                      </a>
                     </div>
                   </div>
                 </div>
-                {
-                  isWideScreen &&
-                  <h1 className='titulo-while-auth font-bold text-white ml-14 subnav-1 justify-center align-center'>Mercampo</h1>
-                }
+                {isWideScreen && (
+                  <h1 className="titulo-while-auth font-bold text-white ml-14 subnav-1 justify-center align-center">
+                    Mercampo
+                  </h1>
+                  
+                )}
               </div>
               {isWideScreen && (
                 <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 subnav-1 justify-end">
@@ -138,16 +259,21 @@ const Header = () => {
                     <BasicTooltip />
                     <span className="mx-1 fs-18px text-white">{cart.length}</span>
                   </div>
-
                   {isAuth ? (
                     <>
+                      {/* Notificaciones - Solo para vendedores y administradores */}
+                      {(roleLocal === "seller" || roleLocal === "admin") && (
+<a
+></a>
+                      )}
+
                       <Menu as="div" className="relative ml-1">
                         <div>
                           <Menu.Button className="flex rounded-full text-sm focus:outline-none border-2 border-green-600">
                             <span className="sr-only">Menú de usuario</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={avatar ? `${import.meta.env.VITE_BACKEND_URL}${avatar}` : '/avatar.png'}
+                              src={avatar ? `${import.meta.env.VITE_BACKEND_URL}${avatar}` : "/avatar.png"}
                               alt="Avatar"
                             />
                           </Menu.Button>
@@ -166,7 +292,10 @@ const Header = () => {
                               {({ active }) => (
                                 <Link
                                   to="/profile"
-                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                  className={classNames(
+                                    active ? "bg-[#3A3A3A]" : "",
+                                    "block px-4 py-2 text-sm text-white",
+                                  )}
                                 >
                                   Perfil
                                 </Link>
@@ -175,21 +304,14 @@ const Header = () => {
 
                             {roleLocal === "admin" && (
                               <>
-                                {/* <Menu.Item>
-                                  {({ active }) => (
-                                    <Link
-                                      to="/myEnterprise"
-                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
-                                    >
-                                      Mi emprendimiento
-                                    </Link>
-                                  )}
-                                </Menu.Item> */}
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
                                       to="/addprod"
-                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                      className={classNames(
+                                        active ? "bg-[#3A3A3A]" : "",
+                                        "block px-4 py-2 text-sm text-white",
+                                      )}
                                     >
                                       Nuevo producto
                                     </Link>
@@ -199,7 +321,10 @@ const Header = () => {
                                   {({ active }) => (
                                     <Link
                                       to="/admin"
-                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                      className={classNames(
+                                        active ? "bg-[#3A3A3A]" : "",
+                                        "block px-4 py-2 text-sm text-white",
+                                      )}
                                     >
                                       Administrar
                                     </Link>
@@ -214,7 +339,10 @@ const Header = () => {
                                   {({ active }) => (
                                     <Link
                                       to="/myEnterprise"
-                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                      className={classNames(
+                                        active ? "bg-[#3A3A3A]" : "",
+                                        "block px-4 py-2 text-sm text-white",
+                                      )}
                                     >
                                       Emprender
                                     </Link>
@@ -224,7 +352,10 @@ const Header = () => {
                                   {({ active }) => (
                                     <Link
                                       to="/addprod"
-                                      className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white')}
+                                      className={classNames(
+                                        active ? "bg-[#3A3A3A]" : "",
+                                        "block px-4 py-2 text-sm text-white",
+                                      )}
                                     >
                                       Nuevo producto
                                     </Link>
@@ -237,7 +368,10 @@ const Header = () => {
                               {({ active }) => (
                                 <span
                                   onClick={logOutFun}
-                                  className={classNames(active ? 'bg-[#3A3A3A]' : '', 'block px-4 py-2 text-sm text-white cursor-pointer')}
+                                  className={classNames(
+                                    active ? "bg-[#3A3A3A]" : "",
+                                    "block px-4 py-2 text-sm text-white cursor-pointer",
+                                  )}
                                 >
                                   Cerrar sesión
                                 </span>
@@ -249,6 +383,7 @@ const Header = () => {
                     </>
                   ) : (
                     <>
+                 
                       {isWideScreen && location.pathname !== "/login" && (
                         <Link
                           to="/login"
@@ -275,7 +410,8 @@ const Header = () => {
         </>
       )}
     </Disclosure>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
+

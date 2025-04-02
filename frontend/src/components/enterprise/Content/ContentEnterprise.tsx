@@ -47,7 +47,7 @@ const Content: React.FC<ContenidoProps> = ({
   const obtenerMunicipio = async (lat: number, lng: number) => {
     try {
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDWmh4H4O1AqdP5-nzLJft-EdFo9m6TDk8`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDWmh4H4O1AqdP5-nzLJft-EdFo9m6TDk8`,
       )
       if (!response.ok) throw new Error("Error en la respuesta de la API")
       const data = await response.json()
@@ -220,3 +220,4 @@ const Content: React.FC<ContenidoProps> = ({
 }
 
 export default Content
+
