@@ -1,6 +1,6 @@
 from gettext import translation
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -167,118 +167,6 @@ def seller_delivered_orders(request):
 
 
 @api_view(['POST'])
-def create_temp_preference(request):
-    user = request.user
-    data = request.data
-    
-    try:
-        # Manejo seguro de order_items
-        order_items = data.get('order_items', [])
-        if isinstance(order_items, str):
-            try:
-                order_items = json.loads(order_items)
-            except json.JSONDecodeError:
-                return Response({"error": "Formato inválido para order_items"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        if not order_items or not isinstance(order_items, list):
-            return Response({"error": "No hay productos válidos en la orden"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Obtener vendedor del primer producto
-        try:
-            first_product = Product.objects.get(id=order_items[0]['id'])
-            seller = first_product.user
-        except Product.DoesNotExist:
-            return Response({"error": f"Producto {order_items[0]['id']} no existe"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Verificar que todos los productos sean del mismo vendedor
-        for item in order_items:
-            try:
-                product = Product.objects.get(id=item['id'])
-                if product.user != seller:
-                    return Response({"error": "Todos los productos deben ser del mismo vendedor"}, status=status.HTTP_400_BAD_REQUEST)
-            except Product.DoesNotExist:
-                return Response({"error": f"Producto {item['id']} no existe"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Verificar credenciales del vendedor
-        try:
-            mp_config = MercadoPagoConfig.objects.get(user=seller)
-        except MercadoPagoConfig.DoesNotExist:
-            return Response({"error": "El vendedor no tiene configurado MercadoPago"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Crear orden temporal
-        temp_order = TemporaryOrder.objects.create(
-            user=user,
-            seller=seller,
-            order_data={
-                "order_items": order_items,
-                "total_price": data.get('total_price'),
-                "address": data.get('address'),
-                "city": data.get('city'),
-                "postal_code": data.get('postal_code'),
-            }
-        )
-        
-        # Configurar SDK con credenciales del vendedor
-        mp = mercadopago.SDK(mp_config.access_token)
-        
-        # Preparar items para MercadoPago
-        mp_items = []
-        for item in order_items:
-            product = Product.objects.get(id=item['id'])
-            mp_items.append({
-                "title": product.name,
-                "quantity": item['quantity'],
-                "unit_price": float(item['price']),
-                "currency_id": "COP"
-            })
-        
-        # Crear preferencia de pago
-        preference_data = {
-            "items": mp_items,
-            "payer": {
-                "name": user.name,
-                "email": user.email
-            },
-            "external_reference": str(temp_order.id),
-            "notification_url": f"{settings.BACKEND_URL}/orders/payment/webhook/",
-            "back_urls": {
-                "success": f"{settings.FRONTEND_URL}/payment/success?preference_id={temp_order.id}",
-                "failure": f"{settings.FRONTEND_URL}/payment/failure",
-                "pending": f"{settings.FRONTEND_URL}/payment/pending"
-            },
-            "auto_return": "approved",
-            "statement_descriptor": f"Compra a {seller}"
-        }
-        
-        preference_response = mp.preference().create(preference_data)
-        
-        if not preference_response.get('response'):
-            logger.error("Error al crear preferencia", extra={
-                "response": preference_response,
-                "user": user.id,
-                "seller": seller.id
-            })
-            return Response({"error": "Error al crear la preferencia de pago"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
-        temp_order.mp_preference_id = preference_response['response']['id']
-        temp_order.save()
-        
-        return Response({
-            "init_point": preference_response['response']['init_point'],
-            "preference_id": temp_order.id,
-            "public_key": mp_config.public_key
-        })
-        
-    except Exception as e:
-        logger.error(f"Error en create_temp_preference: {str(e)}", exc_info=True)
-        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-
-
-
-@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def confirm_order_received(request, order_id):
     try:
@@ -398,11 +286,104 @@ def check_order_confirmation(request, order_id):
 
 
 
-
-
-
-
-
+@api_view(['POST'])
+def create_temp_preference(request):
+    user = request.user
+    data = request.data
+    
+    try:
+        order_items = data.get('order_items', [])
+        if isinstance(order_items, str):
+            try:
+                order_items = json.loads(order_items)
+            except json.JSONDecodeError:
+                return Response({"error": "Formato inválido para order_items"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not order_items or not isinstance(order_items, list):
+            return Response({"error": "No hay productos válidos en la orden"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            first_product = Product.objects.get(id=order_items[0]['id'])
+            seller = first_product.user
+        except Product.DoesNotExist:
+            return Response({"error": f"Producto {order_items[0]['id']} no existe"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        for item in order_items:
+            try:
+                product = Product.objects.get(id=item['id'])
+                if product.user != seller:
+                    return Response({"error": "Todos los productos deben ser del mismo vendedor"}, status=status.HTTP_400_BAD_REQUEST)
+            except Product.DoesNotExist:
+                return Response({"error": f"Producto {item['id']} no existe"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            mp_config = MercadoPagoConfig.objects.get(user=seller)
+        except MercadoPagoConfig.DoesNotExist:
+            return Response({"error": "El vendedor no tiene configurado MercadoPago"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        temp_order = TemporaryOrder.objects.create(
+            user=user,
+            seller=seller,
+            order_data={
+                "order_items": order_items,
+                "total_price": data.get('total_price'),
+                "address": data.get('address'),
+                "city": data.get('city'),
+                "postal_code": data.get('postal_code'),
+            }
+        )
+        
+        mp = mercadopago.SDK(mp_config.access_token)
+        
+        mp_items = []
+        for item in order_items:
+            product = Product.objects.get(id=item['id'])
+            mp_items.append({
+                "title": product.name,
+                "quantity": item['quantity'],
+                "unit_price": float(item['price']),
+                "currency_id": "COP"
+            })
+        
+        preference_data = {
+            "items": mp_items,
+            "payer": {
+                "name": user.name,
+                "email": user.email
+            },
+            "external_reference": str(temp_order.id),
+            "notification_url": f"{settings.BACKEND_URL}/orders/payment/webhook/",
+            "back_urls": {
+                "success": f"{settings.FRONTEND_URL}/payment/success?preference_id={temp_order.id}",
+                "failure": f"{settings.FRONTEND_URL}/payment/failure",
+                "pending": f"{settings.FRONTEND_URL}/payment/pending"
+            },
+            "auto_return": "approved",
+            "statement_descriptor": f"Compra a {seller}"
+        }
+        
+        preference_response = mp.preference().create(preference_data)
+        
+        if not preference_response.get('response'):
+            logger.error("Error al crear preferencia", extra={
+                "response": preference_response,
+                "user": user.id,
+                "seller": seller.id
+            })
+            return Response({"error": "Error al crear la preferencia de pago"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        temp_order.mp_preference_id = preference_response['response']['id']
+        temp_order.save()
+        
+        return Response({
+            "init_point": preference_response['response']['init_point'],
+            "preference_id": temp_order.id,
+            "public_key": mp_config.public_key
+        })
+        
+    except Exception as e:
+        logger.error(f"Error en create_temp_preference: {str(e)}", exc_info=True)
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 
@@ -418,7 +399,7 @@ def check_order_confirmation(request, order_id):
 def check_payment_status(request, payment_id):
     try:
         # Obtener orden temporal para encontrar al vendedor
-        temp_order = TemporaryOrder.objects.get(mp_preference_id=preference_id)
+        temp_order = TemporaryOrder.objects.get(mp_preference_id=payment_id)
         seller = temp_order.seller
         
         # Usar credenciales del vendedor
@@ -474,46 +455,6 @@ def webhook(request):
     except Exception as e:
         logger.error(f"Error en webhook: {str(e)}")
         return JsonResponse({"error": str(e)}, status=500)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @api_view(['GET', 'POST'])
@@ -581,14 +522,16 @@ def mercadopago_config(request):
             "date_configured": mp_config.date_configured
         }, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
 
+
 def finalize_order(temp_order, payment_id):
     order_data = temp_order.order_data
-    
-    # Asegurarnos de que los campos opcionales tengan valores por defecto
+
+    # Valores por defecto para los campos opcionales
     seller_id = order_data.get("seller_id")
-    shipping_price = order_data.get("shipping_price", 0.0)  # Valor por defecto 0
-    tax_price = order_data.get("tax_price", 0.0)  # Valor por defecto 0
-    
+    shipping_price = order_data.get("shipping_price", 0.0)
+    tax_price = order_data.get("tax_price", 0.0)
+
+    # Crear la orden principal
     order = Order.objects.create(
         user=temp_order.user,
         total_price=order_data["total_price"],
@@ -596,12 +539,12 @@ def finalize_order(temp_order, payment_id):
         payment_id=payment_id,
         is_paid=True,
         paid_at=datetime.now(),
-        seller_id=seller_id,  # Nuevo campo
-        shipping_price=shipping_price,  # Nuevo campo
-        tax_price=tax_price  # Nuevo campo
+        seller_id=seller_id,
+        shipping_price=shipping_price,
+        tax_price=tax_price
     )
 
-    # Resto del código permanece igual...
+    # Crear la dirección de envío
     ShoppingAddress.objects.create(
         order=order,
         address=order_data["address"],
@@ -610,31 +553,46 @@ def finalize_order(temp_order, payment_id):
         country="Colombia"
     )
 
+    # Optimización: Obtener todos los productos en una sola consulta
+    product_ids = [item["id"] for item in order_data["order_items"]]
+    products = {product.id: product for product in Product.objects.filter(id__in=product_ids)}
+
+    # Crear los items de la orden
+    order_items = []
     for item in order_data["order_items"]:
-        try:
-            product = Product.objects.get(id=item["id"])
-        except Product.DoesNotExist:
+        product = products.get(item["id"])
+
+        if not product:
             logger.warning(f"Producto no encontrado: {item['id']}")
             continue
-        Orderitem.objects.create(
+
+        order_items.append(Orderitem(
             product=product,
             order=order,
             quantity=item["quantity"],
             price=item["price"]
-        )
-        product.count_in_stock = max(0, product.count_in_stock - item["quantity"])
-        product.save()
+        ))
 
+        # Reducir stock del producto
+        product.count_in_stock = max(0, product.count_in_stock - item["quantity"])
+
+    # Guardar los items de la orden en una sola operación
+    Orderitem.objects.bulk_create(order_items)
+
+    # Guardar los productos con stock actualizado en una sola operación
+    Product.objects.bulk_update(products.values(), ["count_in_stock"])
+
+    # Eliminar la orden temporal
     temp_order.delete()
-    
+
+    # Enviar correo de confirmación
     try:
         send_order_confirmation_email(order)
         logger.info(f"Correo de confirmación enviado para la orden {order.id}")
     except Exception as e:
         logger.error(f"Error al enviar correo de confirmación: {str(e)}")
-    
-    return order
 
+    return order
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

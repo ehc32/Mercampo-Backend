@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Bell } from "lucide-react"
+import { useEffect, useState, useRef } from "react"
+import { Bell, Check, CheckCheck } from "lucide-react"
 import { getNotifications, markNotificationAsRead, type Notification } from "../api/notifications"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 interface NotificationBadgeProps {
@@ -15,9 +15,24 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const notificationRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
   const unreadCount = notifications.filter((notification) => !notification.is_read).length
+
+  // Handle clicks outside to close notification panel
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+        setShowNotifications(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   // Cargar notificaciones
   useEffect(() => {
@@ -143,15 +158,15 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
   }
 
   return (
-    <div className="relative">
+    <div className="relative" ref={notificationRef}>
       <button
         onClick={() => setShowNotifications(!showNotifications)}
-        className="relative p-1 rounded-full text-white hover:text-green-500 focus:outline-none"
+        className="relative p-2 rounded-full text-white hover:text-green-500 focus:outline-none transition-colors"
         aria-label="Notificaciones"
       >
         <Bell size={20} />
         {unreadCount > 0 && (
-          <span className="absolute top-0 left-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+          <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
             {unreadCount}
           </span>
         )}
@@ -160,29 +175,47 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
       {showNotifications && (
         <div className="origin-top-left absolute left-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
           <div className="py-1">
-            <div className="px-4 py-2 border-b border-gray-200">
+            <div className="px-4 py-3 border-b border-gray-200 flex justify-between items-center">
               <h3 className="text-lg font-medium text-gray-900">Notificaciones</h3>
+              {unreadCount > 0 && (
+                <button
+                  onClick={handleMarkAllAsRead}
+                  className="text-sm text-green-600 hover:text-green-800 flex items-center"
+                >
+                  <CheckCheck size={16} className="mr-1" />
+                  Marcar todas
+                </button>
+              )}
             </div>
 
             {isLoading ? (
-              <div className="px-4 py-3 text-sm text-gray-500 text-center">Cargando notificaciones...</div>
+              <div className="px-4 py-6 text-sm text-gray-500 text-center">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-600 mx-auto mb-2"></div>
+                Cargando...
+              </div>
             ) : (
-              <div className="max-h-96 overflow-y-auto">
+              <div className="max-h-60 overflow-y-auto overflow-x-hidden">
                 {notifications.length > 0 ? (
                   notifications.map((notification) => (
                     <div
                       key={notification.id}
                       onClick={() => handleNotificationClick(notification)}
-                      className={`px-4 py-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 ${!notification.is_read ? "bg-green-50" : ""}`}
+                      className={`px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100 transition-colors ${
+                        !notification.is_read ? "bg-green-50" : ""
+                      }`}
                     >
                       <div className="flex items-start">
-                        <div className="flex-shrink-0">
-                          {!notification.is_read && (
-                            <span className="inline-block w-2 h-2 bg-green-600 rounded-full mr-2"></span>
+                        <div className="flex-shrink-0 mt-0.5">
+                          {!notification.is_read ? (
+                            <span className="inline-block w-3 h-3 bg-green-600 rounded-full"></span>
+                          ) : (
+                            <Check size={16} className="text-green-600" />
                           )}
                         </div>
-                        <div className="ml-3 w-0 flex-1">
-                          <p className="text-sm font-medium text-gray-900">{notification.message}</p>
+                        <div className="ml-3 w-full">
+                          <p className="text-sm font-medium text-gray-900 break-words whitespace-normal">
+                            {notification.message}
+                          </p>
                           <p className="mt-1 text-xs text-gray-500">
                             {formatNotificationDate(notification.created_at)}
                           </p>
@@ -191,16 +224,20 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
                     </div>
                   ))
                 ) : (
-                  <div className="px-4 py-3 text-sm text-gray-500 text-center">No tienes notificaciones</div>
+                  <div className="px-4 py-6 text-sm text-gray-500 text-center">No tienes notificaciones</div>
                 )}
               </div>
             )}
 
-            {notifications.length > 0 && unreadCount > 0 && (
-              <div className="px-4 py-2 border-t border-gray-200">
-                <button onClick={handleMarkAllAsRead} className="text-sm text-green-600 hover:text-green-800">
-                  Marcar todas como leídas
-                </button>
+            {notifications.length > 0 && (
+              <div className="px-4 py-2 border-t border-gray-200 text-center">
+                <Link
+                  to="/profile"
+                  className="text-sm text-green-600 hover:text-green-800 block py-1"
+                  onClick={() => setShowNotifications(false)}
+                >
+                  Ver todas las notificaciones
+                </Link>
               </div>
             )}
           </div>
@@ -208,7 +245,6 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
       )}
     </div>
   )
-
 }
 
 export default NotificationBadge

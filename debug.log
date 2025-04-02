@@ -3897,6 +3897,437 @@ WARNING 2025-04-01 17:08:21,668 log Not Found: /users/mercado-pago/config/done/u
 WARNING 2025-04-01 17:08:30,602 log Not Found: /users/mercado-pago/config/done/undefined/
 WARNING 2025-04-01 17:08:30,621 log Not Found: /users/mercado-pago/config/done/undefined/
 INFO 2025-04-02 08:11:56,111 autoreload Watching for file changes with StatReloader
+<<<<<<< HEAD
+INFO 2025-04-02 08:13:35,319 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 08:19:48,385 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:19:48,413 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:22:47,827 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:22:47,837 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:28:41,614 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:28:41,625 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:28:49,655 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:28:49,670 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:28:57,576 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:28:57,595 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:29:10,083 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:29:10,094 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:31:02,588 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:31:02,602 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:33:49,961 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:33:49,970 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:34:10,577 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:34:10,592 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:35:04,900 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:35:04,910 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:45:03,663 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:45:03,675 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:45:09,751 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:45:09,768 log Not Found: /users/mercado-pago/config/done/undefined/
+INFO 2025-04-02 08:47:41,496 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 08:47:44,041 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 08:48:18,997 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 08:48:19,006 log Not Found: /users/mercado-pago/config/done/undefined/
+INFO 2025-04-02 08:55:22,803 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 08:55:24,603 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 09:17:55,094 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:17:55,106 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:18:00,192 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:18:00,218 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:30:26,316 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:30:26,327 log Not Found: /users/mercado-pago/config/done/undefined/
+INFO 2025-04-02 09:31:42,465 views Correo de confirmación enviado para la orden 11
+WARNING 2025-04-02 09:31:50,372 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:31:50,400 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:32:01,654 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:32:01,676 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:32:16,330 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:32:16,354 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:07,355 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:07,365 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:08,107 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:08,116 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:28,284 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:28,293 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:29,115 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:38:29,121 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:39:00,088 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 09:39:00,268 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 09:39:00,669 log Not Found: /products/caterandom//
+WARNING 2025-04-02 09:44:46,225 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:45:27,320 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:45:47,265 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:47:16,539 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:47:49,010 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:59:18,190 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 09:59:18,202 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:01:04,140 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:01:04,152 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:02:33,957 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:02:34,087 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:02:47,000 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:02:47,158 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:04:11,881 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:04:12,079 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:13:31,135 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:13:31,181 log Not Found: /users/mercado-pago/config/done/undefined/
+WARNING 2025-04-02 10:13:58,307 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:14:13,234 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:15:32,252 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:15:41,263 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:15:47,556 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:16:32,376 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:16:44,270 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:17:30,234 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:25:53,435 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:25:57,267 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:25:57,551 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:26:22,284 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:26:50,283 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:35:27,805 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:35:44,278 log Not Found: /users/mercado-pago/config/done/2/
+INFO 2025-04-02 10:36:08,460 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\models.py changed, reloading.
+INFO 2025-04-02 10:36:11,511 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 10:36:38,714 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 10:39:04,477 log Internal Server Error: /users/mercado-pago/config/done/3/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 197, in get_seller_mercado_pago_config
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 507, in to_representation
+    for field in fields:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 368, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 356, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1076, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1222, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1340, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `refresh_token` is not valid for model `MercadoPagoConfig`.
+WARNING 2025-04-02 10:39:04,489 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:39:41,433 log Not Found: /users/mercado-pago/config/done/2/
+ERROR 2025-04-02 10:39:41,630 log Internal Server Error: /users/mercado-pago/config/done/3/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 197, in get_seller_mercado_pago_config
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 507, in to_representation
+    for field in fields:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 368, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 356, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1076, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1222, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1340, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `refresh_token` is not valid for model `MercadoPagoConfig`.
+ERROR 2025-04-02 10:42:06,151 log Internal Server Error: /users/mercado-pago/config/done/3/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 197, in get_seller_mercado_pago_config
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 507, in to_representation
+    for field in fields:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 368, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 356, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1076, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1222, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1340, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `refresh_token` is not valid for model `MercadoPagoConfig`.
+ERROR 2025-04-02 10:42:06,543 log Internal Server Error: /users/mercado-pago/config/done/3/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 197, in get_seller_mercado_pago_config
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 507, in to_representation
+    for field in fields:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 368, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 356, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1076, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1222, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\serializers.py", line 1340, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `refresh_token` is not valid for model `MercadoPagoConfig`.
+INFO 2025-04-02 10:42:42,254 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-04-02 10:42:44,565 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 10:47:31,399 log Method Not Allowed: /users/mercado-pago/config/2/
+WARNING 2025-04-02 10:47:31,488 log Method Not Allowed: /users/mercado-pago/config/3/
+WARNING 2025-04-02 10:47:35,639 log Method Not Allowed: /users/mercado-pago/config/3/
+WARNING 2025-04-02 10:47:35,903 log Method Not Allowed: /users/mercado-pago/config/3/
+WARNING 2025-04-02 10:48:11,983 log Method Not Allowed: /users/mercado-pago/config/3/
+WARNING 2025-04-02 10:48:12,214 log Method Not Allowed: /users/mercado-pago/config/3/
+WARNING 2025-04-02 10:48:25,551 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:48:37,391 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:52:35,294 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:55:28,330 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:58:09,847 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:58:50,443 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:58:55,306 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 10:59:00,408 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 11:02:00,798 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 11:02:17,249 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 11:06:50,497 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 11:06:50,807 log Not Found: /users/mercado-pago/config/done/2/
+INFO 2025-04-02 11:33:24,925 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 11:33:27,279 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 11:43:11,773 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 11:43:13,838 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 11:43:23,118 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 11:43:24,261 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 12:00:36,370 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 12:00:36,375 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 12:00:36,391 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 12:00:36,401 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 12:00:36,530 log Unauthorized: /products/opinion/bring/0/
+WARNING 2025-04-02 12:00:36,536 log Unauthorized: /products/get/tomateasdfrutas/
+WARNING 2025-04-02 12:00:36,553 log Unauthorized: /products/opinion/bring/0/
+WARNING 2025-04-02 12:00:36,556 log Unauthorized: /products/get/tomateasdfrutas/
+ERROR 2025-04-02 12:01:00,650 views Error en create_temp_preference: 'id'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 383, in create_temp_preference
+    temp_order.mp_preference_id = preference_response['response']['id']
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'id'
+ERROR 2025-04-02 12:01:00,658 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-02 12:03:49,918 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:03:52,988 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 12:04:02,885 views Error en create_temp_preference: 'User' object has no attribute 'username'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 361, in create_temp_preference
+    "statement_descriptor": f"Compra a {seller.username}"[:22]  # Máximo 22 caracteres
+                                        ^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'username'
+ERROR 2025-04-02 12:04:02,890 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-02 12:04:37,035 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:04:38,243 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 12:05:01,367 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:05:02,546 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 12:05:06,259 views Estructura de respuesta inesperada
+ERROR 2025-04-02 12:05:06,260 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-02 12:32:21,176 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 12:32:42,071 views Estructura de respuesta inesperada
+ERROR 2025-04-02 12:32:42,072 log Internal Server Error: /orders/payment/temp_preference/
+WARNING 2025-04-02 12:33:00,849 log Method Not Allowed: /orders/payment/temp_preference/
+WARNING 2025-04-02 12:33:01,251 log Not Found: /favicon.ico
+INFO 2025-04-02 12:33:26,780 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:33:29,075 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 12:33:40,360 views Error en create_temp_preference: 'id'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 263, in create_temp_preference
+    temp_order.mp_preference_id = preference_response['response']['id']
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'id'
+ERROR 2025-04-02 12:33:40,368 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-02 12:37:01,707 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:37:04,572 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 12:37:20,952 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:37:22,923 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 12:37:25,226 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 12:37:25,331 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 12:37:25,456 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 12:37:25,535 log Unauthorized: /users/refresh/
+INFO 2025-04-02 12:37:52,295 views MercadoPago response
+ERROR 2025-04-02 12:37:52,296 views Estructura de respuesta inesperada
+ERROR 2025-04-02 12:37:52,297 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-02 12:38:53,752 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\models.py changed, reloading.
+INFO 2025-04-02 12:38:56,764 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 12:39:25,827 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:39:27,790 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 12:39:55,197 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 12:40:18,329 views Error en create_temp_preference: 'id'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 263, in create_temp_preference
+    temp_order.mp_preference_id = preference_response['response']['id']
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'id'
+ERROR 2025-04-02 12:40:18,337 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-02 12:51:11,934 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-02 12:51:16,237 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 12:53:45,702 views Correo de confirmación enviado para la orden 12
+WARNING 2025-04-02 12:54:43,811 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 12:54:44,270 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 13:02:58,432 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 13:02:58,801 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 14:25:27,167 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 14:25:27,171 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 14:25:27,173 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 14:25:27,176 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 14:25:27,178 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 14:25:27,207 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 14:36:40,467 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 14:36:40,744 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 14:36:40,982 log Not Found: /products/caterandom//
+WARNING 2025-04-02 15:03:48,073 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 15:03:48,399 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 15:53:34,299 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 15:53:34,413 log Unauthorized: /users/get/solo/2/
+=======
 INFO 2025-04-02 09:16:39,536 autoreload Watching for file changes with StatReloader
 WARNING 2025-04-02 09:18:00,087 log Not Found: /users/paypalconfig/3/
 WARNING 2025-04-02 09:18:00,098 log Not Found: /users/paypalconfig/3/
@@ -4521,4 +4952,211 @@ WARNING 2025-04-02 15:37:07,092 log Not Found: /users/get-enterprise-by-user/3/
 WARNING 2025-04-02 15:37:07,134 log Not Found: /users/get-enterprise-by-user/3/
 WARNING 2025-04-02 15:46:21,558 log Not Found: /users/paypalconfig/3/
 WARNING 2025-04-02 15:46:21,559 log Not Found: /users/paypalconfig/3/
+<<<<<<< HEAD
 INFO 2025-04-02 15:56:16,963 autoreload Watching for file changes with StatReloader
+=======
+>>>>>>> 7dbf43ea1f4979bf8f2fdd160ca9a4daffae925f
+INFO 2025-04-02 16:03:27,880 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 16:04:10,081 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-04-02 16:04:11,102 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 16:04:13,405 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-04-02 16:04:14,493 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 16:05:59,495 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 16:10:05,521 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 16:11:27,343 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 16:11:27,347 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 16:11:27,363 log Unauthorized: /orders/notifications/
+WARNING 2025-04-02 16:11:27,375 log Unauthorized: /orders/notifications/
+ERROR 2025-04-02 16:11:41,014 log Internal Server Error: /users/enterprises/3/posts/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 449, in get_posts_with_comments
+    paginated_posts = paginator.paginate_queryset(posts, request)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 557, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 543, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+ERROR 2025-04-02 16:11:41,245 log Internal Server Error: /users/enterprises/3/posts/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 449, in get_posts_with_comments
+    paginated_posts = paginator.paginate_queryset(posts, request)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 557, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 543, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+WARNING 2025-04-02 16:12:11,316 log Bad Request: /users/posts/create/
+INFO 2025-04-02 16:13:50,712 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 16:13:58,479 log Bad Request: /users/posts/create/
+WARNING 2025-04-02 16:14:15,445 log Bad Request: /users/posts/create/
+WARNING 2025-04-02 16:14:29,811 log Bad Request: /users/posts/create/
+ERROR 2025-04-02 16:14:43,505 log Internal Server Error: /users/posts/create/
+>>>>>>> 1a6f7628cff78b2128c85d2de2a6724c3cd6f4a0

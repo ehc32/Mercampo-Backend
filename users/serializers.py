@@ -97,7 +97,7 @@ class PayPalConfigSerializer(serializers.ModelSerializer):
 class MercadoPagoConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = MercadoPagoConfig
-        fields = [ 'user', 'public_key', 'access_token', 'refresh_token' , 'created_at', 'updated_at']
+        fields = [ 'user', 'public_key', 'access_token' , 'created_at', 'updated_at']
 
     def create(self, validated_data):
         user = self.context.get('user')

@@ -113,6 +113,11 @@ const UserProfile = () => {
   const [confirmingOrderId, setConfirmingOrderId] = useState<number | null>(null)
   const [confirmedCount, setConfirmedCount] = useState(0)
 
+  const [ordersPage, setOrdersPage] = useState(1)
+  const [pendingOrdersPage, setPendingOrdersPage] = useState(1)
+  const [deliveredOrdersPage, setDeliveredOrdersPage] = useState(1)
+  const [itemsPerPage] = useState(5)
+
   const { access: token } = useAuthStore()
   const id = token ? JSON.parse(atob(token.split(".")[1])).user_id : null
 
@@ -451,6 +456,20 @@ const UserProfile = () => {
     return confirmedCount
   }
 
+  // Pagination helpers
+  const paginateData = (data, page, itemsPerPage) => {
+    const startIndex = (page - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    return data?.slice(startIndex, endIndex) || []
+  }
+
+  // Get paginated data for each tab
+  const paginatedOrders = paginateData(orders, ordersPage, itemsPerPage)
+  const paginatedPendingOrders = paginateData(pendingOrders, pendingOrdersPage, itemsPerPage)
+  const paginatedDeliveredOrders = paginateData(deliveredOrders, deliveredOrdersPage, itemsPerPage)
+  const paginatedMyProducts = paginateData(myProducts, page, itemsPerPage)
+  const paginatedMyProductsSells = paginateData(myProductsSells, page, itemsPerPage)
+
   return (
     <Box sx={{ maxWidth: "lg", mx: "auto", p: isWideScreen ? 6 : 1, mt: ".1em" }}>
       <Card className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -476,7 +495,13 @@ const UserProfile = () => {
           <div className="flex justify-between items-center py-4">
             <Tabs
               value={tabValue}
-              onChange={(_, newValue) => setTabValue(newValue)}
+              onChange={(_, newValue) => {
+                setTabValue(newValue)
+                setOrdersPage(1)
+                setPendingOrdersPage(1)
+                setDeliveredOrdersPage(1)
+                setPage(1)
+              }}
               textColor="primary"
               indicatorColor="primary"
               sx={{ ".MuiTabs-indicator": { backgroundColor: "#39A900" } }}
@@ -539,7 +564,7 @@ const UserProfile = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {orders.map((order) => (
+                        {paginatedOrders.map((order) => (
                           <TableRow key={order.id}>
                             <TableCell>{order.user.name}</TableCell>
                             <TableCell>${Number(order.total_price).toLocaleString()}</TableCell>
@@ -607,6 +632,14 @@ const UserProfile = () => {
                         ))}
                       </TableBody>
                     </Table>
+                    <div>
+                      <Pagination
+                        count={Math.ceil((orders?.length || 0) / itemsPerPage)}
+                        page={ordersPage}
+                        onChange={(event, value) => setOrdersPage(value)}
+                        className="flex flex-row w-full justify-center my-6"
+                      />
+                    </div>
                   </>
                 ) : (
                   <Typography align="center" py={3}>
@@ -641,7 +674,7 @@ const UserProfile = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {pendingOrders.map((order) => (
+                        {paginatedPendingOrders.map((order) => (
                           <TableRow key={order.id}>
                             <TableCell>{order.user.name}</TableCell>
                             <TableCell>${Number(order.total_price).toLocaleString()}</TableCell>
@@ -696,6 +729,14 @@ const UserProfile = () => {
                         ))}
                       </TableBody>
                     </Table>
+                    <div>
+                      <Pagination
+                        count={Math.ceil((pendingOrders?.length || 0) / itemsPerPage)}
+                        page={pendingOrdersPage}
+                        onChange={(event, value) => setPendingOrdersPage(value)}
+                        className="flex flex-row w-full justify-center my-6"
+                      />
+                    </div>
                   </>
                 ) : (
                   <div className="py-8 px-4">
@@ -770,7 +811,7 @@ const UserProfile = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {deliveredOrders.map((order) => (
+                        {paginatedDeliveredOrders.map((order) => (
                           <TableRow
                             key={order.id}
                             id={`order-row-${order.id}`}
@@ -808,6 +849,14 @@ const UserProfile = () => {
                         ))}
                       </TableBody>
                     </Table>
+                    <div>
+                      <Pagination
+                        count={Math.ceil((deliveredOrders?.length || 0) / itemsPerPage)}
+                        page={deliveredOrdersPage}
+                        onChange={(event, value) => setDeliveredOrdersPage(value)}
+                        className="flex flex-row w-full justify-center my-6"
+                      />
+                    </div>
                   </>
                 ) : (
                   <div className="py-8 px-4">
@@ -843,7 +892,7 @@ const UserProfile = () => {
                   </TableHead>
                   <TableBody>
                     {dataLenght2 > 0 ? (
-                      myProductsSells.map((product: MyOrder) => (
+                      paginatedMyProductsSells.map((product: MyOrder) => (
                         <TableRow key={product.id}>
                           <TableCell>{product.name.slice(0, 10)}</TableCell>
                           <TableCell>${product.price}</TableCell>
@@ -890,7 +939,7 @@ const UserProfile = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {myProducts.map((product: MyOrder) => (
+                    {paginatedMyProducts.map((product: MyOrder) => (
                       <TableRow key={product.id}>
                         <TableCell>{product.name.slice(0, 12)}...</TableCell>
                         <TableCell>{product.description.slice(0, 20)}...</TableCell>
