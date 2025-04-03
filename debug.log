@@ -5160,3 +5160,169 @@ WARNING 2025-04-02 16:14:15,445 log Bad Request: /users/posts/create/
 WARNING 2025-04-02 16:14:29,811 log Bad Request: /users/posts/create/
 ERROR 2025-04-02 16:14:43,505 log Internal Server Error: /users/posts/create/
 >>>>>>> 1a6f7628cff78b2128c85d2de2a6724c3cd6f4a0
+INFO 2025-04-02 16:34:32,832 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 16:34:48,918 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-04-02 16:34:50,438 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 16:35:13,712 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:35:13,714 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:35:24,539 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:35:24,546 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:35:24,660 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:35:24,667 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:37:46,207 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 16:37:46,271 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-02 16:37:46,547 log Not Found: /products/caterandom//
+WARNING 2025-04-02 16:37:52,148 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:37:52,165 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:37:52,212 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:37:52,218 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:37:59,909 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:38:13,910 log Bad Request: /orders/payment/temp_preference/
+WARNING 2025-04-02 16:38:24,036 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:38:24,040 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:18,280 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:18,294 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:18,384 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:39:18,393 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:39:21,599 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:21,602 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:28,048 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:28,049 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:28,081 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:39:28,085 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:39:51,872 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:39:51,875 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:40:40,789 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:40:40,791 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:40:40,820 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:40:40,838 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-02 16:40:55,237 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:40:55,251 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:41:00,538 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:41:00,542 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:41:00,602 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 16:41:00,617 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-02 16:42:18,762 log Bad Request: /users/mercado-pago/config/2/
+WARNING 2025-04-02 16:42:22,594 log Bad Request: /users/mercado-pago/config/2/
+WARNING 2025-04-02 16:42:32,223 log Bad Request: /users/mercado-pago/config/2/
+WARNING 2025-04-02 16:58:10,985 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-02 16:58:10,989 log Not Found: /users/paypalconfig/3/
+ERROR 2025-04-02 16:58:46,263 log Internal Server Error: /products/get/equals/salsa/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\products\views.py", line 69, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+                                                                                                      ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'. Did you mean: 'HTTP_200_OK'?
+WARNING 2025-04-02 18:17:50,611 log Unauthorized: /users/refresh/
+WARNING 2025-04-02 18:17:50,917 log Unauthorized: /orders/notifications/
+INFO 2025-04-03 08:41:10,541 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 09:14:46,506 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-03 09:14:46,508 log Not Found: /users/get-enterprise-by-user/3/
+WARNING 2025-04-03 09:19:09,536 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:19:09,552 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:19:09,659 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:19:09,660 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:21:56,042 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:21:56,070 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:21:56,149 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:21:56,172 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:31:12,350 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:31:12,351 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:31:12,392 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:31:12,405 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:33:02,597 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:33:03,061 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:33:08,154 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:33:08,158 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:33:08,764 log Not Found: /products/caterandom//
+WARNING 2025-04-03 09:33:17,688 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:33:17,709 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:33:17,732 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:33:17,788 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:33:21,672 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:33:22,472 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:48:11,723 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:48:11,724 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:48:11,757 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:48:11,775 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:56:00,992 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:56:00,992 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 09:56:01,024 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 09:56:01,038 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-04-03 10:23:47,394 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 10:34:54,514 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:34:54,533 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:34:54,583 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 10:34:54,618 log Not Found: /users/mercado-pago/config/done/2/
+ERROR 2025-04-03 10:35:44,457 log Internal Server Error: /products/get/equals/Cafe/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\products\views.py", line 69, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+                                                                                                      ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'. Did you mean: 'HTTP_200_OK'?
+WARNING 2025-04-03 10:35:59,940 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:35:59,958 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:36:10,239 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:36:10,239 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:36:10,279 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:36:10,279 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:36:42,351 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:36:44,153 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:36:45,036 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:36:45,739 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:36:47,714 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:37:15,534 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:37:15,575 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 10:37:15,647 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-03 10:37:15,667 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-04-03 14:14:22,417 autoreload Watching for file changes with StatReloader

@@ -18,31 +18,39 @@ const Header = () => {
   const [roleLocal, setRoleLocal] = useState("")
   const cart = useCartStore((state) => state.cart)
   const { isAuth, access, id } = useAuthStore()
+  const [userId, setUserId] = useState<number | null>(null)
   const location = useLocation()
   const navigate = useNavigate()
 
   const avatar = ""
 
   useEffect(() => {
-    const setRoleFromToken = () => {
+    const setRoleAndUserIdFromToken = () => {
       const token: string | null = access
       if (token) {
         try {
           const tokenDecoded: Token = jwt_decode(token)
           const userRole = tokenDecoded.role
           const userEnterprise = tokenDecoded.enterprise
+          const userIdFromToken = tokenDecoded.user_id
+          
           setRoleLocal(userRole)
+          setUserId(userIdFromToken) // Establecer userId desde el token
           console.log(userEnterprise)
         } catch (error) {
           console.error("Error al decodificar el token:", error)
         }
       } else {
         setRoleLocal("")
+        setUserId(null)
       }
     }
 
-    setRoleFromToken()
+    setRoleAndUserIdFromToken()
   }, [access])
+
+  // Usar id del store si está disponible, si no usar el del estado local (userId)
+  const currentUserId = id || userId
 
   function logOutFun() {
     useAuthStore.getState().logout()
@@ -103,6 +111,12 @@ const Header = () => {
                       className="text-white font-medium hover:text-green-500 px-3 py-2 rounded-md text-sm"
                     >
                       Emprendimientos
+                    </Link>
+                    <Link
+                      to={"/blogs"}
+                      className="text-white font-medium hover:text-green-500 px-3 py-2 rounded-md text-sm"
+                    >
+                      Blog
                     </Link>
                   </div>
                 </div>
@@ -212,11 +226,17 @@ const Header = () => {
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
-                                  to="/myEnterprise"
+                                  to={currentUserId ? `/myEnterprise/${currentUserId}` : '#'}
                                   className={classNames(
                                     active ? "bg-[#3A3A3A]" : "",
                                     "flex items-center px-4 py-2 text-sm text-white",
                                   )}
+                                  onClick={e => {
+                                    if (!currentUserId) {
+                                      e.preventDefault()
+                                      toast.error("No se pudo identificar tu usuario")
+                                    }
+                                  }}
                                 >
                                   <Settings size={16} className="mr-2" />
                                   Emprender

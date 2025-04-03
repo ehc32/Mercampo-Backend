@@ -537,3 +537,7 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
+.span-comentario {
+    font-size: inherit;
+}
