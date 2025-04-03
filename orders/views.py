@@ -259,33 +259,6 @@ def check_order_confirmation(request, order_id):
         return Response({'detail': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @api_view(['POST'])
 def create_temp_preference(request):
     user = request.user
@@ -385,15 +358,6 @@ def create_temp_preference(request):
         logger.error(f"Error en create_temp_preference: {str(e)}", exc_info=True)
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-
-
-
-
-
-
-
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def check_payment_status(request, payment_id):
@@ -411,51 +375,6 @@ def check_payment_status(request, payment_id):
     
     except Exception as e:
         return Response({"error": str(e)}, status=500)
-
-
-@csrf_exempt
-@api_view(['POST'])
-def webhook(request):
-    try:
-        data = json.loads(request.body)
-        payment_id = data.get('data', {}).get('id')
-        
-        # Obtener preferencia usando credenciales globales (solo para obtener external_reference)
-        mp_global = mercadopago.SDK(settings.MERCADOPAGO_ACCESS_TOKEN)
-        payment_info = mp_global.payment().get(payment_id)
-        external_reference = payment_info['response'].get('external_reference')
-        
-        # Obtener orden temporal y vendedor
-        temp_order = TemporaryOrder.objects.get(id=external_reference)
-        seller = temp_order.seller
-        
-        # Validar credenciales del vendedor
-        try:
-            mp_config = MercadoPagoConfig.objects.get(user=seller)
-            mp_seller = mercadopago.SDK(mp_config.access_token)
-            payment_info = mp_seller.payment().get(payment_id)
-        except MercadoPagoConfig.DoesNotExist:
-            return JsonResponse({"error": "Vendedor no tiene configurado MercadoPago"}, status=400)
-        
-        # Procesar pago
-        if payment_info['response']['status'] == 'approved':
-            # Crear orden definitiva
-            order = Order.objects.create(
-                user=temp_order.user,
-                seller=seller,
-                total_price=temp_order.order_data['total_price'],
-                payment_id=payment_id,
-                is_paid=True,
-                paid_at=datetime.now()
-            )
-            # ... resto de la lógica ...
-            
-        return JsonResponse({"status": "success"})
-    
-    except Exception as e:
-        logger.error(f"Error en webhook: {str(e)}")
-        return JsonResponse({"error": str(e)}, status=500)
-
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
@@ -645,6 +564,7 @@ def finalize_order_on_success(request):
     }, status=status.HTTP_201_CREATED)
 
 def send_order_confirmation_email(order):
+
     subject = "Confirmación de Pedido"
     recipient_email = order.user.email
     context = {"user": order.user, "order": order}
@@ -660,3 +580,261 @@ def send_order_confirmation_email(order):
         html_message=html_content, 
         fail_silently=False,
     )
+
+
+
+@csrf_exempt
+@api_view(['POST'])
+def webhook(request):
+    """
+    Webhook para recibir notificaciones de MercadoPago.
+    Maneja notificaciones de prueba y pagos.
+    """
+    try:
+        # Log de la solicitud recibida
+        logger.info(f"Webhook recibido: {request.body.decode('utf-8')}")
+        
+        # Manejar diferentes formatos de notificación
+        # Verificar si los datos vienen como parámetros en la URL
+        if request.GET.get('data.id') and request.GET.get('type'):
+            # Formato alternativo con parámetros en URL
+            payment_id = request.GET.get('data.id')
+            notification_type = request.GET.get('type')
+            
+            # Crear estructura de datos similar al formato JSON
+            data = {
+                'action': f"{notification_type}.created",
+                'type': notification_type,
+                'data': {
+                    'id': payment_id
+                }
+            }
+            logger.info(f"Datos extraídos de parámetros URL: {data}")
+        else:
+            # Intentar parsear el JSON del cuerpo
+            try:
+                data = json.loads(request.body)
+            except json.JSONDecodeError as e:
+                logger.error(f"JSON inválido: {str(e)}")
+                return JsonResponse({"error": "Formato JSON inválido"}, status=400)
+        
+        # Log de los datos parseados
+        logger.info(f"Datos parseados: {data}")
+        
+        # Obtener el tipo de acción y tipo de notificación
+        action = data.get('action')
+        notification_type = data.get('type')
+        logger.info(f"Acción: {action}, Tipo: {notification_type}")
+        
+        # Manejar notificación de prueba
+        if action == 'test.created' or notification_type == 'test':
+            logger.info("Notificación de prueba recibida")
+            return JsonResponse({"status": "success"})
+        
+        # Manejar notificación de pago
+        if action == 'payment.created' or notification_type == 'payment':
+            # Obtener ID del pago
+            payment_id = data.get('data', {}).get('id')
+            if not payment_id:
+                logger.error("ID de pago no encontrado en los datos")
+                return JsonResponse({"error": "ID de pago no encontrado"}, status=400)
+            
+            logger.info(f"Procesando pago: {payment_id}")
+            
+            # Verificar si el pago ya fue procesado
+            if Order.objects.filter(payment_id=payment_id).exists():
+                logger.info(f"Pago {payment_id} ya fue procesado anteriormente")
+                return JsonResponse({"status": "already_processed"})
+            
+            try:
+                # Obtener información del pago usando credenciales globales
+                mp_global = mercadopago.SDK(settings.MERCADOPAGO_ACCESS_TOKEN)
+                payment_info = mp_global.payment().get(payment_id)
+                
+                if 'response' not in payment_info:
+                    logger.error(f"Respuesta de pago inválida: {payment_info}")
+                    return JsonResponse({"error": "Respuesta de pago inválida"}, status=400)
+                
+                # Obtener external_reference (ID de la orden temporal)
+                external_reference = payment_info['response'].get('external_reference')
+                if not external_reference:
+                    logger.error("External reference no encontrado en la información del pago")
+                    return JsonResponse({"error": "External reference no encontrado"}, status=400)
+                
+                logger.info(f"External reference: {external_reference}")
+                
+                # Obtener orden temporal
+                try:
+                    temp_order = TemporaryOrder.objects.get(id=external_reference)
+                    seller = temp_order.seller
+                    logger.info(f"Orden temporal encontrada: {temp_order.id}, Vendedor: {seller.id}")
+                except TemporaryOrder.DoesNotExist:
+                    logger.error(f"Orden temporal no encontrada para external_reference: {external_reference}")
+                    return JsonResponse({"error": "Orden temporal no encontrada"}, status=404)
+                
+                # Obtener configuración de MercadoPago del vendedor
+                try:
+                    mp_config = MercadoPagoConfig.objects.get(user=seller)
+                    logger.info(f"Configuración de MercadoPago encontrada para vendedor: {seller.id}")
+                except MercadoPagoConfig.DoesNotExist:
+                    logger.error(f"Configuración de MercadoPago no encontrada para vendedor: {seller.id}")
+                    return JsonResponse({"error": "Configuración de MercadoPago del vendedor no encontrada"}, status=400)
+                
+                # Obtener información del pago usando credenciales del vendedor
+                mp_seller = mercadopago.SDK(mp_config.access_token)
+                payment_info = mp_seller.payment().get(payment_id)
+                
+                # Verificar estado del pago
+                payment_status = payment_info['response'].get('status')
+                logger.info(f"Estado del pago: {payment_status}")
+                
+                # Procesar pago si está aprobado
+                if payment_status == 'approved':
+                    logger.info(f"Pago {payment_id} aprobado, creando orden definitiva")
+                    
+                    # Crear orden definitiva
+                    order = finalize_order(temp_order, payment_id)
+                    logger.info(f"Orden {order.id} creada exitosamente para pago {payment_id}")
+                    
+                    # Enviar correo de confirmación
+                    try:
+                        send_order_confirmation_email(order)
+                        logger.info(f"Correo de confirmación enviado para orden {order.id}")
+                    except Exception as e:
+                        logger.error(f"Error al enviar correo de confirmación: {str(e)}")
+                
+                return JsonResponse({"status": "success", "payment_status": payment_status})
+            
+            except Exception as e:
+                logger.error(f"Error al procesar pago {payment_id}: {str(e)}", exc_info=True)
+                return JsonResponse({"error": f"Error al procesar pago: {str(e)}"}, status=500)
+        
+        # Manejar notificación de merchant_order
+        if action == 'merchant_order.created' or notification_type == 'merchant_order':
+            merchant_order_id = data.get('data', {}).get('id')
+            if not merchant_order_id:
+                logger.error("ID de merchant_order no encontrado en los datos")
+                return JsonResponse({"error": "ID de merchant_order no encontrado"}, status=400)
+            
+            logger.info(f"Procesando merchant order: {merchant_order_id}")
+            # Aquí puedes agregar la lógica para manejar merchant_orders si es necesario
+            return JsonResponse({"status": "success"})
+        
+        # Manejar otros tipos de notificaciones
+        logger.info(f"Tipo de acción no manejada: {action}, tipo: {notification_type}")
+        return JsonResponse({"status": "ignored"})
+        
+    except Exception as e:
+        logger.error(f"Error en webhook: {str(e)}", exc_info=True)
+        return JsonResponse({"error": str(e)}, status=500)
+    """
+    Webhook para recibir notificaciones de MercadoPago.
+    Maneja notificaciones de prueba y pagos.
+    """
+    try:
+        logger.info(f"Webhook recibido: {request.body.decode('utf-8')}")
+        
+        # Intentar parsear el JSON
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON inválido: {str(e)}")
+            return JsonResponse({"error": "Formato JSON inválido"}, status=400)
+        
+        # Log de los datos parseados
+        logger.info(f"Datos parseados: {data}")
+        
+        # Obtener el tipo de acción
+        action = data.get('action')
+        logger.info(f"Acción: {action}")
+        
+        # Manejar notificación de prueba
+        if action == 'test.created' or data.get('type') == 'test':
+            logger.info("Notificación de prueba recibida")
+            return JsonResponse({"status": "success"})
+        
+        # Manejar notificación de pago
+        if action == 'payment.created' or data.get('type') == 'payment':
+            # Obtener ID del pago
+            payment_id = data.get('data', {}).get('id')
+            if not payment_id:
+                logger.error("ID de pago no encontrado en los datos")
+                return JsonResponse({"error": "ID de pago no encontrado"}, status=400)
+            
+            logger.info(f"Procesando pago: {payment_id}")
+            
+            # Verificar si el pago ya fue procesado
+            if Order.objects.filter(payment_id=payment_id).exists():
+                logger.info(f"Pago {payment_id} ya fue procesado anteriormente")
+                return JsonResponse({"status": "already_processed"})
+            
+            try:
+                # Obtener información del pago usando credenciales globales
+                mp_global = mercadopago.SDK(settings.MERCADOPAGO_ACCESS_TOKEN)
+                payment_info = mp_global.payment().get(payment_id)
+                
+                if 'response' not in payment_info:
+                    logger.error(f"Respuesta de pago inválida: {payment_info}")
+                    return JsonResponse({"error": "Respuesta de pago inválida"}, status=400)
+                
+                # Obtener external_reference (ID de la orden temporal)
+                external_reference = payment_info['response'].get('external_reference')
+                if not external_reference:
+                    logger.error("External reference no encontrado en la información del pago")
+                    return JsonResponse({"error": "External reference no encontrado"}, status=400)
+                
+                logger.info(f"External reference: {external_reference}")
+                
+                # Obtener orden temporal
+                try:
+                    temp_order = TemporaryOrder.objects.get(id=external_reference)
+                    seller = temp_order.seller
+                    logger.info(f"Orden temporal encontrada: {temp_order.id}, Vendedor: {seller.id}")
+                except TemporaryOrder.DoesNotExist:
+                    logger.error(f"Orden temporal no encontrada para external_reference: {external_reference}")
+                    return JsonResponse({"error": "Orden temporal no encontrada"}, status=404)
+                
+                # Obtener configuración de MercadoPago del vendedor
+                try:
+                    mp_config = MercadoPagoConfig.objects.get(user=seller)
+                    logger.info(f"Configuración de MercadoPago encontrada para vendedor: {seller.id}")
+                except MercadoPagoConfig.DoesNotExist:
+                    logger.error(f"Configuración de MercadoPago no encontrada para vendedor: {seller.id}")
+                    return JsonResponse({"error": "Configuración de MercadoPago del vendedor no encontrada"}, status=400)
+                
+                # Obtener información del pago usando credenciales del vendedor
+                mp_seller = mercadopago.SDK(mp_config.access_token)
+                payment_info = mp_seller.payment().get(payment_id)
+                
+                # Verificar estado del pago
+                payment_status = payment_info['response'].get('status')
+                logger.info(f"Estado del pago: {payment_status}")
+                
+                # Procesar pago si está aprobado
+                if payment_status == 'approved':
+                    logger.info(f"Pago {payment_id} aprobado, creando orden definitiva")
+                    
+                    # Crear orden definitiva
+                    order = finalize_order(temp_order, payment_id)
+                    logger.info(f"Orden {order.id} creada exitosamente para pago {payment_id}")
+                    
+                    # Enviar correo de confirmación
+                    try:
+                        send_order_confirmation_email(order)
+                        logger.info(f"Correo de confirmación enviado para orden {order.id}")
+                    except Exception as e:
+                        logger.error(f"Error al enviar correo de confirmación: {str(e)}")
+                
+                return JsonResponse({"status": "success", "payment_status": payment_status})
+            
+            except Exception as e:
+                logger.error(f"Error al procesar pago {payment_id}: {str(e)}", exc_info=True)
+                return JsonResponse({"error": f"Error al procesar pago: {str(e)}"}, status=500)
+        
+        # Manejar otros tipos de notificaciones
+        logger.info(f"Tipo de acción no manejada: {action}")
+        return JsonResponse({"status": "ignored"})
+        
+    except Exception as e:
+        logger.error(f"Error en webhook: {str(e)}", exc_info=True)
+        return JsonResponse({"error": str(e)}, status=500)

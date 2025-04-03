@@ -36,8 +36,7 @@ ALLOWED_HOSTS = ["*"]
 #Crendeciales Mercado Pago
 MERCADOPAGO_ACCESS_TOKEN = '' 
 FRONTEND_URL = 'http://localhost:5173'  
-BACKEND_URL = 'https://1830-2800-486-1183-a700-a003-45eb-9838-88f5.ngrok-free.app'
-
+BACKEND_URL = 'https://184c-179-1-219-233.ngrok-free.app'
 
 
 
@@ -165,17 +164,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'comercio',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'PASSWORD': 'NcwYPXheNEwafmCNadOBVebiOOxnrHOs',
+        'HOST': 'tramway.proxy.rlwy.net',
+        'PORT': '42749',
     }
 }
+
 
 
 # Password validation

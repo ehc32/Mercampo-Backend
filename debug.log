@@ -5159,6 +5159,7 @@ WARNING 2025-04-02 16:13:58,479 log Bad Request: /users/posts/create/
 WARNING 2025-04-02 16:14:15,445 log Bad Request: /users/posts/create/
 WARNING 2025-04-02 16:14:29,811 log Bad Request: /users/posts/create/
 ERROR 2025-04-02 16:14:43,505 log Internal Server Error: /users/posts/create/
+<<<<<<< HEAD
 >>>>>>> 1a6f7628cff78b2128c85d2de2a6724c3cd6f4a0
 INFO 2025-04-02 16:34:32,832 autoreload Watching for file changes with StatReloader
 INFO 2025-04-02 16:34:48,918 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\backend\settings.py changed, reloading.
@@ -5326,3 +5327,931 @@ WARNING 2025-04-03 10:37:15,575 log Not Found: /users/paypalconfig/3/
 WARNING 2025-04-03 10:37:15,647 log Not Found: /users/mercado-pago/config/done/1/
 WARNING 2025-04-03 10:37:15,667 log Not Found: /users/mercado-pago/config/done/1/
 INFO 2025-04-03 14:14:22,417 autoreload Watching for file changes with StatReloader
+=======
+INFO 2025-04-02 16:43:34,510 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 16:43:54,955 log Internal Server Error: /users/enterprises/3/posts/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 449, in get_posts_with_comments
+    paginated_posts = paginator.paginate_queryset(posts, request)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 557, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 543, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+ERROR 2025-04-02 16:43:55,166 log Internal Server Error: /users/enterprises/3/posts/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 449, in get_posts_with_comments
+    paginated_posts = paginator.paginate_queryset(posts, request)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 557, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 543, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+ERROR 2025-04-02 16:44:38,292 log Internal Server Error: /users/enterprises/3/posts/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 449, in get_posts_with_comments
+    paginated_posts = paginator.paginate_queryset(posts, request)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 557, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 543, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+ERROR 2025-04-02 16:44:38,444 log Internal Server Error: /users/enterprises/3/posts/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\users\views.py", line 449, in get_posts_with_comments
+    paginated_posts = paginator.paginate_queryset(posts, request)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 557, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\query.py", line 543, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: no existe la relación «users_enterprisepost»
+LINE 1: SELECT COUNT(*) AS "__count" FROM "users_enterprisepost" WHE...
+                                          ^
+
+INFO 2025-04-03 08:25:07,643 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 08:27:54,812 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 08:27:54,814 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 08:27:54,859 log Unauthorized: /orders/notifications/
+WARNING 2025-04-03 08:27:54,864 log Unauthorized: /orders/notifications/
+WARNING 2025-04-03 08:28:08,838 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 08:28:08,842 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 08:28:08,848 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 08:28:08,852 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 08:28:08,854 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 08:28:08,920 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 08:28:08,977 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 08:28:08,986 log Unauthorized: /users/get/solo/2/
+WARNING 2025-04-03 08:28:08,989 log Unauthorized: /orders/my/orders/
+WARNING 2025-04-03 08:28:09,003 log Unauthorized: /orders/my/orders/
+INFO 2025-04-03 08:40:39,581 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 08:40:42,318 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-03 08:44:48,108 views Error en create_temp_preference: 'id'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 361, in create_temp_preference
+    temp_order.mp_preference_id = preference_response['response']['id']
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'id'
+ERROR 2025-04-03 08:44:48,111 log Internal Server Error: /orders/payment/temp_preference/
+ERROR 2025-04-03 08:50:55,598 log Internal Server Error: /orders/payment/finalize/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 676, in finalize_order_on_success
+    order = finalize_order(temp_order, payment_id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 603, in finalize_order
+    OrderConfirmation.objects.create(
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 656, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+TypeError: OrderConfirmation() got unexpected keyword arguments: 'confirmation_date'
+ERROR 2025-04-03 08:50:55,616 log Internal Server Error: /orders/payment/finalize/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 676, in finalize_order_on_success
+    order = finalize_order(temp_order, payment_id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 603, in finalize_order
+    OrderConfirmation.objects.create(
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\query.py", line 656, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+TypeError: OrderConfirmation() got unexpected keyword arguments: 'confirmation_date'
+INFO 2025-04-03 08:57:02,715 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 08:57:06,172 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 08:58:34,509 views Correo de confirmación enviado para la orden 15
+INFO 2025-04-03 08:58:34,510 views Correo de confirmación enviado para la orden 16
+WARNING 2025-04-03 08:58:56,569 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 08:58:56,868 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:02:03,364 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:02:03,611 log Not Found: /users/mercado-pago/config/done/2/
+INFO 2025-04-03 09:03:34,488 views Correo de confirmación enviado para la orden 17
+INFO 2025-04-03 09:03:34,770 views Correo de confirmación enviado para la orden 18
+INFO 2025-04-03 09:14:54,975 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:14:57,470 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 09:19:59,321 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:20:00,746 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-03 09:23:40,959 views Error en create_temp_preference: 'User' object has no attribute 'username'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 383, in create_temp_preference
+    "statement_descriptor": f"Compra a {seller.username}",
+                                        ^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'username'
+ERROR 2025-04-03 09:23:40,963 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-03 09:23:58,350 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:24:00,807 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 09:24:36,682 views Confirmation email sent for order 19
+WARNING 2025-04-03 09:24:49,389 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:24:49,678 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:24:59,455 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:24:59,760 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:25:59,083 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:25:59,377 log Not Found: /users/mercado-pago/config/done/2/
+INFO 2025-04-03 09:32:35,731 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:32:38,331 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 09:33:08,077 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:33:09,442 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 09:43:34,559 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 09:43:34,894 log Unauthorized: /users/get/solo/2/
+INFO 2025-04-03 09:43:50,051 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:43:52,667 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 09:45:05,318 log Bad Request: /orders/payment/temp_preference/
+WARNING 2025-04-03 09:45:18,991 log Bad Request: /orders/payment/temp_preference/
+WARNING 2025-04-03 09:45:37,115 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 09:46:11,584 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:46:11,822 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:46:11,969 log Not Found: /products/caterandom//
+ERROR 2025-04-03 09:47:25,809 log Internal Server Error: /products/get/equals/Mango/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\products\views.py", line 69, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+                                                                                                      ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'
+WARNING 2025-04-03 09:47:35,845 log Unauthorized: /users/login/
+WARNING 2025-04-03 09:48:37,669 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:48:37,778 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:48:38,096 log Not Found: /products/caterandom//
+WARNING 2025-04-03 09:49:38,384 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:49:38,604 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 09:49:38,743 log Not Found: /products/caterandom//
+ERROR 2025-04-03 09:50:02,857 views Error in create_temp_preference: 'Product' object has no attribute 'image'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 338, in create_temp_preference
+    "picture_url": product.image.url if product.image else None
+                                        ^^^^^^^^^^^^^
+AttributeError: 'Product' object has no attribute 'image'
+ERROR 2025-04-03 09:50:02,859 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-03 09:50:35,544 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:50:38,829 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-03 09:50:43,957 views Error in create_temp_preference: 'User' object has no attribute 'username'
+Traceback (most recent call last):
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py", line 363, in create_temp_preference
+    "statement_descriptor": f"Purchase from {seller.username}",
+                                             ^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'username'
+ERROR 2025-04-03 09:50:43,958 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-04-03 09:51:00,457 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 09:51:01,851 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 09:51:28,607 views Correo de confirmación enviado para la orden 21
+WARNING 2025-04-03 09:53:15,166 log Not Found: /
+WARNING 2025-04-03 09:53:16,539 log Not Found: /favicon.ico
+WARNING 2025-04-03 09:54:36,355 log Method Not Allowed: /orders/payment/webhook/
+ERROR 2025-04-03 09:55:26,326 views Error en webhook: TemporaryOrder matching query does not exist.
+ERROR 2025-04-03 09:55:26,327 log Internal Server Error: /orders/payment/webhook/
+WARNING 2025-04-03 09:55:49,544 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:55:49,809 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:56:13,024 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 09:56:13,251 log Not Found: /users/mercado-pago/config/done/2/
+ERROR 2025-04-03 09:58:15,078 views Error en webhook: TemporaryOrder matching query does not exist.
+ERROR 2025-04-03 09:58:15,078 log Internal Server Error: /orders/payment/webhook/
+INFO 2025-04-03 10:01:44,889 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 10:01:48,329 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 10:01:59,241 views Webhook received: {"action":"test.created","api_version":"v1","application_id":"3235953554774632","date_created":"2021-11-01T02:02:02Z","id":"123456","live_mode":false,"type":"test","user_id":2354510330,"data":{"id":"107184693188"}}
+INFO 2025-04-03 10:01:59,242 views Test webhook received, responding with success
+INFO 2025-04-03 10:06:44,347 views Correo de confirmación enviado para la orden 22
+INFO 2025-04-03 10:09:29,253 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-04-03 10:09:31,643 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 10:10:38,759 views Webhook received: {"resource":"https://api.mercadolibre.com/merchant_orders/30053290203","topic":"merchant_order"}
+WARNING 2025-04-03 10:10:38,760 views Unknown webhook type: None
+INFO 2025-04-03 10:10:39,463 views Webhook received: {"action":"payment.created","api_version":"v1","data":{"id":"106766587455"},"date_created":"2025-04-03T15:10:38Z","id":120319902238,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:10:39,575 views Webhook received: {"resource":"106766587455","topic":"payment"}
+WARNING 2025-04-03 10:10:39,576 views Unknown webhook type: None
+ERROR 2025-04-03 10:10:39,774 views External reference not found in payment info
+WARNING 2025-04-03 10:10:39,774 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:10:47,288 views Correo de confirmación enviado para la orden 23
+INFO 2025-04-03 10:11:24,260 views Webhook received: {"resource":"https://api.mercadolibre.com/merchant_orders/30053290203","topic":"merchant_order"}
+WARNING 2025-04-03 10:11:24,261 views Unknown webhook type: None
+INFO 2025-04-03 10:11:26,084 views Webhook received: {"action":"payment.created","api_version":"v1","data":{"id":"106766587455"},"date_created":"2025-04-03T15:10:38Z","id":120251983011,"live_mode":true,"type":"payment","user_id":"2354510330"}
+ERROR 2025-04-03 10:11:26,502 views External reference not found in payment info
+WARNING 2025-04-03 10:11:26,503 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:11:26,796 views Webhook received: {"action":"payment.created","api_version":"v1","data":{"id":"106766587455"},"date_created":"2025-04-03T15:10:38Z","id":120319915024,"live_mode":true,"type":"payment","user_id":"2354510330"}
+ERROR 2025-04-03 10:11:27,062 views External reference not found in payment info
+WARNING 2025-04-03 10:11:27,065 log Bad Request: /orders/payment/webhook/
+WARNING 2025-04-03 10:12:36,039 log Method Not Allowed: /orders/payment/webhook/
+WARNING 2025-04-03 10:13:05,753 log Method Not Allowed: /orders/payment/webhook/
+WARNING 2025-04-03 10:13:09,314 log Not Found: /favicon.ico
+INFO 2025-04-03 10:13:29,873 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-04-03 10:13:31,412 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 10:15:05,406 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\urls.py changed, reloading.
+INFO 2025-04-03 10:15:06,780 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 10:15:45,265 log Not Found: /orders/payment/webhook/
+WARNING 2025-04-03 10:15:45,760 log Not Found: /orders/payment/webhook/
+WARNING 2025-04-03 10:15:46,387 log Not Found: /orders/payment/webhook/
+WARNING 2025-04-03 10:16:03,953 log Not Found: /orders/payment/webhook/
+WARNING 2025-04-03 10:16:10,505 log Method Not Allowed: /orders/orders/payment/webhook/
+INFO 2025-04-03 10:16:18,430 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\urls.py changed, reloading.
+INFO 2025-04-03 10:16:20,948 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 10:16:25,462 log Method Not Allowed: /orders/payment/webhook/
+WARNING 2025-04-03 10:16:51,222 log Not Found: /
+WARNING 2025-04-03 10:16:51,301 log Not Found: /favicon.ico
+WARNING 2025-04-03 10:17:02,813 log Method Not Allowed: /orders/payment/webhook/
+WARNING 2025-04-03 10:17:03,805 log Method Not Allowed: /orders/payment/webhook/
+INFO 2025-04-03 10:17:04,374 views Webhook received: "xmlRequest="''
+ERROR 2025-04-03 10:17:04,376 views Invalid JSON in webhook request
+WARNING 2025-04-03 10:17:04,378 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:20:59,551 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 10:21:01,007 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 10:21:36,798 log Method Not Allowed: /orders/payment/webhook/
+INFO 2025-04-03 10:22:42,067 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30073710920","topic":"merchant_order"}
+INFO 2025-04-03 10:22:42,068 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30073710920', 'topic': 'merchant_order'}
+INFO 2025-04-03 10:22:42,070 views Acción: None
+INFO 2025-04-03 10:22:42,072 views Tipo de acción no manejada: None
+INFO 2025-04-03 10:22:42,725 views Webhook recibido: {"resource":"106768262391","topic":"payment"}
+INFO 2025-04-03 10:22:42,729 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106768262391"},"date_created":"2025-04-03T15:22:42Z","id":120255360227,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:22:42,730 views Datos parseados: {'resource': '106768262391', 'topic': 'payment'}
+INFO 2025-04-03 10:22:42,731 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '106768262391'}, 'date_created': '2025-04-03T15:22:42Z', 'id': 120255360227, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 10:22:42,731 views Acción: None
+INFO 2025-04-03 10:22:42,732 views Acción: payment.created
+INFO 2025-04-03 10:22:42,732 views Tipo de acción no manejada: None
+INFO 2025-04-03 10:22:42,733 views Procesando pago: 106768262391
+INFO 2025-04-03 10:22:43,133 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30073710920","topic":"merchant_order"}
+INFO 2025-04-03 10:22:43,134 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30073710920', 'topic': 'merchant_order'}
+INFO 2025-04-03 10:22:43,135 views Acción: None
+INFO 2025-04-03 10:22:43,136 views Tipo de acción no manejada: None
+ERROR 2025-04-03 10:22:43,234 views External reference no encontrado en la información del pago
+WARNING 2025-04-03 10:22:43,236 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:22:51,193 views Correo de confirmación enviado para la orden 24
+INFO 2025-04-03 10:23:25,249 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106768262391"},"date_created":"2025-04-03T15:22:42Z","id":120251983163,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:23:25,249 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '106768262391'}, 'date_created': '2025-04-03T15:22:42Z', 'id': 120251983163, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 10:23:25,250 views Acción: payment.created
+INFO 2025-04-03 10:23:25,251 views Procesando pago: 106768262391
+INFO 2025-04-03 10:23:25,403 views Pago 106768262391 ya fue procesado anteriormente
+WARNING 2025-04-03 10:29:02,529 log Unauthorized: /users/refresh/
+INFO 2025-04-03 10:29:43,662 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30073901602","topic":"merchant_order"}
+INFO 2025-04-03 10:29:43,663 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30073901602', 'topic': 'merchant_order'}
+INFO 2025-04-03 10:29:43,664 views Acción: None
+INFO 2025-04-03 10:29:43,665 views Tipo de acción no manejada: None
+INFO 2025-04-03 10:29:44,382 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"107195423636"},"date_created":"2025-04-03T15:29:43Z","id":120255506331,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:29:44,383 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '107195423636'}, 'date_created': '2025-04-03T15:29:43Z', 'id': 120255506331, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 10:29:44,383 views Acción: payment.created
+INFO 2025-04-03 10:29:44,384 views Procesando pago: 107195423636
+INFO 2025-04-03 10:29:44,467 views Webhook recibido: {"resource":"107195423636","topic":"payment"}
+INFO 2025-04-03 10:29:44,468 views Datos parseados: {'resource': '107195423636', 'topic': 'payment'}
+INFO 2025-04-03 10:29:44,469 views Acción: None
+INFO 2025-04-03 10:29:44,469 views Tipo de acción no manejada: None
+ERROR 2025-04-03 10:29:44,946 views External reference no encontrado en la información del pago
+WARNING 2025-04-03 10:29:44,947 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:29:45,012 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30073901602","topic":"merchant_order"}
+INFO 2025-04-03 10:29:45,012 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30073901602', 'topic': 'merchant_order'}
+INFO 2025-04-03 10:29:45,013 views Acción: None
+INFO 2025-04-03 10:29:45,014 views Tipo de acción no manejada: None
+INFO 2025-04-03 10:29:52,438 views Correo de confirmación enviado para la orden 25
+INFO 2025-04-03 10:30:26,880 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"107195423636"},"date_created":"2025-04-03T15:29:43Z","id":120252467015,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:30:26,882 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '107195423636'}, 'date_created': '2025-04-03T15:29:43Z', 'id': 120252467015, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 10:30:26,882 views Acción: payment.created
+INFO 2025-04-03 10:30:26,882 views Procesando pago: 107195423636
+INFO 2025-04-03 10:30:27,011 views Pago 107195423636 ya fue procesado anteriormente
+INFO 2025-04-03 10:30:52,511 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106766587455"},"date_created":"2025-04-03T15:10:38Z","id":120320453596,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:30:52,518 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '106766587455'}, 'date_created': '2025-04-03T15:10:38Z', 'id': 120320453596, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 10:30:52,519 views Acción: payment.created
+INFO 2025-04-03 10:30:52,520 views Procesando pago: 106766587455
+INFO 2025-04-03 10:30:52,776 views Pago 106766587455 ya fue procesado anteriormente
+INFO 2025-04-03 10:35:30,556 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 10:35:33,187 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 10:36:23,051 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30074082122","topic":"merchant_order"}
+INFO 2025-04-03 10:36:23,052 views Query params: <QueryDict: {'id': ['30074082122'], 'topic': ['merchant_order']}>
+INFO 2025-04-03 10:36:23,054 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30074082122', 'topic': 'merchant_order'}
+INFO 2025-04-03 10:36:23,055 views ID de merchant_order: 30074082122
+INFO 2025-04-03 10:36:23,055 views Procesando merchant_order: 30074082122
+INFO 2025-04-03 10:36:23,503 views Merchant order 30074082122 no tiene pagos asociados
+INFO 2025-04-03 10:36:23,825 views Webhook recibido: {"resource":"106769746061","topic":"payment"}
+INFO 2025-04-03 10:36:23,827 views Query params: <QueryDict: {'id': ['106769746061'], 'topic': ['payment']}>
+INFO 2025-04-03 10:36:23,828 views Datos parseados: {'resource': '106769746061', 'topic': 'payment'}
+INFO 2025-04-03 10:36:23,832 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106769746061"},"date_created":"2025-04-03T15:36:23Z","id":120320525290,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:36:23,832 views ID de pago obtenido de resource: 106769746061
+INFO 2025-04-03 10:36:23,834 views Query params: <QueryDict: {'data.id': ['106769746061'], 'type': ['payment']}>
+INFO 2025-04-03 10:36:23,834 views Procesando pago: 106769746061
+INFO 2025-04-03 10:36:23,835 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '106769746061'}, 'date_created': '2025-04-03T15:36:23Z', 'id': 120320525290, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 10:36:23,839 views ID de pago obtenido de data.id: 106769746061
+INFO 2025-04-03 10:36:23,841 views Procesando pago: 106769746061
+INFO 2025-04-03 10:36:24,617 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30074082122","topic":"merchant_order"}
+INFO 2025-04-03 10:36:24,617 views Query params: <QueryDict: {'id': ['30074082122'], 'topic': ['merchant_order']}>
+INFO 2025-04-03 10:36:24,618 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30074082122', 'topic': 'merchant_order'}
+INFO 2025-04-03 10:36:24,620 views ID de merchant_order: 30074082122
+INFO 2025-04-03 10:36:24,620 views Procesando merchant_order: 30074082122
+INFO 2025-04-03 10:36:25,104 views Información del pago: {'message': 'Must provide your access_token to proceed', 'error': 'unauthorized', 'status': 401, 'cause': [{'code': 5, 'description': 'Must provide your access_token to proceed', 'data': '03-04-2025T15:36:24UTC;541c2e13-75a6-4a0b-9d5e-b0f92dc9433d'}]}
+ERROR 2025-04-03 10:36:25,105 views No se pudo encontrar external_reference en ninguna parte
+WARNING 2025-04-03 10:36:25,108 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:36:25,126 views Información del pago: {'message': 'Must provide your access_token to proceed', 'error': 'unauthorized', 'status': 401, 'cause': [{'code': 5, 'description': 'Must provide your access_token to proceed', 'data': '03-04-2025T15:36:24UTC;abbc287f-8f71-442b-bd2b-6b581850274c'}]}
+ERROR 2025-04-03 10:36:25,126 views No se pudo encontrar external_reference en ninguna parte
+WARNING 2025-04-03 10:36:25,126 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:36:25,415 views Merchant order 30074082122 no tiene pagos asociados
+INFO 2025-04-03 10:36:29,722 views Finalizando orden para temp_order: 49, payment_id: 106769746061
+INFO 2025-04-03 10:36:29,728 views Orden principal creada: 26
+INFO 2025-04-03 10:36:29,730 views Dirección de envío creada para orden: 26
+INFO 2025-04-03 10:36:29,731 views Productos obtenidos: 1
+INFO 2025-04-03 10:36:29,734 views Items de orden creados: 1
+INFO 2025-04-03 10:36:29,735 views Stock de productos actualizado
+INFO 2025-04-03 10:36:29,736 views Orden temporal None eliminada
+INFO 2025-04-03 10:37:01,181 views Webhook recibido: {"resource":"106769746061","topic":"payment"}
+INFO 2025-04-03 10:37:01,181 views Query params: <QueryDict: {'id': ['106769746061'], 'topic': ['payment']}>
+INFO 2025-04-03 10:37:01,182 views Datos parseados: {'resource': '106769746061', 'topic': 'payment'}
+INFO 2025-04-03 10:37:01,182 views ID de pago obtenido de resource: 106769746061
+INFO 2025-04-03 10:37:01,182 views Procesando pago: 106769746061
+INFO 2025-04-03 10:37:01,314 views Pago 106769746061 ya fue procesado anteriormente
+INFO 2025-04-03 10:37:04,203 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106769746061"},"date_created":"2025-04-03T15:36:23Z","id":120252467081,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 10:37:04,204 views Query params: <QueryDict: {'data.id': ['106769746061'], 'type': ['payment']}>
+INFO 2025-04-03 10:37:04,205 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '106769746061'}, 'date_created': '2025-04-03T15:36:23Z', 'id': 120252467081, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 10:37:04,205 views ID de pago obtenido de data.id: 106769746061
+INFO 2025-04-03 10:37:04,206 views Procesando pago: 106769746061
+INFO 2025-04-03 10:37:04,336 views Pago 106769746061 ya fue procesado anteriormente
+INFO 2025-04-03 10:49:20,717 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 10:49:23,171 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 10:49:39,256 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 10:49:40,851 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 10:51:02,146 views Merchant Order 30054379569 actualizado. Estado: 401
+WARNING 2025-04-03 10:51:02,643 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 10:51:03,433 views Payment 107198181780 actualizado. Estado: 401
+INFO 2025-04-03 10:51:04,017 views Merchant Order 30054379569 actualizado. Estado: 401
+INFO 2025-04-03 10:51:10,648 views Correo de confirmación enviado para la orden 27
+WARNING 2025-04-03 10:51:50,093 log Bad Request: /orders/payment/webhook/
+WARNING 2025-04-03 10:51:50,367 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 11:04:24,442 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 11:04:26,891 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 11:05:08,434 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30054749063","topic":"merchant_order"}
+INFO 2025-04-03 11:05:08,436 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30054749063', 'topic': 'merchant_order'}
+INFO 2025-04-03 11:05:08,438 views Acción: None, Tipo: None
+INFO 2025-04-03 11:05:08,439 views Tipo de acción no manejada: None, tipo: None
+INFO 2025-04-03 11:05:09,858 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106773584397"},"date_created":"2025-04-03T16:05:08Z","id":120256351811,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 11:05:09,860 views Datos extraídos de parámetros URL: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106773584397'}}
+INFO 2025-04-03 11:05:09,864 views Webhook recibido: {"resource":"106773584397","topic":"payment"}
+INFO 2025-04-03 11:05:09,865 views Datos parseados: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106773584397'}}
+INFO 2025-04-03 11:05:09,865 views Datos parseados: {'resource': '106773584397', 'topic': 'payment'}
+INFO 2025-04-03 11:05:09,866 views Acción: payment.created, Tipo: payment
+INFO 2025-04-03 11:05:09,867 views Acción: None, Tipo: None
+INFO 2025-04-03 11:05:09,867 views Procesando pago: 106773584397
+INFO 2025-04-03 11:05:09,869 views Tipo de acción no manejada: None, tipo: None
+INFO 2025-04-03 11:05:10,162 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30054749063","topic":"merchant_order"}
+INFO 2025-04-03 11:05:10,162 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30054749063', 'topic': 'merchant_order'}
+INFO 2025-04-03 11:05:10,163 views Acción: None, Tipo: None
+INFO 2025-04-03 11:05:10,165 views Tipo de acción no manejada: None, tipo: None
+ERROR 2025-04-03 11:05:10,763 views External reference no encontrado en la información del pago
+WARNING 2025-04-03 11:05:10,764 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 11:05:18,759 views Correo de confirmación enviado para la orden 28
+INFO 2025-04-03 11:05:54,595 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106773584397"},"date_created":"2025-04-03T16:05:08Z","id":120252467353,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 11:05:54,596 views Datos extraídos de parámetros URL: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106773584397'}}
+INFO 2025-04-03 11:05:54,596 views Datos parseados: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106773584397'}}
+INFO 2025-04-03 11:05:54,597 views Acción: payment.created, Tipo: payment
+INFO 2025-04-03 11:05:54,597 views Procesando pago: 106773584397
+INFO 2025-04-03 11:05:54,740 views Pago 106773584397 ya fue procesado anteriormente
+INFO 2025-04-03 11:09:27,821 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 11:09:30,955 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 11:10:03,445 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30074975848","topic":"merchant_order"}
+INFO 2025-04-03 11:10:03,446 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30074975848', 'topic': 'merchant_order'}
+INFO 2025-04-03 11:10:03,446 views Usando formato de datos del cuerpo JSON con resource/topic: {'type': 'merchant_order', 'data': {'id': '30074975848'}}
+INFO 2025-04-03 11:10:03,447 views Tipo: merchant_order, ID: 30074975848, Acción: None
+INFO 2025-04-03 11:10:03,448 views Procesando merchant order: 30074975848
+INFO 2025-04-03 11:10:04,120 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"107200738578"},"date_created":"2025-04-03T16:10:03Z","id":120321389720,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 11:10:04,122 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '107200738578'}, 'date_created': '2025-04-03T16:10:03Z', 'id': 120321389720, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 11:10:04,122 views Usando formato de datos del cuerpo JSON con action/data.id
+INFO 2025-04-03 11:10:04,124 views Tipo: payment, ID: 107200738578, Acción: payment.created
+INFO 2025-04-03 11:10:04,125 views Procesando pago: 107200738578
+INFO 2025-04-03 11:10:04,137 views Webhook recibido: {"resource":"107200738578","topic":"payment"}
+INFO 2025-04-03 11:10:04,138 views Datos parseados: {'resource': '107200738578', 'topic': 'payment'}
+INFO 2025-04-03 11:10:04,139 views Usando formato de datos del cuerpo JSON con resource/topic: {'type': 'payment', 'data': {'id': '107200738578'}}
+INFO 2025-04-03 11:10:04,139 views Tipo: payment, ID: 107200738578, Acción: None
+INFO 2025-04-03 11:10:04,140 views Procesando pago: 107200738578
+ERROR 2025-04-03 11:10:04,567 views External reference no encontrado en la información del pago
+WARNING 2025-04-03 11:10:04,569 log Bad Request: /orders/payment/webhook/
+ERROR 2025-04-03 11:10:04,692 views External reference no encontrado en la información del pago
+WARNING 2025-04-03 11:10:04,693 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 11:10:04,836 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30074975848","topic":"merchant_order"}
+INFO 2025-04-03 11:10:04,837 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30074975848', 'topic': 'merchant_order'}
+INFO 2025-04-03 11:10:04,837 views Usando formato de datos del cuerpo JSON con resource/topic: {'type': 'merchant_order', 'data': {'id': '30074975848'}}
+INFO 2025-04-03 11:10:04,838 views Tipo: merchant_order, ID: 30074975848, Acción: None
+INFO 2025-04-03 11:10:04,840 views Procesando merchant order: 30074975848
+INFO 2025-04-03 11:10:12,208 views Correo de confirmación enviado para la orden 29
+INFO 2025-04-03 11:10:41,649 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"107200738578"},"date_created":"2025-04-03T16:10:03Z","id":120252467381,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 11:10:41,649 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '107200738578'}, 'date_created': '2025-04-03T16:10:03Z', 'id': 120252467381, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 11:10:41,650 views Usando formato de datos del cuerpo JSON con action/data.id
+INFO 2025-04-03 11:10:41,650 views Tipo: payment, ID: 107200738578, Acción: payment.created
+INFO 2025-04-03 11:10:41,651 views Procesando pago: 107200738578
+INFO 2025-04-03 11:10:41,793 views Pago 107200738578 ya fue procesado anteriormente
+INFO 2025-04-03 11:10:51,469 views Webhook recibido: {"resource":"107200738578","topic":"payment"}
+INFO 2025-04-03 11:10:51,469 views Datos parseados: {'resource': '107200738578', 'topic': 'payment'}
+INFO 2025-04-03 11:10:51,470 views Usando formato de datos del cuerpo JSON con resource/topic: {'type': 'payment', 'data': {'id': '107200738578'}}
+INFO 2025-04-03 11:10:51,470 views Tipo: payment, ID: 107200738578, Acción: None
+INFO 2025-04-03 11:10:51,470 views Procesando pago: 107200738578
+INFO 2025-04-03 11:10:51,607 views Pago 107200738578 ya fue procesado anteriormente
+INFO 2025-04-03 11:11:10,331 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"107198181780"},"date_created":"2025-04-03T15:51:01Z","id":120321537844,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 11:11:10,332 views Datos parseados: {'action': 'payment.created', 'api_version': 'v1', 'data': {'id': '107198181780'}, 'date_created': '2025-04-03T15:51:01Z', 'id': 120321537844, 'live_mode': True, 'type': 'payment', 'user_id': '2354510330'}
+INFO 2025-04-03 11:11:10,333 views Usando formato de datos del cuerpo JSON con action/data.id
+INFO 2025-04-03 11:11:10,334 views Tipo: payment, ID: 107198181780, Acción: payment.created
+INFO 2025-04-03 11:11:10,334 views Procesando pago: 107198181780
+INFO 2025-04-03 11:11:10,501 views Pago 107198181780 ya fue procesado anteriormente
+INFO 2025-04-03 11:12:20,975 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-04-03 11:12:23,355 autoreload Watching for file changes with StatReloader
+INFO 2025-04-03 11:13:07,548 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30075053312","topic":"merchant_order"}
+INFO 2025-04-03 11:13:07,550 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30075053312', 'topic': 'merchant_order'}
+INFO 2025-04-03 11:13:07,552 views Acción: None, Tipo: None
+INFO 2025-04-03 11:13:07,554 views Tipo de acción no manejada: None, tipo: None
+INFO 2025-04-03 11:13:08,200 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106774385511"},"date_created":"2025-04-03T16:13:07Z","id":120256603233,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 11:13:08,200 views Datos extraídos de parámetros URL: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106774385511'}}
+INFO 2025-04-03 11:13:08,201 views Datos parseados: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106774385511'}}
+INFO 2025-04-03 11:13:08,201 views Acción: payment.created, Tipo: payment
+INFO 2025-04-03 11:13:08,202 views Procesando pago: 106774385511
+INFO 2025-04-03 11:13:08,262 views Webhook recibido: {"resource":"106774385511","topic":"payment"}
+INFO 2025-04-03 11:13:08,263 views Datos parseados: {'resource': '106774385511', 'topic': 'payment'}
+INFO 2025-04-03 11:13:08,263 views Acción: None, Tipo: None
+INFO 2025-04-03 11:13:08,264 views Tipo de acción no manejada: None, tipo: None
+ERROR 2025-04-03 11:13:08,669 views External reference no encontrado en la información del pago
+WARNING 2025-04-03 11:13:08,670 log Bad Request: /orders/payment/webhook/
+INFO 2025-04-03 11:13:09,088 views Webhook recibido: {"resource":"https://api.mercadolibre.com/merchant_orders/30075053312","topic":"merchant_order"}
+INFO 2025-04-03 11:13:09,089 views Datos parseados: {'resource': 'https://api.mercadolibre.com/merchant_orders/30075053312', 'topic': 'merchant_order'}
+INFO 2025-04-03 11:13:09,090 views Acción: None, Tipo: None
+INFO 2025-04-03 11:13:09,091 views Tipo de acción no manejada: None, tipo: None
+INFO 2025-04-03 11:13:16,697 views Correo de confirmación enviado para la orden 30
+INFO 2025-04-03 11:13:45,942 views Webhook recibido: {"action":"payment.created","api_version":"v1","data":{"id":"106774385511"},"date_created":"2025-04-03T16:13:07Z","id":120252467403,"live_mode":true,"type":"payment","user_id":"2354510330"}
+INFO 2025-04-03 11:13:45,943 views Datos extraídos de parámetros URL: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106774385511'}}
+INFO 2025-04-03 11:13:45,943 views Datos parseados: {'action': 'payment.created', 'type': 'payment', 'data': {'id': '106774385511'}}
+INFO 2025-04-03 11:13:45,945 views Acción: payment.created, Tipo: payment
+INFO 2025-04-03 11:13:45,946 views Procesando pago: 106774385511
+INFO 2025-04-03 11:13:46,233 views Pago 106774385511 ya fue procesado anteriormente
+INFO 2025-04-03 11:47:27,306 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 11:47:31,816 log Unauthorized: /orders/notifications/
+INFO 2025-04-03 11:53:33,036 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 11:54:06,143 log Unauthorized: /orders/notifications/
+WARNING 2025-04-03 11:55:06,895 log Unauthorized: /orders/notifications/
+INFO 2025-04-03 11:55:42,364 autoreload C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-04-03 12:02:21,157 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-03 12:02:31,736 log Unauthorized: /orders/notifications/
+WARNING 2025-04-03 12:02:31,739 log Unauthorized: /users/get/solo/3/
+WARNING 2025-04-03 12:02:33,668 log Unauthorized: /users/get/solo/3/
+WARNING 2025-04-03 12:03:42,351 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:03:42,519 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:03:43,137 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:03:43,474 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:03:50,143 log Unauthorized: /users/login/
+WARNING 2025-04-03 12:04:30,720 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:04:31,054 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:04:32,717 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:04:33,180 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:05:02,812 log Unauthorized: /users/login/
+WARNING 2025-04-03 12:05:11,820 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:05:12,771 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:05:47,984 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:05:48,066 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:05:48,839 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:05:48,969 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:06:17,794 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:06:17,796 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:06:18,911 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:06:19,005 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-04-03 12:11:23,961 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 12:11:23,961 log Unauthorized: /users/refresh/
+WARNING 2025-04-03 12:11:24,027 log Unauthorized: /orders/payment/finalize/
+WARNING 2025-04-03 12:11:24,039 log Unauthorized: /orders/payment/finalize/
+ERROR 2025-04-03 12:11:58,006 log Internal Server Error: /products/get/equals/MAZ BLANCO O NO BLANCO/
+Traceback (most recent call last):
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fabian\Desktop\Proyecto ICESF\PlataformaComercio\products\views.py", line 69, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+                                                                                                      ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'
+WARNING 2025-04-03 12:12:04,293 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:12:05,297 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:12:57,154 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:12:58,020 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-03 12:13:59,129 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 12:14:00,003 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-03 12:14:01,210 log Not Found: /products/caterandom//
+>>>>>>> a308a2eb00e2f161e908f13f2708f435ea6e8dcb
