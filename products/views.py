@@ -1,3 +1,6 @@
+import base64
+import imghdr
+from django.core.files.base import ContentFile
 from django.utils import timezone
 from datetime import timedelta, datetime
 
@@ -7,7 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
-from . models import Category, Product, Reviews
+from . models import Category, Product, ProductImage, Reviews
 from . serializers import ProductCreateSerializer, ProductReadSerializer, ProductImagesSerializer, ReviewCreateSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
 from rest_framework.decorators import api_view
@@ -236,20 +239,73 @@ def get_top_selling_products(request):
 
 @api_view(['PUT'])
 def edit_product(request, pk):
-    product = Product.objects.get(pk=pk)
-    if request.user.role == "admin":
-        serializer = ProductReadSerializer(product, data=request.data)
-        if serializer.is_valid():
-            name = serializer.validated_data['name']
-            category = serializer.validated_data['category']
-            s = name + category
-            slug = slugify(s)
-            serializer.save(user=request.user, slug=slug)
-            return Response(serializer.data)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-    else:
+    
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"detail": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+    print(request.user.role)
+
+    if request.user.role not in ["seller", "admin"]:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+    # Guardamos el estado actual antes de la edición
+    current_status = product.status
+    
+    # Procesamos los datos del producto
+    serializer = ProductCreateSerializer(product, data=request.data, partial=True)
+    
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Actualizamos el slug si cambió el nombre o categoría
+    name = serializer.validated_data.get('name', product.name)
+    category = serializer.validated_data.get('category', product.category)
+    s = name + category
+    slug = slugify(s)
+    
+    # Procesamos las imágenes EXACTAMENTE como en el serializer de creación
+    if 'images' in request.data:
+        image = request.data['images']
+        
+        # Asegurarse de que es solo una imagen, no una lista
+        if isinstance(image, list):
+            image = image[0]  # Solo tomamos la primera
+
+        try:
+            # Limpiar imagen base64
+            if "," in image:
+                image = image.split(",")[1]
+
+            image_data = base64.b64decode(image)
+            image_type = imghdr.what(None, image_data)
+            if image_type is None:
+                image_type = 'jpg'
+            image_name = f'image_0.{image_type}'
+            image_file = ContentFile(image_data, name=image_name)
+
+            # Eliminar imagen anterior
+            ProductImage.objects.filter(product=product).delete()
+
+            # Crear nueva imagen
+            ProductImage.objects.create(product=product, image=image_file)
+        except Exception as e:
+            print(f"Error procesando la imagen: {str(e)}")
+
+    # Guardamos el producto manteniendo el estado original
+    updated_product = serializer.save(
+        user=request.user, 
+        slug=slug,
+        status=current_status  # Mantenemos el estado original
+    )
+    
+    # Forzamos la recarga de las relaciones
+    updated_product.refresh_from_db()
+    
+    # Devolvemos los datos con el serializer de lectura
+    read_serializer = ProductReadSerializer(updated_product)
+    return Response(read_serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['DELETE'])
 def delete_product(request, pk):

@@ -51,11 +51,15 @@
 
 .imgContent {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .imgContent img {
     border-radius: 5px 5px 0 0;
     width: 100%;
+    max-height: 200px;
     cursor: pointer;
 }
 

@@ -246,6 +246,51 @@ def create_enterprise(request, idUser):
     except User.DoesNotExist:
         return Response({'detail': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
     
+@api_view(['PATCH'])
+def update_enterprise(request, user_id):
+    try:
+        # Verificar que el usuario existe y tiene una empresa
+        user = User.objects.get(pk=user_id)
+        enterprise = Enterprise.objects.get(owner_user=user)
+        
+        # Verificar que el usuario que hace la solicitud es el dueño o admin
+        if request.user != user and request.user.role != 'admin':
+            return Response(
+                {"detail": "No tienes permiso para actualizar esta empresa"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        # Copiar los datos del request
+        data = request.data.copy()
+        
+        # Procesar tipo_productos si viene como lista
+        if 'tipo_productos' in data and isinstance(data['tipo_productos'], list):
+            data['tipo_productos'] = ', '.join(data['tipo_productos'])
+        
+        # Serializar y actualizar
+        serializer = EnterpriseSerializer(
+            enterprise, 
+            data=data, 
+            partial=True  # Permite actualización parcial
+        )
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    except User.DoesNotExist:
+        return Response(
+            {"detail": "Usuario no encontrado"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    except Enterprise.DoesNotExist:
+        return Response(
+            {"detail": "Empresa no encontrada para este usuario"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
 @api_view(['GET'])
 def get_enterprises(request):
     search_query = request.query_params.get('search', None)

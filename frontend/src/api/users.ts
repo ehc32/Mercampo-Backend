@@ -115,6 +115,65 @@ export const get_enterprices = async (
     return response.data;
   };
 
+  export const update_enterprise = async (
+    user_id: number | string,
+    data: {
+      name?: string;
+      phone?: string;
+      address?: string;
+      description?: string;
+      tipo_productos?: string | string[];
+      facebook?: string;
+      instagram?: string;
+      whatsapp?: string;
+      link_enterprise?: string;
+      avatar?: string | File;
+    }
+  ) => {
+    // Crear FormData para manejar archivos (avatar)
+    const formData = new FormData();
+  
+    // Procesar tipo_productos si viene como array
+    if (data.tipo_productos && Array.isArray(data.tipo_productos)) {
+      formData.append("tipo_productos", data.tipo_productos.join(", "));
+    } else if (data.tipo_productos) {
+      formData.append("tipo_productos", data.tipo_productos as string);
+    }
+  
+    // Agregar otros campos si están presentes
+    if (data.name) formData.append("name", data.name);
+    if (data.phone) formData.append("phone", data.phone);
+    if (data.address) formData.append("address", data.address);
+    if (data.description) formData.append("description", data.description);
+    if (data.facebook) formData.append("facebook", data.facebook);
+    if (data.instagram) formData.append("instagram", data.instagram);
+    if (data.whatsapp) formData.append("whatsapp", data.whatsapp);
+    if (data.link_enterprise) formData.append("link_enterprise", data.link_enterprise);
+    
+    // Manejar avatar (puede ser string base64 o File)
+    if (data.avatar) {
+      if (typeof data.avatar === 'string') {
+        // Si es base64, enviar como string
+        formData.append("avatar", data.avatar);
+      } else {
+        // Si es File, enviar como archivo
+        formData.append("avatar", data.avatar);
+      }
+    }
+  
+    const response = await authAxios.patch(
+      `/users/enterprise/update/${user_id}/`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+  
+    return response.data;
+  };
+
 export const getEnterpriseByUser = async (userId: number | string) => {
     const response = await axi.get(`users/get-enterprise-by-user/${userId}`);
     return response; 

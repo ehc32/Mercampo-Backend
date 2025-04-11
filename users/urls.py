@@ -30,6 +30,7 @@ urlpatterns = [
     
     # Enterprise (Empresas)
     path('create-enterprise/<int:idUser>/', views.create_enterprise),
+     path('enterprise/update/<int:user_id>/', views.update_enterprise, name='update_enterprise'),
     path('get-enterprises/', views.get_enterprises),
     path('get-enterprise-by-user/<int:user_id>/', views.get_enterprise_by_user),
     

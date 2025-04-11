@@ -34,7 +34,7 @@ export const edit_product = async (data: Product) => {
     formData.append("category", data.category);
     formData.append("price", data.price.toString());
     if (data.image) {
-        formData.append("image", data.image);
+        formData.append("images", data.image);
     }
     await authAxios.put(`/products/edit/${data.id}/`, formData);
 };

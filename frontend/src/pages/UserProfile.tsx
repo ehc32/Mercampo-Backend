@@ -22,6 +22,11 @@ import {
   CircularProgress,
   Tooltip,
   Badge,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material"
 import { get_solo_user } from "../api/users"
 import { my_orders, my_pending_orders, seller_delivered_orders, edit_order } from "../api/orders"
@@ -30,6 +35,7 @@ import { get_all_products_by_user, get_products_in_sells_by_user } from "../api/
 import ProfileTables from "../components/profile/profileTables"
 import { CheckCircle, ThumbsUp, Package } from "lucide-react"
 import { checkOrderConfirmation, confirmOrderReceived } from "../api/notifications"
+import { edit_product } from "../api/products"
 
 interface OrderInterface {
   id: number
@@ -87,6 +93,10 @@ interface MyOrder {
   count_in_stock: number
   fecha_limite: string
   quantity: number
+  unit: string
+  category: string
+  map_locate: string
+  image: string
 }
 
 const UserProfile = () => {
@@ -469,6 +479,104 @@ const UserProfile = () => {
   const paginatedDeliveredOrders = paginateData(deliveredOrders, deliveredOrdersPage, itemsPerPage)
   const paginatedMyProducts = paginateData(myProducts, page, itemsPerPage)
   const paginatedMyProductsSells = paginateData(myProductsSells, page, itemsPerPage)
+
+  // Estados y funciones para el modal de edición
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [editingProduct, setEditingProduct] = useState<MyOrder | null>(null)
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    category: "",
+    price: 0,
+    count_in_stock: 0,
+    unit: "",
+    map_locate: "",
+    image: null,
+  })
+
+  const handleOpenEditModal = (product: MyOrder) => {
+    setEditingProduct(product)
+    setFormData({
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      price: product.price,
+      count_in_stock: product.count_in_stock,
+      unit: product.unit,
+      map_locate: product.map_locate,
+      image: product.image,
+    })
+    setEditModalOpen(true)
+  }
+
+  const handleCloseEditModal = () => {
+    setEditModalOpen(false)
+    setEditingProduct(null)
+  }
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+  }
+
+  const handleImageChange = (e: any) => {
+    const imageFile = e.target.files[0]
+    setFormData({
+      ...formData,
+      image: imageFile,
+    })
+  }
+
+  // Reemplazar la función handleEditSubmit actual con esta implementación completa:
+
+  const handleEditSubmit = async () => {
+    if (!editingProduct) return
+
+    try {
+      let imageBase64: string | null = null
+
+      // Convertir la imagen a base64 si existe y es un archivo (no una URL)
+      if (formData.image && !(typeof formData.image === "string")) {
+        const reader = new FileReader()
+        const imageLoaded = new Promise<string>((resolve, reject) => {
+          reader.onloadend = () => {
+            if (reader.result && typeof reader.result === "string") {
+              resolve(reader.result)
+            } else {
+              reject("Error al convertir la imagen a base64")
+            }
+          }
+          reader.onerror = () => reject("Error de lectura del archivo")
+        })
+
+        reader.readAsDataURL(formData.image)
+        imageBase64 = await imageLoaded
+      }
+
+      const productToUpdate = {
+        ...editingProduct,
+        ...formData,
+        id: editingProduct.id,
+        image: imageBase64 || formData.image, // Se envía en base64 si es nuevo archivo, o la URL si no cambió
+      }
+
+      await edit_product(productToUpdate)
+      toast.success("Producto actualizado con éxito")
+
+      // Actualizar la lista de productos
+      if (id) {
+        get_my_products(id)
+      }
+
+      handleCloseEditModal()
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error)
+      toast.error("Error al actualizar el producto")
+    }
+  }
 
   return (
     <Box sx={{ maxWidth: "lg", mx: "auto", p: isWideScreen ? 6 : 1, mt: ".1em" }}>
@@ -936,6 +1044,7 @@ const UserProfile = () => {
                       <TableCell>Vendidos</TableCell>
                       <TableCell>F. Creación</TableCell>
                       <TableCell>F. Vencimiento</TableCell>
+                      <TableCell>Acciones</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -949,6 +1058,20 @@ const UserProfile = () => {
                         <TableCell>{product.count_in_sells}</TableCell>
                         <TableCell className="w-32">{formatearFecha(product.created)}</TableCell>
                         <TableCell className="w-32">{formatearFecha(product.fecha_limite)}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            size="small"
+                            onClick={() => handleOpenEditModal(product)}
+                            sx={{
+                              backgroundColor: "#39A900",
+                              "&:hover": { backgroundColor: "#2c7d00" },
+                              textTransform: "none",
+                            }}
+                          >
+                            Editar
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -1015,9 +1138,230 @@ const UserProfile = () => {
           </div>
         </Box>
       </Modal>
+      {/* Modal de edición de producto */}
+      <Modal
+        open={editModalOpen}
+        onClose={handleCloseEditModal}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <Box
+          sx={{
+            width: { xs: "95%", sm: 650 },
+            borderRadius: "8px",
+            maxHeight: "85vh",
+            padding: 0,
+            backgroundColor: "background.paper",
+            margin: "auto",
+            marginTop: "5%",
+            overflowY: "hidden",
+            boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+          }}
+        >
+          {editingProduct ? (
+            <div className="flex flex-col" style={{ minHeight: "85vh", overflowY: "auto" }}>
+              <div className="bg-[#39A900] p-4 rounded-t-lg">
+                <h2 className="text-xl font-bold text-white text-center">Editar Producto</h2>
+                <p className="text-green-100 text-center text-sm mt-1">{editingProduct.name}</p>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-4">
+                <div className="grid grid-cols-1 gap-4">
+                  <TextField
+                    label="Nombre del producto"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    fullWidth
+                    variant="outlined"
+                    InputProps={{
+                      sx: { borderRadius: "8px" },
+                    }}
+                  />
+
+                  <TextField
+                    label="Descripción"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    fullWidth
+                    multiline
+                    rows={3}
+                    variant="outlined"
+                    InputProps={{
+                      sx: { borderRadius: "8px" },
+                    }}
+                  />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <FormControl fullWidth variant="outlined" sx={{ borderRadius: "8px" }}>
+                      <InputLabel id="category-label">Categoría</InputLabel>
+                      <Select
+                        labelId="category-label"
+                        label="Categoría"
+                        name="category"
+                        value={formData.category}
+                        onChange={handleInputChange}
+                        sx={{ borderRadius: "8px" }}
+                      >
+                        <MenuItem value="FRUTAS">Frutas</MenuItem>
+                        <MenuItem value="VERDURAS">Verduras</MenuItem>
+                        <MenuItem value="GRANOS">Granos</MenuItem>
+                        <MenuItem value="OTROS">Otros</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    <TextField
+                      label="Precio"
+                      name="price"
+                      type="number"
+                      value={formData.price}
+                      onChange={handleInputChange}
+                      fullWidth
+                      variant="outlined"
+                      InputProps={{
+                        startAdornment: <span className="text-gray-500 mr-1">$</span>,
+                        sx: { borderRadius: "8px" },
+                      }}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <TextField
+                      label="Stock disponible"
+                      name="count_in_stock"
+                      type="number"
+                      value={formData.count_in_stock}
+                      onChange={handleInputChange}
+                      fullWidth
+                      variant="outlined"
+                      InputProps={{
+                        sx: { borderRadius: "8px" },
+                      }}
+                    />
+
+                    <TextField
+                      label="Unidad de medida"
+                      name="unit"
+                      value={formData.unit}
+                      onChange={handleInputChange}
+                      fullWidth
+                      variant="outlined"
+                      InputProps={{
+                        sx: { borderRadius: "8px" },
+                      }}
+                    />
+                  </div>
+
+                  <TextField
+                    label="Ubicación en mapa"
+                    name="map_locate"
+                    value={formData.map_locate}
+                    onChange={handleInputChange}
+                    fullWidth
+                    variant="outlined"
+                    InputProps={{
+                      sx: { borderRadius: "8px" },
+                    }}
+                  />
+
+                  <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <Typography variant="subtitle1" className="font-medium mb-2">
+                      Imagen del producto
+                    </Typography>
+                    <div className="flex items-center justify-center w-full">
+                      <label className="flex flex-col w-full h-24 border-2 border-dashed border-blue-300 rounded-lg hover:bg-gray-100 hover:border-blue-400 transition-all cursor-pointer">
+                        {formData.image ? (
+                          <div className="flex items-center justify-center h-full">
+                            {typeof formData.image === "string" ? (
+                              <img
+                                src={formData.image || "/placeholder.svg"}
+                                alt="Vista previa"
+                                className="h-full object-contain rounded"
+                              />
+                            ) : (
+                              <div className="flex flex-col items-center justify-center w-full h-full">
+                                <img
+                                  src={URL.createObjectURL(formData.image) || "/placeholder.svg"}
+                                  alt="Vista previa"
+                                  className="h-16 object-contain"
+                                />
+                                <p className="text-xs text-gray-500 mt-1 truncate w-40">{formData.image.name}</p>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-center justify-center pt-4">
+                            <svg
+                              className="w-6 h-6 text-gray-400 group-hover:text-gray-600"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                              ></path>
+                            </svg>
+                            <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                              Seleccionar imagen
+                            </p>
+                          </div>
+                        )}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="opacity-0 absolute"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Botones fijos en la parte inferior */}
+              <div className="mt-auto p-4 bg-gray-50 border-t flex justify-end space-x-2 rounded-b-lg">
+                <Button
+                  variant="outlined"
+                  onClick={handleCloseEditModal}
+                  sx={{
+                    borderRadius: "4px",
+                    textTransform: "none",
+                    padding: "6px 16px",
+                  }}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleEditSubmit}
+                  sx={{
+                    borderRadius: "4px",
+                    backgroundColor: "#39A900",
+                    "&:hover": {
+                      backgroundColor: "#2d8500",
+                    },
+                    textTransform: "none",
+                    padding: "6px 16px",
+                  }}
+                >
+                  Guardar Cambios
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="p-8 text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Cargando información del producto...</p>
+            </div>
+          )}
+        </Box>
+      </Modal>
     </Box>
   )
 }
 
 export default UserProfile
-

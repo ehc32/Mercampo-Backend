@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import AsideEnterprise from "../components/enterprise/asideEnterprise";
 import ContentEnterprise from "../components/enterprise/content";
@@ -12,37 +12,38 @@ const Enterprise = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchEnterpriseData = async () => {
-      if (!id) {
-        setError('No se proporcionó ID de usuario');
-        setIsLoading(false);
-        return;
-      }
+  // Mover la función fetchEnterpriseData fuera del useEffect y usar useCallback
+  const fetchEnterpriseData = useCallback(async () => {
+    if (!id) {
+      setError('No se proporcionó ID de usuario');
+      setIsLoading(false);
+      return;
+    }
 
-      try {
-        setIsLoading(true);
-        const response = await getEnterpriseByUser(id);
-        
-        if (!response.data || !response.data.enterprise) {
-          setError('No hay datos de empresa');
-        } else {
-          setEnterpriseData(response.data);
-        }
-        
-        setIsLoading(false);
-      } catch (err) {
-        setError('Error al cargar los datos de la empresa');
-        setIsLoading(false);
-        console.error(err);
+    try {
+      setIsLoading(true);
+      const response = await getEnterpriseByUser(id);
+      
+      if (!response.data || !response.data.enterprise) {
+        setError('No hay datos de empresa');
+      } else {
+        setEnterpriseData(response.data);
       }
-    };
-
-    fetchEnterpriseData();
+      
+      setIsLoading(false);
+    } catch (err) {
+      setError('Error al cargar los datos de la empresa');
+      setIsLoading(false);
+      console.error(err);
+    }
   }, [id]);
 
+  useEffect(() => {
+    fetchEnterpriseData();
+  }, [fetchEnterpriseData]);
+
   const handleRegisterEnterprise = () => {
-    navigate('/create-enterprise'); // Ajusta esta ruta según tu aplicación
+    navigate('/create-enterprise');
     toast.info('Redirigiendo al registro de empresa');
   };
 
@@ -124,7 +125,10 @@ const Enterprise = () => {
         height: '100%',
         overflowY: 'auto'
       }}>
-        <AsideEnterprise enterpriseData={enterpriseData} />
+        <AsideEnterprise 
+          enterpriseData={enterpriseData} 
+          onUpdate={fetchEnterpriseData} // Pasamos directamente la función
+        />
       </div>
       
       {/* Contenido principal - Ocupa todo el espacio restante */}

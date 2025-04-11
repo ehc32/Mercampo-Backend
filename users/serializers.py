@@ -120,8 +120,8 @@ class UserCanPublishSerializer(serializers.ModelSerializer):
 
 
 class EnterpriseSerializer(serializers.ModelSerializer):
-
-    owner_user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    owner_user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
+    tipo_productos = serializers.CharField(required=False)
 
     class Meta:
         model = Enterprise
@@ -130,6 +130,17 @@ class EnterpriseSerializer(serializers.ModelSerializer):
             'instagram', 'whatsapp', 'address', 'products_length', 'description',
             'link_enterprise', 'avatar', 'is_active'
         ]
+        extra_kwargs = {
+            'rut': {'required': False},
+            'products_length': {'required': False},
+            'is_active': {'required': False},
+        }
+
+    def validate_tipo_productos(self, value):
+        # Si viene como lista, convertir a string separado por comas
+        if isinstance(value, list):
+            return ', '.join(value)
+        return value
 
     def create(self, validated_data):
         owner_user = validated_data.pop('owner_user')
@@ -145,13 +156,19 @@ class EnterpriseSerializer(serializers.ModelSerializer):
         validated_data['rut'] = rut
         validated_data['tipo_productos'] = tipo_productos
         
-        # Validaciones opcionales
         if Enterprise.objects.filter(owner_user=owner_user).exists():
             raise serializers.ValidationError("Este usuario ya tiene una empresa registrada.")
 
-        # Crear la empresa
         enterprise = Enterprise.objects.create(owner_user=owner_user, **validated_data)
         return enterprise
+
+    def update(self, instance, validated_data):
+        # Procesar campos específicos si están presentes
+        if 'tipo_productos' in validated_data:
+            if isinstance(validated_data['tipo_productos'], list):
+                validated_data['tipo_productos'] = ', '.join(validated_data['tipo_productos'])
+        
+        return super().update(instance, validated_data)
     
 class EnterprisePostSerializer(serializers.ModelSerializer):
     images = serializers.ListField(
