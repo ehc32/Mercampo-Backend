@@ -4,6 +4,7 @@ import Map from './Map';
 import './style.css';
 import { compressImage } from '../../utils/imageUtils';
 import { update_enterprise } from '../../api/users';
+import { Tooltip } from '@mui/material';
 
 interface AsideEnterpriseProps {
     enterpriseData: any;
@@ -309,34 +310,87 @@ const AsideEnterprise = ({ enterpriseData, onUpdate }: AsideEnterpriseProps) => 
                             </>
                         ) : (
                             <>
-                                <a
+                                <Tooltip 
+                                    title="Facebook"
+                                    arrow
+                                    placement="bottom"
+                                    componentsProps={{
+                                    tooltip: {
+                                        sx: {
+                                        bgcolor: '#3b5998', // Color azul de Facebook
+                                        color: 'white',
+                                        fontSize: '0.8rem',
+                                        '& .MuiTooltip-arrow': {
+                                            color: '#3b5998',
+                                        },
+                                        }
+                                    }
+                                    }}
+                                >
+                                    <a
                                     href={formData.facebook || "https://facebook.com"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="social-link facebook"
-                                >
+                                    >
                                     <FaFacebookF className="social-icon" />
-                                    <span>Facebook</span>
-                                </a>
-                                <a
+                                    </a>
+                                </Tooltip>
+
+                                <Tooltip 
+                                    title="Instagram"
+                                    arrow
+                                    placement="bottom"
+                                    componentsProps={{
+                                    tooltip: {
+                                        sx: {
+                                        bgcolor: '#E1306C', // Color rosa de Instagram
+                                        color: 'white',
+                                        fontSize: '0.8rem',
+                                        '& .MuiTooltip-arrow': {
+                                            color: '#E1306C',
+                                        },
+                                        }
+                                    }
+                                    }}
+                                >
+                                    <a
                                     href={formData.instagram || "https://instagram.com"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="social-link instagram"
-                                >
+                                    >
                                     <FaInstagram className="social-icon" />
-                                    <span>Instagram</span>
-                                </a>
-                                <a
+                                    </a>
+                                </Tooltip>
+
+                                <Tooltip 
+                                    title="WhatsApp"
+                                    arrow
+                                    placement="bottom"
+                                    componentsProps={{
+                                    tooltip: {
+                                        sx: {
+                                        bgcolor: '#25D366', // Color verde de WhatsApp
+                                        color: 'white',
+                                        fontSize: '0.8rem',
+                                        '& .MuiTooltip-arrow': {
+                                            color: '#25D366',
+                                        },
+                                        }
+                                    }
+                                    }}
+                                >
+                                    <a
                                     href={`https://wa.me/${formData.whatsapp}` || "https://wa.me/1234567890"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="social-link whatsapp"
-                                >
+                                    >
                                     <FaWhatsapp className="social-icon" />
-                                    <span>WhatsApp</span>
-                                </a>
-                            </>
+                                    </a>
+                                </Tooltip>
+                                </>
                         )}
                     </div>
 

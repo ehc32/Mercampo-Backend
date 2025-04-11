@@ -13,7 +13,7 @@ export default function Component() {
                         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl" style={{ color: '#fff' }}>
                             Nuestra Plataforma de Comercio
                         </h1>
-                        <p className="text-lg md:text-xl text-white">
+                        <p className="text-lg md:text-xl text-white text-justify">
                             Somos una plataforma dedicada a conectar a productores y consumidores a través de soluciones innovadoras para mejorar la comercialización.
                         </p>
                     </div>
@@ -43,21 +43,21 @@ export default function Component() {
                                     <p className="text-16 font-bold text-black" style={{ fontSize: '16px' }}>Sin intermediarios</p>
                                     <span className="ml-1">🚫</span>
                                 </div>
-                                <p className="text-16 text-black" style={{ fontSize: '16px' }}>En mercampo, los productores pueden vender sus productos directamente a los consumidores, sin tener que pagar comisiones o tarifas a intermediarios.</p>
+                                <p className="text-16 text-black text-justify" style={{ fontSize: '16px' }}>En mercampo, los productores pueden vender sus productos directamente a los consumidores, sin tener que pagar comisiones o tarifas a intermediarios.</p>
                             </li>
                             <li>
                                 <div className="flex flex-row align-center">
                                     <p className="text-16 font-bold text-black" style={{ fontSize: '16px' }}>Pagos seguros</p>
                                     <span className="ml-1">🔒</span>
                                 </div>
-                                <p className="text-16 text-black" style={{ fontSize: '16px' }}>Nuestra plataforma cuenta con integración PayPal, lo que garantiza que las transacciones sean seguras y confiables.</p>
+                                <p className="text-16 text-black text-justify" style={{ fontSize: '16px' }}>Nuestra plataforma cuenta con integración PayPal, lo que garantiza que las transacciones sean seguras y confiables.</p>
                             </li>
                             <li>
                                 <div className="flex flex-row align-center">
                                     <p className="text-16 font-bold text-black" style={{ fontSize: '16px' }}>Acceso a nuevos mercados</p>
                                     <span className=" ml-2">🌐</span>
                                 </div>
-                                <p className="text-16 text-black" style={{ fontSize: '16px' }}>Nuestra plataforma conecta a los productores con un amplio mercado de consumidores, lo que les permite expandir su negocio y aumentar sus ventas.</p>
+                                <p className="text-16 text-black text-justify" style={{ fontSize: '16px' }}>Nuestra plataforma conecta a los productores con un amplio mercado de consumidores, lo que les permite expandir su negocio y aumentar sus ventas.</p>
                             </li>
                         </ul>
                     </div>

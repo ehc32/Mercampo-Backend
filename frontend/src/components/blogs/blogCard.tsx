@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
-import { Rating, Typography } from '@mui/material';
+import { Rating, Tooltip, Typography } from '@mui/material';
 import { Star as StarIcon } from '@mui/icons-material';
 import { ChevronDown, ChevronUp, User } from 'lucide-react';
 import { create_comment, get_solo_user, edit_comment, delete_comment } from '../../api/users';
@@ -309,17 +309,35 @@ const BlogCard = ({ post }: { post: any }) => {
                     onClick={handleEnterpriseClick}
                     style={{ cursor: 'pointer' }}
                 >
-                    {enterpriseData?.avatar ? (
-                        <img 
-                            src={enterpriseData.avatar} 
-                            alt="Logo de la empresa" 
-                            className="user-avatar"
-                        />
-                    ) : (
-                        <div className="default-avatar">
-                            <User size={20} />
-                        </div>
-                    )}
+                    <Tooltip 
+                        title={enterpriseData?.name || "Empresa desconocida"}
+                        arrow
+                        placement="bottom"
+                        componentsProps={{
+                            tooltip: {
+                                sx: {
+                                    bgcolor: '#3A3A3A',
+                                    color: 'white',
+                                    fontSize: '0.8rem',
+                                    '& .MuiTooltip-arrow': {
+                                        color: '#3A3A3A',
+                                    },
+                                }
+                            }
+                        }}
+                    >
+                        {enterpriseData?.avatar ? (
+                            <img 
+                                src={enterpriseData.avatar} 
+                                alt="Logo de la empresa" 
+                                className="user-avatar"
+                            />
+                        ) : (
+                            <div className="default-avatar">
+                                <User size={20} />
+                            </div>
+                        )}
+                    </Tooltip>
                     <div className="user-details">
                         <p className="user-name">
                             {loadingEnterprise ? "Cargando..." : enterpriseData?.name || "Empresa desconocida"}

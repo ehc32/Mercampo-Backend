@@ -10560,3 +10560,171 @@ Traceback (most recent call last):
     return File(open(self.path(name), mode))
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srhad\\Desktop\\plataforma comercio\\PlataformaComercio\\media\\image_0_RA7LRxh.jpg'
+INFO 2025-04-11 08:54:46,268 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-11 08:55:35,503 log Internal Server Error: /products/getRandom/random_products/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\products\views.py", line 142, in get_products_random
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 687, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\products\serializers.py", line 21, in get_first_image
+    with first_image_instance.image.open("rb") as image_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\fields\files.py", line 79, in open
+    self.file = self.storage.open(self.name, mode)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\files\storage\base.py", line 22, in open
+    return self._open(name, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\files\storage\filesystem.py", line 68, in _open
+    return File(open(self.path(name), mode))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srhad\\Desktop\\plataforma comercio\\PlataformaComercio\\media\\image_0_ch1PjQt.jpg'
+ERROR 2025-04-11 08:55:35,505 log Internal Server Error: /products/getRandom/random_products/
+Traceback (most recent call last):
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\products\views.py", line 142, in get_products_random
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 687, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\products\serializers.py", line 21, in get_first_image
+    with first_image_instance.image.open("rb") as image_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\db\models\fields\files.py", line 79, in open
+    self.file = self.storage.open(self.name, mode)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\files\storage\base.py", line 22, in open
+    return self._open(name, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\srhad\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\django\core\files\storage\filesystem.py", line 68, in _open
+    return File(open(self.path(name), mode))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srhad\\Desktop\\plataforma comercio\\PlataformaComercio\\media\\image_0_ucpXYAI.jpg'
+WARNING 2025-04-11 08:56:37,593 log Unauthorized: /users/login/
+WARNING 2025-04-11 08:56:50,188 log Unauthorized: /users/login/
+INFO 2025-04-11 08:57:01,363 autoreload C:\Users\srhad\Desktop\plataforma comercio\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-04-11 08:57:03,518 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-11 08:58:52,705 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 08:58:52,796 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 08:58:52,862 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-11 08:58:52,867 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-11 09:19:17,655 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:19:17,669 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:19:25,801 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:19:25,812 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:19:25,936 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-11 09:19:25,996 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-11 09:31:02,152 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:31:02,160 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:31:04,787 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:31:04,794 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:34:45,151 log Unauthorized: /users/refresh/
+WARNING 2025-04-11 09:34:45,152 log Unauthorized: /users/refresh/
+WARNING 2025-04-11 09:34:45,221 log Unauthorized: /orders/notifications/
+WARNING 2025-04-11 09:34:45,241 log Unauthorized: /orders/notifications/
+WARNING 2025-04-11 09:35:11,501 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:35:11,598 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:42:58,948 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:42:58,949 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:43:07,624 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:43:07,631 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 09:43:07,680 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 09:43:07,681 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 10:01:31,202 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:01:31,205 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:01:31,238 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 10:01:31,250 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 10:01:40,229 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 10:01:41,019 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 10:22:56,490 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 10:22:56,507 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:22:56,508 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:22:56,539 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-04-11 10:39:06,143 log Unauthorized: /users/refresh/
+WARNING 2025-04-11 10:39:07,478 log Unauthorized: /orders/notifications/
+WARNING 2025-04-11 10:39:23,838 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:39:23,852 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:39:31,919 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:39:31,948 log Not Found: /users/paypalconfig/3/
+WARNING 2025-04-11 10:39:31,995 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-11 10:39:32,000 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-04-11 10:40:15,047 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-11 10:40:15,059 log Not Found: /products/opinion/bring/0/
+WARNING 2025-04-11 10:40:15,796 log Not Found: /products/caterandom//

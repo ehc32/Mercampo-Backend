@@ -21,6 +21,7 @@ import {
   CardContent,
   Chip,
   Paper,
+  Tooltip,
 } from "@mui/material"
 import {
   ArrowBack,
@@ -415,31 +416,32 @@ const CartPage = () => {
                               </div>
 
                               <div className="flex items-center space-x-4 ml-2">
-                                <div className="flex items-center border border-gray-200 rounded-lg">
+                              <div className="flex items-center border border-gray-200 rounded-lg">
+                                <Tooltip title="Reducir cantidad" arrow placement="top">
                                   <IconButton size="small" onClick={() => removeFromCart(item)} sx={{ color: "#666" }}>
                                     <Remove fontSize="small" />
                                   </IconButton>
-                                  <Typography
-                                    variant="body2"
-                                    sx={{ width: "30px", textAlign: "center", fontWeight: 500 }}
-                                  >
-                                    {item.quantity}
-                                  </Typography>
+                                </Tooltip>
+                                
+                                <Typography
+                                  variant="body2"
+                                  sx={{ width: "30px", textAlign: "center", fontWeight: 500 }}
+                                >
+                                  {item.quantity}
+                                </Typography>
+                                
+                                <Tooltip title="Aumentar cantidad" arrow placement="top">
                                   <IconButton size="small" onClick={() => addToCart(item)} sx={{ color: "#39A900" }}>
                                     <Add fontSize="small" />
                                   </IconButton>
-                                </div>
+                                </Tooltip>
+                              </div>
 
-                                <Typography
-                                  variant="subtitle1"
-                                  sx={{ fontWeight: 600, width: "90px", textAlign: "right" }}
-                                >
-                                  ${(item.price * item.quantity).toLocaleString()}
-                                </Typography>
-
+                              <Tooltip title="Eliminar producto" arrow placement="top">
                                 <IconButton size="small" onClick={() => removeProduct(item)} sx={{ color: "#f44336" }}>
                                   <DeleteOutline fontSize="small" />
                                 </IconButton>
+                              </Tooltip>
                               </div>
                             </div>
                           </CardContent>

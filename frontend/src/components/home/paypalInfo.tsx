@@ -8,7 +8,7 @@ const PaypalIntro = () => {
           <h2 className="text-center text-2xl font-extrabold text-gray-900 mb-4">
             <span className="text-[#39A900]">Pago Seguro</span> con PayPal
           </h2>
-          <p className="text-gray-700 mb-4" style={{ fontSize: "16px" }}>
+          <p className="text-gray-700 mb-4 text-justify" style={{ fontSize: "16px" }}>
             En nuestra tienda en línea, te ofrecemos la opción de pagar con PayPal, una de las plataformas de pago más
             seguras y confiables del mundo. Con PayPal, puedes realizar tus compras de manera rápida y sencilla, con la
             tranquilidad de que tus datos están protegidos.
@@ -20,7 +20,7 @@ const PaypalIntro = () => {
               <h3 className="text-2xl font-semibold text-gray-800 mb-3" style={{ fontSize: "18px" }}>
                 Ventajas de Usar PayPal
               </h3>
-              <ul className="list-disc list-inside space-y-1 text-gray-600">
+              <ul className="list-disc list-inside space-y-1 text-gray-600 text-justify">
                 <li style={{ fontSize: "16px" }}>
                   <strong className="text-gray-800">Seguridad:</strong> PayPal utiliza tecnología avanzada para proteger
                   tus datos financieros y personales, reduciendo el riesgo de fraude.
@@ -52,7 +52,7 @@ const PaypalIntro = () => {
               />
             </div>
           </div>
-          <p className="text-gray-700" style={{ fontSize: "16px" }}>
+          <p className="text-gray-700 text-justify" style={{ fontSize: "16px" }}>
             Al elegir PayPal como método de pago, no solo estás optando por una transacción segura, sino también por una
             experiencia de compra sin complicaciones. ¡Compra con confianza y disfruta de tus productos!
           </p>

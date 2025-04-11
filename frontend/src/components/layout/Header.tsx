@@ -13,6 +13,7 @@ import AsideToggle from "../shared/tooltip/TooltipAside"
 import "./../../global/style.css"
 import NotificationBadge from "../NotificationBadge"
 import { ShoppingCart, User, LogOut, Package, Settings } from "lucide-react"
+import { Tooltip } from "@mui/material"
 
 const Header = () => {
   const [roleLocal, setRoleLocal] = useState("")
@@ -124,36 +125,89 @@ const Header = () => {
 
               {/* Right section: Cart, notifications, and user menu */}
               <div className="flex items-center space-x-4">
-                {/* Cart */}
-                <div className="flex items-center">
-                  <Link
-                    to="/cart"
-                    className="relative p-1 rounded-full text-white hover:text-green-500 focus:outline-none"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      navigate("/cart")
+                {/* Cart con Tooltip */}
+                <Tooltip 
+                  title="Carrito de compras"
+                  arrow
+                  placement="bottom"
+                  componentsProps={{
+                    tooltip: {
+                      sx: {
+                        bgcolor: '#3A3A3A',
+                        color: 'white',
+                        fontSize: '0.8rem',
+                        '& .MuiTooltip-arrow': {
+                          color: '#3A3A3A',
+                        },
+                      }
+                    }
+                  }}
+                >
+                  <div className="flex items-center">
+                    <Link
+                      to="/cart"
+                      className="relative p-1 rounded-full text-white hover:text-green-500 focus:outline-none"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        navigate("/cart")
+                      }}
+                    >
+                      <ShoppingCart size={20} />
+                      {cart.length > 0 && (
+                        <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-green-600 rounded-full">
+                          {cart.length}
+                        </span>
+                      )}
+                    </Link>
+                  </div>
+                </Tooltip>
+
+                {/* Notifications con Tooltip - Solo para vendedores y administradores */}
+                {isAuth && (roleLocal === "seller" || roleLocal === "admin") && (
+                  <Tooltip 
+                    title="Notificaciones"
+                    arrow
+                    placement="bottom"
+                    componentsProps={{
+                      tooltip: {
+                        sx: {
+                          bgcolor: '#3A3A3A',
+                          color: 'white',
+                          fontSize: '0.8rem',
+                          '& .MuiTooltip-arrow': {
+                            color: '#3A3A3A',
+                          },
+                        }
+                      }
                     }}
                   >
-                    <ShoppingCart size={20} />
-                    {cart.length > 0 && (
-                      <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-green-600 rounded-full">
-                        {cart.length}
-                      </span>
-                    )}
-                  </Link>
-                </div>
-
-                {/* Notifications - Only for authenticated sellers and admins */}
-                {isAuth && (roleLocal === "seller" || roleLocal === "admin") && (
-                  <div className="relatve">
-                    <NotificationBadge userId={id} userRole={roleLocal} />
-                  </div>
+                    <div className="relative">
+                      <NotificationBadge userId={id} userRole={roleLocal} />
+                    </div>
+                  </Tooltip>
                 )}
 
                 {/* User menu or auth buttons */}
                 {isAuth ? (
-                  <Menu as="div" className="relative ml-3">
-                    <div>
+                <Menu as="div" className="relative ml-3">
+                  <div>
+                    <Tooltip 
+                      title="Menú de usuario"
+                      arrow
+                      placement="bottom"
+                      componentsProps={{
+                        tooltip: {
+                          sx: {
+                            bgcolor: '#3A3A3A',
+                            color: 'white',
+                            fontSize: '0.8rem',
+                            '& .MuiTooltip-arrow': {
+                              color: '#3A3A3A',
+                            },
+                          }
+                        }
+                      }}
+                    >
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Menú de usuario</span>
                         <img
@@ -162,6 +216,7 @@ const Header = () => {
                           alt="Avatar"
                         />
                       </Menu.Button>
+                    </Tooltip>
                     </div>
                     <Transition
                       as={Fragment}

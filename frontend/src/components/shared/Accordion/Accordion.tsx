@@ -25,7 +25,7 @@ const AccordionSet: React.FC<AccordionProps> = ({ titulo, contenido, isOpen, onC
                 {titulo}
             </AccordionSummary>
             {isOpen && (
-                <AccordionDetails className={'light-mode-accordion'}>
+                <AccordionDetails className={'light-mode-accordion text-justify'}>
                     {contenido}
                 </AccordionDetails>
             )}
