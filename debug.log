@@ -10728,3 +10728,376 @@ WARNING 2025-04-11 10:39:32,000 log Not Found: /users/mercado-pago/config/done/1
 WARNING 2025-04-11 10:40:15,047 log Not Found: /products/opinion/bring/0/
 WARNING 2025-04-11 10:40:15,059 log Not Found: /products/opinion/bring/0/
 WARNING 2025-04-11 10:40:15,796 log Not Found: /products/caterandom//
+INFO 2025-10-27 12:36:31,940 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 12:39:08,628 log Not Found: /products/getRandom/random_products/
+WARNING 2025-10-27 12:39:08,682 log Not Found: /products/getRandom/random_products/
+WARNING 2025-10-27 12:42:18,814 log Not Found: /users/login/
+WARNING 2025-10-27 12:42:42,001 log Not Found: /users/login/
+INFO 2025-10-27 12:54:32,582 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-27 12:54:36,783 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 13:00:39,956 log Unauthorized: /users/login/
+WARNING 2025-10-27 13:03:32,136 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:03:32,168 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-10-27 13:03:32,187 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:03:32,209 log Not Found: /users/mercado-pago/config/done/3/
+WARNING 2025-10-27 13:04:43,289 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:04:43,327 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:04:43,364 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:04:43,380 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:05:35,507 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:05:35,517 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:05:35,566 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:05:35,573 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:06:26,146 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:06:26,177 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:06:26,215 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:06:26,231 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:06:50,361 log Unauthorized: /users/login/
+ERROR 2025-10-27 13:10:06,384 log Internal Server Error: /products/get/equals/Tomate/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py", line 72, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'
+WARNING 2025-10-27 13:10:30,920 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 13:10:30,988 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 13:10:31,074 log Not Found: /products/caterandom//
+WARNING 2025-10-27 13:11:47,256 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 13:11:47,308 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 13:11:47,486 log Not Found: /products/caterandom//
+WARNING 2025-10-27 13:11:53,755 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:11:53,757 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:11:53,825 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:11:53,834 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:12:23,010 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:12:23,044 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:12:23,062 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:12:23,108 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:14:11,828 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:14:11,835 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:14:11,932 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:14:11,950 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:21:49,959 log Bad Request: /users/sell/paypalsel/1/
+ERROR 2025-10-27 13:22:56,449 log Internal Server Error: /users/sell/paypalsel/1/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_paypalconfig_pkey"
+DETAIL:  Key (user_id)=(1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py", line 159, in request_seller_paypal_config
+    serializer.save()  # El serializador se encargará de asignar el usuario
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py", line 91, in create
+    paypal_config = PayPalConfig.objects.create(user=user, **validated_data)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_paypalconfig_pkey"
+DETAIL:  Key (user_id)=(1) already exists.
+
+WARNING 2025-10-27 13:23:19,244 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 13:23:19,293 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 13:23:19,481 log Not Found: /products/caterandom//
+WARNING 2025-10-27 13:23:25,715 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:23:25,734 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:23:25,771 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:23:25,811 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:23:43,941 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:23:43,968 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:23:44,000 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:23:44,028 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:23:48,071 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:23:48,091 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:23:48,117 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:23:48,171 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:26:11,175 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:26:11,275 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:26:11,421 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:26:11,466 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:26:51,371 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:26:51,406 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:26:51,448 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:26:51,486 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:27:06,063 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:27:06,109 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:29:13,492 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:29:13,520 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 13:29:13,547 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 13:29:13,602 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-27 17:05:47,965 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 17:06:45,812 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 17:07:46,113 log Unauthorized: /users/refresh/
+WARNING 2025-10-27 17:07:46,114 log Unauthorized: /users/refresh/
+WARNING 2025-10-27 17:07:46,246 log Unauthorized: /orders/notifications/
+WARNING 2025-10-27 17:07:46,261 log Unauthorized: /orders/notifications/
+WARNING 2025-10-27 17:08:56,634 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:08:56,675 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 17:08:56,696 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:08:56,748 log Not Found: /users/mercado-pago/config/done/5/
+ERROR 2025-10-27 17:11:10,273 log Internal Server Error: /products/delete/2/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py", line 312, in delete_product
+    product = Product.objects.get(pk=pk)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+products.models.Product.DoesNotExist: Product matching query does not exist.
+ERROR 2025-10-27 17:11:11,227 log Internal Server Error: /products/delete/4/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py", line 312, in delete_product
+    product = Product.objects.get(pk=pk)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+products.models.Product.DoesNotExist: Product matching query does not exist.
+WARNING 2025-10-27 17:11:56,727 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:11:56,909 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:11:57,337 log Not Found: /products/caterandom//
+WARNING 2025-10-27 17:13:07,623 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:13:07,747 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:13:08,143 log Not Found: /products/caterandom//
+WARNING 2025-10-27 17:13:18,448 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:13:18,472 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:13:18,519 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:13:18,550 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:14:08,453 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:14:08,493 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:14:08,541 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:14:08,568 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:14:18,712 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:14:18,748 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:14:18,776 log Not Found: /users/paypalconfig/3/
+WARNING 2025-10-27 17:14:18,813 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:17:03,242 log Not Found: /users/paypalconfig/undefined/
+WARNING 2025-10-27 17:17:03,267 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:17:29,370 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:17:29,451 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:24:26,401 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:24:26,483 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:24:34,756 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:24:34,850 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:24:49,140 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 17:24:49,175 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 17:24:49,236 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 17:24:49,266 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 17:24:58,158 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:24:58,220 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:48:49,573 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:48:49,624 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:50:47,210 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:50:47,309 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:51:20,858 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:51:20,922 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:51:21,307 log Not Found: /products/caterandom//
+WARNING 2025-10-27 17:51:29,137 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:51:29,269 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:51:42,603 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 17:51:42,636 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 17:51:42,673 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 17:51:42,698 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 17:51:54,274 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:51:54,364 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:52:25,865 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:52:25,924 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:52:42,574 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 17:52:42,613 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 17:52:42,659 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 17:52:42,709 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 17:53:12,203 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:53:12,256 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 17:53:12,488 log Not Found: /products/caterandom//
+WARNING 2025-10-27 17:53:17,352 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:53:17,423 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 17:55:19,634 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:15:57,122 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:15:57,156 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:15:57,177 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:15:57,207 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:16:44,486 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:16:44,541 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-27 18:16:52,105 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-27 18:16:55,933 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 18:16:56,622 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:17:09,343 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:17:09,359 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:17:09,402 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:17:09,432 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:17:27,436 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:17:27,464 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:17:27,480 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:17:27,514 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:17:33,109 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:17:33,120 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:17:33,161 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:17:33,209 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:17:38,074 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:17:38,118 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-27 18:22:00,810 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\models.py changed, reloading.
+INFO 2025-10-27 18:22:02,345 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 18:22:28,898 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-27 18:22:29,996 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 18:22:45,425 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\urls.py changed, reloading.
+INFO 2025-10-27 18:22:46,385 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 18:23:30,907 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\urls.py changed, reloading.
+INFO 2025-10-27 18:23:31,753 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 18:28:43,960 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:28:43,994 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:29:07,820 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:29:07,878 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:29:46,526 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:29:46,544 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:29:46,571 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:29:46,604 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:29:50,028 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:29:50,067 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-27 18:33:56,839 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-27 18:33:59,422 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 18:34:13,638 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-27 18:34:14,940 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 18:34:29,742 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-27 18:34:31,309 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 18:37:45,068 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:37:45,121 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:37:58,967 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:37:58,987 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:37:59,018 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:37:59,043 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:38:05,339 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:38:05,401 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:41:54,296 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:41:54,377 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:42:21,235 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:42:21,298 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:42:34,717 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:42:34,763 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:43:38,786 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:43:38,855 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:44:11,780 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:44:11,839 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 18:44:11,865 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:44:11,925 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 18:54:38,874 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 18:54:38,917 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-27 18:54:39,284 log Not Found: /products/caterandom//
+WARNING 2025-10-27 18:56:51,637 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:56:51,732 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:56:54,996 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:56:55,049 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:57:19,072 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 18:57:19,124 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 19:00:54,199 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 19:00:54,219 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 19:00:54,247 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-27 19:00:54,256 log Not Found: /users/mercado-pago/config/done/5/
+WARNING 2025-10-27 19:01:35,262 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 19:01:35,288 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 19:01:45,116 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 19:01:45,144 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 19:03:12,636 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-27 19:03:12,683 log Not Found: /users/mercado-pago/config/done/1/

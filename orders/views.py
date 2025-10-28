@@ -49,6 +49,8 @@ def create_order(request):
       - order_items: string JSON de una lista de items (cada uno con id, quantity, price)
       - total_price: total de la orden
       - address, city, postal_code: datos de envío
+      - payment_method (opcional): método de pago usado
+      - payment_id (opcional): ID de la transacción
     """
     user = request.user
     data = request.data
@@ -59,11 +61,25 @@ def create_order(request):
         return Response({'error': 'Invalid format for order_items'}, status=status.HTTP_400_BAD_REQUEST)
 
     total_price = data['total_price']
+    payment_method = data.get('payment_method', None)
+    payment_id = data.get('payment_id', None)
+
+    # Obtener el vendedor del primer producto (asumiendo que todos son del mismo vendedor)
+    seller = None
+    if orderItems:
+        try:
+            first_product = Product.objects.get(id=orderItems[0]['id'])
+            seller = first_product.user
+        except Product.DoesNotExist:
+            pass
 
     # Crear la orden definitiva
     order = Order.objects.create(
         user=user,
-        total_price=total_price
+        seller=seller,  # Asignar el vendedor
+        total_price=total_price,
+        payment_method=payment_method,
+        payment_id=payment_id
     )
 
     # Crear la dirección de envío
@@ -140,10 +156,11 @@ def get_order_items(request, pk):
 def seller_pending_orders(request):
     seller = request.user  
 
+    # Usar el campo seller directamente para mejor rendimiento
     orders = Order.objects.filter(
-        orderitem__product__user=seller,  
-        is_delivered=False  
-    ).distinct()  
+        seller=seller,
+        status__in=['pending', 'preparing', 'shipped']  # Estados pendientes
+    ).order_by('-created_at')
 
     # Serializamos las órdenes
     serializer = OrderSerializer(orders, many=True)
@@ -156,10 +173,11 @@ def seller_pending_orders(request):
 def seller_delivered_orders(request):
     seller = request.user
 
+    # Usar el campo seller directamente
     orders = Order.objects.filter(
-        orderitem__product__user=seller, 
-        is_delivered=True 
-    ).distinct() 
+        seller=seller,
+        status__in=['delivered', 'completed']  # Estados entregados
+    ).order_by('-created_at')
 
     # Serializamos las órdenes
     serializer = OrderSerializer(orders, many=True)
@@ -215,6 +233,90 @@ def mark_notification_as_read(request, notification_id):
     notification.save()
 
     return Response({'detail': 'Notification marked as read'}, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_order_status(request, order_id):
+    """
+    Actualiza el estado de una orden.
+    
+    Flujo de estados:
+    - pending -> preparing (vendedor)
+    - preparing -> shipped (vendedor)
+    - shipped -> delivered (vendedor)
+    - delivered -> completed (cliente confirma)
+    
+    Body: { "status": "preparing" | "shipped" | "delivered" | "completed" | "cancelled" }
+    """
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        return Response({'detail': 'Orden no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+    
+    new_status = request.data.get('status')
+    
+    # Validar que el status sea válido
+    valid_statuses = [choice[0] for choice in Order.STATUS_CHOICES]
+    if new_status not in valid_statuses:
+        return Response({'detail': 'Estado inválido'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Verificar permisos según el rol
+    user = request.user
+    
+    # Obtener el vendedor de la orden
+    seller = order.orderitem_set.first().product.user if order.orderitem_set.exists() else None
+    
+    # Solo el vendedor puede cambiar a: preparing, shipped, delivered
+    if new_status in ['preparing', 'shipped', 'delivered']:
+        if user != seller and not user.role == 'admin':
+            return Response({'detail': 'Solo el vendedor puede actualizar este estado'}, status=status.HTTP_403_FORBIDDEN)
+    
+    # Solo el cliente puede cambiar a: completed
+    if new_status == 'completed':
+        if user != order.user and not user.role == 'admin':
+            return Response({'detail': 'Solo el cliente puede completar la orden'}, status=status.HTTP_403_FORBIDDEN)
+        
+        # Solo se puede completar si está entregada
+        if order.status != 'delivered':
+            return Response({'detail': 'La orden debe estar entregada para completarla'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Actualizar el estado
+    old_status = order.status
+    order.status = new_status
+    
+    # Si se marca como delivered, actualizar campos de compatibilidad
+    if new_status == 'delivered':
+        order.is_delivered = True
+        order.delivered_at = datetime.now()
+    
+    order.save()
+    
+    # Crear notificación según el cambio de estado
+    if new_status == 'shipped' and seller:
+        Notification.objects.create(
+            user=order.user,
+            message=f"Tu orden #{order.id} ha sido enviada",
+            link=f"/orders/{order.id}/",
+        )
+    elif new_status == 'delivered' and seller:
+        Notification.objects.create(
+            user=order.user,
+            message=f"Tu orden #{order.id} ha sido entregada. Por favor confírmalo.",
+            link=f"/orders/{order.id}/",
+        )
+    elif new_status == 'completed' and seller:
+        Notification.objects.create(
+            user=seller,
+            message=f"El cliente ha confirmado la recepción de la orden #{order.id}",
+            link=f"/orders/{order.id}/",
+        )
+    
+    serializer = OrderSerializer(order)
+    return Response({
+        'detail': f'Estado actualizado de {old_status} a {new_status}',
+        'order': serializer.data
+    }, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])

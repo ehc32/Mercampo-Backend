@@ -3,6 +3,16 @@ from users.models import User
 from products.models import Product
 
 class Order(models.Model):
+    # Estados posibles para una orden
+    STATUS_CHOICES = [
+        ('pending', 'Pendiente'),
+        ('preparing', 'En preparación'),
+        ('shipped', 'Enviado'),
+        ('delivered', 'Entregado'),
+        ('completed', 'Completado'),
+        ('cancelled', 'Cancelado'),
+    ]
+    
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="buyer_orders") 
     seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="seller_orders")
     payment_method = models.CharField(max_length=200, null=True, blank=True)
@@ -11,10 +21,16 @@ class Order(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     is_paid = models.BooleanField(default=False)
     paid_at = models.DateTimeField(auto_now_add=False, null=True, blank=True)
-    is_delivered = models.BooleanField(default=False)
+    is_delivered = models.BooleanField(default=False)  # Mantener por compatibilidad
     delivered_at = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     payment_id = models.CharField(max_length=200, null=True, blank=True)
+    
+    # Nuevo campo de estado
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    
+    def __str__(self):
+        return f"Order #{self.id} - {self.get_status_display()}"
 
 
 class Orderitem(models.Model):

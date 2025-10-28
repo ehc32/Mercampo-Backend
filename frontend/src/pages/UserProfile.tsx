@@ -425,9 +425,9 @@ const UserProfile = () => {
   useEffect(() => {
     if (tabValue === "compras") {
       fetchMyOrders()
-    } else if (tabValue === "pendientes" && user?.role === "seller") {
+    } else if (tabValue === "pendientes" && (user?.role === "seller" || user?.role === "admin")) {
       fetchPendingOrders()
-    } else if (tabValue === "ventas" && user?.role === "seller") {
+    } else if (tabValue === "ventas" && (user?.role === "seller" || user?.role === "admin")) {
       fetchDeliveredOrders()
     }
   }, [tabValue, user?.role])
@@ -757,7 +757,7 @@ const UserProfile = () => {
               </>
             )}
 
-            {tabValue === "pendientes" && user?.role === "seller" && (
+            {tabValue === "pendientes" && (user?.role === "seller" || user?.role === "admin") && (
               <>
                 {isPendingLoading ? (
                   <Typography align="center" py={3}>
@@ -866,7 +866,7 @@ const UserProfile = () => {
               </>
             )}
 
-            {tabValue === "ventas" && user?.role === "seller" && (
+            {tabValue === "ventas" && (user?.role === "seller" || user?.role === "admin") && (
               <>
                 {isDeliveredLoading ? (
                   <Typography align="center" py={3}>
@@ -986,7 +986,7 @@ const UserProfile = () => {
               </>
             )}
 
-            {tabValue === "ventas" && user?.role !== "seller" && (
+            {tabValue === "ventas" && user?.role !== "seller" && user?.role !== "admin" && (
               <>
                 <Table>
                   <TableHead>

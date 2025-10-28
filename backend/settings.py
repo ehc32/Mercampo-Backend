@@ -15,10 +15,11 @@ from datetime import timedelta
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from BASE_DIR/.env
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -114,12 +115,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
-    'users',
-    'products',
     'corsheaders',
-    'orders',
     'django_celery_beat',
     'drf_yasg',
+    'users',
+    'products',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -166,12 +167,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'NcwYPXheNEwafmCNadOBVebiOOxnrHOs',
-        'HOST': 'tramway.proxy.rlwy.net',
-        'PORT': '42749',
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': os.getenv('DB_NAME', 'railway'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -268,7 +269,7 @@ REST_FRAMEWORK = {
 
 # automatizar procesos, se va a usar en este caso para eliminar productos cada cierto tiempo
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Requiere que Redis esté instalado
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')  # Requiere que Redis esté instalado
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json' 
 

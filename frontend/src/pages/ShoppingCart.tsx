@@ -67,9 +67,17 @@ const CartPage = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
+  // Set seller ID when cart changes
+  useEffect(() => {
+    if (cart.length > 0 && cart[0].user) {
+      setPayPalUserId(cart[0].user)
+    }
+  }, [cart])
+
   // Fetch PayPal user data
   const paypalUser = async () => {
     try {
+      if (!id) return
       const response = await get_paypal_user(id)
       const data = response.data
       setPaypal(data)
@@ -192,7 +200,8 @@ const CartPage = () => {
     return actions.order
       .capture()
       .then((details) => {
-        handleSubmit()
+        // Pasar el payment_id y payment_method a handleSubmit
+        handleSubmit("paypal", data.orderID)
         toast.success("Pago completado. Gracias, " + details.payer.name.given_name)
       })
       .catch((error) => {
@@ -206,7 +215,7 @@ const CartPage = () => {
   }
 
   // Submit order
-  const handleSubmit = () => {
+  const handleSubmit = (paymentMethod?: string, paymentId?: string) => {
     if (cart.length === 0) {
       toast.warning("No hay productos en el carrito")
       return
@@ -228,6 +237,14 @@ const CartPage = () => {
       formData.append("address", address)
       formData.append("city", city)
       formData.append("postal_code", postal_code)
+      
+      // Agregar payment_method y payment_id si están disponibles
+      if (paymentMethod) {
+        formData.append("payment_method", paymentMethod)
+      }
+      if (paymentId) {
+        formData.append("payment_id", paymentId)
+      }
 
       create_order(formData)
       toast.success("Se ha realizado correctamente su compra, espere a que llegue su pedido 😊")
@@ -706,40 +723,7 @@ const CartPage = () => {
                     </div>
                   </div>
 
-                  {selectedPaymentMethod === "paypal" ? (
-                    <MuiButton
-                      fullWidth
-                      variant="contained"
-                      onClick={() => {
-                        if (!isFormValid) {
-                          setFormTouched(true)
-                        } else {
-                          handleSubmit()
-                        }
-                      }}
-                      disabled={isProcessing}
-                      sx={{
-                        mt: 3,
-                        bgcolor: "#39A900",
-                        "&:hover": { bgcolor: "#2c7d00" },
-                        py: 1.5,
-                        borderRadius: "10px",
-                        fontWeight: "bold",
-                        transition: "all 0.2s ease",
-                      }}
-                    >
-                      {isProcessing ? (
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                          <CircularProgress size={20} sx={{ color: "white", mr: 1 }} />
-                          Procesando...
-                        </Box>
-                      ) : (
-                        <>
-                          <CreditCard sx={{ mr: 1 }} /> Pagar con PayPal
-                        </>
-                      )}
-                    </MuiButton>
-                  ) : selectedPaymentMethod === "mercadopago" ? (
+                  {selectedPaymentMethod === "mercadopago" ? (
                     <MuiButton
                       fullWidth
                       variant="contained"

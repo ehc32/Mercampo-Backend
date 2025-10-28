@@ -15,10 +15,10 @@ urlpatterns = [
     path('deliver/<int:pk>/', views.delivered),
     path('solo/<int:pk>/', views.solo_order),
     path('<int:pk>/items/', views.get_order_items),
+    path('<int:order_id>/status/', views.update_order_status, name='update_order_status'),  # Nueva ruta
     path('payment/temp_preference/', views.create_temp_preference), 
     path('payment/webhook/', views.webhook), 
     path('payment/status/<str:payment_id>/', views.check_payment_status, name='check_payment_status'),
     path('payment/finalize/', views.finalize_order_on_success, name='finalize_order_on_success'),
     path('payment/mp-config/', views.mercadopago_config),
-
 ]
