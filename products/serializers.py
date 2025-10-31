@@ -1,5 +1,6 @@
 import base64
-import imghdr
+from io import BytesIO
+from PIL import Image
 
 from django.core.files.base import ContentFile
 from django.db import models
@@ -23,7 +24,11 @@ class ProductReadSerializer(serializers.ModelSerializer):
             with first_image_instance.image.open("rb") as image_file:
                 image_data = image_file.read()
                 encoded_image = base64.b64encode(image_data).decode('utf-8')
-                image_type = imghdr.what(None, image_data) or 'jpg'
+                try:
+                    fmt = Image.open(BytesIO(image_data)).format.lower()
+                    image_type = {'jpeg': 'jpg', 'jpg': 'jpg', 'png': 'png', 'gif': 'gif', 'webp': 'webp'}.get(fmt, 'jpg')
+                except Exception:
+                    image_type = 'jpg'
                 return f'data:image/{image_type};base64,{encoded_image.replace("dataimage/jpegbase64", "")}'
         return None
 
@@ -60,8 +65,10 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 
         for i, image in enumerate(images):
             image_data = base64.b64decode(image)
-            image_type = imghdr.what(None, image_data)
-            if image_type is None:
+            try:
+                fmt = Image.open(BytesIO(image_data)).format.lower()
+                image_type = {'jpeg': 'jpg', 'jpg': 'jpg', 'png': 'png', 'gif': 'gif', 'webp': 'webp'}.get(fmt, 'jpg')
+            except Exception:
                 image_type = 'jpg'
             image_name = f'image_{i}.{image_type}'
             image_file = ContentFile(image_data, name=image_name)
@@ -81,7 +88,11 @@ class ProductImagesSerializer(serializers.Serializer): # brings the imgs from th
             with image.image.open("rb") as image_file:
                 image_data = image_file.read()
                 encoded_image = base64.b64encode(image_data).decode('utf-8')
-                image_type = imghdr.what(None, image_data) or 'jpg'
+                try:
+                    fmt = Image.open(BytesIO(image_data)).format.lower()
+                    image_type = {'jpeg': 'jpg', 'jpg': 'jpg', 'png': 'png', 'gif': 'gif', 'webp': 'webp'}.get(fmt, 'jpg')
+                except Exception:
+                    image_type = 'jpg'
                 images_data.append(f'data:image/{image_type};base64,{encoded_image.replace("dataimage/jpegbase64", "")}')
         return images_data
     
