@@ -14019,3 +14019,196 @@ WARNING 2025-10-31 09:16:00,360 log Not Found: /products/opinion/bring/0/
 WARNING 2025-10-31 09:16:02,442 log Not Found: /products/caterandom//
 WARNING 2025-10-31 09:16:09,786 log Not Found: /users/paypalconfig/1/
 WARNING 2025-10-31 09:16:10,991 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 09:35:20,661 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 09:35:22,179 log Not Found: /users/paypalconfig/1/
+INFO 2025-10-31 09:36:46,168 views Configuración de Mercado Pago creada para usuario 1. Access_token presente: True, longitud: 75
+ERROR 2025-10-31 09:37:51,432 log Internal Server Error: /products/get/equals/Cebolla/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py", line 85, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'
+WARNING 2025-10-31 09:38:23,919 log Unauthorized: /users/login/
+WARNING 2025-10-31 09:38:54,705 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 09:38:55,886 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 09:38:57,928 log Not Found: /products/caterandom//
+ERROR 2025-10-31 09:40:27,243 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-5dbb64f7419sm635666137.15 - gsmtp')
+WARNING 2025-10-31 09:40:34,416 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 09:40:35,770 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 09:40:57,127 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 09:40:58,782 log Not Found: /users/paypalconfig/2/
+INFO 2025-10-31 09:41:53,025 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 09:41:53,358 views Vendedor identificado: 1
+INFO 2025-10-31 09:41:54,181 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 09:41:54,594 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 09:41:55,122 views Item agregado: Tomate x1 @ $34250.0
+INFO 2025-10-31 09:41:55,289 views Item agregado: Cebolla x1 @ $5000.0
+INFO 2025-10-31 09:41:55,289 views Creando preferencia de Mercado Pago con 2 items para usuario 2
+INFO 2025-10-31 09:41:55,289 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 34250.0,
+      "currency_id": "COP"
+    },
+    {
+      "title": "Cebolla",
+      "quantity": 1,
+      "unit_price": 5000.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "PRUEBAS",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "2",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=2",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 09:41:56,258 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "8814756537680114",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T10:41:59.887-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "2",
+    "id": "2958196622-f04b7a73-def9-49fa-a870-f9db8e618b84",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-f04b7a73-def9-49fa-a870-f9db8e618b84",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 34250
+      },
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Cebolla",
+        "quantity": 1,
+        "unit_price": 5000
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "PRUEBAS",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-f04b7a73-def9-49fa-a870-f9db8e618b84",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 09:41:56,452 views Preferencia creada exitosamente. ID: 2958196622-f04b7a73-def9-49fa-a870-f9db8e618b84, Temp Order ID: 2
+ERROR 2025-10-31 09:43:54,783 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-5dbb64b33easm628566137.12 - gsmtp')
+INFO 2025-10-31 09:43:56,205 views Webhook recibido. Method=POST. Body={"type":"payment","data":{"id":"131960568818"}}. Query={}
+INFO 2025-10-31 09:43:56,210 views Datos normalizados: {'type': 'payment', 'data': {'id': '131960568818'}}
+INFO 2025-10-31 09:43:56,212 views Procesando pago: 131960568818
+INFO 2025-10-31 09:43:57,482 views Pago 131960568818 ya fue procesado anteriormente
+WARNING 2025-10-31 09:44:03,631 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 09:44:04,673 log Not Found: /users/paypalconfig/2/
