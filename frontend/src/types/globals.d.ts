@@ -31,6 +31,7 @@ interface Empresa {
 
 interface CarrouselLast12Props {
   producto?: Product;
+  productos?: Product[];
   empresa?: Empresa;
 }
 

@@ -2,7 +2,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 
 from django.db.models import Avg
-from .models import Enterprise, PayPalConfig, User, Seller, EnterprisePost, PostComment, MercadoPagoConfig
+from .models import Enterprise, PayPalConfig, User, Seller, EnterprisePost, PostComment, MercadoPagoConfig, GoogleMapsConfig
 from django.contrib.auth.models import AnonymousUser
 
 class UserSerializer(serializers.ModelSerializer):
@@ -97,15 +97,45 @@ class PayPalConfigSerializer(serializers.ModelSerializer):
 class MercadoPagoConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = MercadoPagoConfig
-        fields = [ 'user', 'public_key', 'access_token' , 'created_at', 'updated_at']
+        fields = ['public_key', 'access_token', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']
 
     def create(self, validated_data):
         user = self.context.get('user')
         if user:
+            # Asegurar que ambos campos estén presentes
+            if 'access_token' not in validated_data or not validated_data.get('access_token'):
+                raise serializers.ValidationError({"access_token": "El access_token es requerido"})
+            if 'public_key' not in validated_data or not validated_data.get('public_key'):
+                raise serializers.ValidationError({"public_key": "El public_key es requerido"})
+            
             mercado_pago_config = MercadoPagoConfig.objects.create(user=user, **validated_data)
             return mercado_pago_config
         else:
             raise serializers.ValidationError("Usuario no proporcionado en el contexto.")
+    
+    def update(self, instance, validated_data):
+        # Actualizar solo los campos proporcionados
+        # Asegurarse de que ambos campos se actualicen si están presentes
+        if 'public_key' in validated_data:
+            instance.public_key = validated_data['public_key']
+        if 'access_token' in validated_data:
+            # Verificar que el access_token no esté vacío
+            if validated_data['access_token'] and validated_data['access_token'].strip():
+                instance.access_token = validated_data['access_token']
+            else:
+                raise serializers.ValidationError({"access_token": "El access_token no puede estar vacío"})
+        instance.save()
+        return instance
+
+
+class GoogleMapsConfigSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GoogleMapsConfig
+        fields = ["api_key", "created_at", "updated_at"]
+        read_only_fields = ["created_at", "updated_at"]
+    
+    # Eliminado to_representation para que devuelva los datos completos cuando se necesite
 
 
 class UserCanPublishSerializer(serializers.ModelSerializer):

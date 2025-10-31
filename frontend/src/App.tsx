@@ -62,7 +62,7 @@ function App() {
                         <Route path="admin" element={<AdminPage />} />
                     </Route>
 
-                    <Route path="*" element={<NotfoundPage />} />
+                    <Route path="*" element={<NotfoundPage boton={false} />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import { changePermission, delete_user, edit_user, get_users } from "../../api/users";
+import ModalMercadoPagoConfig from "../shared/Modal/ModalMercadoPagoConfig";
 
 // Styles for Modal
 const style = {
@@ -197,6 +198,11 @@ const Users = ({ results }: any) => {
                   <MUIIconButton className="focus:outline-none" onClick={() => handleModalOpen(o)}>
                     <DriveFileRenameOutlineIcon className="text-blue-600" />
                   </MUIIconButton>
+                  {(o.role === "seller" || o.role === "admin") && (
+                    <div style={{ display: "inline-block", marginLeft: "8px" }}>
+                      <ModalMercadoPagoConfig userId={o.id} />
+                    </div>
+                  )}
                   <MUIIconButton className="focus:outline-none" onClick={() => handleOpenConfirmationModal(o.id)}>
                     <DeleteIcon className="text-red-600" />
                   </MUIIconButton>

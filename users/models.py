@@ -147,6 +147,16 @@ class MercadoPagoConfig(models.Model):
 class PasswordReset(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     code = models.CharField(max_length=4)
+
+
+# --- Google Maps configuration (global) ---
+class GoogleMapsConfig(models.Model):
+    api_key = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "Google Maps Configuration"
     created_at = models.DateTimeField(auto_now_add=True)
 
     def is_expired(self):

@@ -29,7 +29,7 @@ import {
   MenuItem,
 } from "@mui/material"
 import { get_solo_user } from "../api/users"
-import { my_orders, my_pending_orders, seller_delivered_orders, edit_order } from "../api/orders"
+import { my_orders, my_pending_orders, seller_delivered_orders, edit_order, seller_orders_by_status, update_order_status } from "../api/orders"
 import { useAuthStore } from "../hooks/auth"
 import { get_all_products_by_user, get_products_in_sells_by_user } from "../api/products"
 import ProfileTables from "../components/profile/profileTables"
@@ -67,6 +67,7 @@ interface OrderInterface {
   delivered_at: string | null
   created_at: string
   payment_method: string | null
+  status?: string  // Estado de la orden: pending, preparing, shipped, delivered, completed, cancelled
   orderconfirmation?: {
     confirmed_at: string
     confirmed_by_user: number
@@ -114,6 +115,12 @@ const UserProfile = () => {
   const [orders, setOrders] = useState<OrderInterface[]>([])
   const [pendingOrders, setPendingOrders] = useState<OrderInterface[]>([])
   const [deliveredOrders, setDeliveredOrders] = useState<OrderInterface[]>([])
+  
+  // Estados para subtabs de ventas
+  const [salesSubTab, setSalesSubTab] = useState("pending") // pending, shipped, completed
+  const [salesOrders, setSalesOrders] = useState<OrderInterface[]>([])
+  const [isSalesLoading, setIsSalesLoading] = useState(false)
+  
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false)
   const [selectedOrderProducts, setSelectedOrderProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -293,6 +300,22 @@ const UserProfile = () => {
     }
   }
 
+  // Nueva función para cargar órdenes de ventas por estado
+  const fetchSalesOrders = async (statusType: string) => {
+    try {
+      setIsSalesLoading(true)
+      const response = await seller_orders_by_status(statusType)
+      console.log(`Sales orders (${statusType}) response:`, response)
+      setSalesOrders(response || [])
+      setIsSalesLoading(false)
+    } catch (error) {
+      console.error(`Error fetching sales orders (${statusType}):`, error)
+      toast.error(`Error al cargar órdenes de ventas (${statusType})`)
+      setIsSalesOrders([])
+      setIsSalesLoading(false)
+    }
+  }
+
   // Modificar la función handleConfirmReceived para manejar mejor los errores y evitar confirmaciones duplicadas
   const handleConfirmReceived = async (orderId: number) => {
     try {
@@ -321,12 +344,14 @@ const UserProfile = () => {
       setConfirmingOrderId(orderId)
       const response = await confirmOrderReceived(orderId)
 
-      // Actualizar la lista de órdenes con la confirmación
+      // Actualizar la lista de órdenes con la confirmación y el nuevo estado
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order.id === orderId
             ? {
                 ...order,
+                status: 'completed',  // Actualizar el estado a completado
+                is_delivered: true,
                 orderconfirmation: {
                   confirmed_at: response.confirmed_at || new Date().toISOString(),
                   confirmed_by_user: id as number,
@@ -335,6 +360,9 @@ const UserProfile = () => {
             : order,
         ),
       )
+      
+      // Refrescar las órdenes para obtener los datos actualizados
+      await fetchMyOrders()
 
       toast.success("¡Gracias por confirmar la recepción de tu pedido! El vendedor ha sido notificado.")
       setConfirmingOrderId(null)
@@ -378,6 +406,8 @@ const UserProfile = () => {
       // Actualizar la lista de órdenes entregadas si estamos en esa pestaña
       if (tabValue === "ventas") {
         fetchDeliveredOrders()
+        // Recargar las órdenes del subtab actual
+        fetchSalesOrders(salesSubTab)
       }
 
       toast.success("Orden marcada como entregada exitosamente")
@@ -387,6 +417,52 @@ const UserProfile = () => {
       toast.error("Error al marcar la orden como entregada")
       setProcessingOrderId(null)
     }
+  }
+
+  // Función para actualizar el estado de una orden desde la sección de ventas
+  const handleUpdateSalesOrderStatus = async (orderId: number, currentStatus: string) => {
+    const statusMap: { [key: string]: string } = {
+      'pending': 'shipped', // Comenzar entrega
+    }
+
+    const nextStatus = statusMap[currentStatus]
+    if (!nextStatus) {
+      toast.error("No se puede actualizar este estado")
+      return
+    }
+
+    setProcessingOrderId(orderId)
+    try {
+      await update_order_status(orderId, nextStatus)
+      toast.success('Orden actualizada a: En entrega')
+      // Recargar las órdenes del subtab actual
+      await fetchSalesOrders(salesSubTab)
+    } catch (error: any) {
+      toast.error(error.response?.data?.detail || "Error al actualizar el estado de la orden")
+    } finally {
+      setProcessingOrderId(null)
+    }
+  }
+
+  // Función para obtener el texto del botón según el estado
+  const getStatusButtonText = (status: string): string | null => {
+    switch (status) {
+      case 'pending':
+        return 'Comenzar entrega'
+      default:
+        return null
+    }
+  }
+
+  // Función para obtener el color del badge según el estado
+  const getStatusBadgeStyle = (status: string) => {
+    const styles: { [key: string]: { bg: string; color: string; text: string } } = {
+      pending: { bg: '#fff3cd', color: '#856404', text: 'Pendiente' },
+      shipped: { bg: '#d1ecf1', color: '#055160', text: 'En entrega' },
+      delivered: { bg: '#d4edda', color: '#155724', text: 'Entregado' }, // compatibilidad
+      completed: { bg: '#d1e7dd', color: '#0f5132', text: 'Completado' },
+    }
+    return styles[status] || styles.pending
   }
 
   const handleOpenOrderModal = async (orderId: number, ordersList: OrderInterface[]) => {
@@ -428,9 +504,17 @@ const UserProfile = () => {
     } else if (tabValue === "pendientes" && (user?.role === "seller" || user?.role === "admin")) {
       fetchPendingOrders()
     } else if (tabValue === "ventas" && (user?.role === "seller" || user?.role === "admin")) {
-      fetchDeliveredOrders()
+      // Cargar órdenes pendientes por defecto
+      fetchSalesOrders("pending")
     }
   }, [tabValue, user?.role])
+
+  // Cargar órdenes cuando cambia el subtab de ventas
+  useEffect(() => {
+    if (tabValue === "ventas" && (user?.role === "seller" || user?.role === "admin") && salesSubTab) {
+      fetchSalesOrders(salesSubTab)
+    }
+  }, [salesSubTab, tabValue, user?.role])
 
   // Verificar si hay un ID de orden para resaltar (desde notificaciones)
   useEffect(() => {
@@ -499,10 +583,10 @@ const UserProfile = () => {
     setFormData({
       name: product.name,
       description: product.description,
-      category: product.category,
+      category: (product as any).category_name || product.category || "",
       price: product.price,
       count_in_stock: product.count_in_stock,
-      unit: product.unit,
+      unit: (product as any).unit_name || product.unit || "",
       map_locate: product.map_locate,
       image: product.image,
     })
@@ -681,32 +765,32 @@ const UserProfile = () => {
                                 ? `${order.shoppingaddress.address}, ${order.shoppingaddress.city}`
                                 : "No disponible"}
                             </TableCell>
-                            <TableCell>{formatearFecha(order.created_at)}</TableCell>
-                            <TableCell>
-                              {order.is_delivered ? (
-                                <span className="text-green-600">
-                                  Entregado {order.delivered_at && `(${formatearFecha(order.delivered_at)})`}
-                                  {order.orderconfirmation && (
-                                    <Tooltip
-                                      title={`Confirmado el ${formatearFecha(order.orderconfirmation.confirmed_at)}`}
-                                    >
-                                      <Badge color="success" variant="dot" sx={{ ml: 1 }}>
-                                        <ThumbsUp size={16} className="text-green-600" />
-                                      </Badge>
-                                    </Tooltip>
-                                  )}
-                                </span>
-                              ) : (
-                                <span className="text-yellow-600">Pendiente</span>
-                              )}
-                            </TableCell>
+                          <TableCell>{formatearFecha(order.created_at)}</TableCell>
+                          <TableCell>
+                            {order.status === 'shipped' ? (
+                              <span className="text-cyan-700">Entregando pedido</span>
+                            ) : order.is_delivered || order.status === 'completed' ? (
+                              <span className="text-green-600">
+                                Entregado {order.delivered_at && `(${formatearFecha(order.delivered_at)})`}
+                                {order.orderconfirmation && (
+                                  <Tooltip title={`Confirmado el ${formatearFecha(order.orderconfirmation.confirmed_at)}`}>
+                                    <Badge color="success" variant="dot" sx={{ ml: 1 }}>
+                                      <ThumbsUp size={16} className="text-green-600" />
+                                    </Badge>
+                                  </Tooltip>
+                                )}
+                              </span>
+                            ) : (
+                              <span className="text-yellow-600">Pendiente</span>
+                            )}
+                          </TableCell>
                             <TableCell>
                               <Button onClick={() => handleOpenOrderModal(order.id, orders)}>
                                 Ver Productos ({order.orderitem_set.length})
                               </Button>
                             </TableCell>
                             <TableCell>
-                              {order.is_delivered && !order.orderconfirmation ? (
+                              {(order.status === 'shipped' || order.status === 'delivered' || (order.is_delivered && order.status !== 'completed')) && !order.orderconfirmation ? (
                                 <Button
                                   variant="contained"
                                   color="success"
@@ -726,7 +810,7 @@ const UserProfile = () => {
                                 >
                                   {confirmingOrderId === order.id ? "Procesando..." : "Confirmar recepción"}
                                 </Button>
-                              ) : order.orderconfirmation ? (
+                              ) : (order.orderconfirmation || order.status === 'completed') ? (
                                 <Typography variant="body2" className="text-green-600 font-medium">
                                   Recepción confirmada
                                 </Typography>
@@ -867,6 +951,120 @@ const UserProfile = () => {
             )}
 
             {tabValue === "ventas" && (user?.role === "seller" || user?.role === "admin") && (
+              <>
+                {/* Subtabs para organizar ventas por estado */}
+                <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
+                  <Tabs
+                    value={salesSubTab}
+                    onChange={(e, newValue) => setSalesSubTab(newValue)}
+                    variant="scrollable"
+                    scrollButtons="auto"
+                  >
+                    <Tab label="Pendientes" value="pending" />
+                    <Tab label="En entrega" value="shipped" />
+                    <Tab label="Completadas" value="completed" />
+                  </Tabs>
+                </Box>
+
+                {/* Contenido según el subtab seleccionado */}
+                {isSalesLoading ? (
+                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px', py: 8 }}>
+                    <CircularProgress sx={{ color: '#39A900' }} />
+                  </Box>
+                ) : salesOrders && salesOrders.length > 0 ? (
+                  <>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Cliente</TableCell>
+                          <TableCell>Precio total</TableCell>
+                          <TableCell>Dirección de entrega</TableCell>
+                          <TableCell>Fecha de pedido</TableCell>
+                          <TableCell>Estado</TableCell>
+                          <TableCell>Productos</TableCell>
+                          <TableCell>Acciones</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {salesOrders.map((order) => {
+                          const statusStyle = getStatusBadgeStyle(order.status || 'pending')
+                          const buttonText = getStatusButtonText(order.status || 'pending')
+                          const isProcessing = processingOrderId === order.id
+                          
+                          return (
+                            <TableRow key={order.id}>
+                              <TableCell>{order.user?.email || order.user?.name || "Sin usuario"}</TableCell>
+                              <TableCell>${parseFloat(order.total_price || 0).toLocaleString('es-CO')}</TableCell>
+                              <TableCell>
+                                {order.shoppingaddress?.address 
+                                  ? `${order.shoppingaddress.address}, ${order.shoppingaddress.city || ''}` 
+                                  : "Sin registrar"}
+                              </TableCell>
+                              <TableCell>
+                                {order.created_at ? formatearFecha(order.created_at) : "N/A"}
+                              </TableCell>
+                              <TableCell>
+                                <span
+                                  style={{
+                                    padding: '4px 8px',
+                                    borderRadius: '4px',
+                                    backgroundColor: statusStyle.bg,
+                                    color: statusStyle.color,
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                  }}
+                                >
+                                  {statusStyle.text}
+                                </span>
+                              </TableCell>
+                              <TableCell>
+                                <Button onClick={() => handleOpenOrderModal(order.id, salesOrders)}>
+                                  Ver Productos ({order.orderitem_set?.length || 0})
+                                </Button>
+                              </TableCell>
+                              <TableCell>
+                                {buttonText && (
+                                  <Button
+                                    variant="contained"
+                                    size="small"
+                                    disabled={isProcessing || !order.is_paid}
+                                    onClick={() => handleUpdateSalesOrderStatus(order.id, order.status || 'pending')}
+                                    sx={{
+                                      bgcolor: '#39A900',
+                                      '&:hover': { bgcolor: '#2f6d30' },
+                                      fontSize: '11px',
+                                      padding: '4px 8px',
+                                      '&.Mui-disabled': { backgroundColor: '#e0e0e0', color: '#a0a0a0' },
+                                    }}
+                                    startIcon={isProcessing ? <CircularProgress size={14} sx={{ color: 'white' }} /> : <CheckCircle size={14} />}
+                                  >
+                                    {isProcessing ? 'Procesando...' : buttonText}
+                                  </Button>
+                                )}
+                                {!order.is_paid && (
+                                  <Typography variant="caption" className="block text-red-500 mt-1" style={{ fontSize: '10px' }}>
+                                    Debe estar pagada
+                                  </Typography>
+                                )}
+                              </TableCell>
+                            </TableRow>
+                          )
+                        })}
+                      </TableBody>
+                    </Table>
+                  </>
+                ) : (
+                  <div className="py-8 px-4">
+                    <Alert severity="info" className="mb-4">
+                      No tienes órdenes en este estado actualmente
+                    </Alert>
+                  </div>
+                )}
+              </>
+            )}
+
+            {/* Sección antigua de ventas completadas - mantener temporalmente para compatibilidad */}
+            {tabValue === "ventas_old" && (user?.role === "seller" || user?.role === "admin") && (
               <>
                 {isDeliveredLoading ? (
                   <Typography align="center" py={3}>

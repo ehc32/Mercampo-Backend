@@ -10,13 +10,18 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.utils.text import slugify
 from rest_framework import status
-from . models import Category, Product, ProductImage, Reviews
-from . serializers import ProductCreateSerializer, ProductReadSerializer, ProductImagesSerializer, ReviewCreateSerializer, ReviewSerializer
-from backend.pagination import CustomPagination
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
-from django.utils.text import slugify
+from . models import Category, Product, ProductImage, Reviews, ProductCategory, UnitOfMeasurement
+from . serializers import (
+    ProductCreateSerializer, 
+    ProductReadSerializer, 
+    ProductImagesSerializer, 
+    ReviewCreateSerializer, 
+    ReviewSerializer,
+    ProductCategorySerializer,
+    UnitOfMeasurementSerializer
+)
+from backend.pagination import CustomPagination
 
 
 @api_view(['POST'])
@@ -26,7 +31,15 @@ def create_product(request):
         
         if product_serializer.is_valid():
             name = product_serializer.validated_data['name']
-            category = product_serializer.validated_data['category']
+            
+            # Obtener categoría: priorizar product_category si existe, sino usar category
+            category_str = ''
+            if 'product_category' in product_serializer.validated_data and product_serializer.validated_data['product_category']:
+                category_obj = product_serializer.validated_data['product_category']
+                category_str = category_obj.name if hasattr(category_obj, 'name') else str(category_obj)
+            elif 'category' in product_serializer.validated_data:
+                category_str = product_serializer.validated_data['category']
+            
             tiempoL_value = product_serializer.validated_data.get('tiempoL', None)
 
             if tiempoL_value is None:
@@ -38,7 +51,7 @@ def create_product(request):
 
             fecha_limite = datetime.now() + timedelta(weeks=weeks_to_add)
 
-            s = name + category
+            s = name + category_str
             slug = slugify(s)
 
             unique_slug = slug
@@ -409,3 +422,177 @@ def reduce_product_stock(request, product_id):
     
     except Product.DoesNotExist:
         return Response({"error": "Producto no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+
+
+#
+# ProductCategory CRUD Views
+#
+
+@api_view(['GET'])
+def get_all_categories(request):
+    """Obtener todas las categorías activas (público) o todas si es admin/seller"""
+    if request.user.is_authenticated and request.user.role in ['admin', 'seller']:
+        categories = ProductCategory.objects.all().order_by('name')
+    else:
+        categories = ProductCategory.objects.filter(is_active=True).order_by('name')
+    
+    serializer = ProductCategorySerializer(categories, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_category(request, pk):
+    """Obtener una categoría por ID"""
+    try:
+        category = ProductCategory.objects.get(pk=pk)
+        if not category.is_active and request.user.role not in ['admin', 'seller']:
+            return Response({'detail': 'Categoría no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductCategorySerializer(category)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except ProductCategory.DoesNotExist:
+        return Response({'detail': 'Categoría no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_category(request):
+    """Crear una nueva categoría (solo Admin y Seller)"""
+    if request.user.role not in ['admin', 'seller']:
+        return Response({'detail': 'No autorizado.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    serializer = ProductCategorySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def update_category(request, pk):
+    """Actualizar una categoría (solo Admin y Seller)"""
+    if request.user.role not in ['admin', 'seller']:
+        return Response({'detail': 'No autorizado.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        category = ProductCategory.objects.get(pk=pk)
+    except ProductCategory.DoesNotExist:
+        return Response({'detail': 'Categoría no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = ProductCategorySerializer(category, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_category(request, pk):
+    """Eliminar una categoría (solo Admin y Seller)"""
+    if request.user.role not in ['admin', 'seller']:
+        return Response({'detail': 'No autorizado.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        category = ProductCategory.objects.get(pk=pk)
+        # Verificar si hay productos usando esta categoría
+        products_count = Product.objects.filter(product_category=category).count()
+        if products_count > 0:
+            # En lugar de eliminar, desactivamos
+            category.is_active = False
+            category.save()
+            return Response({
+                'detail': f'La categoría fue desactivada porque tiene {products_count} producto(s) asociado(s).',
+                'category': ProductCategorySerializer(category).data
+            }, status=status.HTTP_200_OK)
+        category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except ProductCategory.DoesNotExist:
+        return Response({'detail': 'Categoría no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+#
+# UnitOfMeasurement CRUD Views
+#
+
+@api_view(['GET'])
+def get_all_units(request):
+    """Obtener todas las unidades de medición activas (público) o todas si es admin/seller"""
+    if request.user.is_authenticated and request.user.role in ['admin', 'seller']:
+        units = UnitOfMeasurement.objects.all().order_by('name')
+    else:
+        units = UnitOfMeasurement.objects.filter(is_active=True).order_by('name')
+    
+    serializer = UnitOfMeasurementSerializer(units, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_unit(request, pk):
+    """Obtener una unidad de medición por ID"""
+    try:
+        unit = UnitOfMeasurement.objects.get(pk=pk)
+        if not unit.is_active and request.user.role not in ['admin', 'seller']:
+            return Response({'detail': 'Unidad de medición no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+        serializer = UnitOfMeasurementSerializer(unit)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except UnitOfMeasurement.DoesNotExist:
+        return Response({'detail': 'Unidad de medición no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_unit(request):
+    """Crear una nueva unidad de medición (solo Admin y Seller)"""
+    if request.user.role not in ['admin', 'seller']:
+        return Response({'detail': 'No autorizado.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    serializer = UnitOfMeasurementSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def update_unit(request, pk):
+    """Actualizar una unidad de medición (solo Admin y Seller)"""
+    if request.user.role not in ['admin', 'seller']:
+        return Response({'detail': 'No autorizado.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        unit = UnitOfMeasurement.objects.get(pk=pk)
+    except UnitOfMeasurement.DoesNotExist:
+        return Response({'detail': 'Unidad de medición no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = UnitOfMeasurementSerializer(unit, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_unit(request, pk):
+    """Eliminar una unidad de medición (solo Admin y Seller)"""
+    if request.user.role not in ['admin', 'seller']:
+        return Response({'detail': 'No autorizado.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        unit = UnitOfMeasurement.objects.get(pk=pk)
+        # Verificar si hay productos usando esta unidad
+        products_count = Product.objects.filter(unit_of_measurement=unit).count()
+        if products_count > 0:
+            # En lugar de eliminar, desactivamos
+            unit.is_active = False
+            unit.save()
+            return Response({
+                'detail': f'La unidad fue desactivada porque tiene {products_count} producto(s) asociado(s).',
+                'unit': UnitOfMeasurementSerializer(unit).data
+            }, status=status.HTTP_200_OK)
+        unit.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except UnitOfMeasurement.DoesNotExist:
+        return Response({'detail': 'Unidad de medición no encontrada.'}, status=status.HTTP_404_NOT_FOUND)

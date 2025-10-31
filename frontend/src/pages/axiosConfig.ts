@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000', // Ajusta la URL base según tu backend
+  baseURL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000',
 });
 
 // Interceptor para agregar el token en cada request

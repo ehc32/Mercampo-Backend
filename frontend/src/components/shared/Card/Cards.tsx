@@ -40,7 +40,13 @@ const Card: React.FC<CarrouselLast12Props> = ({ producto }) => {
                             {producto.name?.length > 20 ? `${producto.name?.slice(0, 20)}...` : producto.name}
                         </h4>
                         <h4 className='headInfo category'>
-                            {(producto.category.charAt(0).toUpperCase() + producto.category.slice(1).toLowerCase())}
+                            {(() => {
+                                const categoryName = producto.category_name || producto.category;
+                                if (!categoryName) return "Sin categoría";
+                                const firstChar = categoryName.charAt(0).toUpperCase();
+                                const rest = categoryName.slice(1).toLowerCase();
+                                return firstChar + rest;
+                            })()}
                         </h4>
                     </div>
                     <p className='headInfo'>

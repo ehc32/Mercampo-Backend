@@ -74,8 +74,11 @@ const ProductDetail: React.FC<ProductProps> = ({
 
   useEffect(() => {
     if (!loading && producto) {
-      setCategory(producto.category);
-      fetchProductos();
+      const categoryValue = producto.category_name || producto.category;
+      if (categoryValue) {
+        setCategory(categoryValue);
+        fetchProductos();
+      }
     }
   }, [loading, producto]);
 
@@ -181,7 +184,11 @@ const ProductDetail: React.FC<ProductProps> = ({
                                       Unidad de medida
                                     </div>
                                     <div className="fs-16px  text-black">
-                                      {producto?.unit}
+                                      {(() => {
+                                        const unitName = producto?.unit_name || producto?.unit;
+                                        if (!unitName) return "Sin unidad";
+                                        return unitName;
+                                      })()}
                                     </div>
                                   </li>
                                   <li>
@@ -189,12 +196,13 @@ const ProductDetail: React.FC<ProductProps> = ({
                                       Categoría
                                     </div>
                                     <div className="fs-16px  text-black">
-                                      {producto?.category
-                                        .charAt(0)
-                                        .toUpperCase() +
-                                        producto?.category
-                                          .slice(1)
-                                          .toLowerCase()}
+                                      {(() => {
+                                        const categoryName = producto?.category_name || producto?.category;
+                                        if (!categoryName) return "Sin categoría";
+                                        const firstChar = categoryName.charAt(0).toUpperCase();
+                                        const rest = categoryName.slice(1).toLowerCase();
+                                        return firstChar + rest;
+                                      })()}
                                     </div>
                                   </li>
                                 </ul>

@@ -8,6 +8,7 @@ urlpatterns = [
     path('my/orders/', views.my_orders),
     path('my/pending/', views.seller_pending_orders),
     path('my/seller/delivered/', views.seller_delivered_orders),
+    path('my/seller/status/<str:status_type>/', views.seller_orders_by_status, name='seller_orders_by_status'),
     path('confirm/<int:order_id>/', views.confirm_order_received, name='confirm_order_received'),
     path('notifications/<int:notification_id>/mark-as-read/', views.mark_notification_as_read, name='mark_notification_as_read'),
     path('notifications/', views.get_notifications),
@@ -16,9 +17,16 @@ urlpatterns = [
     path('solo/<int:pk>/', views.solo_order),
     path('<int:pk>/items/', views.get_order_items),
     path('<int:order_id>/status/', views.update_order_status, name='update_order_status'),  # Nueva ruta
+
+    # MercadoPago
     path('payment/temp_preference/', views.create_temp_preference), 
     path('payment/webhook/', views.webhook), 
     path('payment/status/<str:payment_id>/', views.check_payment_status, name='check_payment_status'),
     path('payment/finalize/', views.finalize_order_on_success, name='finalize_order_on_success'),
     path('payment/mp-config/', views.mercadopago_config),
+
+    # PayPal
+    path('paypal/create/', views.paypal_create_order, name='paypal_create_order'),
+    path('paypal/capture/', views.paypal_capture, name='paypal_capture'),
+    path('paypal/webhook/', views.paypal_webhook, name='paypal_webhook'),
 ]

@@ -25,33 +25,16 @@
   }
   
   /* Contenedor horizontal para los botones */
-  .horizontal-buttons-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    padding-bottom: 16px;
-  }
-  
-  /* Para pantallas más grandes, mantener en línea */
-  @media (min-width: 1024px) {
-    .horizontal-buttons-container {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-    }
-  }
-  
-  /* Estilos para los botones dentro del contenedor */
-  .horizontal-buttons-container > * {
-    flex: 0 0 auto;
-    min-width: 200px;
-    max-width: 250px;
-    height: 48px;
-    margin-bottom: 8px;
-  }
+.horizontal-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.horizontal-buttons-container > * {
+  height: 48px;
+}
   
   /* Estilos para los h2 dentro de los botones */
   .horizontal-buttons-container h2,
@@ -70,28 +53,6 @@
   }
   
   /* Asegurar que el scroll sea suave en dispositivos táctiles */
-  .horizontal-buttons-container {
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-  
-  /* Estilos para scrollbar en navegadores webkit */
-  .horizontal-buttons-container::-webkit-scrollbar {
-    height: 6px;
-  }
-  
-  .horizontal-buttons-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-  
-  .horizontal-buttons-container::-webkit-scrollbar-thumb {
-    background: #39a900;
-    border-radius: 10px;
-  }
-  
-  .horizontal-buttons-container::-webkit-scrollbar-thumb:hover {
-    background: #2c7a00;
-  }
+/* sin scroll horizontal */
   
   

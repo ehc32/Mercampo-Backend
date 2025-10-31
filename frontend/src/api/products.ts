@@ -48,9 +48,19 @@ export const post_product = async (data: Product) => {
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("count_in_stock", data.count_in_stock.toString());
-    formData.append("category", data.category);
+    // Enviar product_category si existe, sino mantener category para compatibilidad
+    if (data.product_category) {
+        formData.append("product_category", data.product_category.toString());
+    } else if (data.category) {
+        formData.append("category", data.category);
+    }
     formData.append("price", data.price.toString());
-    formData.append("unit", data.unit);
+    // Enviar unit_of_measurement si existe, sino mantener unit para compatibilidad
+    if (data.unit_of_measurement) {
+        formData.append("unit_of_measurement", data.unit_of_measurement.toString());
+    } else if (data.unit) {
+        formData.append("unit", data.unit);
+    }
     formData.append("map_locate", data.map_locate);
     formData.append("locate", data.locate);
     formData.append("tiempoL", data.tiempoL.toString());

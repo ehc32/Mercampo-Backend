@@ -1,6 +1,10 @@
 import './../global/dashlite.css'
 
-const NotfoundPage = ({ boton }) => {
+interface NotfoundPageProps {
+    boton?: boolean;
+}
+
+const NotfoundPage = ({ boton = false }: NotfoundPageProps) => {
     return (
         <div className="nk-app-root w-full">
             <div className="nk-main">

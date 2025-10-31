@@ -29,15 +29,24 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "*").split(",")] if os.getenv("ALLOWED_HOSTS") else ["*"]
 
 #Crendeciales Mercado Pago
-MERCADOPAGO_ACCESS_TOKEN = '' 
-FRONTEND_URL = 'http://localhost:5173'  
-BACKEND_URL = 'https://184c-179-1-219-233.ngrok-free.app'
+MERCADOPAGO_ACCESS_TOKEN = os.getenv('MERCADOPAGO_ACCESS_TOKEN', '')
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+BACKEND_URL = os.getenv('BACKEND_URL', 'http://localhost:8000')
+
+# PayPal config
+PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID', '')
+PAYPAL_SECRET = os.getenv('PAYPAL_SECRET', '')
+PAYPAL_ENV = os.getenv('PAYPAL_ENV', 'sandbox')  # sandbox | live
+PAYPAL_CURRENCY = os.getenv('PAYPAL_CURRENCY', 'USD')
+PAYPAL_API_BASE = 'https://api-m.sandbox.paypal.com' if PAYPAL_ENV == 'sandbox' else 'https://api-m.paypal.com'
+PAYPAL_WEBHOOK_ID = os.getenv('PAYPAL_WEBHOOK_ID', '')
+# Si tus precios están en COP pero cobras en USD, define un tipo de cambio aproximado para sandbox/pruebas
+PAYPAL_EXCHANGE_COP_USD = float(os.getenv('PAYPAL_EXCHANGE_COP_USD', '4000'))
 
 
 
@@ -134,12 +143,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = True 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",  # 🔹 Tu frontend local
-    "http://localhost:5500",
-]
-
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -165,16 +168,20 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.getenv('DB_NAME', 'railway'),
-        'USER': os.getenv('DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'mercampo',
+            'USER': 'mercampo_user',
+            'PASSWORD': '2JrBRqm1tExyYdGn8CbPOSNXgHTpMye9',
+            'HOST': 'dpg-d42b6up5pdvs73f4d3q0-a.oregon-postgres.render.com',
+            'PORT': '5432',
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+        }
     }
-}
 
 
 
@@ -214,9 +221,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'dist/static')
-]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -227,10 +231,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
 
-CORS_ALLOWED_ORIGINS = [
-        "http://localhost:5173"
-]
-
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.getenv("FRONTEND_ORIGINS", "http://localhost:5173").split(",")]
 CORS_ALLOW_CREDENTIALS = True
 
 SIMPLE_JWT = {
@@ -275,6 +277,9 @@ CELERY_TASK_SERIALIZER = 'json'
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
+
+FRONTEND_URL = "http://localhost:5173"
+BACKEND_URL = "http://localhost:8000"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

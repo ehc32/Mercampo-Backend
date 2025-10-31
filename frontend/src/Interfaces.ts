@@ -8,14 +8,16 @@ export interface Product {
     price: number;
     rating?: number;
     count_in_stock: number;
-    category: string;
+    category?: string; // Mantener para compatibilidad
+    product_category?: number; // Nueva: ID de la categoría
     image: File | null;
     quantity?: number;
     num_reviews?: number;
-    unit?: string;
+    unit?: string; // Mantener para compatibilidad
+    unit_of_measurement?: number; // Nueva: ID de la unidad
     map_locate?: string;
     locate?: string;
-
+    tiempoL?: number;
 }
 
 export interface Order {
@@ -49,3 +51,21 @@ export interface Token {
     role: string;
     avatar: File | null;
 };
+
+export interface ProductCategory {
+    id?: number;
+    name: string;
+    description?: string;
+    is_active?: boolean;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export interface UnitOfMeasurement {
+    id?: number;
+    name: string;
+    abbreviation?: string;
+    is_active?: boolean;
+    created_at?: string;
+    updated_at?: string;
+}

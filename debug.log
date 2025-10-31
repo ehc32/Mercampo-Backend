@@ -11101,3 +11101,2916 @@ WARNING 2025-10-27 19:01:45,116 log Not Found: /users/mercado-pago/config/done/1
 WARNING 2025-10-27 19:01:45,144 log Not Found: /users/mercado-pago/config/done/1/
 WARNING 2025-10-27 19:03:12,636 log Not Found: /users/mercado-pago/config/done/1/
 WARNING 2025-10-27 19:03:12,683 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-29 20:09:39,731 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 20:11:35,966 autoreload Watching for file changes with StatReloader
+ERROR 2025-10-29 20:12:49,547 log Internal Server Error: /products/get/equals/Tomate/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py", line 72, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'
+WARNING 2025-10-29 20:12:56,151 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-29 20:12:56,298 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:12:59,242 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-29 20:12:59,465 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:13:15,441 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-29 20:13:15,547 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:13:16,089 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-29 20:13:16,254 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:14:16,385 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:14:17,217 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:14:50,038 log Unauthorized: /users/refresh/
+WARNING 2025-10-29 20:14:50,044 log Unauthorized: /users/refresh/
+WARNING 2025-10-29 20:14:50,049 log Unauthorized: /users/refresh/
+WARNING 2025-10-29 20:14:50,055 log Unauthorized: /users/refresh/
+WARNING 2025-10-29 20:14:50,067 log Unauthorized: /users/refresh/
+WARNING 2025-10-29 20:14:50,173 log Unauthorized: /users/mercado-pago/config/done/5/
+WARNING 2025-10-29 20:14:50,178 log Unauthorized: /users/get/solo/5/
+WARNING 2025-10-29 20:14:50,182 log Unauthorized: /orders/my/orders/
+WARNING 2025-10-29 20:14:50,187 log Unauthorized: /users/mercado-pago/config/done/5/
+WARNING 2025-10-29 20:14:50,197 log Unauthorized: /orders/my/orders/
+WARNING 2025-10-29 20:14:50,689 log Not Found: /users/paypalconfig/5/
+WARNING 2025-10-29 20:14:55,383 log Unauthorized: /users/login/
+WARNING 2025-10-29 20:14:55,630 log Unauthorized: /users/login/
+WARNING 2025-10-29 20:15:25,278 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 20:15:26,032 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 20:15:27,015 log Not Found: /products/caterandom//
+WARNING 2025-10-29 20:15:33,283 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:15:34,005 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:22:36,598 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 20:22:36,704 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 20:22:37,362 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 20:22:37,591 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 20:22:45,937 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:22:47,526 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:24:51,049 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:24:51,995 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:24:58,912 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 20:24:59,636 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 20:25:00,808 log Not Found: /products/caterandom//
+WARNING 2025-10-29 20:25:10,700 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:25:11,402 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:25:33,040 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:25:33,915 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 20:25:43,436 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 20:25:43,538 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 20:25:44,293 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 20:25:44,531 log Not Found: /users/mercado-pago/config/done/2/
+INFO 2025-10-29 22:32:18,198 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 23:00:57,143 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 23:01:13,560 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 23:01:14,205 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 23:01:15,394 log Not Found: /products/caterandom//
+WARNING 2025-10-29 23:01:17,795 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:01:18,545 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:02:54,218 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 23:02:54,329 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 23:02:54,808 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 23:02:54,994 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 23:03:10,620 log Unauthorized: /users/refresh/
+WARNING 2025-10-29 23:03:10,623 log Unauthorized: /users/refresh/
+WARNING 2025-10-29 23:03:10,649 log Unauthorized: /orders/notifications/
+WARNING 2025-10-29 23:03:10,654 log Unauthorized: /orders/notifications/
+WARNING 2025-10-29 23:03:24,112 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:03:25,672 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-29 23:34:13,954 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 23:35:19,928 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 23:35:20,598 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-29 23:35:21,453 log Not Found: /products/caterandom//
+WARNING 2025-10-29 23:35:24,834 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:35:25,504 log Not Found: /users/mercado-pago/config/done/1/
+ERROR 2025-10-29 23:35:36,253 log Bad Gateway: /orders/paypal/create/
+ERROR 2025-10-29 23:35:48,753 log Bad Gateway: /orders/paypal/create/
+ERROR 2025-10-29 23:35:55,120 log Bad Gateway: /orders/paypal/create/
+INFO 2025-10-29 23:37:58,594 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 23:38:09,290 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:38:10,100 log Not Found: /users/mercado-pago/config/done/1/
+ERROR 2025-10-29 23:39:10,439 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials a1e0cc1a2514c-9350199dafbsm289787241.13 - gsmtp')
+ERROR 2025-10-29 23:39:12,142 views paypal_capture error: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-557ddb5e29asm6400430e0c.16 - gsmtp')
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 797, in paypal_capture
+    send_order_confirmation_email(order)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 867, in send_order_confirmation_email
+    send_mail(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\backends\smtp.py", line 127, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\backends\smtp.py", line 94, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 750, in login
+    raise last_exception
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 739, in login
+    (code, resp) = self.auth(
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 662, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-557ddb5e29asm6400430e0c.16 - gsmtp')
+ERROR 2025-10-29 23:39:12,182 log Internal Server Error: /orders/paypal/capture/
+INFO 2025-10-29 23:40:01,702 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 23:40:09,054 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:40:09,709 log Not Found: /users/mercado-pago/config/done/1/
+ERROR 2025-10-29 23:40:44,100 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials a1e0cc1a2514c-93501978210sm290968241.10 - gsmtp')
+WARNING 2025-10-29 23:41:15,375 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:41:16,046 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:41:51,762 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 23:41:51,859 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 23:41:52,360 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 23:41:52,518 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 23:42:20,639 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:42:21,415 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:42:34,623 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:42:35,302 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-29 23:42:49,110 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 23:42:49,275 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-29 23:42:49,783 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-29 23:42:49,979 log Not Found: /users/mercado-pago/config/done/2/
+INFO 2025-10-30 20:47:44,741 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 20:49:00,744 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py changed, reloading.
+INFO 2025-10-30 20:49:04,854 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 20:50:06,966 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-30 20:51:44,467 log Unauthorized: /users/login/
+WARNING 2025-10-30 20:51:59,404 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 20:52:00,151 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-30 20:57:26,910 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py changed, reloading.
+INFO 2025-10-30 20:57:30,607 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 20:57:45,360 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py changed, reloading.
+INFO 2025-10-30 20:57:47,035 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 21:15:25,971 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\serializers.py changed, reloading.
+INFO 2025-10-30 21:15:29,726 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 21:16:29,245 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\serializers.py changed, reloading.
+INFO 2025-10-30 21:16:32,058 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-30 21:32:23,429 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 21:32:24,097 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 21:32:26,330 log Not Found: /products/caterandom//
+WARNING 2025-10-30 21:32:58,331 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 21:32:59,665 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 21:33:21,536 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 21:33:22,384 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:28:42,404 log Unauthorized: /users/refresh/
+WARNING 2025-10-30 22:28:42,409 log Unauthorized: /users/refresh/
+WARNING 2025-10-30 22:28:42,427 log Unauthorized: /orders/notifications/
+WARNING 2025-10-30 22:28:42,434 log Unauthorized: /orders/notifications/
+WARNING 2025-10-30 22:30:39,022 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:30:40,069 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:31:36,003 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:31:36,830 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:32:57,481 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:32:57,583 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:32:58,195 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:32:58,290 log Not Found: /users/mercado-pago/config/done/2/
+INFO 2025-10-30 22:37:34,515 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-30 22:37:38,864 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-30 22:39:22,400 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:39:22,496 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:39:23,006 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:39:23,177 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:39:23,832 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:39:24,490 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-30 22:39:31,481 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-30 22:39:34,627 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 22:40:08,229 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-30 22:40:09,822 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 22:41:50,527 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-30 22:41:52,747 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-30 22:42:11,147 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:42:11,844 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:42:26,012 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:42:26,762 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:42:57,496 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:42:57,578 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:42:58,137 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:42:58,227 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:43:39,208 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:43:40,109 log Not Found: /users/mercado-pago/config/done/1/
+ERROR 2025-10-30 22:44:24,980 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-5594499f49fsm223098e0c.10 - gsmtp')
+WARNING 2025-10-30 22:44:31,737 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:44:31,852 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:44:32,564 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:44:32,753 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:44:54,061 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:44:54,701 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-30 22:47:08,683 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-30 22:47:15,594 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-30 22:47:50,999 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:47:51,697 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:48:01,676 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:48:01,765 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:48:02,289 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:48:02,585 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:48:17,874 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:48:17,918 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:48:18,484 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:48:18,675 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:48:22,652 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:48:23,420 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:49:29,129 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 22:49:29,838 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 22:49:30,972 log Not Found: /products/caterandom//
+INFO 2025-10-30 22:49:47,412 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-30 22:49:50,521 autoreload Watching for file changes with StatReloader
+INFO 2025-10-30 22:50:00,694 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\urls.py changed, reloading.
+INFO 2025-10-30 22:50:02,514 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-30 22:50:33,064 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:50:33,866 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:50:59,533 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:50:59,731 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:51:00,349 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:51:00,698 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:51:50,307 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:51:50,405 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:51:50,885 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:51:51,138 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:52:12,953 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:52:13,057 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:52:13,573 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:52:13,771 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:52:57,455 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:52:57,564 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:52:58,014 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-30 22:52:58,202 log Not Found: /users/mercado-pago/config/done/2/
+WARNING 2025-10-30 22:53:07,409 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:53:08,049 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:54:09,502 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:54:10,254 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:54:42,676 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:54:43,561 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:55:28,062 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 22:55:29,077 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 22:55:29,994 log Not Found: /products/caterandom//
+WARNING 2025-10-30 22:55:39,447 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 22:55:40,132 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-30 22:55:40,920 log Not Found: /products/caterandom//
+WARNING 2025-10-30 22:56:23,006 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-30 22:56:23,915 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-31 01:27:34,919 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 01:28:18,308 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 01:28:18,323 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 01:28:18,324 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 01:28:18,325 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 01:28:18,331 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 01:28:18,407 log Unauthorized: /orders/my/orders/
+WARNING 2025-10-31 01:28:18,407 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-10-31 01:28:18,453 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 01:28:18,715 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 01:28:38,005 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-31 01:28:39,991 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-31 01:29:32,017 log Not Found: /users/mercado-pago/config/done/1/
+WARNING 2025-10-31 01:29:32,934 log Not Found: /users/mercado-pago/config/done/1/
+INFO 2025-10-31 01:33:38,709 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:33:42,804 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:33:49,784 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:33:51,279 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:34:58,504 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:34:59,964 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 01:36:24,686 log Bad Request: /users/mercado-pago/config/1/
+INFO 2025-10-31 01:37:01,046 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 01:37:07,002 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:37:09,327 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:37:11,827 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:37:27,639 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:37:28,935 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:39:45,115 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 01:39:49,565 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:40:13,095 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:40:15,043 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:40:27,539 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 01:40:30,380 autoreload Watching for file changes with StatReloader
+ERROR 2025-10-31 01:41:34,013 views Error en create_temp_preference: 'id'
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 534, in create_temp_preference
+    temp_order.mp_preference_id = preference_response['response']['id']
+KeyError: 'id'
+ERROR 2025-10-31 01:41:34,029 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-10-31 01:42:51,267 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 01:42:57,917 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:43:07,775 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 01:43:10,370 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:43:23,772 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:43:26,775 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:43:53,250 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 01:43:56,171 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:44:10,927 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:44:17,643 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:44:28,170 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:44:31,935 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:44:49,286 views Configuración de Mercado Pago guardada para usuario 1. Access_token presente: True, longitud: 75
+INFO 2025-10-31 01:46:01,625 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:46:15,981 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:46:45,443 views Configuración de Mercado Pago guardada para usuario 1. Access_token presente: True, longitud: 75
+ERROR 2025-10-31 01:47:56,876 views Error en create_temp_preference: 'id'
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 552, in create_temp_preference
+    temp_order.mp_preference_id = preference_response['response']['id']
+KeyError: 'id'
+ERROR 2025-10-31 01:47:56,888 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-10-31 01:50:18,296 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 01:50:26,023 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:50:49,792 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:50:55,461 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:51:14,883 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:51:18,613 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:51:29,432 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 01:51:37,325 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:52:36,139 views Configuración de Mercado Pago guardada para usuario 1. Access_token presente: True, longitud: 75, valor: APP_USR-881475653768...
+ERROR 2025-10-31 01:56:19,024 views Error en create_temp_preference: 'id'
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 552, in create_temp_preference
+    temp_order.mp_preference_id = preference_response['response']['id']
+KeyError: 'id'
+ERROR 2025-10-31 01:56:19,039 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-10-31 01:57:17,531 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:57:25,318 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:57:36,290 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 01:57:42,700 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:57:53,202 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 01:57:56,878 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:58:03,328 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 01:58:05,829 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:58:16,379 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:58:20,489 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:58:28,431 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 01:58:31,142 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 01:58:49,302 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 01:58:49,403 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 01:58:49,497 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 01:58:50,001 views Respuesta de Mercado Pago recibida: 400
+ERROR 2025-10-31 01:58:50,002 views Respuesta de Mercado Pago incompleta
+ERROR 2025-10-31 01:58:50,003 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-10-31 01:59:53,167 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:00:11,686 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:00:11,793 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:00:11,880 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:00:12,389 views Respuesta de Mercado Pago recibida: 400
+ERROR 2025-10-31 02:00:12,391 views Respuesta de Mercado Pago incompleta
+ERROR 2025-10-31 02:00:12,393 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-10-31 02:00:17,609 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:00:22,435 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:00:47,226 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:00:52,504 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:00:56,814 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:01:01,612 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:01:27,583 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:01:33,623 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:01:52,849 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:01:53,040 views Vendedor identificado: 1
+INFO 2025-10-31 02:01:53,312 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:01:53,408 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:01:53,496 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:01:53,497 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:01:54,031 views Respuesta de Mercado Pago recibida: 400
+ERROR 2025-10-31 02:01:54,032 views Respuesta de Mercado Pago incompleta
+ERROR 2025-10-31 02:01:54,033 log Internal Server Error: /orders/payment/temp_preference/
+INFO 2025-10-31 02:03:03,641 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:03:08,092 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:03:58,528 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:04:08,045 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:04:12,411 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:04:15,678 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:04:26,631 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:04:26,835 views Vendedor identificado: 1
+INFO 2025-10-31 02:04:27,108 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:04:27,217 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:04:27,310 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:04:27,314 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:04:27,315 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "13",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?preference_id=13",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "auto_return": "approved",
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:04:27,870 views Respuesta completa de Mercado Pago: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+ERROR 2025-10-31 02:04:27,871 views Error en respuesta de Mercado Pago (status 400): auto_return invalid. back_url.success must be defined - invalid_auto_return
+ERROR 2025-10-31 02:04:27,872 views Respuesta completa: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+WARNING 2025-10-31 02:04:27,874 log Bad Request: /orders/payment/temp_preference/
+INFO 2025-10-31 02:05:10,595 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:05:15,571 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:05:28,418 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:05:32,277 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:05:36,425 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:05:41,194 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:06:17,205 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:06:21,329 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:06:36,313 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:06:39,809 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:06:43,113 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:06:45,710 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:06:49,032 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:06:51,927 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:07:02,654 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:07:02,953 views Vendedor identificado: 1
+INFO 2025-10-31 02:07:03,217 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:07:03,314 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:07:03,403 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:07:03,411 views URLs configuradas - Frontend: http://localhost:5173, Backend: http://localhost:8000
+INFO 2025-10-31 02:07:03,418 views back_urls completo: {
+  "success": "http://localhost:5173/payment/success?preference_id=14",
+  "failure": "http://localhost:5173/payment/failure",
+  "pending": "http://localhost:5173/payment/pending"
+}
+INFO 2025-10-31 02:07:03,426 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:07:03,435 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "14",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?preference_id=14",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "auto_return": "approved",
+  "statement_descriptor": "Compra a "
+}
+INFO 2025-10-31 02:07:03,448 views Validando estructura - back_urls tiene 'success': True
+INFO 2025-10-31 02:07:03,461 views Valor de back_urls.success: http://localhost:5173/payment/success?preference_id=14
+INFO 2025-10-31 02:07:04,092 views Respuesta completa de Mercado Pago: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+ERROR 2025-10-31 02:07:04,094 views Error en respuesta de Mercado Pago (status 400): auto_return invalid. back_url.success must be defined - invalid_auto_return
+ERROR 2025-10-31 02:07:04,094 views Respuesta completa: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+WARNING 2025-10-31 02:07:04,096 log Bad Request: /orders/payment/temp_preference/
+INFO 2025-10-31 02:07:13,561 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:07:13,983 views Vendedor identificado: 1
+INFO 2025-10-31 02:07:14,828 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:07:15,081 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:07:15,174 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:07:15,175 views URLs configuradas - Frontend: http://localhost:5173, Backend: http://localhost:8000
+INFO 2025-10-31 02:07:15,175 views back_urls completo: {
+  "success": "http://localhost:5173/payment/success?preference_id=15",
+  "failure": "http://localhost:5173/payment/failure",
+  "pending": "http://localhost:5173/payment/pending"
+}
+INFO 2025-10-31 02:07:15,177 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:07:15,177 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "15",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?preference_id=15",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "auto_return": "approved",
+  "statement_descriptor": "Compra a "
+}
+INFO 2025-10-31 02:07:15,179 views Validando estructura - back_urls tiene 'success': True
+INFO 2025-10-31 02:07:15,180 views Valor de back_urls.success: http://localhost:5173/payment/success?preference_id=15
+INFO 2025-10-31 02:07:15,604 views Respuesta completa de Mercado Pago: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+ERROR 2025-10-31 02:07:15,605 views Error en respuesta de Mercado Pago (status 400): auto_return invalid. back_url.success must be defined - invalid_auto_return
+ERROR 2025-10-31 02:07:15,606 views Respuesta completa: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+WARNING 2025-10-31 02:07:15,607 log Bad Request: /orders/payment/temp_preference/
+INFO 2025-10-31 02:07:20,895 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:07:21,086 views Vendedor identificado: 1
+INFO 2025-10-31 02:07:21,358 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:07:21,448 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:07:21,536 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:07:21,536 views URLs configuradas - Frontend: http://localhost:5173, Backend: http://localhost:8000
+INFO 2025-10-31 02:07:21,537 views back_urls completo: {
+  "success": "http://localhost:5173/payment/success?preference_id=16",
+  "failure": "http://localhost:5173/payment/failure",
+  "pending": "http://localhost:5173/payment/pending"
+}
+INFO 2025-10-31 02:07:21,537 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:07:21,538 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "16",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?preference_id=16",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "auto_return": "approved",
+  "statement_descriptor": "Compra a "
+}
+INFO 2025-10-31 02:07:21,538 views Validando estructura - back_urls tiene 'success': True
+INFO 2025-10-31 02:07:21,538 views Valor de back_urls.success: http://localhost:5173/payment/success?preference_id=16
+INFO 2025-10-31 02:07:21,917 views Respuesta completa de Mercado Pago: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+ERROR 2025-10-31 02:07:21,919 views Error en respuesta de Mercado Pago (status 400): auto_return invalid. back_url.success must be defined - invalid_auto_return
+ERROR 2025-10-31 02:07:21,919 views Respuesta completa: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+WARNING 2025-10-31 02:07:21,921 log Bad Request: /orders/payment/temp_preference/
+INFO 2025-10-31 02:08:14,092 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:08:15,638 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:08:33,619 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 02:08:35,971 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:08:45,714 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:09:11,598 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:09:11,903 views Vendedor identificado: 1
+INFO 2025-10-31 02:09:12,213 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:09:12,317 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:09:12,416 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:09:12,416 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:09:12,416 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "17",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?preference_id=17",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "auto_return": "approved",
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:09:13,207 views Respuesta completa de Mercado Pago: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+ERROR 2025-10-31 02:09:13,208 views Error en respuesta de Mercado Pago (status 400): auto_return invalid. back_url.success must be defined - invalid_auto_return
+ERROR 2025-10-31 02:09:13,208 views Respuesta completa: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+WARNING 2025-10-31 02:09:13,208 log Bad Request: /orders/payment/temp_preference/
+INFO 2025-10-31 02:10:45,820 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:10:48,172 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:11:00,227 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:11:01,158 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:11:38,140 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:11:38,438 views Vendedor identificado: 1
+INFO 2025-10-31 02:11:39,153 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:11:39,257 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:11:39,459 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:11:39,459 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:11:39,464 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "18",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?preference_id=18",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:11:40,284 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "8814756537680114",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T03:11:42.900-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "18",
+    "id": "2958196622-b3583bd1-3417-4842-9f0e-965954e8498f",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-b3583bd1-3417-4842-9f0e-965954e8498f",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-b3583bd1-3417-4842-9f0e-965954e8498f",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 02:11:40,383 views Preferencia creada exitosamente. ID: 2958196622-b3583bd1-3417-4842-9f0e-965954e8498f, Temp Order ID: 18
+INFO 2025-10-31 02:16:22,150 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:16:24,980 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:17:09,594 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:17:13,818 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:17:52,961 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:17:53,911 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:20:17,238 views Webhook recibido: {"action":"payment.updated","api_version":"v1","data":{"id":"123456"},"date_created":"2021-11-01T02:02:02Z","id":"123456","live_mode":false,"type":"payment","user_id":2951333956}
+INFO 2025-10-31 02:20:17,269 views Datos parseados: {'action': 'payment.updated', 'api_version': 'v1', 'data': {'id': '123456'}, 'date_created': '2021-11-01T02:02:02Z', 'id': '123456', 'live_mode': False, 'type': 'payment', 'user_id': 2951333956}
+INFO 2025-10-31 02:20:17,278 views Acción: payment.updated
+INFO 2025-10-31 02:20:17,288 views Procesando pago: 123456
+ERROR 2025-10-31 02:20:19,082 views External reference no encontrado en la información del pago
+WARNING 2025-10-31 02:20:19,088 log Bad Request: /orders/payment/webhook/
+INFO 2025-10-31 02:20:36,437 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:20:36,654 views Vendedor identificado: 1
+INFO 2025-10-31 02:20:36,962 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:20:37,164 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:20:37,268 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:20:37,268 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:20:37,271 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "19",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=19",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "auto_return": "approved",
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:20:37,865 views Respuesta completa de Mercado Pago: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+ERROR 2025-10-31 02:20:37,866 views Error en respuesta de Mercado Pago (status 400): auto_return invalid. back_url.success must be defined - invalid_auto_return
+ERROR 2025-10-31 02:20:37,866 views Respuesta completa: {
+  "status": 400,
+  "response": {
+    "message": "auto_return invalid. back_url.success must be defined",
+    "error": "invalid_auto_return",
+    "status": 400,
+    "cause": null
+  }
+}
+WARNING 2025-10-31 02:20:37,869 log Bad Request: /orders/payment/temp_preference/
+INFO 2025-10-31 02:22:20,774 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:22:23,779 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:22:32,153 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:22:33,191 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:25:56,606 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:25:57,180 views Vendedor identificado: 1
+INFO 2025-10-31 02:25:57,655 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:25:57,784 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:25:57,879 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:25:57,881 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:25:57,883 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "20",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=20",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:25:58,597 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "8814756537680114",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T03:26:01.258-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "20",
+    "id": "2958196622-24cea103-f7da-4165-a782-4d38b0833b60",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-24cea103-f7da-4165-a782-4d38b0833b60",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-24cea103-f7da-4165-a782-4d38b0833b60",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 02:25:58,701 views Preferencia creada exitosamente. ID: 2958196622-24cea103-f7da-4165-a782-4d38b0833b60, Temp Order ID: 20
+INFO 2025-10-31 02:29:10,781 views Configuración de Mercado Pago actualizada para usuario 1. Access_token presente: True, longitud: 75
+INFO 2025-10-31 02:29:56,047 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:29:56,248 views Vendedor identificado: 1
+INFO 2025-10-31 02:29:56,510 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:29:56,617 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:29:56,705 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:29:56,706 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:29:56,716 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "21",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=21",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:29:57,382 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "3566837095409141",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T03:30:00.030-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "21",
+    "id": "2958196622-1cf26d9d-d858-4343-8fd7-e6c55987e081",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-1cf26d9d-d858-4343-8fd7-e6c55987e081",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-1cf26d9d-d858-4343-8fd7-e6c55987e081",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 02:29:57,476 views Preferencia creada exitosamente. ID: 2958196622-1cf26d9d-d858-4343-8fd7-e6c55987e081, Temp Order ID: 21
+INFO 2025-10-31 02:36:06,596 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:36:15,129 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:36:45,618 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:36:47,572 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:37:37,015 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:37:37,196 views Vendedor identificado: 1
+INFO 2025-10-31 02:37:37,463 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:37:37,558 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:37:37,645 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:37:37,647 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:37:37,647 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "22",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=22",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:37:38,269 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "3566837095409141",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T03:37:40.948-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "22",
+    "id": "2958196622-c7337a31-66ab-4bae-8d35-8a9e2c2ca61b",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-c7337a31-66ab-4bae-8d35-8a9e2c2ca61b",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-c7337a31-66ab-4bae-8d35-8a9e2c2ca61b",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 02:37:38,362 views Preferencia creada exitosamente. ID: 2958196622-c7337a31-66ab-4bae-8d35-8a9e2c2ca61b, Temp Order ID: 22
+INFO 2025-10-31 02:41:07,081 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:41:14,070 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:41:41,262 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:41:48,617 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:42:12,492 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:42:15,303 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:45:30,667 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:45:30,848 views Vendedor identificado: 1
+INFO 2025-10-31 02:45:31,114 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:45:31,216 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:45:31,315 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:45:31,341 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:45:31,344 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "23",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=23",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:45:31,990 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "3566837095409141",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T03:45:34.662-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "23",
+    "id": "2958196622-3125b4df-d840-4b92-a2aa-64c02bce0347",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-3125b4df-d840-4b92-a2aa-64c02bce0347",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-3125b4df-d840-4b92-a2aa-64c02bce0347",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 02:45:32,091 views Preferencia creada exitosamente. ID: 2958196622-3125b4df-d840-4b92-a2aa-64c02bce0347, Temp Order ID: 23
+WARNING 2025-10-31 02:47:50,290 log Not Found: /orders/payment/finalize/
+WARNING 2025-10-31 02:47:50,292 log Not Found: /orders/payment/finalize/
+WARNING 2025-10-31 02:47:59,221 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 02:47:59,828 log Not Found: /users/paypalconfig/2/
+INFO 2025-10-31 02:50:24,875 views Webhook recibido. Method=GET. Body=. Query={}
+INFO 2025-10-31 02:50:24,875 views Datos normalizados: {'type': None, 'action': None, 'data': {'id': None}}
+INFO 2025-10-31 02:50:24,876 views Tipo de acción no manejada: None, tipo: None
+WARNING 2025-10-31 02:52:07,432 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 02:52:08,002 log Not Found: /users/paypalconfig/2/
+INFO 2025-10-31 02:53:44,334 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:53:44,514 views Vendedor identificado: 1
+INFO 2025-10-31 02:53:44,790 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:53:44,908 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:53:45,005 views Item agregado: Tomate x1 @ $37700.0
+INFO 2025-10-31 02:53:45,006 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:53:45,009 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "24",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=24",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:53:45,585 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "3566837095409141",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T03:53:48.264-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "24",
+    "id": "2958196622-a1429cbb-b19c-4edb-a6b3-11990160dc82",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-a1429cbb-b19c-4edb-a6b3-11990160dc82",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-a1429cbb-b19c-4edb-a6b3-11990160dc82",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 02:53:45,679 views Preferencia creada exitosamente. ID: 2958196622-a1429cbb-b19c-4edb-a6b3-11990160dc82, Temp Order ID: 24
+ERROR 2025-10-31 02:55:31,633 log Internal Server Error: /orders/payment/finalize/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'TEMP_ORDER_ID'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 879, in finalize_order_on_success
+    temp_order = TemporaryOrder.objects.get(id=external_reference)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got 'TEMP_ORDER_ID'.
+ERROR 2025-10-31 02:55:31,635 log Internal Server Error: /orders/payment/finalize/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'TEMP_ORDER_ID'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 879, in finalize_order_on_success
+    temp_order = TemporaryOrder.objects.get(id=external_reference)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got 'TEMP_ORDER_ID'.
+WARNING 2025-10-31 02:56:44,652 log Not Found: /orders/payment/finalize/
+WARNING 2025-10-31 02:56:44,686 log Not Found: /orders/payment/finalize/
+INFO 2025-10-31 02:56:58,292 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:57:08,107 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:57:14,401 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 02:57:16,442 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 02:58:07,581 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 02:58:07,769 views Vendedor identificado: 1
+INFO 2025-10-31 02:58:08,044 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 02:58:08,143 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 02:58:08,232 views Item agregado: Tomate x12 @ $37700.0
+INFO 2025-10-31 02:58:08,233 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 02:58:08,233 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 12,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "25",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=25",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 02:58:08,734 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "3566837095409141",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T03:58:11.422-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "25",
+    "id": "2958196622-0a3b5850-513e-4405-b772-b7aefd0e0a0b",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-0a3b5850-513e-4405-b772-b7aefd0e0a0b",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 12,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-0a3b5850-513e-4405-b772-b7aefd0e0a0b",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 02:58:08,829 views Preferencia creada exitosamente. ID: 2958196622-0a3b5850-513e-4405-b772-b7aefd0e0a0b, Temp Order ID: 25
+ERROR 2025-10-31 02:59:25,751 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-55944993ccfsm401692e0c.7 - gsmtp')
+ERROR 2025-10-31 02:59:25,791 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-5dbb64bab89sm364664137.14 - gsmtp')
+ERROR 2025-10-31 02:59:27,248 log Internal Server Error: /orders/payment/finalize/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 916, in finalize_order_on_success
+    send_order_confirmation_email(order)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 1123, in send_order_confirmation_email
+    send_mail(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\backends\smtp.py", line 127, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\backends\smtp.py", line 94, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 750, in login
+    raise last_exception
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 739, in login
+    (code, resp) = self.auth(
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 662, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-55944b96e0esm386570e0c.22 - gsmtp')
+ERROR 2025-10-31 02:59:27,256 log Internal Server Error: /orders/payment/finalize/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 916, in finalize_order_on_success
+    send_order_confirmation_email(order)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py", line 1123, in send_order_confirmation_email
+    send_mail(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\backends\smtp.py", line 127, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\mail\backends\smtp.py", line 94, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 750, in login
+    raise last_exception
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 739, in login
+    (code, resp) = self.auth(
+  File "C:\Users\heoctor\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 662, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-559449647e0sm399956e0c.3 - gsmtp')
+INFO 2025-10-31 03:00:17,100 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 03:00:31,346 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 03:00:43,716 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 03:00:46,117 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 03:01:00,716 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 03:01:00,898 views Vendedor identificado: 1
+INFO 2025-10-31 03:01:01,153 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 03:01:01,246 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 03:01:01,332 views Item agregado: Tomate x13 @ $37700.0
+INFO 2025-10-31 03:01:01,333 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 03:01:01,334 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 13,
+      "unit_price": 37700.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "sdas",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "26",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=26",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 03:01:01,803 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "3566837095409141",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T04:01:04.488-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "26",
+    "id": "2958196622-275d2e5e-7c74-4f3f-83c8-0f1e6ac65065",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-275d2e5e-7c74-4f3f-83c8-0f1e6ac65065",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 13,
+        "unit_price": 37700
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "sdas",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-275d2e5e-7c74-4f3f-83c8-0f1e6ac65065",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 03:01:01,894 views Preferencia creada exitosamente. ID: 2958196622-275d2e5e-7c74-4f3f-83c8-0f1e6ac65065, Temp Order ID: 26
+ERROR 2025-10-31 03:02:19,620 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-559449639fesm401662e0c.1 - gsmtp')
+ERROR 2025-10-31 03:02:19,627 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials a1e0cc1a2514c-93512a554f5sm422188241.5 - gsmtp')
+INFO 2025-10-31 03:02:20,345 views Webhook recibido. Method=POST. Body={"type":"payment","data":{"id":"131328218395"}}. Query={}
+INFO 2025-10-31 03:02:20,357 views Datos normalizados: {'type': 'payment', 'data': {'id': '131328218395'}}
+INFO 2025-10-31 03:02:20,361 views Procesando pago: 131328218395
+INFO 2025-10-31 03:02:20,397 views Webhook recibido. Method=POST. Body={"type":"payment","data":{"id":"131328218395"}}. Query={}
+INFO 2025-10-31 03:02:20,398 views Datos normalizados: {'type': 'payment', 'data': {'id': '131328218395'}}
+INFO 2025-10-31 03:02:20,398 views Procesando pago: 131328218395
+INFO 2025-10-31 03:02:20,927 views Pago 131328218395 ya fue procesado anteriormente
+INFO 2025-10-31 03:02:20,947 views Pago 131328218395 ya fue procesado anteriormente
+WARNING 2025-10-31 03:02:31,443 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:02:31,976 log Not Found: /users/paypalconfig/2/
+INFO 2025-10-31 03:08:10,751 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 03:08:20,033 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 03:13:23,013 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 03:14:01,200 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:14:01,668 log Not Found: /users/paypalconfig/1/
+INFO 2025-10-31 03:16:06,980 views Configuración de Mercado Pago creada para usuario 1. Access_token presente: True, longitud: 75
+WARNING 2025-10-31 03:16:11,823 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:16:12,020 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:16:43,549 log Not Found: /
+WARNING 2025-10-31 03:16:43,997 log Not Found: /favicon.ico
+ERROR 2025-10-31 03:17:42,200 log Internal Server Error: /products/get/equals/Tomate/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py", line 85, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'
+WARNING 2025-10-31 03:17:53,644 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 03:17:53,732 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 03:17:53,926 log Not Found: /products/caterandom//
+WARNING 2025-10-31 03:18:05,045 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 03:18:06,123 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 03:18:08,194 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 03:18:10,375 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:18:10,498 log Unauthorized: /orders/my/orders/
+WARNING 2025-10-31 03:18:10,566 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 03:18:10,612 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-10-31 03:18:10,639 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:18:10,674 log Unauthorized: /orders/my/orders/
+WARNING 2025-10-31 03:18:10,691 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-10-31 03:18:11,800 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 03:18:13,876 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 03:18:46,184 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 03:18:46,235 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 03:18:46,421 log Not Found: /products/caterandom//
+WARNING 2025-10-31 03:18:53,247 log Not Found: /users/paypalconfig/1/
+INFO 2025-10-31 03:19:42,565 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 03:19:42,582 views Vendedor identificado: 1
+INFO 2025-10-31 03:19:42,603 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 03:19:42,658 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 03:19:42,665 views Item agregado: Tomate x1 @ $34250.0
+INFO 2025-10-31 03:19:42,665 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 03:19:42,666 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 34250.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "PRUEBA",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "1",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=1",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 03:19:43,373 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "8814756537680114",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T04:19:46.061-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "1",
+    "id": "2958196622-27ffa58e-d60d-43c2-ab81-e9f444aba32f",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-27ffa58e-d60d-43c2-ab81-e9f444aba32f",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 34250
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "PRUEBA",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-27ffa58e-d60d-43c2-ab81-e9f444aba32f",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 03:19:43,429 views Preferencia creada exitosamente. ID: 2958196622-27ffa58e-d60d-43c2-ab81-e9f444aba32f, Temp Order ID: 1
+ERROR 2025-10-31 03:21:18,924 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-5dbb619fdb0sm394223137.5 - gsmtp')
+ERROR 2025-10-31 03:21:18,924 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-5dbb619fbf9sm388000137.6 - gsmtp')
+INFO 2025-10-31 03:21:20,123 views Webhook recibido. Method=POST. Body={"type":"payment","data":{"id":"131328893833"}}. Query={}
+INFO 2025-10-31 03:21:20,126 views Webhook recibido. Method=POST. Body={"type":"payment","data":{"id":"131328893833"}}. Query={}
+INFO 2025-10-31 03:21:20,127 views Datos normalizados: {'type': 'payment', 'data': {'id': '131328893833'}}
+INFO 2025-10-31 03:21:20,127 views Datos normalizados: {'type': 'payment', 'data': {'id': '131328893833'}}
+INFO 2025-10-31 03:21:20,127 views Procesando pago: 131328893833
+INFO 2025-10-31 03:21:20,128 views Procesando pago: 131328893833
+INFO 2025-10-31 03:21:20,179 views Pago 131328893833 ya fue procesado anteriormente
+INFO 2025-10-31 03:21:20,195 views Pago 131328893833 ya fue procesado anteriormente
+WARNING 2025-10-31 03:21:45,942 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:21:46,031 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:22:46,077 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:22:46,219 log Not Found: /users/paypalconfig/1/
+INFO 2025-10-31 03:24:11,782 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 03:24:11,743 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 03:24:15,270 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 03:24:15,270 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 03:24:30,103 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 03:24:30,115 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 03:24:33,304 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 03:24:33,318 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 03:24:59,330 log Not Found: /users/paypalconfig/1/
+INFO 2025-10-31 03:25:11,534 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 03:25:11,544 views Vendedor identificado: 1
+INFO 2025-10-31 03:25:11,556 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 03:25:11,603 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 03:25:11,608 views Item agregado: Tomate x1 @ $34250.0
+INFO 2025-10-31 03:25:11,610 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 03:25:11,610 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 34250.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "PRUEBA",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "2",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=2",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 03:25:12,259 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "8814756537680114",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T04:25:14.917-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "2",
+    "id": "2958196622-9b630c4b-7847-453d-a597-1313cdfe39ba",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-9b630c4b-7847-453d-a597-1313cdfe39ba",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 34250
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "PRUEBA",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-9b630c4b-7847-453d-a597-1313cdfe39ba",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 03:25:12,327 views Preferencia creada exitosamente. ID: 2958196622-9b630c4b-7847-453d-a597-1313cdfe39ba, Temp Order ID: 2
+ERROR 2025-10-31 03:26:47,877 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials a1e0cc1a2514c-93512ceee11sm412958241.14 - gsmtp')
+INFO 2025-10-31 03:26:48,827 views Webhook recibido. Method=POST. Body={"type":"payment","data":{"id":"131329347047"}}. Query={}
+INFO 2025-10-31 03:26:48,827 views Datos normalizados: {'type': 'payment', 'data': {'id': '131329347047'}}
+INFO 2025-10-31 03:26:48,828 views Procesando pago: 131329347047
+INFO 2025-10-31 03:26:48,857 views Pago 131329347047 ya fue procesado anteriormente
+WARNING 2025-10-31 03:28:11,808 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:28:11,858 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:28:23,266 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:28:23,328 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:28:34,104 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:28:34,151 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:28:43,034 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:28:43,086 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:28:49,381 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:28:49,432 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 03:28:51,563 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 03:28:51,606 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 06:53:20,603 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 06:53:20,607 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 06:53:20,663 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 06:53:20,822 log Unauthorized: /orders/notifications/
+WARNING 2025-10-31 06:53:20,978 log Unauthorized: /users/get/solo/1/
+WARNING 2025-10-31 06:53:22,419 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 07:47:25,678 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 07:47:25,734 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 07:58:05,007 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 07:58:05,062 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 07:58:05,247 log Not Found: /products/caterandom//
+INFO 2025-10-31 07:59:02,306 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 07:59:02,477 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 07:59:08,632 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 07:59:08,633 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 07:59:15,550 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 07:59:15,952 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 07:59:18,134 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 07:59:18,690 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 07:59:33,823 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 07:59:34,451 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\orders\views.py changed, reloading.
+INFO 2025-10-31 07:59:35,276 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 07:59:35,960 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 07:59:54,740 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 07:59:54,815 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:01:00,225 log Bad Request: /orders/1/status/
+WARNING 2025-10-31 08:01:13,521 log Bad Request: /orders/1/status/
+WARNING 2025-10-31 08:02:18,280 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:02:18,402 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:02:18,468 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:02:18,950 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:03:57,552 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:03:57,598 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:04:03,160 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:04:03,200 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:04:07,288 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:04:07,334 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:04:17,975 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:04:18,015 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:04:31,485 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:04:31,530 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:05:04,692 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:05:04,781 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:06:06,839 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:06:06,976 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:06:13,134 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:06:13,189 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:06:13,549 log Not Found: /products/caterandom//
+WARNING 2025-10-31 08:07:32,631 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:07:32,699 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:07:40,289 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:07:40,339 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:14:52,914 log Not Found: /users/paypalconfig/1/
+INFO 2025-10-31 08:15:09,212 views Recibida petición de preferencia de usuario 2. Datos recibidos: ['order_items', 'total_price', 'address', 'city', 'postal_code', 'seller_id']
+INFO 2025-10-31 08:15:09,272 views Vendedor identificado: 1
+INFO 2025-10-31 08:15:09,294 views Iniciando creación de preferencia para vendedor 1, usuario 2. Access_token longitud: 75
+INFO 2025-10-31 08:15:09,345 views SDK de MercadoPago inicializado correctamente para vendedor 1
+INFO 2025-10-31 08:15:09,348 views Item agregado: Tomate x1 @ $34250.0
+INFO 2025-10-31 08:15:09,349 views Creando preferencia de Mercado Pago con 1 items para usuario 2
+INFO 2025-10-31 08:15:09,351 views Datos de preferencia: {
+  "items": [
+    {
+      "title": "Tomate",
+      "quantity": 1,
+      "unit_price": 34250.0,
+      "currency_id": "COP"
+    }
+  ],
+  "payer": {
+    "name": "PRUEBA",
+    "email": "hecto@gmail.com"
+  },
+  "external_reference": "3",
+  "notification_url": "http://localhost:8000/orders/payment/webhook/",
+  "back_urls": {
+    "success": "http://localhost:5173/payment/success?external_reference=3",
+    "failure": "http://localhost:5173/payment/failure",
+    "pending": "http://localhost:5173/payment/pending"
+  },
+  "statement_descriptor": "Compra a xzenzi259@gmail.com"
+}
+INFO 2025-10-31 08:15:10,157 views Respuesta completa de Mercado Pago: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "8814756537680114",
+    "collector_id": 2958196622,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-10-31T09:15:13.796-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "3",
+    "id": "2958196622-2e6f95c3-5b19-4f4c-95eb-03d1b83e409b",
+    "init_point": "https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-2e6f95c3-5b19-4f4c-95eb-03d1b83e409b",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "COP",
+        "description": "",
+        "title": "Tomate",
+        "quantity": 1,
+        "unit_price": 34250
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "http://localhost:8000/orders/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "hecto@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "PRUEBA",
+      "surname": "",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.co/checkout/v1/redirect?pref_id=2958196622-2e6f95c3-5b19-4f4c-95eb-03d1b83e409b",
+    "site_id": "MCO",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null,
+        "neighborhood": null
+      }
+    },
+    "statement_descriptor": "Compra a xzenzi259@gmail.com",
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-10-31 08:15:10,212 views Preferencia creada exitosamente. ID: 2958196622-2e6f95c3-5b19-4f4c-95eb-03d1b83e409b, Temp Order ID: 3
+ERROR 2025-10-31 08:16:44,823 views Error al enviar correo de confirmación: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-5dbb61a09adsm568069137.4 - gsmtp')
+INFO 2025-10-31 08:16:45,591 views Webhook recibido. Method=POST. Body={"type":"payment","data":{"id":"131949153528"}}. Query={}
+INFO 2025-10-31 08:16:45,592 views Datos normalizados: {'type': 'payment', 'data': {'id': '131949153528'}}
+INFO 2025-10-31 08:16:45,592 views Procesando pago: 131949153528
+INFO 2025-10-31 08:16:45,623 views Pago 131949153528 ya fue procesado anteriormente
+WARNING 2025-10-31 08:17:15,306 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:17:15,354 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:17:38,831 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:17:38,904 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:17:46,995 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:17:47,087 log Not Found: /users/paypalconfig/2/
+INFO 2025-10-31 08:21:42,202 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\models.py changed, reloading.
+INFO 2025-10-31 08:21:42,854 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\models.py changed, reloading.
+INFO 2025-10-31 08:21:49,005 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:22:29,918 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 08:22:30,042 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 08:22:35,094 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:22:35,097 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:23:34,568 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 08:23:34,583 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 08:23:41,833 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:23:41,833 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:24:04,283 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 08:24:04,390 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\views.py changed, reloading.
+INFO 2025-10-31 08:24:10,920 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:24:10,929 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:24:16,886 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\urls.py changed, reloading.
+INFO 2025-10-31 08:24:16,908 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\urls.py changed, reloading.
+INFO 2025-10-31 08:24:19,418 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:24:19,454 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:26:07,840 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\users\serializers.py changed, reloading.
+INFO 2025-10-31 08:26:19,271 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 08:29:03,913 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:29:07,625 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:29:49,870 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:29:56,752 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:30:45,371 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:32:29,652 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:32:29,784 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:32:30,161 log Not Found: /products/caterandom//
+WARNING 2025-10-31 08:32:34,936 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:32:35,059 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:32:45,110 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:32:45,254 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:32:45,552 log Not Found: /products/caterandom//
+WARNING 2025-10-31 08:33:06,371 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:33:06,488 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:33:13,147 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:33:56,082 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:36:54,828 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:36:55,018 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:38:40,871 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:38:40,998 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 08:38:41,998 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 08:38:42,000 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 08:38:42,000 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 08:38:42,006 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 08:38:42,021 log Unauthorized: /users/refresh/
+WARNING 2025-10-31 08:38:45,956 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-10-31 08:38:45,985 log Unauthorized: /users/get/solo/2/
+WARNING 2025-10-31 08:38:46,036 log Unauthorized: /orders/my/orders/
+WARNING 2025-10-31 08:38:46,067 log Unauthorized: /users/mercado-pago/config/done/2/
+WARNING 2025-10-31 08:39:01,303 log Unauthorized: /orders/my/orders/
+INFO 2025-10-31 08:41:26,401 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 08:41:35,335 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:41:37,617 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 08:41:39,165 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 08:42:08,251 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 08:42:12,603 autoreload Watching for file changes with StatReloader
+ERROR 2025-10-31 08:42:18,289 log Internal Server Error: /users/get/solo/1/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedTable: relation "users_user" does not exist
+LINE 1: ...user"."enterprise_id", "users_user"."avatar" FROM "users_use...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework_simplejwt\authentication.py", line 40, in authenticate
+    return self.get_user(validated_token), validated_token
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework_simplejwt\authentication.py", line 119, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: relation "users_user" does not exist
+LINE 1: ...user"."enterprise_id", "users_user"."avatar" FROM "users_use...
+                                                             ^
+
+ERROR 2025-10-31 08:42:18,352 log Internal Server Error: /orders/my/seller/status/shipped/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedTable: relation "users_user" does not exist
+LINE 1: ...user"."enterprise_id", "users_user"."avatar" FROM "users_use...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework_simplejwt\authentication.py", line 40, in authenticate
+    return self.get_user(validated_token), validated_token
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework_simplejwt\authentication.py", line 119, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: relation "users_user" does not exist
+LINE 1: ...user"."enterprise_id", "users_user"."avatar" FROM "users_use...
+                                                             ^
+
+ERROR 2025-10-31 08:42:26,165 log Internal Server Error: /users/get/solo/1/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedTable: relation "users_user" does not exist
+LINE 1: ...user"."enterprise_id", "users_user"."avatar" FROM "users_use...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework_simplejwt\authentication.py", line 40, in authenticate
+    return self.get_user(validated_token), validated_token
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework_simplejwt\authentication.py", line 119, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: relation "users_user" does not exist
+LINE 1: ...user"."enterprise_id", "users_user"."avatar" FROM "users_use...
+                                                             ^
+
+ERROR 2025-10-31 08:47:06,115 log Internal Server Error: /products/get/equals/Tomate/
+Traceback (most recent call last):
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py", line 85, in search_products_similar
+    return Response({'message': 'No se encontraron productos que coincidan con la búsqueda.'}, status=status.HTTP_201_OK)
+AttributeError: module 'rest_framework.status' has no attribute 'HTTP_201_OK'
+WARNING 2025-10-31 08:47:50,824 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:47:52,617 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:47:54,788 log Not Found: /products/caterandom//
+WARNING 2025-10-31 08:47:58,534 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:47:59,905 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:49:49,616 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:49:50,771 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 08:49:52,626 log Not Found: /products/caterandom//
+WARNING 2025-10-31 08:51:28,671 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 08:51:30,023 log Not Found: /users/paypalconfig/1/
+INFO 2025-10-31 09:00:31,473 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\models.py changed, reloading.
+INFO 2025-10-31 09:00:37,674 autoreload Watching for file changes with StatReloader

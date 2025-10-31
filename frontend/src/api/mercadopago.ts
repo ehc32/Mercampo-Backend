@@ -5,9 +5,21 @@ export const get_mercadopago_config = async (sellerId: number) => {
   try {
     const response = await authAxios.get(`users/mercado-pago/config/done/${sellerId}/`)
     return response.data
-  } catch (error) {
+  } catch (error: any) {
+    // Si el error es 404 o no hay configuración, devolver un objeto sin credenciales
+    if (error.response?.status === 404 || error.response?.status === 200) {
+      return {
+        public_key: null,
+        access_token: null,
+        user_id: sellerId
+      }
+    }
     console.error(`Error al obtener configuración de Mercado Pago del vendedor ${sellerId}:`, error)
-    throw error
+    return {
+      public_key: null,
+      access_token: null,
+      user_id: sellerId
+    }
   }
 }
 
@@ -29,13 +41,11 @@ export const save_mercadopago_config = async (data: {
       throw new Error("El access_token es requerido")
     }
 
-    // Preparar el payload según la estructura de tu tabla SQL
+    // Preparar el payload - solo enviar public_key y access_token
+    // El user_id se obtiene del pk en la URL, y created_at/updated_at son automáticos
     const payload = {
-      user_id: data.user_id, // Usar el nombre exacto del campo en tu DB
       public_key: data.public_key,
       access_token: data.access_token,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
     }
 
     // Asegúrate de que la URL coincida con la definida en tu backend

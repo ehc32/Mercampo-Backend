@@ -55,6 +55,8 @@ class TemporaryOrder(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller_temp_orders")  # Vendedor
     order_data = models.JSONField()
     mp_preference_id = models.CharField(max_length=255, null=True, blank=True)
+    paypal_order_id = models.CharField(max_length=255, null=True, blank=True)
+    provider = models.CharField(max_length=50, default="mercadopago")  # mercadopago | paypal
     status = models.CharField(max_length=50, default="created")
     created_at = models.DateTimeField(auto_now_add=True)
 

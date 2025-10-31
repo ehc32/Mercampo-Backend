@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { useCartStore } from "../../hooks/cart"
@@ -21,10 +21,11 @@ const PaymentSuccess = () => {
     orderId: null,
   })
   const [loading, setLoading] = useState(true)
+  const hasFinalizedRef = useRef(false)
 
   useEffect(() => {
     const params = new URLSearchParams(location.search)
-    const paymentId = params.get("payment_id") || ""
+    const paymentId = params.get("payment_id") || params.get("collection_id") || ""
     const status = params.get("status") || ""
     const externalReference = params.get("external_reference") || ""
 
@@ -36,6 +37,8 @@ const PaymentSuccess = () => {
     })
 
     const finalizeOrder = async () => {
+      if (hasFinalizedRef.current) return
+      hasFinalizedRef.current = true
       if (paymentId && externalReference) {
         try {
           const response = await authAxios.post("/orders/payment/finalize/", {
@@ -43,12 +46,26 @@ const PaymentSuccess = () => {
             external_reference: externalReference,
           })
 
-          if (response.order_id) {
+          const data = response.data || {}
+          if (data.order_id) {
             setOrderDetails((prev) => ({
               ...prev,
-              orderId: response.order_id,
+              orderId: data.order_id,
             }))
           }
+
+          // Fallback: disparar webhook para notificación server-to-server en pruebas
+          try {
+            await fetch("https://99729b8625b9.ngrok-free.app/orders/payment/webhook/", {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ type: "payment", data: { id: paymentId } }),
+            })
+          } catch (e) {
+            console.warn("Webhook fallback call failed (ignored):", e)
+          }
+
           removeAll()
           toast.success("¡Pago completado y orden creada con éxito!")
         } catch (error) {

@@ -42,6 +42,7 @@ import { useCartStore } from "../hooks/cart"
 import { get_paypal_user } from "../api/users"
 import { get_mercadopago_config } from "../api/mercadopago"
 import { create_temp_preference } from "../api/orders"
+import { paypal_create, paypal_capture } from "../api/paypal"
 import "./../global/style.css"
 
 const CartPage = () => {
@@ -143,9 +144,10 @@ const CartPage = () => {
         toast.error("Error en la respuesta del servidor")
         setIsPageLoading(false)
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error creating payment preference:", error)
-      toast.error("Error al crear preferencia de pago")
+      const errorMessage = error.response?.data?.error || error.response?.data?.details || error.message || "Error al crear preferencia de pago"
+      toast.error(errorMessage, { autoClose: 5000 })
       setIsPageLoading(false)
     } finally {
       setIsProcessing(false)
@@ -168,50 +170,53 @@ const CartPage = () => {
     },
   })
 
-  // PayPal order creation
-  const createOrder = (data, actions) => {
-    if (cart.length > 0) {
-      const translateCOPtoUSD = () => {
-        const cop = total_price
-        const usd = cop / 70000
-        return usd.toFixed(2)
+// PayPal order creation (server-side)
+  const createOrder = async () => {
+    try {
+      if (cart.length === 0) {
+        toast.warning("No hay objetos para comprar")
+        return;
       }
-      return actions.order.create({
-        purchase_units: [
-          {
-            amount: {
-              value: translateCOPtoUSD(),
-            },
-          },
-        ],
-        application_context: {
-          shipping_preference: "NO_SHIPPING",
-        },
-      })
-    } else {
-      toast.warning("No hay objetos para comprar")
+      if (!address || !city || !postal_code) {
+        toast.warning("Completa los datos de envío")
+        setFormTouched(true)
+        return;
+      }
+      const payload = {
+        order_items: cart,
+        total_price: total_price.toString(),
+        address,
+        city,
+        postal_code,
+      }
+      const res = await paypal_create(payload)
+      return res.orderID
+    } catch (e) {
+      console.error(e)
+      toast.error("No se pudo crear la orden de PayPal")
     }
   }
 
-  // PayPal payment approval
-  const onApprove = (data, actions) => {
-    setIsProcessing(true)
-    setIsPageLoading(true)
-    return actions.order
-      .capture()
-      .then((details) => {
-        // Pasar el payment_id y payment_method a handleSubmit
-        handleSubmit("paypal", data.orderID)
-        toast.success("Pago completado. Gracias, " + details.payer.name.given_name)
-      })
-      .catch((error) => {
-        toast.error("Error al capturar el pago")
-        console.error("Error en la captura de pago:", error)
-        setIsPageLoading(false)
-      })
-      .finally(() => {
-        setIsProcessing(false)
-      })
+  // PayPal payment approval (server capture)
+  const onApprove = async (data) => {
+    try {
+      setIsProcessing(true)
+      setIsPageLoading(true)
+      const r = await paypal_capture(data.orderID)
+      if (r.status === 'approved' || r.status === 'COMPLETED' || r.status === 'completed') {
+        toast.success("Pago completado ✅")
+        removeAll()
+        navigate("/")
+      } else {
+        toast.warning(`Estado de pago: ${r.status}`)
+      }
+    } catch (error) {
+      console.error("Error en la captura de pago:", error)
+      toast.error("Error al capturar el pago")
+    } finally {
+      setIsPageLoading(false)
+      setIsProcessing(false)
+    }
   }
 
   // Submit order
@@ -724,38 +729,51 @@ const CartPage = () => {
                   </div>
 
                   {selectedPaymentMethod === "mercadopago" ? (
-                    <MuiButton
-                      fullWidth
-                      variant="contained"
-                      onClick={() => {
-                        if (!isFormValid) {
-                          setFormTouched(true)
-                        } else {
-                          createMercadoPagoPreference()
-                        }
-                      }}
-                      disabled={isProcessing}
-                      sx={{
-                        mt: 3,
-                        bgcolor: "#39A900",
-                        "&:hover": { bgcolor: "#2c7d00" },
-                        py: 1.5,
-                        borderRadius: "10px",
-                        fontWeight: "bold",
-                        transition: "all 0.2s ease",
-                      }}
-                    >
-                      {isProcessing ? (
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                          <CircularProgress size={20} sx={{ color: "white", mr: 1 }} />
-                          Procesando...
-                        </Box>
-                      ) : (
-                        <>
-                          <CreditCard sx={{ mr: 1 }} /> Pagar con Mercado Pago
-                        </>
-                      )}
-                    </MuiButton>
+                    mercadoPagoConfig && mercadoPagoConfig.public_key && mercadoPagoConfig.access_token ? (
+                      <MuiButton
+                        fullWidth
+                        variant="contained"
+                        onClick={() => {
+                          if (!isFormValid) {
+                            setFormTouched(true)
+                            toast.warning("Por favor completa los datos de envío")
+                          } else {
+                            createMercadoPagoPreference()
+                          }
+                        }}
+                        disabled={isProcessing}
+                        sx={{
+                          mt: 3,
+                          bgcolor: "#009EE3",
+                          "&:hover": { bgcolor: "#0088C7" },
+                          py: 1.5,
+                          borderRadius: "10px",
+                          fontWeight: "bold",
+                          transition: "all 0.2s ease",
+                          textTransform: "none",
+                        }}
+                      >
+                        {isProcessing ? (
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <CircularProgress size={20} sx={{ color: "white", mr: 1 }} />
+                            Procesando...
+                          </Box>
+                        ) : (
+                          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <MercadoPagoIcon />
+                            <Typography sx={{ ml: 1, fontWeight: "bold" }}>
+                              Pagar con Mercado Pago
+                            </Typography>
+                          </Box>
+                        )}
+                      </MuiButton>
+                    ) : (
+                      <Box sx={{ mt: 3, p: 2, bgcolor: "#fff3cd", borderRadius: 2, textAlign: "center" }}>
+                        <Typography variant="body2" sx={{ color: "#856404" }}>
+                          ⚠️ El vendedor no ha configurado Mercado Pago. Por favor, selecciona otro método de pago.
+                        </Typography>
+                      </Box>
+                    )
                   ) : (
                     <MuiButton
                       fullWidth

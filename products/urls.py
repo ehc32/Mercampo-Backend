@@ -27,4 +27,18 @@ urlpatterns = [
     path('news/', views.news_products),  # news products
     path('get/equals/<str:search>/', views.search_products_similar),  # Búsqueda por nombre exacto
     path('<int:product_id>/update-status/', views.update_status),  # Búsqueda por nombre exacto
+    
+    # URLs para ProductCategory CRUD
+    path('categories/', views.get_all_categories),  # GET todas las categorías
+    path('categories/<int:pk>/', views.get_category),  # GET una categoría
+    path('categories/create/', views.create_category),  # POST crear categoría
+    path('categories/<int:pk>/update/', views.update_category),  # PUT/PATCH actualizar categoría
+    path('categories/<int:pk>/delete/', views.delete_category),  # DELETE eliminar categoría
+    
+    # URLs para UnitOfMeasurement CRUD
+    path('units/', views.get_all_units),  # GET todas las unidades
+    path('units/<int:pk>/', views.get_unit),  # GET una unidad
+    path('units/create/', views.create_unit),  # POST crear unidad
+    path('units/<int:pk>/update/', views.update_unit),  # PUT/PATCH actualizar unidad
+    path('units/<int:pk>/delete/', views.delete_unit),  # DELETE eliminar unidad
 ]

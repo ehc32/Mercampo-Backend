@@ -6,8 +6,10 @@ import { search_prod } from "../api/products";
 import { search_users } from "../api/users";
 import Aprove from "../components/admin/AprovSellerUser";
 import AproveProd from "../components/admin/AprovSellerUserProduct";
+import Categories from "../components/admin/Categories";
 import Orders from "../components/admin/Orders";
 import Products from "../components/admin/Products";
+import Units from "../components/admin/Units";
 import Users from "../components/admin/Users";
 
 const AdminPage = () => {
@@ -80,6 +82,12 @@ const AdminPage = () => {
             <Tab className="focus:outline-none" sx={{
               '&.Mui-selected': { color: '#39A900' },
             }} label="Nuevos productos" />
+            <Tab className="focus:outline-none" sx={{
+              '&.Mui-selected': { color: '#39A900' },
+            }} label="Categorías" />
+            <Tab className="focus:outline-none" sx={{
+              '&.Mui-selected': { color: '#39A900' },
+            }} label="Unidades" />
           </Tabs>
 
           <Box>
@@ -88,6 +96,8 @@ const AdminPage = () => {
             {selectedTab === 2 && <Users results={users} />}
             {selectedTab === 3 && <Aprove results={data} />}
             {selectedTab === 4 && <AproveProd results={data} />}
+            {selectedTab === 5 && <Categories />}
+            {selectedTab === 6 && <Units />}
           </Box>
         </Card>
       </section>

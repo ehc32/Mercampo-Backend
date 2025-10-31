@@ -1,7 +1,8 @@
 import random
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.core.mail import send_mail
 from django.utils.html import strip_tags
@@ -10,7 +11,7 @@ from django.db.models import Q
 from django.db.models import Count
 from django.db.models import Avg
 from backend.pagination import CustomPagination
-from .models import PayPalConfig, Role, User, Seller, Enterprise, EnterprisePost, PostComment, PasswordReset , MercadoPagoConfig
+from .models import PayPalConfig, Role, User, Seller, Enterprise, EnterprisePost, PostComment, PasswordReset , MercadoPagoConfig, GoogleMapsConfig
 
 from .serializers import (
     PostCommentSerializer,
@@ -23,7 +24,7 @@ from .serializers import (
     UserSerializer,
     EditUserSerializer,
     SellerRequestSerializer,
-     PasswordResetRequestSerializer, PasswordResetVerifySerializer , MercadoPagoConfigSerializer
+     PasswordResetRequestSerializer, PasswordResetVerifySerializer , MercadoPagoConfigSerializer, GoogleMapsConfigSerializer
 )
 
 @api_view(['GET'])
@@ -177,30 +178,102 @@ def request_seller_mercado_pago_config(request, pk):
     try:
         user = User.objects.get(pk=pk)
         
+        # Verificar que se recibieron los datos necesarios
+        access_token = request.data.get('access_token')
+        public_key = request.data.get('public_key')
+        
+        if not access_token or not access_token.strip():
+            return Response({'detail': 'El access_token es requerido'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not public_key or not public_key.strip():
+            return Response({'detail': 'El public_key es requerido'}, status=status.HTTP_400_BAD_REQUEST)
+        
         # Verifica si ya existe configuración para este usuario
         existing_config = MercadoPagoConfig.objects.filter(user=user).first()
         
-        if existing_config:
-            serializer = MercadoPagoConfigSerializer(existing_config, data=request.data, partial=True)
-        else:
-            serializer = MercadoPagoConfigSerializer(data=request.data)
+        # Crear el serializer con el contexto del usuario
+        serializer_context = {'user': user}
+        
+        # Usar update_or_create directamente para asegurar que se guarde correctamente
+        import logging
+        logger = logging.getLogger(__name__)
+        
+        # Limpiar los valores de espacios en blanco
+        access_token_clean = access_token.strip() if access_token else ""
+        public_key_clean = public_key.strip() if public_key else ""
+        
+        try:
+            mp_config, created = MercadoPagoConfig.objects.update_or_create(
+                user=user,
+                defaults={
+                    'public_key': public_key_clean,
+                    'access_token': access_token_clean
+                }
+            )
             
-        if serializer.is_valid():
-            serializer.save(user=user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            # Verificar que se guardó correctamente
+            mp_config.refresh_from_db()
+            logger.info(f"Configuración de Mercado Pago {'creada' if created else 'actualizada'} para usuario {pk}. Access_token presente: {bool(mp_config.access_token)}, longitud: {len(mp_config.access_token) if mp_config.access_token else 0}")
+            
+            # Devolver el access_token completo como lo solicita el usuario
+            return Response({
+                'public_key': mp_config.public_key,
+                'access_token': mp_config.access_token,
+                'user_id': pk
+            }, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
+            
+        except Exception as e:
+            logger.error(f"Error al guardar configuración de Mercado Pago: {str(e)}", exc_info=True)
+            return Response({'detail': f'Error al guardar la configuración: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
     except User.DoesNotExist:
         return Response({'detail': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
     
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_seller_mercado_pago_config(request, pk):
     try:
         mercado_pago_config = MercadoPagoConfig.objects.get(user_id=pk)
-        serializer = MercadoPagoConfigSerializer(mercado_pago_config)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        # Devolver public_key y access_token completo como lo solicita el usuario
+        return Response({
+            'public_key': mercado_pago_config.public_key,
+            'access_token': mercado_pago_config.access_token,
+            'user_id': pk
+        }, status=status.HTTP_200_OK)
     except MercadoPagoConfig.DoesNotExist:
-        return Response({'detail': 'Configuración de MercadoPago no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({
+            'public_key': None,
+            'access_token': None,
+            'has_config': False,
+            'user_id': pk
+        }, status=status.HTTP_200_OK)  # Cambiar a 200 para que no sea un error si no existe
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_google_maps_config(request):
+    cfg = GoogleMapsConfig.objects.first()
+    if not cfg:
+        return Response({"api_key": None, "has_config": False}, status=status.HTTP_200_OK)
+    serializer = GoogleMapsConfigSerializer(cfg)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def set_google_maps_config(request):
+    api_key = request.data.get('api_key')
+    if not api_key or not api_key.strip():
+        return Response({"detail": "api_key es requerido"}, status=status.HTTP_400_BAD_REQUEST)
+    cfg = GoogleMapsConfig.objects.first()
+    if cfg:
+        cfg.api_key = api_key.strip()
+        cfg.save()
+        serializer = GoogleMapsConfigSerializer(cfg)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    cfg = GoogleMapsConfig.objects.create(api_key=api_key.strip())
+    serializer = GoogleMapsConfigSerializer(cfg)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST'])

@@ -25,6 +25,10 @@ urlpatterns = [
 
     path('mercado-pago/config/<int:pk>/', views.request_seller_mercado_pago_config, name='mercado-pago-config'),
     path('mercado-pago/config/done/<int:pk>/', views.get_seller_mercado_pago_config),
+
+    # Google Maps global config
+    path('google-maps/config/', views.get_google_maps_config),  # GET
+    path('google-maps/config/save/', views.set_google_maps_config),  # POST
     
     path('sell/changePermision/<int:idUser>/', views.change_can_publish),
     

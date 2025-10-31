@@ -15,6 +15,7 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({})
   const notificationRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
@@ -173,9 +174,10 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
       </button>
 
       {showNotifications && (
-        <div className="origin-top-left absolute left-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+        <div className="absolute right-0 mt-2 w-[360px] max-w-[92vw] rounded-xl bg-white ring-1 ring-black/5 shadow-[0_12px_32px_rgba(16,24,40,.12),_0_2px_6px_rgba(16,24,40,.06)] focus:outline-none z-50 overflow-hidden">
           <div className="py-1">
-            <div className="px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+            {/* Header sticky */}
+            <div className="px-4 py-3 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white z-10">
               <h3 className="text-lg font-medium text-gray-900">Notificaciones</h3>
               {unreadCount > 0 && (
                 <button
@@ -194,31 +196,55 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
                 Cargando...
               </div>
             ) : (
-              <div className="max-h-60 overflow-y-auto overflow-x-hidden">
+              <div className="max-h-[60vh] overflow-y-auto overflow-x-hidden divide-y divide-gray-100">
                 {notifications.length > 0 ? (
                   notifications.map((notification) => (
                     <div
                       key={notification.id}
                       onClick={() => handleNotificationClick(notification)}
-                      className={`px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100 transition-colors ${
+                      className={`px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors ${
                         !notification.is_read ? "bg-green-50" : ""
                       }`}
                     >
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mt-0.5">
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0 mt-1">
                           {!notification.is_read ? (
                             <span className="inline-block w-3 h-3 bg-green-600 rounded-full"></span>
                           ) : (
                             <Check size={16} className="text-green-600" />
                           )}
                         </div>
-                        <div className="ml-3 w-full">
-                          <p className="text-sm font-medium text-gray-900 break-words whitespace-normal">
-                            {notification.message}
-                          </p>
-                          <p className="mt-1 text-xs text-gray-500">
-                            {formatNotificationDate(notification.created_at)}
-                          </p>
+                        <div className="ml-0 w-full leading-relaxed">
+                          {(() => {
+                            const isExpanded = !!expanded[notification.id]
+                            const clampStyle = isExpanded
+                              ? undefined
+                              : { display: '-webkit-box', WebkitLineClamp: 2 as any, WebkitBoxOrient: 'vertical' as any, overflow: 'hidden' }
+                            return (
+                              <>
+                                <div className="flex items-start justify-between gap-3">
+                                  <p className="text-sm font-medium text-gray-900 break-words whitespace-normal" style={clampStyle as any}>
+                                    {notification.message}
+                                  </p>
+                                  <span className="text-[11px] text-gray-500 flex-shrink-0">
+                                    {formatNotificationDate(notification.created_at)}
+                                  </span>
+                                </div>
+                                {notification.message && notification.message.length > 90 && (
+                                  <button
+                                    className="mt-1 text-xs font-semibold text-green-700 hover:text-green-800"
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      setExpanded((prev) => ({ ...prev, [notification.id]: !isExpanded }))
+                                    }}
+                                    aria-label={isExpanded ? 'Ver menos' : 'Ver más'}
+                                  >
+                                    {isExpanded ? 'Ver menos' : 'Ver más'}
+                                  </button>
+                                )}
+                              </>
+                            )
+                          })()}
                         </div>
                       </div>
                     </div>
@@ -229,11 +255,12 @@ const NotificationBadge = ({ userId, userRole }: NotificationBadgeProps) => {
               </div>
             )}
 
+            {/* Footer sticky */}
             {notifications.length > 0 && (
-              <div className="px-4 py-2 border-t border-gray-200 text-center">
+              <div className="px-0 border-t border-gray-200 sticky bottom-0 bg-white">
                 <Link
                   to="/profile"
-                  className="text-sm text-green-600 hover:text-green-800 block py-1"
+                  className="block w-full text-center text-[15px] font-semibold text-green-700 hover:text-green-800 py-3 hover:bg-gray-50"
                   onClick={() => setShowNotifications(false)}
                 >
                   Ver todas las notificaciones

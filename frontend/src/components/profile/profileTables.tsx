@@ -11,6 +11,7 @@ import ModalRequestSeller from "../shared/Modal/ModalARequestSeller"
 import ModalSellerConfig from "../shared/Modal/ModalConfigSeller"
 import ModalEditProfile from "../shared/Modal/ModalEditUser"
 import ModalMercadoPagoConfig from "../shared/Modal/ModalMercadoPagoConfig"
+import ModalGoogleMapsConfig from "../shared/Modal/ModalGoogleMapsConfig"
 import "./style.css"
 import ConsentModal from "../shared/Modal/consentForm"
 import "./../../global/style.css"
@@ -18,7 +19,8 @@ import { FaBookOpen } from "react-icons/fa"
 import ModalCreateEnterprise from "../shared/Modal/ModalCreateEnterprise"
 import { get_mercadopago_config } from "../../api/mercadopago"
 
-function ProfileTables({ user, id }) {
+interface ProfileTablesProps { user: any; id: any }
+function ProfileTables({ user, id }: ProfileTablesProps) {
   const [tabValue, setTabValue] = useState(0)
   const [paypal, SetPaypal] = useState<any>()
   const [mercadoPago, setMercadoPago] = useState<any>()
@@ -60,7 +62,7 @@ function ProfileTables({ user, id }) {
     fetchMercadoPagoConfig()
   }, [id])
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = (_event: any, newValue: any) => {
     setTabValue(newValue)
   }
 
@@ -339,18 +341,21 @@ function ProfileTables({ user, id }) {
       {user?.role !== "client" ? (
         <TabPanel value={tabValue} index={3}>
           <div className="horizontal-buttons-container">
-            <ModalEditProfile user={user} id={id} />
+            <ModalEditProfile id={id} />
             {user?.role === "seller" && (
               <>
                 <ModalSellerConfig id={id} />
                 <ModalCreateEnterprise />
                 <ModalMercadoPagoConfig userId={id} />
+                <ModalGoogleMapsConfig />
               </>
             )}
             {user?.role === "admin" && (
               <>
                 <ModalSellerConfig id={id} />
                 <ModalCreateEnterprise />
+                <ModalMercadoPagoConfig userId={id} />
+                <ModalGoogleMapsConfig />
               </>
             )}
             {user?.role === "client" && <ModalRequestSeller userId={id} />}
@@ -367,7 +372,7 @@ function ProfileTables({ user, id }) {
       ) : (
         <TabPanel value={tabValue} index={1}>
           <div className="horizontal-buttons-container">
-            <ModalEditProfile user={user} id={id} />
+            <ModalEditProfile id={id} />
             {user?.role === "seller" && (
               <>
                 <ModalSellerConfig id={id} />
@@ -377,6 +382,7 @@ function ProfileTables({ user, id }) {
               <>
                 <ModalSellerConfig id={id} />
                 <ModalCreateEnterprise />
+                <ModalMercadoPagoConfig userId={id} />
               </>
             )}
             {user?.role === "client" && <ModalRequestSeller userId={id} />}
@@ -395,7 +401,7 @@ function ProfileTables({ user, id }) {
   )
 }
 
-function TabPanel(props) {
+function TabPanel(props: any) {
   const { children, value, index, ...other } = props
 
   return (

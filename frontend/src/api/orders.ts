@@ -10,6 +10,12 @@ export const edit_order = async (id: number) => {
   await authAxios.put(`/orders/deliver/${id}/`)
 }
 
+// Nueva función para actualizar el estado de la orden usando el sistema de estados
+export const update_order_status = async (orderId: number, status: string) => {
+  const response = await authAxios.patch(`/orders/${orderId}/status/`, { status })
+  return response.data
+}
+
 export const get_orders = async () => {
   const response = await authAxios.get(`/orders/`)
   return response.data
@@ -37,6 +43,12 @@ export const my_pending_orders = async () => {
 }
 export const seller_delivered_orders = async () => {
   const response = await authAxios.get("orders/my/seller/delivered/")
+  return response.data
+}
+
+// Nueva función para obtener órdenes del vendedor por estado específico
+export const seller_orders_by_status = async (statusType: string) => {
+  const response = await authAxios.get(`/orders/my/seller/status/${statusType}/`)
   return response.data
 }
 

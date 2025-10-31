@@ -5,11 +5,13 @@ from django.core.files.base import ContentFile
 from django.db import models
 from rest_framework import serializers
 
-from .models import Product, ProductImage, Reviews, User
+from .models import Product, ProductImage, Reviews, User, ProductCategory, UnitOfMeasurement
 
 
 class ProductReadSerializer(serializers.ModelSerializer):
     first_image = serializers.SerializerMethodField()
+    category_name = serializers.SerializerMethodField()
+    unit_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -23,6 +25,24 @@ class ProductReadSerializer(serializers.ModelSerializer):
                 encoded_image = base64.b64encode(image_data).decode('utf-8')
                 image_type = imghdr.what(None, image_data) or 'jpg'
                 return f'data:image/{image_type};base64,{encoded_image.replace("dataimage/jpegbase64", "")}'
+        return None
+
+    def get_category_name(self, obj):
+        # Priorizar product_category si existe
+        if obj.product_category:
+            return obj.product_category.name
+        # Fallback a category (string) si existe
+        elif obj.category:
+            return obj.category
+        return None
+
+    def get_unit_name(self, obj):
+        # Priorizar unit_of_measurement si existe
+        if obj.unit_of_measurement:
+            return obj.unit_of_measurement.name
+        # Fallback a unit (string) si existe
+        elif obj.unit:
+            return obj.unit
         return None
 
 class ProductCreateSerializer(serializers.ModelSerializer):
@@ -99,3 +119,18 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviews
         fields = ['product', 'user', 'rating', 'comment', 'created']
+
+
+# Serializers para ProductCategory y UnitOfMeasurement
+class ProductCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductCategory
+        fields = ['id', 'name', 'description', 'is_active', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']
+
+
+class UnitOfMeasurementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UnitOfMeasurement
+        fields = ['id', 'name', 'abbreviation', 'is_active', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']

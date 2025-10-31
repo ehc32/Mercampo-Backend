@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { bring_prome, post_product } from "../api/products";
+import { get_all_categories, get_all_units } from "../api/categories";
 import ImageInput from "../components/assets/imageInput/ImageInput";
 import BasicTooltip from "../components/shared/tooltip/TooltipHelp";
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import './../global/style.css'
 
 const AddProd = () => {
@@ -20,8 +23,42 @@ const AddProd = () => {
   const [precio, setPrecio] = useState("");
   const [unidad, setUnidad] = useState("");
   const [tiempoL, setTiempoL] = useState<number>();
+  const [categories, setCategories] = useState<any[]>([]);
+  const [units, setUnits] = useState<any[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [loadingUnits, setLoadingUnits] = useState(true);
   const ciudades = ["Neiva", "Pitalito", "Garzón", "La Plata", "San Agustín", "Acevedo", "Campoalegre", "Yaguará", "Gigante", "Paicol", "Rivera", "Aipe", "Villavieja", "Tarqui", "Timaná", "Palermo", "Santa María"];
   const [typingTimeout, setTypingTimeout] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoadingCategories(true);
+        const categoriesData = await get_all_categories();
+        // Filtrar solo categorías activas
+        const activeCategories = categoriesData.filter((cat: any) => cat.is_active);
+        setCategories(activeCategories);
+      } catch (error) {
+        toast.error("Error al cargar categorías");
+      } finally {
+        setLoadingCategories(false);
+      }
+
+      try {
+        setLoadingUnits(true);
+        const unitsData = await get_all_units();
+        // Filtrar solo unidades activas
+        const activeUnits = unitsData.filter((unit: any) => unit.is_active);
+        setUnits(activeUnits);
+      } catch (error) {
+        toast.error("Error al cargar unidades de medición");
+      } finally {
+        setLoadingUnits(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handlePriceChange = (e: any) => {
     const inputValue = Math.max(0, Number(e.target.value));
@@ -102,14 +139,14 @@ const AddProd = () => {
 
     const product: Product = {
       name: nombre,
-      category: categoria,
+      product_category: parseInt(categoria), // Usar el ID de la categoría
       description: descripcion,
       count_in_stock: parseInt(cantidad),
       price: Number(price),
       image: images,
       map_locate: ubicacionDescriptiva,
       locate: ubicacion,
-      unit: unidad,
+      unit_of_measurement: parseInt(unidad), // Usar el ID de la unidad
       tiempoL: tiempoL,
     };
 
@@ -165,24 +202,30 @@ const AddProd = () => {
                 <h6 className="text-black font-bold m-1 ">Categoria
                   <BasicTooltip titlet={"Selecciona la categoria que más se adecúe al tipo de producto que desea ofertar"} /></h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
-                  <Select
-                    value={categoria}
-                    onChange={(e) => setCategoria(e.target.value)}
-                    required
-                    displayEmpty
-                    sx={{
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#39A900',
-                      }
-                    }}
-                  >
-                    <MenuItem value="" disabled>Selecciona una categoría</MenuItem>
-                    <MenuItem value="VERDURAS">Verduras</MenuItem>
-                    <MenuItem value="FRUTAS">Frutas</MenuItem>
-                    <MenuItem value="GRANOS">Grano</MenuItem>
-                    <MenuItem value="UNIDAD">Unidad</MenuItem>
-                    <MenuItem value="OTROS">Otros</MenuItem>
-                  </Select>
+                  {loadingCategories ? (
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
+                      <CircularProgress size={24} sx={{ color: '#39A900' }} />
+                    </Box>
+                  ) : (
+                    <Select
+                      value={categoria}
+                      onChange={(e) => setCategoria(e.target.value)}
+                      required
+                      displayEmpty
+                      sx={{
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#39A900',
+                        }
+                      }}
+                    >
+                      <MenuItem value="" disabled>Selecciona una categoría</MenuItem>
+                      {categories.map((cat) => (
+                        <MenuItem key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
                 </FormControl>
               </div>
             </div>
@@ -244,21 +287,30 @@ const AddProd = () => {
                   <BasicTooltip titlet={"Seleccione una unidad de medida según al producto que desea ofertar"} />
                 </h6>
                 <FormControl fullWidth sx={{ mb: 2 }}>
-                  <Select
-                    value={unidad}
-                    onChange={(e) => setUnidad(e.target.value)}
-                    displayEmpty
-                    required
-                    sx={{
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#39A900',
-                      }
-                    }}
-                  >
-                    <MenuItem value="" disabled>Selecciona una unidad</MenuItem>
-                    <MenuItem value="Kg">Kilos</MenuItem>
-                    <MenuItem value="L">Litros</MenuItem>
-                  </Select>
+                  {loadingUnits ? (
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
+                      <CircularProgress size={24} sx={{ color: '#39A900' }} />
+                    </Box>
+                  ) : (
+                    <Select
+                      value={unidad}
+                      onChange={(e) => setUnidad(e.target.value)}
+                      displayEmpty
+                      required
+                      sx={{
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#39A900',
+                        }
+                      }}
+                    >
+                      <MenuItem value="" disabled>Selecciona una unidad</MenuItem>
+                      {units.map((unit) => (
+                        <MenuItem key={unit.id} value={unit.id}>
+                          {unit.abbreviation ? `${unit.name} (${unit.abbreviation})` : unit.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
                 </FormControl>
               </div>
               <div className="flex-1">
