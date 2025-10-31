@@ -14226,3 +14226,13 @@ INFO 2025-10-31 10:28:18,276 autoreload Watching for file changes with StatReloa
 INFO 2025-10-31 10:28:36,540 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\serializers.py changed, reloading.
 INFO 2025-10-31 10:28:41,356 autoreload Watching for file changes with StatReloader
 INFO 2025-10-31 10:29:03,166 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\serializers.py changed, reloading.
+INFO 2025-10-31 10:29:05,852 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 10:34:31,786 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 10:38:02,689 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 10:38:04,589 log Not Found: /users/paypalconfig/2/
+INFO 2025-10-31 10:57:17,179 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 10:57:23,706 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 10:57:32,009 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 10:57:33,911 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 10:57:43,246 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\backend\settings.py changed, reloading.
+INFO 2025-10-31 10:57:44,379 autoreload Watching for file changes with StatReloader

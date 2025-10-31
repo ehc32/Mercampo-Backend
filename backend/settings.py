@@ -232,7 +232,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "users.User"
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.getenv("FRONTEND_ORIGINS", "http://localhost:5173").split(",")]
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.getenv(
+    "FRONTEND_ORIGINS",
+    "http://localhost:5173,https://mercampo-fronted-9l6n.vercel.app"
+).split(",")]
 CORS_ALLOW_CREDENTIALS = True
 
 SIMPLE_JWT = {
