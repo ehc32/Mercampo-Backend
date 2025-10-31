@@ -14212,3 +14212,11 @@ INFO 2025-10-31 09:43:56,212 views Procesando pago: 131960568818
 INFO 2025-10-31 09:43:57,482 views Pago 131960568818 ya fue procesado anteriormente
 WARNING 2025-10-31 09:44:03,631 log Not Found: /users/paypalconfig/2/
 WARNING 2025-10-31 09:44:04,673 log Not Found: /users/paypalconfig/2/
+WARNING 2025-10-31 10:18:32,138 log Not Found: /favicon.ico
+WARNING 2025-10-31 10:19:39,186 log Not Found: /users/paypalconfig/2/
+INFO 2025-10-31 10:22:40,564 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py changed, reloading.
+INFO 2025-10-31 10:22:51,551 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 10:23:08,856 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py changed, reloading.
+INFO 2025-10-31 10:23:13,759 autoreload Watching for file changes with StatReloader
+INFO 2025-10-31 10:23:35,043 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\views.py changed, reloading.
+INFO 2025-10-31 10:23:43,654 autoreload Watching for file changes with StatReloader

@@ -1,5 +1,6 @@
 import base64
-import imghdr
+from io import BytesIO
+from PIL import Image
 from django.core.files.base import ContentFile
 from django.utils import timezone
 from datetime import timedelta, datetime
@@ -22,6 +23,19 @@ from . serializers import (
     UnitOfMeasurementSerializer
 )
 from backend.pagination import CustomPagination
+
+
+# --- helpers ---
+def _detect_image_ext_from_bytes(image_bytes):
+    """Return normalized extension (jpg/png/gif/webp) or None if invalid image."""
+    try:
+        bio = BytesIO(image_bytes)
+        img = Image.open(bio)
+        img.verify()  # validate
+        fmt = Image.open(BytesIO(image_bytes)).format.lower()
+        return {"jpeg": "jpg", "jpg": "jpg", "png": "png", "gif": "gif", "webp": "webp"}.get(fmt)
+    except Exception:
+        return None
 
 
 @api_view(['POST'])
@@ -292,9 +306,7 @@ def edit_product(request, pk):
                 image = image.split(",")[1]
 
             image_data = base64.b64decode(image)
-            image_type = imghdr.what(None, image_data)
-            if image_type is None:
-                image_type = 'jpg'
+            image_type = _detect_image_ext_from_bytes(image_data) or 'jpg'
             image_name = f'image_0.{image_type}'
             image_file = ContentFile(image_data, name=image_name)
 
