@@ -14014,3 +14014,8 @@ WARNING 2025-10-31 08:51:28,671 log Not Found: /users/paypalconfig/1/
 WARNING 2025-10-31 08:51:30,023 log Not Found: /users/paypalconfig/1/
 INFO 2025-10-31 09:00:31,473 autoreload C:\Users\heoctor\Desktop\PROGRAMACION\Mercampo\PlataformaComercio\products\models.py changed, reloading.
 INFO 2025-10-31 09:00:37,674 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-31 09:15:58,878 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 09:16:00,360 log Not Found: /products/opinion/bring/0/
+WARNING 2025-10-31 09:16:02,442 log Not Found: /products/caterandom//
+WARNING 2025-10-31 09:16:09,786 log Not Found: /users/paypalconfig/1/
+WARNING 2025-10-31 09:16:10,991 log Not Found: /users/paypalconfig/1/
